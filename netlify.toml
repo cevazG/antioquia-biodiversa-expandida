@@ -4,7 +4,6 @@
 
 [build]
   publish = "."
-  ignore  = "exit 0"   # sin paso de build; se sirven los archivos tal cual
 
 # ── Redirects ────────────────────────────────────────────────────────────────
 

@@ -1,26 +1,31 @@
 {
   "env": {
     "node": true,
-    "es2021": true
+    "es2022": true
   },
   "parserOptions": {
-    "ecmaVersion": 2021
+    "ecmaVersion": 2022
   },
+  "plugins": ["security"],
+  "extends": [
+    "eslint:recommended",
+    "plugin:security/recommended"
+  ],
   "rules": {
-    "no-unused-vars": ["error", { "argsIgnorePattern": "^_", "varsIgnorePattern": "^_" }],
-    "no-undef": "error",
-    "no-var": "error",
-    "prefer-const": "warn",
-    "eqeqeq": ["error", "always"],
-    "semi": ["error", "always"],
-    "no-dupe-keys": "error",
-    "no-unreachable": "error",
-    "no-console": "off"
+    "no-eval": "error",
+    "no-implied-eval": "error",
+    "no-new-func": "error"
   },
-  "ignorePatterns": [
-    "node_modules/",
-    "src/scripts/generate_docs.js",
-    "src/scripts/generate_criterios_doc.js",
-    "src/scripts/generate_analisis_especies_doc.js"
+  "ignorePatterns": ["node_modules/", "coverage/"],
+  "overrides": [
+    {
+      "files": ["src/__tests__/**/*.js"],
+      "env": { "jest": true },
+      "rules": { "no-undef": "off" }
+    },
+    {
+      "files": ["src/scripts/**/*.js"],
+      "rules": { "no-unused-vars": "warn" }
+    }
   ]
 }

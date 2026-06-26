@@ -5,7 +5,9 @@ const path     = require('path');
 const fs       = require('fs');
 const router   = express.Router();
 
-const { requireAdmin } = require('../middleware/adminAuth');
+const { requireAdmin }          = require('../middleware/adminAuth');
+const { getCached, invalidate, TTL } = require('../utils/cache');
+const { redis }                 = require('../db');
 const JplPhoto = require('../models/JplPhoto');
 const GcPhoto  = require('../models/GcPhoto');
 
@@ -40,13 +42,23 @@ function especieSlug(nombre) {
     .replace(/\s+/g, '_');
 }
 
+// Limpia el resumen de Wikipedia: quita HTML, trunca en 350 chars al último punto
+function cleanWiki(raw) {
+  if (!raw) return '';
+  const clean = raw.replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim();
+  const cut = clean.length > 350 ? clean.lastIndexOf('.', 350) : clean.length;
+  return clean.slice(0, cut > 0 ? cut + 1 : 350).trim();
+}
+
 // Guarda el buffer de una foto JPL como WebP optimizado y devuelve la ruta relativa.
 // Estructura: img/fotos/bio/{mes}/{grupo}/{especie_slug}/{especie_slug}_001.webp
 async function saveJplFile(buffer, originalname, mes, grupo, especieCientifico) {
   const slug   = especieSlug(especieCientifico) || 'sin_nombre';
   const subdir = path.join(mes, grupo, slug);
   const dir    = path.join(FRONTEND, 'comunidad/jovenes_pa_lante/img/fotos/bio', subdir);
+  // eslint-disable-next-line security/detect-non-literal-fs-filename -- ruta construida por el servidor, no por el usuario; endpoint protegido por requireAdmin
   fs.mkdirSync(dir, { recursive: true });
+  // eslint-disable-next-line security/detect-non-literal-fs-filename -- ídem
   const existing = fs.readdirSync(dir).filter(f => /\.(jpe?g|webp|png)$/i.test(f)).length;
   const filename = `${slug}_${String(existing + 1).padStart(3, '0')}.webp`;
   await sharp(buffer)
@@ -59,7 +71,9 @@ async function saveJplFile(buffer, originalname, mes, grupo, especieCientifico) 
 // Guarda el buffer de una foto GC como WebP 1200×675 (16:9 recortado) y devuelve la ruta relativa.
 async function saveGcFile(buffer, mes) {
   const dir = path.join(FRONTEND, 'comunidad/guarda_cuencas/img/fotos', `gc_${mes}`);
+  // eslint-disable-next-line security/detect-non-literal-fs-filename -- ídem
   fs.mkdirSync(dir, { recursive: true });
+  // eslint-disable-next-line security/detect-non-literal-fs-filename -- ídem
   const existing = fs.readdirSync(dir).filter(f => /\.(jpe?g|webp|png)$/i.test(f)).length;
   const filename = `gc_${String(existing + 1).padStart(3, '0')}.webp`;
   await sharp(buffer)
@@ -116,6 +130,7 @@ router.post('/autofill', requireAdmin, async (req, res) => {
 
     // 2) Estado IUCN
     const statusRaw = taxon.conservation_status?.status_name?.toLowerCase() || '';
+    // eslint-disable-next-line security/detect-object-injection -- statusRaw es string lowercase de iNaturalist API, IUCN_MAP tiene claves fijas
     const iucn = IUCN_MAP[statusRaw]
               || taxon.conservation_status?.status?.toUpperCase()
               || 'DD';
@@ -131,13 +146,6 @@ router.post('/autofill', requireAdmin, async (req, res) => {
 
     const nameEs = taxonEs.preferred_common_name || '';
 
-    function cleanWiki(raw) {
-      if (!raw) return '';
-      const clean = raw.replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim();
-      const cut = clean.length > 350 ? clean.lastIndexOf('.', 350) : clean.length;
-      return clean.slice(0, cut > 0 ? cut + 1 : 350).trim();
-    }
-
     const descripcionEs = cleanWiki(taxonEs.wikipedia_summary);
     const descripcionEn = cleanWiki(taxonEn.wikipedia_summary);
 
@@ -152,17 +160,24 @@ router.post('/autofill', requireAdmin, async (req, res) => {
 
 // ─── JPL ──────────────────────────────────────────────────────────────────
 router.get('/jpl/meses', requireAdmin, async (req, res) => {
-  const meses = await JplPhoto.distinct('mes');
-  meses.sort((a, b) => b.localeCompare(a));
+  const meses = await getCached(redis, 'jpl:meses', TTL.JPL_MESES, async () => {
+    const lista = await JplPhoto.distinct('mes');
+    lista.sort((a, b) => b.localeCompare(a));
+    return lista;
+  });
   res.json(meses);
 });
 
 router.get('/jpl/fotos/:mes', requireAdmin, async (req, res) => {
-  const fotos = await JplPhoto.find({ mes: req.params.mes }).sort('orden createdAt');
+  const mes   = req.params.mes;
+  const fotos = await getCached(redis, `jpl:fotos:${mes}`, TTL.JPL_FOTOS, () =>
+    JplPhoto.find({ mes }).sort('orden createdAt').lean()
+  );
   res.json(fotos);
 });
 
 router.get('/jpl/stats/analytics', requireAdmin, async (req, res) => {
+  const result = await getCached(redis, 'jpl:stats:analytics', TTL.JPL_STATS, async () => {
   const all = await JplPhoto.find({}).lean();
 
   const allCreditSet = new Set(all.map(f => f.credito?.trim()).filter(Boolean));
@@ -172,7 +187,9 @@ router.get('/jpl/stats/analytics', requireAdmin, async (req, res) => {
   const fMap = {};
   all.forEach(f => {
     const s = f.subregion || '';
+    // eslint-disable-next-line security/detect-object-injection -- clave proviene de documento MongoDB (valor curado por admin), no de input HTTP
     if (!fMap[s]) fMap[s] = new Set();
+    // eslint-disable-next-line security/detect-object-injection -- ídem
     if (f.credito?.trim()) fMap[s].add(f.credito.trim());
   });
   const fotografos = Object.entries(fMap)
@@ -185,9 +202,13 @@ router.get('/jpl/stats/analytics', requireAdmin, async (req, res) => {
   all.forEach(f => {
     const key = f.municipio?.trim();
     if (!key) return;
+    // eslint-disable-next-line security/detect-object-injection -- clave proviene de documento MongoDB (valor curado por admin), no de input HTTP
     if (!mMap[key]) mMap[key] = { municipio: key, subregion: f.subregion || '', fotos: 0, esps: new Set(), amenazadas: 0 };
+    // eslint-disable-next-line security/detect-object-injection -- ídem
     mMap[key].fotos++;
+    // eslint-disable-next-line security/detect-object-injection -- ídem
     if (f.especieCientifico?.trim()) mMap[key].esps.add(f.especieCientifico.trim());
+    // eslint-disable-next-line security/detect-object-injection -- ídem
     if (['CR','EN','VU'].includes(f.iucn)) mMap[key].amenazadas++;
   });
   const municipios = Object.values(mMap)
@@ -214,7 +235,7 @@ router.get('/jpl/stats/analytics', requireAdmin, async (req, res) => {
       foto: f.fotos?.[0] || '', mes: f.mes,
     }));
 
-  res.json({
+  return {
     totalFotografos:      allCreditSet.size,
     municipiosCubiertos:  Object.keys(mMap).length,
     subregionesCubiertas: allSubregSet.size,
@@ -222,10 +243,13 @@ router.get('/jpl/stats/analytics', requireAdmin, async (req, res) => {
     municipios,
     alertas,
     bioindicadores,
+  };
   });
+  res.json(result);
 });
 
 router.get('/jpl/stats/monthly', requireAdmin, async (req, res) => {
+  const result = await getCached(redis, 'jpl:stats:monthly', TTL.JPL_STATS, async () => {
   const MESES_ES = ['','Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'];
   const rows = await JplPhoto.aggregate([
     {
@@ -247,10 +271,12 @@ router.get('/jpl/stats/monthly', requireAdmin, async (req, res) => {
     },
     { $sort: { mes: 1 } },
   ]);
-  res.json(rows.map(r => {
+  return rows.map(r => {
     const [y, m] = r.mes.split('-');
     return { ...r, label: `${MESES_ES[+m]} ${y}` };
-  }));
+  });
+  });
+  res.json(result);
 });
 
 router.post('/jpl/fotos/:mes', requireAdmin, jplFields, async (req, res) => {
@@ -280,6 +306,7 @@ router.post('/jpl/fotos/:mes', requireAdmin, jplFields, async (req, res) => {
     descripcionEs:     req.body.descripcionEs      || '',
     descripcionEn:     req.body.descripcionEn      || '',
   });
+  await invalidate(redis, `jpl:fotos:${mes}`, 'jpl:stats:analytics', 'jpl:stats:monthly');
   res.status(201).json(photo);
 });
 
@@ -324,6 +351,7 @@ router.put('/jpl/fotos/:mes/:id', requireAdmin, jplFields, async (req, res) => {
 
   const photo = await JplPhoto.findByIdAndUpdate(req.params.id, update, { new: true });
   if (!photo) return res.status(404).json({ error: 'No encontrada' });
+  await invalidate(redis, `jpl:fotos:${req.params.mes}`, 'jpl:stats:analytics', 'jpl:stats:monthly');
   res.json(photo);
 });
 
@@ -334,6 +362,7 @@ router.delete('/jpl/fotos/:id', requireAdmin, async (req, res) => {
     const abs = path.join(FRONTEND, 'comunidad/jovenes_pa_lante', p);
     if (fs.existsSync(abs)) fs.unlinkSync(abs);
   });
+  await invalidate(redis, 'jpl:fotos:*', 'jpl:stats:analytics', 'jpl:stats:monthly');
   res.json({ ok: true });
 });
 
@@ -400,18 +429,25 @@ router.post('/jpl/publicar/:mes', requireAdmin, async (req, res) => {
   fs.writeFileSync(indexPath, JSON.stringify(index, null, 2));
 
   await JplPhoto.updateMany({ mes }, { publicado: true });
+  await invalidate(redis, 'jpl:meses', `jpl:fotos:${mes}`);
   res.json({ ok: true, count: fotos.length });
 });
 
 // ─── GUARDA CUENCAS ────────────────────────────────────────────────────────
 router.get('/gc/meses', requireAdmin, async (req, res) => {
-  const meses = await GcPhoto.distinct('mes');
-  meses.sort((a, b) => b.localeCompare(a));
+  const meses = await getCached(redis, 'gc:meses', TTL.GC_MESES, async () => {
+    const lista = await GcPhoto.distinct('mes');
+    lista.sort((a, b) => b.localeCompare(a));
+    return lista;
+  });
   res.json(meses);
 });
 
 router.get('/gc/fotos/:mes', requireAdmin, async (req, res) => {
-  const fotos = await GcPhoto.find({ mes: req.params.mes }).sort('orden createdAt');
+  const mes   = req.params.mes;
+  const fotos = await getCached(redis, `gc:fotos:${mes}`, TTL.GC_FOTOS, () =>
+    GcPhoto.find({ mes }).sort('orden createdAt').lean()
+  );
   res.json(fotos);
 });
 
@@ -433,6 +469,7 @@ router.post('/gc/fotos/:mes', requireAdmin, gcUpload.single('foto'), async (req,
     descripcionEs:req.body.descripcionEs || '',
     descripcionEn:req.body.descripcionEn || '',
   });
+  await invalidate(redis, `gc:fotos:${mes}`);
   res.status(201).json(photo);
 });
 
@@ -458,6 +495,7 @@ router.put('/gc/fotos/:mes/:id', requireAdmin, gcUpload.single('foto'), async (r
   }
   const photo = await GcPhoto.findByIdAndUpdate(req.params.id, update, { new: true });
   if (!photo) return res.status(404).json({ error: 'No encontrada' });
+  await invalidate(redis, `gc:fotos:${req.params.mes}`);
   res.json(photo);
 });
 
@@ -466,6 +504,7 @@ router.delete('/gc/fotos/:id', requireAdmin, async (req, res) => {
   if (!photo) return res.status(404).json({ error: 'No encontrada' });
   const abs = path.join(FRONTEND, 'comunidad/guarda_cuencas', photo.foto);
   if (fs.existsSync(abs)) fs.unlinkSync(abs);
+  await invalidate(redis, 'gc:fotos:*');
   res.json({ ok: true });
 });
 
@@ -527,6 +566,7 @@ router.post('/gc/publicar/:mes', requireAdmin, async (req, res) => {
   fs.writeFileSync(indexPath, JSON.stringify(index, null, 2));
 
   await GcPhoto.updateMany({ mes }, { publicado: true });
+  await invalidate(redis, 'gc:meses', `gc:fotos:${mes}`);
   res.json({ ok: true, count: fotos.length });
 });
 

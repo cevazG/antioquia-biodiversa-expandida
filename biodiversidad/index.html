@@ -70,6 +70,47 @@
     </div>
   </div>
 
-  <script src="js/index.js?v=2"></script>
+  <!-- Modal Ley 1581 de 2012 — se muestra una sola vez; bloquea la UI hasta aceptar -->
+  <div id="privacy-modal" class="privacy-overlay" role="dialog" aria-modal="true" aria-labelledby="privacy-title" aria-describedby="privacy-desc">
+    <div class="privacy-card">
+      <div class="privacy-icon" aria-hidden="true">🔒</div>
+
+      <h2 id="privacy-title" class="privacy-title">
+        Tratamiento de datos personales
+        <span class="privacy-title__en">Personal data processing</span>
+      </h2>
+
+      <div id="privacy-desc" class="privacy-body">
+        <p>
+          La <strong>Gobernación de Antioquia</strong> recopila información de navegación con fines estadísticos y de mejora del servicio,
+          en cumplimiento de la <strong>Ley 1581 de 2012</strong> (Habeas Data).
+          No compartimos sus datos con terceros sin su consentimiento.
+          Puede ejercer sus derechos de acceso, corrección y supresión contactando a
+          <strong>protecciondatos@antioquia.gov.co</strong>.
+        </p>
+        <p class="privacy-body__en">
+          The <strong>Gobernación de Antioquia</strong> collects browsing data for statistical and service improvement purposes,
+          in compliance with <strong>Law 1581 of 2012</strong> (Habeas Data).
+          We do not share your data with third parties without your consent.
+          You may exercise your rights of access, correction and deletion by contacting
+          <strong>protecciondatos@antioquia.gov.co</strong>.
+        </p>
+      </div>
+
+      <label class="privacy-check" for="privacy-checkbox">
+        <input type="checkbox" id="privacy-checkbox" aria-required="true">
+        <span class="privacy-check__label">
+          He leído y acepto el tratamiento de mis datos personales.
+          <em>I have read and accept the processing of my personal data.</em>
+        </span>
+      </label>
+
+      <button id="privacy-btn" class="privacy-btn" disabled>
+        Aceptar · Accept
+      </button>
+    </div>
+  </div>
+
+  <script src="js/index.js?v=3"></script>
 </body>
 </html>

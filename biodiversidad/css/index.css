@@ -124,3 +124,151 @@
     }
     .corner-leaf--tl { top: -20px; left: -20px; transform: rotate(-30deg); }
     .corner-leaf--br { bottom: -20px; right: -20px; transform: rotate(150deg); }
+
+    /* ── Modal Ley 1581 ───────────────────────────────────────────────────── */
+
+    .privacy-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 200;
+      background: rgba(0, 0, 0, 0.72);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: var(--space-lg);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      animation: fadeIn 0.3s ease both;
+    }
+
+    .privacy-overlay.hidden {
+      display: none;
+    }
+
+    .privacy-card {
+      background: #1a3d28;
+      border: 1px solid rgba(255, 199, 44, 0.25);
+      border-radius: 20px;
+      padding: var(--space-xl) var(--space-lg);
+      width: 100%;
+      max-width: 400px;
+      max-height: 90dvh;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-md);
+      box-shadow: 0 24px 64px rgba(0, 0, 0, 0.5);
+      animation: slideUp 0.35s ease both;
+    }
+
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .privacy-icon {
+      font-size: 2rem;
+      text-align: center;
+    }
+
+    .privacy-title {
+      color: var(--color-white);
+      font-size: 1.0625rem;
+      font-weight: 700;
+      text-align: center;
+      line-height: 1.4;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .privacy-title__en {
+      color: rgba(255, 255, 255, 0.55);
+      font-size: 0.875rem;
+      font-weight: 500;
+    }
+
+    .privacy-body {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-sm);
+    }
+
+    .privacy-body p {
+      color: rgba(255, 255, 255, 0.85);
+      font-size: 0.8125rem;
+      line-height: 1.6;
+    }
+
+    .privacy-body__en {
+      color: rgba(255, 255, 255, 0.5) !important;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      padding-top: var(--space-sm);
+    }
+
+    .privacy-body strong {
+      color: var(--color-white);
+      font-weight: 600;
+    }
+
+    .privacy-check {
+      display: flex;
+      align-items: flex-start;
+      gap: var(--space-sm);
+      cursor: pointer;
+      padding: var(--space-sm);
+      border-radius: 10px;
+      border: 1px solid rgba(255, 199, 44, 0.3);
+      background: rgba(255, 199, 44, 0.05);
+      transition: background 0.2s;
+    }
+
+    .privacy-check:has(input:checked) {
+      background: rgba(255, 199, 44, 0.12);
+      border-color: rgba(255, 199, 44, 0.6);
+    }
+
+    .privacy-check input[type="checkbox"] {
+      flex-shrink: 0;
+      width: 20px;
+      height: 20px;
+      margin-top: 1px;
+      accent-color: var(--color-gold);
+      cursor: pointer;
+    }
+
+    .privacy-check__label {
+      color: rgba(255, 255, 255, 0.9);
+      font-size: 0.8125rem;
+      line-height: 1.5;
+    }
+
+    .privacy-check__label em {
+      display: block;
+      color: rgba(255, 255, 255, 0.5);
+      font-style: normal;
+      margin-top: 2px;
+    }
+
+    .privacy-btn {
+      width: 100%;
+      padding: 14px;
+      border: none;
+      border-radius: 12px;
+      background: var(--color-green-light);
+      color: #fff;
+      font-family: var(--font-main);
+      font-size: 0.9375rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: opacity 0.2s, transform 0.15s;
+    }
+
+    .privacy-btn:disabled {
+      opacity: 0.35;
+      cursor: not-allowed;
+    }
+
+    .privacy-btn:not(:disabled):active {
+      transform: scale(0.97);
+    }

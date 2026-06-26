@@ -49,11 +49,45 @@ stages:
         workingDir: $(WORKING_DIR)
 
     - task: Npm@1
+      displayName: 'npm audit — dependencias con CVE Alta o Crítica fallan el build'
+      inputs:
+        command: custom
+        workingDir: $(WORKING_DIR)
+        customCommand: audit --audit-level=high --omit=dev
+
+    - task: Npm@1
       displayName: 'Lint (ESLint)'
       inputs:
         command: custom
         workingDir: $(WORKING_DIR)
         customCommand: run lint
+
+    - task: Npm@1
+      displayName: 'SAST — ESLint-security (0 errores requeridos)'
+      inputs:
+        command: custom
+        workingDir: $(WORKING_DIR)
+        customCommand: run lint:security
+
+    - script: |
+        pip install semgrep --quiet
+        semgrep \
+          --config p/nodejs \
+          --config p/owasp-top-ten \
+          --config ../.semgrep.yml \
+          src/ \
+          --json \
+          --output $(Build.ArtifactStagingDirectory)/semgrep-report.json \
+          --error
+      workingDirectory: $(WORKING_DIR)
+      displayName: 'SAST — Semgrep (p/nodejs + p/owasp-top-ten + reglas locales)'
+
+    - task: PublishBuildArtifacts@1
+      displayName: 'Publicar reporte Semgrep'
+      condition: always()
+      inputs:
+        PathtoPublish: '$(Build.ArtifactStagingDirectory)/semgrep-report.json'
+        ArtifactName: semgrep-sast
 
     - task: Npm@1
       displayName: 'Tests con cobertura'

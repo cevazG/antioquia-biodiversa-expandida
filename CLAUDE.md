@@ -17,6 +17,9 @@ Web app mobile-first para la Gobernación de Antioquia. Permite consultar la bio
 | Diseño | Mobile-first, 375–430 px de ancho objetivo |
 | Idiomas | Español / Inglés (`localStorage` clave `ab_lang`) |
 | Mapa municipios | Leaflet.js 1.9.4 |
+| Logs | Winston 3 — JSON estructurado con traceId por petición (ajuste v2.1) |
+| Caché | Redis 7 + ioredis — TTLs por ruta; modo degradado si Redis no está disponible (ajuste v2.1) |
+| SAST | ESLint-security + Semgrep (`p/nodejs`, `p/owasp-top-ten`) — 0 errores en código de API (ajuste v2.1) |
 
 ---
 
@@ -59,11 +62,21 @@ Antioquia Biodiversa/
 │
 ├── backend/                           ← API REST (Node.js/Express + MongoDB Atlas)
 │   ├── package.json
-│   ├── .env                           ← MONGODB_URI_COM, SESSION_SECRET, ADMIN_PASSWORD
+│   ├── .env                           ← MONGODB_URI_COM, SESSION_SECRET, ADMIN_PASSWORD, LOG_LEVEL, REDIS_URL
 │   ├── src/
-│   │   ├── index.js                   ← Express app, rutas, CORS, sesiones
+│   │   ├── index.js                   ← Express app, rutas, CORS, sesiones, requestLogger
+│   │   ├── db.js                      ← Conexión MongoDB + Redis (exporta connCom, redis)
 │   │   ├── swagger.yaml               ← Spec OpenAPI 3.0.3
-│   │   ├── middleware/adminAuth.js    ← Guard de sesión para rutas admin
+│   │   ├── middleware/
+│   │   │   ├── adminAuth.js           ← Guard de sesión para rutas admin
+│   │   │   └── requestLogger.js       ← Log de cada request: método, path, status, ms, traceId
+│   │   ├── utils/
+│   │   │   ├── logger.js              ← Winston: JSON estructurado, traceId, archivos en logs/
+│   │   │   └── cache.js               ← getCached() + invalidate() con TTLs de la propuesta
+│   ├── .eslintrc.json                 ← ESLint + eslint-plugin-security; overrides para tests/scripts
+├── .semgrep.yml                       ← Reglas SAST locales + apunta a p/nodejs y p/owasp-top-ten
+├── azure-pipelines.yml                ← CI: lint → lint:security → semgrep → tests → SonarQube → deploy
+├── netlify.toml                       ← Publish dir, redirects trailing slash, security headers, cache
 │   │   ├── models/
 │   │   │   ├── JplPhoto.js            ← fotos:[String] (array 1-3), mes, especie, grupo, IUCN…
 │   │   │   └── GcPhoto.js             ← foto:String (único), mes, cuenca, subregion…
@@ -438,6 +451,86 @@ Estructura: `biodiversidad/img/species/<grupo>/<familia>/<spXXX_slug>/<slug>_001
 
 ---
 
+## SAST — Análisis estático de seguridad
+
+### Scripts de seguridad disponibles
+
+| Script | Alcance | Cuándo usar |
+|---|---|---|
+| `npm run lint` | Todo `src/` — calidad de código | En cada commit |
+| `npm run lint:security` | Solo código de API (`routes/`, `middleware/`, `utils/`, `index.js`, `db.js`) | Antes de cada PR |
+| `npm run lint:fix` | Todo `src/` — corrige automáticamente | Para limpiar advertencias menores |
+| `npm audit --audit-level=high` | Dependencias de producción con CVE conocidas | Antes de cada PR |
+
+### Resultado esperado de `lint:security`
+
+- **0 errores** — el pipeline CI falla si hay errores
+- **~20 advertencias** — todas son falsos positivos documentados con `// eslint-disable-next-line` en el código (rutas de archivo construidas por el servidor, claves de objetos desde MongoDB, todo bajo `requireAdmin`)
+
+### Pipeline CI — 7 pasos (azure-pipelines.yml)
+
+Según la Propuesta Técnica v2.0, el pipeline ejecuta en cada push a `main` o `develop`:
+
+| Paso | Comando | Falla si… |
+|---|---|---|
+| 1 | Checkout desde Azure Repos | — |
+| 2 | `npm install` | Dependencias no resuelven |
+| 3 | `npm audit --audit-level=high` | CVE Alta o Crítica en deps de producción |
+| 4 | `npm run lint:security` | Error ESLint de severidad `error` |
+| 5 | `npm test` | Test fallido o cobertura < 90% |
+| 6 | Semgrep `p/nodejs + p/owasp-top-ten` | Vulnerabilidad Alta o Crítica |
+| 7 | Build + deploy (solo `develop`/`main`) | — |
+
+Semgrep publica el reporte JSON como artefacto `semgrep-sast`. Las reglas locales en `.semgrep.yml` detectan session cookies sin `secure`, contraseñas hardcodeadas y errores internos expuestos al cliente.
+
+> **Pendiente de activar:** requiere acceso al proyecto Azure DevOps de TI Gobernación. `azure-pipelines.yml` está listo; solo necesita las Service Connections configuradas por TI.
+
+---
+
+## Netlify — Configuración de despliegue
+
+El frontend estático se despliega en Netlify desde la rama `main`. El backend Node.js corre en el servidor de la Gobernación y **no** pasa por Netlify.
+
+### netlify.toml — comportamiento clave
+
+| Sección | Qué hace |
+|---|---|
+| `[build] publish = "."` | Sirve todos los archivos desde la raíz del repo |
+| Redirect `/` → `/biodiversidad/index.html` (200) | Entrada instantánea sin parpadeo de la meta-refresh |
+| Redirects `/{módulo}/*/` → `/{módulo}/*` (301) | Normaliza trailing slash para que `_autoPath()` en i18n.js calcule bien la profundidad del URL |
+| Headers `X-Frame-Options`, `X-Content-Type-Options`… | Cabeceras de seguridad en todas las páginas |
+| Cache CSS/JS/fotos especies → 1 año | Los archivos usan `?v=N` como cache buster al cambiar |
+| Cache fotos JPL/GC → 30 días | Se actualizan mensualmente al publicar un mes nuevo |
+| Cache JSON de datos → 1 hora | Pueden cambiar sin nuevo deploy de Netlify |
+
+### Privacidad Ley 1581 (`biodiversidad/index.html`)
+
+Modal que aparece **una sola vez** en la primera visita:
+- Texto completo en ES y EN (antes de elegir idioma)
+- Checkbox **no pre-marcado** — el botón "Aceptar · Accept" arranca deshabilitado
+- Al aceptar: `localStorage.setItem('ab_privacy_accepted', '1')` → modal no vuelve a aparecer
+- Botón en `--color-green-light` (#3bbb6a) — verde del sistema de diseño oficial
+
+---
+
+## Manual de despliegue (README.md)
+
+Cubre todos los compromisos de documentación del § 8 de la Propuesta Técnica v2.0:
+
+| Sección | Contenido |
+|---|---|
+| Prerrequisitos | Node.js 22 LTS, npm 10+, MongoDB Atlas 7.x, Redis 7.x |
+| Instalación local | Clonar, instalar, configurar `.env`, levantar Redis, `npm run dev` |
+| Variables de entorno | `MONGODB_URI_COM`, `SESSION_SECRET`, `ADMIN_PASSWORD`, `REDIS_URL`, `LOG_LEVEL`, `PORT` |
+| Comandos | `dev`, `start`, `lint`, `lint:security`, `npm audit`, `test`, `test:coverage`, `optimize-photos` |
+| Despliegue producción | Ubuntu 24.04: Node.js, Redis (256 MB, allkeys-lru), PM2, Nginx, Certbot/SSL |
+| Nginx | Config completa con proxy inverso, `X-Real-IP`, health check upstream, SSL |
+| Verificación | `pm2 status`, `pm2 logs`, `curl /api/health` — respuesta esperada `mongodb+redis connected` |
+| API REST | Tabla de endpoints con método, ruta, descripción y nivel de auth |
+| Stack tecnológico | Tabla completa al día (Winston, ioredis, SAST, CI/CD) |
+
+---
+
 ## Roadmap
 
 ### Fase 1 — Prototipo (completado)
@@ -471,7 +564,22 @@ Estructura: `biodiversidad/img/species/<grupo>/<familia>/<spXXX_slug>/<slug>_001
 - [x] Corrección contador galería biodiversidad (`z-index: 10` en `.gallery-counter`)
 - [x] Backward compat foto/fotos: `getImgs()` normaliza datos legados (foto:string) y nuevos (fotos:[])
 
-### Fase 2 — Producción (pendiente)
+### Fase 2 — Propuesta Técnica v2.1 (en curso)
+
+> Ajustes comprometidos con la Gobernación de Antioquia. Secuencia: A1 → A2 → A3 → B1.
+> Pendientes de TI Gobernación: Azure DevOps, credenciales Entra ID, servidor on-premises.
+
+- [x] **A1 — Winston + /api/health** — logs JSON estructurados con traceId; health reporta estado MongoDB
+- [x] **A2 — Redis 7 + ioredis** — caché de catálogo con TTLs definidos (RNF02, RNF06)
+- [x] **A3 — ESLint-security + Semgrep** — SAST en dos capas + pipeline CI Azure DevOps (RNF05)
+- [x] **npm audit** — agregado al pipeline CI (Paso 3 del PDF); falla en CVE Alta o Crítica
+- [x] **README.md / Manual de despliegue** — prerrequisitos, instalación, Redis, Nginx, PM2, variables, comandos
+- [ ] **B1 — Microsoft Entra ID** — reemplaza express-session; requiere Client ID + Tenant ID (RNF05, RNF08)
+- [x] **C1 — Ley 1581** — modal de privacidad en entrada de la app, checkbox no pre-marcado, bilingüe, localStorage
+- [x] **C2 — netlify.toml** — redirects para Pretty URLs, cabeceras de seguridad, cache de assets
+- [ ] **WCAG 2.1 AA** — validación con WAVE antes de cada pase a producción
+
+### Fase 3 — Contenido y producción completa
 - [ ] Ampliar a 150+ especies con fotos y descripciones bilingües
 - [ ] Consultar Libro Rojo de Colombia para estados IUCN reales en Lepidoptera
 - [ ] Dominio oficial `.gov.co`

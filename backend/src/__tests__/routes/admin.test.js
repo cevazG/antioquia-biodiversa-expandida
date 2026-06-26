@@ -2,6 +2,18 @@
 const request = require('supertest');
 const { makeApp } = require('../helpers/app');
 
+// Mock de db para evitar conexión real a MongoDB/Redis en tests
+jest.mock('../../db', () => ({
+  connCom: { readyState: 1 },
+  redis: {
+    get:    jest.fn().mockResolvedValue(null),
+    setex:  jest.fn().mockResolvedValue('OK'),
+    del:    jest.fn().mockResolvedValue(1),
+    keys:   jest.fn().mockResolvedValue([]),
+    ping:   jest.fn().mockResolvedValue('PONG'),
+  },
+}));
+
 // Mocks de modelos para que el router no intente conectar a BD
 jest.mock('../../models/JplPhoto', () => ({
   distinct: jest.fn(), find: jest.fn(), countDocuments: jest.fn(),

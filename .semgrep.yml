@@ -1,0 +1,56 @@
+# .semgrep.yml — Reglas SAST personalizadas para Antioquia Biodiversa
+# Se ejecuta junto con los rulesets del registro:
+#   semgrep --config p/nodejs --config p/owasp-top-ten --config .semgrep.yml backend/src/
+#
+# Las reglas p/nodejs y p/owasp-top-ten cubren:
+#   - Inyección SQL/NoSQL, XSS, path traversal, deserialización insegura
+#   - eval() peligroso, prototype pollution, ReDoS
+#   - Secrets hardcodeados, tokens en logs
+#
+# Las reglas locales capturan patrones específicos de este proyecto.
+
+rules:
+
+  # ── Seguridad de sesiones ──────────────────────────────────────────────────
+
+  - id: session-cookie-not-secure
+    message: "La cookie de sesión debe tener 'secure: true' en producción."
+    severity: WARNING
+    languages: [javascript]
+    pattern: |
+      express-session({..., cookie: {..., secure: false, ...}, ...})
+
+  # ── Secrets en código fuente ───────────────────────────────────────────────
+
+  - id: hardcoded-admin-password
+    message: "Contraseña hardcodeada detectada. Usar variables de entorno."
+    severity: ERROR
+    languages: [javascript]
+    patterns:
+      - pattern: |
+          $VAR = "..."
+      - metavariable-regex:
+          metavariable: $VAR
+          regex: '(?i)(password|passwd|pwd|secret|token|api_?key)'
+      - pattern-not: |
+          $VAR = process.env.$ENV
+
+  # ── Validación de entrada ──────────────────────────────────────────────────
+
+  - id: req-body-without-validation
+    message: "req.body accedido sin validación de tipo. Considerar express-validator o zod."
+    severity: INFO
+    languages: [javascript]
+    pattern: |
+      req.body.$FIELD
+    pattern-not-inside: |
+      if (...) { ... }
+
+  # ── Manejo de errores ──────────────────────────────────────────────────────
+
+  - id: error-detail-in-response
+    message: "Detalle de error interno expuesto al cliente. Evitar en producción."
+    severity: WARNING
+    languages: [javascript]
+    pattern: |
+      res.status($CODE).json({..., detail: $ERR.message, ...})

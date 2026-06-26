@@ -1,5 +1,16 @@
 # Antioquia Biodiversa — Documentación Técnica
 
+## Reglas de flujo de trabajo
+
+> **OBLIGATORIO — no hacer commit ni push a GitHub sin autorización explícita del usuario.**
+>
+> Flujo correcto:
+> 1. Implementar cambios
+> 2. Probar en **localhost:3000** — el usuario aprueba lo que ve
+> 3. Solo cuando el usuario dice "sí, súbelo" → `git commit` + `git push`
+
+---
+
 ## Descripción general
 
 Web app mobile-first para la Gobernación de Antioquia. Permite consultar la biodiversidad del departamento, explorar la red hídrica y acceder a programas comunitarios, en español e inglés. Acceso vía QR.

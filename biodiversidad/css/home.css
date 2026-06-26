@@ -60,7 +60,7 @@
     }
 
     .home-hero p {
-      color: rgba(255,255,255,0.8);
+      color: rgba(255,255,255,0.95);
       font-size: 0.9375rem;
     }
 
@@ -120,15 +120,15 @@
     .module-card--agua { border-left: 4px solid #3561ab; }
     .module-card--com  { border-left: 4px solid #f28e18; }
 
-    .module-card__text h3 {
+    .module-card__text h2 {
       font-size: 1.0625rem;
       font-weight: 700;
       margin-bottom: 4px;
     }
 
-    .module-card--bio  .module-card__text h3 { color: var(--color-green-dark); }
-    .module-card--agua .module-card__text h3 { color: #1a3a6b; }
-    .module-card--com  .module-card__text h3 { color: #B0942B; }
+    .module-card--bio  .module-card__text h2 { color: var(--color-green-dark); }
+    .module-card--agua .module-card__text h2 { color: #1a3a6b; }
+    .module-card--com  .module-card__text h2 { color: #7D5C00; }
 
     .module-card__text p {
       font-size: 0.8125rem;

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#3561ab">
+  <title>Galería Guarda Cuencas · Antioquia</title>
+  <link rel="stylesheet" href="../../biodiversidad/css/main.css">
+  <link rel="stylesheet" href="../../biodiversidad/css/components.css">
+  <link rel="stylesheet" href="../../biodiversidad/css/animations.css">
+  <link rel="stylesheet" href="galeria.css">
+</head>
+<body>
+  <div class="app-shell">
+
+    <header class="app-header">
+      <button class="app-header__back" onclick="history.back()" aria-label="Volver">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5m0 0l7 7m-7-7l7-7"/></svg>
+      </button>
+      <div class="app-header__title">
+        <span data-i18n="gc_fotos_titulo">Galería de Cuencas</span>
+        <span data-i18n="gc_titulo">Guarda Cuencas</span>
+      </div>
+      <button class="app-header__lang" data-lang-toggle style="border-color:#3561ab;color:#3561ab;">EN</button>
+    </header>
+
+    <!-- Context bar -->
+    <div class="gallery-context">
+      <div class="gallery-context__title" data-i18n="gc_fotos_titulo">Galería de Cuencas</div>
+      <div class="gallery-context__sub" id="gallery-sub">—</div>
+    </div>
+
+    <!-- Toolbar: mes + subregión -->
+    <div class="gallery-toolbar">
+      <div class="month-row" id="month-filters" role="group" aria-label="Filtrar por mes">
+        <!-- month chips injected by JS -->
+      </div>
+      <select class="filter-select" id="subregion-filter" aria-label="Filtrar por subregión">
+        <option value="all" data-i18n="all_subregions">Todas las subregiones</option>
+        <option value="valle_aburra">Valle de Aburrá</option>
+        <option value="oriente">Oriente</option>
+        <option value="suroeste">Suroeste</option>
+        <option value="norte">Norte</option>
+        <option value="occidente">Occidente</option>
+        <option value="uraba">Urabá</option>
+        <option value="bajo_cauca">Bajo Cauca</option>
+        <option value="nordeste">Nordeste</option>
+        <option value="magdalena_medio">Magdalena Medio</option>
+      </select>
+    </div>
+
+    <!-- Photo list -->
+    <main>
+      <div class="photo-list" id="photo-list"></div>
+    </main>
+
+  </div>
+
+  <!-- Modal -->
+  <div class="modal-overlay" id="modal-overlay" onclick="closeModal()"></div>
+  <div class="modal-sheet" id="modal-sheet" role="dialog" aria-modal="true">
+    <div class="modal-photo" id="modal-photo">
+      <button class="modal-close" onclick="closeModal()" aria-label="Cerrar">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 6L6 18M6 6l12 12"/></svg>
+      </button>
+      <img id="modal-img" src="" alt="" loading="lazy">
+      <div class="modal-photo__placeholder" id="modal-placeholder" style="display:none">💧</div>
+    </div>
+    <div class="modal-body">
+      <div class="modal-handle" aria-hidden="true"></div>
+      <div class="modal-title"  id="modal-title"></div>
+      <div class="modal-badges" id="modal-badges"></div>
+      <p class="modal-desc"    id="modal-desc"></p>
+      <div class="modal-credit" id="modal-credit">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M6 20v-2a6 6 0 0112 0v2"/></svg>
+        <span id="modal-credit-text"></span>
+      </div>
+    </div>
+  </div>
+
+  <script src="../../biodiversidad/js/i18n.js"></script>
+  <script src="galeria.js"></script>
+</body>
+</html>

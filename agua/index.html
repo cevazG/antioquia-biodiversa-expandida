@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#3561ab">
+  <title>Agua · Antioquia</title>
+  <link rel="stylesheet" href="../biodiversidad/css/main.css">
+  <link rel="stylesheet" href="../biodiversidad/css/components.css">
+  <link rel="stylesheet" href="../biodiversidad/css/animations.css">
+  <link rel="stylesheet" href="index.css">
+</head>
+<body>
+  <div class="app-shell">
+
+    <header class="app-header">
+      <button class="app-header__back" onclick="window.location.href='../biodiversidad/home.html'" aria-label="Volver al inicio">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5m0 0l7 7m-7-7l7-7"/></svg>
+      </button>
+      <div class="app-header__title">
+        <span data-i18n="agua_modulo">Módulo Agua</span>
+        <span>Antioquia</span>
+      </div>
+      <button class="app-header__lang" data-lang-toggle style="border-color:#3561ab;color:#3561ab;">EN</button>
+    </header>
+
+    <div class="agua-hero">
+      <div class="agua-hero__content">
+        <span class="agua-hero__emoji" aria-hidden="true">💧</span>
+        <h1 data-i18n="agua_titulo">Red Hídrica de Antioquia</h1>
+        <p data-i18n="agua_subtitulo">Explora ríos, fuentes y cuencas abastecedoras por subregión</p>
+      </div>
+    </div>
+
+    <main class="agua-content anim-stagger">
+
+      <div class="stats-row">
+        <div class="stat-chip">
+          <div class="stat-chip__num">9</div>
+          <div class="stat-chip__label" data-i18n="subregions_label">Subregiones</div>
+        </div>
+        <div class="stat-chip">
+          <div class="stat-chip__num">10</div>
+          <div class="stat-chip__label" data-i18n="agua_rios_stat">Ríos principales</div>
+        </div>
+        <div class="stat-chip">
+          <div class="stat-chip__num">24</div>
+          <div class="stat-chip__label" data-i18n="agua_cuencas_stat">Cuencas</div>
+        </div>
+      </div>
+
+      <p class="section-label" data-i18n="agua_explorar_por">Explorar por</p>
+
+      <a href="mapa.html?tipo=fuentes" class="agua-mode-card agua-mode-card--fuentes ripple-container anim-fade-in-up">
+        <div class="agua-mode-card__icon">🏞️</div>
+        <div class="agua-mode-card__text">
+          <h3 data-i18n="agua_fuentes_titulo">Fuentes Hídricas</h3>
+          <p data-i18n="agua_fuentes_desc">Ríos, quebradas y cuerpos de agua principales de cada subregión</p>
+        </div>
+        <svg class="agua-mode-card__arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 18l6-6-6-6"/></svg>
+      </a>
+
+      <a href="mapa.html?tipo=cuencas" class="agua-mode-card agua-mode-card--cuencas ripple-container anim-fade-in-up">
+        <div class="agua-mode-card__icon">🚰</div>
+        <div class="agua-mode-card__text">
+          <h3 data-i18n="agua_cuencas_titulo">Cuencas Abastecedoras</h3>
+          <p data-i18n="agua_cuencas_desc">Cuencas que surten los acueductos municipales del departamento</p>
+        </div>
+        <svg class="agua-mode-card__arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 18l6-6-6-6"/></svg>
+      </a>
+
+    </main>
+
+    <nav class="bottom-bar" aria-label="Navegación principal">
+      <button class="bottom-bar__btn" onclick="window.location.href='../biodiversidad/home.html'" aria-label="Inicio">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        <span data-i18n="home">Inicio</span>
+      </button>
+      <button class="bottom-bar__btn" onclick="window.location.href='../biodiversidad/biodiversidad.html'" aria-label="Biodiversidad">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        <span data-i18n="nav_bio">Bio</span>
+      </button>
+      <button class="bottom-bar__btn active" aria-label="Agua">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C6 8 4 12 4 15a8 8 0 0016 0c0-3-2-7-8-13z"/></svg>
+        <span data-i18n="nav_agua">Agua</span>
+      </button>
+      <button class="bottom-bar__btn" onclick="window.location.href='../comunidad/index.html'" aria-label="Comunidad">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
+        <span data-i18n="com_titulo">Comunidad</span>
+      </button>
+    </nav>
+  </div>
+
+  <script src="../biodiversidad/js/i18n.js"></script>
+  <script src="index.js"></script>
+</body>
+</html>

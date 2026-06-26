@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <!-- Cuerpo del ave -->
+  <ellipse cx="32" cy="36" rx="14" ry="10" fill="#1565C0"/>
+  <!-- Cabeza -->
+  <circle cx="44" cy="26" r="8" fill="#1E88E5"/>
+  <!-- Ojo -->
+  <circle cx="47" cy="24" r="2.5" fill="white"/>
+  <circle cx="47.8" cy="23.5" r="1.2" fill="#1A237E"/>
+  <!-- Pico -->
+  <path d="M52 25 L58 23 L52 27 Z" fill="#FFC107"/>
+  <!-- Ala superior -->
+  <path d="M18 30 Q8 20 10 36 Q16 38 28 36 Z" fill="#0D47A1"/>
+  <!-- Ala inferior (vuelo) -->
+  <path d="M20 40 Q6 50 14 56 Q22 52 32 44 Z" fill="#1565C0"/>
+  <!-- Cola -->
+  <path d="M18 40 L6 48 L10 52 L20 44 L18 40 Z" fill="#0D47A1"/>
+  <!-- Plumas de la cola -->
+  <path d="M16 42 L4 52 L8 54 L18 44" stroke="#1E88E5" stroke-width="1.5" fill="none"/>
+</svg>

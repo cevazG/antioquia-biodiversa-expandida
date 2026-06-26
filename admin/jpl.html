@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>JPL — Admin Antioquia Biodiversa</title>
+<link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+
+<header class="admin-header">
+  <h1>🦜 Jóvenes pa' Lante — Fotos de Biodiversidad</h1>
+  <div class="admin-header__actions">
+    <a href="/admin/gc.html">Guarda Cuencas →</a>
+    <a href="/admin/impacto.html" style="color:#6ee87a;font-weight:700">📊 Impacto →</a>
+    <a href="/admin/analisis.html" style="color:#6ee87a;font-weight:700">🔬 Análisis →</a>
+    <a href="/admin/mapa.html" style="color:#6ee87a;font-weight:700">🗺️ Mapa →</a>
+    <button class="btn btn--ghost btn--sm" id="logoutBtn">Salir</button>
+  </div>
+</header>
+
+<main class="admin-main">
+
+  <!-- Selector de mes -->
+  <div class="card">
+    <div class="card__title">Mes activo</div>
+    <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;">
+      <input type="month" id="mesInput" style="max-width:180px">
+      <button class="btn btn--primary" id="cargarMesBtn">Cargar mes</button>
+      <button class="btn btn--ghost" id="nuevoMesBtn">+ Nuevo mes</button>
+    </div>
+    <div class="month-tabs" id="monthTabs" style="margin-top:14px"></div>
+  </div>
+
+  <!-- Grid de fotos -->
+  <div class="card" id="fotosCard" style="display:none">
+    <div class="card__title" id="fotosCardTitle">Fotos del mes</div>
+    <div id="fotosGrid" class="photo-grid"></div>
+    <div id="emptyFotos" class="empty-state" style="display:none">
+      <div class="empty-state__icon">📷</div>
+      <p>Sin fotos. Agrega la primera con el botón de abajo.</p>
+    </div>
+  </div>
+</main>
+
+<!-- Barra inferior -->
+<div class="publish-bar" id="publishBar" style="display:none">
+  <span class="publish-bar__count" id="publishCount">0 fotos</span>
+  <div style="display:flex;gap:8px">
+    <button class="btn btn--orange" id="addFotoBtn">+ Agregar foto</button>
+    <button class="btn btn--primary" id="publicarBtn">✓ Publicar mes</button>
+  </div>
+</div>
+
+<!-- Sheet: formulario nueva foto -->
+<div class="sheet-overlay" id="sheetOverlay">
+  <div class="sheet">
+    <div class="sheet__handle"></div>
+    <div class="sheet__title" id="sheetTitle">Nueva foto de biodiversidad</div>
+    <form id="photoForm" enctype="multipart/form-data">
+      <input type="hidden" id="editId">
+
+      <!-- Zona de fotos (1–3) -->
+      <div class="form-group form-group--full" style="margin-bottom:16px">
+        <label id="fotoLabel">Fotos <small style="font-weight:400;color:var(--muted)">(1–3 · JPG/WEBP)</small></label>
+        <div id="fotosArea" class="foto-slots"></div>
+        <button type="button" class="btn btn--ghost btn--sm" id="addSlotBtn"
+                style="margin-top:10px;display:none">+ Agregar otra foto</button>
+      </div>
+
+      <div class="form-grid">
+        <div class="form-group">
+          <label>Especie (español) *</label>
+          <input type="text" name="especieEs" id="especieEs" placeholder="Colibrí de cola rufa" required>
+        </div>
+        <div class="form-group">
+          <label>Species (English)</label>
+          <input type="text" name="especieEn" id="especieEn" placeholder="Rufous-tailed Hummingbird">
+        </div>
+        <div class="form-group form-group--full">
+          <label>Nombre científico</label>
+          <div style="display:flex;gap:8px;align-items:center">
+            <input type="text" name="especieCientifico" id="especieCientifico" placeholder="Amazilia tzacatl" style="flex:1;min-width:0">
+            <button type="button" class="btn btn--ghost btn--sm" id="autofillBtn" title="Buscar en iNaturalist">🔍 Autocompletar</button>
+          </div>
+          <div id="inatLink" style="display:none;margin-top:4px;font-size:0.75rem">
+            <a id="inatLinkAnchor" href="#" target="_blank" rel="noopener" style="color:#74ac00">Ver en iNaturalist ↗</a>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Grupo *</label>
+          <select name="grupo" id="grupo" required>
+            <option value="">Seleccionar…</option>
+            <option value="aves">🦜 Aves</option>
+            <option value="anfibios_reptiles">🐸 Anfibios y Reptiles</option>
+            <option value="mariposas">🦋 Mariposas</option>
+            <option value="polillas">🦗 Polillas</option>
+            <option value="mamiferos">🦌 Mamíferos</option>
+            <option value="animales_domesticos">🐄 Animales Domésticos</option>
+            <option value="peces">🐟 Peces de Agua Dulce</option>
+            <option value="orquideas">🌸 Orquídeas</option>
+            <option value="arboles_nativos">🌳 Árboles Nativos</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>IUCN *</label>
+          <select name="iucn" id="iucn">
+            <option value="LC">LC — Preocupación menor</option>
+            <option value="NT">NT — Casi amenazada</option>
+            <option value="VU">VU — Vulnerable</option>
+            <option value="EN">EN — En peligro</option>
+            <option value="CR">CR — En peligro crítico</option>
+            <option value="DD">DD — Datos insuficientes</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Subregión *</label>
+          <select name="subregion" id="subregion" required>
+            <option value="">Seleccionar…</option>
+            <option value="valle_aburra">Valle de Aburrá</option>
+            <option value="oriente">Oriente</option>
+            <option value="norte">Norte</option>
+            <option value="occidente">Occidente</option>
+            <option value="suroeste">Suroeste</option>
+            <option value="nordeste">Nordeste</option>
+            <option value="bajo_cauca">Bajo Cauca</option>
+            <option value="magdalena_medio">Magdalena Medio</option>
+            <option value="uraba">Urabá</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Municipio</label>
+          <input type="text" name="municipio" id="municipio" placeholder="Envigado">
+        </div>
+        <div class="form-group form-group--full">
+          <label>Crédito fotográfico</label>
+          <input type="text" name="credito" id="credito" placeholder="Carlos Andrade · Envigado">
+        </div>
+        <div class="form-group form-group--full">
+          <label>Descripción (español)</label>
+          <textarea name="descripcionEs" id="descripcionEs" placeholder="Descripción de la especie y el avistamiento…"></textarea>
+        </div>
+        <div class="form-group form-group--full">
+          <label>Description (English)</label>
+          <textarea name="descripcionEn" id="descripcionEn" placeholder="Species and sighting description…"></textarea>
+        </div>
+        <div class="form-group form-group--full">
+          <div class="toggle-row">
+            <input type="checkbox" name="endemica" id="endemica">
+            <label for="endemica">🏔️ Especie endémica de Antioquia / Colombia</label>
+          </div>
+        </div>
+      </div>
+
+      <div style="display:flex;gap:10px;margin-top:20px">
+        <button type="button" class="btn btn--ghost btn--full" id="cancelSheetBtn">Cancelar</button>
+        <button type="submit" class="btn btn--orange btn--full" id="savePhotoBtn">Guardar foto</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script src="js/api.js"></script>
+<script src="jpl.js"></script>
+</body>
+</html>

@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Guarda Cuencas — Admin Antioquia Biodiversa</title>
+<link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+
+<header class="admin-header" style="background:#1a3a6b">
+  <h1>💧 Guarda Cuencas — Fotos de Cuencas</h1>
+  <div class="admin-header__actions">
+    <a href="/admin/jpl.html">← Jóvenes pa' Lante</a>
+    <a href="/admin/impacto.html" style="color:#6ee87a;font-weight:700">📊 Impacto →</a>
+    <a href="/admin/analisis.html" style="color:#6ee87a;font-weight:700">🔬 Análisis →</a>
+    <a href="/admin/mapa.html" style="color:#6ee87a;font-weight:700">🗺️ Mapa →</a>
+    <button class="btn btn--ghost btn--sm" id="logoutBtn">Salir</button>
+  </div>
+</header>
+
+<main class="admin-main">
+
+  <div class="card">
+    <div class="card__title">Mes activo</div>
+    <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;">
+      <input type="month" id="mesInput" style="max-width:180px">
+      <button class="btn btn--blue" id="cargarMesBtn">Cargar mes</button>
+      <button class="btn btn--ghost" id="nuevoMesBtn">+ Nuevo mes</button>
+    </div>
+    <div class="month-tabs" id="monthTabs" style="margin-top:14px"></div>
+  </div>
+
+  <div class="card" id="fotosCard" style="display:none">
+    <div class="card__title" id="fotosCardTitle">Fotos del mes</div>
+    <div id="fotosGrid" class="photo-grid"></div>
+    <div id="emptyFotos" class="empty-state" style="display:none">
+      <div class="empty-state__icon">🌊</div>
+      <p>Sin fotos. Agrega la primera con el botón de abajo.</p>
+    </div>
+  </div>
+</main>
+
+<div class="publish-bar" id="publishBar" style="display:none">
+  <span class="publish-bar__count" id="publishCount">0 fotos</span>
+  <div style="display:flex;gap:8px">
+    <button class="btn btn--blue" id="addFotoBtn">+ Agregar foto</button>
+    <button class="btn btn--primary" id="publicarBtn">✓ Publicar mes</button>
+  </div>
+</div>
+
+<!-- Sheet nueva / editar foto -->
+<div class="sheet-overlay" id="sheetOverlay">
+  <div class="sheet">
+    <div class="sheet__handle"></div>
+    <div class="sheet__title" id="sheetTitle">Nueva foto de cuenca</div>
+    <form id="photoForm" enctype="multipart/form-data">
+      <input type="hidden" id="editId">
+
+      <div class="form-group form-group--full" style="margin-bottom:16px">
+        <label id="fotoLabel">Foto * <small style="color:var(--muted)">(formato horizontal recomendado)</small></label>
+        <!-- Foto actual (solo en edición) -->
+        <div id="currentPhotoWrap" style="display:none;margin-bottom:10px">
+          <img id="currentPhotoImg" src="" alt="Foto actual"
+               style="width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:8px;border:1.5px solid var(--border)">
+          <div style="display:flex;gap:8px;margin-top:8px">
+            <button type="button" class="btn btn--ghost btn--sm" id="changePhotoBtn">🔄 Cambiar foto</button>
+          </div>
+        </div>
+        <div id="uploadZoneWrap">
+          <div class="upload-zone">
+            <input type="file" name="foto" id="fotoInput" accept="image/jpeg,image/webp,image/png">
+            <div class="upload-zone__icon">🌊</div>
+            <div class="upload-zone__text">Toca para seleccionar la foto<br><small>JPG / WEBP · máx 10 MB</small></div>
+          </div>
+          <div class="upload-preview" id="uploadPreview" style="display:none">
+            <img id="previewImg" src="" alt="Vista previa" style="aspect-ratio:16/9;object-fit:cover">
+          </div>
+          <button type="button" class="btn btn--ghost btn--sm" id="cancelChangeBtn"
+                  style="display:none;margin-top:8px">✕ Cancelar cambio</button>
+        </div>
+      </div>
+
+      <div class="form-grid">
+        <div class="form-group form-group--full">
+          <label>Título (español) *</label>
+          <input type="text" name="tituloEs" id="tituloEs" placeholder="Cañón del Río Porce" required>
+        </div>
+        <div class="form-group form-group--full">
+          <label>Title (English)</label>
+          <input type="text" name="tituloEn" id="tituloEn" placeholder="Porce River Canyon">
+        </div>
+        <div class="form-group">
+          <label>Cuenca / Cuerpo de agua *</label>
+          <input type="text" name="cuenca" id="cuenca" placeholder="Río Porce" required>
+        </div>
+        <div class="form-group">
+          <label>Subregión *</label>
+          <select name="subregion" id="subregion" required>
+            <option value="">Seleccionar…</option>
+            <option value="valle_aburra">Valle de Aburrá</option>
+            <option value="oriente">Oriente</option>
+            <option value="norte">Norte</option>
+            <option value="occidente">Occidente</option>
+            <option value="suroeste">Suroeste</option>
+            <option value="nordeste">Nordeste</option>
+            <option value="bajo_cauca">Bajo Cauca</option>
+            <option value="magdalena_medio">Magdalena Medio</option>
+            <option value="uraba">Urabá</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Municipio</label>
+          <input type="text" name="municipio" id="municipio" placeholder="Cisneros">
+        </div>
+        <div class="form-group form-group--full">
+          <label>Crédito fotográfico</label>
+          <input type="text" name="credito" id="credito" placeholder="Guarda Cuencas Nordeste · Hernán Quiroz">
+        </div>
+        <div class="form-group form-group--full">
+          <label>Descripción (español)</label>
+          <textarea name="descripcionEs" id="descripcionEs" placeholder="Descripción del cuerpo de agua, su importancia hídrica y contexto…"></textarea>
+        </div>
+        <div class="form-group form-group--full">
+          <label>Description (English)</label>
+          <textarea name="descripcionEn" id="descripcionEn" placeholder="Water body description, hydrological importance and context…"></textarea>
+        </div>
+      </div>
+
+      <div style="display:flex;gap:10px;margin-top:20px">
+        <button type="button" class="btn btn--ghost btn--full" id="cancelSheetBtn">Cancelar</button>
+        <button type="submit" class="btn btn--blue btn--full" id="savePhotoBtn">Guardar foto</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script src="js/api.js"></script>
+<script src="gc.js"></script>
+</body>
+</html>

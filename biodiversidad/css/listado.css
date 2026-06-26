@@ -1,0 +1,125 @@
+/* Header de contexto (subregión + grupo) */
+    .listado-context {
+      background: linear-gradient(135deg, var(--color-green-dark), var(--color-green-primary));
+      padding: var(--space-md) var(--space-md) var(--space-lg);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .listado-context__deco {
+      position: absolute;
+      right: -10px;
+      top: -10px;
+      font-size: 6rem;
+      opacity: 0.10;
+      line-height: 1;
+      pointer-events: none;
+    }
+
+    .listado-context__breadcrumb {
+      font-size: 0.8125rem;
+      color: rgba(255,255,255,0.65);
+      margin-bottom: 4px;
+    }
+
+    .listado-context__title {
+      color: white;
+      font-size: 1.375rem;
+      font-weight: 800;
+    }
+
+    .listado-context__sub {
+      color: rgba(255,255,255,0.75);
+      font-size: 0.875rem;
+      margin-top: 4px;
+    }
+
+    /* Barra de búsqueda y filtros */
+    .listado-toolbar {
+      padding: var(--space-md) var(--space-md) 0;
+      background: var(--color-white);
+      border-bottom: 1px solid var(--color-border);
+      position: sticky;
+      top: var(--header-height);
+      z-index: 50;
+    }
+
+    /* Resultados */
+    .listado-body {
+      padding: var(--space-md);
+      padding-bottom: calc(var(--bottom-bar-height) + var(--space-lg));
+    }
+
+    /* Contador de resultados */
+    .results-count {
+      font-size: 0.8125rem;
+      color: var(--color-text-light);
+      margin-bottom: var(--space-md);
+    }
+
+    .results-count strong {
+      color: var(--color-green-dark);
+      font-weight: 700;
+    }
+
+    /* En modo búsqueda libre — tarjetas de resultado planas */
+    .search-result-card {
+      display: flex;
+      align-items: center;
+      gap: var(--space-md);
+      padding: var(--space-md);
+      background: var(--color-white);
+      border-radius: var(--radius-md);
+      cursor: pointer;
+      transition: all var(--transition);
+      text-decoration: none;
+      color: inherit;
+      margin-bottom: var(--space-sm);
+      border: 1.5px solid var(--color-border);
+    }
+
+    .search-result-card:active {
+      background: var(--color-green-pale);
+      border-color: var(--color-green-primary);
+      transform: scale(0.98);
+    }
+
+    .search-result-card__photo {
+      width: 64px;
+      height: 64px;
+      border-radius: var(--radius-sm);
+      background: var(--color-green-pale);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      flex-shrink: 0;
+    }
+
+    .search-result-card__info { flex: 1; min-width: 0; }
+
+    .search-result-card__common {
+      font-weight: 700;
+      font-size: 0.9375rem;
+      color: var(--color-text-dark);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .search-result-card__scientific {
+      font-family: var(--font-italic);
+      font-style: italic;
+      font-size: 0.8125rem;
+      color: var(--color-text-light);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .search-result-card__meta {
+      display: flex;
+      gap: 6px;
+      margin-top: 6px;
+      flex-wrap: wrap;
+    }

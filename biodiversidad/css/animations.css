@@ -1,0 +1,213 @@
+/* ============================================================
+   ANTIOQUIA BIODIVERSA — animations.css
+   Transiciones y animaciones de página
+   ============================================================ */
+
+/* ─── Fade-in de página ─────────────────────────────────── */
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50%       { transform: scale(1.05); }
+}
+
+@keyframes shimmer {
+  0%   { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+/* ─── Clases de animación ───────────────────────────────── */
+
+.anim-fade-in {
+  animation: fadeIn 0.4s ease both;
+}
+
+.anim-fade-in-up {
+  animation: fadeInUp 0.4s ease both;
+}
+
+.anim-slide-right {
+  animation: slideInRight 0.35s ease both;
+}
+
+.anim-slide-left {
+  animation: slideInLeft 0.35s ease both;
+}
+
+.anim-scale-in {
+  animation: scaleIn 0.35s ease both;
+}
+
+/* Stagger delay para listas */
+.anim-stagger > *:nth-child(1)  { animation-delay: 0.05s; }
+.anim-stagger > *:nth-child(2)  { animation-delay: 0.10s; }
+.anim-stagger > *:nth-child(3)  { animation-delay: 0.15s; }
+.anim-stagger > *:nth-child(4)  { animation-delay: 0.20s; }
+.anim-stagger > *:nth-child(5)  { animation-delay: 0.25s; }
+.anim-stagger > *:nth-child(6)  { animation-delay: 0.30s; }
+.anim-stagger > *:nth-child(7)  { animation-delay: 0.35s; }
+.anim-stagger > *:nth-child(8)  { animation-delay: 0.40s; }
+.anim-stagger > *:nth-child(n+9){ animation-delay: 0.45s; }
+
+/* ─── Skeleton loading ──────────────────────────────────── */
+
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--color-border) 25%,
+    var(--color-green-pale) 50%,
+    var(--color-border) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: var(--radius-sm);
+}
+
+.skeleton-text {
+  height: 1em;
+  margin-bottom: 0.5em;
+}
+
+.skeleton-text.short { width: 60%; }
+.skeleton-text.medium { width: 80%; }
+.skeleton-text.full { width: 100%; }
+
+.skeleton-card {
+  height: 80px;
+  border-radius: var(--radius-md);
+  margin-bottom: var(--space-sm);
+}
+
+/* ─── Transición de accordión ───────────────────────────── */
+
+.family-body {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.35s ease;
+}
+
+.family-body.open {
+  max-height: 2000px;
+}
+
+/* ─── Efecto ripple en botones táctiles ─────────────────── */
+
+.ripple-container {
+  position: relative;
+  overflow: hidden;
+}
+
+.ripple {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.3);
+  animation: ripple-anim 0.6s linear;
+  pointer-events: none;
+}
+
+@keyframes ripple-anim {
+  from {
+    transform: scale(0);
+    opacity: 1;
+  }
+  to {
+    transform: scale(4);
+    opacity: 0;
+  }
+}
+
+/* ─── Entrada del mapa ──────────────────────────────────── */
+
+.map-container {
+  animation: fadeIn 0.5s ease both;
+}
+
+/* ─── Pulsación del punto de subregión seleccionada ──────── */
+
+.map-selected-pulse {
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+/* ─── Toast / notificación ──────────────────────────────── */
+
+.toast {
+  position: fixed;
+  bottom: calc(var(--bottom-bar-height) + var(--space-lg));
+  left: 50%;
+  transform: translateX(-50%) translateY(20px);
+  background: var(--color-green-dark);
+  color: white;
+  padding: 12px 20px;
+  border-radius: var(--radius-full);
+  font-size: 0.875rem;
+  font-weight: 500;
+  box-shadow: var(--shadow-md);
+  opacity: 0;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+  z-index: 200;
+  pointer-events: none;
+  max-width: calc(var(--app-max-width) - 2 * var(--space-md));
+}
+
+.toast.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* ─── Respeta preferencia de movimiento reducido ─────────── */
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

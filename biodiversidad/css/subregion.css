@@ -1,0 +1,201 @@
+.subregion-page {
+      min-height: 100dvh;
+    }
+
+    /* Hero con gradiente y emoji decorativo */
+    .subregion-hero {
+      position: relative;
+      background: linear-gradient(135deg, var(--color-green-dark) 0%, var(--color-green-primary) 100%);
+      padding: calc(var(--space-xl) + env(safe-area-inset-top)) var(--space-md) var(--space-xl);
+      overflow: hidden;
+    }
+
+    .subregion-hero__deco {
+      position: absolute;
+      right: -16px;
+      bottom: -16px;
+      font-size: 9rem;
+      opacity: 0.10;
+      line-height: 1;
+      pointer-events: none;
+      animation: pulse 4s ease-in-out infinite;
+    }
+
+    .subregion-hero__back {
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+      background: none;
+      border: none;
+      color: rgba(255,255,255,0.75);
+      font-family: var(--font-primary);
+      font-size: 0.875rem;
+      cursor: pointer;
+      padding: 0;
+      margin-bottom: var(--space-lg);
+    }
+
+    .subregion-hero__back:active { color: white; }
+
+    .subregion-hero__label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--color-gold);
+      margin-bottom: 6px;
+    }
+
+    .subregion-hero__name {
+      font-size: 2.25rem;
+      font-weight: 800;
+      color: white;
+      line-height: 1.1;
+      margin-bottom: var(--space-sm);
+    }
+
+    .subregion-hero__subtitle {
+      color: rgba(255,255,255,0.75);
+      font-size: 0.9375rem;
+    }
+
+    /* Contenido */
+    .subregion-content {
+      padding: var(--space-lg) var(--space-md);
+      padding-bottom: calc(var(--bottom-bar-height) + var(--space-lg));
+    }
+
+    .choose-label {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--color-text-dark);
+      margin-bottom: var(--space-md);
+    }
+
+    /* Override bio-card para esta pantalla */
+    .bio-grid-sr {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--space-md);
+    }
+
+    .bio-card-sr {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-sm);
+      padding: var(--space-lg) var(--space-md);
+      border-radius: var(--radius-lg);
+      cursor: pointer;
+      transition: all var(--transition);
+      text-align: center;
+      text-decoration: none;
+      color: var(--color-white);
+      min-height: 140px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .bio-card-sr::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(255,255,255,0.12);
+      opacity: 0;
+      transition: opacity var(--transition);
+    }
+
+    .bio-card-sr:active::before { opacity: 1; }
+    .bio-card-sr:active { transform: scale(0.96); }
+
+    .bio-card-sr--aves              { background: linear-gradient(145deg, #0D47A1, #1976D2); }
+    .bio-card-sr--anfibios_reptiles { background: linear-gradient(145deg, #004D40, #00897B); }
+    .bio-card-sr--mariposas         { background: linear-gradient(145deg, #4A148C, #7B1FA2); }
+    .bio-card-sr--polillas          { background: linear-gradient(145deg, #3E2723, #6D4C41); }
+    .bio-card-sr--orquideas         { background: linear-gradient(145deg, #880E4F, #C2185B); }
+    .bio-card-sr--mamiferos          { background: linear-gradient(145deg, #BF360C, #E64A19); }
+    .bio-card-sr--animales_domesticos { background: linear-gradient(145deg, #33691E, #7CB342); }
+    .bio-card-sr--peces               { background: linear-gradient(145deg, #004D40, #00838F); }
+    .bio-card-sr--arboles_nativos     { background: linear-gradient(145deg, #1B5E20, #388E3C); }
+
+    /* Última tarjeta impar ocupa ancho completo */
+    .bio-card-sr:last-child:nth-child(odd) {
+      grid-column: 1 / -1;
+      min-height: 110px;
+    }
+
+    .bio-card-sr__icon-wrap {
+      width: 60px;
+      height: 60px;
+      background: rgba(255,255,255,0.15);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 4px;
+    }
+
+    .bio-card-sr__icon-wrap img {
+      width: 40px;
+      height: 40px;
+    }
+
+    .bio-card-sr__name {
+      font-size: 1rem;
+      font-weight: 700;
+      text-shadow: 0 1px 4px rgba(0,0,0,0.25);
+    }
+
+    .bio-card-sr__count {
+      font-size: 0.8125rem;
+      font-weight: 500;
+      opacity: 0.85;
+    }
+
+    /* Layout hero: texto izquierda + badges derecha */
+    .subregion-hero__body {
+      display: flex;
+      align-items: center;
+      gap: var(--space-md);
+    }
+
+    .subregion-hero__text {
+      flex: 1;
+      min-width: 0;
+    }
+
+    /* Columna de badges a la derecha */
+    .subregion-badges {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      flex-shrink: 0;
+    }
+
+    .hero-badge {
+      width: 54px;
+      height: 54px;
+      background: rgba(255,255,255,0.18);
+      border: 1.5px solid rgba(255,255,255,0.35);
+      border-radius: 50%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      backdrop-filter: blur(4px);
+      flex-shrink: 0;
+    }
+
+    .hero-badge__emoji {
+      font-size: 1.25rem;
+      line-height: 1;
+    }
+
+    .hero-badge__count {
+      font-size: 0.7rem;
+      font-weight: 700;
+      line-height: 1;
+      margin-top: 2px;
+    }

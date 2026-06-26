@@ -1,0 +1,102 @@
+{
+  "rios_principales": [
+    { "nombre": "Río Cauca",    "longitud_km": 380, "descripcionEs": "Eje vertebral del occidente antioqueño. Atraviesa el departamento de sur a norte.", "subregiones": ["suroeste","occidente","norte","bajo_cauca"] },
+    { "nombre": "Río Magdalena","longitud_km": 290, "descripcionEs": "Límite oriental de Antioquia. Principal arteria fluvial de Colombia.", "subregiones": ["magdalena_medio"] },
+    { "nombre": "Río Atrato",   "longitud_km": 210, "descripcionEs": "Uno de los ríos con mayor caudal del mundo por unidad de área. Nace en el Atrato antioqueño.", "subregiones": ["uraba","occidente"] },
+    { "nombre": "Río Porce",    "longitud_km": 170, "descripcionEs": "Continuación del río Medellín. Cruza el nordeste hasta unirse al Nechí.", "subregiones": ["valle_aburra","nordeste"] },
+    { "nombre": "Río Nechí",    "longitud_km": 150, "descripcionEs": "Afluente del Cauca que drena el Bajo Cauca antioqueño.", "subregiones": ["nordeste","bajo_cauca"] },
+    { "nombre": "Río León",     "longitud_km": 120, "descripcionEs": "Principal río de Urabá, desemboca en el golfo junto al Atrato.", "subregiones": ["uraba"] },
+    { "nombre": "Río San Juan", "longitud_km": 110, "descripcionEs": "Nace en el suroeste antioqueño y drena hacia el Chocó.", "subregiones": ["suroeste","occidente"] },
+    { "nombre": "Río Cocorná",  "longitud_km": 90,  "descripcionEs": "Afluente del Magdalena. Atraviesa el oriente antioqueño.", "subregiones": ["oriente"] },
+    { "nombre": "Río Arma",     "longitud_km": 85,  "descripcionEs": "Afluente del Cauca. Límite natural entre Antioquia y Caldas.", "subregiones": ["suroeste","oriente"] },
+    { "nombre": "Río Buey",     "longitud_km": 80,  "descripcionEs": "Afluente del Arma. Drena el oriente y suroeste de Antioquia.", "subregiones": ["suroeste","oriente"] }
+  ],
+  "subregiones": {
+    "valle_aburra": {
+      "nombre": "Valle de Aburrá",
+      "lat": 6.25, "lng": -75.57, "zoom": 11,
+      "rios": ["Río Medellín (Aburrá-Porce)", "Río Piedras", "Río Aurrá", "Quebrada La Iguana", "Quebrada La Iguaná"],
+      "cuencas_abastecedoras": [
+        { "nombre": "La Fé",           "municipios": ["El Retiro", "La Ceja"], "caudal_m3s": 4.2 },
+        { "nombre": "Piedras Blancas", "municipios": ["Medellín"], "caudal_m3s": 1.8 },
+        { "nombre": "Calderas",        "municipios": ["Medellín"], "caudal_m3s": 1.2 },
+        { "nombre": "Río Grande II",   "municipios": ["Medellín", "Bello", "Copacabana"], "caudal_m3s": 6.0 },
+        { "nombre": "Manantiales",     "municipios": ["Medellín", "Itagüí"], "caudal_m3s": 2.5 }
+      ]
+    },
+    "oriente": {
+      "nombre": "Oriente",
+      "lat": 6.10, "lng": -75.25, "zoom": 10,
+      "rios": ["Río Negro", "Río Cocorná", "Río Buey", "Río Arma", "Río Samaná Sur"],
+      "cuencas_abastecedoras": [
+        { "nombre": "Río Negro",   "municipios": ["Rionegro", "Marinilla", "Guarne"], "caudal_m3s": 3.1 },
+        { "nombre": "La Fé",       "municipios": ["El Retiro", "La Ceja"], "caudal_m3s": 4.2 },
+        { "nombre": "Cocorná",     "municipios": ["Cocorná", "San Luis"], "caudal_m3s": 1.5 }
+      ]
+    },
+    "norte": {
+      "nombre": "Norte",
+      "lat": 6.90, "lng": -75.45, "zoom": 10,
+      "rios": ["Río Grande", "Río Guadalupe", "Río Nus", "Río San Andrés", "Río Espíritu Santo"],
+      "cuencas_abastecedoras": [
+        { "nombre": "Río Grande",    "municipios": ["Santa Rosa de Osos", "Belmira", "Entrerríos"], "caudal_m3s": 8.0 },
+        { "nombre": "Río Guadalupe", "municipios": ["Guadalupe", "Angostura"], "caudal_m3s": 2.3 }
+      ]
+    },
+    "uraba": {
+      "nombre": "Urabá",
+      "lat": 7.90, "lng": -76.65, "zoom": 9,
+      "rios": ["Río Atrato", "Río León", "Río Apartadó", "Río Turbo", "Río Carepa", "Río Herradura"],
+      "cuencas_abastecedoras": [
+        { "nombre": "Río León",      "municipios": ["Apartadó", "Carepa", "Chigorodó"], "caudal_m3s": 5.5 },
+        { "nombre": "Río Apartadó",  "municipios": ["Apartadó"], "caudal_m3s": 1.2 },
+        { "nombre": "Río Turbo",     "municipios": ["Turbo"], "caudal_m3s": 1.0 }
+      ]
+    },
+    "bajo_cauca": {
+      "nombre": "Bajo Cauca",
+      "lat": 7.80, "lng": -75.10, "zoom": 9,
+      "rios": ["Río Cauca", "Río Nechí", "Río Man", "Río Tarazá", "Río Espíritu Santo"],
+      "cuencas_abastecedoras": [
+        { "nombre": "Río Cauca",  "municipios": ["Caucasia", "Nechí", "Cáceres"], "caudal_m3s": 12.0 },
+        { "nombre": "Río Man",    "municipios": ["El Bagre"], "caudal_m3s": 1.8 }
+      ]
+    },
+    "nordeste": {
+      "nombre": "Nordeste",
+      "lat": 6.80, "lng": -74.90, "zoom": 10,
+      "rios": ["Río Porce", "Río Nus", "Río Nechí (alto)", "Río Anorí", "Río Tigüí"],
+      "cuencas_abastecedoras": [
+        { "nombre": "Porce II",  "municipios": ["Amalfi", "Anorí", "Segovia"], "caudal_m3s": 3.0 },
+        { "nombre": "Río Nus",   "municipios": ["Cisneros", "Santo Domingo"], "caudal_m3s": 1.5 }
+      ]
+    },
+    "magdalena_medio": {
+      "nombre": "Magdalena Medio",
+      "lat": 6.30, "lng": -74.45, "zoom": 9,
+      "rios": ["Río Magdalena", "Río Cocorná Sur", "Río Samaná Norte", "Río Nare"],
+      "cuencas_abastecedoras": [
+        { "nombre": "Río Magdalena",    "municipios": ["Puerto Berrío", "Puerto Nare"], "caudal_m3s": 15.0 },
+        { "nombre": "Río Samaná Norte", "municipios": ["Puerto Triunfo"], "caudal_m3s": 2.1 }
+      ]
+    },
+    "occidente": {
+      "nombre": "Occidente",
+      "lat": 6.60, "lng": -75.95, "zoom": 10,
+      "rios": ["Río Cauca", "Río Sucio", "Río Tonusco", "Río San Juan (parte)", "Río Herradura"],
+      "cuencas_abastecedoras": [
+        { "nombre": "Río Tonusco", "municipios": ["Santa Fe de Antioquia", "Sopetrán"], "caudal_m3s": 1.8 },
+        { "nombre": "Río Sucio",   "municipios": ["Cañasgordas", "Frontino", "Dabeiba"], "caudal_m3s": 2.5 }
+      ]
+    },
+    "suroeste": {
+      "nombre": "Suroeste",
+      "lat": 5.90, "lng": -75.80, "zoom": 10,
+      "rios": ["Río Cauca", "Río San Juan", "Río Arma", "Río Buey", "Río Barroso"],
+      "cuencas_abastecedoras": [
+        { "nombre": "Río San Juan", "municipios": ["Andes", "Jericó", "Jardín"], "caudal_m3s": 3.5 },
+        { "nombre": "Río Arma",     "municipios": ["Abejorral", "Támesis"], "caudal_m3s": 2.0 }
+      ]
+    }
+  }
+}

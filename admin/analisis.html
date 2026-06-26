@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Análisis Territorial — Antioquia Biodiversa</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap">
+<link rel="stylesheet" href="css/impacto.css?v=3">
+</head>
+<body>
+
+<header class="impact-hero impact-hero--compact">
+  <div class="impact-hero__top">
+    <div class="impact-hero__brand">
+      <div>
+        <div class="impact-hero__name">
+          🔬 Análisis territorial
+          <small>Secretaría de Medio Ambiente · datos de campo JPL</small>
+        </div>
+      </div>
+    </div>
+    <div class="impact-hero__actions">
+      <a href="/admin/impacto.html" class="btn-print" style="font-size:12px">← Impacto</a>
+      <a href="/admin/mapa.html" class="btn-print" style="font-size:12px">🗺️ Mapa →</a>
+      <a href="/admin/tendencia.html" class="btn-print" style="font-size:12px">📈 Tendencia</a>
+      <a href="/admin/mes.html" class="btn-print" style="font-size:12px">📅 Mes actual</a>
+      <button class="btn-print" onclick="window.print()">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+        PDF
+      </button>
+    </div>
+  </div>
+  <span class="impact-hero__date" id="reportDate">—</span>
+</header>
+
+<main class="impact-body">
+
+  <!-- 1. Alcance social -->
+  <div class="impact-section">
+    <div class="section-header">
+      <div class="section-label">Alcance del programa</div>
+      <div class="section-title">Jóvenes y territorios involucrados</div>
+      <div class="section-subtitle">Totales acumulados desde el inicio del programa en base de datos</div>
+    </div>
+    <div class="section-body">
+      <div class="stat-grid" style="grid-template-columns:repeat(3,1fr)">
+        <div class="stat-card">
+          <div class="stat-card__num" id="a-fotografos">—</div>
+          <div class="stat-card__label">Fotógrafos únicos</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card__num" id="a-municipios">—</div>
+          <div class="stat-card__label">Municipios con registros</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card__num" id="a-subregiones">—</div>
+          <div class="stat-card__label">Subregiones activas</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. Mapa de calor municipal -->
+  <div class="impact-section">
+    <div class="section-header">
+      <div class="section-label">Densidad territorial</div>
+      <div class="section-title">Mapa de calor — municipios con registros</div>
+      <div class="section-subtitle">Color más intenso = más registros · Agrupado por subregión</div>
+    </div>
+    <div class="section-body">
+      <div id="heatmap"></div>
+    </div>
+  </div>
+
+  <!-- 3. Fotógrafos por subregión -->
+  <div class="impact-section">
+    <div class="section-header">
+      <div class="section-label">Participación ciudadana</div>
+      <div class="section-title">Fotógrafos únicos por subregión</div>
+      <div class="section-subtitle">Jóvenes distintos que contribuyeron al menos un registro fotográfico</div>
+    </div>
+    <div class="section-body">
+      <div id="fotografos-bars"></div>
+    </div>
+  </div>
+
+  <!-- 3. Cobertura municipal -->
+  <div class="impact-section">
+    <div class="section-header">
+      <div class="section-label">Cobertura territorial</div>
+      <div class="section-title">Municipios con registros de biodiversidad</div>
+      <div class="section-subtitle">Ordenados por número de registros fotográficos</div>
+    </div>
+    <div class="section-body" style="padding-top:12px">
+      <table class="threat-table" id="municipios-table"></table>
+      <div id="municipios-empty" class="empty-mes" style="display:none">Sin municipios registrados aún.</div>
+    </div>
+  </div>
+
+  <!-- 4. Alertas CR / EN -->
+  <div class="impact-section" style="border-top:4px solid #d32f2f">
+    <div class="section-header">
+      <div class="section-label" style="color:#d32f2f">⚠ Alerta de conservación — requiere atención prioritaria</div>
+      <div class="section-title">Especies CR / EN fotografiadas por participantes</div>
+      <div class="section-subtitle">En Peligro Crítico o En Peligro · presencia confirmada en territorio antioqueño por jóvenes del programa</div>
+    </div>
+    <div class="section-body">
+      <div class="notable-grid" id="alertas-grid"></div>
+      <div id="alertas-empty" class="empty-mes" style="display:none">Sin alertas CR/EN registradas en base de datos.</div>
+    </div>
+  </div>
+
+  <!-- 6. iNaturalist: registros por subregión -->
+  <div class="impact-section" style="border-top:4px solid #018d38">
+    <div class="section-header">
+      <div class="section-label" style="color:#018d38">🌿 iNaturalist · Proyecto JPL — tiempo real</div>
+      <div class="section-title">Registros por subregión</div>
+      <div class="section-subtitle">Distribución geográfica de las 600 observaciones más recientes con coordenadas GPS</div>
+    </div>
+    <div class="section-body">
+      <div id="inat-subs-bars"></div>
+      <div id="inat-subs-loading" style="color:var(--muted);font-size:12px;padding:8px 0">Cargando desde iNaturalist…</div>
+    </div>
+  </div>
+
+  <!-- 7. iNaturalist: top especies -->
+  <div class="impact-section" style="border-top:4px solid #018d38">
+    <div class="section-header">
+      <div class="section-label" style="color:#018d38">🦜 iNaturalist · Proyecto JPL — tiempo real</div>
+      <div class="section-title">Top 20 especies más observadas</div>
+      <div class="section-subtitle">Total acumulado en el proyecto · ordenadas por número de registros</div>
+    </div>
+    <div class="section-body">
+      <div id="inat-spp-bars"></div>
+      <div id="inat-spp-loading" style="color:var(--muted);font-size:12px;padding:8px 0">Cargando desde iNaturalist…</div>
+      <div id="inat-spp-legend" style="display:flex;flex-wrap:wrap;gap:10px 20px;margin-top:12px;padding-top:10px;border-top:1px solid #e8eaf0"></div>
+    </div>
+  </div>
+
+  <!-- 8. iNaturalist: top observadores -->
+  <div class="impact-section" style="border-top:4px solid #018d38">
+    <div class="section-header">
+      <div class="section-label" style="color:#018d38">👤 iNaturalist · Proyecto JPL — tiempo real</div>
+      <div class="section-title">Top 20 observadores</div>
+      <div class="section-subtitle">Total de registros por usuario · datos en tiempo real de iNaturalist</div>
+    </div>
+    <div class="section-body">
+      <div id="inat-obs-bars"></div>
+      <div id="inat-obs-loading" style="color:var(--muted);font-size:12px;padding:8px 0">Cargando desde iNaturalist…</div>
+    </div>
+  </div>
+
+  <!-- 5. Bioindicadores hídricos -->
+  <div class="impact-section" style="border-top:4px solid #0277bd">
+    <div class="section-header">
+      <div class="section-label" style="color:#0277bd">💧 Indicadores de calidad hídrica</div>
+      <div class="section-title">Anfibios y peces — bioindicadores de ecosistemas acuáticos</div>
+      <div class="section-subtitle">Su presencia confirma cuencas con agua limpia y hábitat conservado · Datos clave para gestión de recursos hídricos</div>
+    </div>
+    <div class="section-body" style="padding-top:12px">
+      <table class="threat-table" id="bio-table"></table>
+      <div id="bio-empty" class="empty-mes" style="display:none">Sin bioindicadores registrados en base de datos.</div>
+    </div>
+  </div>
+
+</main>
+
+<footer class="impact-footer">
+  <strong>Antioquia Biodiversa</strong> · Análisis territorial para Secretaría de Medio Ambiente de Antioquia
+</footer>
+
+<script src="js/api.js"></script>
+<script src="js/subregiones.js"></script>
+<script src="analisis.js"></script>
+</body>
+</html>

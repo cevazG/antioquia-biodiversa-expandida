@@ -1,0 +1,172 @@
+/* Header verde en home */
+.app-header {
+  background: var(--color-green-dark);
+  border-bottom-color: rgba(255,255,255,0.15);
+}
+
+.app-header__logo {
+  filter: drop-shadow(0 1px 4px rgba(0,0,0,.25));
+}
+
+.app-header__title {
+  color: #ffffff;
+}
+
+.app-header__title span {
+  color: rgba(255,255,255,0.75);
+}
+
+.app-header__lang {
+  border-color: rgba(255,255,255,0.6);
+  color: #ffffff;
+}
+
+.app-header__lang:active {
+  background: rgba(255,255,255,0.2);
+  color: #ffffff;
+}
+
+/* Hero */
+    .home-hero {
+      background: linear-gradient(160deg, var(--color-green-dark), var(--color-green-primary));
+      padding: var(--space-xl) var(--space-md) var(--space-xxl);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .home-hero::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='40' viewBox='0 0 80 40'%3E%3Cellipse cx='40' cy='20' rx='20' ry='30' fill='%23ffffff05' transform='rotate(30 40 20)'/%3E%3C/svg%3E");
+      background-size: 80px 40px;
+    }
+
+    .home-hero__content { position: relative; z-index: 1; }
+
+    .home-hero__logo {
+      width: 80px;
+      height: 80px;
+      object-fit: contain;
+      margin-bottom: var(--space-sm);
+      filter: drop-shadow(0 4px 12px rgba(0,0,0,.25));
+    }
+
+    .home-hero h1 {
+      color: var(--color-white);
+      font-size: 1.625rem;
+      margin-bottom: var(--space-sm);
+    }
+
+    .home-hero p {
+      color: rgba(255,255,255,0.8);
+      font-size: 0.9375rem;
+    }
+
+    /* Contenido */
+    .home-content {
+      padding: var(--space-lg) var(--space-md);
+      padding-bottom: calc(var(--bottom-bar-height) + var(--space-md));
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-md);
+      background: var(--color-bg);
+    }
+
+    .section-label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--color-text-light);
+    }
+
+    /* Tarjetas de módulo */
+    .module-card {
+      display: flex;
+      align-items: center;
+      gap: var(--space-md);
+      background: white;
+      border-radius: var(--radius-lg);
+      padding: var(--space-lg);
+      box-shadow: var(--shadow-sm);
+      text-decoration: none;
+      color: var(--color-text-dark);
+      border: 2px solid transparent;
+      transition: all var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .module-card:active { transform: scale(0.98); }
+
+    .module-card__icon {
+      width: 60px;
+      height: 60px;
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      flex-shrink: 0;
+    }
+
+    .module-card--bio  .module-card__icon { background: var(--color-green-pale); }
+    .module-card--agua .module-card__icon { background: #e8f0fb; }
+    .module-card--com  .module-card__icon { background: #fff3e0; }
+
+    .module-card--bio  { border-left: 4px solid var(--color-green-primary); }
+    .module-card--agua { border-left: 4px solid #3561ab; }
+    .module-card--com  { border-left: 4px solid #f28e18; }
+
+    .module-card__text h3 {
+      font-size: 1.0625rem;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .module-card--bio  .module-card__text h3 { color: var(--color-green-dark); }
+    .module-card--agua .module-card__text h3 { color: #1a3a6b; }
+    .module-card--com  .module-card__text h3 { color: #B0942B; }
+
+    .module-card__text p {
+      font-size: 0.8125rem;
+      color: var(--color-text-light);
+      line-height: 1.4;
+    }
+
+    .module-card__arrow {
+      margin-left: auto;
+      flex-shrink: 0;
+    }
+
+    .module-card--bio  .module-card__arrow { color: var(--color-green-primary); }
+    .module-card--agua .module-card__arrow { color: #3561ab; }
+    .module-card--com  .module-card__arrow { color: #f28e18; }
+
+    /* Stats */
+    .stats-row {
+      display: flex;
+      gap: var(--space-sm);
+    }
+
+    .stat-chip {
+      flex: 1;
+      background: var(--color-green-pale);
+      border-radius: var(--radius-md);
+      padding: var(--space-sm) var(--space-md);
+      text-align: center;
+    }
+
+    .stat-chip__num {
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: var(--color-green-dark);
+    }
+
+    .stat-chip__label {
+      font-size: 0.7rem;
+      color: var(--color-text-light);
+      font-weight: 500;
+    }

@@ -1,0 +1,71 @@
+{
+  "mes": "Mayo",
+  "mesEn": "May",
+  "año": 2026,
+  "fotos": [
+    {
+      "id": "jpl_may_001",
+      "foto": "img/fotos/bio/2026-05/jpl_may_001.jpg",
+      "credito": "Alejandro Patiño · Rionegro",
+      "municipio": "Rionegro",
+      "subregion": "oriente",
+      "especieEs": "Tucán pico iris",
+      "especieEn": "Keel-billed Toucan",
+      "especieCientifico": "Ramphastos sulfuratus",
+      "grupo": "aves",
+      "iucn": "LC",
+      "endemica": false,
+      "descripcionEs": "Individuo adulto posado sobre rama de guamo al borde de bosque secundario. Su colorido pico puede medir hasta un tercio de la longitud total del cuerpo.",
+      "descripcionEn": "Adult individual perched on a guamo branch at the edge of secondary forest. Its colorful beak can measure up to a third of its total body length.",
+      "familia": "ramphastidae"
+    },
+    {
+      "id": "jpl_may_002",
+      "foto": "img/fotos/bio/2026-05/jpl_may_002.jpg",
+      "credito": "Mariana Salazar · Jardín",
+      "municipio": "Jardín",
+      "subregion": "suroeste",
+      "especieEs": "Bromelia roja",
+      "especieEn": "Red Bromeliad",
+      "especieCientifico": "Guzmania lingulata",
+      "grupo": "orquideas",
+      "iucn": "LC",
+      "endemica": false,
+      "descripcionEs": "Especie epífita fotografiada en bosque húmedo a 1 750 m. Sus brácteas rojas actúan como señal para colibríes polinizadores.",
+      "descripcionEn": "Epiphytic species photographed in humid forest at 1,750 m. Its red bracts act as a signal for hummingbird pollinators.",
+      "familia": "bromeliaceae"
+    },
+    {
+      "id": "jpl_may_003",
+      "foto": "img/fotos/bio/2026-05/jpl_may_003.jpg",
+      "credito": "Diego Monsalve · Apartadó",
+      "municipio": "Apartadó",
+      "subregion": "uraba",
+      "especieEs": "Manatí del Caribe",
+      "especieEn": "Caribbean Manatee",
+      "especieCientifico": "Trichechus manatus",
+      "grupo": "mamiferos",
+      "iucn": "VU",
+      "endemica": false,
+      "descripcionEs": "Avistamiento en el golfo de Urabá durante jornada de monitoreo comunitario. Especie vulnerable que ha recuperado presencia en las costas de Antioquia.",
+      "descripcionEn": "Sighting in the Gulf of Urabá during a community monitoring session. Vulnerable species that has recovered its presence on the Antioquia coast.",
+      "familia": "trichechidae"
+    },
+    {
+      "id": "jpl_may_004",
+      "foto": "img/fotos/bio/2026-05/jpl_may_004.jpg",
+      "credito": "Sandra Gil · Bello",
+      "municipio": "Bello",
+      "subregion": "valle_aburra",
+      "especieEs": "Cedro rosado",
+      "especieEn": "Pink Cedar",
+      "especieCientifico": "Cedrela odorata",
+      "grupo": "arboles_nativos",
+      "iucn": "VU",
+      "endemica": false,
+      "descripcionEs": "Árbol adulto en proceso de reforestación urbana en el norte del Valle de Aburrá. Especie maderable vulnerable por sobreexplotación histórica.",
+      "descripcionEn": "Adult tree in an urban reforestation process in northern Valle de Aburrá. Timber species vulnerable due to historical overexploitation.",
+      "familia": "meliaceae"
+    }
+  ]
+}

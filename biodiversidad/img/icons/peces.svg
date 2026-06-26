@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <!-- Cola -->
+  <path d="M8 32 L18 20 L18 44 Z" fill="#006064"/>
+  <path d="M10 32 L18 22 L18 42 Z" fill="#0097A7" opacity="0.6"/>
+
+  <!-- Cuerpo -->
+  <ellipse cx="38" cy="32" rx="20" ry="12" fill="#006064"/>
+  <ellipse cx="36" cy="30" rx="10" ry="6" fill="#0097A7" opacity="0.5"/>
+
+  <!-- Aleta dorsal -->
+  <path d="M28 21 Q36 14 46 20 L46 22 Q36 17 28 23 Z" fill="#006064"/>
+
+  <!-- Aleta pectoral -->
+  <path d="M36 32 Q42 26 46 30 L44 34 Q40 30 36 34 Z" fill="#0097A7" opacity="0.7"/>
+
+  <!-- Aleta ventral -->
+  <path d="M34 38 Q38 44 44 42 L43 40 Q38 42 34 40 Z" fill="#0097A7" opacity="0.7"/>
+
+  <!-- Ojo -->
+  <circle cx="52" cy="30" r="4" fill="#004D40"/>
+  <circle cx="52" cy="30" r="2" fill="#E0F2F1"/>
+  <circle cx="53" cy="29" r="0.8" fill="#004D40"/>
+
+  <!-- Boca -->
+  <path d="M58 33 Q60 35 58 36" stroke="#004D40" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+
+  <!-- Escamas (línea lateral) -->
+  <path d="M22 32 Q30 30 40 31 Q48 32 54 33" stroke="#0097A7" stroke-width="1" fill="none" opacity="0.6"/>
+
+  <!-- Burbujas -->
+  <circle cx="60" cy="24" r="2" stroke="#0097A7" stroke-width="1.2" fill="none" opacity="0.7"/>
+  <circle cx="57" cy="18" r="1.5" stroke="#0097A7" stroke-width="1" fill="none" opacity="0.5"/>
+</svg>

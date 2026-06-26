@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#018d38">
+  <title>Comunidad · Antioquia Biodiversa</title>
+  <link rel="stylesheet" href="../biodiversidad/css/main.css">
+  <link rel="stylesheet" href="../biodiversidad/css/components.css">
+  <link rel="stylesheet" href="../biodiversidad/css/animations.css">
+  <link rel="stylesheet" href="index.css">
+</head>
+<body>
+  <div class="app-shell">
+
+    <!-- Hero -->
+    <header class="com-hero">
+      <div class="com-hero__label" data-i18n="com_titulo">Comunidad</div>
+      <h1 class="com-hero__title" data-i18n="com_hero_title">Programas Comunitarios</h1>
+      <p class="com-hero__subtitle" data-i18n="com_hero_sub">Iniciativas para conservar la biodiversidad de Antioquia junto con sus comunidades</p>
+    </header>
+
+    <!-- Programas -->
+    <main class="com-content">
+
+      <a href="jovenes_pa_lante/index.html" class="prog-card prog-card--jpl ripple-container anim-fade-in-up">
+        <div class="prog-card__deco">🌱</div>
+        <div class="prog-card__body">
+          <div class="prog-card__name" data-i18n="jpl_titulo">Jóvenes pa' Lante</div>
+          <div class="prog-card__desc" data-i18n="jpl_desc_short">Educación ambiental para jóvenes de los 125 municipios de Antioquia</div>
+        </div>
+        <svg class="prog-card__arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 18l6-6-6-6"/></svg>
+      </a>
+
+      <a href="guarda_cuencas/index.html" class="prog-card prog-card--gc ripple-container anim-fade-in-up">
+        <div class="prog-card__deco">💧</div>
+        <div class="prog-card__body">
+          <div class="prog-card__name" data-i18n="gc_titulo">Guarda Cuencas</div>
+          <div class="prog-card__desc" data-i18n="gc_desc_short">Guardianes comunitarios de las cuencas hídricas de Antioquia</div>
+        </div>
+        <svg class="prog-card__arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 18l6-6-6-6"/></svg>
+      </a>
+
+      <a href="especie_del_mes.html" class="prog-card prog-card--edm ripple-container anim-fade-in-up">
+        <div class="prog-card__deco">🏆</div>
+        <div class="prog-card__body">
+          <div class="prog-card__name" data-i18n="jpl_edm_titulo">Especie del Mes</div>
+          <div class="prog-card__desc" data-i18n="edm_desc_short">La especie insignia de Antioquia cada mes · Envía tu foto de avistamiento</div>
+        </div>
+        <svg class="prog-card__arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 18l6-6-6-6"/></svg>
+      </a>
+
+    </main>
+
+    <!-- Bottom bar -->
+    <nav class="bottom-bar" aria-label="Navegación principal">
+      <button class="bottom-bar__btn" onclick="window.location.href='../biodiversidad/home.html'" aria-label="Inicio">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        <span data-i18n="home">Inicio</span>
+      </button>
+      <button class="bottom-bar__btn" onclick="window.location.href='../biodiversidad/biodiversidad.html'" aria-label="Biodiversidad">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        <span data-i18n="nav_bio">Bio</span>
+      </button>
+      <button class="bottom-bar__btn" onclick="window.location.href='../agua/index.html'" aria-label="Agua">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C6 8 4 12 4 15a8 8 0 0016 0c0-3-2-7-8-13z"/></svg>
+        <span data-i18n="nav_agua">Agua</span>
+      </button>
+      <button class="bottom-bar__btn active" aria-label="Comunidad">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
+        <span data-i18n="com_titulo">Comunidad</span>
+      </button>
+    </nav>
+  </div>
+
+  <script src="../biodiversidad/js/i18n.js"></script>
+  <script src="../biodiversidad/js/nav.js"></script>
+  <script src="../biodiversidad/js/app.js"></script>
+  <script src="index.js"></script>
+</body>
+</html>

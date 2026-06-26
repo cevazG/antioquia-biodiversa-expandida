@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <!-- Cuerpo del animal (bovino/equino estilizado) -->
+  <ellipse cx="32" cy="38" rx="18" ry="12" fill="#558B2F"/>
+  <ellipse cx="30" cy="36" rx="8" ry="5" fill="#7CB342" opacity="0.5"/>
+
+  <!-- Cabeza -->
+  <ellipse cx="48" cy="28" rx="10" ry="9" fill="#558B2F"/>
+  <ellipse cx="46" cy="27" rx="4" ry="3.5" fill="#7CB342" opacity="0.5"/>
+
+  <!-- Hocico -->
+  <ellipse cx="56" cy="31" rx="5" ry="4" fill="#558B2F"/>
+  <circle cx="55" cy="30" r="1.2" fill="#33691E"/>
+  <circle cx="57" cy="30" r="1.2" fill="#33691E"/>
+
+  <!-- Ojo -->
+  <circle cx="47" cy="25" r="2" fill="#1B5E20"/>
+  <circle cx="47" cy="25" r="1" fill="#E8F5E9"/>
+
+  <!-- Oreja -->
+  <ellipse cx="42" cy="20" rx="4" ry="6" fill="#558B2F" transform="rotate(-20 42 20)"/>
+  <ellipse cx="42" cy="20" rx="2" ry="3.5" fill="#7CB342" opacity="0.6" transform="rotate(-20 42 20)"/>
+
+  <!-- Patas delanteras -->
+  <rect x="20" y="47" width="5" height="11" rx="2.5" fill="#558B2F"/>
+  <rect x="28" y="47" width="5" height="11" rx="2.5" fill="#558B2F"/>
+
+  <!-- Patas traseras -->
+  <rect x="36" y="47" width="5" height="11" rx="2.5" fill="#558B2F"/>
+  <rect x="44" y="47" width="5" height="11" rx="2.5" fill="#558B2F"/>
+
+  <!-- Cola -->
+  <path d="M14 36 Q8 32 10 26 Q12 22 16 25" stroke="#558B2F" stroke-width="3" stroke-linecap="round" fill="none"/>
+  <circle cx="10" cy="26" r="3" fill="#558B2F"/>
+
+  <!-- Cuernos (bovino) -->
+  <path d="M44 20 Q40 12 36 14" stroke="#33691E" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+  <path d="M50 19 Q52 11 56 13" stroke="#33691E" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+</svg>

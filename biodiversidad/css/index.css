@@ -1,0 +1,126 @@
+/* Página de idioma: sin header ni bottom bar */
+    body { background: var(--color-green-dark); }
+
+    .lang-page {
+      min-height: 100dvh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: var(--space-xl) var(--space-lg);
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Fondo orgánico con formas de hojas */
+    .lang-page__bg {
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at 15% 85%, rgba(255,199,44,0.18) 0%, transparent 55%),
+        radial-gradient(ellipse at 85% 15%, rgba(77,184,112,0.20) 0%, transparent 55%),
+        linear-gradient(160deg, #1B4D2E 0%, #215732 40%, #009639 100%);
+    }
+
+    /* Patrón de hojas decorativas */
+    .lang-page__leaves {
+      position: fixed;
+      inset: 0;
+      background-image:
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'%3E%3Cellipse cx='40' cy='40' rx='18' ry='30' fill='%23ffffff08' transform='rotate(30 40 40)'/%3E%3C/svg%3E");
+      background-size: 80px 80px;
+    }
+
+    .lang-page__content {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: 400px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: var(--space-xl);
+      animation: fadeInUp 0.6s ease both;
+    }
+
+    /* Logo / escudo oficial */
+    .brand-logo {
+      width: 120px;
+      height: auto;
+      filter: drop-shadow(0 8px 24px rgba(0,0,0,0.35));
+    }
+
+    .brand-title {
+      text-align: center;
+    }
+
+    .brand-title h1 {
+      color: var(--color-white);
+      font-size: 2rem;
+      font-weight: 800;
+      line-height: 1.15;
+      text-shadow: 0 2px 12px rgba(0,0,0,0.3);
+    }
+
+    .brand-title p {
+      color: rgba(255,255,255,0.75);
+      font-size: 0.9375rem;
+      margin-top: 6px;
+    }
+
+    /* Divisor decorativo dorado */
+    .gold-divider {
+      display: flex;
+      align-items: center;
+      gap: var(--space-md);
+      width: 100%;
+    }
+
+    .gold-divider::before,
+    .gold-divider::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: rgba(255,199,44,0.5);
+    }
+
+    .gold-divider span {
+      color: var(--color-gold);
+      font-size: 0.8125rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+    }
+
+    .lang-options {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-md);
+      width: 100%;
+    }
+
+    /* Pie de página */
+    .lang-footer {
+      position: fixed;
+      bottom: env(safe-area-inset-bottom, 16px);
+      left: 0;
+      right: 0;
+      text-align: center;
+      padding-bottom: var(--space-md);
+    }
+
+    .lang-footer p {
+      color: rgba(255,255,255,0.45);
+      font-size: 0.75rem;
+    }
+
+    /* Decoración esquinas */
+    .corner-leaf {
+      position: fixed;
+      font-size: 8rem;
+      opacity: 0.06;
+      line-height: 1;
+      pointer-events: none;
+    }
+    .corner-leaf--tl { top: -20px; left: -20px; transform: rotate(-30deg); }
+    .corner-leaf--br { bottom: -20px; right: -20px; transform: rotate(150deg); }

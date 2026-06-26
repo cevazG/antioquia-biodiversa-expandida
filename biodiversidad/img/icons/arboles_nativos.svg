@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <!-- Tronco -->
+  <rect x="28" y="44" width="8" height="16" rx="3" fill="#2E7D32"/>
+  <rect x="29" y="44" width="3" height="16" rx="1.5" fill="#388E3C" opacity="0.5"/>
+
+  <!-- Copa inferior (más ancha) -->
+  <ellipse cx="32" cy="40" rx="22" ry="14" fill="#2E7D32"/>
+  <ellipse cx="29" cy="38" rx="10" ry="7" fill="#388E3C" opacity="0.5"/>
+
+  <!-- Copa media -->
+  <ellipse cx="32" cy="27" rx="16" ry="11" fill="#2E7D32"/>
+  <ellipse cx="30" cy="26" rx="7" ry="5" fill="#388E3C" opacity="0.5"/>
+
+  <!-- Copa superior -->
+  <ellipse cx="32" cy="17" rx="10" ry="8" fill="#1B5E20"/>
+  <ellipse cx="30" cy="16" rx="4" ry="3.5" fill="#2E7D32" opacity="0.6"/>
+
+  <!-- Punta del árbol -->
+  <ellipse cx="32" cy="10" rx="6" ry="5" fill="#1B5E20"/>
+
+  <!-- Flores/frutos (guayacán amarillo) -->
+  <circle cx="20" cy="38" r="2.5" fill="#F9A825" opacity="0.9"/>
+  <circle cx="44" cy="36" r="2.5" fill="#F9A825" opacity="0.9"/>
+  <circle cx="24" cy="26" r="2" fill="#F9A825" opacity="0.8"/>
+  <circle cx="40" cy="25" r="2" fill="#F9A825" opacity="0.8"/>
+  <circle cx="32" cy="22" r="1.5" fill="#FDD835" opacity="0.9"/>
+</svg>

@@ -1,0 +1,125 @@
+{
+  "mes": "Junio", "mesEn": "June", "año": 2026,
+  "fotos": [
+    {
+      "id": "gc_001",
+      "foto": "img/fotos/gc_001.jpg",
+      "credito": "Guarda Cuencas Oriente · Juan Pérez",
+      "municipio": "Guarne",
+      "subregion": "oriente",
+      "cuenca": "Río Negro",
+      "tituloEs": "Nacimiento del Río Negro",
+      "tituloEn": "Río Negro Headwaters",
+      "descripcionEs": "Vista panorámica del nacimiento del Río Negro en el páramo de Las Palmas. Esta cuenca abastece de agua a municipios del oriente antioqueño y al Valle de Aburrá.",
+      "descripcionEn": "Panoramic view of the Río Negro headwaters in the Las Palmas paramo. This watershed supplies water to municipalities in eastern Antioquia and the Valle de Aburrá."
+    },
+    {
+      "id": "gc_002",
+      "foto": "img/fotos/gc_002.jpg",
+      "credito": "Guarda Cuencas Norte · María Lopera",
+      "municipio": "Donmatías",
+      "subregion": "norte",
+      "cuenca": "Río Grande",
+      "tituloEs": "Embalse Río Grande",
+      "tituloEn": "Río Grande Reservoir",
+      "descripcionEs": "Embalse Río Grande II, principal fuente hídrica para el sistema de potabilización de Medellín y el norte del Valle de Aburrá. Capacidad de 170 millones de m³.",
+      "descripcionEn": "Río Grande II reservoir, the main water source for Medellín's water treatment system and northern Valle de Aburrá. Capacity of 170 million m³."
+    },
+    {
+      "id": "gc_003",
+      "foto": "img/fotos/gc_003.jpg",
+      "credito": "Guarda Cuencas Urabá · Carlos Mena",
+      "municipio": "Turbo",
+      "subregion": "uraba",
+      "cuenca": "Río Atrato",
+      "tituloEs": "Delta del Río Atrato",
+      "tituloEn": "Atrato River Delta",
+      "descripcionEs": "Zona deltaica del Atrato donde el río se abre en múltiples brazos antes de desembocar en el golfo de Urabá. Uno de los ecosistemas de humedal más biodiversos de Colombia.",
+      "descripcionEn": "The Atrato delta where the river splits into multiple channels before entering the Gulf of Urabá. One of Colombia's most biodiverse wetland ecosystems."
+    },
+    {
+      "id": "gc_004",
+      "foto": "img/fotos/gc_004.jpg",
+      "credito": "Guarda Cuencas Bajo Cauca · Rosa Gil",
+      "municipio": "Caucasia",
+      "subregion": "bajo_cauca",
+      "cuenca": "Río Cauca",
+      "tituloEs": "Río Cauca en el Bajo Cauca",
+      "tituloEn": "Cauca River in the Bajo Cauca",
+      "descripcionEs": "El río Cauca atraviesa la región del Bajo Cauca antioqueño. En este tramo es eje de vida para comunidades ribereñas y la pesca artesanal.",
+      "descripcionEn": "The Cauca River crosses the Bajo Cauca region of Antioquia. In this stretch it is the lifeline for riverside communities and artisanal fishing."
+    },
+    {
+      "id": "gc_005",
+      "foto": "img/fotos/gc_005.jpg",
+      "credito": "Guarda Cuencas Suroeste · Luisa Arango",
+      "municipio": "Andes",
+      "subregion": "suroeste",
+      "cuenca": "Río San Juan",
+      "tituloEs": "Quebrada Las Ánimas",
+      "tituloEn": "Las Ánimas Stream",
+      "descripcionEs": "Nacimiento de la quebrada Las Ánimas, afluente del río San Juan. Zona de recarga hídrica protegida por las comunidades locales. Altitud 2 100 m s. n. m.",
+      "descripcionEn": "Headwaters of Las Ánimas stream, a tributary of the San Juan River. Water recharge area protected by local communities. Altitude 2,100 m a.s.l."
+    },
+    {
+      "id": "gc_006",
+      "foto": "img/fotos/gc_006.jpg",
+      "credito": "Guarda Cuencas Occidente · Andrés Velásquez",
+      "municipio": "Santa Fe de Antioquia",
+      "subregion": "occidente",
+      "cuenca": "Río Tonusco",
+      "tituloEs": "Río Tonusco",
+      "tituloEn": "Tonusco River",
+      "descripcionEs": "El Tonusco, afluente del Cauca en el occidente antioqueño. Sus riberas albergan galerías de bosque seco tropical, ecosistema en peligro crítico en Antioquia.",
+      "descripcionEn": "The Tonusco, a Cauca tributary in western Antioquia. Its banks host tropical dry forest galleries, a critically threatened ecosystem in Antioquia."
+    },
+    {
+      "id": "gc_007",
+      "foto": "img/fotos/gc_007.jpg",
+      "credito": "Guarda Cuencas Nordeste · Diana Cano",
+      "municipio": "Yolombó",
+      "subregion": "nordeste",
+      "cuenca": "Río Nechí",
+      "tituloEs": "Río Nechí en el Nordeste",
+      "tituloEn": "Nechí River in the Northeast",
+      "descripcionEs": "Tramo medio del río Nechí, afluente del Cauca. Cuenca estratégica para la generación hidroeléctrica y la pesca de subsistencia en el nordeste.",
+      "descripcionEn": "Middle reach of the Nechí River, a Cauca tributary. Strategic watershed for hydroelectric generation and subsistence fishing in the northeast."
+    },
+    {
+      "id": "gc_008",
+      "foto": "img/fotos/gc_008.jpg",
+      "credito": "Guarda Cuencas Magdalena Medio · Felipe Torres",
+      "municipio": "Puerto Berrío",
+      "subregion": "magdalena_medio",
+      "cuenca": "Río Magdalena",
+      "tituloEs": "Humedales del Magdalena Medio",
+      "tituloEn": "Middle Magdalena Wetlands",
+      "descripcionEs": "Complejo de ciénagas y humedales a orillas del Magdalena. Estas zonas inundables son clave para la reproducción de peces migratorios y la regulación de caudales.",
+      "descripcionEn": "Complex of swamps and wetlands along the Magdalena. These floodplains are key for migratory fish reproduction and flow regulation."
+    },
+    {
+      "id": "gc_009",
+      "foto": "img/fotos/gc_009.jpg",
+      "credito": "Guarda Cuencas Valle de Aburrá · Natalia Ríos",
+      "municipio": "Bello",
+      "subregion": "valle_aburra",
+      "cuenca": "Quebrada La Iguaná",
+      "tituloEs": "Recuperación quebrada La Iguaná",
+      "tituloEn": "La Iguaná Stream Restoration",
+      "descripcionEs": "Tramo recuperado de la quebrada La Iguaná, con reforestación de especies nativas. Proyecto que une barrios del occidente de Medellín con el río Aburrá.",
+      "descripcionEn": "Restored stretch of La Iguaná stream with native species reforestation. Project connecting neighborhoods in western Medellín with the Aburrá River."
+    },
+    {
+      "id": "gc_010",
+      "foto": "img/fotos/gc_010.jpg",
+      "credito": "Guarda Cuencas Norte · Tomás Sierra",
+      "municipio": "Belmira",
+      "subregion": "norte",
+      "cuenca": "Río Chico",
+      "tituloEs": "Páramo de Belmira",
+      "tituloEn": "Belmira Páramo",
+      "descripcionEs": "Páramo de Belmira, la estrella hídrica más alta del norte antioqueño a 3 200 m s. n. m. Nacimiento del río Chico, que abastece varios municipios del norte.",
+      "descripcionEn": "Belmira páramo, the highest water source in northern Antioquia at 3,200 m a.s.l. Headwater of the Río Chico, which supplies several northern municipalities."
+    }
+  ]
+}

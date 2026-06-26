@@ -1,0 +1,130 @@
+:root { --color-agua: #3561ab; --color-agua-dark: #1a3a6b; --color-agua-pale: #e8f0fb; }
+
+    .agua-hero {
+      background: linear-gradient(160deg, var(--color-agua-dark), var(--color-agua));
+      padding: var(--space-xl) var(--space-md) var(--space-xxl);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .agua-hero::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='40' viewBox='0 0 80 40'%3E%3Cpath d='M0 20 Q20 5 40 20 Q60 35 80 20' fill='none' stroke='%23ffffff08' stroke-width='2'/%3E%3C/svg%3E");
+      background-size: 80px 40px;
+    }
+
+    .agua-hero__content { position: relative; z-index: 1; }
+
+    .agua-hero__emoji {
+      font-size: 3.5rem;
+      margin-bottom: var(--space-sm);
+      display: block;
+      animation: pulse 3s ease-in-out infinite;
+    }
+
+    .agua-hero h1 { color: white; font-size: 1.625rem; margin-bottom: var(--space-sm); }
+    .agua-hero p  { color: rgba(255,255,255,0.8); font-size: 0.9375rem; }
+
+    .agua-content {
+      padding: var(--space-lg) var(--space-md);
+      padding-bottom: calc(var(--bottom-bar-height) + var(--space-md));
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-md);
+    }
+
+    /* Tarjetas de modo */
+    .agua-mode-card {
+      display: flex;
+      align-items: center;
+      gap: var(--space-md);
+      background: white;
+      border-radius: var(--radius-lg);
+      padding: var(--space-lg);
+      box-shadow: var(--shadow-sm);
+      text-decoration: none;
+      color: var(--color-text-dark);
+      border: 2px solid transparent;
+      transition: all var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .agua-mode-card:active { transform: scale(0.98); }
+
+    .agua-mode-card__icon {
+      width: 56px;
+      height: 56px;
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.75rem;
+      flex-shrink: 0;
+    }
+
+    .agua-mode-card--fuentes .agua-mode-card__icon { background: #e8f4fd; }
+    .agua-mode-card--cuencas .agua-mode-card__icon { background: #e8f0fb; }
+
+    .agua-mode-card__text h3 {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--color-agua-dark);
+      margin-bottom: 4px;
+    }
+
+    .agua-mode-card__text p {
+      font-size: 0.8125rem;
+      color: var(--color-text-light);
+      line-height: 1.4;
+    }
+
+    .agua-mode-card__arrow {
+      margin-left: auto;
+      color: var(--color-agua);
+      flex-shrink: 0;
+    }
+
+    /* Stats */
+    .stats-row {
+      display: flex;
+      gap: var(--space-sm);
+    }
+
+    .stat-chip {
+      flex: 1;
+      background: var(--color-agua-pale);
+      border-radius: var(--radius-md);
+      padding: var(--space-sm) var(--space-md);
+      text-align: center;
+    }
+
+    .stat-chip__num {
+      font-size: 1.375rem;
+      font-weight: 800;
+      color: var(--color-agua-dark);
+    }
+
+    .stat-chip__label {
+      font-size: 0.7rem;
+      color: var(--color-agua);
+      font-weight: 600;
+    }
+
+    .section-label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--color-text-light);
+    }
+
+    /* Header azul agua */
+    .app-header { border-bottom: 3px solid var(--color-agua); }
+
+    /* Bottom bar activo */
+    .bottom-bar__btn--agua.active svg,
+    .bottom-bar__btn--agua.active span { color: var(--color-agua); }

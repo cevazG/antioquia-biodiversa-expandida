@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <!-- Ala superior izquierda (más ancha, extendida) -->
+  <path d="M28 30 Q10 18 4 8 Q0 20 8 28 Q16 34 28 32 Z" fill="#4E342E"/>
+  <!-- Ala superior derecha -->
+  <path d="M36 30 Q54 18 60 8 Q64 20 56 28 Q48 34 36 32 Z" fill="#5D4037"/>
+  <!-- Ala inferior izquierda (con ojo falso) -->
+  <path d="M28 32 Q14 40 10 56 Q20 60 28 50 Q30 42 28 34 Z" fill="#6D4C41"/>
+  <!-- Ojo falso izquierdo -->
+  <circle cx="16" cy="50" r="5" fill="#FF6F00"/>
+  <circle cx="16" cy="50" r="3" fill="#212121"/>
+  <circle cx="15" cy="49" r="1" fill="white"/>
+  <!-- Ala inferior derecha (con ojo falso) -->
+  <path d="M36 32 Q50 40 54 56 Q44 60 36 50 Q34 42 36 34 Z" fill="#5D4037"/>
+  <!-- Ojo falso derecho -->
+  <circle cx="48" cy="50" r="5" fill="#FF6F00"/>
+  <circle cx="48" cy="50" r="3" fill="#212121"/>
+  <circle cx="47" cy="49" r="1" fill="white"/>
+  <!-- Patrón de pelaje en alas -->
+  <path d="M10 20 Q18 16 26 20" stroke="#795548" stroke-width="2" fill="none" stroke-linecap="round"/>
+  <path d="M38 20 Q46 16 54 20" stroke="#795548" stroke-width="2" fill="none" stroke-linecap="round"/>
+  <!-- Cuerpo peludo -->
+  <ellipse cx="32" cy="34" rx="3.5" ry="10" fill="#3E2723"/>
+  <!-- Segmentos del abdomen -->
+  <line x1="28.5" y1="28" x2="35.5" y2="28" stroke="#5D4037" stroke-width="1" opacity="0.5"/>
+  <line x1="28.5" y1="32" x2="35.5" y2="32" stroke="#5D4037" stroke-width="1" opacity="0.5"/>
+  <line x1="28.5" y1="36" x2="35.5" y2="36" stroke="#5D4037" stroke-width="1" opacity="0.5"/>
+  <!-- Cabeza -->
+  <circle cx="32" cy="22" r="4" fill="#3E2723"/>
+  <!-- Antenas plumosas -->
+  <path d="M30 19 Q24 12 18 8" stroke="#4E342E" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <path d="M34 19 Q40 12 46 8" stroke="#4E342E" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <!-- Plumas en antenas -->
+  <path d="M22 10 L18 8 L24 12" stroke="#6D4C41" stroke-width="1.5" fill="none"/>
+  <path d="M42 10 L46 8 L40 12" stroke="#6D4C41" stroke-width="1.5" fill="none"/>
+  <!-- Ojos -->
+  <circle cx="30" cy="21" r="1.5" fill="#FF6F00"/>
+  <circle cx="34" cy="21" r="1.5" fill="#FF6F00"/>
+</svg>

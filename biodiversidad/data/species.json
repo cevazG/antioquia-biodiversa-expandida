@@ -1,0 +1,2791 @@
+{
+  "groups": [
+    "aves",
+    "anfibios_reptiles",
+    "mariposas",
+    "polillas",
+    "orquideas",
+    "mamiferos"
+  ],
+  "subregions": [
+    "Urabá",
+    "Occidente",
+    "Norte",
+    "Bajo Cauca",
+    "Nordeste",
+    "Magdalena Medio",
+    "Valle de Aburrá",
+    "Oriente",
+    "Suroeste"
+  ],
+  "families": [
+    {
+      "id": "trogonidae",
+      "group": "aves",
+      "nameEs": "Trogones",
+      "nameEn": "Trogons",
+      "descriptionEs": "Aves de colores metálicos brillantes que habitan el interior de los bosques húmedos. Sus plumas iridiscentes han sido apreciadas culturalmente por siglos en Mesoamérica y los Andes.",
+      "descriptionEn": "Brightly metallic-colored birds that inhabit the interior of humid forests. Their iridescent feathers have been culturally prized for centuries in Mesoamerica and the Andes."
+    },
+    {
+      "id": "craugastoridae",
+      "group": "anfibios_reptiles",
+      "nameEs": "Ranas de Lluvia",
+      "nameEn": "Rain Frogs",
+      "descriptionEs": "Amplia familia de ranas terrestres sin fase larvaria acuática libre. Extremadamente diversas en los bosques húmedos de Antioquia.",
+      "descriptionEn": "Large family of terrestrial frogs with no free-living aquatic larval stage. Extremely diverse in Antioquia's humid forests."
+    },
+    {
+      "id": "leptodactylidae",
+      "group": "anfibios_reptiles",
+      "nameEs": "Ranas Leptodactílidas",
+      "nameEn": "Leptodactylid Frogs",
+      "descriptionEs": "Familia diversa de ranas neotropicales que incluye algunas de las mayores ranas de Colombia. Producen nidos de espuma para depositar sus huevos.",
+      "descriptionEn": "Diverse family of neotropical frogs including some of Colombia's largest frogs. They produce foam nests to deposit their eggs."
+    },
+    {
+      "id": "hylidae",
+      "group": "anfibios_reptiles",
+      "nameEs": "Ranas de Árbol",
+      "nameEn": "Tree Frogs",
+      "descriptionEs": "Ranas arborícolas con almohadillas adhesivas en los dedos que les permiten trepar. Son especialmente activas en las noches lluviosas de los bosques antioqueños.",
+      "descriptionEn": "Arboreal frogs with adhesive pads on their toes that allow them to climb. They are especially active on rainy nights in Antioquia's forests."
+    },
+    {
+      "id": "colubridae",
+      "group": "anfibios_reptiles",
+      "nameEs": "Serpientes Colúbridas",
+      "nameEn": "Colubrid Snakes",
+      "descriptionEs": "La familia más grande de serpientes del mundo, con más del 60% de las especies. La mayoría son inofensivas para los humanos y juegan un papel crucial en el control de roedores e insectos.",
+      "descriptionEn": "The world's largest snake family, with over 60% of all species. Most are harmless to humans and play a crucial role in controlling rodents and insects."
+    },
+    {
+      "id": "nymphalidae",
+      "group": "mariposas",
+      "nameEs": "Mariposas Ninfálidas",
+      "nameEn": "Brush-footed Butterflies",
+      "descriptionEs": "La familia más grande de mariposas, con una enorme diversidad de formas y colores. Incluye las mariposas búho y las mariposas monarca.",
+      "descriptionEn": "The largest butterfly family, with enormous diversity of shapes and colors. Includes owl butterflies and monarch butterflies."
+    },
+    {
+      "id": "hesperiidae",
+      "group": "mariposas",
+      "nameEs": "Mariposas Hesperidas",
+      "nameEn": "Skipper Butterflies",
+      "descriptionEs": "Mariposas pequeñas y ágiles de vuelo rápido y errático. A menudo subestimadas por su aspecto discreto, son increíblemente diversas en los ecosistemas de Antioquia.",
+      "descriptionEn": "Small, agile butterflies with fast and erratic flight. Often overlooked for their subdued appearance, they are incredibly diverse in Antioquia's ecosystems."
+    },
+    {
+      "id": "saturniidae",
+      "group": "polillas",
+      "nameEs": "Polillas Gigantes",
+      "nameEn": "Giant Silk Moths",
+      "descriptionEs": "Las polillas más grandes del mundo, con envergaduras que pueden superar los 30 cm. Sus orugas producen seda de alta calidad.",
+      "descriptionEn": "The world's largest moths, with wingspans that can exceed 30 cm. Their caterpillars produce high-quality silk."
+    },
+    {
+      "id": "erebidae",
+      "group": "polillas",
+      "nameEs": "Polillas Érébidas",
+      "nameEn": "Erebid Moths",
+      "descriptionEs": "Una de las familias de polillas más grandes y diversas, con colores y patrones extraordinarios. Incluye las polillas tigre y las polillas lichen, muchas de ellas diurnas.",
+      "descriptionEn": "One of the largest and most diverse moth families, with extraordinary colors and patterns. Includes tiger moths and lichen moths, many of them diurnal."
+    },
+    {
+      "id": "cattleyinae",
+      "group": "orquideas",
+      "nameEs": "Orquídeas Cattleya",
+      "nameEn": "Cattleya Orchids",
+      "descriptionEs": "Las 'reinas de las orquídeas', conocidas por sus flores grandes y fragantes. Colombia es el mayor centro de diversidad de este grupo en el mundo.",
+      "descriptionEn": "The 'queens of orchids', known for their large, fragrant flowers. Colombia is the greatest center of diversity for this group in the world."
+    },
+    {
+      "id": "epidendrinae",
+      "group": "orquideas",
+      "nameEs": "Epidendros y Afines",
+      "nameEn": "Epidendrum and Allies",
+      "descriptionEs": "La subfamilia más grande de orquídeas, con más de 15.000 especies. El género Epidendrum es uno de los más diversos del mundo, con cientos de especies en los Andes antioqueños.",
+      "descriptionEn": "The largest orchid subfamily, with over 15,000 species. The genus Epidendrum is one of the most diverse in the world, with hundreds of species in the Antioquian Andes."
+    },
+    {
+      "id": "maxillarieae",
+      "group": "orquideas",
+      "nameEs": "Maxilarias y Afines",
+      "nameEn": "Maxillaria and Allies",
+      "descriptionEs": "Tribu de orquídeas epífitas con flores solitarias de gran belleza y en muchos casos fragantes. Abundantes en los bosques húmedos de montaña de Antioquia.",
+      "descriptionEn": "Tribe of epiphytic orchids with solitary flowers of great beauty, often fragrant. Abundant in Antioquia's humid mountain forests."
+    },
+    {
+      "id": "oncidiinae",
+      "group": "orquideas",
+      "nameEs": "Orquídeas Danza",
+      "nameEn": "Dancing Lady Orchids",
+      "descriptionEs": "Conocidas por sus flores en forma de bailarina. Antioquia alberga decenas de géneros de esta subtribu, especialmente en los bosques de niebla.",
+      "descriptionEn": "Known for their dancer-shaped flowers. Antioquia hosts dozens of genera from this subtribe, especially in cloud forests."
+    },
+    {
+      "id": "felidae",
+      "group": "mamiferos",
+      "nameEs": "Félidos",
+      "nameEn": "Felids",
+      "descriptionEs": "Carnívoros de la familia del jaguar y el puma. Son indicadores clave de la salud del ecosistema por ser depredadores tope.",
+      "descriptionEn": "Carnivores of the jaguar and puma family. Key ecosystem health indicators as apex predators."
+    },
+    {
+      "id": "ursidae_andean",
+      "group": "mamiferos",
+      "nameEs": "Oso andino",
+      "nameEn": "Andean bear",
+      "descriptionEs": "Único úrsido nativo de Sudamérica. Habita los bosques andinos de niebla y páramos de Antioquia.",
+      "descriptionEn": "The only bear native to South America. Inhabits Andean cloud forests and páramos of Antioquia."
+    },
+    {
+      "id": "sciuridae",
+      "group": "mamiferos",
+      "nameEs": "Ardillas",
+      "nameEn": "Squirrels",
+      "descriptionEs": "Roedores arborícolas ágiles y de cola voluminosa. Cumplen un rol ecológico fundamental como dispersores de semillas en los bosques andinos.",
+      "descriptionEn": "Agile arboreal rodents with bushy tails. Play a key ecological role as seed dispersers in Andean forests."
+    },
+    {
+      "id": "caviidae",
+      "group": "mamiferos",
+      "nameEs": "Capibaras",
+      "nameEn": "Capybaras",
+      "descriptionEs": "Familia de roedores que incluye al mayor roedor del mundo. Semiacuáticos, habitan orillas de ríos, ciénagas y humedales.",
+      "descriptionEn": "Rodent family that includes the world's largest rodent. Semi-aquatic, they inhabit riverbanks, swamps and wetlands."
+    },
+    {
+      "id": "dasyproctidae",
+      "group": "mamiferos",
+      "nameEs": "Guatines",
+      "nameEn": "Agoutis",
+      "descriptionEs": "Roedores terrestres de patas largas y pelaje brillante. Son uno de los pocos mamíferos capaces de abrir las duras semillas del nogal y el chontaduro.",
+      "descriptionEn": "Long-legged terrestrial rodents with glossy fur. One of the few mammals capable of cracking open the hard seeds of walnut and peach palm."
+    },
+    {
+      "id": "atelidae",
+      "group": "mamiferos",
+      "nameEs": "Monos aulladores",
+      "nameEn": "Howler monkeys",
+      "descriptionEs": "Primates de gran tamaño conocidos por su vocalización que puede escucharse a varios kilómetros. Son los primates más grandes de Sudamérica.",
+      "descriptionEn": "Large primates known for their vocalizations audible several kilometers away. The largest primates in South America."
+    },
+    {
+      "id": "cebidae",
+      "group": "mamiferos",
+      "nameEs": "Capuchinos",
+      "nameEn": "Capuchin monkeys",
+      "descriptionEs": "Primates medianos reconocidos por su inteligencia y habilidad para usar herramientas. Omnívoros versátiles que habitan diversos tipos de bosque.",
+      "descriptionEn": "Medium-sized primates known for their intelligence and tool use. Versatile omnivores inhabiting various forest types."
+    },
+    {
+      "id": "aotidae",
+      "group": "mamiferos",
+      "nameEs": "Monos nocturnos",
+      "nameEn": "Night monkeys",
+      "descriptionEs": "Únicos primates del mundo con hábitos estrictamente nocturnos. Sus grandes ojos les permiten ver con poca luz en los bosques andinos.",
+      "descriptionEn": "The world's only strictly nocturnal primates. Their large eyes allow them to see in low light in Andean forests."
+    },
+    {
+      "id": "mustelidae",
+      "group": "mamiferos",
+      "nameEs": "Mustélidos",
+      "nameEn": "Mustelids",
+      "descriptionEs": "Familia que agrupa a nutrias, tayras y comadrejas. Carnívoros ágiles que ocupan nichos ecológicos clave en ríos y bosques de Antioquia.",
+      "descriptionEn": "Family including otters, tayras and weasels. Agile carnivores occupying key ecological niches in rivers and forests of Antioquia."
+    },
+    {
+      "id": "procyonidae",
+      "group": "mamiferos",
+      "nameEs": "Procyónidos",
+      "nameEn": "Procyonids",
+      "descriptionEs": "Mamíferos medianos omnívoros con habilidades trepadoras. Incluyen al olinguito, especie descrita científicamente por primera vez en 2013.",
+      "descriptionEn": "Medium-sized omnivorous mammals with climbing abilities. Includes the olinguito, a species first described by science in 2013."
+    },
+    {
+      "id": "canidae",
+      "group": "mamiferos",
+      "nameEs": "Cánidos",
+      "nameEn": "Canids",
+      "descriptionEs": "Familia del zorro y el lobo. En Antioquia habita el zorro perro o zorro cangrejero, el cánido silvestre más común y adaptable del trópico americano.",
+      "descriptionEn": "Family of foxes and wolves. In Antioquia the crab-eating fox inhabits the region, the most common and adaptable wild canid of the American tropics."
+    },
+    {
+      "id": "lycaenidae",
+      "group": "mariposas",
+      "nameEs": "Licénidos",
+      "nameEn": "Gossamer-winged Butterflies",
+      "descriptionEs": "",
+      "descriptionEn": ""
+    },
+    {
+      "id": "papilionidae",
+      "group": "mariposas",
+      "nameEs": "Mariposas Cola de Golondrina",
+      "nameEn": "Swallowtail Butterflies",
+      "descriptionEs": "",
+      "descriptionEn": ""
+    },
+    {
+      "id": "pieridae",
+      "group": "mariposas",
+      "nameEs": "Mariposas Blancas y Amarillas",
+      "nameEn": "Whites & Yellows",
+      "descriptionEs": "",
+      "descriptionEn": ""
+    },
+    {
+      "id": "riodinidae",
+      "group": "mariposas",
+      "nameEs": "Mariposas Metálicas",
+      "nameEn": "Metalmark Butterflies",
+      "descriptionEs": "",
+      "descriptionEn": ""
+    },
+    {
+      "id": "geometridae",
+      "group": "polillas",
+      "nameEs": "Geométridas",
+      "nameEn": "Geometer Moths",
+      "descriptionEs": "Una de las familias más diversas de polillas, reconocibles por sus alas anchas que extienden planas. Sus orugas (\"mide-pulgadas\") se mueven arqueando el cuerpo. Muchas especies tienen coloración críptica que las hace casi invisibles sobre corteza y hojas.",
+      "descriptionEn": "One of the most diverse moth families, recognizable by their broad wings held flat. Their larvae (\"inchworms\") move by arching the body. Many species have cryptic coloration that makes them almost invisible on bark and leaves."
+    },
+    {
+      "id": "crambidae",
+      "group": "polillas",
+      "nameEs": "Polillas Crámbidas",
+      "nameEn": "Grass Moths",
+      "descriptionEs": "Familia numerosa de micropolillas y polillas medianas con alas muy variables. Incluye las \"polillas del pasto\" y varias plagas agrícolas importantes. Algunas tienen alas semitransparentes con marcas oscuras.",
+      "descriptionEn": "A large family of micro- and medium-sized moths with highly variable wings. Includes the grass moths and several important agricultural pests. Some have semi-transparent wings with dark markings."
+    },
+    {
+      "id": "lasiocampidae",
+      "group": "polillas",
+      "nameEs": "Polillas Lasiocámpidas",
+      "nameEn": "Lappet Moths",
+      "descriptionEs": "Polillas robustas con cuerpo peludo y antenas muy pectinadas. Las orugas suelen ser peludas y gregarias. Muchas especies presentan coloraciones crípticas que imitan corteza o madera.",
+      "descriptionEn": "Robust moths with hairy bodies and strongly pectinate antennae. Caterpillars are usually hairy and gregarious. Many species show cryptic coloration mimicking bark or wood."
+    },
+    {
+      "id": "bombycidae",
+      "group": "polillas",
+      "nameEs": "Bombícidas",
+      "nameEn": "Silk Moths",
+      "descriptionEs": "Familia que incluye el gusano de seda domesticado. Las especies silvestres habitan bosques tropicales. Presentan alas anteriores con un ápice ganchudo característico.",
+      "descriptionEn": "Family that includes the domesticated silkworm. Wild species inhabit tropical forests. They have forewings with a characteristic hooked apex."
+    },
+    {
+      "id": "ramphastidae",
+      "group": "aves",
+      "nameEs": "Tucanes y Arasaríes",
+      "nameEn": "Toucans and Aracaris"
+    },
+    {
+      "id": "momotidae",
+      "group": "aves",
+      "nameEs": "Barranqueros",
+      "nameEn": "Motmots"
+    },
+    {
+      "id": "psittacidae",
+      "group": "aves",
+      "nameEs": "Loros y Periquitos",
+      "nameEn": "Parrots and Parakeets"
+    },
+    {
+      "id": "thraupidae",
+      "group": "aves",
+      "nameEs": "Tangaras y Mieleros",
+      "nameEn": "Tanagers and Honeycreepers"
+    },
+    {
+      "id": "chlorospingidae",
+      "group": "aves",
+      "nameEs": "Clorospingos",
+      "nameEn": "Bush-Tanagers"
+    },
+    {
+      "id": "parulidae",
+      "group": "aves",
+      "nameEs": "Reinitas",
+      "nameEn": "Wood-Warblers"
+    },
+    {
+      "id": "bufonidae",
+      "group": "anfibios_reptiles",
+      "nameEs": "Sapos Verdaderos",
+      "nameEn": "True Toads"
+    },
+    {
+      "id": "pleurothallidinae",
+      "group": "orquideas",
+      "nameEs": "Pleurotálidas",
+      "nameEn": "Pleurothallids"
+    },
+    {
+      "id": "aeridinae",
+      "group": "orquideas",
+      "nameEs": "Orquídeas Vandáceas",
+      "nameEn": "Vanda Alliance Orchids"
+    },
+    {
+      "id": "zygopetalinae",
+      "group": "orquideas",
+      "nameEs": "Cigopétalas",
+      "nameEn": "Zygopetalum Alliance"
+    }
+  ],
+  "species": [
+    {
+      "id": "sp010101",
+      "familyId": "trogonidae",
+      "group": "aves",
+      "scientificName": "Trogon collaris",
+      "nameEs": "Trogón Acollarado",
+      "nameEn": "Collared Trogon",
+      "iucn": "LC",
+      "subregions": [
+        "Urabá",
+        "Norte",
+        "Occidente",
+        "Magdalena Medio",
+        "Oriente"
+      ],
+      "descriptionEs": "Ave de colores espectaculares con el pecho rojo brillante, la espalda verde metálico y un collar blanco que separa ambos colores. Habita el interior de los bosques húmedos tropicales y subtropicales. Anida en termiteros o troncos podridos. El macho y la hembra comparten la incubación de los huevos.",
+      "descriptionEn": "A spectacularly colored bird with a brilliant red breast, metallic green back, and a white collar separating both colors. Inhabits the interior of tropical and subtropical humid forests. Nests in termite mounds or rotting trunks. Male and female share incubation duties.",
+      "photos": [
+        {
+          "url": "gr01_aves/fa01_trogonidae/sp010101_trogon_collaris/sp010101_trogon_collaris_001.webp",
+          "captionEs": "Macho",
+          "captionEn": "Male"
+        },
+        {
+          "url": "gr01_aves/fa01_trogonidae/sp010101_trogon_collaris/sp010101_trogon_collaris_002.webp",
+          "captionEs": "Hembra",
+          "captionEn": "Female"
+        },
+        {
+          "url": "gr01_aves/fa01_trogonidae/sp010101_trogon_collaris/sp010101_trogon_collaris_003.webp",
+          "captionEs": "Macho — vista lateral",
+          "captionEn": "Male — lateral view"
+        },
+        {
+          "url": "gr01_aves/fa01_trogonidae/sp010101_trogon_collaris/sp010101_trogon_collaris_004.webp",
+          "captionEs": "Hembra — plumaje natural",
+          "captionEn": "Female — natural plumage"
+        }
+      ]
+    },
+    {
+      "id": "sp020101",
+      "familyId": "colubridae",
+      "group": "anfibios_reptiles",
+      "scientificName": "Lampropeltis micropholis",
+      "nameEs": "Falsa Coral",
+      "nameEn": "Andean Milk Snake",
+      "iucn": "LC",
+      "subregions": [
+        "Valle de Aburrá",
+        "Oriente",
+        "Norte",
+        "Occidente"
+      ],
+      "descriptionEs": "Serpiente inofensiva de colores rojo, negro y amarillo que imita el patrón de las serpientes corales venenosas (mimetismo batesiano). Habita bosques andinos y sus bordes entre 500 y 2.500 metros. Es nocturna y se alimenta de pequeños reptiles, anfibios y roedores.",
+      "descriptionEn": "Harmless snake with red, black, and yellow colors that mimics the pattern of venomous coral snakes (Batesian mimicry). Inhabits Andean forests and edges between 500 and 2,500 meters. Nocturnal, feeds on small reptiles, amphibians, and rodents.",
+      "photos": [
+        "gr02_anfibios_reptiles/fa01_colubridae/sp020101_lampropeltis_micropholis/sp020101_lampropeltis_micropholis_001.webp",
+        "gr02_anfibios_reptiles/fa01_colubridae/sp020101_lampropeltis_micropholis/sp020101_lampropeltis_micropholis_002.webp"
+      ]
+    },
+    {
+      "id": "sp020102",
+      "familyId": "colubridae",
+      "group": "anfibios_reptiles",
+      "scientificName": "Leptophis ahaetulla",
+      "nameEs": "Lora Verde",
+      "nameEn": "Parrot Snake",
+      "iucn": "LC",
+      "subregions": [
+        "Urabá",
+        "Norte",
+        "Occidente",
+        "Magdalena Medio"
+      ],
+      "descriptionEs": "Serpiente esbelta y ágil de color verde brillante que vive en los arbustos y el sotobosque de los bosques tropicales. Sus grandes ojos le dan excelente visión diurna para cazar ranas arborícolas y lagartijas. Aunque no es venenosa para los humanos, posee dientes traseros que producen una leve toxina.",
+      "descriptionEn": "Slender and agile bright green snake that lives in shrubs and forest understory. Its large eyes provide excellent diurnal vision for hunting tree frogs and lizards. Although not venomous to humans, it possesses rear fangs that deliver a mild toxin.",
+      "photos": [
+        "gr02_anfibios_reptiles/fa01_colubridae/sp020102_leptophis_ahaetulla/sp020102_leptophis_ahaetulla_001.webp",
+        "gr02_anfibios_reptiles/fa01_colubridae/sp020102_leptophis_ahaetulla/sp020102_leptophis_ahaetulla_002.webp",
+        "gr02_anfibios_reptiles/fa01_colubridae/sp020102_leptophis_ahaetulla/sp020102_leptophis_ahaetulla_003.webp",
+        "gr02_anfibios_reptiles/fa01_colubridae/sp020102_leptophis_ahaetulla/sp020102_leptophis_ahaetulla_004.webp"
+      ]
+    },
+    {
+      "id": "sp020201",
+      "familyId": "craugastoridae",
+      "group": "anfibios_reptiles",
+      "scientificName": "Pristimantis sp. 1",
+      "nameEs": "Rana de Lluvia Andina (sp. 1)",
+      "nameEn": "Andean Rain Frog (sp. 1)",
+      "iucn": "DD",
+      "subregions": [
+        "Oriente",
+        "Norte",
+        "Suroeste"
+      ],
+      "descriptionEs": "Rana de lluvia del género Pristimantis, el género más diverso de vertebrados terrestres del mundo. Habita los bosques húmedos y de niebla andinos. Su identidad a nivel de especie está pendiente de confirmación taxonómica. Como todos los Pristimantis, su desarrollo es directo: los huevos eclosionan como ranas diminutas.",
+      "descriptionEn": "A rain frog of the genus Pristimantis, the most species-rich genus of terrestrial vertebrates in the world. Inhabits humid and cloud forests in the Andes. Species-level identity is pending taxonomic confirmation. Like all Pristimantis, development is direct: eggs hatch as tiny froglets.",
+      "photos": [
+        "gr02_anfibios_reptiles/fa02_craugastoridae/sp020201_pristimantis_sp/sp020201_pristimantis_sp_001.webp",
+        "gr02_anfibios_reptiles/fa02_craugastoridae/sp020201_pristimantis_sp/sp020201_pristimantis_sp_002.webp"
+      ]
+    },
+    {
+      "id": "sp020202",
+      "familyId": "craugastoridae",
+      "group": "anfibios_reptiles",
+      "scientificName": "Pristimantis sp. 2",
+      "nameEs": "Rana de Lluvia Andina (sp. 2)",
+      "nameEn": "Andean Rain Frog (sp. 2)",
+      "iucn": "DD",
+      "subregions": [
+        "Oriente",
+        "Occidente",
+        "Norte"
+      ],
+      "descriptionEs": "Segunda especie del género Pristimantis registrada en las fotografías de campo. Se diferencia de sp. 1 por su patrón de coloración y morfología. Antioquia puede albergar más de 100 especies de este género aún sin describir, lo que la convierte en una de las prioridades para la exploración biológica.",
+      "descriptionEn": "Second species of the genus Pristimantis recorded in field photographs. It differs from sp. 1 by its coloration pattern and morphology. Antioquia may harbor more than 100 species of this genus yet to be described, making it a priority for biological exploration.",
+      "photos": [
+        "gr02_anfibios_reptiles/fa02_craugastoridae/sp020202_pristimantis_sp/sp020202_pristimantis_sp_001.webp",
+        "gr02_anfibios_reptiles/fa02_craugastoridae/sp020202_pristimantis_sp/sp020202_pristimantis_sp_002.webp"
+      ]
+    },
+    {
+      "id": "sp020301",
+      "familyId": "hylidae",
+      "group": "anfibios_reptiles",
+      "scientificName": "Boana pugnax",
+      "nameEs": "Rana de Árbol Gladiadora",
+      "nameEn": "Gladiator Tree Frog",
+      "iucn": "LC",
+      "subregions": [
+        "Urabá",
+        "Norte",
+        "Magdalena Medio",
+        "Bajo Cauca",
+        "Occidente"
+      ],
+      "descriptionEs": "Rana arborícola grande de color verde brillante que habita cerca de cuerpos de agua. Los machos son territoriales y utilizan espuelas córneas en el pulgar para luchar entre sí por los mejores sitios de canto, de ahí su nombre de 'gladiadora'. Construye estanques en el barro para depositar sus huevos.",
+      "descriptionEn": "Large, bright green tree frog that lives near bodies of water. Males are territorial and use cornified spurs on their thumbs to fight each other for the best calling sites, hence the name 'gladiator'. Constructs mud ponds to deposit eggs.",
+      "photos": [
+        "gr02_anfibios_reptiles/fa03_hylidae/sp020301_boana_pugnax/sp020301_boana_pugnax_001.webp",
+        "gr02_anfibios_reptiles/fa03_hylidae/sp020301_boana_pugnax/sp020301_boana_pugnax_002.webp"
+      ]
+    },
+    {
+      "id": "sp020401",
+      "familyId": "leptodactylidae",
+      "group": "anfibios_reptiles",
+      "scientificName": "Leptodactylus pentadactylus",
+      "nameEs": "Rana Toro Sudamericana",
+      "nameEn": "South American Bullfrog",
+      "iucn": "LC",
+      "subregions": [
+        "Urabá",
+        "Bajo Cauca",
+        "Magdalena Medio",
+        "Norte"
+      ],
+      "descriptionEs": "Una de las ranas más grandes de Colombia, pudiendo superar los 18 cm de longitud. Habita los bosques húmedos tropicales de las tierras bajas. Es activa de noche y produce un potente llamado que puede escucharse a cientos de metros. Construye nidos de espuma en el suelo para proteger sus huevos.",
+      "descriptionEn": "One of Colombia's largest frogs, reaching over 18 cm in length. Inhabits tropical humid forests of the lowlands. Nocturnal and produces a powerful call audible hundreds of meters away. It builds foam nests on the ground to protect its eggs.",
+      "photos": [
+        "gr02_anfibios_reptiles/fa04_leptodactylidae/sp020401_leptodactylus_pentadactylus/sp020401_leptodactylus_pentadactylus_001.webp"
+      ]
+    },
+    {
+      "id": "sp030101",
+      "familyId": "hesperiidae",
+      "group": "mariposas",
+      "scientificName": "Hesperiini sp.",
+      "nameEs": "Mariposa Saltarina",
+      "nameEn": "Skipper Butterfly",
+      "iucn": "DD",
+      "subregions": [
+        "Oriente",
+        "Valle de Aburrá",
+        "Occidente",
+        "Norte",
+        "Suroeste"
+      ],
+      "descriptionEs": "Tribu de mariposas de tamaño pequeño a mediano (Hesperiidae), conocidas popularmente como “saltarinas” por su vuelo rápido y errático. Se distinguen por su cuerpo robusto, cabeza ancha y la postura característica al posarse, con las alas anteriores y posteriores en ángulos diferentes. Son frecuentes en bordes de bosque, jardines y zonas abiertas a diversas altitudes en Antioquia.",
+      "descriptionEn": "Small to medium-sized butterflies (Hesperiidae: tribe Hesperiini), popularly known as “skippers” for their rapid and darting flight. They are distinguished by their robust body, wide head, and characteristic resting posture with forewings and hindwings held at different angles. They are common in forest edges, gardens and open areas at various elevations in Antioquia.",
+      "photos": [
+        "gr03_mariposas/fa01_hesperiidae/sp030101_hesperiini/sp030101_hesperiini_001.webp"
+      ]
+    },
+    {
+      "id": "sp030102",
+      "familyId": "hesperiidae",
+      "group": "mariposas",
+      "scientificName": "Telegonus sp.",
+      "nameEs": "Saltarina Coliuda",
+      "nameEn": "Long-tailed Skipper",
+      "iucn": "DD",
+      "subregions": [
+        "Urabá",
+        "Magdalena Medio",
+        "Nordeste",
+        "Oriente"
+      ],
+      "descriptionEs": "Género de mariposas saltarinas (Hesperiidae: Eudaminae) caracterizadas por sus alas anteriores anguladas y una pequeña proyección en forma de cola en las alas posteriores. Habitan el interior y los bordes de bosques húmedos tropicales y subtropicales de tierras bajas. Los machos defienden territorios posados sobre la vegetación en sitios con luz solar filtrada.",
+      "descriptionEn": "Genus of skippers (Hesperiidae: Eudaminae) characterized by their angled forewings and a small tail-like projection on the trailing edge of the hindwings. They inhabit the interior and edges of tropical and subtropical humid forests in lowland areas. Males defend territories by perching on vegetation in spots of filtered sunlight.",
+      "photos": [
+        "gr03_mariposas/fa01_hesperiidae/sp030102_telegonus/sp030102_telegonus_001.webp"
+      ]
+    },
+    {
+      "id": "sp030201",
+      "familyId": "lycaenidae",
+      "group": "mariposas",
+      "scientificName": "Arawacus sp.",
+      "nameEs": "Mariposa Coliazul",
+      "nameEn": "Hairstreak Butterfly",
+      "iucn": "DD",
+      "subregions": [
+        "Oriente",
+        "Suroeste",
+        "Valle de Aburrá",
+        "Norte"
+      ],
+      "descriptionEs": "Género de mariposas de la familia Lycaenidae (Theclinae), conocidas como coliazules por los delgados filamentos en el borde posterior de sus alas traseras que simulan falsas antenas para confundir a los depredadores. Muchas especies presentan coloración azul iridiscente en el dorso. Sus larvas se asocian principalmente a plantas de las familias Leguminosae y Myrtaceae en los bosques andinos de Antioquia.",
+      "descriptionEn": "Genus of butterflies in the family Lycaenidae (Theclinae), known as hairstreaks for the thin filaments on the trailing edge of their hindwings that mimic false antennae to confuse predators. Many species display iridescent blue coloration on the upperside. Their larvae are primarily associated with plants of the families Leguminosae and Myrtaceae in the Andean forests of Antioquia.",
+      "photos": [
+        "gr03_mariposas/fa02_lycaenidae/sp030201_arawacus/sp030201_arawacus_001.webp"
+      ]
+    },
+    {
+      "id": "sp030301",
+      "familyId": "nymphalidae",
+      "group": "mariposas",
+      "scientificName": "Catonephele numilia",
+      "nameEs": "Mariposa Electra",
+      "nameEn": "Numilia Eighty-eight Butterfly",
+      "iucn": "LC",
+      "subregions": [
+        "Urabá",
+        "Magdalena Medio",
+        "Nordeste",
+        "Bajo Cauca"
+      ],
+      "descriptionEs": "Mariposa de marcado dimorfismo sexual: el macho tiene alas negras con manchas naranja brillante, mientras la hembra es completamente diferente con alas marrones atigradas. Habita el interior de los bosques húmedos tropicales de las tierras bajas y zonas medias de Antioquia.",
+      "descriptionEn": "Butterfly with marked sexual dimorphism: the male has black wings with bright orange spots, while the female looks completely different with tiger-striped brown wings. Inhabits the interior of tropical humid forests in lowland and mid-elevation areas of Antioquia.",
+      "photos": [
+        "gr03_mariposas/fa03_nymphalidae/sp030301_catonephele_numilia/sp030301_catonephele_numilia_001.webp"
+      ]
+    },
+    {
+      "id": "sp030302",
+      "familyId": "nymphalidae",
+      "group": "mariposas",
+      "scientificName": "Anartia amathea",
+      "nameEs": "Mariposa Pavo Real Escarlata",
+      "nameEn": "Scarlet Peacock Butterfly",
+      "iucn": "LC",
+      "subregions": [
+        "Valle de Aburrá",
+        "Oriente",
+        "Norte",
+        "Occidente",
+        "Suroeste"
+      ],
+      "descriptionEs": "Mariposa de tamaño mediano con alas rojas y negras inconfundibles, con marcas blancas en las alas anteriores. Una de las mariposas más comunes y visibles de los jardines y espacios abiertos antioqueños. Los adultos tienen vuelo lento y son fáciles de observar al posarse en flores.",
+      "descriptionEn": "Medium-sized butterfly with unmistakable red and black wings with white markings on the forewings. One of the most common and visible butterflies in Antioquian gardens and open spaces. Adults have a slow flight and are easy to observe when perching on flowers.",
+      "photos": [
+        "gr03_mariposas/fa03_nymphalidae/sp030302_anartia_amathea/sp030302_anartia_amathea_001.webp"
+      ]
+    },
+    {
+      "id": "sp030303",
+      "familyId": "nymphalidae",
+      "group": "mariposas",
+      "scientificName": "Actinote sp.",
+      "nameEs": "Mariposa Actínote",
+      "nameEn": "Actinote Butterfly",
+      "iucn": "DD",
+      "subregions": [
+        "Oriente",
+        "Norte",
+        "Occidente",
+        "Suroeste"
+      ],
+      "descriptionEs": "Género de mariposas ninfálidas (Heliconiinae) de coloración aposemática —típicamente negra y roja o naranja— que advierte a los depredadores de su toxicidad. Sus larvas se alimentan de plantas del género Eupatorium y otras asteráceas, de donde obtienen los compuestos defensivos. Son frecuentes en bordes de bosque andino y zonas abiertas con vegetación arbustiva en las zonas medias de Antioquia.",
+      "descriptionEn": "Genus of nymphalid butterflies (Heliconiinae) with aposematic coloration—typically black and red or orange—warning predators of their toxicity. Their larvae feed on plants of the genus Eupatorium and other Asteraceae, from which they obtain defensive compounds. They are common in Andean forest edges and open areas with shrubby vegetation in the mid-elevation zones of Antioquia.",
+      "photos": [
+        "gr03_mariposas/fa03_nymphalidae/sp030303_actinote/sp030303_actinote_001.webp"
+      ]
+    },
+    {
+      "id": "sp030304",
+      "familyId": "nymphalidae",
+      "group": "mariposas",
+      "scientificName": "Adelpha sp.",
+      "nameEs": "Mariposa Hermana",
+      "nameEn": "Sister Butterfly",
+      "iucn": "DD",
+      "subregions": [
+        "Urabá",
+        "Oriente",
+        "Magdalena Medio",
+        "Norte",
+        "Nordeste"
+      ],
+      "descriptionEs": "Género diverso de mariposas ninfálidas (Limenitidinae) con más de 100 especies en el Neotrópico, varias de ellas presentes en Antioquia. Se reconocen por una banda blanca, azul o naranja que atraviesa el centro de sus alas. Los adultos visitan frutas fermentadas, excrementos y suelo húmedo para obtener minerales. Habitan bosques húmedos desde las tierras bajas hasta los Andes medios.",
+      "descriptionEn": "Diverse genus of nymphalid butterflies (Limenitidinae) with over 100 species in the Neotropics, several present in Antioquia. They are recognized by a white, blue or orange band crossing the center of their wings. Adults visit rotting fruit, dung and damp soil to obtain minerals. They inhabit humid forests from lowlands to the mid-Andes.",
+      "photos": [
+        "gr03_mariposas/fa03_nymphalidae/sp030304_adelpha/sp030304_adelpha_001.webp"
+      ]
+    },
+    {
+      "id": "sp030305",
+      "familyId": "nymphalidae",
+      "group": "mariposas",
+      "scientificName": "Anartia sp.",
+      "nameEs": "Mariposa Anartia",
+      "nameEn": "Anartia Butterfly",
+      "iucn": "DD",
+      "subregions": [
+        "Valle de Aburrá",
+        "Oriente",
+        "Norte",
+        "Occidente"
+      ],
+      "descriptionEs": "Género de mariposas ninfálidas (Nymphalinae) con varias especies en Antioquia, incluyendo A. amathea (escarlata) y A. jatrophae (blanca). Son mariposas de tamaño mediano que frecuentan espacios abiertos, jardines y áreas perturbadas. Los colores varían del rojo brillante al blanco, siempre con marcas negras características. Las hembras depositan huevos sobre plantas de las familias Acanthaceae y Verbenaceae.",
+      "descriptionEn": "Genus of nymphalid butterflies (Nymphalinae) with several species in Antioquia, including A. amathea (scarlet) and A. jatrophae (white). They are medium-sized butterflies that frequent open spaces, gardens and disturbed areas. Colors range from bright red to white, always with characteristic black markings. Females lay eggs on plants of the families Acanthaceae and Verbenaceae.",
+      "photos": [
+        "gr03_mariposas/fa03_nymphalidae/sp030305_anartia/sp030305_anartia_001.webp",
+        "gr03_mariposas/fa03_nymphalidae/sp030305_anartia/sp030305_anartia_002.webp"
+      ]
+    },
+    {
+      "id": "sp030306",
+      "familyId": "nymphalidae",
+      "group": "mariposas",
+      "scientificName": "Archaeoprepona sp.",
+      "nameEs": "Mariposa Prepona Azul",
+      "nameEn": "Blue Prepona Butterfly",
+      "iucn": "DD",
+      "subregions": [
+        "Urabá",
+        "Magdalena Medio",
+        "Bajo Cauca",
+        "Nordeste"
+      ],
+      "descriptionEs": "Género de grandes mariposas ninfálidas (Charaxinae) que destacan por el intenso azul iridiscente en el dorso de sus alas. Habitan el dosel y los bordes de bosques húmedos tropicales de tierras bajas. Los adultos raramente visitan flores; prefieren alimentarse de frutas fermentadas, savia de árboles y minerales disueltos en suelo húmedo. Su vuelo potente los hace difíciles de observar cuando vuelan alto en el dosel.",
+      "descriptionEn": "Genus of large nymphalid butterflies (Charaxinae) notable for the intense iridescent blue on the upperside of their wings. They inhabit the canopy and edges of lowland tropical humid forests. Adults rarely visit flowers, preferring to feed on rotting fruit, tree sap and minerals from damp soil. Their powerful flight makes them difficult to observe when flying high in the canopy.",
+      "photos": [
+        "gr03_mariposas/fa03_nymphalidae/sp030306_archaeoprepona/sp030306_archaeoprepona_001.webp"
+      ]
+    },
+    {
+      "id": "sp030307",
+      "familyId": "nymphalidae",
+      "group": "mariposas",
+      "scientificName": "Biblis sp.",
+      "nameEs": "Mariposa Borde Rojo",
+      "nameEn": "Red Rim Butterfly",
+      "iucn": "DD",
+      "subregions": [
+        "Valle de Aburrá",
+        "Norte",
+        "Oriente",
+        "Occidente"
+      ],
+      "descriptionEs": "Género de mariposas ninfálidas (Biblidinae) reconocibles por la característica banda roja en el borde de sus alas traseras, que contrasta con el fondo negro. La especie más representativa es Biblis hyperia, presente en jardines, parques y bordes de bosque de Antioquia. Las hembras depositan sus huevos en plantas del género Tragia (Euphorbiaceae). Los adultos se alimentan de néctar y frutas fermentadas.",
+      "descriptionEn": "Genus of nymphalid butterflies (Biblidinae) recognizable by the characteristic red band on the edge of their hindwings, contrasting with the black background. The most representative species is Biblis hyperia, present in gardens, parks and forest edges in Antioquia. Females lay their eggs on plants of the genus Tragia (Euphorbiaceae). Adults feed on nectar and rotting fruit.",
+      "photos": [
+        "gr03_mariposas/fa03_nymphalidae/sp030307_biblis/sp030307_biblis_001.webp"
+      ]
+    },
+    {
+      "id": "sp030401",
+      "familyId": "papilionidae",
+      "group": "mariposas",
+      "scientificName": "Papilionoidea sp.",
+      "nameEs": "Mariposa Cola de Golondrina",
+      "nameEn": "Swallowtail Butterfly",
+      "iucn": "DD",
+      "subregions": [
+        "Oriente",
+        "Suroeste",
+        "Norte",
+        "Occidente",
+        "Valle de Aburrá"
+      ],
+      "descriptionEs": "Las mariposas de la familia Papilionidae —llamadas colas de golondrina por las prolongaciones posteriores de sus alas en muchas especies— incluyen algunas de las más grandes y vistosas de Antioquia. Habitan desde el nivel del mar hasta los bosques andinos. Los adultos visitan flores en busca de néctar y realizan puddling: absorben minerales y sales de suelo húmedo, especialmente los machos.",
+      "descriptionEn": "Butterflies of the family Papilionidae—called swallowtails for the tail-like extensions on the hindwings of many species—include some of the largest and most spectacular butterflies in Antioquia. They inhabit from sea level to Andean forests. Adults visit flowers for nectar and perform puddling: absorbing minerals and salts from damp soil, especially males.",
+      "photos": [
+        "gr03_mariposas/fa04_papilionidae/sp030401_papilionoidea/sp030401_papilionoidea_001.webp"
+      ]
+    },
+    {
+      "id": "sp030501",
+      "familyId": "pieridae",
+      "group": "mariposas",
+      "scientificName": "Coliadini sp.",
+      "nameEs": "Mariposa Sulfuro",
+      "nameEn": "Sulfur Butterfly",
+      "iucn": "DD",
+      "subregions": [
+        "Valle de Aburrá",
+        "Oriente",
+        "Norte",
+        "Suroeste",
+        "Occidente"
+      ],
+      "descriptionEs": "Tribu de mariposas de la familia Pieridae (Coliadinae) conocidas popularmente como sulfuros o amarillas por su coloración predominantemente amarilla o anaranjada. Son de las mariposas más abundantes y visibles de Antioquia, frecuentes en potreros, jardines, bordes de caminos y zonas agrícolas. Sus larvas se alimentan principalmente de leguminosas. Algunas especies realizan migraciones estacionales en grandes grupos.",
+      "descriptionEn": "Tribe of butterflies in the family Pieridae (Coliadinae), popularly known as sulfurs or yellows for their predominantly yellow or orange coloration. They are among the most abundant and visible butterflies in Antioquia, common in pastures, gardens, roadsides and agricultural areas. Their larvae feed mainly on legumes. Some species perform seasonal migrations in large groups.",
+      "photos": [
+        "gr03_mariposas/fa05_pieridae/sp030501_coliadini/sp030501_coliadini_001.webp"
+      ]
+    },
+    {
+      "id": "sp030601",
+      "familyId": "riodinidae",
+      "group": "mariposas",
+      "scientificName": "Amarynthis sp.",
+      "nameEs": "Mariposa Metalmark Jaspeada",
+      "nameEn": "Marbled Metalmark",
+      "iucn": "DD",
+      "subregions": [
+        "Urabá",
+        "Magdalena Medio",
+        "Oriente",
+        "Nordeste"
+      ],
+      "descriptionEs": "Género de mariposas de la familia Riodinidae con un llamativo patrón jaspeado: combinación de bandas blancas, negras y rojas que las hace inconfundibles. Habitan el sotobosque de bosques húmedos tropicales y subtropicales a altitudes bajas y medias. Como es característico de los Riodinidae, posan frecuentemente sobre hojas con las alas completamente abiertas en horizontal, mostrando su intrincado patrón alar.",
+      "descriptionEn": "Genus of butterflies in the family Riodinidae with a striking marbled pattern: a combination of white, black and red bands that make them unmistakable. They inhabit the understory of tropical and subtropical humid forests at low to mid elevations. As is characteristic of Riodinidae, they frequently perch on leaves with wings held completely open horizontally, displaying their intricate wing pattern.",
+      "photos": [
+        "gr03_mariposas/fa06_riodinidae/sp030601_amarynthis/sp030601_amarynthis_001.webp"
+      ]
+    },
+    {
+      "id": "sp030602",
+      "familyId": "riodinidae",
+      "group": "mariposas",
+      "scientificName": "Ancyluris sp.",
+      "nameEs": "Mariposa Metalmark Ancyluris",
+      "nameEn": "Ancyluris Metalmark",
+      "iucn": "DD",
+      "subregions": [
+        "Urabá",
+        "Magdalena Medio",
+        "Bajo Cauca",
+        "Nordeste"
+      ],
+      "descriptionEs": "Género de pequeñas mariposas metálicas (Riodinidae) propias de los bosques tropicales neotropicales. Presentan colores metálicos brillantes —azules, verdes o cobrizos— con complejos patrones de bandas en sus alas. Habitan el sotobosque y los bordes de bosques húmedos de tierras bajas. Los adultos posan frecuentemente sobre hojas en posición horizontal, con las alas totalmente desplegadas.",
+      "descriptionEn": "Genus of small metallic butterflies (Riodinidae) from Neotropical tropical forests. They display brilliant metallic colors—blues, greens or coppery tones—with complex banding patterns on their wings. They inhabit the understory and edges of lowland humid forests. Adults frequently perch on leaves in a horizontal position with wings fully spread.",
+      "photos": [
+        "gr03_mariposas/fa06_riodinidae/sp030602_ancyluris/sp030602_ancyluris_001.webp"
+      ]
+    },
+    {
+      "id": "sp030603",
+      "familyId": "riodinidae",
+      "group": "mariposas",
+      "scientificName": "Anteros sp.",
+      "nameEs": "Mariposa Metalmark Anteros",
+      "nameEn": "Anteros Metalmark",
+      "iucn": "DD",
+      "subregions": [
+        "Urabá",
+        "Magdalena Medio",
+        "Nordeste",
+        "Oriente"
+      ],
+      "descriptionEs": "Género de mariposas metalmark (Riodinidae) con varias especies en Colombia. Presentan patrones complejos con frecuentes reflejos azules, violetas o cobrizos que cambian con el ángulo de la luz. Habitan el sotobosque de bosques húmedos tropicales. Los adultos suelen posarse en el envés de hojas con las alas abiertas, comportamiento típico que los hace relativamente fáciles de observar en senderos de bosque.",
+      "descriptionEn": "Genus of metalmark butterflies (Riodinidae) with several species in Colombia. They display complex patterns with frequent blue, violet or coppery reflections that change with the angle of light. They inhabit the understory of tropical humid forests. Adults typically perch on leaf undersides with wings open, typical behavior that makes them relatively easy to observe on forest trails.",
+      "photos": [
+        "gr03_mariposas/fa06_riodinidae/sp030603_anteros/sp030603_anteros_001.webp"
+      ]
+    },
+    {
+      "id": "sp030604",
+      "familyId": "riodinidae",
+      "group": "mariposas",
+      "scientificName": "Anteros kupris",
+      "nameEs": "Anteros Kupris",
+      "nameEn": "Anteros kupris",
+      "iucn": "DD",
+      "subregions": [
+        "Oriente",
+        "Nordeste",
+        "Norte",
+        "Magdalena Medio"
+      ],
+      "descriptionEs": "Especie de mariposa metalmark (Riodinidae) descrita por Hewitson en 1857. Se distingue de otras especies del género Anteros por sus marcas anaranjadas o cobrizas sobre fondo oscuro con lustre metálico. Habita el sotobosque de bosques húmedos andinos y subandinos de Colombia. Es una especie de registro escaso, generalmente observada de forma solitaria sobre vegetación en zonas sombreadas del interior del bosque.",
+      "descriptionEn": "Metalmark butterfly species (Riodinidae) described by Hewitson in 1857. Distinguished from other Anteros species by its orange or coppery markings on a dark background with metallic luster. Inhabits the understory of humid Andean and sub-Andean forests of Colombia. It is an infrequently recorded species, usually observed solitary on vegetation in shaded areas of the forest interior.",
+      "photos": [
+        "gr03_mariposas/fa06_riodinidae/sp030604_anteros_kupris/sp030604_anteros_kupris_001.webp"
+      ]
+    },
+    {
+      "id": "sp030605",
+      "familyId": "riodinidae",
+      "group": "mariposas",
+      "scientificName": "Argyrogrammana sp.",
+      "nameEs": "Mariposa Metalmark Plateada",
+      "nameEn": "Silver Metalmark",
+      "iucn": "DD",
+      "subregions": [
+        "Oriente",
+        "Suroeste",
+        "Norte",
+        "Occidente"
+      ],
+      "descriptionEs": "Género de pequeñas mariposas metalmark (Riodinidae) que presentan marcas plateadas o blancas características en sus alas, de las que reciben el nombre. Habitan bosques húmedos andinos y subandinos a altitudes medias y altas en Antioquia. Son insectos de vuelo bajo en el sotobosque y bordes de senderos forestales, donde se les puede observar posados con las alas horizontales sobre hojas en zonas de sombra.",
+      "descriptionEn": "Genus of small metalmark butterflies (Riodinidae) featuring characteristic silver or white markings on their wings, from which they take their name. They inhabit humid Andean and sub-Andean forests at mid to high elevations in Antioquia. They are low-flying insects in the understory and forest path edges, where they can be observed perched with wings horizontal on leaves in shaded areas.",
+      "photos": [
+        "gr03_mariposas/fa06_riodinidae/sp030605_argyrogrammana/sp030605_argyrogrammana_001.webp"
+      ]
+    },
+    {
+      "id": "sp030606",
+      "familyId": "riodinidae",
+      "group": "mariposas",
+      "scientificName": "Charis sp.",
+      "nameEs": "Mariposa Metalmark Charis",
+      "nameEn": "Charis Metalmark",
+      "iucn": "DD",
+      "subregions": [
+        "Oriente",
+        "Suroeste",
+        "Norte",
+        "Occidente"
+      ],
+      "descriptionEs": "Género de mariposas metalmark (Riodinidae: Nymphidiini) con coloración variable según la especie: combinaciones de ocre, naranja y blanco con bordes oscuros. Habitan principalmente bordes de bosque andino y subandino, claros con vegetación herbácea y jardines a altitudes medias. Las hembras depositan huevos en plantas del género Croton (Euphorbiaceae) y especies afines.",
+      "descriptionEn": "Genus of metalmark butterflies (Riodinidae: Nymphidiini) with variable coloration depending on the species: combinations of ochre, orange and white with dark borders. They mainly inhabit Andean and sub-Andean forest edges, clearings with herbaceous vegetation and gardens at mid-elevations. Females lay eggs on plants of the genus Croton (Euphorbiaceae) and related species.",
+      "photos": [
+        "gr03_mariposas/fa06_riodinidae/sp030606_charis/sp030606_charis_001.webp"
+      ]
+    },
+    {
+      "id": "sp030607",
+      "familyId": "riodinidae",
+      "group": "mariposas",
+      "scientificName": "Lasaia sp.",
+      "nameEs": "Mariposa Metalmark Azul",
+      "nameEn": "Blue Metalmark",
+      "iucn": "DD",
+      "subregions": [
+        "Urabá",
+        "Magdalena Medio",
+        "Bajo Cauca",
+        "Nordeste"
+      ],
+      "descriptionEs": "Género de mariposas metalmark (Riodinidae) con llamativa coloración azul metálico iridiscente en el dorso de las alas, que contrasta con el patrón más apagado del envés. Son frecuentes en el sotobosque de bosques húmedos tropicales de las tierras bajas antioquenas. Como muchos Riodinidae, los adultos posan sobre hojas con las alas abiertas en zonas de luz filtrada, lo que permite apreciar sus reflejos metálicos.",
+      "descriptionEn": "Genus of metalmark butterflies (Riodinidae) with striking iridescent metallic blue coloration on the upperside of their wings, contrasting with the more muted pattern on the underside. They are common in the understory of tropical humid forests in Antioquia's lowlands. Like many Riodinidae, adults perch on leaves with wings open in areas of filtered light, allowing appreciation of their metallic reflections.",
+      "photos": [
+        "gr03_mariposas/fa06_riodinidae/sp030607_lasaia/sp030607_lasaia_001.webp"
+      ]
+    },
+    {
+      "id": "sp030608",
+      "familyId": "riodinidae",
+      "group": "mariposas",
+      "scientificName": "Rhetus sp.",
+      "nameEs": "Mariposa Metalmark Coluda",
+      "nameEn": "Long-tailed Metalmark",
+      "iucn": "DD",
+      "subregions": [
+        "Urabá",
+        "Magdalena Medio",
+        "Bajo Cauca"
+      ],
+      "descriptionEs": "Género de mariposas metalmark (Riodinidae) fácilmente reconocibles por las largas colas que presentan sus alas traseras, únicas entre los Riodinidae neotropicales. El dorso de las alas muestra colores iridiscentes azules y negros de gran vistosidad. Habitan el sotobosque de bosques húmedos tropicales de tierras bajas. Los adultos vuelan lentamente y posan con frecuencia sobre la vegetación baja con las alas abiertas.",
+      "descriptionEn": "Genus of metalmark butterflies (Riodinidae) easily recognizable by the long tails on their hindwings, unique among Neotropical Riodinidae. The upperside of the wings displays striking iridescent blue and black colors. They inhabit the understory of lowland tropical humid forests. Adults fly slowly and frequently perch on low vegetation with wings open.",
+      "photos": [
+        "gr03_mariposas/fa06_riodinidae/sp030608_rhetus/sp030608_rhetus_001.webp"
+      ]
+    },
+    {
+      "id": "sp030609",
+      "familyId": "riodinidae",
+      "group": "mariposas",
+      "scientificName": "Riodinini sp.",
+      "nameEs": "Mariposa Metalmark",
+      "nameEn": "Metalmark Butterfly",
+      "iucn": "DD",
+      "subregions": [
+        "Urabá",
+        "Oriente",
+        "Magdalena Medio",
+        "Nordeste"
+      ],
+      "descriptionEs": "Tribu de mariposas de la familia Riodinidae, una de las más diversas del Neotrópico con más de 1.500 especies. Se caracterizan por su pequeño tamaño, vuelo lento y la costumbre de posar sobre hojas con las alas abiertas horizontalmente. Muchas especies presentan reflejos metálicos en sus alas, de ahí su nombre popular. Son excelentes indicadoras de la salud de los bosques húmedos de Antioquia.",
+      "descriptionEn": "Tribe of butterflies in the family Riodinidae, one of the most diverse in the Neotropics with over 1,500 species. They are characterized by their small size, slow flight and the habit of perching on leaves with wings open horizontally. Many species display metallic reflections on their wings, hence their popular name. They are excellent indicators of the health of Antioquia's humid forests.",
+      "photos": [
+        "gr03_mariposas/fa06_riodinidae/sp030609_riodinini/sp030609_riodinini_001.webp"
+      ]
+    },
+    {
+      "id": "sp040101",
+      "familyId": "erebidae",
+      "group": "polillas",
+      "scientificName": "Chlorhoda metamelaena",
+      "nameEs": "Polilla Érébida de Antioquia",
+      "nameEn": "Antioquia Erebid Moth",
+      "iucn": "DD",
+      "subregions": [
+        "Urabá",
+        "Bajo Cauca",
+        "Magdalena Medio",
+        "Norte"
+      ],
+      "descriptionEs": "Polilla de la familia Erebidae con llamativos colores de advertencia que indican toxicidad a los depredadores. Habita los bordes de bosques húmedos tropicales. Como muchas érébidas, es diurna y puede confundirse con una mariposa. Su biología detallada es poco conocida.",
+      "descriptionEn": "Moth of the family Erebidae with striking warning colors that signal toxicity to predators. Inhabits tropical humid forest edges. Like many erebids, it is diurnal and can be confused with a butterfly. Its detailed biology is poorly known.",
+      "photos": [
+        "gr04_polillas/fa01_erebidae/sp040101_chlorhoda_metamelaena/sp040101_chlorhoda_metamelaena_001.webp"
+      ]
+    },
+    {
+      "id": "sp040102",
+      "familyId": "erebidae",
+      "group": "polillas",
+      "scientificName": "Prepiella auroides",
+      "nameEs": "Polilla Áurea",
+      "nameEn": "Golden Erebid Moth",
+      "iucn": "DD",
+      "subregions": [
+        "Norte",
+        "Oriente",
+        "Occidente",
+        "Suroeste"
+      ],
+      "descriptionEs": "Polilla diurna con brillantes colores amarillos y negros que sirven como señales de aposematismo. Pertenece a la tribu de las polillas tigre de la familia Erebidae. Habita principalmente en bosques húmedos de montaña y es visible visitando flores en horas del día.",
+      "descriptionEn": "Diurnal moth with brilliant yellow and black colors serving as aposematic signals. Belongs to the tiger moth tribe within the family Erebidae. Mainly inhabits humid mountain forests and is visible visiting flowers during daylight hours.",
+      "photos": [
+        "gr04_polillas/fa01_erebidae/sp040102_prepiella_auroides/sp040102_prepiella_auroides_001.webp"
+      ]
+    },
+    {
+      "id": "sp040103",
+      "slug": "arctiinea_sp",
+      "scientificName": "Arctiinea sp.",
+      "nameEs": "Polilla Árctica",
+      "nameEn": "Arctiinae Moth",
+      "familyId": "erebidae",
+      "group": "polillas",
+      "iucn": "DD",
+      "subregions": [
+        "Urabá",
+        "Norte",
+        "Occidente",
+        "Oriente",
+        "Suroeste"
+      ],
+      "descriptionEs": "Polilla de la subfamilia Arctiinae, una de las más diversas de los trópicos. Muchas especies exhiben patrones de colores vivos que advierten sobre su toxicidad. Frecuente en bordes de bosque y zonas de vegetación secundaria.",
+      "descriptionEn": "Moth of subfamily Arctiinae, one of the most diverse in the tropics. Many species display bright color patterns that warn predators of their toxicity. Frequent at forest edges and secondary vegetation.",
+      "photos": [
+        "gr04_polillas/fa01_erebidae/sp040103_arctiinea_sp/sp040103_arctiinea_sp_001.webp"
+      ]
+    },
+    {
+      "id": "sp040104",
+      "slug": "bertholdia_sp",
+      "scientificName": "Bertholdia sp.",
+      "nameEs": "Polilla Bertholdia",
+      "nameEn": "Bertholdia Moth",
+      "familyId": "erebidae",
+      "group": "polillas",
+      "iucn": "DD",
+      "subregions": [
+        "Urabá",
+        "Norte",
+        "Occidente",
+        "Oriente",
+        "Suroeste"
+      ],
+      "descriptionEs": "Género conocido por producir clics ultrasónicos que interfieren con la ecolocalización de murciélagos, siendo uno de los pocos insectos con mecanismo activo de defensa sonora contra depredadores.",
+      "descriptionEn": "Genus known for producing ultrasonic clicks that interfere with bat echolocation, being one of the few insects with an active acoustic defense mechanism against predators.",
+      "photos": [
+        "gr04_polillas/fa01_erebidae/sp040104_bertholdia_sp/sp040104_bertholdia_sp_001.webp"
+      ]
+    },
+    {
+      "id": "sp040105",
+      "slug": "correbia_sp",
+      "scientificName": "Correbia sp.",
+      "nameEs": "Polilla Correbia",
+      "nameEn": "Correbia Moth",
+      "familyId": "erebidae",
+      "group": "polillas",
+      "iucn": "DD",
+      "subregions": [
+        "Urabá",
+        "Norte",
+        "Occidente",
+        "Oriente",
+        "Suroeste"
+      ],
+      "descriptionEs": "Polilla de la tribu Euchromiini con coloración aposemática. Habita los bosques húmedos tropicales de la cordillera andina. Su biología y distribución exacta en Colombia son poco conocidas.",
+      "descriptionEn": "Moth of tribe Euchromiini with aposematic coloration. Inhabits the humid tropical forests of the Andean cordillera. Its exact biology and distribution in Colombia are poorly known.",
+      "photos": [
+        "gr04_polillas/fa01_erebidae/sp040105_correbia_sp/sp040105_correbia_sp_001.webp"
+      ]
+    },
+    {
+      "id": "sp040106",
+      "slug": "edebessa_nigropuncta",
+      "scientificName": "Edebessa nigropuncta",
+      "nameEs": "Polilla Roja Punteada",
+      "nameEn": "Red Spotted Moth",
+      "familyId": "erebidae",
+      "group": "polillas",
+      "iucn": "DD",
+      "subregions": [
+        "Urabá",
+        "Norte",
+        "Occidente",
+        "Oriente",
+        "Suroeste"
+      ],
+      "descriptionEs": "Polilla de coloración roja brillante con puntos negros sobre las alas posteriores, patrón aposemático que anuncia la presencia de compuestos tóxicos en sus tejidos. Diurna.",
+      "descriptionEn": "Brightly red-colored moth with black spots on the hindwings, an aposematic pattern announcing the presence of toxic compounds in its tissues. Diurnal.",
+      "photos": [
+        "gr04_polillas/fa01_erebidae/sp040106_edebessa_nigropuncta/sp040106_edebessa_nigropuncta_001.webp"
+      ]
+    },
+    {
+      "id": "sp040107",
+      "slug": "eulepidotis_sp",
+      "scientificName": "Eulepidotis sp.",
+      "nameEs": "Polilla Eulepidotis",
+      "nameEn": "Eulepidotis Moth",
+      "familyId": "erebidae",
+      "group": "polillas",
+      "iucn": "DD",
+      "subregions": [
+        "Urabá",
+        "Norte",
+        "Occidente",
+        "Oriente",
+        "Suroeste"
+      ],
+      "descriptionEs": "Género neotropical de la familia Erebidae con más de 100 especies descritas. Frecuente en bosques húmedos de Colombia. Sus alas muestran patrones variables de colores tierra y ocres.",
+      "descriptionEn": "Neotropical genus of family Erebidae with over 100 described species. Frequent in humid forests of Colombia. Wings show variable patterns of earth tones and ochres.",
+      "photos": [
+        "gr04_polillas/fa01_erebidae/sp040107_eulepidotis_sp/sp040107_eulepidotis_sp_001.webp"
+      ]
+    },
+    {
+      "id": "sp040108",
+      "slug": "heliura_flavopunctata",
+      "scientificName": "Heliura flavopunctata",
+      "nameEs": "Polilla de Puntos Amarillos",
+      "nameEn": "Yellow-spotted Moth",
+      "familyId": "erebidae",
+      "group": "polillas",
+      "iucn": "DD",
+      "subregions": [
+        "Urabá",
+        "Norte",
+        "Occidente",
+        "Oriente",
+        "Suroeste"
+      ],
+      "descriptionEs": "Polilla de la subfamilia Arctiinae caracterizada por sus puntos amarillos sobre el cuerpo oscuro. Habita bosques húmedos y nublados de los Andes. Nocturna y atraída por fuentes de luz artificial.",
+      "descriptionEn": "Moth of subfamily Arctiinae characterized by yellow spots on a dark body. Inhabits humid and cloud forests of the Andes. Nocturnal and attracted to artificial light sources.",
+      "photos": [
+        "gr04_polillas/fa01_erebidae/sp040108_heliura_flavopunctata/sp040108_heliura_flavopunctata_001.webp"
+      ]
+    },
+    {
+      "id": "sp040109",
+      "slug": "uranophora_walkeri",
+      "scientificName": "Uranophora walkeri",
+      "nameEs": "Polilla Naranja Rayada",
+      "nameEn": "Striped Orange Moth",
+      "familyId": "erebidae",
+      "group": "polillas",
+      "iucn": "DD",
+      "subregions": [
+        "Urabá",
+        "Norte",
+        "Occidente",
+        "Oriente",
+        "Suroeste"
+      ],
+      "descriptionEs": "Polilla llamativa de color naranja intenso con franjas negras y blancas en el extremo alar. Su coloración aposemática indica toxicidad a los depredadores. Habita bordes de bosque tropical.",
+      "descriptionEn": "Striking moth of intense orange color with black and white stripes at the wing tip. Its aposematic coloration signals toxicity to predators. Inhabits tropical forest edges.",
+      "photos": [
+        "gr04_polillas/fa01_erebidae/sp040109_uranophora_walkeri/sp040109_uranophora_walkeri_001.webp"
+      ]
+    },
+    {
+      "id": "sp040110",
+      "slug": "ornarantia_biferana",
+      "scientificName": "Ornarantia biferana",
+      "nameEs": "Polilla Bicolor",
+      "nameEn": "Bicolor Moth",
+      "familyId": "erebidae",
+      "group": "polillas",
+      "iucn": "DD",
+      "subregions": [
+        "Urabá",
+        "Norte",
+        "Occidente",
+        "Oriente",
+        "Suroeste"
+      ],
+      "descriptionEs": "Polilla con llamativo patrón bicolor: mitad superior pardo oscura y mitad inferior ámbar con manchas negras, separadas por una banda blanca. Nocturna, frecuente en bosques húmedos.",
+      "descriptionEn": "Moth with a striking bicolor pattern: dark brown upper half and amber lower half with black spots, separated by a white band. Nocturnal, frequent in humid forests.",
+      "photos": [
+        "gr04_polillas/fa01_erebidae/sp040110_ornarantia_biferana/sp040110_ornarantia_biferana_001.webp"
+      ]
+    },
+    {
+      "id": "sp040201",
+      "familyId": "saturniidae",
+      "group": "polillas",
+      "scientificName": "Pseudautomeris horsti",
+      "nameEs": "Polilla Ojo de Pavo Real Andina",
+      "nameEn": "Andean Peacock-eye Silkmoth",
+      "iucn": "DD",
+      "subregions": [
+        "Oriente",
+        "Norte",
+        "Suroeste",
+        "Occidente"
+      ],
+      "descriptionEs": "Polilla de la familia Saturniidae con grandes ocelos en las alas posteriores que imitan ojos de vertebrados para intimidar a los depredadores. Habita los bosques húmedos andinos de Antioquia. Al igual que otros saturniidos, los adultos no se alimentan y viven solo para reproducirse.",
+      "descriptionEn": "Moth of the family Saturniidae with large eye-spots on the hindwings that mimic vertebrate eyes to intimidate predators. Inhabits the humid Andean forests of Antioquia. Like other saturniids, adults do not feed and live only to reproduce.",
+      "photos": [
+        "gr04_polillas/fa02_saturniidae/sp040201_pseudautomeris_horsti/sp040201_pseudautomeris_horsti_001.webp"
+      ]
+    },
+    {
+      "id": "sp040202",
+      "familyId": "saturniidae",
+      "group": "polillas",
+      "scientificName": "Titaea leumonti",
+      "nameEs": "Polilla Titea de los Andes",
+      "nameEn": "Leumont's Titan Silkmoth",
+      "iucn": "DD",
+      "subregions": [
+        "Urabá",
+        "Nordeste",
+        "Magdalena Medio",
+        "Norte"
+      ],
+      "descriptionEs": "Gran polilla saturniida con patrones de colores terrosos y ocre en sus alas. Habita los bosques tropicales húmedos de las tierras bajas y zonas medias de Antioquia. Como todos los saturniidos, carece de aparato bucal funcional en estado adulto y su corta vida adulta está dedicada exclusivamente a la reproducción.",
+      "descriptionEn": "Large saturniid moth with earthy and ochre color patterns on its wings. Inhabits tropical humid forests of Antioquia's lowlands and mid-elevation zones. Like all saturniids, it lacks a functional mouthpart as an adult and its short adult life is dedicated exclusively to reproduction.",
+      "photos": [
+        "gr04_polillas/fa02_saturniidae/sp040202_titaea_leumonti/sp040202_titaea_leumonti_001.webp"
+      ]
+    },
+    {
+      "id": "sp040203",
+      "slug": "adeloneivaia_sp",
+      "scientificName": "Adeloneivaia sp.",
+      "nameEs": "Polilla Sedosa Andina",
+      "nameEn": "Andean Silk Moth",
+      "familyId": "saturniidae",
+      "group": "polillas",
+      "iucn": "DD",
+      "subregions": [
+        "Urabá",
+        "Norte",
+        "Occidente",
+        "Oriente",
+        "Suroeste"
+      ],
+      "descriptionEs": "Polilla sedosa del género Adeloneivaia, endémica de los bosques andinos de Sudamérica. Pertenece a la subfamilia Ceratocampinae. Los machos presentan antenas muy pectinadas para detectar las feromonas de las hembras.",
+      "descriptionEn": "Silk moth of genus Adeloneivaia, endemic to Andean forests of South America. Belongs to subfamily Ceratocampinae. Males have highly pectinate antennae to detect female pheromones.",
+      "photos": [
+        "gr04_polillas/fa02_saturniidae/sp040203_adeloneivaia_sp/sp040203_adeloneivaia_sp_001.webp",
+        "gr04_polillas/fa02_saturniidae/sp040203_adeloneivaia_sp/sp040203_adeloneivaia_sp_002.webp"
+      ]
+    },
+    {
+      "id": "sp040204",
+      "slug": "ceratocampinae_sp",
+      "scientificName": "Ceratocampinae sp.",
+      "nameEs": "Polilla Imperial",
+      "nameEn": "Imperial Moth",
+      "familyId": "saturniidae",
+      "group": "polillas",
+      "iucn": "DD",
+      "subregions": [
+        "Urabá",
+        "Norte",
+        "Occidente",
+        "Oriente",
+        "Suroeste"
+      ],
+      "descriptionEs": "Polilla de la subfamilia Ceratocampinae con impresionantes alas. Las orugas se alimentan de árboles nativos y no construyen capullo de seda; se purifican en el suelo.",
+      "descriptionEn": "Moth of subfamily Ceratocampinae with impressive wings. Caterpillars feed on native trees and do not build a silk cocoon; they pupate underground.",
+      "photos": [
+        "gr04_polillas/fa02_saturniidae/sp040204_ceratocampinae_sp/sp040204_ceratocampinae_sp_001.webp",
+        "gr04_polillas/fa02_saturniidae/sp040204_ceratocampinae_sp/sp040204_ceratocampinae_sp_002.webp"
+      ]
+    },
+    {
+      "id": "sp040205",
+      "slug": "rhodirphia_carminata",
+      "scientificName": "Rhodirphia carminata",
+      "nameEs": "Polilla Carmesí",
+      "nameEn": "Crimson Silk Moth",
+      "familyId": "saturniidae",
+      "group": "polillas",
+      "iucn": "DD",
+      "subregions": [
+        "Urabá",
+        "Norte",
+        "Occidente",
+        "Oriente",
+        "Suroeste"
+      ],
+      "descriptionEs": "Una de las polillas más espectaculares de Antioquia: alas carmesí y naranja encendido con manchas blancas sobre fondo grisáceo oscuro. Pertenece a la subfamilia Hemileucinae. Su coloración disuade a los depredadores.",
+      "descriptionEn": "One of the most spectacular moths of Antioquia: crimson and bright orange wings with white spots on dark gray background. Belongs to subfamily Hemileucinae. Its coloration deters predators.",
+      "photos": [
+        "gr04_polillas/fa02_saturniidae/sp040205_rhodirphia_carminata/sp040205_rhodirphia_carminata_001.webp",
+        "gr04_polillas/fa02_saturniidae/sp040205_rhodirphia_carminata/sp040205_rhodirphia_carminata_002.webp"
+      ]
+    },
+    {
+      "id": "sp040206",
+      "slug": "saturniidae_sp1",
+      "scientificName": "Saturniidae sp. 1",
+      "nameEs": "Polilla Ocelada",
+      "nameEn": "Eyed Silk Moth",
+      "familyId": "saturniidae",
+      "group": "polillas",
+      "iucn": "DD",
+      "subregions": [
+        "Urabá",
+        "Norte",
+        "Occidente",
+        "Oriente",
+        "Suroeste"
+      ],
+      "descriptionEs": "Satúrnida con espectaculares ocelos (manchas en forma de ojo) en las alas posteriores que usa como mecanismo de defensa contra depredadores. Al abrirse súbitamente, los ocelos simulan los ojos de un animal más grande.",
+      "descriptionEn": "Saturniid with spectacular eyespots (eye-shaped markings) on hindwings used as a defense mechanism against predators. When suddenly opened, the eyespots simulate the eyes of a larger animal.",
+      "photos": [
+        "gr04_polillas/fa02_saturniidae/sp040206_saturniidae_sp1/sp040206_saturniidae_sp1_001.webp"
+      ]
+    },
+    {
+      "id": "sp040207",
+      "slug": "saturniidae_sp2",
+      "scientificName": "Saturniidae sp. 2",
+      "nameEs": "Polilla Sedosa Verde",
+      "nameEn": "Green Silk Moth",
+      "familyId": "saturniidae",
+      "group": "polillas",
+      "iucn": "DD",
+      "subregions": [
+        "Urabá",
+        "Norte",
+        "Occidente",
+        "Oriente",
+        "Suroeste"
+      ],
+      "descriptionEs": "Gran satúrnida de coloración verde con manchas oscuras características. Posiblemente perteneciente a la subfamilia Arsenurinae. Habita los bosques húmedos andinos y premontanos de Antioquia.",
+      "descriptionEn": "Large saturniid with green coloration and characteristic dark markings. Possibly belonging to subfamily Arsenurinae. Inhabits the humid Andean and premontane forests of Antioquia.",
+      "photos": [
+        "gr04_polillas/fa02_saturniidae/sp040207_saturniidae_sp2/sp040207_saturniidae_sp2_001.webp"
+      ]
+    },
+    {
+      "id": "sp040301",
+      "slug": "argyrotome_prospectata",
+      "scientificName": "Argyrotome prospectata",
+      "nameEs": "Polilla Argirotoma",
+      "nameEn": "Argyrotome Moth",
+      "familyId": "geometridae",
+      "group": "polillas",
+      "iucn": "DD",
+      "subregions": [
+        "Urabá",
+        "Norte",
+        "Occidente",
+        "Oriente",
+        "Suroeste"
+      ],
+      "descriptionEs": "Geométrida de tamaño mediano con alas de tonos plateados y plateados moteados. Habita bosques húmedos de altitud media en la cordillera andina. Frecuenta bordes de bosque y áreas con vegetación secundaria.",
+      "descriptionEn": "Medium-sized geometrid with silvery and mottled silver-toned wings. Inhabits mid-altitude humid forests of the Andean cordillera. Frequents forest edges and secondary vegetation.",
+      "photos": [
+        "gr04_polillas/fa03_geometridae/sp040301_argyrotome_prospectata/sp040301_argyrotome_prospectata_001.webp"
+      ]
+    },
+    {
+      "id": "sp040302",
+      "slug": "certima_espuma",
+      "scientificName": "Certima espuma",
+      "nameEs": "Geométrida Anaranjada",
+      "nameEn": "Orange Geometer",
+      "familyId": "geometridae",
+      "group": "polillas",
+      "iucn": "DD",
+      "subregions": [
+        "Urabá",
+        "Norte",
+        "Occidente",
+        "Oriente",
+        "Suroeste"
+      ],
+      "descriptionEs": "Geométrida de color naranja uniforme con bordes ligeramente oscuros. Las alas extendidas revelan el característico patrón de la familia con líneas transversales tenues. Nocturna y atraída por la luz.",
+      "descriptionEn": "Uniformly orange geometer moth with slightly darkened borders. Extended wings reveal the characteristic family pattern with faint transverse lines. Nocturnal and attracted to light.",
+      "photos": [
+        "gr04_polillas/fa03_geometridae/sp040302_certima_espuma/sp040302_certima_espuma_001.webp"
+      ]
+    },
+    {
+      "id": "sp040303",
+      "slug": "chavarriella_porcius",
+      "scientificName": "Chavarriella porcius",
+      "nameEs": "Geométrida Verde con Bordes",
+      "nameEn": "Green Bordered Geometer",
+      "familyId": "geometridae",
+      "group": "polillas",
+      "iucn": "DD",
+      "subregions": [
+        "Urabá",
+        "Norte",
+        "Occidente",
+        "Oriente",
+        "Suroeste"
+      ],
+      "descriptionEs": "Hermosa geométrida verde con marcas pardas en los extremos alares. El contraste entre el verde esmeralda y los bordes marrón-púrpura la hace fácilmente reconocible. Habita los bosques nublados andinos.",
+      "descriptionEn": "Beautiful green geometrid with brown markings at the wing ends. The contrast between emerald green and brown-purple borders makes it easily recognizable. Inhabits Andean cloud forests.",
+      "photos": [
+        "gr04_polillas/fa03_geometridae/sp040303_chavarriella_porcius/sp040303_chavarriella_porcius_001.webp"
+      ]
+    },
+    {
+      "id": "sp040304",
+      "slug": "eois_yvata",
+      "scientificName": "Eois yvata",
+      "nameEs": "Geométrida Eois",
+      "nameEn": "Eois Geometer",
+      "familyId": "geometridae",
+      "group": "polillas",
+      "iucn": "DD",
+      "subregions": [
+        "Urabá",
+        "Norte",
+        "Occidente",
+        "Oriente",
+        "Suroeste"
+      ],
+      "descriptionEs": "Geométrida del género Eois, uno de los más ricos en especies de la familia. Sus orugas son especialistas en el género de plantas Piper (piperáceas). Indicadora de la salud de los bosques húmedos.",
+      "descriptionEn": "Geometrid of genus Eois, one of the species-richest in the family. Its caterpillars are specialists on Piper (piperaceae) plants. Indicator of humid forest health.",
+      "photos": [
+        "gr04_polillas/fa03_geometridae/sp040304_eois_yvata/sp040304_eois_yvata_001.webp"
+      ]
+    },
+    {
+      "id": "sp040305",
+      "slug": "geometridae_sp1",
+      "scientificName": "Geometrinae sp. 1",
+      "nameEs": "Geométrida Verde 1",
+      "nameEn": "Green Geometer 1",
+      "familyId": "geometridae",
+      "group": "polillas",
+      "iucn": "DD",
+      "subregions": [
+        "Urabá",
+        "Norte",
+        "Occidente",
+        "Oriente",
+        "Suroeste"
+      ],
+      "descriptionEs": "Geométrida esmeralda de la subfamilia Geometrinae. Su coloración verde brillante le permite mimetizarse perfectamente con la vegetación. Habita los bosques húmedos premontanos de Antioquia.",
+      "descriptionEn": "Emerald geometrid of subfamily Geometrinae. Its bright green coloration allows it to perfectly blend with vegetation. Inhabits the premontane humid forests of Antioquia.",
+      "photos": [
+        "gr04_polillas/fa03_geometridae/sp040305_geometridae_sp1/sp040305_geometridae_sp1_001.webp"
+      ]
+    },
+    {
+      "id": "sp040306",
+      "slug": "geometridae_sp2",
+      "scientificName": "Geometrinae sp. 2",
+      "nameEs": "Geométrida Verde 2",
+      "nameEn": "Green Geometer 2",
+      "familyId": "geometridae",
+      "group": "polillas",
+      "iucn": "DD",
+      "subregions": [
+        "Urabá",
+        "Norte",
+        "Occidente",
+        "Oriente",
+        "Suroeste"
+      ],
+      "descriptionEs": "Geométrida verde con suaves marcas pardas en el centro de las alas. La coloración verde es producida por pigmentos de biliverdina, que se degradan con la luz y con la edad, volviendo las alas amarillas.",
+      "descriptionEn": "Green geometrid with soft brown markings at the wing center. The green coloration is produced by biliverdin pigments, which degrade with light and age, turning the wings yellow.",
+      "photos": [
+        "gr04_polillas/fa03_geometridae/sp040306_geometridae_sp2/sp040306_geometridae_sp2_001.webp"
+      ]
+    },
+    {
+      "id": "sp040307",
+      "slug": "geometridae_sp3",
+      "scientificName": "Geometrinae sp. 3",
+      "nameEs": "Geométrida Verde con Margen Dorado",
+      "nameEn": "Gold-margined Green Geometer",
+      "familyId": "geometridae",
+      "group": "polillas",
+      "iucn": "DD",
+      "subregions": [
+        "Urabá",
+        "Norte",
+        "Occidente",
+        "Oriente",
+        "Suroeste"
+      ],
+      "descriptionEs": "Espectacular geométrida verde con amplios márgenes dorados y blancos en las alas. El contraste de colores hace de esta especie una de las más llamativas del grupo en Colombia. Habita bosques húmedos.",
+      "descriptionEn": "Spectacular green geometrid with broad golden and white wing margins. The color contrast makes this species one of the most striking in the group in Colombia. Inhabits humid forests.",
+      "photos": [
+        "gr04_polillas/fa03_geometridae/sp040307_geometridae_sp3/sp040307_geometridae_sp3_001.webp"
+      ]
+    },
+    {
+      "id": "sp040308",
+      "slug": "geometridea_tricolor",
+      "scientificName": "Geometridea sp.",
+      "nameEs": "Geométrida Tricolor",
+      "nameEn": "Tricolor Geometer",
+      "familyId": "geometridae",
+      "group": "polillas",
+      "iucn": "DD",
+      "subregions": [
+        "Urabá",
+        "Norte",
+        "Occidente",
+        "Oriente",
+        "Suroeste"
+      ],
+      "descriptionEs": "Pequeña geométrida de tres colores con un diseño alar muy llamativo. Su tamaño reducido y colores contrastantes son características distintivas. Habita el sotobosque de los bosques húmedos andinos.",
+      "descriptionEn": "Small three-colored geometrid with a very striking wing pattern. Its small size and contrasting colors are distinctive features. Inhabits the understory of Andean humid forests.",
+      "photos": [
+        "gr04_polillas/fa03_geometridae/sp040308_geometridea_tricolor/sp040308_geometridea_tricolor_001.webp"
+      ]
+    },
+    {
+      "id": "sp040309",
+      "slug": "leuciris_fimbriaria",
+      "scientificName": "Leuciris fimbriaria",
+      "nameEs": "Geométrida Parda Fimbriada",
+      "nameEn": "Fringed Brown Geometer",
+      "familyId": "geometridae",
+      "group": "polillas",
+      "iucn": "DD",
+      "subregions": [
+        "Urabá",
+        "Norte",
+        "Occidente",
+        "Oriente",
+        "Suroeste"
+      ],
+      "descriptionEs": "Geométrida parda de tamaño mediano con bordes alares finamente festoneados. Una de las geométridas más frecuentes en los bosques andinos de Antioquia. Nocturna, vuela de agosto a enero.",
+      "descriptionEn": "Medium-sized brown geometrid with finely scalloped wing margins. One of the most frequent geometrids in the Andean forests of Antioquia. Nocturnal, flies from August to January.",
+      "photos": [
+        "gr04_polillas/fa03_geometridae/sp040309_leuciris_fimbriaria/sp040309_leuciris_fimbriaria_001.webp",
+        "gr04_polillas/fa03_geometridae/sp040309_leuciris_fimbriaria/sp040309_leuciris_fimbriaria_002.webp",
+        "gr04_polillas/fa03_geometridae/sp040309_leuciris_fimbriaria/sp040309_leuciris_fimbriaria_003.webp",
+        "gr04_polillas/fa03_geometridae/sp040309_leuciris_fimbriaria/sp040309_leuciris_fimbriaria_004.webp"
+      ]
+    },
+    {
+      "id": "sp040310",
+      "slug": "nemoria_scriptaria",
+      "scientificName": "Nemoria scriptaria",
+      "nameEs": "Geométrida Esmeralda Escrita",
+      "nameEn": "Scripted Emerald",
+      "familyId": "geometridae",
+      "group": "polillas",
+      "iucn": "DD",
+      "subregions": [
+        "Urabá",
+        "Norte",
+        "Occidente",
+        "Oriente",
+        "Suroeste"
+      ],
+      "descriptionEs": "Geométrida esmeralda con finas líneas rojas características (\"scriptaria\" = escrita). Las orugas se alimentan de flores y frutos inmaduros, imitando perfectamente a las estructuras reproductivas de la planta.",
+      "descriptionEn": "Emerald geometrid with characteristic fine red lines (\"scriptaria\" = written). Caterpillars feed on flowers and immature fruits, perfectly imitating the plant's reproductive structures.",
+      "photos": [
+        "gr04_polillas/fa03_geometridae/sp040310_nemoria_scriptaria/sp040310_nemoria_scriptaria_001.webp"
+      ]
+    },
+    {
+      "id": "sp040311",
+      "slug": "opisthoxia_metargyria",
+      "scientificName": "Opisthoxia metargyria",
+      "nameEs": "Geométrida Metálica",
+      "nameEn": "Metallic Geometer",
+      "familyId": "geometridae",
+      "group": "polillas",
+      "iucn": "DD",
+      "subregions": [
+        "Urabá",
+        "Norte",
+        "Occidente",
+        "Oriente",
+        "Suroeste"
+      ],
+      "descriptionEs": "Geométrida con reflejos plateados y metálicos en las alas. El nombre \"metargyria\" alude a sus brillos plateados. Especie poco documentada en Colombia, habita bosques húmedos de altitud media.",
+      "descriptionEn": "Geometrid with silvery and metallic reflections on wings. The name \"metargyria\" alludes to its silvery sheen. Poorly documented species in Colombia, inhabits mid-altitude humid forests.",
+      "photos": [
+        "gr04_polillas/fa03_geometridae/sp040311_opisthoxia_metargyria/sp040311_opisthoxia_metargyria_001.webp"
+      ]
+    },
+    {
+      "id": "sp040312",
+      "slug": "synchlora_gerularia",
+      "scientificName": "Synchlora gerularia",
+      "nameEs": "Geométrida Verde Sinclorida",
+      "nameEn": "Synchlora Emerald",
+      "familyId": "geometridae",
+      "group": "polillas",
+      "iucn": "DD",
+      "subregions": [
+        "Urabá",
+        "Norte",
+        "Occidente",
+        "Oriente",
+        "Suroeste"
+      ],
+      "descriptionEs": "Pequeña geométrida verde del género Synchlora, cuyas orugas tienen el hábito único de adornarse con pétalos de flores. La coloración verde de los adultos les sirve de camuflaje en la vegetación.",
+      "descriptionEn": "Small green geometrid of genus Synchlora, whose caterpillars have the unique habit of decorating themselves with flower petals. The green coloration of adults serves as camouflage in vegetation.",
+      "photos": [
+        "gr04_polillas/fa03_geometridae/sp040312_synchlora_gerularia/sp040312_synchlora_gerularia_001.webp"
+      ]
+    },
+    {
+      "id": "sp040313",
+      "slug": "epimecis_subroraria",
+      "scientificName": "Epimecis subroraria",
+      "nameEs": "Geométrida Ennomina Parda",
+      "nameEn": "Epimecis Geometer",
+      "familyId": "geometridae",
+      "group": "polillas",
+      "iucn": "DD",
+      "subregions": [
+        "Urabá",
+        "Norte",
+        "Occidente",
+        "Oriente",
+        "Suroeste"
+      ],
+      "descriptionEs": "Geométrida de la subfamilia Ennominae con patrón críptico pardo que imita la corteza de los árboles. Las orugas son \"mide-pulgadas\" (loop caterpillars). Habita los bosques andinos de Antioquia.",
+      "descriptionEn": "Geometrid of subfamily Ennominae with cryptic brown pattern that mimics tree bark. Caterpillars are \"inchworms\" (loop caterpillars). Inhabits the Andean forests of Antioquia.",
+      "photos": [
+        "gr04_polillas/fa03_geometridae/sp040313_epimecis_subroraria/sp040313_epimecis_subroraria_001.webp"
+      ]
+    },
+    {
+      "id": "sp040401",
+      "slug": "diaphania_costata",
+      "scientificName": "Diaphania costata",
+      "nameEs": "Polilla Diafania",
+      "nameEn": "Diaphania Moth",
+      "familyId": "crambidae",
+      "group": "polillas",
+      "iucn": "DD",
+      "subregions": [
+        "Urabá",
+        "Norte",
+        "Occidente",
+        "Oriente",
+        "Suroeste"
+      ],
+      "descriptionEs": "Polilla de la familia Crambidae con alas semitransparentes y marcas oscuras características. Las larvas de algunas especies de Diaphania son plagas de cultivos de cucurbitáceas. Habita zonas tropicales húmedas.",
+      "descriptionEn": "Moth of family Crambidae with semi-transparent wings and characteristic dark markings. Larvae of some Diaphania species are pests of cucurbit crops. Inhabits humid tropical zones.",
+      "photos": [
+        "gr04_polillas/fa04_crambidae/sp040401_diaphania_costata/sp040401_diaphania_costata_001.webp"
+      ]
+    },
+    {
+      "id": "sp040501",
+      "slug": "antachara_ecuadoriensis",
+      "scientificName": "Antachara ecuadoriensis",
+      "nameEs": "Polilla Lasiocámpida Naranja",
+      "nameEn": "Orange Lappet Moth",
+      "familyId": "lasiocampidae",
+      "group": "polillas",
+      "iucn": "DD",
+      "subregions": [
+        "Urabá",
+        "Norte",
+        "Occidente",
+        "Oriente",
+        "Suroeste"
+      ],
+      "descriptionEs": "Polilla lasiocámpida de coloración naranja con alas estriadas plegadas en posición de reposo. Especie registrada en Ecuador y Colombia. Sus orugas son peludas y pueden causar dermatitis por contacto.",
+      "descriptionEn": "Orange lappet moth with striated wings folded at rest. Species recorded in Ecuador and Colombia. Its caterpillars are hairy and can cause contact dermatitis.",
+      "photos": [
+        "gr04_polillas/fa05_lasiocampidae/sp040501_antachara_ecuadoriensis/sp040501_antachara_ecuadoriensis_001.webp",
+        "gr04_polillas/fa05_lasiocampidae/sp040501_antachara_ecuadoriensis/sp040501_antachara_ecuadoriensis_002.webp"
+      ]
+    },
+    {
+      "id": "sp040502",
+      "slug": "nesara_amisena",
+      "scientificName": "Nesara amisena",
+      "nameEs": "Polilla Lasiocámpida Moteada",
+      "nameEn": "Spotted Lappet Moth",
+      "familyId": "lasiocampidae",
+      "group": "polillas",
+      "iucn": "DD",
+      "subregions": [
+        "Urabá",
+        "Norte",
+        "Occidente",
+        "Oriente",
+        "Suroeste"
+      ],
+      "descriptionEs": "Polilla robusta con antenas muy pectinadas en el macho. Las alas anteriores crema-beige presentan llamativas manchas ovales marrón oscuro y azul-grisáceo. Habita los bosques húmedos andinos.",
+      "descriptionEn": "Robust moth with highly pectinate antennae in the male. Cream-beige forewings show striking dark brown and blue-gray oval spots. Inhabits Andean humid forests.",
+      "photos": [
+        "gr04_polillas/fa05_lasiocampidae/sp040502_nesara_amisena/sp040502_nesara_amisena_001.webp",
+        "gr04_polillas/fa05_lasiocampidae/sp040502_nesara_amisena/sp040502_nesara_amisena_002.webp"
+      ]
+    },
+    {
+      "id": "sp040601",
+      "slug": "bombycidae_sp",
+      "scientificName": "Bombycidae sp.",
+      "nameEs": "Polilla Bombícida",
+      "nameEn": "Bombycid Moth",
+      "familyId": "bombycidae",
+      "group": "polillas",
+      "iucn": "DD",
+      "subregions": [
+        "Urabá",
+        "Norte",
+        "Occidente",
+        "Oriente",
+        "Suroeste"
+      ],
+      "descriptionEs": "Polilla de la familia Bombycidae, emparentada con el gusano de seda doméstico (Bombyx mori). Presenta alas anteriores con el característico ápice ganchudo de la familia. Habita bosques tropicales húmedos.",
+      "descriptionEn": "Moth of family Bombycidae, related to the domestic silkworm (Bombyx mori). Has forewings with the family's characteristic hooked apex. Inhabits tropical humid forests.",
+      "photos": [
+        "gr04_polillas/fa06_bombycidae/sp040601_bombycidae_sp/sp040601_bombycidae_sp_001.webp"
+      ]
+    },
+    {
+      "id": "sp050101",
+      "familyId": "aotidae",
+      "group": "mamiferos",
+      "scientificName": "Aotus lemurinus",
+      "nameEs": "Mono nocturno andino",
+      "nameEn": "Andean night monkey",
+      "iucn": "VU",
+      "subregions": [
+        "Oriente",
+        "Occidente",
+        "Norte",
+        "Suroeste",
+        "Nordeste"
+      ],
+      "descriptionEs": "El único primate de hábitos nocturnos del mundo. Sus enormes ojos le permiten ver en la oscuridad del bosque andino. Forma parejas de por vida y el macho carga a las crías la mayor parte del tiempo. Amenazado por la deforestación de los bosques de niebla.",
+      "descriptionEn": "The world's only nocturnal primate. Its enormous eyes allow it to see in the darkness of the Andean forest. Forms lifelong pairs and the male carries the young most of the time. Threatened by deforestation of cloud forests.",
+      "photos": [
+        "gr05_mamiferos/fa01_aotidae/sp050101_aotus_lemurinus/sp050101_aotus_lemurinus_001.webp"
+      ]
+    },
+    {
+      "id": "sp050201",
+      "familyId": "atelidae",
+      "group": "mamiferos",
+      "scientificName": "Alouatta seniculus",
+      "nameEs": "Mono aullador rojo",
+      "nameEn": "Venezuelan red howler",
+      "iucn": "LC",
+      "subregions": [
+        "Urabá",
+        "Bajo Cauca",
+        "Magdalena Medio",
+        "Nordeste",
+        "Norte",
+        "Oriente"
+      ],
+      "descriptionEs": "El primate más grande de Colombia, reconocido por sus potentes vocalizaciones que resuenan a varios kilómetros. El macho adulto es de color rojizo oscuro. Su alarido al amanecer es uno de los sonidos más emblemáticos de la selva antiqueña.",
+      "descriptionEn": "The largest primate in Colombia, recognized by its powerful vocalizations that resonate for several kilometers. The adult male is dark reddish in color. Its roar at dawn is one of the most emblematic sounds of the Antioquian jungle.",
+      "photos": [
+        "gr05_mamiferos/fa02_atelidae/sp050201_alouatta_seniculus/sp050201_alouatta_seniculus_001.webp"
+      ]
+    },
+    {
+      "id": "sp050301",
+      "familyId": "canidae",
+      "group": "mamiferos",
+      "scientificName": "Cerdocyon thous",
+      "nameEs": "Zorro perro",
+      "nameEn": "Crab-eating fox",
+      "iucn": "LC",
+      "subregions": [
+        "Norte",
+        "Nordeste",
+        "Magdalena Medio",
+        "Bajo Cauca",
+        "Urabá",
+        "Oriente"
+      ],
+      "descriptionEs": "El cánido silvestre más común de Colombia. De pelaje gris con tonos negros y amarillos, es omnívoro y oportunista: come desde cangrejos y frutas hasta carroña. Activo principalmente al amanecer y al anochecer, habita desde selvas húmedas hasta sabanas.",
+      "descriptionEn": "The most common wild canid in Colombia. Gray fur with black and yellow tones, omnivorous and opportunistic: eats everything from crabs and fruits to carrion. Active mainly at dawn and dusk, inhabits environments from humid forests to savannas.",
+      "photos": [
+        "gr05_mamiferos/fa03_canidae/sp050301_cerdocyon_thous/sp050301_cerdocyon_thous_001.webp"
+      ]
+    },
+    {
+      "id": "sp050401",
+      "familyId": "caviidae",
+      "group": "mamiferos",
+      "scientificName": "Hydrochoerus hydrochaeris",
+      "nameEs": "Chigüiro",
+      "nameEn": "Capybara",
+      "iucn": "LC",
+      "subregions": [
+        "Urabá",
+        "Bajo Cauca",
+        "Magdalena Medio"
+      ],
+      "descriptionEs": "El roedor más grande del mundo, puede superar los 60 kg. Semiacuático, vive en grupos familiares a orillas de ríos, ciénagas y humedales de las tierras bajas antiqueñas. Su carne fue consumida históricamente durante la Cuaresma al ser clasificado como \"pez\".",
+      "descriptionEn": "The world's largest rodent, can exceed 60 kg. Semi-aquatic, lives in family groups along rivers, swamps and wetlands of Antioquia's lowlands. Its meat was historically consumed during Lent after being classified as \"fish\" by the Catholic Church.",
+      "photos": [
+        "gr05_mamiferos/fa04_caviidae/sp050401_hydrochoerus_hydrochaeris/sp050401_hydrochoerus_hydrochaeris_001.webp"
+      ]
+    },
+    {
+      "id": "sp050501",
+      "familyId": "cebidae",
+      "group": "mamiferos",
+      "scientificName": "Cebus albifrons",
+      "nameEs": "Maicero cariblanco",
+      "nameEn": "White-fronted capuchin",
+      "iucn": "LC",
+      "subregions": [
+        "Urabá",
+        "Magdalena Medio",
+        "Bajo Cauca",
+        "Nordeste"
+      ],
+      "descriptionEs": "Capuchino de rostro pálido y cuerpo gris con tonos rojizos. Altamente inteligente, utiliza piedras para romper frutos duros y es capaz de aprender comportamientos observando a otros individuos. Vive en grupos de hasta 30 individuos.",
+      "descriptionEn": "Pale-faced capuchin with grayish body and reddish tones. Highly intelligent, uses stones to crack hard fruits and can learn behaviors by observing others. Lives in groups of up to 30 individuals.",
+      "photos": [
+        "gr05_mamiferos/fa05_cebidae/sp050501_cebus_albifrons/sp050501_cebus_albifrons_001.webp"
+      ]
+    },
+    {
+      "id": "sp050601",
+      "familyId": "dasyproctidae",
+      "group": "mamiferos",
+      "scientificName": "Dasyprocta fuliginosa",
+      "nameEs": "Guatín negro",
+      "nameEn": "Black agouti",
+      "iucn": "LC",
+      "subregions": [
+        "Urabá",
+        "Bajo Cauca",
+        "Magdalena Medio",
+        "Nordeste",
+        "Oriente"
+      ],
+      "descriptionEs": "Roedor de pelaje oscuro brillante y patas largas que le permiten correr a gran velocidad. Clave en la regeneración del bosque por su hábito de enterrar semillas que luego olvida. Es uno de los pocos animales que puede abrir el duro endocarpo del chontaduro.",
+      "descriptionEn": "Rodent with brilliant dark fur and long legs enabling high-speed running. Key to forest regeneration through its habit of burying seeds it later forgets. One of the few animals that can crack open the hard endocarp of the peach palm.",
+      "photos": [
+        "gr05_mamiferos/fa06_dasyproctidae/sp050601_dasyprocta_fuliginosa/sp050601_dasyprocta_fuliginosa_001.webp"
+      ]
+    },
+    {
+      "id": "sp050701",
+      "familyId": "felidae",
+      "group": "mamiferos",
+      "scientificName": "Panthera onca",
+      "nameEs": "Jaguar",
+      "nameEn": "Jaguar",
+      "iucn": "NT",
+      "subregions": [
+        "Urabá",
+        "Bajo Cauca",
+        "Magdalena Medio"
+      ],
+      "descriptionEs": "El mayor félido de América y el tercero más grande del mundo. En Antioquia habita principalmente en las tierras bajas de Urabá y el Bajo Cauca, donde la selva húmeda ofrece cobertura y presas abundantes.",
+      "descriptionEn": "The largest felid in the Americas and the third largest in the world. In Antioquia it mainly inhabits the lowlands of Urabá and Bajo Cauca.",
+      "photos": []
+    },
+    {
+      "id": "sp050702",
+      "familyId": "felidae",
+      "group": "mamiferos",
+      "scientificName": "Puma concolor",
+      "nameEs": "Puma",
+      "nameEn": "Puma",
+      "iucn": "LC",
+      "subregions": [
+        "Oriente",
+        "Norte",
+        "Occidente",
+        "Suroeste"
+      ],
+      "descriptionEs": "El mamífero terrestre de mayor distribución en el hemisferio occidental. Adaptable a múltiples ecosistemas, desde bosques andinos hasta zonas secas del norte antioqueño.",
+      "descriptionEn": "The land mammal with the widest distribution in the Western Hemisphere. Adaptable to multiple ecosystems.",
+      "photos": []
+    },
+    {
+      "id": "sp050703",
+      "familyId": "felidae",
+      "group": "mamiferos",
+      "scientificName": "Leopardus pardalis",
+      "nameEs": "Ocelote",
+      "nameEn": "Ocelot",
+      "iucn": "LC",
+      "subregions": [
+        "Urabá",
+        "Magdalena Medio",
+        "Nordeste",
+        "Bajo Cauca"
+      ],
+      "descriptionEs": "Félido de mediano tamaño con un pelaje moteado de gran belleza. Fuertemente cazado en el siglo XX por su piel; hoy depende de la protección de los bosques húmedos del norte de Antioquia.",
+      "descriptionEn": "A medium-sized felid with beautifully spotted fur. Heavily hunted in the 20th century; today depends on protection of humid forests in northern Antioquia.",
+      "photos": []
+    },
+    {
+      "id": "sp050801",
+      "familyId": "mustelidae",
+      "group": "mamiferos",
+      "scientificName": "Lontra longicaudis",
+      "nameEs": "Nutria neotropical",
+      "nameEn": "Neotropical river otter",
+      "iucn": "NT",
+      "subregions": [
+        "Oriente",
+        "Norte",
+        "Occidente",
+        "Suroeste",
+        "Magdalena Medio"
+      ],
+      "descriptionEs": "Mustélido semiacuático de cuerpo alargado y pelo impermeable. Indicadora de la calidad del agua: su presencia señala ríos y quebradas bien conservados. Ha desaparecido de muchas cuencas de Antioquia por la contaminación y la caza histórica por su pelaje.",
+      "descriptionEn": "Semi-aquatic mustelid with elongated body and waterproof fur. Indicator of water quality: its presence signals well-preserved rivers and streams. Has disappeared from many Antioquia river basins due to pollution and historical hunting for its pelt.",
+      "photos": [
+        "gr05_mamiferos/fa08_mustelidae/sp050801_lontra_longicaudis/sp050801_lontra_longicaudis_001.webp"
+      ]
+    },
+    {
+      "id": "sp050802",
+      "familyId": "mustelidae",
+      "group": "mamiferos",
+      "scientificName": "Eira barbara",
+      "nameEs": "Tayra",
+      "nameEn": "Tayra",
+      "iucn": "LC",
+      "subregions": [
+        "Urabá",
+        "Magdalena Medio",
+        "Bajo Cauca",
+        "Nordeste",
+        "Oriente",
+        "Occidente"
+      ],
+      "descriptionEs": "Mustélido de cuerpo negro y cabeza castaña, ágil tanto en el suelo como en los árboles. Omnívoro oportunista que come desde frutas y huevos hasta pequeños mamíferos. Es capaz de planear la cosecha de frutas, regresando días después a recolectarlas maduras.",
+      "descriptionEn": "Mustelid with black body and brown head, agile both on the ground and in trees. Opportunistic omnivore eating everything from fruits and eggs to small mammals. Capable of planning fruit harvests, returning days later to collect them when ripe.",
+      "photos": [
+        "gr05_mamiferos/fa08_mustelidae/sp050802_eira_barbara/sp050802_eira_barbara_001.webp"
+      ]
+    },
+    {
+      "id": "sp050901",
+      "familyId": "procyonidae",
+      "group": "mamiferos",
+      "scientificName": "Bassaricyon neblina",
+      "nameEs": "Olinguito",
+      "nameEn": "Olinguito",
+      "iucn": "NT",
+      "subregions": [
+        "Oriente",
+        "Occidente",
+        "Norte",
+        "Suroeste"
+      ],
+      "descriptionEs": "El primer carnívoro del hemisferio occidental descrito científicamente en el siglo XXI (2013). Habita exclusivamente los bosques nublados andinos entre 1.500 y 2.750 m. De hábitos nocturnos y solitarios, se alimenta principalmente de frutos y néctar.",
+      "descriptionEn": "The first carnivore of the Western Hemisphere scientifically described in the 21st century (2013). Lives exclusively in Andean cloud forests between 1,500 and 2,750 m. Nocturnal and solitary, feeds mainly on fruits and nectar.",
+      "photos": [
+        "gr05_mamiferos/fa09_procyonidae/sp050901_bassaricyon_neblina/sp050901_bassaricyon_neblina_001.webp"
+      ]
+    },
+    {
+      "id": "sp051001",
+      "familyId": "sciuridae",
+      "group": "mamiferos",
+      "scientificName": "Sciurus granatensis",
+      "nameEs": "Ardilla de cola roja",
+      "nameEn": "Red-tailed squirrel",
+      "iucn": "LC",
+      "subregions": [
+        "Valle de Aburrá",
+        "Oriente",
+        "Occidente",
+        "Norte",
+        "Suroeste",
+        "Nordeste"
+      ],
+      "descriptionEs": "Ardilla arborícola de pelaje rojizo intenso, la más común en los bosques andinos de Antioquia. Se adapta bien a zonas urbanas con parques arbolados y es frecuente en el Valle de Aburrá. Dispersa semillas de numerosas especies de árboles.",
+      "descriptionEn": "Arboreal squirrel with intense reddish fur, the most common in Andean forests of Antioquia. Adapts well to urban areas with tree-lined parks and is frequent in the Valle de Aburrá. Disperses seeds of numerous tree species.",
+      "photos": [
+        "gr05_mamiferos/fa10_sciuridae/sp051001_sciurus_granatensis/sp051001_sciurus_granatensis_001.webp"
+      ]
+    },
+    {
+      "id": "sp051101",
+      "familyId": "ursidae_andean",
+      "group": "mamiferos",
+      "scientificName": "Tremarctos ornatus",
+      "nameEs": "Oso andino",
+      "nameEn": "Spectacled bear",
+      "iucn": "VU",
+      "subregions": [
+        "Norte",
+        "Oriente",
+        "Occidente",
+        "Suroeste"
+      ],
+      "descriptionEs": "Único oso nativo de Sudamérica, llamado así por los característicos anillos claros alrededor de sus ojos. Habita los bosques andinos entre 1.800 y 3.500 m de altitud.",
+      "descriptionEn": "The only bear native to South America, named for the distinctive pale rings around its eyes. Inhabits Andean forests between 1,800 and 3,500 m.",
+      "photos": []
+    },
+    {
+      "id": "sp080101",
+      "familyId": "cattleyinae",
+      "group": "orquideas",
+      "scientificName": "Cattleya sp.",
+      "nameEs": "Orquídea Cattleya",
+      "nameEn": "Cattleya Orchid",
+      "iucn": "DD",
+      "subregions": [
+        "Norte",
+        "Occidente",
+        "Oriente",
+        "Suroeste"
+      ],
+      "descriptionEs": "Orquídea del género Cattleya de flores grandes y vistosas registrada en campo. Su identificación a nivel de especie requiere confirmación taxonómica por especialistas. Como todas las cattleyas antioqueñas, es epífita y habita los bosques húmedos de montaña entre 500 y 2.000 metros de altitud.",
+      "descriptionEn": "Orchid of the genus Cattleya with large, showy flowers recorded in the field. Species-level identification requires taxonomic confirmation by specialists. Like all Antioquian cattleyas, it is epiphytic and inhabits humid mountain forests between 500 and 2,000 meters altitude.",
+      "photos": [
+        "gr08_orquideas/fa01_cattleyinae/sp080101_cattleya_sp/sp080101_cattleya_sp_001.webp"
+      ]
+    },
+    {
+      "id": "sp080201",
+      "familyId": "epidendrinae",
+      "group": "orquideas",
+      "scientificName": "Epidendrum sp.",
+      "nameEs": "Epidendro de Antioquia",
+      "nameEn": "Antioquia Epidendrum",
+      "iucn": "DD",
+      "subregions": [
+        "Valle de Aburrá",
+        "Oriente",
+        "Norte",
+        "Occidente",
+        "Suroeste"
+      ],
+      "descriptionEs": "Orquídea del género Epidendrum, el más diverso de la familia Orchidaceae con más de 1.500 especies. Habita los bordes de bosque, jardines y zonas perturbadas de montaña. Sus pequeñas flores se agrupan en racimos. La identificación de especie está pendiente de análisis taxonómico.",
+      "descriptionEn": "Orchid of the genus Epidendrum, the most diverse in the family Orchidaceae with over 1,500 species. Inhabits forest edges, gardens, and disturbed mountain areas. Its small flowers are grouped in clusters. Species identification is pending taxonomic analysis.",
+      "photos": [
+        "gr08_orquideas/fa02_epidendrinae/sp080201_epidendrum_sp/sp080201_epidendrum_sp_001.webp",
+        "gr08_orquideas/fa02_epidendrinae/sp080201_epidendrum_sp/sp080201_epidendrum_sp_002.webp",
+        "gr08_orquideas/fa02_epidendrinae/sp080201_epidendrum_sp/sp080201_epidendrum_sp_003.webp",
+        "gr08_orquideas/fa02_epidendrinae/sp080201_epidendrum_sp/sp080201_epidendrum_sp_004.webp"
+      ]
+    },
+    {
+      "id": "sp080301",
+      "familyId": "maxillarieae",
+      "group": "orquideas",
+      "scientificName": "Maxillaria sp.",
+      "nameEs": "Maxilaria de los Andes",
+      "nameEn": "Andean Maxillaria",
+      "iucn": "DD",
+      "subregions": [
+        "Norte",
+        "Oriente",
+        "Suroeste",
+        "Occidente"
+      ],
+      "descriptionEs": "Orquídea epífita del género Maxillaria con flores solitarias de gran belleza, generalmente fragantes. Crece sobre los troncos y ramas de los árboles de los bosques húmedos andinos. Su identificación de especie requiere análisis especializado de las flores y su morfología.",
+      "descriptionEn": "Epiphytic orchid of the genus Maxillaria with solitary flowers of great beauty, generally fragrant. Grows on the trunks and branches of trees in humid Andean forests. Species identification requires specialized analysis of the flowers and their morphology.",
+      "photos": [
+        "gr08_orquideas/fa03_maxillarieae/sp080301_maxillaria_sp/sp080301_maxillaria_sp_001.webp"
+      ]
+    },
+    {
+      "id": "sp080401",
+      "familyId": "oncidiinae",
+      "group": "orquideas",
+      "scientificName": "Oncidium sp.",
+      "nameEs": "Orquídea Danza de Antioquia",
+      "nameEn": "Antioquia Dancing Lady Orchid",
+      "iucn": "DD",
+      "subregions": [
+        "Valle de Aburrá",
+        "Oriente",
+        "Norte",
+        "Occidente",
+        "Suroeste"
+      ],
+      "descriptionEs": "Orquídea del género Oncidium con flores en forma de bailarina de color amarillo. Crece como epífita en los bosques húmedos andinos de Antioquia. Sus vistosas flores se agrupan en largas varas. La especie exacta está pendiente de confirmación taxonómica.",
+      "descriptionEn": "Orchid of the genus Oncidium with yellow dancer-shaped flowers. Grows as an epiphyte in the humid Andean forests of Antioquia. Its showy flowers are grouped on long stems. The exact species is pending taxonomic confirmation.",
+      "photos": [
+        "gr08_orquideas/fa04_oncidiinae/sp080401_oncidium_sp/sp080401_oncidium_sp_001.webp",
+        "gr08_orquideas/fa04_oncidiinae/sp080401_oncidium_sp/sp080401_oncidium_sp_002.webp",
+        "gr08_orquideas/fa04_oncidiinae/sp080401_oncidium_sp/sp080401_oncidium_sp_003.webp",
+        "gr08_orquideas/fa04_oncidiinae/sp080401_oncidium_sp/sp080401_oncidium_sp_004.webp"
+      ]
+    },
+    {
+      "id": "sp010102",
+      "familyId": "trogonidae",
+      "group": "aves",
+      "scientificName": "Trogon viridis",
+      "nameEs": "Trogón Coliblanco",
+      "nameEn": "White-tailed Trogon",
+      "iucn": "LC",
+      "subregions": [
+        "Urabá",
+        "Occidente",
+        "Bajo Cauca",
+        "Magdalena Medio"
+      ],
+      "descriptionEs": "Trogón de tamaño mediano con la espalda verde metálico, el pecho amarillo intenso y la cola con barras blancas y negras bien definidas. Habita el interior y los bordes de los bosques húmedos tropicales de tierras bajas. Se alimenta principalmente de frutos e insectos capturados en vuelos cortos desde ramas percha.",
+      "descriptionEn": "Medium-sized trogon with metallic green back, bright yellow underparts, and a tail with bold black-and-white barring. Inhabits the interior and edges of lowland tropical humid forests. Feeds mainly on fruits and insects snatched in short sallies from a perch.",
+      "photos": [
+        "gr01_aves/fa01_trogonidae/sp010102_trogon_viridis/sp010102_trogon_viridis_001.webp",
+        "gr01_aves/fa01_trogonidae/sp010102_trogon_viridis/sp010102_trogon_viridis_002.webp"
+      ]
+    },
+    {
+      "id": "sp010201",
+      "familyId": "ramphastidae",
+      "group": "aves",
+      "scientificName": "Pteroglossus torquatus",
+      "nameEs": "Arasarí Acollarado",
+      "nameEn": "Collared Aracari",
+      "iucn": "LC",
+      "subregions": [
+        "Urabá",
+        "Occidente",
+        "Norte",
+        "Bajo Cauca",
+        "Magdalena Medio"
+      ],
+      "descriptionEs": "Pequeño tucán de pico largo y serrado con un llamativo collar castaño-rojizo en el pecho. Vive en grupos de 6 a 15 individuos que recorren el dosel del bosque húmedo en busca de frutos maduros. Anida en cavidades de árboles y duerme en comunidad para conservar el calor. También consume insectos y huevos de otras aves.",
+      "descriptionEn": "Small toucan with a long serrated bill and a striking chestnut-red breast band. Lives in groups of 6–15 individuals that travel the humid forest canopy in search of ripe fruits. Nests in tree cavities and roosts communally to conserve heat. Also eats insects and eggs of other birds.",
+      "photos": [
+        "gr01_aves/fa02_ramphastidae/sp010201_pteroglossus_torquatus/sp010201_pteroglossus_torquatus_001.webp",
+        "gr01_aves/fa02_ramphastidae/sp010201_pteroglossus_torquatus/sp010201_pteroglossus_torquatus_002.webp"
+      ]
+    },
+    {
+      "id": "sp010301",
+      "familyId": "momotidae",
+      "group": "aves",
+      "scientificName": "Baryphthengus martii",
+      "nameEs": "Barranquero Pechicastaño",
+      "nameEn": "Rufous Motmot",
+      "iucn": "LC",
+      "subregions": [
+        "Urabá",
+        "Occidente",
+        "Norte",
+        "Bajo Cauca"
+      ],
+      "descriptionEs": "El motmot más grande de Colombia, reconocible por su pecho y flancos de color castaño rojizo y su larga cola con una \"raqueta\" terminal que balancea como un péndulo. Excava nidos en túneles dentro de barrancos o raíces de árboles caídos. Se alimenta de insectos grandes, lagartijas, ranas y frutos.",
+      "descriptionEn": "Colombia's largest motmot, recognizable by its rufous chest and flanks and its long racket-tipped tail that it swings like a pendulum. Digs nest tunnels in earthen banks or under fallen tree roots. Feeds on large insects, lizards, frogs, and fruits.",
+      "photos": [
+        "gr01_aves/fa03_momotidae/sp010301_baryphthengus_martii/sp010301_baryphthengus_martii_001.webp"
+      ]
+    },
+    {
+      "id": "sp010401",
+      "familyId": "psittacidae",
+      "group": "aves",
+      "scientificName": "Pyrilia pyrilia",
+      "nameEs": "Lorito Cabecigualdo",
+      "nameEn": "Saffron-headed Parrot",
+      "iucn": "LC",
+      "subregions": [
+        "Urabá",
+        "Norte",
+        "Bajo Cauca",
+        "Magdalena Medio"
+      ],
+      "descriptionEs": "Loro pequeño con el cuerpo verde y la cabeza y el pecho de color amarillo azafrán, combinación inconfundible entre los psitácidos del norte de Colombia. Habita los bosques húmedos y semisecos de las tierras bajas. Su población está bajo presión por la deforestación y la captura para el tráfico de mascotas.",
+      "descriptionEn": "Small parrot with green body and saffron-yellow head and breast — an unmistakable combination among psittacids in northern Colombia. Inhabits humid and semi-dry lowland forests. Its population faces pressure from deforestation and capture for the pet trade.",
+      "photos": [
+        "gr01_aves/fa04_psittacidae/sp010401_pyrilia_pyrilia/sp010401_pyrilia_pyrilia_001.webp"
+      ]
+    },
+    {
+      "id": "sp010402",
+      "familyId": "psittacidae",
+      "group": "aves",
+      "scientificName": "Psittacara wagleri",
+      "nameEs": "Lora Frentirroja",
+      "nameEn": "Scarlet-fronted Parakeet",
+      "iucn": "LC",
+      "subregions": [
+        "Norte",
+        "Valle de Aburrá",
+        "Suroeste",
+        "Occidente",
+        "Oriente"
+      ],
+      "descriptionEs": "Perico verde de tamaño mediano con una frente de color rojo escarlata inconfundible. Forma bandadas ruidosas que sobrevuelan valles interandinos y laderas de montaña entre los 500 y 2.500 m. Muy adaptable a paisajes transformados, es una de las loritas más comunes en el campo y las periferias urbanas de Antioquia.",
+      "descriptionEn": "Medium-sized green parakeet with an unmistakable scarlet-red forehead. Forms noisy flocks flying over interandean valleys and mountain slopes from 500 to 2,500 m. Highly adaptable to transformed landscapes, it is one of the most common parakeets in rural and peri-urban Antioquia.",
+      "photos": [
+        "gr01_aves/fa04_psittacidae/sp010402_psittacara_wagleri/sp010402_psittacara_wagleri_001.webp"
+      ]
+    },
+    {
+      "id": "sp010501",
+      "familyId": "thraupidae",
+      "group": "aves",
+      "scientificName": "Cyanerpes cyaneus",
+      "nameEs": "Mielero Patirrojo",
+      "nameEn": "Red-legged Honeycreeper",
+      "iucn": "LC",
+      "subregions": [
+        "Urabá",
+        "Norte",
+        "Occidente",
+        "Bajo Cauca",
+        "Magdalena Medio"
+      ],
+      "descriptionEs": "Ave pequeña y ágil. El macho luce un plumaje azul violáceo iridiscente, patas rojas vivas y una corona turquesa brillante; la hembra es verde con rayas en el pecho. Usa su pico curvo para extraer néctar de flores tubulares y complementa su dieta con frutos e insectos. Habitual en los doselones y bordes de bosque húmedo.",
+      "descriptionEn": "Small and agile bird. The male sports iridescent blue-violet plumage, bright red legs, and a turquoise crown; the female is green with a streaked breast. Uses its curved bill to extract nectar from tubular flowers, supplementing its diet with fruits and insects. Common in the canopy and edges of humid forest.",
+      "photos": [
+        "gr01_aves/fa05_thraupidae/sp010501_cyanerpes_cyaneus/sp010501_cyanerpes_cyaneus_001.webp",
+        "gr01_aves/fa05_thraupidae/sp010501_cyanerpes_cyaneus/sp010501_cyanerpes_cyaneus_002.webp"
+      ]
+    },
+    {
+      "id": "sp010502",
+      "familyId": "thraupidae",
+      "group": "aves",
+      "scientificName": "Stilpnia larvata",
+      "nameEs": "Tangara Capuchidorada",
+      "nameEn": "Golden-hooded Tanager",
+      "iucn": "LC",
+      "subregions": [
+        "Urabá",
+        "Occidente",
+        "Norte"
+      ],
+      "descriptionEs": "Tangara pequeña con una llamativa combinación de negro en el cuerpo, manchas azul eléctrico en las alas y una capucha amarillo-dorado en la cabeza. Habita bordes de bosque, jardines y áreas arboladas desde el nivel del mar hasta 1.200 m. Frecuente en bandadas mixtas que recorren el follaje buscando frutos pequeños.",
+      "descriptionEn": "Small tanager with a striking combination of black body, electric-blue wing patches, and a golden-yellow hood. Inhabits forest edges, gardens, and wooded areas from sea level to 1,200 m. Common in mixed flocks that forage through foliage for small fruits.",
+      "photos": [
+        "gr01_aves/fa05_thraupidae/sp010502_stilpnia_larvata/sp010502_stilpnia_larvata_001.webp",
+        "gr01_aves/fa05_thraupidae/sp010502_stilpnia_larvata/sp010502_stilpnia_larvata_002.webp"
+      ]
+    },
+    {
+      "id": "sp010601",
+      "familyId": "chlorospingidae",
+      "group": "aves",
+      "scientificName": "Chlorospingus flavopectus",
+      "nameEs": "Clorospingo Pechiamarillo",
+      "nameEn": "Common Bush-Tanager",
+      "iucn": "LC",
+      "subregions": [
+        "Oriente",
+        "Norte",
+        "Suroeste",
+        "Occidente"
+      ],
+      "descriptionEs": "Ave pequeña y muy activa del sotobosque andino, con el dorso verde oliva, la garganta blanca y el pecho amarillo. Vive en grupos familiares que inspeccionan incansablemente ramas bajas y medias del bosque nublado entre 1.200 y 2.800 m. Es uno de los participantes más constantes en las bandadas mixtas de las cordilleras antioqueñas.",
+      "descriptionEn": "Small and highly active bird of Andean undergrowth, with olive-green back, white throat, and yellow breast. Lives in family groups that tirelessly inspect lower and middle branches of cloud forest between 1,200 and 2,800 m. One of the most consistent participants in mixed flocks on the Andean ridges of Antioquia.",
+      "photos": [
+        "gr01_aves/fa06_chlorospingidae/sp010601_chlorospingus_flavopectus/sp010601_chlorospingus_flavopectus_001.webp"
+      ]
+    },
+    {
+      "id": "sp010701",
+      "familyId": "parulidae",
+      "group": "aves",
+      "scientificName": "Setophaga discolor",
+      "nameEs": "Reinita Galana",
+      "nameEn": "Prairie Warbler",
+      "iucn": "NT",
+      "subregions": [
+        "Urabá",
+        "Norte",
+        "Bajo Cauca",
+        "Magdalena Medio"
+      ],
+      "descriptionEs": "Reinita migratoria pequeña con el dorso verde oliva, el pecho y los flancos amarillos con rayas negras y una franja amarilla inconfundible bajo el ojo. Pasa el invierno boreal en el norte de Colombia, donde habita matorrales costeros, bordes de manglar y vegetación baja de zonas cálidas. Mueve la cola de forma característica hacia arriba y abajo.",
+      "descriptionEn": "Small migratory warbler with olive-green back, yellow underparts with black streaking, and a distinctive yellow stripe below the eye. Winters in northern Colombia, inhabiting coastal scrub, mangrove edges, and low vegetation in warm lowlands. Characteristically pumps its tail up and down.",
+      "photos": [
+        "gr01_aves/fa07_parulidae/sp010701_setophaga_discolor/sp010701_setophaga_discolor_001.webp"
+      ]
+    },
+    {
+      "id": "sp020103",
+      "familyId": "colubridae",
+      "group": "anfibios_reptiles",
+      "scientificName": "Oxyrhopus petolarius",
+      "nameEs": "Coral Falsa",
+      "nameEn": "False Coral Snake",
+      "iucn": "LC",
+      "subregions": [
+        "Urabá",
+        "Norte",
+        "Bajo Cauca",
+        "Magdalena Medio",
+        "Occidente"
+      ],
+      "descriptionEs": "Serpiente no venenosa que imita el patrón de bandas rojas, negras y blancas de las corales verdaderas, estrategia defensiva conocida como mimetismo batesiano. Activa al anochecer y de noche. Se alimenta de lagartijas, pequeñas ranas y otras serpientes. A pesar de ser inofensiva, su parecido con las corales la protege eficazmente de los depredadores.",
+      "descriptionEn": "Non-venomous snake that mimics the red, black, and white banding of true coral snakes, a defensive strategy known as Batesian mimicry. Active at dusk and night. Feeds on lizards, small frogs, and other snakes. Despite being harmless, its resemblance to coral snakes effectively deters predators.",
+      "photos": [
+        "gr02_anfibios_reptiles/fa01_colubridae/sp020103_oxyrhopus_petolarius/sp020103_oxyrhopus_petolarius_001.webp",
+        "gr02_anfibios_reptiles/fa01_colubridae/sp020103_oxyrhopus_petolarius/sp020103_oxyrhopus_petolarius_002.webp"
+      ]
+    },
+    {
+      "id": "sp020203",
+      "familyId": "craugastoridae",
+      "group": "anfibios_reptiles",
+      "scientificName": "Craugastor metriosistus",
+      "nameEs": "Rana de Hojarasca Andina",
+      "nameEn": "Andean Robber Frog",
+      "iucn": "LC",
+      "subregions": [
+        "Urabá",
+        "Occidente",
+        "Norte"
+      ],
+      "descriptionEs": "Rana de tamaño mediano que vive entre la hojarasca y las raíces de los bosques húmedos andinos. No tiene fase de renacuajo libre: los huevos se depositan en tierra y de ellos emergen directamente ranitas completamente formadas. Esta estrategia de desarrollo directo la hace independiente de los cuerpos de agua para reproducirse.",
+      "descriptionEn": "Medium-sized frog that lives among leaf litter and roots of Andean humid forests. Has no free-swimming tadpole stage: eggs are laid on land and hatch directly into fully formed froglets. This direct-development strategy makes it independent of water bodies for reproduction.",
+      "photos": [
+        "gr02_anfibios_reptiles/fa02_craugastoridae/sp020203_craugastor_metriosistus/sp020203_craugastor_metriosistus_001.webp"
+      ]
+    },
+    {
+      "id": "sp020204",
+      "familyId": "craugastoridae",
+      "group": "anfibios_reptiles",
+      "scientificName": "Pristimantis gaigei",
+      "nameEs": "Rana de Hojarasca de Gaige",
+      "nameEn": "Gaige's Robber Frog",
+      "iucn": "LC",
+      "subregions": [
+        "Oriente",
+        "Norte",
+        "Occidente",
+        "Suroeste"
+      ],
+      "descriptionEs": "Pequeña rana críptica de la hojarasca andina, con la piel rugosa y coloración variable entre ocre, pardo y verdoso que la camufla perfectamente en el suelo del bosque. Como todos los Pristimantis, tiene desarrollo directo sin renacuajo. Pristimantis es uno de los géneros más diversos de vertebrados en el mundo, con más de 500 especies descritas.",
+      "descriptionEn": "Small cryptic frog of the Andean leaf litter, with rough skin and variable coloration between ochre, brown, and green that provides perfect camouflage on the forest floor. Like all Pristimantis, has direct development without a tadpole. Pristimantis is one of the most diverse vertebrate genera in the world, with over 500 described species.",
+      "photos": [
+        "gr02_anfibios_reptiles/fa02_craugastoridae/sp020204_pristimantis_gaigei/sp020204_pristimantis_gaigei_001.webp",
+        "gr02_anfibios_reptiles/fa02_craugastoridae/sp020204_pristimantis_gaigei/sp020204_pristimantis_gaigei_002.webp"
+      ]
+    },
+    {
+      "id": "sp020302",
+      "familyId": "hylidae",
+      "group": "anfibios_reptiles",
+      "scientificName": "Smilisca phaeota",
+      "nameEs": "Rana de Árbol Enmascarada",
+      "nameEn": "Masked Tree Frog",
+      "iucn": "LC",
+      "subregions": [
+        "Urabá",
+        "Occidente",
+        "Norte",
+        "Bajo Cauca"
+      ],
+      "descriptionEs": "Rana arborícola de tamaño mediano con una máscara oscura característica alrededor de los ojos que contrasta con su dorso verde o pardo. Activa de noche, habita los bordes de bosque húmedo, quebradas y zonas de cultivo con vegetación riparia. Sus cantos nocturnos son un sonido característico de las noches cálidas en el Bajo Cauca y Urabá.",
+      "descriptionEn": "Medium-sized tree frog with a distinctive dark mask around the eyes contrasting with its green or brown back. Active at night, inhabits humid forest edges, streams, and farmland with riparian vegetation. Its nocturnal calls are a characteristic sound of warm nights in the Bajo Cauca and Urabá regions.",
+      "photos": [
+        "gr02_anfibios_reptiles/fa03_hylidae/sp020302_smilisca_phaeota/sp020302_smilisca_phaeota_001.webp",
+        "gr02_anfibios_reptiles/fa03_hylidae/sp020302_smilisca_phaeota/sp020302_smilisca_phaeota_002.webp"
+      ]
+    },
+    {
+      "id": "sp020501",
+      "familyId": "bufonidae",
+      "group": "anfibios_reptiles",
+      "scientificName": "Rhaebo haematiticus",
+      "nameEs": "Sapo Sangrante",
+      "nameEn": "Bleeding Toad",
+      "iucn": "LC",
+      "subregions": [
+        "Urabá",
+        "Occidente",
+        "Bajo Cauca"
+      ],
+      "descriptionEs": "Sapo de los bosques húmedos tropicales de tierras bajas, de piel rugosa y coloración parda con manchas rojizas. Su nombre común alude a las secreciones rojizas que producen sus glándulas paratoides cuando se siente amenazado, tóxicas para los depredadores. Activo principalmente de noche entre la hojarasca del suelo del bosque.",
+      "descriptionEn": "Toad of lowland tropical humid forests, with rough skin and brownish coloration with reddish spots. Its common name refers to the reddish secretions produced by its parotoid glands when threatened, which are toxic to predators. Mainly active at night among leaf litter on the forest floor.",
+      "photos": [
+        "gr02_anfibios_reptiles/fa05_bufonidae/sp020501_rhaebo_haematiticus/sp020501_rhaebo_haematiticus_001.webp",
+        "gr02_anfibios_reptiles/fa05_bufonidae/sp020501_rhaebo_haematiticus/sp020501_rhaebo_haematiticus_002.webp"
+      ]
+    },
+    {
+      "id": "sp080202",
+      "familyId": "epidendrinae",
+      "group": "orquideas",
+      "scientificName": "Epidendrum fimbriatum",
+      "nameEs": "Epidendro Fimbriado",
+      "nameEn": "Fringed Epidendrum",
+      "iucn": "LC",
+      "subregions": [
+        "Oriente",
+        "Norte",
+        "Occidente",
+        "Suroeste"
+      ],
+      "descriptionEs": "Orquídea epífita de tallos delgados con flores pequeñas cuyos pétalos presentan bordes finamente fimbriados o dentados, característica que le da el nombre. Crece en bosques nublados entre 1.500 y 2.800 m. Como la mayoría de los epidendros colombianos, florece en racimos terminales y depende de polinizadores específicos del bosque andino.",
+      "descriptionEn": "Epiphytic orchid with slender stems and small flowers whose petals have finely fringed or toothed margins, giving it its name. Grows in cloud forests between 1,500 and 2,800 m. Like most Colombian epidendrums, it blooms in terminal racemes and depends on specific pollinators of the Andean forest.",
+      "photos": [
+        "gr08_orquideas/fa02_epidendrinae/sp080202_epidendrum_fimbriatum/sp080202_epidendrum_fimbriatum_001.webp"
+      ]
+    },
+    {
+      "id": "sp080203",
+      "familyId": "epidendrinae",
+      "group": "orquideas",
+      "scientificName": "Epidendrum ibaguense",
+      "nameEs": "Orquídea Cruz de Mayo",
+      "nameEn": "Reed-stem Epidendrum",
+      "iucn": "LC",
+      "subregions": [
+        "Valle de Aburrá",
+        "Oriente",
+        "Norte",
+        "Occidente",
+        "Suroeste"
+      ],
+      "descriptionEs": "Una de las orquídeas más comunes y reconocibles de los Andes colombianos, con flores naranjas o rojas en racimos densos sobre tallos en caña. Muy adaptable, crece en bordes de carretera, jardines, potreros y laderas abiertas entre 1.200 y 3.000 m. Es una de las pocas orquídeas verdaderamente terrestres y colonizadoras de ambientes perturbados.",
+      "descriptionEn": "One of the most common and recognizable orchids of the Colombian Andes, with orange or red flowers in dense racemes on reed-like stems. Very adaptable, grows on roadsides, gardens, pastures, and open slopes between 1,200 and 3,000 m. One of the few truly terrestrial orchids and a colonizer of disturbed environments.",
+      "photos": [
+        "gr08_orquideas/fa02_epidendrinae/sp080203_epidendrum_ibaguense/sp080203_epidendrum_ibaguense_001.webp"
+      ]
+    },
+    {
+      "id": "sp080302",
+      "familyId": "maxillarieae",
+      "group": "orquideas",
+      "scientificName": "Lycaste sp.",
+      "nameEs": "Orquídea Lycaste",
+      "nameEn": "Lycaste Orchid",
+      "iucn": "DD",
+      "subregions": [
+        "Oriente",
+        "Norte",
+        "Occidente",
+        "Suroeste"
+      ],
+      "descriptionEs": "Orquídea epífita o terrestre de hojas grandes y plegadas con flores solitarias de gran tamaño en tonos blancos, amarillos o rosados. Habita los bosques nublados andinos entre 1.500 y 2.500 m. Las flores tienen tres sépalos prominentes que forman una estrella y un labelo complejo. Varias especies del género están amenazadas por la extracción para el comercio de flores.",
+      "descriptionEn": "Epiphytic or terrestrial orchid with large pleated leaves bearing solitary oversized flowers in white, yellow, or pink tones. Inhabits Andean cloud forests between 1,500 and 2,500 m. The flowers have three prominent sepals forming a star and a complex lip. Several species in the genus are threatened by extraction for the flower trade.",
+      "photos": [
+        "gr08_orquideas/fa03_maxillarieae/sp080302_lycaste_sp/sp080302_lycaste_sp_001.webp"
+      ]
+    },
+    {
+      "id": "sp080402",
+      "familyId": "oncidiinae",
+      "group": "orquideas",
+      "scientificName": "Miltonia sp.",
+      "nameEs": "Orquídea Pensamiento",
+      "nameEn": "Pansy Orchid",
+      "iucn": "DD",
+      "subregions": [
+        "Oriente",
+        "Occidente",
+        "Suroeste",
+        "Norte"
+      ],
+      "descriptionEs": "Orquídea epífita conocida popularmente como \"orquídea pensamiento\" por la similitud de sus flores con las flores del pensamiento de jardín. Produce flores grandes y vistosas con patrones de color en rojo, blanco y rosado. Habita los bosques nublados de los Andes entre 1.500 y 2.800 m. Muy apreciada en horticultura y muy recolectada del hábitat natural.",
+      "descriptionEn": "Epiphytic orchid popularly known as the \"pansy orchid\" for its flowers resemblance to garden pansies. Produces large, showy flowers with color patterns in red, white, and pink. Inhabits Andean cloud forests between 1,500 and 2,800 m. Highly valued in horticulture and heavily collected from natural habitat.",
+      "photos": [
+        "gr08_orquideas/fa04_oncidiinae/sp080402_miltonia_sp/sp080402_miltonia_sp_001.webp"
+      ]
+    },
+    {
+      "id": "sp080403",
+      "familyId": "oncidiinae",
+      "group": "orquideas",
+      "scientificName": "Odontoglossum sp.",
+      "nameEs": "Odontogloso",
+      "nameEn": "Odontoglossum Orchid",
+      "iucn": "DD",
+      "subregions": [
+        "Oriente",
+        "Occidente",
+        "Norte",
+        "Suroeste"
+      ],
+      "descriptionEs": "Orquídea epífita de flores grandes con pétalos y sépalos ondulados y dentados que le dan su nombre (del griego: diente-lengua). Habita los bosques nublados y subpáramos de los Andes colombianos entre 2.000 y 3.500 m. Sus flores son muy vistosas, con fondos blancos o amarillos manchados de café. Ha sido base de innumerables híbridos ornamentales.",
+      "descriptionEn": "Epiphytic orchid with large flowers bearing wavy, toothed petals and sepals that give it its name (from Greek: tooth-tongue). Inhabits cloud forests and sub-páramos of the Colombian Andes between 2,000 and 3,500 m. Its showy flowers have white or yellow backgrounds spotted with brown. It has been the basis for countless ornamental hybrids.",
+      "photos": [
+        "gr08_orquideas/fa04_oncidiinae/sp080403_odontoglossum_sp/sp080403_odontoglossum_sp_001.webp"
+      ]
+    },
+    {
+      "id": "sp080404",
+      "familyId": "oncidiinae",
+      "group": "orquideas",
+      "scientificName": "Ornithocephalus sp.",
+      "nameEs": "Orquídea Cabeza de Pájaro",
+      "nameEn": "Bird's-head Orchid",
+      "iucn": "DD",
+      "subregions": [
+        "Urabá",
+        "Occidente",
+        "Norte",
+        "Bajo Cauca"
+      ],
+      "descriptionEs": "Miniorquídea epífita con flores de apenas unos milímetros cuya columna floral tiene forma de cabeza de pájaro, rasgo que le da el nombre al género. Crece sobre ramas delgadas y cortezas en bosques húmedos de tierras bajas y medias. A pesar de su pequeño tamaño, produce racimos de flores perfectamente formadas visibles con lupa.",
+      "descriptionEn": "Miniature epiphytic orchid with flowers just a few millimeters wide whose floral column is shaped like a bird's head, the trait that gives the genus its name. Grows on thin branches and bark in humid forests of lowlands and mid-elevations. Despite its tiny size, it produces racemes of perfectly formed flowers visible with a magnifier.",
+      "photos": [
+        "gr08_orquideas/fa04_oncidiinae/sp080404_ornithocephalus_sp/sp080404_ornithocephalus_sp_001.webp",
+        "gr08_orquideas/fa04_oncidiinae/sp080404_ornithocephalus_sp/sp080404_ornithocephalus_sp_002.webp"
+      ]
+    },
+    {
+      "id": "sp080501",
+      "familyId": "pleurothallidinae",
+      "group": "orquideas",
+      "scientificName": "Acianthera sp.",
+      "nameEs": "Orquídea Acianthera",
+      "nameEn": "Acianthera Orchid",
+      "iucn": "DD",
+      "subregions": [
+        "Oriente",
+        "Occidente",
+        "Norte",
+        "Suroeste"
+      ],
+      "descriptionEs": "Pequeña orquídea epífita de la subtribu Pleurothallidinae con hojas carnosas y flores diminutas dispuestas en racimos. Habita bosques nublados entre 1.500 y 2.800 m. El género Acianthera agrupa cientos de especies en los Andes tropicales, muchas de ellas endémicas de pequeñas áreas y con identificación que requiere microscopio.",
+      "descriptionEn": "Small epiphytic orchid of the subtribe Pleurothallidinae with fleshy leaves and tiny flowers arranged in racemes. Inhabits cloud forests between 1,500 and 2,800 m. The genus Acianthera groups hundreds of species in the tropical Andes, many endemic to small areas and requiring microscopy for identification.",
+      "photos": [
+        "gr08_orquideas/fa05_pleurothallidinae/sp080501_acianthera_sp/sp080501_acianthera_sp_001.webp"
+      ]
+    },
+    {
+      "id": "sp080502",
+      "familyId": "pleurothallidinae",
+      "group": "orquideas",
+      "scientificName": "Dracula radiosa",
+      "nameEs": "Orquídea Drácula Radiosa",
+      "nameEn": "Radiant Dracula Orchid",
+      "iucn": "DD",
+      "subregions": [
+        "Occidente",
+        "Norte",
+        "Oriente"
+      ],
+      "descriptionEs": "Orquídea epífita de los bosques nublados andinos cuyas flores tienen sépalos largos terminados en colas filamentosas que irradian desde el centro como rayos, de ahí su nombre. El género Dracula imita visualmente hongos y hongos específicos para atraer a sus polinizadores, moscas del género Drosophila. Crece colgante en ramas húmedas entre 1.800 y 2.600 m.",
+      "descriptionEn": "Epiphytic orchid of Andean cloud forests whose flowers have long sepals ending in thread-like tails that radiate from the center like spokes, hence its name. The genus Dracula visually mimics specific fungi to attract its pollinators, flies of the genus Drosophila. Grows pendant on humid branches between 1,800 and 2,600 m.",
+      "photos": [
+        "gr08_orquideas/fa05_pleurothallidinae/sp080502_dracula_radiosa/sp080502_dracula_radiosa_001.webp"
+      ]
+    },
+    {
+      "id": "sp080503",
+      "familyId": "pleurothallidinae",
+      "group": "orquideas",
+      "scientificName": "Dracula sp.",
+      "nameEs": "Orquídea Drácula",
+      "nameEn": "Dracula Orchid",
+      "iucn": "DD",
+      "subregions": [
+        "Occidente",
+        "Norte",
+        "Oriente"
+      ],
+      "descriptionEs": "Orquídea epífita colgante del bosque nublado andino, con flores que mimetizan hongos para atraer moscas polinizadoras. Las flores nacen en pedúnculos pendulares que cuelgan por debajo del sustrato, adaptación para llegar al suelo del bosque donde abundan las moscas. Colombia alberga la mayor diversidad de Dracula del mundo.",
+      "descriptionEn": "Pendant epiphytic orchid of the Andean cloud forest, with flowers that mimic fungi to attract pollinating flies. Flowers emerge on pendant peduncles that hang below the substrate, an adaptation to reach the forest floor where flies are abundant. Colombia harbors the greatest diversity of Dracula in the world.",
+      "photos": [
+        "gr08_orquideas/fa05_pleurothallidinae/sp080503_dracula_sp/sp080503_dracula_sp_001.webp"
+      ]
+    },
+    {
+      "id": "sp080504",
+      "familyId": "pleurothallidinae",
+      "group": "orquideas",
+      "scientificName": "Lepanthes ligiae",
+      "nameEs": "Lepanthes de Ligia",
+      "nameEn": "Ligia's Lepanthes",
+      "iucn": "DD",
+      "subregions": [
+        "Oriente",
+        "Occidente",
+        "Norte"
+      ],
+      "descriptionEs": "Miniorquídea epífita endémica de los Andes colombianos con flores de pocos milímetros sobre hojas ovaladas con vainas peciolares aladas. El género Lepanthes es uno de los más diversos de las Américas, con más de 1.000 especies descritas, muchas de ellas conocidas solo de un único municipio o montaña. Su polinización es realizada por moscas pequeñas.",
+      "descriptionEn": "Miniature epiphytic orchid endemic to the Colombian Andes with flowers just a few millimeters wide on oval leaves with winged petiolar sheaths. The genus Lepanthes is one of the most diverse in the Americas, with over 1,000 described species, many known only from a single municipality or mountain. Pollinated by tiny flies.",
+      "photos": [
+        "gr08_orquideas/fa05_pleurothallidinae/sp080504_lepanthes_ligiae/sp080504_lepanthes_ligiae_001.webp",
+        "gr08_orquideas/fa05_pleurothallidinae/sp080504_lepanthes_ligiae/sp080504_lepanthes_ligiae_002.webp"
+      ]
+    },
+    {
+      "id": "sp080505",
+      "familyId": "pleurothallidinae",
+      "group": "orquideas",
+      "scientificName": "Lepanthes rutrum",
+      "nameEs": "Lepanthes Rutrum",
+      "nameEn": "Rutrum Lepanthes",
+      "iucn": "DD",
+      "subregions": [
+        "Oriente",
+        "Occidente",
+        "Norte"
+      ],
+      "descriptionEs": "Miniorquídea epífita de los bosques nublados colombianos, con flores diminutas de colores intensos sobre hojas pequeñas. Como todas las Lepanthes, sus flores son tan pequeñas que requieren lupa para apreciar su estructura compleja. Es polinizada por moscas fungívoras atraídas por el mimetismo floral con hongos.",
+      "descriptionEn": "Miniature epiphytic orchid of Colombian cloud forests, with tiny brightly colored flowers on small leaves. Like all Lepanthes, its flowers are so small they require a magnifier to appreciate their complex structure. Pollinated by fungivorous flies attracted by floral mimicry of fungi.",
+      "photos": [
+        "gr08_orquideas/fa05_pleurothallidinae/sp080505_lepanthes_rutrum/sp080505_lepanthes_rutrum_001.webp"
+      ]
+    },
+    {
+      "id": "sp080506",
+      "familyId": "pleurothallidinae",
+      "group": "orquideas",
+      "scientificName": "Lepanthes sp.",
+      "nameEs": "Orquídea Lepanthes",
+      "nameEn": "Lepanthes Orchid",
+      "iucn": "DD",
+      "subregions": [
+        "Oriente",
+        "Occidente",
+        "Norte",
+        "Suroeste"
+      ],
+      "descriptionEs": "Miniorquídea epífita de la subtribu Pleurothallidinae. Con más de 1.000 especies, Lepanthes es uno de los géneros de orquídeas más diversos del mundo y uno de los más amenazados por la deforestación, dado que muchas especies tienen distribuciones extremadamente restringidas a una sola montaña o fragmento de bosque nublado.",
+      "descriptionEn": "Miniature epiphytic orchid of the subtribe Pleurothallidinae. With over 1,000 species, Lepanthes is one of the most diverse orchid genera in the world and one of the most threatened by deforestation, as many species have extremely restricted distributions to a single mountain or cloud forest fragment.",
+      "photos": [
+        "gr08_orquideas/fa05_pleurothallidinae/sp080506_lepanthes_sp/sp080506_lepanthes_sp_001.webp"
+      ]
+    },
+    {
+      "id": "sp080507",
+      "familyId": "pleurothallidinae",
+      "group": "orquideas",
+      "scientificName": "Masdevallia hortensis",
+      "nameEs": "Masdevallia Hortensis",
+      "nameEn": "Hortensis Masdevallia",
+      "iucn": "DD",
+      "subregions": [
+        "Oriente",
+        "Occidente",
+        "Norte"
+      ],
+      "descriptionEs": "Orquídea epífita de los bosques nublados andinos con flores de sépalos fusionados en un tubo que se abren en tres colas filamentosas. Las Masdevallia son muy sensibles a los cambios de temperatura y requieren ambientes frescos y húmedos, lo que las hace vulnerables al cambio climático. Sus flores de colores intensos las convierten en favoritas del cultivo de orquídeas.",
+      "descriptionEn": "Epiphytic orchid of Andean cloud forests with flowers whose sepals are fused into a tube that opens into three thread-like tails. Masdevallias are highly sensitive to temperature changes and require cool, humid environments, making them vulnerable to climate change. Their intensely colored flowers make them favorites in orchid cultivation.",
+      "photos": [
+        "gr08_orquideas/fa05_pleurothallidinae/sp080507_masdevallia_hortensis/sp080507_masdevallia_hortensis_001.webp"
+      ]
+    },
+    {
+      "id": "sp080508",
+      "familyId": "pleurothallidinae",
+      "group": "orquideas",
+      "scientificName": "Masdevallia sp.",
+      "nameEs": "Orquídea Masdevallia",
+      "nameEn": "Masdevallia Orchid",
+      "iucn": "DD",
+      "subregions": [
+        "Oriente",
+        "Occidente",
+        "Norte",
+        "Suroeste"
+      ],
+      "descriptionEs": "Orquídea epífita del bosque nublado andino con flores triangulares formadas por sépalos fusionados en sus bases. Colombia es el país con mayor diversidad de Masdevallia del mundo. Muchas especies son endémicas de áreas muy pequeñas en los Andes antioqueños y están bajo presión por la deforestación y la extracción para el mercado ornamental.",
+      "descriptionEn": "Epiphytic orchid of the Andean cloud forest with triangular flowers formed by sepals fused at their bases. Colombia is the country with the greatest diversity of Masdevallia in the world. Many species are endemic to very small areas of the Antioquian Andes and face pressure from deforestation and extraction for the ornamental market.",
+      "photos": [
+        "gr08_orquideas/fa05_pleurothallidinae/sp080508_masdevallia_sp/sp080508_masdevallia_sp_001.webp"
+      ]
+    },
+    {
+      "id": "sp080509",
+      "familyId": "pleurothallidinae",
+      "group": "orquideas",
+      "scientificName": "Platystele sp.",
+      "nameEs": "Orquídea Platystele",
+      "nameEn": "Platystele Orchid",
+      "iucn": "DD",
+      "subregions": [
+        "Oriente",
+        "Occidente",
+        "Norte"
+      ],
+      "descriptionEs": "Una de las orquídeas más pequeñas del mundo: las flores de algunas Platystele miden menos de 2 mm. Epífita de los bosques nublados entre 1.500 y 2.800 m, crece en colonias sobre ramas y musgos húmedos. Su tamaño microscópico hace que muchas especies pasen desapercibidas y potencialmente haya muchas aún sin describir en los Andes colombianos.",
+      "descriptionEn": "One of the smallest orchids in the world: flowers of some Platystele measure less than 2 mm. Epiphytic in cloud forests between 1,500 and 2,800 m, grows in colonies on branches and wet mosses. Its microscopic size means many species go unnoticed and there are potentially many still undescribed in the Colombian Andes.",
+      "photos": [
+        "gr08_orquideas/fa05_pleurothallidinae/sp080509_platystele_sp/sp080509_platystele_sp_001.webp",
+        "gr08_orquideas/fa05_pleurothallidinae/sp080509_platystele_sp/sp080509_platystele_sp_002.webp"
+      ]
+    },
+    {
+      "id": "sp080510",
+      "familyId": "pleurothallidinae",
+      "group": "orquideas",
+      "scientificName": "Pleurothallis diabolica",
+      "nameEs": "Pleurotálida Diabólica",
+      "nameEn": "Diabolical Pleurothallis",
+      "iucn": "DD",
+      "subregions": [
+        "Oriente",
+        "Occidente",
+        "Norte"
+      ],
+      "descriptionEs": "Orquídea epífita del bosque nublado andino cuyas flores tienen apéndices o estructuras que le dan un aspecto inusual, sugestivo de su nombre \"diabolica\". Pertenece al enorme género Pleurothallis, uno de los más diversos de las Américas. Muchas Pleurothallis tienen distribuciones muy restringidas y son altamente sensibles a la pérdida de bosque nublado.",
+      "descriptionEn": "Epiphytic orchid of the Andean cloud forest whose flowers have appendages or structures giving it an unusual appearance, suggestive of its name \"diabolica\". Belongs to the enormous genus Pleurothallis, one of the most diverse in the Americas. Many Pleurothallis have very restricted distributions and are highly sensitive to cloud forest loss.",
+      "photos": [
+        "gr08_orquideas/fa05_pleurothallidinae/sp080510_pleurothallis_diabolica/sp080510_pleurothallis_diabolica_001.webp"
+      ]
+    },
+    {
+      "id": "sp080511",
+      "familyId": "pleurothallidinae",
+      "group": "orquideas",
+      "scientificName": "Pleurothallis sp.",
+      "nameEs": "Orquídea Pleurotálida",
+      "nameEn": "Pleurothallis Orchid",
+      "iucn": "DD",
+      "subregions": [
+        "Oriente",
+        "Occidente",
+        "Norte",
+        "Suroeste"
+      ],
+      "descriptionEs": "Orquídea epífita de la subtribu Pleurothallidinae, el grupo más diverso de orquídeas en Colombia. Las Pleurothallis presentan una enorme variedad de formas florales, desde flores diminutas hasta elaboradas estructuras de centímetros, todas especializadas en atraer polinizadores específicos. Son indicadores de la salud del bosque nublado andino.",
+      "descriptionEn": "Epiphytic orchid of the subtribe Pleurothallidinae, the most diverse group of orchids in Colombia. Pleurothallis show an enormous variety of floral forms, from tiny flowers to elaborate centimeter-sized structures, all specialized to attract specific pollinators. They are indicators of the health of the Andean cloud forest.",
+      "photos": [
+        "gr08_orquideas/fa05_pleurothallidinae/sp080511_pleurothallis_sp/sp080511_pleurothallis_sp_001.webp",
+        "gr08_orquideas/fa05_pleurothallidinae/sp080511_pleurothallis_sp/sp080511_pleurothallis_sp_002.webp",
+        "gr08_orquideas/fa05_pleurothallidinae/sp080511_pleurothallis_sp/sp080511_pleurothallis_sp_003.webp"
+      ]
+    },
+    {
+      "id": "sp080512",
+      "familyId": "pleurothallidinae",
+      "group": "orquideas",
+      "scientificName": "Scaphosepalum decorum",
+      "nameEs": "Escafosépalo Decoroso",
+      "nameEn": "Decorous Scaphosepalum",
+      "iucn": "DD",
+      "subregions": [
+        "Oriente",
+        "Occidente",
+        "Norte"
+      ],
+      "descriptionEs": "Orquídea epífita andina con flores peculiares cuyos sépalos laterales forman una estructura en forma de cuchara o barco, rasgo que da nombre al género (del griego: barco-sépalo). Habita los bosques nublados húmedos entre 1.800 y 2.800 m. Las flores atraen moscas polinizadoras mediante señales visuales y olfativas que simulan hongos en descomposición.",
+      "descriptionEn": "Andean epiphytic orchid with peculiar flowers whose lateral sepals form a spoon or boat-shaped structure, the trait that names the genus (from Greek: boat-sepal). Inhabits humid cloud forests between 1,800 and 2,800 m. Flowers attract pollinating flies through visual and olfactory cues that simulate decomposing fungi.",
+      "photos": [
+        "gr08_orquideas/fa05_pleurothallidinae/sp080512_scaphosepalum_decorum/sp080512_scaphosepalum_decorum_001.webp"
+      ]
+    },
+    {
+      "id": "sp080513",
+      "familyId": "pleurothallidinae",
+      "group": "orquideas",
+      "scientificName": "Scaphosepalum sp.",
+      "nameEs": "Orquídea Escafosépalo",
+      "nameEn": "Scaphosepalum Orchid",
+      "iucn": "DD",
+      "subregions": [
+        "Oriente",
+        "Occidente",
+        "Norte"
+      ],
+      "descriptionEs": "Orquídea epífita del bosque nublado andino con flores que imitan hongos para atraer moscas polinizadoras. Los Scaphosepalum son conocidos por sus flores que se abren secuencialmente en el mismo pedúnculo durante meses, produciendo flores una tras otra sobre el mismo tallo floral, lo que maximiza las oportunidades de polinización.",
+      "descriptionEn": "Epiphytic orchid of the Andean cloud forest with flowers that mimic fungi to attract pollinating flies. Scaphosepalums are known for their flowers that open sequentially on the same peduncle over months, producing flowers one after another on the same floral stem, maximizing pollination opportunities.",
+      "photos": [
+        "gr08_orquideas/fa05_pleurothallidinae/sp080513_scaphosepalum_sp/sp080513_scaphosepalum_sp_001.webp"
+      ]
+    },
+    {
+      "id": "sp080514",
+      "familyId": "pleurothallidinae",
+      "group": "orquideas",
+      "scientificName": "Stelis sp.",
+      "nameEs": "Orquídea Stelis",
+      "nameEn": "Stelis Orchid",
+      "iucn": "DD",
+      "subregions": [
+        "Oriente",
+        "Occidente",
+        "Norte",
+        "Suroeste"
+      ],
+      "descriptionEs": "Pequeña orquídea epífita de racimos densos con flores triangulares diminutas. El género Stelis es uno de los más diversos de Pleurothallidinae, con cientos de especies en los Andes tropicales. Muchas se diferencian solo por detalles microscópicos de la flor. Crece en bosques nublados sobre musgos y ramas de árboles entre 1.500 y 3.000 m.",
+      "descriptionEn": "Small epiphytic orchid forming dense racemes of tiny triangular flowers. The genus Stelis is one of the most diverse in Pleurothallidinae, with hundreds of species in the tropical Andes. Many differ only in microscopic floral details. Grows in cloud forests on mosses and tree branches between 1,500 and 3,000 m.",
+      "photos": [
+        "gr08_orquideas/fa05_pleurothallidinae/sp080514_stelis_sp/sp080514_stelis_sp_001.webp"
+      ]
+    },
+    {
+      "id": "sp080601",
+      "familyId": "aeridinae",
+      "group": "orquideas",
+      "scientificName": "Abdominea minimiflora",
+      "nameEs": "Orquídea Abdomínea",
+      "nameEn": "Miniflower Abdominea",
+      "iucn": "DD",
+      "subregions": [
+        "Urabá",
+        "Occidente"
+      ],
+      "descriptionEs": "Miniorquídea monopodial de la tribu Aeridinae con flores extremadamente pequeñas pero perfectamente formadas. Aunque su distribución natural es el sudeste asiático, se cultiva y se ha naturalizado en jardines tropicales de Colombia. Es una de las orquídeas con las flores más pequeñas de su tribu, cultivada por coleccionistas especializados.",
+      "descriptionEn": "Miniature monopodial orchid of the tribe Aeridinae with extremely small but perfectly formed flowers. Although its natural distribution is Southeast Asia, it is cultivated and has naturalized in tropical gardens of Colombia. It is one of the orchids with the smallest flowers in its tribe, grown by specialist collectors.",
+      "photos": [
+        "gr08_orquideas/fa06_aeridinae/sp080601_abdominea_minimiflora/sp080601_abdominea_minimiflora_001.webp"
+      ]
+    },
+    {
+      "id": "sp080602",
+      "familyId": "aeridinae",
+      "group": "orquideas",
+      "scientificName": "Chiloschista sp.",
+      "nameEs": "Orquídea sin Hojas",
+      "nameEn": "Leafless Orchid",
+      "iucn": "DD",
+      "subregions": [
+        "Urabá",
+        "Occidente"
+      ],
+      "descriptionEs": "Orquídea epífita extraordinaria que realiza la fotosíntesis principalmente a través de sus raíces verdes y aplanadas, careciendo prácticamente de hojas. Esta adaptación extrema le permite sobrevivir en ramas expuestas. Produce racimos de flores pequeñas y delicadas. Cultivada por coleccionistas de orquídeas inusuales en los trópicos colombianos.",
+      "descriptionEn": "Extraordinary epiphytic orchid that performs photosynthesis mainly through its flattened green roots, having virtually no leaves. This extreme adaptation allows it to survive on exposed branches. Produces racemes of small, delicate flowers. Cultivated by collectors of unusual orchids in the Colombian tropics.",
+      "photos": [
+        "gr08_orquideas/fa06_aeridinae/sp080602_chiloschista_sp/sp080602_chiloschista_sp_001.webp"
+      ]
+    },
+    {
+      "id": "sp080701",
+      "familyId": "zygopetalinae",
+      "group": "orquideas",
+      "scientificName": "Kefersteinia tolimensis",
+      "nameEs": "Kefersteinia del Tolima",
+      "nameEn": "Tolima Kefersteinia",
+      "iucn": "DD",
+      "subregions": [
+        "Oriente",
+        "Occidente",
+        "Suroeste",
+        "Norte"
+      ],
+      "descriptionEs": "Orquídea epífita de los Andes colombianos con flores solitarias de gran belleza, con pétalos y sépalos de color blanco cremoso o verde pálido manchados de púrpura y un labelo complejo y decorativo. Habita los bosques nublados entre 1.500 y 2.500 m. Es una especie de distribución restringida al centro-occidente de Colombia, con pocos registros documentados.",
+      "descriptionEn": "Epiphytic orchid of the Colombian Andes with solitary, highly ornate flowers with creamy white or pale green petals and sepals spotted with purple and a complex, decorative lip. Inhabits cloud forests between 1,500 and 2,500 m. A species with restricted distribution in central-western Colombia, with few documented records.",
+      "photos": [
+        "gr08_orquideas/fa07_zygopetalinae/sp080701_kefersteinia_tolimensis/sp080701_kefersteinia_tolimensis_001.webp"
+      ]
+    }
+  ]
+}

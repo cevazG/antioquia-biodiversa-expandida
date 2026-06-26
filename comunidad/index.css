@@ -1,0 +1,118 @@
+.com-hero {
+      background: linear-gradient(150deg, var(--color-green-dark) 0%, var(--color-green-primary) 100%);
+      padding: calc(var(--space-xl) + env(safe-area-inset-top)) var(--space-md) var(--space-xl);
+      position: relative;
+      overflow: hidden;
+      text-align: center;
+    }
+
+    .com-hero::after {
+      content: '🌿';
+      position: absolute;
+      right: -16px;
+      bottom: -20px;
+      font-size: 9rem;
+      opacity: 0.08;
+      line-height: 1;
+      pointer-events: none;
+    }
+
+    .com-hero__label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--color-mint-digital);
+      margin-bottom: 6px;
+    }
+
+    .com-hero__title {
+      font-size: 2rem;
+      font-weight: 800;
+      color: white;
+      line-height: 1.1;
+      margin-bottom: var(--space-sm);
+    }
+
+    .com-hero__subtitle {
+      font-size: 0.9375rem;
+      color: rgba(255,255,255,0.75);
+      max-width: 280px;
+      margin: 0 auto;
+      line-height: 1.5;
+    }
+
+    /* Tarjetas de programa */
+    .com-content {
+      padding: var(--space-lg) var(--space-md);
+      padding-bottom: calc(var(--bottom-bar-height) + var(--space-lg));
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-md);
+    }
+
+    .prog-card {
+      display: flex;
+      align-items: center;
+      gap: var(--space-md);
+      padding: var(--space-lg);
+      border-radius: var(--radius-lg);
+      text-decoration: none;
+      color: white;
+      position: relative;
+      overflow: hidden;
+      transition: transform var(--transition), box-shadow var(--transition);
+      box-shadow: var(--shadow-md);
+    }
+
+    .prog-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(255,255,255,0.1);
+      opacity: 0;
+      transition: opacity var(--transition);
+    }
+
+    .prog-card:active::before { opacity: 1; }
+    .prog-card:active { transform: scale(0.98); box-shadow: var(--shadow-sm); }
+
+    .prog-card--jpl   { background: linear-gradient(135deg, #B0942B, #f28e18); }
+    .prog-card--gc    { background: linear-gradient(135deg, #1a3a6b, #3561ab); }
+    .prog-card--edm   { background: linear-gradient(135deg, #5e2c68, #8b4a97); }
+
+    .prog-card__deco {
+      width: 64px;
+      height: 64px;
+      background: rgba(255,255,255,0.18);
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.25rem;
+      flex-shrink: 0;
+    }
+
+    .prog-card__body {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .prog-card__name {
+      font-size: 1.125rem;
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 4px;
+    }
+
+    .prog-card__desc {
+      font-size: 0.8125rem;
+      opacity: 0.85;
+      line-height: 1.4;
+      color: white;
+    }
+
+    .prog-card__arrow {
+      flex-shrink: 0;
+      opacity: 0.75;
+    }

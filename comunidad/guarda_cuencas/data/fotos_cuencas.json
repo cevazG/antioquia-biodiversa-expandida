@@ -1,0 +1,18 @@
+{
+  "meses": [
+    {
+      "id": "2026-06",
+      "mes": "Junio", "mesEn": "June", "año": 2026,
+      "count": 10,
+      "portada": "img/fotos/gc_001.jpg",
+      "archivo": "data/cuencas_2026_06.json"
+    },
+    {
+      "id": "2026-05",
+      "mes": "Mayo",  "mesEn": "May",  "año": 2026,
+      "count": 3,
+      "portada": "img/fotos/gc_2026_05/gc_may_001.jpg",
+      "archivo": "data/cuencas_2026_05.json"
+    }
+  ]
+}

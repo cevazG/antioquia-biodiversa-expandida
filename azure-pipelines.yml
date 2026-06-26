@@ -1,0 +1,165 @@
+# azure-pipelines.yml
+# CI/CD — Antioquia Biodiversa
+# Requiere configurar en Azure DevOps:
+#   - Service connection SonarQube: nombre exacto en SONARQUBE_SERVICE_CONNECTION
+#   - Service connection SSH Dev:  nombre exacto en SSH_DEV_SERVICE_CONNECTION
+#   - Service connection SSH Prod: nombre exacto en SSH_PROD_SERVICE_CONNECTION
+#   - Variable group "antioquia-biodiversa-secrets" con: SERVER_DEV_USER, SERVER_DEV_HOST,
+#     SERVER_PROD_USER, SERVER_PROD_HOST, APP_PATH (ruta del repo en el servidor)
+
+trigger:
+  branches:
+    include:
+      - main
+      - develop
+
+pool:
+  vmImage: ubuntu-latest
+
+variables:
+  NODE_VERSION: '20.x'
+  WORKING_DIR: 'backend'
+  SONARQUBE_SERVICE_CONNECTION: 'SonarQube-AntioquiaBiodiversa'
+  SSH_DEV_SERVICE_CONNECTION:  'SSH-Dev-AntioquiaBiodiversa'
+  SSH_PROD_SERVICE_CONNECTION: 'SSH-Prod-AntioquiaBiodiversa'
+
+# ─────────────────────────────────────────────
+# STAGE 1 — Integración continua (CI)
+# Ejecuta en todas las ramas
+# ─────────────────────────────────────────────
+stages:
+
+- stage: CI
+  displayName: 'CI — Lint, Tests y Cobertura'
+  jobs:
+
+  - job: Build
+    displayName: 'Instalar, lintear y probar'
+    steps:
+
+    - task: NodeTool@0
+      displayName: 'Instalar Node.js $(NODE_VERSION)'
+      inputs:
+        versionSpec: $(NODE_VERSION)
+
+    - task: Npm@1
+      displayName: 'npm install'
+      inputs:
+        command: install
+        workingDir: $(WORKING_DIR)
+
+    - task: Npm@1
+      displayName: 'Lint (ESLint)'
+      inputs:
+        command: custom
+        workingDir: $(WORKING_DIR)
+        customCommand: run lint
+
+    - task: Npm@1
+      displayName: 'Tests con cobertura'
+      inputs:
+        command: custom
+        workingDir: $(WORKING_DIR)
+        customCommand: run test:coverage
+
+    - task: PublishTestResults@2
+      displayName: 'Publicar resultados JUnit'
+      condition: always()
+      inputs:
+        testResultsFormat: JUnit
+        testResultsFiles: '$(WORKING_DIR)/coverage/junit.xml'
+        mergeTestResults: true
+        testRunTitle: 'Jest — Antioquia Biodiversa'
+
+    - task: PublishCodeCoverageResults@2
+      displayName: 'Publicar cobertura'
+      inputs:
+        summaryFileLocation: '$(WORKING_DIR)/coverage/coverage-summary.json'
+
+    - task: SonarQubePrepare@6
+      displayName: 'SonarQube — preparar análisis'
+      inputs:
+        SonarQube: $(SONARQUBE_SERVICE_CONNECTION)
+        scannerMode: CLI
+        configMode: manual
+        cliProjectKey: antioquia-biodiversa-backend
+        cliProjectName: 'Antioquia Biodiversa — Backend'
+        cliSources: '$(WORKING_DIR)/src'
+        extraProperties: |
+          sonar.exclusions=**/node_modules/**,**/coverage/**,**/__tests__/**
+          sonar.javascript.lcov.reportPaths=$(WORKING_DIR)/coverage/lcov.info
+          sonar.testExecutionReportPaths=$(WORKING_DIR)/coverage/junit.xml
+
+    - task: SonarQubeAnalyze@6
+      displayName: 'SonarQube — ejecutar análisis'
+
+    - task: SonarQubePublish@6
+      displayName: 'SonarQube — publicar resultado'
+      inputs:
+        pollingTimeoutSec: 300
+
+# ─────────────────────────────────────────────
+# STAGE 2 — Deploy a Dev
+# Solo en la rama develop
+# ─────────────────────────────────────────────
+- stage: DeployDev
+  displayName: 'Deploy → Dev'
+  dependsOn: CI
+  condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/develop'))
+  variables:
+    - group: antioquia-biodiversa-secrets
+
+  jobs:
+  - deployment: DeployDev
+    displayName: 'Desplegar en servidor Dev'
+    environment: Dev
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+
+          - task: SSH@0
+            displayName: 'Actualizar y reiniciar en Dev'
+            inputs:
+              sshServiceConnection: $(SSH_DEV_SERVICE_CONNECTION)
+              runOptions: commands
+              commands: |
+                cd $(APP_PATH) &&
+                git pull origin develop &&
+                cd backend &&
+                npm install --omit=dev &&
+                pm2 restart antioquia-biodiversa || pm2 start src/index.js --name antioquia-biodiversa
+              failOnStdErr: false
+
+# ─────────────────────────────────────────────
+# STAGE 3 — Deploy a Producción
+# Solo en la rama main · requiere aprobación manual
+# ─────────────────────────────────────────────
+- stage: DeployProd
+  displayName: 'Deploy → Producción'
+  dependsOn: CI
+  condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/main'))
+  variables:
+    - group: antioquia-biodiversa-secrets
+
+  jobs:
+  - deployment: DeployProd
+    displayName: 'Desplegar en servidor Producción'
+    environment: Produccion   # La aprobación manual se configura en este environment en Azure DevOps
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+
+          - task: SSH@0
+            displayName: 'Actualizar y reiniciar en Producción'
+            inputs:
+              sshServiceConnection: $(SSH_PROD_SERVICE_CONNECTION)
+              runOptions: commands
+              commands: |
+                cd $(APP_PATH) &&
+                git pull origin main &&
+                cd backend &&
+                npm install --omit=dev &&
+                pm2 restart antioquia-biodiversa || pm2 start src/index.js --name antioquia-biodiversa
+              failOnStdErr: false

@@ -1,0 +1,59 @@
+{
+  "mes": "Junio",
+  "mesEn": "June",
+  "año": 2026,
+  "fotos": [
+    {
+      "id": "jpl_2026-06_001",
+      "fotos": [
+        "img/fotos/bio/2026-06/aves/coereba_flaveola/coereba_flaveola_002.webp"
+      ],
+      "credito": "maritza21328",
+      "municipio": "Mutatá",
+      "subregion": "uraba",
+      "especieEs": "Reinita Mielera",
+      "especieEn": "Bananaquit",
+      "especieCientifico": "Coereba flaveola",
+      "grupo": "aves",
+      "iucn": "LC",
+      "endemica": true,
+      "descripcionEs": "El platanero (Coereba flaveola) es una especie de ave paseriforme, la única del género Coereba. Éste es también el único género de la familia Coerebidae, del orden Passeriformes. Se sabe actualmente que Coerebidae resulta no válida o que debe incluir otros miembros.",
+      "descripcionEn": "The bananaquit (Coereba flaveola) is a species of passerine bird Natural from Puerto Rico. It is tentatively placed in the tanager family, but classified as incertae sedis by other authorities such as the American Ornithologists' Union. Its classification is debated, and it is often placed in its own family: Coerebidae."
+    },
+    {
+      "id": "jpl_2026-06_002",
+      "fotos": [
+        "img/fotos/bio/2026-06/aves/sarcoramphus_papa/sarcoramphus_papa_002.webp"
+      ],
+      "credito": "dahianna_lucia",
+      "municipio": "Mutatá",
+      "subregion": "uraba",
+      "especieEs": "Zopilote Rey",
+      "especieEn": "King Vulture",
+      "especieCientifico": "Sarcoramphus papa",
+      "grupo": "aves",
+      "iucn": "DD",
+      "endemica": false,
+      "descripcionEs": "Sarcoramphus papa, llamado comúnmente: cóndor real, cóndor de los llanos, zamuro rey, urubú rey, urubú real, urubú blanco, zopilote rey,jote real, rey de los gallinazos, rey gallote, rey zope, zopilote real, cuervo real, y cóndor de la selva, es un buitre americano, miembro de la familia Cathartidae, que vive predominantemente en los bosques tropic",
+      "descripcionEn": "The king vulture (Sarcoramphus papa) is a large bird found in Central and South America. It is a member of the New World vulture family Cathartidae. This vulture lives predominantly in tropical lowland forests stretching from southern Mexico to northern Argentina."
+    },
+    {
+      "id": "jpl_2026-06_003",
+      "fotos": [
+        "img/fotos/bio/2026-06/arboles_nativos/cecropia_peltata/cecropia_peltata_002.webp",
+        "img/fotos/bio/2026-06/arboles_nativos/cecropia_peltata/cecropia_peltata_003.webp"
+      ],
+      "credito": "maradu",
+      "municipio": "San Carlos",
+      "subregion": "oriente",
+      "especieEs": "Guarumo",
+      "especieEn": "trumpet tree",
+      "especieCientifico": "Cecropia peltata",
+      "grupo": "arboles_nativos",
+      "iucn": "LC",
+      "endemica": false,
+      "descripcionEs": "El yagrumo, yarumo o guarumbo (Cecropia peltata), es un árbol representativo de la zona intertropical americana y se extiende desde México hasta América del Sur, incluyendo las Antillas. Es común en clima cálido, aunque puede llegar a crecer a alturas de más de 2.",
+      "descripcionEn": "Cecropia peltata is a fast-growing tree in the genus Cecropia. Common names include trumpet tree and snakewood. It is listed as one of the world's 100 worst invasive alien species."
+    }
+  ]
+}

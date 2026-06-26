@@ -1,0 +1,132 @@
+:root {
+      --color-jpl:      #f28e18;
+      --color-jpl-dark: #B0942B;
+      --color-jpl-pale: #fff3e0;
+    }
+
+    body, html { height: 100%; }
+
+    .jpl-map-page {
+      display: flex;
+      flex-direction: column;
+      height: 100dvh;
+    }
+
+    /* Header */
+    .map-header {
+      background: var(--color-jpl-dark);
+      padding: calc(var(--space-sm) + env(safe-area-inset-top)) var(--space-md) var(--space-sm);
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+      flex-shrink: 0;
+      z-index: 1000;
+    }
+
+    .map-header__back {
+      width: 36px; height: 36px;
+      background: rgba(255,255,255,0.15);
+      border: none; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      color: white; cursor: pointer; flex-shrink: 0;
+    }
+
+    .map-header__title {
+      font-size: 1rem; font-weight: 700; color: white; flex: 1;
+    }
+
+    .map-header__subtitle {
+      font-size: 0.75rem; color: rgba(255,255,255,0.7); font-weight: 400;
+    }
+
+    /* Filtro subregión */
+    .filter-bar {
+      background: white;
+      padding: 8px var(--space-md);
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      flex-shrink: 0;
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .filter-bar::-webkit-scrollbar { display: none; }
+
+    .filter-pill {
+      background: #f5f5f5;
+      border: 1.5px solid #e0e0e0;
+      color: var(--color-text-dark);
+      padding: 5px 14px;
+      border-radius: var(--radius-full);
+      font-size: 0.78rem;
+      font-weight: 600;
+      white-space: nowrap;
+      cursor: pointer;
+      transition: all 0.15s;
+      flex-shrink: 0;
+    }
+
+    .filter-pill.active {
+      background: var(--color-jpl);
+      border-color: var(--color-jpl);
+      color: white;
+    }
+
+    /* Mapa */
+    #map {
+      flex: 1;
+      width: 100%;
+      z-index: 1;
+    }
+
+    /* Contador flotante */
+    .map-counter {
+      position: absolute;
+      top: calc(var(--space-sm) + env(safe-area-inset-top) + 46px + 46px + 8px);
+      right: var(--space-md);
+      background: rgba(142, 95, 0, 0.9);
+      color: white;
+      padding: 6px 14px;
+      border-radius: var(--radius-full);
+      font-size: 0.8rem;
+      font-weight: 700;
+      z-index: 900;
+      backdrop-filter: blur(6px);
+      pointer-events: none;
+    }
+
+    /* Bottom bar */
+    .bottom-bar { position: relative; z-index: 1000; }
+
+    /* Popup */
+    .leaflet-popup-content-wrapper {
+      border-radius: 14px !important;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.15) !important;
+      padding: 0 !important;
+      overflow: hidden;
+    }
+
+    .leaflet-popup-content { margin: 0 !important; }
+    .leaflet-popup-tip-container { display: none; }
+
+    .popup-card {
+      padding: 14px 16px;
+      min-width: 180px;
+    }
+
+    .popup-card__name {
+      font-family: var(--font-primary);
+      font-size: 0.9375rem;
+      font-weight: 700;
+      color: var(--color-jpl-dark);
+      margin-bottom: 2px;
+    }
+
+    .popup-card__sub {
+      font-size: 0.78rem;
+      color: var(--color-text-light);
+      font-weight: 500;
+      text-transform: capitalize;
+    }

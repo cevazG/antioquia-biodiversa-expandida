@@ -1,0 +1,1076 @@
+openapi: 3.0.3
+info:
+  title: Antioquia Biodiversa API
+  description: >
+    API REST para la aplicación Antioquia Biodiversa — Gobernación de Antioquia.
+    Expone información sobre especies, familias, grupos taxonómicos, subregiones
+    y recursos hídricos del departamento. También incluye los endpoints del panel
+    de administración de curadores (JPL y Guarda Cuencas).
+  version: 1.0.0
+  contact:
+    name: Sebastián Guzmán Díaz
+    email: sguzmand@gmail.com
+
+servers:
+  - url: /api
+    description: Servidor local / producción (relativo)
+
+tags:
+  - name: Sistema
+    description: Estado del servidor
+  - name: Especies
+    description: Catálogo de especies de flora y fauna
+  - name: Familias
+    description: Familias taxonómicas
+  - name: Grupos
+    description: Grupos de biodiversidad (aves, mamíferos, orquídeas…)
+  - name: Subregiones
+    description: Las 9 subregiones de Antioquia y sus recursos hídricos
+  - name: Especie del Mes
+    description: Especie editorial del mes y galería comunitaria
+  - name: Admin — Autenticación
+    description: Login / logout del panel de curadores
+  - name: Admin — JPL
+    description: CRUD de fotografías del programa Jóvenes pa' Lante
+  - name: Admin — Guarda Cuencas
+    description: CRUD de fotografías del programa Guarda Cuencas
+
+paths:
+
+  # ─── Sistema ───────────────────────────────────────────────────────────────
+
+  /health:
+    get:
+      tags: [Sistema]
+      summary: Estado del servidor
+      operationId: getHealth
+      responses:
+        '200':
+          description: Servidor operativo
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: ok
+
+  # ─── Especies ──────────────────────────────────────────────────────────────
+
+  /species:
+    get:
+      tags: [Especies]
+      summary: Listar especies
+      operationId: listSpecies
+      parameters:
+        - name: kingdom
+          in: query
+          description: Filtrar por reino
+          schema:
+            type: string
+            enum: [fauna, flora]
+        - name: group
+          in: query
+          description: Filtrar por grupo taxonómico (ID interno)
+          schema:
+            type: string
+            example: aves
+        - name: subregion
+          in: query
+          description: Filtrar por subregión (ID interno)
+          schema:
+            type: string
+            example: valle_aburra
+        - name: iucn
+          in: query
+          description: Filtrar por categoría IUCN
+          schema:
+            type: string
+            enum: [LC, NT, VU, EN, CR, DD]
+        - name: q
+          in: query
+          description: Búsqueda por texto (nombre común o científico)
+          schema:
+            type: string
+        - name: page
+          in: query
+          description: Número de página (base 1)
+          schema:
+            type: integer
+            default: 1
+            minimum: 1
+        - name: limit
+          in: query
+          description: Resultados por página
+          schema:
+            type: integer
+            default: 20
+            minimum: 1
+            maximum: 100
+      responses:
+        '200':
+          description: Lista paginada de especies
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  total:
+                    type: integer
+                    example: 150
+                  page:
+                    type: integer
+                    example: 1
+                  limit:
+                    type: integer
+                    example: 20
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/SpeciesSummary'
+        '500':
+          $ref: '#/components/responses/Error500'
+
+  /species/{id}:
+    get:
+      tags: [Especies]
+      summary: Obtener ficha completa de una especie
+      operationId: getSpeciesById
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: Identificador único de la especie (ej. sp001)
+          schema:
+            type: string
+            example: sp001
+      responses:
+        '200':
+          description: Ficha completa de la especie
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SpeciesDetail'
+        '404':
+          $ref: '#/components/responses/Error404'
+        '500':
+          $ref: '#/components/responses/Error500'
+
+  # ─── Familias ──────────────────────────────────────────────────────────────
+
+  /families:
+    get:
+      tags: [Familias]
+      summary: Listar familias taxonómicas
+      operationId: listFamilies
+      parameters:
+        - name: kingdom
+          in: query
+          description: Filtrar por reino
+          schema:
+            type: string
+            enum: [fauna, flora]
+        - name: group
+          in: query
+          description: Filtrar por grupo taxonómico
+          schema:
+            type: string
+            example: aves
+      responses:
+        '200':
+          description: Lista de familias
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Family'
+        '500':
+          $ref: '#/components/responses/Error500'
+
+  # ─── Grupos ────────────────────────────────────────────────────────────────
+
+  /groups:
+    get:
+      tags: [Grupos]
+      summary: Listar grupos de biodiversidad
+      operationId: listGroups
+      parameters:
+        - name: kingdom
+          in: query
+          description: Filtrar por reino
+          schema:
+            type: string
+            enum: [fauna, flora]
+      responses:
+        '200':
+          description: Lista de grupos ordenada
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Group'
+        '500':
+          $ref: '#/components/responses/Error500'
+
+  # ─── Subregiones ───────────────────────────────────────────────────────────
+
+  /subregions:
+    get:
+      tags: [Subregiones]
+      summary: Listar las 9 subregiones de Antioquia
+      operationId: listSubregions
+      responses:
+        '200':
+          description: Lista de subregiones
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Subregion'
+        '500':
+          $ref: '#/components/responses/Error500'
+
+  /subregions/{id}:
+    get:
+      tags: [Subregiones]
+      summary: Obtener una subregión por ID
+      operationId: getSubregionById
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID interno de la subregión
+          schema:
+            type: string
+            enum: [uraba, occidente, norte, bajo_cauca, nordeste, magdalena_medio, valle_aburra, oriente, suroeste]
+      responses:
+        '200':
+          description: Datos de la subregión
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Subregion'
+        '404':
+          $ref: '#/components/responses/Error404'
+        '500':
+          $ref: '#/components/responses/Error500'
+
+  /subregions/{id}/rivers:
+    get:
+      tags: [Subregiones]
+      summary: Listar ríos de una subregión
+      operationId: getRiversBySubregion
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID interno de la subregión
+          schema:
+            type: string
+            example: oriente
+      responses:
+        '200':
+          description: Lista de ríos de la subregión
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/River'
+        '500':
+          $ref: '#/components/responses/Error500'
+
+  # ─── Especie del Mes ───────────────────────────────────────────────────────
+
+  /species-month/current:
+    get:
+      tags: [Especie del Mes]
+      summary: Especie del mes activa con avistamientos aprobados
+      operationId: getSpeciesMonthCurrent
+      responses:
+        '200':
+          description: Especie activa del mes con galería comunitaria
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SpeciesMonth'
+        '404':
+          $ref: '#/components/responses/Error404'
+        '500':
+          $ref: '#/components/responses/Error500'
+
+  /species-month/history:
+    get:
+      tags: [Especie del Mes]
+      summary: Historial de especies del mes anteriores
+      operationId: getSpeciesMonthHistory
+      responses:
+        '200':
+          description: Lista de especies del mes inactivas
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SpeciesMonthSummary'
+        '500':
+          $ref: '#/components/responses/Error500'
+
+  # ─── Admin — Autenticación ─────────────────────────────────────────────────
+
+  /admin/login:
+    post:
+      tags: [Admin — Autenticación]
+      summary: Iniciar sesión como curador
+      operationId: adminLogin
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [password]
+              properties:
+                password:
+                  type: string
+                  format: password
+      responses:
+        '200':
+          description: Sesión iniciada
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                    example: true
+        '401':
+          description: Contraseña incorrecta
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          $ref: '#/components/responses/Error500'
+
+  /admin/logout:
+    post:
+      tags: [Admin — Autenticación]
+      summary: Cerrar sesión
+      operationId: adminLogout
+      responses:
+        '200':
+          description: Sesión cerrada
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                    example: true
+
+  /admin/me:
+    get:
+      tags: [Admin — Autenticación]
+      summary: Verificar sesión activa
+      operationId: adminMe
+      responses:
+        '200':
+          description: Sesión válida
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  authenticated:
+                    type: boolean
+                    example: true
+        '401':
+          description: Sin sesión activa
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  # ─── Admin — JPL ───────────────────────────────────────────────────────────
+
+  /admin/jpl/meses:
+    get:
+      tags: [Admin — JPL]
+      summary: Listar meses disponibles en JPL
+      operationId: jplListMeses
+      security:
+        - sessionCookie: []
+      responses:
+        '200':
+          description: Lista de meses con conteo de fotos
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/MesResumen'
+        '401':
+          $ref: '#/components/responses/Error401'
+        '500':
+          $ref: '#/components/responses/Error500'
+
+  /admin/jpl/fotos/{mes}:
+    get:
+      tags: [Admin — JPL]
+      summary: Listar fotos JPL de un mes
+      operationId: jplGetFotos
+      security:
+        - sessionCookie: []
+      parameters:
+        - $ref: '#/components/parameters/MesParam'
+      responses:
+        '200':
+          description: Fotos del mes
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/JplFoto'
+        '401':
+          $ref: '#/components/responses/Error401'
+        '500':
+          $ref: '#/components/responses/Error500'
+
+    post:
+      tags: [Admin — JPL]
+      summary: Subir nueva foto JPL
+      operationId: jplUploadFoto
+      security:
+        - sessionCookie: []
+      parameters:
+        - $ref: '#/components/parameters/MesParam'
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              required: [foto]
+              properties:
+                foto:
+                  type: string
+                  format: binary
+                  description: Archivo de imagen (JPG/PNG/WebP, máx 10 MB)
+                usuario:
+                  type: string
+                municipio:
+                  type: string
+                grupo:
+                  type: string
+                  enum: [aves, anfibios_reptiles, mariposas, polillas, mamiferos, animales_domesticos, peces, orquideas, arboles_nativos]
+                iucn:
+                  type: string
+                  enum: [LC, NT, VU, EN, CR, DD]
+                endemica:
+                  type: boolean
+                comentario:
+                  type: string
+      responses:
+        '201':
+          description: Foto subida y convertida a WebP
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JplFoto'
+        '401':
+          $ref: '#/components/responses/Error401'
+        '500':
+          $ref: '#/components/responses/Error500'
+
+  /admin/jpl/fotos/{mes}/{id}:
+    put:
+      tags: [Admin — JPL]
+      summary: Actualizar metadatos de una foto JPL
+      operationId: jplUpdateFoto
+      security:
+        - sessionCookie: []
+      parameters:
+        - $ref: '#/components/parameters/MesParam'
+        - $ref: '#/components/parameters/FotoIdParam'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/JplFotoUpdate'
+      responses:
+        '200':
+          description: Foto actualizada
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JplFoto'
+        '401':
+          $ref: '#/components/responses/Error401'
+        '404':
+          $ref: '#/components/responses/Error404'
+        '500':
+          $ref: '#/components/responses/Error500'
+
+  /admin/jpl/fotos/{id}:
+    delete:
+      tags: [Admin — JPL]
+      summary: Eliminar una foto JPL
+      operationId: jplDeleteFoto
+      security:
+        - sessionCookie: []
+      parameters:
+        - $ref: '#/components/parameters/FotoIdParam'
+      responses:
+        '200':
+          description: Foto eliminada
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                    example: true
+        '401':
+          $ref: '#/components/responses/Error401'
+        '404':
+          $ref: '#/components/responses/Error404'
+        '500':
+          $ref: '#/components/responses/Error500'
+
+  /admin/jpl/publicar/{mes}:
+    post:
+      tags: [Admin — JPL]
+      summary: Publicar JSON mensual de JPL
+      operationId: jplPublicar
+      security:
+        - sessionCookie: []
+      parameters:
+        - $ref: '#/components/parameters/MesParam'
+      responses:
+        '200':
+          description: JSON publicado correctamente
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                    example: true
+                  archivo:
+                    type: string
+                    example: fotos_2026_06.json
+        '401':
+          $ref: '#/components/responses/Error401'
+        '500':
+          $ref: '#/components/responses/Error500'
+
+  # ─── Admin — Guarda Cuencas ────────────────────────────────────────────────
+
+  /admin/gc/meses:
+    get:
+      tags: [Admin — Guarda Cuencas]
+      summary: Listar meses disponibles en Guarda Cuencas
+      operationId: gcListMeses
+      security:
+        - sessionCookie: []
+      responses:
+        '200':
+          description: Lista de meses con conteo de fotos
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/MesResumen'
+        '401':
+          $ref: '#/components/responses/Error401'
+        '500':
+          $ref: '#/components/responses/Error500'
+
+  /admin/gc/fotos/{mes}:
+    get:
+      tags: [Admin — Guarda Cuencas]
+      summary: Listar fotos GC de un mes
+      operationId: gcGetFotos
+      security:
+        - sessionCookie: []
+      parameters:
+        - $ref: '#/components/parameters/MesParam'
+      responses:
+        '200':
+          description: Fotos del mes
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/GcFoto'
+        '401':
+          $ref: '#/components/responses/Error401'
+        '500':
+          $ref: '#/components/responses/Error500'
+
+    post:
+      tags: [Admin — Guarda Cuencas]
+      summary: Subir nueva foto GC
+      operationId: gcUploadFoto
+      security:
+        - sessionCookie: []
+      parameters:
+        - $ref: '#/components/parameters/MesParam'
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              required: [foto]
+              properties:
+                foto:
+                  type: string
+                  format: binary
+                  description: Archivo de imagen (JPG/PNG/WebP, máx 10 MB)
+                cuenca:
+                  type: string
+                subregion:
+                  type: string
+                municipio:
+                  type: string
+                comentario:
+                  type: string
+      responses:
+        '201':
+          description: Foto subida y convertida a WebP
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GcFoto'
+        '401':
+          $ref: '#/components/responses/Error401'
+        '500':
+          $ref: '#/components/responses/Error500'
+
+  /admin/gc/fotos/{mes}/{id}:
+    put:
+      tags: [Admin — Guarda Cuencas]
+      summary: Actualizar metadatos de una foto GC
+      operationId: gcUpdateFoto
+      security:
+        - sessionCookie: []
+      parameters:
+        - $ref: '#/components/parameters/MesParam'
+        - $ref: '#/components/parameters/FotoIdParam'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GcFotoUpdate'
+      responses:
+        '200':
+          description: Foto actualizada
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GcFoto'
+        '401':
+          $ref: '#/components/responses/Error401'
+        '404':
+          $ref: '#/components/responses/Error404'
+        '500':
+          $ref: '#/components/responses/Error500'
+
+  /admin/gc/fotos/{id}:
+    delete:
+      tags: [Admin — Guarda Cuencas]
+      summary: Eliminar una foto GC
+      operationId: gcDeleteFoto
+      security:
+        - sessionCookie: []
+      parameters:
+        - $ref: '#/components/parameters/FotoIdParam'
+      responses:
+        '200':
+          description: Foto eliminada
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                    example: true
+        '401':
+          $ref: '#/components/responses/Error401'
+        '404':
+          $ref: '#/components/responses/Error404'
+        '500':
+          $ref: '#/components/responses/Error500'
+
+  /admin/gc/publicar/{mes}:
+    post:
+      tags: [Admin — Guarda Cuencas]
+      summary: Publicar JSON mensual de Guarda Cuencas
+      operationId: gcPublicar
+      security:
+        - sessionCookie: []
+      parameters:
+        - $ref: '#/components/parameters/MesParam'
+      responses:
+        '200':
+          description: JSON publicado correctamente
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ok:
+                    type: boolean
+                    example: true
+                  archivo:
+                    type: string
+                    example: cuencas_2026_06.json
+        '401':
+          $ref: '#/components/responses/Error401'
+        '500':
+          $ref: '#/components/responses/Error500'
+
+# ─── Componentes ───────────────────────────────────────────────────────────────
+
+components:
+
+  securitySchemes:
+    sessionCookie:
+      type: apiKey
+      in: cookie
+      name: connect.sid
+      description: Cookie de sesión obtenida al hacer POST /api/admin/login
+
+  parameters:
+    MesParam:
+      name: mes
+      in: path
+      required: true
+      description: Mes en formato YYYY_MM
+      schema:
+        type: string
+        pattern: '^\d{4}_\d{2}$'
+        example: 2026_06
+    FotoIdParam:
+      name: id
+      in: path
+      required: true
+      description: ID MongoDB de la foto
+      schema:
+        type: string
+        example: 6650f1a2b3c4d5e6f7a8b9c0
+
+  responses:
+    Error401:
+      description: No autenticado
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Error404:
+      description: Recurso no encontrado
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Error500:
+      description: Error interno del servidor
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+
+  schemas:
+
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+          example: Recurso no encontrado
+
+    SpeciesSummary:
+      type: object
+      properties:
+        id:
+          type: string
+          example: sp001
+        nameEs:
+          type: string
+          example: Colibrí de cola rufa
+        nameEn:
+          type: string
+          example: Rufous-tailed Hummingbird
+        scientificName:
+          type: string
+          example: Amazilia tzacatl
+        group:
+          type: string
+          example: aves
+        kingdom:
+          type: string
+          enum: [fauna, flora]
+        iucn:
+          type: string
+          enum: [LC, NT, VU, EN, CR, DD]
+        subregions:
+          type: array
+          items:
+            type: string
+          example: [valle_aburra, oriente]
+        photos:
+          type: array
+          items:
+            type: string
+          example: [aves/trochilidae/sp001_amazilia_tzacatl/01.webp]
+
+    SpeciesDetail:
+      allOf:
+        - $ref: '#/components/schemas/SpeciesSummary'
+        - type: object
+          properties:
+            familyId:
+              type: string
+              example: trochilidae
+            descriptionEs:
+              type: string
+            descriptionEn:
+              type: string
+
+    Family:
+      type: object
+      properties:
+        id:
+          type: string
+          example: trochilidae
+        group:
+          type: string
+          example: aves
+        kingdom:
+          type: string
+          enum: [fauna, flora]
+        nameEs:
+          type: string
+          example: Colibríes
+        nameEn:
+          type: string
+          example: Hummingbirds
+        descriptionEs:
+          type: string
+        descriptionEn:
+          type: string
+
+    Group:
+      type: object
+      properties:
+        id:
+          type: string
+          example: aves
+        kingdom:
+          type: string
+          enum: [fauna, flora]
+        order:
+          type: integer
+          example: 1
+        nameEs:
+          type: string
+          example: Aves
+        nameEn:
+          type: string
+          example: Birds
+        emoji:
+          type: string
+          example: "\U0001F426"
+
+    Subregion:
+      type: object
+      properties:
+        id:
+          type: string
+          example: valle_aburra
+        nameEs:
+          type: string
+          example: Valle de Aburrá
+        nameEn:
+          type: string
+          example: Aburrá Valley
+        descriptionEs:
+          type: string
+        descriptionEn:
+          type: string
+
+    River:
+      type: object
+      properties:
+        id:
+          type: string
+        nameEs:
+          type: string
+        nameEn:
+          type: string
+        subregions:
+          type: array
+          items:
+            type: string
+
+    SpeciesMonth:
+      type: object
+      properties:
+        mes:
+          type: string
+          example: Junio
+        anio:
+          type: integer
+          example: 2026
+        nombre:
+          type: string
+          example: Mariposa Morpho Azul
+        nombreCientifico:
+          type: string
+          example: Morpho peleides
+        grupo:
+          type: string
+          example: mariposas
+        iucn:
+          type: string
+          enum: [LC, NT, VU, EN, CR, DD]
+        descripcionEs:
+          type: string
+        descripcionEn:
+          type: string
+        fotosAprobadas:
+          type: array
+          items:
+            type: object
+            properties:
+              usuario:
+                type: string
+              municipio:
+                type: string
+              fecha:
+                type: string
+                format: date
+              comentario:
+                type: string
+
+    SpeciesMonthSummary:
+      type: object
+      properties:
+        mes:
+          type: string
+        anio:
+          type: integer
+        nombre:
+          type: string
+        grupo:
+          type: string
+        totalFotos:
+          type: integer
+
+    MesResumen:
+      type: object
+      properties:
+        mes:
+          type: string
+          example: 2026_06
+        totalFotos:
+          type: integer
+          example: 42
+
+    JplFoto:
+      type: object
+      properties:
+        _id:
+          type: string
+          example: 6650f1a2b3c4d5e6f7a8b9c0
+        mes:
+          type: string
+          example: 2026_06
+        url:
+          type: string
+          example: /uploads/jpl/2026_06/foto_001.webp
+        usuario:
+          type: string
+        municipio:
+          type: string
+        grupo:
+          type: string
+          enum: [aves, anfibios_reptiles, mariposas, polillas, mamiferos, animales_domesticos, peces, orquideas, arboles_nativos]
+        iucn:
+          type: string
+          enum: [LC, NT, VU, EN, CR, DD]
+        endemica:
+          type: boolean
+        comentario:
+          type: string
+        fechaSubida:
+          type: string
+          format: date-time
+
+    JplFotoUpdate:
+      type: object
+      properties:
+        usuario:
+          type: string
+        municipio:
+          type: string
+        grupo:
+          type: string
+        iucn:
+          type: string
+        endemica:
+          type: boolean
+        comentario:
+          type: string
+
+    GcFoto:
+      type: object
+      properties:
+        _id:
+          type: string
+          example: 6650f1a2b3c4d5e6f7a8b9c1
+        mes:
+          type: string
+          example: 2026_06
+        url:
+          type: string
+          example: /uploads/gc/2026_06/foto_001.webp
+        cuenca:
+          type: string
+        subregion:
+          type: string
+        municipio:
+          type: string
+        comentario:
+          type: string
+        fechaSubida:
+          type: string
+          format: date-time
+
+    GcFotoUpdate:
+      type: object
+      properties:
+        cuenca:
+          type: string
+        subregion:
+          type: string
+        municipio:
+          type: string
+        comentario:
+          type: string

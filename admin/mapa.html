@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Mapa de Observaciones — Antioquia Biodiversa</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css">
+<link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css">
+<link rel="stylesheet" href="css/impacto.css">
+<style>
+  html, body { height: 100%; overflow: hidden; }
+  .map-page { display: flex; flex-direction: column; height: 100vh; }
+  #map { height: 100%; width: 100%; z-index: 0; }
+
+  .map-stats-overlay {
+    position: absolute;
+    top: 80px; left: 16px;
+    z-index: 1000;
+    background: rgba(255,255,255,.96);
+    border-radius: 10px;
+    padding: 12px 16px;
+    box-shadow: 0 2px 20px rgba(0,0,0,.18);
+    font-family: 'Poppins', sans-serif;
+    min-width: 180px;
+  }
+  .map-stat { display: flex; justify-content: space-between; gap: 16px; align-items: baseline; }
+  .map-stat + .map-stat { margin-top: 5px; }
+  .map-stat__label { font-size: 10px; color: #6b7280; font-weight: 500; }
+  .map-stat__num   { font-size: 15px; font-weight: 800; color: #018d38; }
+
+  .map-loading-overlay {
+    position: absolute;
+    top: 80px; left: 50%; transform: translateX(-50%);
+    z-index: 1001;
+    background: rgba(7,31,18,.88);
+    color: #fff;
+    border-radius: 20px;
+    padding: 8px 20px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .map-loading-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: #6ee87a;
+    animation: inat-pulse 1.2s ease-in-out infinite;
+  }
+  @keyframes inat-pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50%       { opacity: .5; transform: scale(.75); }
+  }
+
+  .map-legend-overlay {
+    position: absolute;
+    bottom: 32px; right: 16px;
+    z-index: 1000;
+    background: rgba(255,255,255,.96);
+    border-radius: 10px;
+    padding: 12px 14px;
+    box-shadow: 0 2px 20px rgba(0,0,0,.18);
+    font-family: 'Poppins', sans-serif;
+    min-width: 160px;
+  }
+  .map-legend__title { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; color: #6b7280; margin-bottom: 8px; }
+  .legend-item { display: flex; align-items: center; gap: 7px; font-size: 11px; color: #1a1a2e; font-weight: 500; margin-bottom: 4px; }
+  .legend-dot  { width: 11px; height: 11px; border-radius: 50%; border: 1.5px solid rgba(255,255,255,.8); flex-shrink: 0; }
+
+  .cluster-icon {
+    width: 34px; height: 34px;
+    border-radius: 50%;
+    background: #018d38;
+    color: #fff;
+    font-family: 'Poppins', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,.25);
+    border: 2px solid #fff;
+  }
+  .leaflet-popup-content-wrapper { font-family: 'Poppins', sans-serif; border-radius: 10px; }
+  .leaflet-popup-content { margin: 12px 14px; }
+  .subregion-tooltip {
+    font-family: 'Poppins', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    background: rgba(255,255,255,.92);
+    border: none;
+    border-radius: 6px;
+    box-shadow: 0 1px 8px rgba(0,0,0,.18);
+    padding: 4px 8px;
+    color: #1a1a2e;
+    pointer-events: none;
+  }
+  .subregion-tooltip::before { display: none; }
+</style>
+</head>
+<body>
+
+<div class="map-page">
+
+  <header class="impact-hero impact-hero--compact" style="flex-shrink:0">
+    <div class="impact-hero__top">
+      <div class="impact-hero__brand">
+        <div>
+          <div class="impact-hero__name">
+            🗺️ Mapa de observaciones
+            <small>Jóvenes pa' Lante · iNaturalist en tiempo real</small>
+          </div>
+        </div>
+      </div>
+      <div class="impact-hero__actions">
+        <a href="/admin/analisis.html" class="btn-print" style="font-size:12px">← Análisis</a>
+        <a href="/admin/impacto.html"  class="btn-print" style="font-size:12px">📊 Impacto</a>
+      </div>
+    </div>
+  </header>
+
+  <div style="position:relative;flex:1;min-height:0">
+    <div id="map"></div>
+
+    <!-- Stats overlay -->
+    <div class="map-stats-overlay">
+      <div class="map-stat">
+        <span class="map-stat__num" id="map-obs-count">—</span>
+        <span class="map-stat__label">Observaciones</span>
+      </div>
+      <div class="map-stat">
+        <span class="map-stat__num" id="map-spp-count">—</span>
+        <span class="map-stat__label">Especies</span>
+      </div>
+      <div class="map-stat">
+        <span class="map-stat__num" id="map-obs-users">—</span>
+        <span class="map-stat__label">Observadores</span>
+      </div>
+    </div>
+
+    <!-- Loading -->
+    <div class="map-loading-overlay" id="map-loading">
+      <span class="map-loading-dot"></span>
+      <span id="map-loading-text">Cargando observaciones de iNaturalist…</span>
+    </div>
+
+    <!-- Legend -->
+    <div class="map-legend-overlay">
+      <div class="map-legend__title">Grupo taxonómico</div>
+      <div id="map-legend-items"></div>
+    </div>
+  </div>
+
+</div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
+<script src="js/api.js"></script>
+<script src="js/subregiones.js"></script>
+<script src="mapa.js"></script>
+</body>
+</html>

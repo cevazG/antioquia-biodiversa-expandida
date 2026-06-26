@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#018d38">
+  <meta name="page-title" content="search_by">
+  <title>Biodiversidad · Antioquia</title>
+  <link rel="stylesheet" href="css/main.css?v=2">
+  <link rel="stylesheet" href="css/components.css?v=2">
+  <link rel="stylesheet" href="css/animations.css?v=2">
+  <link rel="stylesheet" href="css/biodiversidad.css">
+  <link rel="prefetch" href="data/species.json" as="fetch">
+  <link rel="prefetch" href="../data/translations.json" as="fetch">
+</head>
+<body>
+  <div class="app-shell">
+
+    <header class="app-header">
+      <button class="app-header__back" onclick="window.location.href='home.html'" aria-label="Volver">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5m0 0l7 7m-7-7l7-7"/></svg>
+      </button>
+      <div class="app-header__title">
+        <span data-i18n="module_bio_header">Módulo Biodiversidad (especies insignia)</span>
+        <span>Antioquia</span>
+      </div>
+      <button class="app-header__lang" data-lang-toggle aria-label="Cambiar idioma">EN</button>
+    </header>
+
+    <div class="bio-hero">
+      <div class="bio-hero__content">
+        <span class="bio-hero__emoji" aria-hidden="true">🌿</span>
+        <h1 data-i18n="search_by">¿Cómo quieres explorar?</h1>
+        <p data-i18n="app_tagline">Descubre la naturaleza de Antioquia</p>
+      </div>
+    </div>
+
+    <main class="bio-content anim-stagger">
+
+      <p class="section-label" data-i18n="search_by">Elige modo de búsqueda</p>
+
+      <a href="mapa.html" class="mode-card ripple-container anim-fade-in-up" aria-label="Explorar por subregión">
+        <div class="mode-card__icon" aria-hidden="true">📍</div>
+        <div class="mode-card__text">
+          <h3 data-i18n="by_subregion">Por Subregión</h3>
+          <p data-i18n="by_subregion_desc">Explora la biodiversidad de cada subregión</p>
+        </div>
+        <svg class="mode-card__arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg>
+      </a>
+
+      <a href="listado.html?kingdom=flora" class="mode-card ripple-container anim-fade-in-up" aria-label="Explorar flora">
+        <div class="mode-card__icon" aria-hidden="true">🌿</div>
+        <div class="mode-card__text">
+          <h3 data-i18n="by_flora">Flora</h3>
+          <p data-i18n="by_flora_desc">Orquídeas, plantas y más</p>
+        </div>
+        <svg class="mode-card__arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg>
+      </a>
+
+      <a href="listado.html?kingdom=fauna" class="mode-card ripple-container anim-fade-in-up" aria-label="Explorar fauna">
+        <div class="mode-card__icon" aria-hidden="true">🦜</div>
+        <div class="mode-card__text">
+          <h3 data-i18n="by_fauna">Fauna</h3>
+          <p data-i18n="by_fauna_desc">Aves, mamíferos, anfibios y más</p>
+        </div>
+        <svg class="mode-card__arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg>
+      </a>
+
+      <p class="section-label" style="margin-top: var(--space-md)" data-i18n="quick_access">Acceso rápido por grupo</p>
+
+      <div class="bio-grid anim-stagger" id="bio-grid">
+        <!-- Se genera dinámicamente -->
+      </div>
+    </main>
+
+    <div class="stats-footer" aria-label="Estadísticas">
+      <div class="stats-footer__item">
+        <span class="stats-footer__num">9</span>
+        <span class="stats-footer__label" data-i18n="subregions_label">Subregiones</span>
+      </div>
+      <div class="stats-footer__item">
+        <span class="stats-footer__num">6</span>
+        <span class="stats-footer__label" data-i18n="groups_label">Grupos bio</span>
+      </div>
+      <div class="stats-footer__item">
+        <span class="stats-footer__num" id="total-species">—</span>
+        <span class="stats-footer__label" data-i18n="species_label">Especies</span>
+      </div>
+    </div>
+
+    <nav class="bottom-bar" aria-label="Navegación principal">
+      <button class="bottom-bar__btn" onclick="window.location.href='home.html'" aria-label="Inicio">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        <span>Inicio</span>
+      </button>
+      <button class="bottom-bar__btn active" aria-label="Biodiversidad">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        <span>Bio</span>
+      </button>
+      <button class="bottom-bar__btn" onclick="window.location.href='../agua/index.html'" aria-label="Agua">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C6 8 4 12 4 15a8 8 0 0016 0c0-3-2-7-8-13z"/></svg>
+        <span>Agua</span>
+      </button>
+      <button class="bottom-bar__btn" onclick="window.location.href='../comunidad/index.html'" aria-label="Comunidad">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
+        <span>Comunidad</span>
+      </button>
+    </nav>
+  </div>
+
+  <script src="js/i18n.js?v=3"></script>
+  <script src="js/data.js?v=3"></script>
+  <script src="js/nav.js?v=3"></script>
+  <script src="js/app.js?v=3"></script>
+
+  <script src="js/biodiversidad.js?v=3"></script>
+</body>
+</html>

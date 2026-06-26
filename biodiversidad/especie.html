@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#018d38">
+  <title>Especie · Antioquia Biodiversa</title>
+  <link rel="stylesheet" href="css/main.css?v=2">
+  <link rel="stylesheet" href="css/components.css?v=2">
+  <link rel="stylesheet" href="css/animations.css?v=2">
+  <link rel="stylesheet" href="css/especie.css">
+</head>
+<body>
+  <div class="app-shell especie-page">
+
+  <!-- Pantalla de carga -->
+  <div id="sp-loading" class="sp-loading">
+    <div class="sp-loading__spinner"></div>
+  </div>
+
+    <!-- Galería de fotos (ocupa la parte superior sin header) -->
+    <div class="gallery-wrapper" id="gallery" role="img" aria-label="Galería de fotos">
+
+      <!-- Botones flotantes -->
+      <button class="gallery-back" onclick="Nav.back()" aria-label="Volver">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M19 12H5m0 0l7 7m-7-7l7-7"/></svg>
+      </button>
+
+      <!-- Placeholder: se reemplaza con fotos reales al tener la BD -->
+      <div class="photo-placeholder" id="photo-placeholder">
+        <div class="photo-placeholder__emoji" id="photo-emoji" aria-hidden="true">🌿</div>
+        <div class="photo-placeholder__label" id="photo-label">
+          Fotografías disponibles próximamente<br><small>Photos coming soon</small>
+        </div>
+      </div>
+
+      <!-- Contador (se activa cuando hay >1 foto) -->
+      <div class="gallery-counter" id="gallery-counter" style="display:none">1 / 1</div>
+    </div>
+
+    <!-- Ficha principal -->
+    <div class="especie-ficha anim-fade-in-up">
+      <div class="especie-ficha__common" id="sp-common">—</div>
+      <div class="especie-ficha__scientific" id="sp-scientific">—</div>
+      <div class="especie-ficha__badges" id="sp-badges"></div>
+    </div>
+
+    <!-- Sección: Estado de conservación IUCN -->
+    <div class="info-section anim-fade-in-up">
+      <div class="info-section__label" data-i18n="conservation_status">Estado de conservación</div>
+      <div class="iucn-card" id="iucn-card">
+        <div class="iucn-card__circle" id="iucn-circle">LC</div>
+        <div class="iucn-card__info">
+          <div class="iucn-card__code" id="iucn-code">—</div>
+          <div class="iucn-card__label" id="iucn-label">—</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sección: Familia -->
+    <div class="info-section anim-fade-in-up">
+      <div class="info-section__label" data-i18n="family">Familia</div>
+      <div id="sp-family">—</div>
+    </div>
+
+    <!-- Sección: Distribución -->
+    <div class="info-section anim-fade-in-up">
+      <div class="info-section__label" data-i18n="distribution">Distribución en Antioquia</div>
+      <div class="distribution-chips" id="sp-distribution"></div>
+    </div>
+
+    <!-- Sección: Descripción -->
+    <div class="info-section anim-fade-in-up">
+      <div class="info-section__label" data-i18n="description">Descripción</div>
+      <p class="info-section__text" id="sp-description">—</p>
+    </div>
+
+    <div class="especie-footer"></div>
+
+    <!-- Bottom bar -->
+    <nav class="bottom-bar" aria-label="Navegación principal">
+      <button class="bottom-bar__btn" onclick="window.location.href='home.html'" aria-label="Inicio">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        <span data-i18n="home">Inicio</span>
+      </button>
+      <button class="bottom-bar__btn active" onclick="window.location.href='biodiversidad.html'" aria-label="Biodiversidad">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        <span data-i18n="nav_bio">Bio</span>
+      </button>
+      <button class="bottom-bar__btn" onclick="window.location.href='../agua/index.html'" aria-label="Agua">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C6 8 4 12 4 15a8 8 0 0016 0c0-3-2-7-8-13z"/></svg>
+        <span data-i18n="nav_agua">Agua</span>
+      </button>
+      <button class="bottom-bar__btn" onclick="window.location.href='../comunidad/index.html'" aria-label="Comunidad">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
+        <span data-i18n="com_titulo">Comunidad</span>
+      </button>
+    </nav>
+
+    <!-- FAB compartir -->
+    <button class="fab-share" id="fab-share" aria-label="Compartir">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+    </button>
+  </div>
+
+  <script src="js/i18n.js?v=3"></script>
+  <script src="js/data.js?v=3"></script>
+  <script src="js/nav.js?v=3"></script>
+  <script src="js/app.js?v=3"></script>
+
+  <script src="js/especie.js?v=3"></script>
+</body>
+</html>

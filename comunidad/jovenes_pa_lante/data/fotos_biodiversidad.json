@@ -1,0 +1,21 @@
+{
+  "meses": [
+    {
+      "id": "v0",
+      "titulo": "Primera Versión",
+      "tituloEn": "First Edition",
+      "count": 17,
+      "portada": "img/fotos/bio/v0/Agalychnis_terranova-ENDÉMICA-Breiner Ferney Jimenez-La Cristalina-SanFrancisco.webp",
+      "archivo": "data/fotos_v0.json"
+    },
+    {
+      "id": "2026-06",
+      "mes": "Junio",
+      "mesEn": "June",
+      "año": 2026,
+      "count": 3,
+      "portada": "img/fotos/bio/2026-06/aves/coereba_flaveola/coereba_flaveola_002.webp",
+      "archivo": "data/fotos_2026_06.json"
+    }
+  ]
+}

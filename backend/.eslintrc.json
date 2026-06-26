@@ -1,0 +1,26 @@
+{
+  "env": {
+    "node": true,
+    "es2021": true
+  },
+  "parserOptions": {
+    "ecmaVersion": 2021
+  },
+  "rules": {
+    "no-unused-vars": ["error", { "argsIgnorePattern": "^_", "varsIgnorePattern": "^_" }],
+    "no-undef": "error",
+    "no-var": "error",
+    "prefer-const": "warn",
+    "eqeqeq": ["error", "always"],
+    "semi": ["error", "always"],
+    "no-dupe-keys": "error",
+    "no-unreachable": "error",
+    "no-console": "off"
+  },
+  "ignorePatterns": [
+    "node_modules/",
+    "src/scripts/generate_docs.js",
+    "src/scripts/generate_criterios_doc.js",
+    "src/scripts/generate_analisis_especies_doc.js"
+  ]
+}

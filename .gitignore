@@ -1,0 +1,26 @@
+# Dependencias
+node_modules/
+npm-debug.log*
+
+# Variables de entorno (credenciales)
+.env
+.env.local
+.env.*.local
+
+# Sistema operativo
+.DS_Store
+Thumbs.db
+
+# Editores
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Logs
+logs/
+*.log
+
+# Archivos temporales
+*.tmp
+*.temp

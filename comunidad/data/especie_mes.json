@@ -1,0 +1,92 @@
+{
+  "actual": {
+    "mes": "Mayo",
+    "año": 2026,
+    "especieId": "sp010",
+    "nombre": "Mariposa Morpho Azul",
+    "nombreCientifico": "Morpho peleides",
+    "grupo": "mariposas",
+    "emoji": "🦋",
+    "colorGrupo": "#4A148C",
+    "subregiones": ["Oriente", "Suroeste", "Norte"],
+    "iucn": "LC",
+    "descripcionEs": "La Mariposa Morpho fue elegida especie de mayo por su extraordinario color azul iridiscente, resultado de la microestructura de sus alas y no de pigmentos. Habita los bosques húmedos del Oriente antioqueño y es un emblema de la riqueza lepidopterológica del departamento.",
+    "descripcionEn": "The Morpho Butterfly was chosen as the species of May for its extraordinary iridescent blue color, produced by the microstructure of its wings rather than pigments. It inhabits the humid forests of eastern Antioquia and is an emblem of the department's lepidopterological richness.",
+    "curiosidadEs": "Sus alas no contienen pigmento azul: el color es producido por la interferencia de la luz en capas nanométricas de su estructura alar, un fenómeno llamado color estructural.",
+    "curiosidadEn": "Its wings contain no blue pigment: the color is produced by light interference in nanometric layers of its wing structure, a phenomenon known as structural color.",
+    "como_identificarlaEs": "Busca un destello azul brillante en los bordes de los bosques húmedos. En reposo, las alas cerradas muestran un patrón marrón con ocelos. Mide entre 10 y 15 cm de envergadura.",
+    "como_identificarlaEn": "Look for a brilliant blue flash at forest edges in humid areas. At rest, the closed wings show a brown pattern with eyespots. Wingspan is between 10 and 15 cm.",
+    "foto_oficial": null,
+    "contacto_whatsapp": "+573001234567",
+    "contacto_email": "biodiversa@antioquia.gov.co",
+    "fotos_comunidad": [
+      {
+        "usuario": "María G.",
+        "municipio": "El Retiro",
+        "fecha": "2026-05-08",
+        "foto": null,
+        "comentario": "La vi en el sendero del parque en la mañana"
+      },
+      {
+        "usuario": "Camilo R.",
+        "municipio": "Guatapé",
+        "fecha": "2026-05-11",
+        "foto": null,
+        "comentario": "Volando cerca del río, increíble el color"
+      },
+      {
+        "usuario": "Sofía M.",
+        "municipio": "San Rafael",
+        "fecha": "2026-05-13",
+        "foto": null,
+        "comentario": "Encontré dos juntas en el jardín"
+      }
+    ]
+  },
+  "anteriores": [
+    {
+      "mes": "Abril",
+      "año": 2026,
+      "nombre": "Jaguar",
+      "nombreCientifico": "Panthera onca",
+      "grupo": "mamiferos",
+      "emoji": "🐆",
+      "colorGrupo": "#BF360C",
+      "iucn": "NT",
+      "fotos_comunidad": 18
+    },
+    {
+      "mes": "Marzo",
+      "año": 2026,
+      "nombre": "Rana de Cristal",
+      "nombreCientifico": "Centrolene prosoblepon",
+      "grupo": "anfibios",
+      "emoji": "🐸",
+      "colorGrupo": "#004D40",
+      "iucn": "NT",
+      "fotos_comunidad": 9
+    },
+    {
+      "mes": "Febrero",
+      "año": 2026,
+      "nombre": "Orquídea de Antioquia",
+      "nombreCientifico": "Cattleya trianae",
+      "grupo": "orquideas",
+      "emoji": "🌸",
+      "colorGrupo": "#880E4F",
+      "iucn": "VU",
+      "fotos_comunidad": 24
+    },
+    {
+      "mes": "Enero",
+      "año": 2026,
+      "nombre": "Oso Andino",
+      "nombreCientifico": "Tremarctos ornatus",
+      "grupo": "mamiferos",
+      "emoji": "🐻",
+      "colorGrupo": "#BF360C",
+      "iucn": "VU",
+      "fotos_comunidad": 31
+    }
+  ]
+}

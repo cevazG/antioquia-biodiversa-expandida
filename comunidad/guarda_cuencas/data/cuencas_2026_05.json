@@ -1,0 +1,41 @@
+{
+  "mes": "Mayo", "mesEn": "May", "año": 2026,
+  "fotos": [
+    {
+      "id": "gc_may_001",
+      "foto": "img/fotos/gc_2026_05/gc_may_001.jpg",
+      "credito": "Guarda Cuencas Oriente · Paula Cárdenas",
+      "municipio": "El Retiro",
+      "subregion": "oriente",
+      "cuenca": "Embalse La Fé",
+      "tituloEs": "Embalse La Fé en temporada de lluvias",
+      "tituloEn": "La Fé Reservoir During Rainy Season",
+      "descripcionEs": "Embalse La Fé en su nivel máximo durante la temporada de lluvias de mayo. Fuente hídrica crítica para el sur del Valle de Aburrá y varios municipios del oriente.",
+      "descripcionEn": "La Fé reservoir at its maximum level during May's rainy season. Critical water source for the southern Valle de Aburrá and several eastern municipalities."
+    },
+    {
+      "id": "gc_may_002",
+      "foto": "img/fotos/gc_2026_05/gc_may_002.jpg",
+      "credito": "Guarda Cuencas Nordeste · Hernán Quiroz",
+      "municipio": "Cisneros",
+      "subregion": "nordeste",
+      "cuenca": "Río Porce",
+      "tituloEs": "Cañón del Río Porce",
+      "tituloEn": "Porce River Canyon",
+      "descripcionEs": "Cañón del Porce en el nordeste antioqueño, formado por millones de años de erosión fluvial. El río continúa su curso hacia el Nechí después de la central hidroeléctrica Porce III.",
+      "descripcionEn": "Porce canyon in northeastern Antioquia, carved by millions of years of fluvial erosion. The river continues its course toward the Nechí after the Porce III hydroelectric plant."
+    },
+    {
+      "id": "gc_may_003",
+      "foto": "img/fotos/gc_2026_05/gc_may_003.jpg",
+      "credito": "Guarda Cuencas Suroeste · Carmen Bedoya",
+      "municipio": "Ciudad Bolívar",
+      "subregion": "suroeste",
+      "cuenca": "Río Bolívar",
+      "tituloEs": "Río Bolívar tras las lluvias",
+      "tituloEn": "Bolívar River After Rains",
+      "descripcionEs": "El río Bolívar crecido después de las lluvias de mayo. Afluente del San Juan que drena el corazón del suroeste cafetero. Sus riberas conservan franjas de bosque nativo.",
+      "descripcionEn": "The Bolívar River swollen after May rains. A San Juan tributary draining the heart of the coffee-growing southwest. Its banks retain strips of native forest."
+    }
+  ]
+}

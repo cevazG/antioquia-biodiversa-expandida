@@ -1,0 +1,73 @@
+{
+  "name": "antioquia-biodiversa-api",
+  "version": "1.0.0",
+  "description": "API REST para Antioquia Biodiversa",
+  "license": "UNLICENSED",
+  "main": "src/index.js",
+  "scripts": {
+    "dev": "nodemon src/index.js",
+    "start": "node src/index.js",
+    "generate-docs": "node src/scripts/generate_docs.js",
+    "generate-evaluacion": "node src/scripts/generate_evaluacion_especies.js",
+    "export-evaluacion": "node src/scripts/export_evaluacion_csv.js",
+    "optimize-photos": "node src/scripts/optimize_photos.js",
+    "optimize-photos-dry": "node src/scripts/optimize_photos.js --dry-run",
+    "lint": "eslint src/ --ext .js",
+    "lint:fix": "eslint src/ --ext .js --fix",
+    "test": "jest",
+    "test:coverage": "jest --coverage"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "testMatch": [
+      "**/src/__tests__/**/*.test.js"
+    ],
+    "collectCoverageFrom": [
+      "src/routes/admin.js",
+      "src/middleware/**/*.js"
+    ],
+    "coverageReporters": [
+      "lcov",
+      "text",
+      "json-summary"
+    ],
+    "coverageThreshold": {
+      "global": {
+        "lines": 90,
+        "functions": 90
+      }
+    },
+    "reporters": [
+      "default",
+      ["jest-junit", {
+        "outputDirectory": "coverage",
+        "outputName": "junit.xml",
+        "classNameTemplate": "{classname}",
+        "titleTemplate": "{title}"
+      }]
+    ]
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "docx": "^9.7.1",
+    "dotenv": "^16.4.5",
+    "exceljs": "^4.4.0",
+    "express": "^4.19.2",
+    "express-session": "^1.19.0",
+    "js-yaml": "^4.2.0",
+    "mongoose": "^8.4.0",
+    "multer": "^2.1.1",
+    "sharp": "^0.34.5",
+    "swagger-ui-express": "^5.0.1"
+  },
+  "devDependencies": {
+    "eslint": "^8.57.1",
+    "jest": "^30.4.2",
+    "jest-junit": "^17.0.0",
+    "nodemon": "^3.1.0",
+    "supertest": "^7.2.2"
+  },
+  "overrides": {
+    "uuid": "^11.1.1"
+  }
+}

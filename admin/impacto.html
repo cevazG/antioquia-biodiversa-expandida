@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Informe de Impacto — Antioquia Biodiversa</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap">
+<link rel="stylesheet" href="css/impacto.css?v=3">
+</head>
+<body>
+
+<!-- ── Hero ──────────────────────────────────────────── -->
+<header class="impact-hero">
+  <div class="impact-hero__top">
+    <div class="impact-hero__brand">
+      <img src="../biodiversidad/img/logo/logo_gobernacion_white.png"
+           alt="Gobernación de Antioquia" class="impact-hero__logo"
+           onerror="this.style.display='none'">
+      <div>
+        <div class="impact-hero__name">
+          Antioquia Biodiversa
+          <small>Gobernación de Antioquia — Informe de Impacto</small>
+        </div>
+      </div>
+    </div>
+    <div class="impact-hero__actions">
+      <a href="/admin/" class="btn-print" style="font-size:12px">← Admin</a>
+      <a href="/admin/tendencia.html" class="btn-print" style="font-size:12px">📈 Tendencia →</a>
+      <a href="/admin/mes.html" class="btn-print" style="font-size:12px">📅 Mes actual →</a>
+      <button class="btn-print" onclick="window.print()">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+        Exportar PDF
+      </button>
+    </div>
+  </div>
+  <p class="impact-hero__tagline">
+    Plataforma digital de biodiversidad para jóvenes de Antioquia — catálogo de especies,
+    ciencia ciudadana activa en <strong>iNaturalist</strong> y herramientas de gestión
+    autónoma para los equipos de la Gobernación.
+  </p>
+  <span class="impact-hero__date" id="reportDate">—</span>
+</header>
+
+<!-- ── Body ──────────────────────────────────────────── -->
+<main class="impact-body">
+
+  <!-- 1. iNaturalist en vivo ────────────────────────── -->
+  <div class="inat-section">
+    <div class="section-label">
+      <span class="inat-live-dot"></span>Ciencia ciudadana · datos en tiempo real
+    </div>
+    <div class="section-title" style="color:#fff;margin-top:2px">
+      Jóvenes pa' Lante en iNaturalist
+    </div>
+    <div class="section-subtitle" style="margin-bottom:0">
+      Observaciones del proyecto <em>jovenes-palante-con-el-ambiente</em>
+      verificadas por la comunidad científica global.
+    </div>
+    <div class="inat-stats">
+      <div class="inat-stat">
+        <div class="inat-stat__num" id="inat-obs">—</div>
+        <div class="inat-stat__label">Observaciones registradas</div>
+      </div>
+      <div class="inat-stat">
+        <div class="inat-stat__num" id="inat-spp">—</div>
+        <div class="inat-stat__label">Especies identificadas</div>
+      </div>
+      <div class="inat-stat">
+        <div class="inat-stat__num" id="inat-ppl">—</div>
+        <div class="inat-stat__label">Jóvenes observadores</div>
+      </div>
+    </div>
+    <a href="https://www.inaturalist.org/projects/jovenes-palante-con-el-ambiente"
+       target="_blank" rel="noopener" class="inat-verify">
+      <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+      Verificar datos en inaturalist.org →
+    </a>
+  </div>
+
+  <!-- 2. Catálogo + JPL (2 columnas) ───────────────── -->
+  <div class="impact-2col page-start">
+
+    <!-- 2a. Catálogo de biodiversidad -->
+    <div class="impact-section">
+      <div class="section-header">
+        <div class="section-label">Módulo Biodiversidad</div>
+        <div class="section-title">Catálogo digital de especies</div>
+        <div class="section-subtitle">Contenido bilingüe (español / inglés) · fichas con IUCN, distribución y fotografía</div>
+      </div>
+      <div class="section-body">
+        <div class="stat-grid">
+          <div class="stat-card">
+            <div class="stat-card__num" id="bio-grupos">9</div>
+            <div class="stat-card__label">Grupos taxonómicos</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-card__num" id="bio-familias">32</div>
+            <div class="stat-card__label">Familias representadas</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-card__num" id="bio-especies">80</div>
+            <div class="stat-card__label">Especies documentadas</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-card__num" id="bio-fotos">92</div>
+            <div class="stat-card__label">Fotografías publicadas</div>
+          </div>
+        </div>
+        <div style="margin-top:20px">
+          <div class="section-label" style="margin-bottom:8px">Especies por grupo</div>
+          <div class="group-bars" id="group-bars">
+            <!-- inyectado por JS -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2b. JPL program stats -->
+    <div class="impact-section impact-section--jpl">
+      <div class="section-header">
+        <div class="section-label">Jóvenes pa' Lante — Galería de campo</div>
+        <div class="section-title">Fotografías ciudadanas de jóvenes</div>
+        <div class="section-subtitle">Registros documentados por participantes del programa en sus territorios</div>
+      </div>
+      <div class="section-body">
+        <div class="jpl-headline">
+          <div class="jpl-headline__num" id="jpl-pct-threat">41%</div>
+          <div class="jpl-headline__text">
+            de las especies fotografiadas por jóvenes del programa están bajo
+            <strong>algún nivel de amenaza IUCN</strong> — un resultado extraordinario
+            que demuestra la riqueza y fragilidad del territorio.
+          </div>
+        </div>
+
+        <div class="jpl-kpis">
+          <div class="jpl-kpi jpl-kpi--orange">
+            <div class="jpl-kpi__num" id="jpl-fotos">17</div>
+            <div class="jpl-kpi__label">Fotos de campo</div>
+          </div>
+          <div class="jpl-kpi jpl-kpi--green">
+            <div class="jpl-kpi__num" id="jpl-endemicas">76%</div>
+            <div class="jpl-kpi__label">Especies endémicas</div>
+          </div>
+          <div class="jpl-kpi jpl-kpi--red">
+            <div class="jpl-kpi__num" id="jpl-amenazadas">7</div>
+            <div class="jpl-kpi__label">Spp. bajo amenaza</div>
+          </div>
+        </div>
+
+        <div class="section-label" style="margin-bottom:8px">Estado de conservación (IUCN)</div>
+        <div class="iucn-bars" id="iucn-bars">
+          <!-- inyectado por JS -->
+        </div>
+
+        <div class="section-label" style="margin:16px 0 8px">Subregiones con presencia</div>
+        <div class="subregion-list" id="subregion-pills">
+          <!-- inyectado por JS -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3. ¿Por qué importa? ──────────────────────────── -->
+  <div class="impact-section page-start">
+    <div class="section-header">
+      <div class="section-label">Análisis de impacto</div>
+      <div class="section-title">¿Por qué estos datos importan?</div>
+    </div>
+    <div class="section-body">
+      <div class="callout-grid">
+        <div class="callout-card">
+          <div class="callout-card__icon">🌎</div>
+          <div class="callout-card__title">Conocimiento local convertido en dato científico</div>
+          <div class="callout-card__text">
+            Cada registro incluye nombre científico, estado IUCN, subregión, municipio y fotografía:
+            exactamente los campos que usan <strong>iNaturalist, GBIF y el SiB Colombia</strong>.
+            Antioquia construye así un inventario de biodiversidad con estándares internacionales.
+          </div>
+        </div>
+        <div class="callout-card">
+          <div class="callout-card__icon">🔴</div>
+          <div class="callout-card__title">41 % bajo amenaza: los jóvenes encuentran lo que la ciencia busca</div>
+          <div class="callout-card__text">
+            En un conjunto aleatorio de observaciones se esperaría &lt;10% de especies amenazadas.
+            Que los jóvenes del programa hayan registrado un 41% refleja que
+            <strong>conocen y habitan ecosistemas de alto valor</strong> que merecen protección urgente.
+          </div>
+        </div>
+        <div class="callout-card">
+          <div class="callout-card__icon">🏔️</div>
+          <div class="callout-card__title">76 % endémicas: biodiversidad que solo existe aquí</div>
+          <div class="callout-card__text">
+            Estas no son especies genéricas: son organismos que <strong>solo existen en Colombia o
+            en Antioquia</strong>. Perderlas es una pérdida global irreversible.
+            El programa los está documentando antes de que desaparezcan.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4. Especies destacadas ───────────────────────── -->
+  <div class="impact-section page-start impact-section--notable">
+    <div class="section-header">
+      <div class="section-label">Biodiversidad en riesgo — Jóvenes pa' Lante</div>
+      <div class="section-title">Tres registros de alto valor científico</div>
+      <div class="section-subtitle">Fotografiados por jóvenes participantes del programa en sus comunidades</div>
+    </div>
+    <div class="section-body">
+      <div class="notable-grid" id="notable-grid">
+        <!-- inyectado por JS -->
+      </div>
+    </div>
+  </div>
+
+  <!-- 5. Tabla de todas las especies amenazadas ─────── -->
+  <div class="impact-section page-start">
+    <div class="section-header">
+      <div class="section-label">Registro completo</div>
+      <div class="section-title">Todas las especies bajo amenaza fotografiadas por jóvenes</div>
+      <div class="section-subtitle">7 de 17 registros de la primera versión corresponden a especies amenazadas o vulnerables</div>
+    </div>
+    <div class="section-body" style="padding-top:12px">
+      <table class="threat-table" id="threat-table">
+        <!-- inyectado por JS -->
+      </table>
+    </div>
+  </div>
+
+  <!-- 6. Cobertura territorial ─────────────────────── -->
+  <div class="impact-section page-start">
+    <div class="section-header">
+      <div class="section-label">Alcance territorial</div>
+      <div class="section-title">Presencia en Antioquia</div>
+    </div>
+    <div class="section-body">
+      <div class="impact-2col" style="gap:28px;align-items:start">
+        <div>
+          <div class="stat-grid" style="grid-template-columns:1fr 1fr;margin-bottom:16px">
+            <div class="stat-card">
+              <div class="stat-card__num">9</div>
+              <div class="stat-card__label">Subregiones de Antioquia</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-card__num">90</div>
+              <div class="stat-card__label">Municipios en mapa JPL</div>
+            </div>
+            <div class="stat-card stat-card--orange">
+              <div class="stat-card__num">4</div>
+              <div class="stat-card__label">Subregiones con fotos publicadas</div>
+            </div>
+            <div class="stat-card stat-card--orange">
+              <div class="stat-card__num">5</div>
+              <div class="stat-card__label">Subregiones sin cubrir aún</div>
+            </div>
+          </div>
+          <div class="section-label" style="margin-bottom:8px">Estado de cobertura fotográfica</div>
+          <div class="subregion-list">
+            <span class="subregion-pill subregion-pill--active">✓ Urabá</span>
+            <span class="subregion-pill subregion-pill--active">✓ Oriente</span>
+            <span class="subregion-pill subregion-pill--active">✓ Nordeste</span>
+            <span class="subregion-pill subregion-pill--active">✓ Magdalena Medio</span>
+            <span class="subregion-pill subregion-pill--inactive">◌ Norte</span>
+            <span class="subregion-pill subregion-pill--inactive">◌ Occidente</span>
+            <span class="subregion-pill subregion-pill--inactive">◌ Bajo Cauca</span>
+            <span class="subregion-pill subregion-pill--inactive">◌ Suroeste</span>
+            <span class="subregion-pill subregion-pill--inactive">◌ Valle de Aburrá</span>
+          </div>
+        </div>
+        <div>
+          <div class="callout-card" style="margin-bottom:12px">
+            <div class="callout-card__icon">📍</div>
+            <div class="callout-card__title">Las 5 subregiones sin cubrir son la hoja de ruta</div>
+            <div class="callout-card__text">
+              Con solo 17 fotografías de la primera versión, el programa ya alcanzó 4 de las 9
+              subregiones — incluyendo Urabá, una de las zonas con mayor biodiversidad del país.
+              Las subregiones restantes representan el potencial directo de las próximas versiones.
+            </div>
+          </div>
+          <div class="callout-card">
+            <div class="callout-card__icon">🗺️</div>
+            <div class="callout-card__title">90 municipios mapeados interactivamente</div>
+            <div class="callout-card__text">
+              El mapa del programa muestra los 90 municipios beneficiados con coordenadas
+              georreferenciadas, navegable desde cualquier dispositivo móvil vía código QR.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 7. Plataforma entregada ──────────────────────── -->
+  <div class="impact-section page-start">
+    <div class="section-header">
+      <div class="section-label">Infraestructura digital entregada</div>
+      <div class="section-title">La plataforma que ahora opera la Gobernación</div>
+      <div class="section-subtitle">Accessible mediante código QR · mobile-first · bilingüe · sin dependencia de desarrollador para actualizaciones de contenido</div>
+    </div>
+    <div class="section-body">
+      <div class="deliver-grid">
+        <div class="deliver-item">
+          <div class="deliver-item__icon">📱</div>
+          <div class="deliver-item__num">3</div>
+          <div class="deliver-item__label">Módulos principales</div>
+        </div>
+        <div class="deliver-item">
+          <div class="deliver-item__icon">🖥️</div>
+          <div class="deliver-item__num">22</div>
+          <div class="deliver-item__label">Pantallas desarrolladas</div>
+        </div>
+        <div class="deliver-item">
+          <div class="deliver-item__icon">🌐</div>
+          <div class="deliver-item__num">2</div>
+          <div class="deliver-item__label">Idiomas (ES / EN)</div>
+        </div>
+        <div class="deliver-item">
+          <div class="deliver-item__icon">⚙️</div>
+          <div class="deliver-item__num">1</div>
+          <div class="deliver-item__label">Panel admin autónomo</div>
+        </div>
+      </div>
+
+      <div class="callout-grid" style="margin-top:16px">
+        <div class="callout-card">
+          <div class="callout-card__icon">🦋</div>
+          <div class="callout-card__title">Módulo Biodiversidad</div>
+          <div class="callout-card__text">
+            80 especies en 32 familias, navegables por subregión, grupo taxonómico o búsqueda directa.
+            Mapa SVG interactivo de las 9 subregiones. Fichas con IUCN, distribución y galería de fotos.
+          </div>
+        </div>
+        <div class="callout-card">
+          <div class="callout-card__icon">💧</div>
+          <div class="callout-card__title">Módulo Agua</div>
+          <div class="callout-card__text">
+            Mapa interactivo de cuencas y fuentes hídricas de Antioquia.
+            Navegable por subregión con información de recursos hídricos departamentales.
+          </div>
+        </div>
+        <div class="callout-card">
+          <div class="callout-card__icon">🤝</div>
+          <div class="callout-card__title">Módulo Comunidad</div>
+          <div class="callout-card__text">
+            Tres programas activos: Jóvenes pa' Lante (galería fotográfica + mapa JPL),
+            Guarda Cuencas (archivo fotográfico mensual) y Especie del Mes (participación ciudadana).
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 8. Hoja de ruta ──────────────────────────────── -->
+  <div class="impact-section page-start">
+    <div class="section-header">
+      <div class="section-label">Progreso y próximos pasos</div>
+      <div class="section-title">Hoja de ruta</div>
+    </div>
+    <div class="section-body">
+      <div class="roadmap-grid">
+        <div>
+          <div class="roadmap-col-title" style="color:var(--green)">✓ Completado</div>
+          <div class="roadmap-list">
+            <div class="roadmap-item roadmap-item--done"><span class="roadmap-item__icon">✅</span>80 especies documentadas en 9 grupos taxonómicos</div>
+            <div class="roadmap-item roadmap-item--done"><span class="roadmap-item__icon">✅</span>92 fotos WebP en módulo de biodiversidad</div>
+            <div class="roadmap-item roadmap-item--done"><span class="roadmap-item__icon">✅</span>17 fotografías de campo de participantes JPL</div>
+            <div class="roadmap-item roadmap-item--done"><span class="roadmap-item__icon">✅</span>4 subregiones cubiertas en primera versión</div>
+            <div class="roadmap-item roadmap-item--done"><span class="roadmap-item__icon">✅</span>Integración activa con iNaturalist (estadísticas en vivo)</div>
+            <div class="roadmap-item roadmap-item--done"><span class="roadmap-item__icon">✅</span>Plataforma bilingüe (español / inglés)</div>
+            <div class="roadmap-item roadmap-item--done"><span class="roadmap-item__icon">✅</span>Panel de administración autónomo para curadores</div>
+            <div class="roadmap-item roadmap-item--done"><span class="roadmap-item__icon">✅</span>Mapa interactivo 90 municipios JPL</div>
+            <div class="roadmap-item roadmap-item--done"><span class="roadmap-item__icon">✅</span>Autocompletado de fichas con API de iNaturalist</div>
+            <div class="roadmap-item roadmap-item--done"><span class="roadmap-item__icon">✅</span>Soporte para múltiples fotos por especie (1–3)</div>
+          </div>
+        </div>
+        <div>
+          <div class="roadmap-col-title" style="color:var(--muted)">◌ Próxima fase</div>
+          <div class="roadmap-list">
+            <div class="roadmap-item roadmap-item--pending"><span class="roadmap-item__icon">◌</span>Ampliar a 150+ especies con fotos y descripciones</div>
+            <div class="roadmap-item roadmap-item--pending"><span class="roadmap-item__icon">◌</span>Cubrir las 9 subregiones de Antioquia</div>
+            <div class="roadmap-item roadmap-item--pending"><span class="roadmap-item__icon">◌</span>Estados IUCN reales para Lepidoptera (Libro Rojo Colombia)</div>
+            <div class="roadmap-item roadmap-item--pending"><span class="roadmap-item__icon">◌</span>Integración con SiB Colombia / GBIF</div>
+            <div class="roadmap-item roadmap-item--pending"><span class="roadmap-item__icon">◌</span>PWA con modo offline (sin internet en campo)</div>
+            <div class="roadmap-item roadmap-item--pending"><span class="roadmap-item__icon">◌</span>Módulo de reporte ciudadano (foto → registro directo)</div>
+            <div class="roadmap-item roadmap-item--pending"><span class="roadmap-item__icon">◌</span>Dominio oficial .gov.co</div>
+            <div class="roadmap-item roadmap-item--pending"><span class="roadmap-item__icon">◌</span>Analytics de uso (visitas, sesiones, flujo de navegación)</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<footer class="impact-footer">
+  <strong>Antioquia Biodiversa</strong> · Plataforma digital de biodiversidad para la Gobernación de Antioquia ·
+  Datos verificados a <span id="footerDate">junio 2026</span>
+</footer>
+
+<script src="js/api.js"></script>
+<script src="impacto.js"></script>
+</body>
+</html>

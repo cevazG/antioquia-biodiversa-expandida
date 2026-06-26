@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Mes en Curso — Antioquia Biodiversa</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap">
+<link rel="stylesheet" href="css/impacto.css?v=3">
+</head>
+<body>
+
+<header class="impact-hero impact-hero--compact">
+  <div class="impact-hero__top">
+    <div class="impact-hero__brand">
+      <div>
+        <div class="impact-hero__name">
+          📅 Mes en curso
+          <small>Jóvenes pa' Lante · registro del período</small>
+        </div>
+      </div>
+    </div>
+    <div class="impact-hero__actions">
+      <a href="/admin/impacto.html" class="btn-print" style="font-size:12px">← Impacto</a>
+      <a href="/admin/tendencia.html" class="btn-print" style="font-size:12px">📈 Tendencia →</a>
+      <button class="btn-print" onclick="window.print()">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+        PDF
+      </button>
+    </div>
+  </div>
+  <select id="mesSelect" class="impact-month-select">
+    <option value="">Cargando meses…</option>
+  </select>
+</header>
+
+<main class="impact-body">
+
+  <!-- KPIs del mes -->
+  <div class="impact-section">
+    <div class="section-header">
+      <div class="section-label" id="kpi-label">—</div>
+      <div class="section-title">Resumen del mes</div>
+    </div>
+    <div class="section-body">
+      <div class="stat-grid" style="grid-template-columns:repeat(5,1fr)">
+        <div class="stat-card">
+          <div class="stat-card__num" id="m-fotos">—</div>
+          <div class="stat-card__label">Fotos registradas</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card__num" id="m-especies">—</div>
+          <div class="stat-card__label">Especies únicas</div>
+        </div>
+        <div class="stat-card stat-card--red">
+          <div class="stat-card__num" id="m-amenazadas">—</div>
+          <div class="stat-card__label">Spp. amenazadas</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card__num" id="m-endemicas">—</div>
+          <div class="stat-card__label">Endémicas</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card__num" id="m-subregiones">—</div>
+          <div class="stat-card__label">Subregiones</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- IUCN + grupos (2 columnas) -->
+  <div class="impact-2col">
+    <div class="impact-section">
+      <div class="section-header">
+        <div class="section-label">Conservación</div>
+        <div class="section-title">Estado IUCN del mes</div>
+      </div>
+      <div class="section-body">
+        <div class="iucn-bars" id="m-iucn-bars"></div>
+      </div>
+    </div>
+    <div class="impact-section">
+      <div class="section-header">
+        <div class="section-label">Diversidad taxonómica</div>
+        <div class="section-title">Grupos cubiertos</div>
+      </div>
+      <div class="section-body">
+        <div class="group-bars" id="m-group-bars"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Galería de fotos del mes -->
+  <div class="impact-section">
+    <div class="section-header">
+      <div class="section-label">Galería</div>
+      <div class="section-title">Fotos del mes</div>
+    </div>
+    <div class="section-body" style="padding-top:16px">
+      <div class="mes-photo-grid" id="mes-grid"></div>
+      <div id="mes-empty" class="empty-mes" style="display:none">Sin fotos registradas para este mes.</div>
+    </div>
+  </div>
+
+</main>
+
+<footer class="impact-footer">
+  <strong>Antioquia Biodiversa</strong> · Registro mensual Jóvenes pa' Lante
+</footer>
+
+<script src="js/api.js"></script>
+<script src="mes.js"></script>
+</body>
+</html>

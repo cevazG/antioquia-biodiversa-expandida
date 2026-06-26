@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Tendencia Mensual — Antioquia Biodiversa</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap">
+<link rel="stylesheet" href="css/impacto.css?v=3">
+</head>
+<body>
+
+<header class="impact-hero impact-hero--compact">
+  <div class="impact-hero__top">
+    <div class="impact-hero__brand">
+      <div>
+        <div class="impact-hero__name">
+          📈 Tendencia mensual
+          <small>Jóvenes pa' Lante · evolución mes a mes</small>
+        </div>
+      </div>
+    </div>
+    <div class="impact-hero__actions">
+      <a href="/admin/impacto.html" class="btn-print" style="font-size:12px">← Impacto</a>
+      <a href="/admin/mes.html" class="btn-print" style="font-size:12px">📅 Mes actual →</a>
+      <button class="btn-print" onclick="window.print()">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+        PDF
+      </button>
+    </div>
+  </div>
+  <span class="impact-hero__date" id="reportDate">—</span>
+</header>
+
+<main class="impact-body">
+
+  <!-- KPIs acumulados -->
+  <div class="impact-section">
+    <div class="section-header">
+      <div class="section-label">Acumulado del programa</div>
+      <div class="section-title">Resumen total</div>
+    </div>
+    <div class="section-body">
+      <div class="stat-grid" style="grid-template-columns:repeat(4,1fr)">
+        <div class="stat-card">
+          <div class="stat-card__num" id="t-meses">—</div>
+          <div class="stat-card__label">Meses activos</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card__num" id="t-fotos">—</div>
+          <div class="stat-card__label">Fotos acumuladas</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-card__num" id="t-avg">—</div>
+          <div class="stat-card__label">Promedio fotos / mes</div>
+        </div>
+        <div class="stat-card stat-card--orange">
+          <div class="stat-card__num" id="t-ultimo">—</div>
+          <div class="stat-card__label" id="t-ultimo-label">Último mes</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Gráfico de barras -->
+  <div class="impact-section">
+    <div class="section-header">
+      <div class="section-label">Evolución · datos en vivo</div>
+      <div class="section-title">Fotografías por mes</div>
+      <div class="section-subtitle">Barra verde = total fotos · overlay rojo = especies amenazadas</div>
+    </div>
+    <div class="section-body">
+      <div class="monthly-chart" id="monthly-chart" style="height:200px"></div>
+      <div class="monthly-labels" id="monthly-labels"></div>
+      <div class="monthly-legend">
+        <span class="monthly-legend__dot" style="background:var(--green)"></span>&nbsp;Total fotos
+        <span class="monthly-legend__dot" style="background:rgba(211,47,47,.65);margin-left:14px"></span>&nbsp;Especies amenazadas
+      </div>
+    </div>
+  </div>
+
+  <!-- Tabla con delta -->
+  <div class="impact-section">
+    <div class="section-header">
+      <div class="section-label">Detalle por mes</div>
+      <div class="section-title">Tabla completa con variación</div>
+      <div class="section-subtitle">Δ = diferencia de fotos respecto al mes anterior</div>
+    </div>
+    <div class="section-body" style="padding-top:12px">
+      <table class="monthly-table" id="monthly-table"></table>
+    </div>
+  </div>
+
+</main>
+
+<footer class="impact-footer">
+  <strong>Antioquia Biodiversa</strong> · Tendencia mensual Jóvenes pa' Lante · Datos directos de base de datos
+</footer>
+
+<script src="js/api.js"></script>
+<script src="tendencia.js"></script>
+</body>
+</html>

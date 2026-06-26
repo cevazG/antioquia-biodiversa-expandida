@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mapa de Contenidos · Antioquia Biodiversa</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/mapa_contenidos.css">
+</head>
+<body>
+
+  <div class="page-header">
+    <h1>Mapa de Contenidos</h1>
+    <p>Antioquia Biodiversa · Arquitectura completa de la aplicación</p>
+  </div>
+
+  <!-- Stats resumen -->
+  <div class="stats-bar">
+    <div class="stat-badge">
+      <div class="stat-badge__num">12</div>
+      <div class="stat-badge__label">Páginas HTML</div>
+    </div>
+    <div class="stat-badge">
+      <div class="stat-badge__num">3</div>
+      <div class="stat-badge__label">Módulos</div>
+    </div>
+    <div class="stat-badge">
+      <div class="stat-badge__num">5</div>
+      <div class="stat-badge__label">Archivos JS</div>
+    </div>
+    <div class="stat-badge">
+      <div class="stat-badge__num">4</div>
+      <div class="stat-badge__label">Archivos JSON</div>
+    </div>
+    <div class="stat-badge">
+      <div class="stat-badge__num">19</div>
+      <div class="stat-badge__label">Especies</div>
+    </div>
+    <div class="stat-badge">
+      <div class="stat-badge__num">90</div>
+      <div class="stat-badge__label">Municipios</div>
+    </div>
+  </div>
+
+  <!-- Entrada global -->
+  <div class="entry-row">
+    <div class="page-node">
+      <div class="page-node__file">index.html</div>
+      <div class="page-node__name">Selección de idioma</div>
+      <div class="page-node__desc">🇨🇴 Español · 🇺🇸 English</div>
+    </div>
+    <div class="arrow">→</div>
+    <div class="page-node node--home">
+      <div class="page-node__file">home.html</div>
+      <div class="page-node__name">Hub principal</div>
+      <div class="page-node__desc">3 módulos · Gobernación de Antioquia</div>
+    </div>
+  </div>
+
+  <div class="arrow--down">↓</div>
+
+  <!-- 3 módulos en columnas -->
+  <div class="modules-row">
+
+    <!-- ── BIODIVERSIDAD ── -->
+    <div class="module-col mod--bio">
+      <div class="module-header">
+        <span class="module-header__emoji">🌿</span>
+        <div>
+          <div class="module-header__title">Biodiversidad</div>
+          <div class="module-header__sub">6 grupos · 13 familias · 19 especies</div>
+        </div>
+      </div>
+      <div class="module-body">
+
+        <div class="page-item">
+          <div class="page-item__file">biodiversidad.html</div>
+          <div class="page-item__name">Inicio módulo</div>
+          <div class="page-item__desc">Stats, modos de búsqueda, acceso rápido por grupo</div>
+        </div>
+
+        <div class="page-item page-item--sub">
+          <div class="page-item__file">mapa.html</div>
+          <div class="page-item__name">Mapa interactivo</div>
+          <div class="page-item__desc">SVG sobre imagen JPG · 9 subregiones tocables</div>
+        </div>
+
+        <div class="page-item page-item--sub2">
+          <div class="page-item__file">subregion.html</div>
+          <div class="page-item__name">Grupos de biodiversidad</div>
+          <div class="page-item__desc">5 grupos: aves, anfibios, mariposas, polillas, orquídeas</div>
+          <div class="page-item__params">
+            <span class="param-chip">?id=</span>
+          </div>
+        </div>
+
+        <div class="page-item page-item--sub">
+          <div class="page-item__file">listado.html</div>
+          <div class="page-item__name">Familias y especies</div>
+          <div class="page-item__desc">Acordeón familia→especie · Barra de búsqueda · Filtros</div>
+          <div class="page-item__params">
+            <span class="param-chip">?subregion=</span>
+            <span class="param-chip">?grupo=</span>
+            <span class="param-chip">?modo=busqueda</span>
+          </div>
+        </div>
+
+        <div class="page-item page-item--sub2">
+          <div class="page-item__file">especie.html</div>
+          <div class="page-item__name">Ficha de especie</div>
+          <div class="page-item__desc">Galería · IUCN · Distribución · Descripción · Compartir</div>
+          <div class="page-item__params">
+            <span class="param-chip">?id=sp001</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ── AGUA ── -->
+    <div class="module-col mod--agua">
+      <div class="module-header">
+        <span class="module-header__emoji">💧</span>
+        <div>
+          <div class="module-header__title">Agua</div>
+          <div class="module-header__sub">10 ríos principales · 21 cuencas</div>
+        </div>
+      </div>
+      <div class="module-body">
+
+        <div class="page-item">
+          <div class="page-item__file">agua/index.html</div>
+          <div class="page-item__name">Inicio módulo</div>
+          <div class="page-item__desc">Stats hídricos · 2 modos: Fuentes o Cuencas</div>
+        </div>
+
+        <div class="page-item page-item--sub">
+          <div class="page-item__file">agua/mapa.html</div>
+          <div class="page-item__name">Mapa hídrico</div>
+          <div class="page-item__desc">Leaflet.js · CartoDB Voyager · 9 marcadores con popup</div>
+          <div class="page-item__params">
+            <span class="param-chip">?tipo=fuentes</span>
+            <span class="param-chip">?tipo=cuencas</span>
+          </div>
+        </div>
+
+        <div class="page-item page-item--sub2">
+          <div class="page-item__file">agua/subregion.html</div>
+          <div class="page-item__name">Detalle subregión</div>
+          <div class="page-item__desc">Mini mapa · Lista de ríos o cuencas · Barra de caudal</div>
+          <div class="page-item__params">
+            <span class="param-chip">?subregion=</span>
+            <span class="param-chip">?tipo=</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ── COMUNIDAD ── -->
+    <div class="module-col mod--com">
+      <div class="module-header">
+        <span class="module-header__emoji">🎓</span>
+        <div>
+          <div class="module-header__title">Comunidad</div>
+          <div class="module-header__sub">Jóvenes pa' Lante · 90 municipios</div>
+        </div>
+      </div>
+      <div class="module-body">
+
+        <div class="page-item">
+          <div class="page-item__file">comunidad/jovenes_pa_lante/index.html</div>
+          <div class="page-item__name">Inicio módulo</div>
+          <div class="page-item__desc">Logo · Stats · Descripción del programa · Requisitos</div>
+        </div>
+
+        <div class="page-item page-item--sub">
+          <div class="page-item__file">comunidad/jovenes_pa_lante/mapa.html</div>
+          <div class="page-item__name">Mapa de municipios</div>
+          <div class="page-item__desc">Leaflet.js · 90 pins · Filtro por subregión · Popup por municipio</div>
+        </div>
+
+      </div>
+    </div>
+
+  </div><!-- /modules-row -->
+
+  <!-- Archivos de datos -->
+  <div class="data-section">
+    <h2>Archivos de datos y recursos</h2>
+    <div class="data-grid">
+
+      <div class="data-card">
+        <div class="data-card__type">JSON · Biodiversidad</div>
+        <div class="data-card__file">data/species.json</div>
+        <div class="data-card__desc">6 grupos · 13 familias · 19 especies con fotos, IUCN, distribución y descripciones</div>
+      </div>
+
+      <div class="data-card">
+        <div class="data-card__type">JSON · Biodiversidad</div>
+        <div class="data-card__file">data/translations.json</div>
+        <div class="data-card__desc">Textos de la UI en español e inglés. Sistema i18n completo</div>
+      </div>
+
+      <div class="data-card">
+        <div class="data-card__type">JSON · Agua</div>
+        <div class="data-card__file">agua/data/fuentes.json</div>
+        <div class="data-card__desc">10 ríos principales · Cuencas abastecedoras por subregión · Coordenadas y caudales</div>
+      </div>
+
+      <div class="data-card">
+        <div class="data-card__type">JSON · Comunidad</div>
+        <div class="data-card__file">comunidad/jovenes_pa_lante/data/municipios.json</div>
+        <div class="data-card__desc">90 municipios con coordenadas lat/lng y subregión asignada</div>
+      </div>
+
+      <div class="data-card">
+        <div class="data-card__type">JavaScript</div>
+        <div class="data-card__file">js/i18n.js</div>
+        <div class="data-card__desc">Sistema de traducción ES/EN. Guarda idioma en localStorage bajo la clave <code>ab_lang</code></div>
+      </div>
+
+      <div class="data-card">
+        <div class="data-card__type">JavaScript</div>
+        <div class="data-card__file">js/data.js</div>
+        <div class="data-card__desc">DataStore: carga, filtra y cuenta especies. Normaliza formato de fotos (string u objeto con caption)</div>
+      </div>
+
+      <div class="data-card">
+        <div class="data-card__type">JavaScript</div>
+        <div class="data-card__file">js/nav.js · js/app.js</div>
+        <div class="data-card__desc">Navegación, historial, breadcrumbs e inicialización general de la app</div>
+      </div>
+
+      <div class="data-card">
+        <div class="data-card__type">CSS</div>
+        <div class="data-card__file">css/main.css · components.css · animations.css</div>
+        <div class="data-card__desc">Sistema de diseño completo basado en el Manual de Identidad Visual de la Gobernación de Antioquia</div>
+      </div>
+
+      <div class="data-card">
+        <div class="data-card__type">Imágenes</div>
+        <div class="data-card__file">img/species/</div>
+        <div class="data-card__desc">Fotos organizadas por grupo/familia/especie. 19 especies con fotos reales. Convención: <code>01.jpg, 02.jpg…</code></div>
+      </div>
+
+      <div class="data-card">
+        <div class="data-card__type">Biblioteca externa</div>
+        <div class="data-card__file">Leaflet.js 1.9.4 (CDN)</div>
+        <div class="data-card__desc">Mapas interactivos. Tiles CartoDB Voyager — muestra ríos de OSM automáticamente</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Leyenda -->
+  <div class="nav-legend">
+    <h2>Notas de navegación</h2>
+    <div class="legend-grid">
+      <div class="legend-item">
+        <div class="legend-dot" style="background:var(--green)"></div>
+        <span>Módulo Biodiversidad — color verde institucional</span>
+      </div>
+      <div class="legend-item">
+        <div class="legend-dot" style="background:var(--blue)"></div>
+        <span>Módulo Agua — azul (#3561ab)</span>
+      </div>
+      <div class="legend-item">
+        <div class="legend-dot" style="background:var(--orange)"></div>
+        <span>Módulo Comunidad — naranja (#f28e18)</span>
+      </div>
+      <div class="legend-item">
+        <div class="legend-dot" style="background:#9e9e9e"></div>
+        <span>Menú inferior: Inicio · Bio · Agua · Comunidad (4 botones en todas las páginas)</span>
+      </div>
+      <div class="legend-item">
+        <div class="legend-dot" style="background:var(--green-dk)"></div>
+        <span>Parámetros URL controlan el estado de cada pantalla</span>
+      </div>
+      <div class="legend-item">
+        <div class="legend-dot" style="background:var(--blue-dk)"></div>
+        <span>Idioma guardado en <code>localStorage</code> — persiste entre sesiones</span>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

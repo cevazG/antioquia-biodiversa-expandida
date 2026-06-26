@@ -1,0 +1,233 @@
+:root { --color-agua: #3561ab; --color-agua-dark: #1a3a6b; --color-agua-pale: #e8f0fb; }
+
+    body, html { height: 100%; }
+
+    .agua-sub-page {
+      display: flex;
+      flex-direction: column;
+      height: 100dvh;
+    }
+
+    /* Header */
+    .map-header {
+      background: var(--color-agua-dark);
+      padding: calc(var(--space-sm) + env(safe-area-inset-top)) var(--space-md) var(--space-sm);
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+      flex-shrink: 0;
+      z-index: 1000;
+    }
+
+    .map-header__back {
+      width: 36px; height: 36px;
+      background: rgba(255,255,255,0.15);
+      border: none; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      color: white; cursor: pointer; flex-shrink: 0;
+    }
+
+    .map-header__title {
+      font-size: 1rem; font-weight: 700; color: white; flex: 1;
+    }
+
+    .map-header__subtitle {
+      font-size: 0.75rem; color: rgba(255,255,255,0.7); font-weight: 400;
+    }
+
+    .tipo-pill {
+      background: rgba(255,255,255,0.18);
+      border: 1px solid rgba(255,255,255,0.3);
+      color: white;
+      padding: 4px 12px;
+      border-radius: var(--radius-full);
+      font-size: 0.8rem;
+      font-weight: 600;
+      flex-shrink: 0;
+    }
+
+    /* Mini mapa */
+    #mini-map {
+      height: 200px;
+      width: 100%;
+      flex-shrink: 0;
+      z-index: 1;
+    }
+
+    /* Contenido desplazable */
+    .sub-content {
+      flex: 1;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+      padding: var(--space-md);
+      padding-bottom: calc(var(--bottom-bar-height) + var(--space-md));
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-md);
+      background: var(--color-bg);
+    }
+
+    .section-title {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--color-agua);
+      margin-bottom: var(--space-sm);
+    }
+
+    /* Tarjetas de fuente hídrica */
+    .fuente-card {
+      background: white;
+      border-radius: var(--radius-lg);
+      padding: var(--space-md);
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      align-items: flex-start;
+      gap: var(--space-md);
+      border-left: 4px solid var(--color-agua);
+    }
+
+    .fuente-card__icon {
+      width: 40px; height: 40px;
+      background: var(--color-agua-pale);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.25rem;
+      flex-shrink: 0;
+    }
+
+    .fuente-card__body { flex: 1; }
+
+    .fuente-card__name {
+      font-size: 0.9375rem;
+      font-weight: 700;
+      color: var(--color-agua-dark);
+      margin-bottom: 4px;
+    }
+
+    .fuente-card__detail {
+      font-size: 0.8125rem;
+      color: var(--color-text-light);
+      line-height: 1.5;
+    }
+
+    .fuente-card__badge {
+      display: inline-block;
+      background: var(--color-agua-pale);
+      color: var(--color-agua-dark);
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 2px 10px;
+      border-radius: var(--radius-full);
+      margin-top: 6px;
+    }
+
+    /* Tarjetas de cuenca */
+    .cuenca-card {
+      background: white;
+      border-radius: var(--radius-lg);
+      padding: var(--space-md);
+      box-shadow: var(--shadow-sm);
+      border-left: 4px solid #2196F3;
+    }
+
+    .cuenca-card__name {
+      font-size: 0.9375rem;
+      font-weight: 700;
+      color: var(--color-agua-dark);
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+    }
+
+    .cuenca-card__name svg { flex-shrink: 0; }
+
+    .cuenca-card__municipios {
+      font-size: 0.8125rem;
+      color: var(--color-text-light);
+      margin-bottom: 8px;
+      line-height: 1.4;
+    }
+
+    .cuenca-card__caudal {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .caudal-bar {
+      flex: 1;
+      height: 6px;
+      background: #e3ecfc;
+      border-radius: 3px;
+      overflow: hidden;
+    }
+
+    .caudal-bar__fill {
+      height: 100%;
+      background: linear-gradient(90deg, #3561ab, #2196F3);
+      border-radius: 3px;
+    }
+
+    .caudal-label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--color-agua);
+      white-space: nowrap;
+    }
+
+    /* Chip municipio */
+    .municipio-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 6px;
+    }
+
+    .municipio-chip {
+      background: #e8f0fb;
+      color: var(--color-agua-dark);
+      font-size: 0.75rem;
+      font-weight: 500;
+      padding: 3px 10px;
+      border-radius: var(--radius-full);
+    }
+
+    /* Stats row */
+    .stats-row {
+      display: flex;
+      gap: var(--space-sm);
+    }
+
+    .stat-chip {
+      flex: 1;
+      background: var(--color-agua-pale);
+      border-radius: var(--radius-md);
+      padding: var(--space-sm) var(--space-md);
+      text-align: center;
+    }
+
+    .stat-chip__num {
+      font-size: 1.375rem;
+      font-weight: 800;
+      color: var(--color-agua-dark);
+    }
+
+    .stat-chip__label {
+      font-size: 0.7rem;
+      color: var(--color-agua);
+      font-weight: 600;
+    }
+
+    /* Bottom bar */
+    .bottom-bar { position: relative; z-index: 1000; }
+
+    /* Leaflet popup */
+    .leaflet-popup-content-wrapper {
+      border-radius: 12px !important;
+      padding: 0 !important;
+    }
+    .leaflet-popup-content { margin: 0 !important; }
+    .leaflet-popup-tip-container { display: none; }

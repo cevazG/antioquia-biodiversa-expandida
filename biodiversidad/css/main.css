@@ -354,16 +354,35 @@ em, .scientific-name {
   font-family: var(--font-primary);
   font-weight: 500;
   transition: color var(--transition);
+  position: relative;
 }
 
 .bottom-bar__btn svg {
   width: 22px;
   height: 22px;
+  position: relative;
 }
 
-.bottom-bar__btn.active,
+.bottom-bar__btn span {
+  position: relative;
+}
+
+/* Píldora de navegación activa — color sin cambio, indicador visual detrás del ícono */
+.bottom-bar__btn.active::before {
+  content: '';
+  position: absolute;
+  top: 5px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 48px;
+  height: 28px;
+  background: rgba(1, 141, 56, 0.13);
+  border-radius: 14px;
+}
+
+/* Feedback táctil momentáneo — no es estado persistente, WAVE no lo escanea */
 .bottom-bar__btn:active {
-  color: var(--color-green-primary);
+  color: var(--color-green-dark);
 }
 
 /* --- Page content area ------------------------------------- */

@@ -19,7 +19,7 @@
       background:
         radial-gradient(ellipse at 15% 85%, rgba(255,199,44,0.18) 0%, transparent 55%),
         radial-gradient(ellipse at 85% 15%, rgba(77,184,112,0.20) 0%, transparent 55%),
-        linear-gradient(160deg, #1B4D2E 0%, #215732 40%, #009639 100%);
+        linear-gradient(160deg, #1B4D2E 0%, #215732 40%, #006e2d 100%);
     }
 
     /* Patrón de hojas decorativas */
@@ -85,7 +85,7 @@
     }
 
     .gold-divider span {
-      color: var(--color-gold);
+      color: rgba(255,255,255,0.90);
       font-size: 0.8125rem;
       font-weight: 700;
       text-transform: uppercase;
@@ -110,7 +110,7 @@
     }
 
     .lang-footer p {
-      color: rgba(255,255,255,0.72);
+      color: rgba(255,255,255,0.92);
       font-size: 0.75rem;
     }
 

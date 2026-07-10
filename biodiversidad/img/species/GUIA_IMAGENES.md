@@ -1,4 +1,4 @@
-# Guía de Alimentación de Imágenes — Antioquia Biodiversa
+# Guía de Alimentación de Imágenes — Antioquia Natural
 
 ## Estructura de carpetas
 
@@ -165,4 +165,4 @@ Para agregar un mes nuevo:
 
 ---
 
-*Antioquia Biodiversa — Gobernación de Antioquia*
+*Antioquia Natural — Gobernación de Antioquia*

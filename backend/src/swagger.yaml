@@ -1,8 +1,8 @@
 openapi: 3.0.3
 info:
-  title: Antioquia Biodiversa API
+  title: Antioquia Natural API
   description: >
-    API REST para la aplicación Antioquia Biodiversa — Gobernación de Antioquia.
+    API REST para la aplicación Antioquia Natural — Gobernación de Antioquia.
     Expone información sobre especies, familias, grupos taxonómicos, subregiones
     y recursos hídricos del departamento. También incluye los endpoints del panel
     de administración de curadores (JPL y Guarda Cuencas).

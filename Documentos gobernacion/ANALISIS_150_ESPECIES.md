@@ -1,7 +1,7 @@
 # Análisis y Propuesta de las 150 Especies Insignia
-## Módulo de Biodiversidad - Antioquia Biodiversa
+## Módulo de Biodiversidad - Antioquia Natural
 
-**Antioquia Biodiversa · Gobernación de Antioquia**
+**Antioquia Natural · Gobernación de Antioquia**
 *Documento de trabajo para el comité científico asesor*
 *Versión 1.0 - junio 2026*
 
@@ -414,6 +414,6 @@ Las siguientes especies obtienen los puntajes más altos y representan los casos
 
 ---
 
-*Antioquia Biodiversa - Gobernación de Antioquia*
+*Antioquia Natural - Gobernación de Antioquia*
 *Análisis preparado como propuesta inicial para discusión del comité científico asesor*
 *Las evaluaciones de puntaje son estimaciones que el comité debe validar con información primaria*

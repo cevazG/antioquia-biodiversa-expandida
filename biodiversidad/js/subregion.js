@@ -32,7 +32,7 @@ const GROUPS = [
 
       // Nombre en el hero
       document.getElementById('subregion-name').textContent = subregionName;
-      document.title = subregionName + ' · Antioquia Biodiversa';
+      document.title = subregionName + ' · Antioquia Natural';
 
       // Generar cuadrícula de grupos
       const grid = document.getElementById('bio-grid');

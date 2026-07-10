@@ -148,7 +148,7 @@ const COLUMNS = [
 
 async function generate() {
   const wb = new ExcelJS.Workbook();
-  wb.creator = 'Antioquia Biodiversa';
+  wb.creator = 'Antioquia Natural';
   wb.created = new Date();
 
   // ── Hoja 1: Instrucciones ────────────────────────────────────────────────

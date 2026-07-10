@@ -47,7 +47,7 @@ const IUCN_COLORS = {
       const family = DataStore.getFamilyById(sp.familyId);
 
       // Título de página
-      document.title = (lang === 'en' ? sp.nameEn : sp.nameEs) + ' · Antioquia Biodiversa';
+      document.title = (lang === 'en' ? sp.nameEn : sp.nameEs) + ' · Antioquia Natural';
 
       // Foto placeholder (emoji de grupo)
       document.getElementById('photo-emoji').textContent = getSpeciesEmoji(sp);

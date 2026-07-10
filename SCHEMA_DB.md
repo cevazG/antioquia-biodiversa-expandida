@@ -1,4 +1,4 @@
-# Antioquia Biodiversa — Esquema de Base de Datos (MongoDB)
+# Antioquia Natural — Esquema de Base de Datos (MongoDB)
 
 > Dos bases de datos en el mismo cluster Atlas. Mismas credenciales, nombres distintos.
 > Última actualización: junio 2026
@@ -202,7 +202,7 @@ Un documento por cada mes publicado.
   "comoIdentificarlaEn": "How to identify it...",
   "fotoOficial": "url/foto-oficial.jpg",
   "contactWhatsapp": "+573001234567",
-  "contactEmail": "biodiversa@antioquia.gov.co",
+  "contactEmail": "natural@antioquia.gov.co",
   "createdAt": "2026-05-01T00:00:00Z"
 }
 ```

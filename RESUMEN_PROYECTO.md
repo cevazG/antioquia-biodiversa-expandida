@@ -1,4 +1,4 @@
-# Antioquia Biodiversa — Resumen del Proyecto
+# Antioquia Natural — Resumen del Proyecto
 
 **Web app mobile-first** desarrollada para la Gobernación de Antioquia.
 Permite explorar la biodiversidad, los recursos hídricos y los programas comunitarios del departamento, en español e inglés, accesible mediante código QR.
@@ -155,7 +155,7 @@ Tres programas que conectan a la ciudadanía con el territorio y los programas d
 | `agua/data/fuentes.json` | Red hídrica por subregión |
 | `admin/` | Panel web de administración para curadores (JPL y Guarda Cuencas) |
 | `backend/` | API REST Node.js/Express + scripts de migración MongoDB |
-| `QR_Antioquia_Biodiversa.png` | QR en verde institucional apuntando a la URL pública |
+| `QR_Antioquia_Natural.png` | QR en verde institucional apuntando a la URL pública |
 | `CLAUDE.md` | Documentación técnica detallada del proyecto |
 | `SCHEMA_DB.md` | Esquema MongoDB para producción |
 | `biodiversidad/img/species/GUIA_IMAGENES.md` | Instrucciones para el equipo curador de fotos |
@@ -164,7 +164,7 @@ Tres programas que conectan a la ciudadanía con el territorio y los programas d
 
 ## URL pública (demo)
 
-**https://antioquia-biodiversa-demo.netlify.app**
+**https://antioquia-natural-demo.netlify.app**
 
 ---
 

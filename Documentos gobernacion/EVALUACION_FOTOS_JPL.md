@@ -1,7 +1,7 @@
 # Criterios de Evaluación y Selección de Fotografías
 ## Programa Jóvenes pa' Lante - Galería de Biodiversidad
 
-**Antioquia Biodiversa · Gobernación de Antioquia**
+**Antioquia Natural · Gobernación de Antioquia**
 *Documento de recomendación para el comité evaluador*
 *Versión 1.0 - junio 2026*
 
@@ -179,5 +179,5 @@ Se recomienda publicar el nombre del fotógrafo junto a cada foto en la galería
 
 ---
 
-*Antioquia Biodiversa - Gobernación de Antioquia*
+*Antioquia Natural - Gobernación de Antioquia*
 *Documento elaborado como guía de referencia para el comité evaluador del programa Jóvenes pa' Lante*

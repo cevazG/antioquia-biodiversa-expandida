@@ -11,7 +11,7 @@ const { redis }                 = require('../db');
 const JplPhoto = require('../models/JplPhoto');
 const GcPhoto  = require('../models/GcPhoto');
 
-const FRONTEND = path.join(__dirname, '../../../');  // backend/src/routes → Antioquia Biodiversa/
+const FRONTEND = path.join(__dirname, '../../../');  // backend/src/routes → Antioquia Natural/
 
 // ─── Configuración de multer ───────────────────────────────────────────────
 

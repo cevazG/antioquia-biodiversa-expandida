@@ -1,4 +1,4 @@
-# Antioquia Biodiversa — Datos de Impacto
+# Antioquia Natural — Datos de Impacto
 
 > Documento vivo. Se actualiza cada vez que se agregan especies, fotos o participantes.  
 > Última actualización: junio 2026 · 80 especies · 92 fotos bio · 23 fotos JPL

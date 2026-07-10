@@ -8,8 +8,8 @@ Los JPGs se convierten después con optimize_photos.js.
 
 import os, json, shutil
 
-SRC_DIR   = '/Users/sebas/Antioquia Biodiversa/Respaldo Fotos/JPLv0'
-ROOT      = '/Users/sebas/Antioquia Biodiversa'
+SRC_DIR   = '/Users/sebas/Antioquia Natural/Respaldo Fotos/JPLv0'
+ROOT      = '/Users/sebas/Antioquia Natural'
 DEST_DIR  = os.path.join(ROOT, 'comunidad/jovenes_pa_lante/img/fotos/bio/v0')
 DATA_DIR  = os.path.join(ROOT, 'comunidad/jovenes_pa_lante/data')
 INDEX_JSON = os.path.join(DATA_DIR, 'fotos_biodiversidad.json')

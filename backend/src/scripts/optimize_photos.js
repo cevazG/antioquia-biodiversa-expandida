@@ -17,7 +17,7 @@ const path   = require('path');
 const fs     = require('fs');
 
 const DRY = process.argv.includes('--dry-run');
-const ROOT = path.join(__dirname, '../../../');  // Antioquia Biodiversa/
+const ROOT = path.join(__dirname, '../../../');  // Antioquia Natural/
 
 // ── Configuraciones por carpeta ────────────────────────────────────────────
 const PROFILES = [

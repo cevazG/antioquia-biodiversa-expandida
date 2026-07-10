@@ -1,8 +1,8 @@
 /**
  * generate_docs.js
  * Genera los dos documentos Word para la Gobernación de Antioquia:
- *   1. Levantamiento_Requisitos_Antioquia_Biodiversa.docx
- *   2. Propuesta_Tecnica_Antioquia_Biodiversa.docx
+ *   1. Levantamiento_Requisitos_Antioquia_Natural.docx
+ *   2. Propuesta_Tecnica_Antioquia_Natural.docx
  *
  * Uso: node src/scripts/generate_docs.js
  */
@@ -166,7 +166,7 @@ function buildLevantamiento() {
       alignment: AlignmentType.CENTER, spacing: { after: 400 }
     }),
     new Paragraph({
-      children: [new TextRun({ text: 'Antioquia Biodiversa', size: 28, color: DARK_GREEN })],
+      children: [new TextRun({ text: 'Antioquia Natural', size: 28, color: DARK_GREEN })],
       alignment: AlignmentType.RIGHT, spacing: { after: 120 }
     }),
     new Paragraph({
@@ -197,14 +197,14 @@ function buildLevantamiento() {
     heading2('1.1.  Propósito'),
     para([
       normal('El propósito de este proyecto es llevar a producción la aplicación web '),
-      bold('"Antioquia Biodiversa"'),
+      bold('"Antioquia Natural"'),
       normal(', desarrollada para la Gobernación de Antioquia, que permita a los ciudadanos explorar la biodiversidad del departamento (flora y fauna por subregión y grupo taxonómico), los recursos hídricos y los programas comunitarios, en español e inglés, desde cualquier dispositivo móvil mediante código QR, sin necesidad de instalación.')
     ]),
     spacer(),
     makeTable(
       ['Campo', 'Información'],
       [
-        ['Nombre del sistema', 'Antioquia Biodiversa'],
+        ['Nombre del sistema', 'Antioquia Natural'],
         ['Administrador del sistema', 'Secretaría de Ambiente - Gobernación de Antioquia'],
         ['Dependencia responsable', 'Dirección de Agua y Saneamiento'],
         ['Líder funcional Gobernación', '[PENDIENTE - nombre del responsable]'],
@@ -242,7 +242,7 @@ function buildLevantamiento() {
     // ── 2. Descripción General ───────────────────────────────────────────────
     heading1('2.  Descripción General'),
     para([
-      normal('Antioquia Biodiversa centraliza en un único canal digital la información sobre la riqueza natural del departamento y sus programas sociales asociados. La aplicación permite a visitantes, estudiantes, investigadores y ciudadanos consultar especies de flora y fauna representativas, explorar la red hídrica y conocer los programas Jóvenes pa\' Lante y Guarda Cuencas, sin requerir instalación ni registro previo.'),
+      normal('Antioquia Natural centraliza en un único canal digital la información sobre la riqueza natural del departamento y sus programas sociales asociados. La aplicación permite a visitantes, estudiantes, investigadores y ciudadanos consultar especies de flora y fauna representativas, explorar la red hídrica y conocer los programas Jóvenes pa\' Lante y Guarda Cuencas, sin requerir instalación ni registro previo.'),
     ]),
     para([
       bold('Impacto esperado: '),
@@ -392,7 +392,7 @@ function buildPropuesta() {
       alignment: AlignmentType.CENTER, spacing: { after: 400 }
     }),
     new Paragraph({
-      children: [new TextRun({ text: 'Antioquia Biodiversa', size: 24, color: DARK_GREEN })],
+      children: [new TextRun({ text: 'Antioquia Natural', size: 24, color: DARK_GREEN })],
       alignment: AlignmentType.CENTER, spacing: { after: 160 }
     }),
     new Paragraph({
@@ -412,7 +412,7 @@ function buildPropuesta() {
 
     // ── 1. Introducción ──────────────────────────────────────────────────────
     heading1('1.  Introducción a la Solución'),
-    para('Antioquia Biodiversa es una aplicación web mobile-first que centraliza la información sobre la biodiversidad del departamento de Antioquia, accesible desde cualquier dispositivo mediante código QR, sin necesidad de instalación. La solución incluye módulos de biodiversidad, recursos hídricos y programas comunitarios (Jóvenes pa\' Lante, Guarda Cuencas, Especie del Mes), galerías fotográficas mensuales para JPL y Guarda Cuencas, un panel de administración web para curadores de contenido, y una API REST documentada. Está construida sobre un stack tecnológico moderno de código abierto, optimizado para bajo costo de operación, alta accesibilidad ciudadana y mantenibilidad a largo plazo por el equipo institucional de la Gobernación.'),
+    para('Antioquia Natural es una aplicación web mobile-first que centraliza la información sobre la biodiversidad del departamento de Antioquia, accesible desde cualquier dispositivo mediante código QR, sin necesidad de instalación. La solución incluye módulos de biodiversidad, recursos hídricos y programas comunitarios (Jóvenes pa\' Lante, Guarda Cuencas, Especie del Mes), galerías fotográficas mensuales para JPL y Guarda Cuencas, un panel de administración web para curadores de contenido, y una API REST documentada. Está construida sobre un stack tecnológico moderno de código abierto, optimizado para bajo costo de operación, alta accesibilidad ciudadana y mantenibilidad a largo plazo por el equipo institucional de la Gobernación.'),
     spacer(),
 
     // ── 2. Detalles Técnicos ─────────────────────────────────────────────────
@@ -603,8 +603,8 @@ async function main() {
   const doc1 = buildLevantamiento();
   const doc2 = buildPropuesta();
 
-  const file1 = path.join(OUT_DIR, 'Levantamiento_Requisitos_Antioquia_Biodiversa.docx');
-  const file2 = path.join(OUT_DIR, 'Propuesta_Tecnica_Antioquia_Biodiversa.docx');
+  const file1 = path.join(OUT_DIR, 'Levantamiento_Requisitos_Antioquia_Natural.docx');
+  const file2 = path.join(OUT_DIR, 'Propuesta_Tecnica_Antioquia_Natural.docx');
 
   await Packer.toBuffer(doc1).then(buf => fs.writeFileSync(file1, buf));
   console.log(`✓ ${file1}`);

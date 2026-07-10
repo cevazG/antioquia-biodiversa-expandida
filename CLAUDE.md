@@ -1,4 +1,4 @@
-# Antioquia Biodiversa — Documentación Técnica
+# Antioquia Natural — Documentación Técnica
 
 ## Reglas de flujo de trabajo
 
@@ -8,6 +8,8 @@
 > 1. Implementar cambios
 > 2. Probar en **localhost:3000** — el usuario aprueba lo que ve
 > 3. Solo cuando el usuario dice "sí, súbelo" → `git commit` + `git push`
+
+> **Documentos privados — nunca subir a GitHub.** `Documentos gobernacion/TI/Propuesta_Ampliacion_JPL_Participantes.md` (y su versión `.docx` cuando exista) contienen la propuesta económica/tarifas internas de negociación con la Gobernación. Son solo para Sebastián y Claude — están en `.gitignore` a propósito. Cualquier documento similar de presupuesto/tarifas/negociación que se cree a futuro debe agregarse también a `.gitignore` y quedar fuera de cualquier commit.
 
 ---
 
@@ -56,7 +58,7 @@ Web app mobile-first para la Gobernación de Antioquia. Permite consultar la bio
 ## Estructura de carpetas
 
 ```
-Antioquia Biodiversa/
+Antioquia Natural/
 ├── index.html                         ← Redirect a biodiversidad/index.html
 ├── CLAUDE.md                          ← Este archivo
 ├── RESUMEN_PROYECTO.md                ← Resumen ejecutivo para stakeholders

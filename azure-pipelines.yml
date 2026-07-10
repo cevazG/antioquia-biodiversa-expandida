@@ -1,10 +1,10 @@
 # azure-pipelines.yml
-# CI/CD — Antioquia Biodiversa
+# CI/CD — Antioquia Natural
 # Requiere configurar en Azure DevOps:
 #   - Service connection SonarQube: nombre exacto en SONARQUBE_SERVICE_CONNECTION
 #   - Service connection SSH Dev:  nombre exacto en SSH_DEV_SERVICE_CONNECTION
 #   - Service connection SSH Prod: nombre exacto en SSH_PROD_SERVICE_CONNECTION
-#   - Variable group "antioquia-biodiversa-secrets" con: SERVER_DEV_USER, SERVER_DEV_HOST,
+#   - Variable group "antioquia-natural-secrets" con: SERVER_DEV_USER, SERVER_DEV_HOST,
 #     SERVER_PROD_USER, SERVER_PROD_HOST, APP_PATH (ruta del repo en el servidor)
 
 trigger:
@@ -19,9 +19,9 @@ pool:
 variables:
   NODE_VERSION: '20.x'
   WORKING_DIR: 'backend'
-  SONARQUBE_SERVICE_CONNECTION: 'SonarQube-AntioquiaBiodiversa'
-  SSH_DEV_SERVICE_CONNECTION:  'SSH-Dev-AntioquiaBiodiversa'
-  SSH_PROD_SERVICE_CONNECTION: 'SSH-Prod-AntioquiaBiodiversa'
+  SONARQUBE_SERVICE_CONNECTION: 'SonarQube-AntioquiaNatural'
+  SSH_DEV_SERVICE_CONNECTION:  'SSH-Dev-AntioquiaNatural'
+  SSH_PROD_SERVICE_CONNECTION: 'SSH-Prod-AntioquiaNatural'
 
 # ─────────────────────────────────────────────
 # STAGE 1 — Integración continua (CI)
@@ -103,7 +103,7 @@ stages:
         testResultsFormat: JUnit
         testResultsFiles: '$(WORKING_DIR)/coverage/junit.xml'
         mergeTestResults: true
-        testRunTitle: 'Jest — Antioquia Biodiversa'
+        testRunTitle: 'Jest — Antioquia Natural'
 
     - task: PublishCodeCoverageResults@2
       displayName: 'Publicar cobertura'
@@ -116,8 +116,8 @@ stages:
         SonarQube: $(SONARQUBE_SERVICE_CONNECTION)
         scannerMode: CLI
         configMode: manual
-        cliProjectKey: antioquia-biodiversa-backend
-        cliProjectName: 'Antioquia Biodiversa — Backend'
+        cliProjectKey: antioquia-natural-backend
+        cliProjectName: 'Antioquia Natural — Backend'
         cliSources: '$(WORKING_DIR)/src'
         extraProperties: |
           sonar.exclusions=**/node_modules/**,**/coverage/**,**/__tests__/**
@@ -141,7 +141,7 @@ stages:
   dependsOn: CI
   condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/develop'))
   variables:
-    - group: antioquia-biodiversa-secrets
+    - group: antioquia-natural-secrets
 
   jobs:
   - deployment: DeployDev
@@ -162,7 +162,7 @@ stages:
                 git pull origin develop &&
                 cd backend &&
                 npm install --omit=dev &&
-                pm2 restart antioquia-biodiversa || pm2 start src/index.js --name antioquia-biodiversa
+                pm2 restart antioquia-natural || pm2 start src/index.js --name antioquia-natural
               failOnStdErr: false
 
 # ─────────────────────────────────────────────
@@ -174,7 +174,7 @@ stages:
   dependsOn: CI
   condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/main'))
   variables:
-    - group: antioquia-biodiversa-secrets
+    - group: antioquia-natural-secrets
 
   jobs:
   - deployment: DeployProd
@@ -195,5 +195,5 @@ stages:
                 git pull origin main &&
                 cd backend &&
                 npm install --omit=dev &&
-                pm2 restart antioquia-biodiversa || pm2 start src/index.js --name antioquia-biodiversa
+                pm2 restart antioquia-natural || pm2 start src/index.js --name antioquia-natural
               failOnStdErr: false

@@ -1,7 +1,7 @@
 # Criterios de Selección de Especies
-## Módulo de Biodiversidad - Antioquia Biodiversa
+## Módulo de Biodiversidad - Antioquia Natural
 
-**Antioquia Biodiversa · Gobernación de Antioquia**
+**Antioquia Natural · Gobernación de Antioquia**
 *Propuesta para el comité científico asesor*
 *Versión 1.0 - junio 2026*
 
@@ -373,5 +373,5 @@ Fuente fotográfica identificada (nivel A o B): ________________________________
 
 ---
 
-*Antioquia Biodiversa - Gobernación de Antioquia*
+*Antioquia Natural - Gobernación de Antioquia*
 *Propuesta elaborada como punto de partida para la discusión del comité científico asesor*

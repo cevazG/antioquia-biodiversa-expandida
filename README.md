@@ -1,4 +1,4 @@
-# Antioquia Biodiversa
+# Antioquia Natural
 
 Aplicación web mobile-first para la Gobernación de Antioquia que permite consultar la biodiversidad del departamento (flora y fauna por subregión y grupo taxonómico), los recursos hídricos y los programas comunitarios Jóvenes pa' Lante y Guarda Cuencas, en español e inglés, accesible vía código QR desde cualquier dispositivo móvil.
 
@@ -23,10 +23,10 @@ Aplicación web mobile-first para la Gobernación de Antioquia que permite consu
 
 ```bash
 # 1. Clonar el repositorio
-git clone https://dev.azure.com/GobernacionAntioquia/antioquia-biodiversa
+git clone https://dev.azure.com/GobernacionAntioquia/antioquia-natural
 
 # 2. Entrar a la carpeta del backend
-cd antioquia-biodiversa/backend
+cd antioquia-natural/backend
 
 # 3. Instalar dependencias
 npm install
@@ -101,7 +101,7 @@ npm run export-evaluacion     # Exportar LISTADO diligenciado a CSV (BOM UTF-8)
 ## Estructura del proyecto
 
 ```
-antioquia-biodiversa/
+antioquia-natural/
 ├── backend/                         # API REST (Node.js + Express + MongoDB + Redis)
 │   ├── src/
 │   │   ├── index.js                 # Express, rutas, sesiones, /api/health
@@ -171,8 +171,8 @@ redis-cli ping   # debe responder: PONG
 ### 3. Clonar y configurar la aplicación
 
 ```bash
-git clone https://dev.azure.com/GobernacionAntioquia/antioquia-biodiversa /var/www/antioquia-biodiversa
-cd /var/www/antioquia-biodiversa/backend
+git clone https://dev.azure.com/GobernacionAntioquia/antioquia-natural /var/www/antioquia-natural
+cd /var/www/antioquia-natural/backend
 npm install --omit=dev
 
 cp .env.example .env
@@ -183,20 +183,20 @@ nano .env
 ### 4. Iniciar con PM2
 
 ```bash
-cd /var/www/antioquia-biodiversa/backend
-pm2 start src/index.js --name antioquia-biodiversa
+cd /var/www/antioquia-natural/backend
+pm2 start src/index.js --name antioquia-natural
 pm2 save
 pm2 startup   # Copiar y ejecutar el comando que muestre
 ```
 
 ### 5. Configurar Nginx
 
-Crear `/etc/nginx/sites-available/antioquia-biodiversa`:
+Crear `/etc/nginx/sites-available/antioquia-natural`:
 
 ```nginx
 server {
     listen 80;
-    server_name biodiversa.antioquia.gov.co;
+    server_name natural.antioquia.gov.co;
 
     # Health check para upstream
     location /api/health {
@@ -219,20 +219,20 @@ server {
 ```
 
 ```bash
-sudo ln -s /etc/nginx/sites-available/antioquia-biodiversa /etc/nginx/sites-enabled/
+sudo ln -s /etc/nginx/sites-available/antioquia-natural /etc/nginx/sites-enabled/
 sudo nginx -t
 sudo systemctl reload nginx
 
 # SSL con Let's Encrypt
-sudo certbot --nginx -d biodiversa.antioquia.gov.co
+sudo certbot --nginx -d natural.antioquia.gov.co
 ```
 
 ### 6. Verificar despliegue
 
 ```bash
 pm2 status
-pm2 logs antioquia-biodiversa --lines 50
-curl https://biodiversa.antioquia.gov.co/api/health
+pm2 logs antioquia-natural --lines 50
+curl https://natural.antioquia.gov.co/api/health
 # Respuesta esperada: {"status":"ok","mongodb":"connected","redis":"connected","uptime":...}
 ```
 
@@ -240,7 +240,7 @@ curl https://biodiversa.antioquia.gov.co/api/health
 
 ## API REST
 
-Base URL: `https://biodiversa.antioquia.gov.co/api`
+Base URL: `https://natural.antioquia.gov.co/api`
 
 Documentación interactiva Swagger: `/api/docs`
 
@@ -263,7 +263,7 @@ Documentación interactiva Swagger: `/api/docs`
 
 ## Panel de administración de curadores
 
-Acceso: `https://biodiversa.antioquia.gov.co/admin/`
+Acceso: `https://natural.antioquia.gov.co/admin/`
 
 Permite a los curadores:
 - Cargar las fotos mensuales de Jóvenes pa' Lante (JPL) y Guarda Cuencas

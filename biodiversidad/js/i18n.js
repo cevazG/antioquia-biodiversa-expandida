@@ -83,7 +83,7 @@ var I18n = (() => {
 
     const titleKey = document.querySelector('meta[name="page-title"]');
     if (titleKey) {
-      document.title = t(titleKey.content) + ' · Antioquia Biodiversa';
+      document.title = t(titleKey.content) + ' · Antioquia Natural';
     }
   }
 

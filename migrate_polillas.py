@@ -2,7 +2,7 @@
 """Migración de polillas al módulo de biodiversidad."""
 import os, shutil, json
 
-ROOT     = '/Users/sebas/Antioquia Biodiversa'
+ROOT     = '/Users/sebas/Antioquia Natural'
 SRC_BASE = f'{ROOT}/Respaldo Fotos/Polillas'
 DST_BASE = f'{ROOT}/biodiversidad/img/species/gr04_polillas'
 JSON_PATH= f'{ROOT}/biodiversidad/data/species.json'

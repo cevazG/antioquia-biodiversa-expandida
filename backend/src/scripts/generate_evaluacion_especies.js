@@ -11,7 +11,7 @@ const path    = require('path');
 const fs      = require('fs');
 
 const OUT_DIR  = path.join(__dirname, '../../../Documentos gobernacion');
-const OUT_FILE = path.join(OUT_DIR, 'Evaluacion_Especies_Antioquia_Biodiversa.xlsx');
+const OUT_FILE = path.join(OUT_DIR, 'Evaluacion_Especies_Antioquia_Natural.xlsx');
 const FILAS    = 200;
 
 // ── Colores ────────────────────────────────────────────────────────────────────
@@ -166,7 +166,7 @@ function buildListado(wb) {
   // Fila 1: título
   ws.mergeCells('A1:V1');
   const t = ws.getCell('A1');
-  t.value = 'EVALUACIÓN DE ESPECIES · Antioquia Biodiversa · Comité Científico Asesor';
+  t.value = 'EVALUACIÓN DE ESPECIES · Antioquia Natural · Comité Científico Asesor';
   t.font  = { bold: true, size: 13, color: { argb: C.white }, name: FONT };
   t.fill  = { type: 'pattern', pattern: 'solid', fgColor: { argb: C.hdrDark } };
   t.alignment = { vertical: 'middle', horizontal: 'center' };
@@ -364,7 +364,7 @@ function buildInstrucciones(wb) {
 
   function blank() { r++; }
 
-  title('INSTRUCCIONES — Plantilla de Evaluación de Especies · Antioquia Biodiversa');
+  title('INSTRUCCIONES — Plantilla de Evaluación de Especies · Antioquia Natural');
   blank();
 
   section('¿Cómo usar esta plantilla?');
@@ -550,7 +550,7 @@ function buildResumen(wb) {
   // ── Título ──────────────────────────────────────────────────────────────────
   ws.mergeCells('A1:G1');
   const titleC = ws.getCell('A1');
-  titleC.value = 'RESUMEN DE EVALUACIÓN · Antioquia Biodiversa · Comité Científico Asesor';
+  titleC.value = 'RESUMEN DE EVALUACIÓN · Antioquia Natural · Comité Científico Asesor';
   titleC.font  = { bold: true, size: 13, color: { argb: C.white }, name: FONT };
   titleC.fill  = { type: 'pattern', pattern: 'solid', fgColor: { argb: C.hdrDark } };
   titleC.alignment = { vertical: 'middle', horizontal: 'center' };
@@ -687,7 +687,7 @@ async function main() {
   computeListasRanges();
 
   const wb = new ExcelJS.Workbook();
-  wb.creator  = 'Antioquia Biodiversa - Gobernación de Antioquia';
+  wb.creator  = 'Antioquia Natural - Gobernación de Antioquia';
   wb.created  = new Date();
   wb.modified = new Date();
 

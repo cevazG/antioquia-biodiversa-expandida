@@ -24,3 +24,14 @@ logs/
 # Archivos temporales
 *.tmp
 *.temp
+
+# Documentos privados de negociación con la Gobernación — NO subir a GitHub
+Documentos gobernacion/TI/Propuesta_Ampliacion_JPL_Participantes.md
+Documentos gobernacion/TI/Propuesta_Ampliacion_JPL_Participantes.docx
+Documentos gobernacion/TI/Cotizacion_Formal_Ampliacion_JPL_v2.md
+Documentos gobernacion/TI/Cotizacion_Formal_Ampliacion_JPL_v2.docx
+Documentos gobernacion/TI/Cotizacion_Formal_Ampliacion_JPL_v2.pdf
+
+# Documentos personales sensibles de participantes (cédulas, antecedentes,
+# declaración de renta, etc.) — NUNCA subir a GitHub
+comunidad/Ampliacion Jovenes/backend/uploads/

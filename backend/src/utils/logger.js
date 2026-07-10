@@ -15,7 +15,7 @@ const logger = createLogger({
     format.errors({ stack: true }),
     format.json()
   ),
-  defaultMeta: { servicio: 'antioquia-biodiversa-api' },
+  defaultMeta: { servicio: 'antioquia-natural-api' },
   transports: [
     new transports.File({
       filename: path.join(LOG_DIR, 'error.log'),

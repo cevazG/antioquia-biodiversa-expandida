@@ -1,7 +1,7 @@
 /**
  * generate_criterios_doc.js
  * Genera el documento Word:
- *   Criterios_Seleccion_Especies_Antioquia_Biodiversa.docx
+ *   Criterios_Seleccion_Especies_Antioquia_Natural.docx
  *
  * Uso: node src/scripts/generate_criterios_doc.js
  */
@@ -156,7 +156,7 @@ function buildCriterios() {
       alignment: AlignmentType.CENTER, spacing: { after: 160 }
     }),
     new Paragraph({
-      children: [new TextRun({ text: 'Módulo de Biodiversidad - Antioquia Biodiversa', bold: true, size: 28, color: DARK_GREEN })],
+      children: [new TextRun({ text: 'Módulo de Biodiversidad - Antioquia Natural', bold: true, size: 28, color: DARK_GREEN })],
       alignment: AlignmentType.CENTER, spacing: { after: 320 }
     }),
     new Paragraph({
@@ -612,7 +612,7 @@ function buildCriterios() {
     spacer(),
     spacer(),
     new Paragraph({
-      children: [new TextRun({ text: 'Antioquia Biodiversa - Gobernación de Antioquia', size: 18, color: GRAY_TEXT, italics: true })],
+      children: [new TextRun({ text: 'Antioquia Natural - Gobernación de Antioquia', size: 18, color: GRAY_TEXT, italics: true })],
       alignment: AlignmentType.CENTER, spacing: { after: 80 }
     }),
     new Paragraph({
@@ -632,7 +632,7 @@ async function main() {
   if (!fs.existsSync(OUT_DIR)) fs.mkdirSync(OUT_DIR, { recursive: true });
 
   const doc = buildCriterios();
-  const outFile = path.join(OUT_DIR, 'Criterios_Seleccion_Especies_Antioquia_Biodiversa.docx');
+  const outFile = path.join(OUT_DIR, 'Criterios_Seleccion_Especies_Antioquia_Natural.docx');
 
   await Packer.toBuffer(doc).then(buf => fs.writeFileSync(outFile, buf));
   console.log(`✓ ${outFile}`);

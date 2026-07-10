@@ -1,4 +1,4 @@
-# .semgrep.yml — Reglas SAST personalizadas para Antioquia Biodiversa
+# .semgrep.yml — Reglas SAST personalizadas para Antioquia Natural
 # Se ejecuta junto con los rulesets del registro:
 #   semgrep --config p/nodejs --config p/owasp-top-ten --config .semgrep.yml backend/src/
 #

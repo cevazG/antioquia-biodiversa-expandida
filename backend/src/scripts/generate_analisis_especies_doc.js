@@ -1,7 +1,7 @@
 /**
  * generate_analisis_especies_doc.js
  * Genera el documento Word:
- *   Analisis_150_Especies_Antioquia_Biodiversa.docx
+ *   Analisis_150_Especies_Antioquia_Natural.docx
  *
  * Uso: node src/scripts/generate_analisis_especies_doc.js
  */
@@ -473,7 +473,7 @@ function buildAnalisis() {
       alignment: AlignmentType.CENTER, spacing: { after: 160 }
     }),
     new Paragraph({
-      children: [new TextRun({ text: 'Módulo de Biodiversidad - Antioquia Biodiversa', bold: true, size: 28, color: DARK_GREEN })],
+      children: [new TextRun({ text: 'Módulo de Biodiversidad - Antioquia Natural', bold: true, size: 28, color: DARK_GREEN })],
       alignment: AlignmentType.CENTER, spacing: { after: 200 }
     }),
     new Paragraph({
@@ -766,7 +766,7 @@ function buildAnalisis() {
     para([bold('5. '), bold('Lista de espera:'), normal(' se recomienda que el comité apruebe simultáneamente una lista de 40 especies adicionales para reemplazos y para la Fase 2 del catálogo.')]),
     spacer(), spacer(),
     new Paragraph({
-      children: [new TextRun({ text: 'Antioquia Biodiversa - Gobernación de Antioquia', size: 18, color: GRAY_TEXT, italics: true })],
+      children: [new TextRun({ text: 'Antioquia Natural - Gobernación de Antioquia', size: 18, color: GRAY_TEXT, italics: true })],
       alignment: AlignmentType.CENTER, spacing: { after: 80 }
     }),
     new Paragraph({
@@ -790,7 +790,7 @@ async function main() {
   if (!fs.existsSync(OUT_DIR)) fs.mkdirSync(OUT_DIR, { recursive: true });
 
   const doc = buildAnalisis();
-  const outFile = path.join(OUT_DIR, 'Analisis_150_Especies_Antioquia_Biodiversa.docx');
+  const outFile = path.join(OUT_DIR, 'Analisis_150_Especies_Antioquia_Natural.docx');
 
   await Packer.toBuffer(doc).then(buf => fs.writeFileSync(outFile, buf));
   console.log(`✓ ${outFile}`);

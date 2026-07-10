@@ -1,6 +1,6 @@
 {
   "es": {
-    "app_name": "Antioquia Biodiversa",
+    "app_name": "Antioquia Natural",
     "app_tagline": "Descubre la naturaleza de Antioquia",
     "choose_language": "Elige tu idioma",
     "lang_es": "Español",
@@ -177,7 +177,7 @@
     "all_subregions": "Todas las subregiones",
 
     "edm_titulo": "Especie del Mes",
-    "edm_modulo": "Comunidad · Antioquia Biodiversa",
+    "edm_modulo": "Comunidad · Antioquia Natural",
     "edm_seleccion_label": "Especie del mes",
     "edm_seleccion_editorial": "Selección editorial",
     "edm_como": "¿Cómo identificarla?",
@@ -194,7 +194,7 @@
     "edm_fotos_count_label": "fotos"
   },
   "en": {
-    "app_name": "Antioquia Biodiversa",
+    "app_name": "Antioquia Natural",
     "app_tagline": "Discover the nature of Antioquia",
     "choose_language": "Choose your language",
     "lang_es": "Español",
@@ -371,7 +371,7 @@
     "all_subregions": "All subregions",
 
     "edm_titulo": "Species of the Month",
-    "edm_modulo": "Community · Antioquia Biodiversa",
+    "edm_modulo": "Community · Antioquia Natural",
     "edm_seleccion_label": "Species of the month",
     "edm_seleccion_editorial": "Editorial selection",
     "edm_como": "How to identify it?",

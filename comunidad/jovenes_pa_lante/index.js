@@ -23,7 +23,8 @@ I18n.init();
 
     // iNaturalist live stats
     (async function loadInatStats() {
-      const FALLBACK = { obs: 57843, spp: 4698, ppl: 473 };
+      // Fallback: última lectura en vivo conocida (jul 2026) — solo se usa si la API falla
+      const FALLBACK = { obs: 58112, spp: 4671, ppl: 472 };
 
       function animateCount(el, target) {
         const start = performance.now();
@@ -45,14 +46,18 @@ I18n.init();
       try {
         const ctrl = new AbortController();
         const timer = setTimeout(() => ctrl.abort(), 6000);
-        const [projResp, pplResp] = await Promise.all([
-          fetch('https://api.inaturalist.org/v1/projects/jovenes-palante-con-el-ambiente', { signal: ctrl.signal }),
+        // El proyecto es de tipo "collection": observations_count/species_count del
+        // endpoint /v1/projects vienen vacíos. Hay que consultar los totales con los
+        // endpoints de búsqueda (per_page=0/1 solo para leer total_results).
+        const [obsResp, sppResp, pplResp] = await Promise.all([
+          fetch('https://api.inaturalist.org/v1/observations?project_id=jovenes-palante-con-el-ambiente&per_page=0', { signal: ctrl.signal }),
+          fetch('https://api.inaturalist.org/v1/observations/species_counts?project_id=jovenes-palante-con-el-ambiente&per_page=1', { signal: ctrl.signal }),
           fetch('https://api.inaturalist.org/v1/observations/observers?project_id=jovenes-palante-con-el-ambiente&per_page=1', { signal: ctrl.signal })
         ]);
         clearTimeout(timer);
-        const [proj, pplData] = await Promise.all([projResp.json(), pplResp.json()]);
-        obs = proj.results?.[0]?.observations_count || FALLBACK.obs;
-        spp = proj.results?.[0]?.species_count || FALLBACK.spp;
+        const [obsData, sppData, pplData] = await Promise.all([obsResp.json(), sppResp.json(), pplResp.json()]);
+        obs = obsData.total_results || FALLBACK.obs;
+        spp = sppData.total_results || FALLBACK.spp;
         ppl = pplData.total_results || FALLBACK.ppl;
       } catch (_) { /* usa valores de respaldo */ }
 

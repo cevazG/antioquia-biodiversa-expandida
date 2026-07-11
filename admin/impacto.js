@@ -107,19 +107,24 @@ function iucnBadge(code) {
 
 // ── iNaturalist ────────────────────────────────────────────
 async function loadInat() {
-  const FALLBACK = { obs: 57843, spp: 4698, ppl: 473 };
+  // Fallback: última lectura en vivo conocida (jul 2026) — solo se usa si la API falla
+  const FALLBACK = { obs: 58112, spp: 4671, ppl: 472 };
   try {
     const ctrl = new AbortController();
     setTimeout(() => ctrl.abort(), 7000);
 
-    const [projRes, obsRes] = await Promise.all([
-      fetch(`https://api.inaturalist.org/v1/projects/${INAT_PROJECT}`, { signal: ctrl.signal }).then(r => r.json()),
+    // El proyecto es de tipo "collection": observations_count/taxa_count del
+    // endpoint /v1/projects vienen vacíos. Hay que consultar los totales con los
+    // endpoints de búsqueda (per_page=0/1 solo para leer total_results).
+    const [obsData, sppData, obsRes] = await Promise.all([
+      fetch(`https://api.inaturalist.org/v1/observations?project_id=${INAT_PROJECT}&per_page=0`, { signal: ctrl.signal }).then(r => r.json()),
+      fetch(`https://api.inaturalist.org/v1/observations/species_counts?project_id=${INAT_PROJECT}&per_page=1`, { signal: ctrl.signal }).then(r => r.json()),
       fetch(`https://api.inaturalist.org/v1/observations/observers?project_id=${INAT_PROJECT}&per_page=1`, { signal: ctrl.signal }).then(r => r.json()),
     ]);
 
-    const obs  = projRes.results?.[0]?.observations_count ?? FALLBACK.obs;
-    const spp  = projRes.results?.[0]?.taxa_count          ?? FALLBACK.spp;
-    const ppl  = obsRes.total_results                      ?? FALLBACK.ppl;
+    const obs  = obsData.total_results ?? FALLBACK.obs;
+    const spp  = sppData.total_results ?? FALLBACK.spp;
+    const ppl  = obsRes.total_results  ?? FALLBACK.ppl;
 
     animateCount(document.getElementById('inat-obs'), obs);
     animateCount(document.getElementById('inat-spp'), spp);

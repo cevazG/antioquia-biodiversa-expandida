@@ -26,7 +26,8 @@ const TAXON_LABELS = {
   Plantae:        '🌿 Plantas',
   Fungi:          '🍄 Hongos',
 };
-const INAT_FALLBACK = { obs: 57843, spp: 4698, ppl: 473 };
+// Fallback: última lectura en vivo conocida (jul 2026) — solo se usa si la API falla
+const INAT_FALLBACK = { obs: 58112, spp: 4671, ppl: 472 };
 
 let map, markerLayer;
 const seenTaxa = new Set();
@@ -173,15 +174,19 @@ async function loadInatStats() {
     const ctrl  = new AbortController();
     const timer = setTimeout(() => ctrl.abort(), 7000);
 
-    const [projRes, obsRes] = await Promise.all([
-      fetch(`https://api.inaturalist.org/v1/projects/${INAT_PROJECT}`, { signal: ctrl.signal }).then(r => r.json()),
+    // El proyecto es de tipo "collection": observations_count/taxa_count del
+    // endpoint /v1/projects vienen vacíos. Hay que consultar los totales con los
+    // endpoints de búsqueda (per_page=0/1 solo para leer total_results).
+    const [obsData, sppData, obsRes] = await Promise.all([
+      fetch(`https://api.inaturalist.org/v1/observations?project_id=${INAT_PROJECT}&per_page=0`, { signal: ctrl.signal }).then(r => r.json()),
+      fetch(`https://api.inaturalist.org/v1/observations/species_counts?project_id=${INAT_PROJECT}&per_page=1`, { signal: ctrl.signal }).then(r => r.json()),
       fetch(`https://api.inaturalist.org/v1/observations/observers?project_id=${INAT_PROJECT}&per_page=1`, { signal: ctrl.signal }).then(r => r.json()),
     ]);
     clearTimeout(timer);
 
-    animateCount(document.getElementById('map-obs-count'), projRes.results?.[0]?.observations_count ?? INAT_FALLBACK.obs);
-    animateCount(document.getElementById('map-spp-count'), projRes.results?.[0]?.taxa_count          ?? INAT_FALLBACK.spp);
-    animateCount(document.getElementById('map-obs-users'), obsRes.total_results                      ?? INAT_FALLBACK.ppl);
+    animateCount(document.getElementById('map-obs-count'), obsData.total_results ?? INAT_FALLBACK.obs);
+    animateCount(document.getElementById('map-spp-count'), sppData.total_results ?? INAT_FALLBACK.spp);
+    animateCount(document.getElementById('map-obs-users'), obsRes.total_results  ?? INAT_FALLBACK.ppl);
   } catch {
     animateCount(document.getElementById('map-obs-count'), INAT_FALLBACK.obs);
     animateCount(document.getElementById('map-spp-count'), INAT_FALLBACK.spp);

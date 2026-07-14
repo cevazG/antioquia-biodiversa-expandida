@@ -362,12 +362,15 @@
   letter-spacing: 0.03em;
 }
 
-.badge-iucn--LC { background: var(--iucn-lc); }
+/* Texto blanco (color por defecto) solo alcanza WCAG AA sobre --iucn-cr (6.30:1).
+   LC/VU/EN/DD con blanco daban 1.63-3.68:1 — se corrige con texto oscuro (#1a1a1a),
+   que sí pasa sobre esos 5 colores (4.73-10.68:1). CR se queda con el blanco heredado. */
+.badge-iucn--LC { background: var(--iucn-lc); color: #1a1a1a; }
 .badge-iucn--NT { background: var(--iucn-nt); color: #333; }
-.badge-iucn--VU { background: var(--iucn-vu); }
-.badge-iucn--EN { background: var(--iucn-en); }
+.badge-iucn--VU { background: var(--iucn-vu); color: #1a1a1a; }
+.badge-iucn--EN { background: var(--iucn-en); color: #1a1a1a; }
 .badge-iucn--CR { background: var(--iucn-cr); }
-.badge-iucn--DD { background: var(--iucn-dd); }
+.badge-iucn--DD { background: var(--iucn-dd); color: #1a1a1a; }
 .badge-iucn--NE {
   background: transparent;
   border: 1.5px solid var(--color-border);
@@ -499,8 +502,8 @@
 }
 
 .filter-chip.active {
-  background: var(--color-green-primary);
-  border-color: var(--color-green-primary);
+  background: var(--color-green-dark); /* --color-green-primary con texto blanco da 4.31:1, no alcanza WCAG AA (4.5:1) */
+  border-color: var(--color-green-dark);
   color: var(--color-white);
 }
 

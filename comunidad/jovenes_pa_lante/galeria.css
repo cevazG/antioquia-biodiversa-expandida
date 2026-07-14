@@ -1,6 +1,6 @@
 :root {
       --color-jpl:      #f28e18;
-      --color-jpl-dark: #B0942B;
+      --color-jpl-dark: #6b5216; /* antes #B0942B: texto blanco sobre este fondo daba 2.95:1, no alcanza WCAG AA (4.5:1) */
       --color-jpl-pale: #fff3e0;
     }
 
@@ -64,14 +64,14 @@
     }
 
     .filter-chip.active {
-      background: var(--color-jpl);
-      border-color: var(--color-jpl);
+      background: var(--color-jpl-dark); /* --color-jpl con texto blanco daba 2.43:1, no alcanza WCAG AA (4.5:1) */
+      border-color: var(--color-jpl-dark);
       color: white;
     }
 
     .filter-chip--sub.active {
-      background: var(--color-green-primary);
-      border-color: var(--color-green-primary);
+      background: var(--color-green-dark); /* --color-green-primary con texto blanco daba 4.31:1, no alcanza WCAG AA (4.5:1) */
+      border-color: var(--color-green-dark);
       color: white;
     }
 
@@ -162,7 +162,9 @@
       pointer-events: none;
     }
 
-    /* Overlays on image */
+    /* Overlays on image — el color de texto lo define .badge-iucn--XX (components.css)
+       según cada color de fondo; aquí no se fuerza blanco, algunas categorías (LC/VU/EN/DD)
+       necesitan texto oscuro para cumplir WCAG AA, ver components.css */
     .photo-card__iucn-overlay {
       position: absolute;
       top: 6px;
@@ -171,7 +173,6 @@
       font-weight: 800;
       padding: 3px 6px;
       border-radius: var(--radius-full);
-      color: white;
       letter-spacing: 0.04em;
       line-height: 1;
     }
@@ -219,7 +220,7 @@
       display: inline-block;
       font-size: 0.5625rem;
       font-weight: 700;
-      color: var(--color-green-primary);
+      color: var(--color-green-dark); /* --color-green-primary daba 3.80:1 sobre --color-green-pale, no alcanza WCAG AA (4.5:1) */
       background: var(--color-green-pale);
       padding: 2px 7px;
       border-radius: var(--radius-full);

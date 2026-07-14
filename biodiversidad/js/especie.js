@@ -165,6 +165,9 @@ const IUCN_COLORS = {
       } else {
         iucnCircle.textContent = sp.iucn;
         iucnCircle.style.background = IUCN_COLORS[sp.iucn] || '#9E9E9E';
+        // Texto blanco (default en CSS) solo cumple WCAG AA sobre CR; LC/NT/VU/EN/DD
+        // necesitan texto oscuro sobre esos fondos claros (ver components.css .badge-iucn--*)
+        iucnCircle.style.color = sp.iucn === 'CR' ? '#fff' : '#1a1a1a';
       }
       document.getElementById('iucn-code').textContent = sp.iucn === 'NE' ? '—' : sp.iucn;
       document.getElementById('iucn-label').textContent = I18n.t('iucn_' + sp.iucn);

@@ -79,7 +79,7 @@ body {
 }
 .btn:hover { opacity: .88; }
 .btn:disabled { opacity: .45; cursor: not-allowed; }
-.btn--primary   { background: var(--green);  color: #fff; }
+.btn--primary   { background: var(--green-dark);  color: #fff; } /* --green con texto blanco daba 4.31:1, no alcanza WCAG AA (4.5:1) */
 .btn--orange    { background: var(--orange); color: #fff; }
 .btn--blue      { background: var(--blue);   color: #fff; }
 .btn--ghost     { background: transparent;   color: var(--text); border: 1.5px solid var(--border); }

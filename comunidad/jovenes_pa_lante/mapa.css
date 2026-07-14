@@ -1,6 +1,6 @@
 :root {
       --color-jpl:      #f28e18;
-      --color-jpl-dark: #B0942B;
+      --color-jpl-dark: #6b5216; /* antes #B0942B, no alcanzaba WCAG AA (4.5:1) en texto sobre fondos claros — ver comunidad/jovenes_pa_lante/index.css */
       --color-jpl-pale: #fff3e0;
     }
 

@@ -233,7 +233,7 @@
     .em-upload-btn:active { opacity: 0.75; }
 
     .em-upload-btn--wa {
-      background: #25D366;
+      background: #0C7A3A; /* verde WhatsApp original (#25D366) con texto blanco daba 1.98:1, no alcanza WCAG AA (4.5:1) */
       color: white;
     }
 
@@ -326,7 +326,7 @@
 
     .em-foto-card__fecha {
       font-size: 0.68rem;
-      color: var(--color-em-light);
+      color: var(--color-em-dark); /* --color-em-light daba 3.41:1 sobre blanco, no alcanza WCAG AA (4.5:1) */
       font-weight: 600;
       margin-top: 4px;
     }

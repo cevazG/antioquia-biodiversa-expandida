@@ -1,7 +1,8 @@
 :root {
       --color-jpl:      #f28e18;
-      --color-jpl-dark: #B0942B;
+      --color-jpl-dark: #6b5216; /* antes #B0942B: 2.69-2.95:1 sobre fondos claros, no alcanza WCAG AA (4.5:1) en texto */
       --color-jpl-pale: #fff3e0;
+      --color-jpl-text: #8f4c08; /* variante de --color-jpl oscurecida para texto (2.21:1 -> 5.97:1); --color-jpl se deja igual para bordes/íconos decorativos */
     }
 
     /* Hero */
@@ -82,7 +83,7 @@
 
     .stat-chip__label {
       font-size: 0.7rem;
-      color: var(--color-jpl);
+      color: var(--color-jpl-text);
       font-weight: 600;
     }
 
@@ -250,12 +251,11 @@
 
     .inat-stat__label {
       font-size: 0.625rem;
-      color: #018d38;
+      color: #0b5640; /* antes #018d38 con opacity:0.75 = 2.81:1 sobre #f0faf4, no alcanza WCAG AA (4.5:1) */
       font-weight: 600;
       text-transform: uppercase;
       letter-spacing: 0.04em;
       margin-top: 2px;
-      opacity: 0.75;
     }
 
     .inat-panel__desc {

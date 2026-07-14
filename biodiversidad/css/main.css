@@ -312,7 +312,7 @@ em, .scientific-name {
   border: 1.5px solid var(--color-green-primary);
   border-radius: var(--radius-full);
   background: none;
-  color: var(--color-green-primary);
+  color: var(--color-green-dark); /* --color-green-primary da 4.31:1 sobre blanco, no alcanza WCAG AA (4.5:1) */
   cursor: pointer;
   transition: all var(--transition);
 }

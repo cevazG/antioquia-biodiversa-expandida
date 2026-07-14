@@ -15,7 +15,7 @@
 
   <!-- Header -->
   <div class="em-header">
-    <button class="em-header__back" onclick="history.back()">
+    <button class="em-header__back" onclick="history.back()" aria-label="Volver">
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5m0 0l7 7m-7-7l7-7"/></svg>
     </button>
     <div class="em-header__text">
@@ -107,7 +107,7 @@
     <!-- Meses anteriores -->
     <div class="em-anteriores">
       <div class="em-section__label" data-i18n="edm_meses">Meses anteriores</div>
-      <div class="em-anteriores__scroll" id="anteriores-scroll"></div>
+      <div class="em-anteriores__scroll" id="anteriores-scroll" tabindex="0" role="region" aria-label="Meses anteriores, desplazable"></div>
     </div>
 
   </div>

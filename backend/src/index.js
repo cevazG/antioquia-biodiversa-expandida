@@ -13,7 +13,7 @@ const { connectDB, connCom, redis } = require('./db');
 const swaggerDoc = YAML.load(fs.readFileSync(path.join(__dirname, 'swagger.yaml'), 'utf8'));
 
 // Validar variables de entorno obligatorias antes de arrancar
-const VARS_REQUERIDAS = ['MONGODB_URI_COM', 'SESSION_SECRET', 'ADMIN_PASSWORD'];
+const VARS_REQUERIDAS = ['MONGODB_URI_COM', 'SESSION_SECRET', 'ADMIN_PASSWORD_HASH'];
 // eslint-disable-next-line security/detect-object-injection -- v proviene de array literal hardcoded, no de input externo
 const faltantes = VARS_REQUERIDAS.filter(v => !process.env[v]);
 if (faltantes.length > 0) {
@@ -28,11 +28,19 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(requestLogger);
 
+// secure sí está activo en producción (valor condicional por NODE_ENV); domain/path se omiten a
+// propósito (defaults correctos de express-session para un solo dominio); expires lo cubre maxAge.
+// nosemgrep: javascript.express.security.audit.express-cookie-settings.express-cookie-session-no-secure,javascript.express.security.audit.express-cookie-settings.express-cookie-session-no-domain,javascript.express.security.audit.express-cookie-settings.express-cookie-session-no-expires,javascript.express.security.audit.express-cookie-settings.express-cookie-session-no-path
 app.use(session({
   secret:            process.env.SESSION_SECRET,
   resave:            false,
   saveUninitialized: false,
-  cookie:            { secure: process.env.NODE_ENV === 'production', maxAge: 8 * 60 * 60 * 1000 },  // 8 h
+  name:              'antioquia.sid', // evita el nombre default 'connect.sid', que delata la librería
+  cookie: {
+    httpOnly: true,  // explícito aunque ya es el default de express-session — no depender de defaults de terceros
+    secure:   process.env.NODE_ENV === 'production',
+    maxAge:   8 * 60 * 60 * 1000, // 8 h
+  },
 }));
 
 // API routes

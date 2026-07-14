@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const { connCom } = require('../db');
+const { GRUPOS_VALIDOS, SUBREGIONES_VALIDAS, IUCN_VALIDOS } = require('../config/catalogo');
 
 const JplPhotoSchema = new mongoose.Schema({
   mes:              { type: String, required: true },  // 'YYYY-MM'
@@ -7,12 +8,12 @@ const JplPhotoSchema = new mongoose.Schema({
   fotos:            [{ type: String }],                 // rutas relativas al frontend (1-3)
   credito:          { type: String, default: '' },
   municipio:        { type: String, default: '' },
-  subregion:        { type: String, required: true },
+  subregion:        { type: String, required: true, enum: SUBREGIONES_VALIDAS },
   especieEs:        { type: String, required: true },
   especieEn:        { type: String, default: '' },
   especieCientifico:{ type: String, default: '' },
-  grupo:            { type: String, required: true },
-  iucn:             { type: String, default: 'DD' },
+  grupo:            { type: String, required: true, enum: GRUPOS_VALIDOS },
+  iucn:             { type: String, default: 'DD', enum: IUCN_VALIDOS },
   endemica:         { type: Boolean, default: false },
   descripcionEs:    { type: String, default: '' },
   descripcionEn:    { type: String, default: '' },

@@ -61,7 +61,7 @@ Copiar `backend/.env.example` como `backend/.env` y completar:
 |---|---|---|
 | `MONGODB_URI_COM` | URI BD Comunidad (JPL, Guarda Cuencas) | ✅ |
 | `SESSION_SECRET` | Secreto sesiones panel admin (mín. 32 chars) | ✅ |
-| `ADMIN_PASSWORD` | Contraseña temporal panel curadores | ✅ |
+| `ADMIN_PASSWORD_HASH` | Hash bcrypt de la contraseña del panel de curadores (nunca texto plano; ver `.env.example` para el comando que lo genera) | ✅ |
 | `REDIS_URL` | URL Redis (`redis://localhost:6379`) | Opcional* |
 | `LOG_LEVEL` | Nivel de log: `error`, `warn`, `info`, `debug` | Opcional |
 | `LOG_DIR` | Carpeta de archivos de log | Opcional |
@@ -110,7 +110,8 @@ antioquia-natural/
 │   │   ├── middleware/
 │   │   │   ├── adminAuth.js         # Guard de autenticación para rutas admin
 │   │   │   └── requestLogger.js     # Log por petición: método, path, status, ms, traceId
-│   │   ├── models/                  # Modelos Mongoose (JplPhoto, GcPhoto)
+│   │   ├── models/                  # Modelos Mongoose (JplPhoto, GcPhoto en uso; CommunitySighting, Municipality definidos, aún sin ruta que los use)
+│   │   ├── services/                # Lógica de negocio (fotoStorage, jplStats, publicacion, inaturalistLookup) — separada de las rutas HTTP
 │   │   ├── routes/
 │   │   │   └── admin.js             # CRUD galería JPL y Guarda Cuencas
 │   │   ├── utils/
@@ -247,15 +248,24 @@ Documentación interactiva Swagger: `/api/docs`
 | Método | Endpoint | Descripción | Auth |
 |---|---|---|---|
 | GET | `/health` | Estado: MongoDB, Redis, uptime | — |
-| GET | `/admin/jpl/meses` | Meses con fotos JPL | Admin |
-| GET | `/admin/jpl/fotos/:mes` | Fotos JPL de un mes | Admin |
-| GET | `/admin/jpl/stats/analytics` | Estadísticas de cobertura | Admin |
-| GET | `/admin/jpl/stats/monthly` | Datos mensuales para gráficos | Admin |
-| GET | `/admin/gc/meses` | Meses con fotos Guarda Cuencas | Admin |
-| GET | `/admin/gc/fotos/:mes` | Fotos GC de un mes | Admin |
 | POST | `/admin/login` | Iniciar sesión en panel admin | — |
 | POST | `/admin/logout` | Cerrar sesión | Admin |
-| POST | `/admin/autofill` | Autocompletar desde iNaturalist | Admin |
+| GET | `/admin/me` | Estado de la sesión actual | — |
+| POST | `/admin/autofill` | Autocompletar especie desde iNaturalist (nombre ES/EN, IUCN, descripción) | Admin |
+| GET | `/admin/jpl/meses` | Meses con fotos JPL | Admin |
+| GET | `/admin/jpl/fotos/:mes` | Fotos JPL de un mes | Admin |
+| POST | `/admin/jpl/fotos/:mes` | Subir una foto JPL nueva | Admin |
+| PUT | `/admin/jpl/fotos/:mes/:id` | Editar una foto JPL | Admin |
+| DELETE | `/admin/jpl/fotos/:id` | Eliminar una foto JPL | Admin |
+| POST | `/admin/jpl/publicar/:mes` | Publicar el JSON del mes al frontend | Admin |
+| GET | `/admin/jpl/stats/analytics` | Estadísticas de cobertura (fotógrafos, municipios, alertas, bioindicadores) | Admin |
+| GET | `/admin/jpl/stats/monthly` | Datos mensuales agregados para gráficos | Admin |
+| GET | `/admin/gc/meses` | Meses con fotos Guarda Cuencas | Admin |
+| GET | `/admin/gc/fotos/:mes` | Fotos GC de un mes | Admin |
+| POST | `/admin/gc/fotos/:mes` | Subir una foto GC nueva | Admin |
+| PUT | `/admin/gc/fotos/:mes/:id` | Editar una foto GC | Admin |
+| DELETE | `/admin/gc/fotos/:id` | Eliminar una foto GC | Admin |
+| POST | `/admin/gc/publicar/:mes` | Publicar el JSON del mes al frontend | Admin |
 
 > La autenticación admin migrará a Microsoft Entra ID (OAuth 2.0 + OIDC) una vez TI Gobernación provea Client ID y Tenant ID.
 
@@ -286,7 +296,7 @@ Las imágenes se convierten automáticamente a WebP (máx. 1200 px, calidad 82) 
 | Logs | Winston (JSON estructurado + traceId) | ^3 |
 | Imágenes | sharp (WebP auto-conversión) | ^0.34 |
 | Uploads | multer | ^1.4 |
-| Autenticación admin | express-session (temporal → Entra ID) | — |
+| Autenticación admin | express-session + bcrypt (temporal → Entra ID) | — |
 | Servidor web | Nginx + PM2 | — |
 | SAST | ESLint-security + Semgrep | — |
 | CI/CD | Azure DevOps (plantillas TI Gobernación) | — |
@@ -296,12 +306,7 @@ Las imágenes se convierten automáticamente a WebP (máx. 1200 px, calidad 82) 
 
 ## Control de versiones
 
-**GitFlow:**
-- `main` — producción estable
-- `develop` — integración continua
-- `feature/nombre` — nuevas funcionalidades
-
-**Conventional Commits:** `feat:`, `fix:`, `docs:`, `refactor:`
+**Estado actual:** desarrollo directo sobre `main` (sin rama `develop` todavía). Los commits siguen el estándar **Conventional Commits** (`feat:`, `fix:`, `docs:`, `refactor:`). Adoptar GitFlow completo (`main` + `develop` + `feature/nombre`) es una mejora pendiente, recomendable antes de la transición a Azure DevOps (ver Chequeo de Lineamientos).
 
 Código y comentarios en **español neutro** según lineamientos de la Gobernación de Antioquia.
 

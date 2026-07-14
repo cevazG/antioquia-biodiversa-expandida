@@ -330,18 +330,20 @@ function getImgs(foto) {
   fotos:            [String], // rutas relativas al frontend (1–3 fotos)
   credito:          String,
   municipio:        String,
-  subregion:        String,   // ID interno (ej. 'uraba')
+  subregion:        String,   // ID interno (ej. 'uraba') — validado contra SUBREGIONES_VALIDAS
   especieEs:        String,
   especieEn:        String,
   especieCientifico:String,
-  grupo:            String,
-  iucn:             String,   // 'LC','NT','VU','EN','CR','DD'
+  grupo:            String,   // validado contra GRUPOS_VALIDOS (config/catalogo.js)
+  iucn:             String,   // 'LC','NT','VU','EN','CR','DD','NE' — validado contra IUCN_VALIDOS
   endemica:         Boolean,
   descripcionEs:    String,
   descripcionEn:    String,
   publicado:        Boolean,
 }
 ```
+
+`backend/src/config/catalogo.js` es la única fuente de verdad para `GRUPOS_VALIDOS`, `SUBREGIONES_VALIDAS` e `IUCN_VALIDOS` en el backend (debe coincidir con las listas ya usadas en `admin/jpl.js` y `admin/gc.js`). Ambos modelos (`JplPhoto`, `GcPhoto`) validan estos campos con `enum` de Mongoose, y las rutas de `admin.js` los validan antes de eso con un 400 explícito (grupo/subregión/IUCN no reconocidos, nombre común o cuenca/título faltante), para que el error llegue con un mensaje claro en vez de una excepción de validación de Mongoose.
 
 ### fotos_biodiversidad.json (índice JPL)
 
@@ -498,6 +500,23 @@ Semgrep publica el reporte JSON como artefacto `semgrep-sast`. Las reglas locale
 
 > **Pendiente de activar:** requiere acceso al proyecto Azure DevOps de TI Gobernación. `azure-pipelines.yml` está listo; solo necesita las Service Connections configuradas por TI.
 
+### Verificación manual completa (2026-07-13)
+
+Los 7 pasos del pipeline se ejecutaron localmente por primera vez (el pipeline real sigue sin correr en ningún lado, a la espera de Azure DevOps), para confirmar que de verdad pasarían el día que TI active el proyecto. Antes de esta verificación, varias piezas estaban configuradas pero nunca probadas contra el código real.
+
+**Suite de tests (`backend/src/__tests__/`)**: pasó de 2 archivos/9 casos (solo login/logout/me del admin) a **8 archivos/51 casos**, cubriendo el CRUD real de JPL y Guarda Cuencas (crear, editar, eliminar, listar), `/autofill` (mockeando la API de iNaturalist), las agregaciones de `/jpl/stats/*`, la publicación (`/jpl/publicar/:mes`, `/gc/publicar/:mes`) y el middleware `requestLogger` (antes en 0%). Cobertura real: de 16.79% a **96.81% líneas / 91.93% funciones**, por encima del umbral del 90% ya configurado (que nunca se había cumplido).
+
+**`npm audit`**: 3 vulnerabilidades resueltas con `npm audit fix` (sin `--force`, sin cambios de versión mayor): `multer` 2.1.1 → 2.2.0, `form-data` 4.0.5 → 4.0.6, `js-yaml` (transitivo de las herramientas de cobertura) 3.14.2 → 3.15.0. Quedó en 0 vulnerabilidades.
+
+**Semgrep**: instalado localmente (`pip3 install semgrep`) y corrido por primera vez contra el código real. Encontró 58 hallazgos iniciales:
+- Cookie de sesión (`src/index.js`): se agregó `httpOnly: true` explícito (ya era el default de `express-session`, pero no conviene depender de eso) y un nombre custom (`antioquia.sid` en vez de `connect.sid`, que delata la librería). `secure`/`domain`/`path`/`expires` ya estaban bien manejados, solo se documentó con `nosemgrep` por qué (Semgrep no reconoce valores condicionales por `NODE_ENV` ni los defaults seguros de la librería).
+- Path traversal en Guarda Cuencas (2 lugares en `admin.js`): documentado con `nosemgrep`, la ruta siempre la genera el servidor (`saveGcFile()`), nunca viene de input directo.
+- Detalle de error expuesto en `/autofill`: documentado con `nosemgrep`, la ruta está detrás de `requireAdmin` y el detalle ayuda a diagnosticar fallas de la API pública de iNaturalist.
+- **Regla local `req-body-without-validation` eliminada de `.semgrep.yml`**: estaba mal escrita desde que se creó (26 jun 2026, junto con el resto de A3) y nunca se había ejecutado hasta ahora. Su intención era detectar `req.body.campo` sin validar, pero su patrón (`pattern-not-inside: if (...) { ... }`) no reconoce la guarda de entrada estándar de Express (`if (!req.body.campo) return res.status(400)...`), así que marcaba el 100% de los accesos a `req.body`, estuvieran validados o no. Se comprobó con un caso mínimo antes de quitarla. Las otras 3 reglas locales sí funcionan y se mantienen.
+- Como consecuencia de esa regla, se agregó validación real (no solo para satisfacer Semgrep): `backend/src/config/catalogo.js` centraliza `GRUPOS_VALIDOS`/`SUBREGIONES_VALIDAS`/`IUCN_VALIDOS`, usados tanto en validación explícita (400 con mensaje claro) en las rutas de `admin.js` como en `enum` de los esquemas `JplPhoto`/`GcPhoto`.
+
+Resultado final: **0 hallazgos de Semgrep**, `npm audit` limpio, lint sin errores, cobertura por encima del umbral. Los 7 pasos del pipeline pasarían hoy si Azure DevOps se activara.
+
 ---
 
 ## Netlify — Configuración de despliegue
@@ -586,6 +605,7 @@ Cubre todos los compromisos de documentación del § 8 de la Propuesta Técnica 
 - [x] **A2 — Redis 7 + ioredis** — caché de catálogo con TTLs definidos (RNF02, RNF06)
 - [x] **A3 — ESLint-security + Semgrep** — SAST en dos capas + pipeline CI Azure DevOps (RNF05)
 - [x] **npm audit** — agregado al pipeline CI (Paso 3 del PDF); falla en CVE Alta o Crítica
+- [x] **Verificación manual de los 7 pasos del pipeline (2026-07-13)**: 51 tests de integración nuevos (96.81% líneas / 91.93% funciones, cumple el umbral de 90%), 3 vulnerabilidades de dependencias resueltas, Semgrep corrido por primera vez y en 0 hallazgos (ver detalle en "SAST")
 - [x] **README.md / Manual de despliegue** — prerrequisitos, instalación, Redis, Nginx, PM2, variables, comandos
 - [ ] **B1 — Microsoft Entra ID** — reemplaza express-session; requiere Client ID + Tenant ID (RNF05, RNF08)
 - [x] **C1 — Ley 1581** — modal de privacidad en entrada de la app, checkbox no pre-marcado, bilingüe, localStorage

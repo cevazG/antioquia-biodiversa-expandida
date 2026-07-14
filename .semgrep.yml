@@ -35,17 +35,6 @@ rules:
       - pattern-not: |
           $VAR = process.env.$ENV
 
-  # ── Validación de entrada ──────────────────────────────────────────────────
-
-  - id: req-body-without-validation
-    message: "req.body accedido sin validación de tipo. Considerar express-validator o zod."
-    severity: INFO
-    languages: [javascript]
-    pattern: |
-      req.body.$FIELD
-    pattern-not-inside: |
-      if (...) { ... }
-
   # ── Manejo de errores ──────────────────────────────────────────────────────
 
   - id: error-detail-in-response

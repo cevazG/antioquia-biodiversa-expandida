@@ -1,8 +1,6 @@
 const express  = require('express');
 const multer   = require('multer');
-const sharp    = require('sharp');
-const path     = require('path');
-const fs       = require('fs');
+const bcrypt   = require('bcryptjs');
 const router   = express.Router();
 
 const { requireAdmin }          = require('../middleware/adminAuth');
@@ -10,8 +8,11 @@ const { getCached, invalidate, TTL } = require('../utils/cache');
 const { redis }                 = require('../db');
 const JplPhoto = require('../models/JplPhoto');
 const GcPhoto  = require('../models/GcPhoto');
-
-const FRONTEND = path.join(__dirname, '../../../');  // backend/src/routes → Antioquia Natural/
+const { GRUPOS_VALIDOS, SUBREGIONES_VALIDAS, IUCN_VALIDOS } = require('../config/catalogo');
+const { saveJplFile, saveGcFile, borrarSiExiste } = require('../services/fotoStorage');
+const jplStats     = require('../services/jplStats');
+const publicacion  = require('../services/publicacion');
+const inaturalist  = require('../services/inaturalistLookup');
 
 // ─── Configuración de multer ───────────────────────────────────────────────
 
@@ -34,58 +35,12 @@ const gcUpload = multer({
   },
 });
 
-// Convierte un nombre científico en slug de carpeta: "Amazilia tzacatl" → "amazilia_tzacatl"
-function especieSlug(nombre) {
-  if (!nombre || !nombre.trim()) return null;
-  return nombre.trim().toLowerCase()
-    .replace(/[^\w\s-]/g, '')
-    .replace(/\s+/g, '_');
-}
-
-// Limpia el resumen de Wikipedia: quita HTML, trunca en 350 chars al último punto
-function cleanWiki(raw) {
-  if (!raw) return '';
-  const clean = raw.replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim();
-  const cut = clean.length > 350 ? clean.lastIndexOf('.', 350) : clean.length;
-  return clean.slice(0, cut > 0 ? cut + 1 : 350).trim();
-}
-
-// Guarda el buffer de una foto JPL como WebP optimizado y devuelve la ruta relativa.
-// Estructura: img/fotos/bio/{mes}/{grupo}/{especie_slug}/{especie_slug}_001.webp
-async function saveJplFile(buffer, originalname, mes, grupo, especieCientifico) {
-  const slug   = especieSlug(especieCientifico) || 'sin_nombre';
-  const subdir = path.join(mes, grupo, slug);
-  const dir    = path.join(FRONTEND, 'comunidad/jovenes_pa_lante/img/fotos/bio', subdir);
-  // eslint-disable-next-line security/detect-non-literal-fs-filename -- ruta construida por el servidor, no por el usuario; endpoint protegido por requireAdmin
-  fs.mkdirSync(dir, { recursive: true });
-  // eslint-disable-next-line security/detect-non-literal-fs-filename -- ídem
-  const existing = fs.readdirSync(dir).filter(f => /\.(jpe?g|webp|png)$/i.test(f)).length;
-  const filename = `${slug}_${String(existing + 1).padStart(3, '0')}.webp`;
-  await sharp(buffer)
-    .resize(1200, 1200, { fit: 'inside', withoutEnlargement: true })
-    .webp({ quality: 82 })
-    .toFile(path.join(dir, filename));
-  return `img/fotos/bio/${subdir.replace(/\\/g, '/')}/${filename}`;
-}
-
-// Guarda el buffer de una foto GC como WebP 1200×675 (16:9 recortado) y devuelve la ruta relativa.
-async function saveGcFile(buffer, mes) {
-  const dir = path.join(FRONTEND, 'comunidad/guarda_cuencas/img/fotos', `gc_${mes}`);
-  // eslint-disable-next-line security/detect-non-literal-fs-filename -- ídem
-  fs.mkdirSync(dir, { recursive: true });
-  // eslint-disable-next-line security/detect-non-literal-fs-filename -- ídem
-  const existing = fs.readdirSync(dir).filter(f => /\.(jpe?g|webp|png)$/i.test(f)).length;
-  const filename = `gc_${String(existing + 1).padStart(3, '0')}.webp`;
-  await sharp(buffer)
-    .resize(1200, 675, { fit: 'cover', position: 'centre' })
-    .webp({ quality: 82 })
-    .toFile(path.join(dir, filename));
-  return `img/fotos/gc_${mes}/${filename}`;
-}
-
 // ─── Auth ──────────────────────────────────────────────────────────────────
+// La contraseña nunca se compara en texto plano: ADMIN_PASSWORD_HASH guarda
+// el hash bcrypt (ver .env.example para el comando que lo genera).
 router.post('/login', (req, res) => {
-  if (req.body.password === process.env.ADMIN_PASSWORD) {
+  const clave = req.body.password || '';
+  if (bcrypt.compareSync(clave, process.env.ADMIN_PASSWORD_HASH)) {
     req.session.isAdmin = true;
     res.json({ ok: true });
   } else {
@@ -103,57 +58,15 @@ router.get('/me', (req, res) => {
 });
 
 // ─── Autofill iNaturalist ─────────────────────────────────────────────────
-const IUCN_MAP = {
-  'least concern': 'LC', 'near threatened': 'NT', 'vulnerable': 'VU',
-  'endangered': 'EN', 'critically endangered': 'CR', 'data deficient': 'DD',
-  'extinct in the wild': 'EW', 'extinct': 'EX', 'not evaluated': 'NE',
-};
-
 router.post('/autofill', requireAdmin, async (req, res) => {
   const { scientificName } = req.body;
   if (!scientificName?.trim()) return res.status(400).json({ error: 'Se requiere nombre científico' });
 
-  // Quitar sufijos de indeterminación para la búsqueda
-  const query = scientificName.replace(/\s+(sp\.|cf\.|aff\.|ssp\.|subsp\.).*/i, '').trim();
-
   try {
-    // 1) Buscar taxón con locale=en para obtener nombre en inglés
-    const searchRes = await fetch(
-      `https://api.inaturalist.org/v1/taxa?q=${encodeURIComponent(query)}&per_page=1&locale=en`,
-      { signal: AbortSignal.timeout(8000) }
-    );
-    const searchData = await searchRes.json();
-    const taxon = searchData.results?.[0];
-    if (!taxon) return res.json({ ok: true, data: null, msg: 'No encontrado en iNaturalist' });
-
-    const nameEn = taxon.preferred_common_name || '';
-
-    // 2) Estado IUCN
-    const statusRaw = taxon.conservation_status?.status_name?.toLowerCase() || '';
-    // eslint-disable-next-line security/detect-object-injection -- statusRaw es string lowercase de iNaturalist API, IUCN_MAP tiene claves fijas
-    const iucn = IUCN_MAP[statusRaw]
-              || taxon.conservation_status?.status?.toUpperCase()
-              || 'DD';
-
-    // 3) Detalle en ES y EN en paralelo → nombres y Wikipedia en ambos idiomas
-    const [detailEsData, detailEnData] = await Promise.all([
-      fetch(`https://api.inaturalist.org/v1/taxa/${taxon.id}?locale=es`, { signal: AbortSignal.timeout(8000) }).then(r => r.json()),
-      fetch(`https://api.inaturalist.org/v1/taxa/${taxon.id}?locale=en`, { signal: AbortSignal.timeout(8000) }).then(r => r.json()),
-    ]);
-
-    const taxonEs = detailEsData.results?.[0] || {};
-    const taxonEn = detailEnData.results?.[0] || {};
-
-    const nameEs = taxonEs.preferred_common_name || '';
-
-    const descripcionEs = cleanWiki(taxonEs.wikipedia_summary);
-    const descripcionEn = cleanWiki(taxonEn.wikipedia_summary);
-
-    res.json({
-      ok: true,
-      data: { nameEs, nameEn, iucn, descripcionEs, descripcionEn, inatUrl: `https://www.inaturalist.org/taxa/${taxon.id}` },
-    });
+    const resultado = await inaturalist.buscarEspecie(scientificName);
+    res.json({ ok: true, ...resultado });
   } catch (err) {
+    // nosemgrep: error-detail-in-response -- ruta detrás de requireAdmin; el detalle ayuda a diagnosticar fallas de la API pública de iNaturalist, no expone datos internos del servidor
     res.status(500).json({ error: 'Error consultando iNaturalist', detail: err.message });
   }
 });
@@ -177,105 +90,12 @@ router.get('/jpl/fotos/:mes', requireAdmin, async (req, res) => {
 });
 
 router.get('/jpl/stats/analytics', requireAdmin, async (req, res) => {
-  const result = await getCached(redis, 'jpl:stats:analytics', TTL.JPL_STATS, async () => {
-  const all = await JplPhoto.find({}).lean();
-
-  const allCreditSet = new Set(all.map(f => f.credito?.trim()).filter(Boolean));
-  const allSubregSet = new Set(all.map(f => f.subregion).filter(Boolean));
-
-  // Fotógrafos únicos por subregión
-  const fMap = {};
-  all.forEach(f => {
-    const s = f.subregion || '';
-    // eslint-disable-next-line security/detect-object-injection -- clave proviene de documento MongoDB (valor curado por admin), no de input HTTP
-    if (!fMap[s]) fMap[s] = new Set();
-    // eslint-disable-next-line security/detect-object-injection -- ídem
-    if (f.credito?.trim()) fMap[s].add(f.credito.trim());
-  });
-  const fotografos = Object.entries(fMap)
-    .filter(([s]) => s)
-    .map(([subregion, set]) => ({ subregion, count: set.size, nombres: [...set].sort() }))
-    .sort((a, b) => b.count - a.count);
-
-  // Cobertura municipal
-  const mMap = {};
-  all.forEach(f => {
-    const key = f.municipio?.trim();
-    if (!key) return;
-    // eslint-disable-next-line security/detect-object-injection -- clave proviene de documento MongoDB (valor curado por admin), no de input HTTP
-    if (!mMap[key]) mMap[key] = { municipio: key, subregion: f.subregion || '', fotos: 0, esps: new Set(), amenazadas: 0 };
-    // eslint-disable-next-line security/detect-object-injection -- ídem
-    mMap[key].fotos++;
-    // eslint-disable-next-line security/detect-object-injection -- ídem
-    if (f.especieCientifico?.trim()) mMap[key].esps.add(f.especieCientifico.trim());
-    // eslint-disable-next-line security/detect-object-injection -- ídem
-    if (['CR','EN','VU'].includes(f.iucn)) mMap[key].amenazadas++;
-  });
-  const municipios = Object.values(mMap)
-    .map(m => ({ municipio: m.municipio, subregion: m.subregion, fotos: m.fotos, especies: m.esps.size, amenazadas: m.amenazadas }))
-    .sort((a, b) => b.fotos - a.fotos);
-
-  // Alertas CR / EN
-  const alertas = all
-    .filter(f => ['CR','EN'].includes(f.iucn))
-    .map(f => ({
-      sci: f.especieCientifico, es: f.especieEs, iucn: f.iucn,
-      municipio: f.municipio,   subregion: f.subregion,
-      credito: f.credito,       endemica: f.endemica,
-      foto: f.fotos?.[0] || '', mes: f.mes,
-    }));
-
-  // Bioindicadores hídricos
-  const bioindicadores = all
-    .filter(f => ['anfibios_reptiles','peces'].includes(f.grupo))
-    .map(f => ({
-      sci: f.especieCientifico, es: f.especieEs, grupo: f.grupo, iucn: f.iucn,
-      municipio: f.municipio,   subregion: f.subregion,
-      credito: f.credito,       endemica: f.endemica,
-      foto: f.fotos?.[0] || '', mes: f.mes,
-    }));
-
-  return {
-    totalFotografos:      allCreditSet.size,
-    municipiosCubiertos:  Object.keys(mMap).length,
-    subregionesCubiertas: allSubregSet.size,
-    fotografos,
-    municipios,
-    alertas,
-    bioindicadores,
-  };
-  });
+  const result = await getCached(redis, 'jpl:stats:analytics', TTL.JPL_STATS, jplStats.calcularAnalytics);
   res.json(result);
 });
 
 router.get('/jpl/stats/monthly', requireAdmin, async (req, res) => {
-  const result = await getCached(redis, 'jpl:stats:monthly', TTL.JPL_STATS, async () => {
-  const MESES_ES = ['','Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'];
-  const rows = await JplPhoto.aggregate([
-    {
-      $group: {
-        _id:            '$mes',
-        fotos:          { $sum: 1 },
-        especiesSet:    { $addToSet: '$especieCientifico' },
-        subregionesSet: { $addToSet: '$subregion' },
-        amenazadas:     { $sum: { $cond: [{ $in: ['$iucn', ['CR','EN','VU']] }, 1, 0] } },
-        endemicas:      { $sum: { $cond: ['$endemica', 1, 0] } },
-      },
-    },
-    {
-      $project: {
-        _id: 0, mes: '$_id', fotos: 1, amenazadas: 1, endemicas: 1,
-        especiesUnicas: { $size: '$especiesSet' },
-        subregiones:    { $size: '$subregionesSet' },
-      },
-    },
-    { $sort: { mes: 1 } },
-  ]);
-  return rows.map(r => {
-    const [y, m] = r.mes.split('-');
-    return { ...r, label: `${MESES_ES[+m]} ${y}` };
-  });
-  });
+  const result = await getCached(redis, 'jpl:stats:monthly', TTL.JPL_STATS, jplStats.calcularEstadisticasMensuales);
   res.json(result);
 });
 
@@ -283,6 +103,10 @@ router.post('/jpl/fotos/:mes', requireAdmin, jplFields, async (req, res) => {
   const mes = req.params.mes;
   const newFiles = req.files?.fotosNuevas || [];
   if (!newFiles.length) return res.status(400).json({ error: 'Se requiere al menos una foto' });
+  if (!req.body.especieEs?.trim()) return res.status(400).json({ error: 'Se requiere el nombre común de la especie' });
+  if (!GRUPOS_VALIDOS.includes(req.body.grupo)) return res.status(400).json({ error: 'Grupo taxonómico no reconocido' });
+  if (!SUBREGIONES_VALIDAS.includes(req.body.subregion)) return res.status(400).json({ error: 'Subregión no reconocida' });
+  if (req.body.iucn && !IUCN_VALIDOS.includes(req.body.iucn)) return res.status(400).json({ error: 'Código IUCN no reconocido' });
 
   const fotoPaths = [];
   for (const f of newFiles) {
@@ -311,6 +135,11 @@ router.post('/jpl/fotos/:mes', requireAdmin, jplFields, async (req, res) => {
 });
 
 router.put('/jpl/fotos/:mes/:id', requireAdmin, jplFields, async (req, res) => {
+  if (!req.body.especieEs?.trim()) return res.status(400).json({ error: 'Se requiere el nombre común de la especie' });
+  if (!GRUPOS_VALIDOS.includes(req.body.grupo)) return res.status(400).json({ error: 'Grupo taxonómico no reconocido' });
+  if (!SUBREGIONES_VALIDAS.includes(req.body.subregion)) return res.status(400).json({ error: 'Subregión no reconocida' });
+  if (req.body.iucn && !IUCN_VALIDOS.includes(req.body.iucn)) return res.status(400).json({ error: 'Código IUCN no reconocido' });
+
   const update = {
     credito:           req.body.credito           || '',
     municipio:         req.body.municipio          || '',
@@ -333,10 +162,7 @@ router.put('/jpl/fotos/:mes/:id', requireAdmin, jplFields, async (req, res) => {
   const old = await JplPhoto.findById(req.params.id);
   if (old) {
     const removed = (old.fotos || []).filter(p => !keepPaths.includes(p));
-    removed.forEach(p => {
-      const abs = path.join(FRONTEND, 'comunidad/jovenes_pa_lante', p);
-      if (fs.existsSync(abs)) fs.unlinkSync(abs);
-    });
+    removed.forEach(p => borrarSiExiste('comunidad/jovenes_pa_lante', p));
   }
 
   // Guardar fotos nuevas
@@ -358,79 +184,15 @@ router.put('/jpl/fotos/:mes/:id', requireAdmin, jplFields, async (req, res) => {
 router.delete('/jpl/fotos/:id', requireAdmin, async (req, res) => {
   const photo = await JplPhoto.findByIdAndDelete(req.params.id);
   if (!photo) return res.status(404).json({ error: 'No encontrada' });
-  (photo.fotos || []).forEach(p => {
-    const abs = path.join(FRONTEND, 'comunidad/jovenes_pa_lante', p);
-    if (fs.existsSync(abs)) fs.unlinkSync(abs);
-  });
+  (photo.fotos || []).forEach(p => borrarSiExiste('comunidad/jovenes_pa_lante', p));
   await invalidate(redis, 'jpl:fotos:*', 'jpl:stats:analytics', 'jpl:stats:monthly');
   res.json({ ok: true });
 });
 
 router.post('/jpl/publicar/:mes', requireAdmin, async (req, res) => {
-  const mes = req.params.mes;                       // 'YYYY-MM'
-  const [año, numMes] = mes.split('-').map(Number);
-  const MESES_ES = ['', 'Enero','Febrero','Marzo','Abril','Mayo','Junio',
-                    'Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
-  const MESES_EN = ['', 'January','February','March','April','May','June',
-                    'July','August','September','October','November','December'];
-
-  const fotos = await JplPhoto.find({ mes }).sort('orden createdAt').lean();
-  if (!fotos.length) return res.status(400).json({ error: 'Sin fotos para publicar' });
-
-  const payload = {
-    mes:    MESES_ES[numMes],
-    mesEn:  MESES_EN[numMes],
-    año,
-    fotos: fotos.map((f, i) => ({
-      id:                `jpl_${mes}_${String(i + 1).padStart(3, '0')}`,
-      fotos:             f.fotos || [],
-      credito:           f.credito,
-      municipio:         f.municipio,
-      subregion:         f.subregion,
-      especieEs:         f.especieEs,
-      especieEn:         f.especieEn,
-      especieCientifico: f.especieCientifico,
-      grupo:             f.grupo,
-      iucn:              f.iucn,
-      endemica:          f.endemica,
-      descripcionEs:     f.descripcionEs,
-      descripcionEn:     f.descripcionEn,
-    })),
-  };
-
-  // Escribir JSON del mes
-  const dataDir = path.join(FRONTEND, 'comunidad/jovenes_pa_lante/data');
-  fs.mkdirSync(dataDir, { recursive: true });
-  fs.writeFileSync(
-    path.join(dataDir, `fotos_${mes.replace('-', '_')}.json`),
-    JSON.stringify(payload, null, 2)
-  );
-
-  // Actualizar índice
-  const indexPath = path.join(dataDir, 'fotos_biodiversidad.json');
-  const portada   = fotos[0].fotos?.[0] || '';
-  let index = { meses: [] };
-  if (fs.existsSync(indexPath)) {
-    index = JSON.parse(fs.readFileSync(indexPath, 'utf8'));
-  }
-  const existing = index.meses.findIndex(m => m.id === mes);
-  const entry = {
-    id:      mes,
-    mes:     MESES_ES[numMes],
-    mesEn:   MESES_EN[numMes],
-    año,
-    count:   fotos.length,
-    portada,
-    archivo: `data/fotos_${mes.replace('-', '_')}.json`,
-  };
-  if (existing >= 0) index.meses[existing] = entry;
-  else index.meses.unshift(entry);
-  index.meses.sort((a, b) => b.id.localeCompare(a.id));
-  fs.writeFileSync(indexPath, JSON.stringify(index, null, 2));
-
-  await JplPhoto.updateMany({ mes }, { publicado: true });
-  await invalidate(redis, 'jpl:meses', `jpl:fotos:${mes}`);
-  res.json({ ok: true, count: fotos.length });
+  const resultado = await publicacion.publicarJpl(req.params.mes);
+  if (!resultado) return res.status(400).json({ error: 'Sin fotos para publicar' });
+  res.json({ ok: true, count: resultado.count });
 });
 
 // ─── GUARDA CUENCAS ────────────────────────────────────────────────────────
@@ -454,6 +216,9 @@ router.get('/gc/fotos/:mes', requireAdmin, async (req, res) => {
 router.post('/gc/fotos/:mes', requireAdmin, gcUpload.single('foto'), async (req, res) => {
   const mes = req.params.mes;
   if (!req.file) return res.status(400).json({ error: 'No se recibió ninguna foto' });
+  if (!req.body.cuenca?.trim()) return res.status(400).json({ error: 'Se requiere el nombre de la cuenca' });
+  if (!req.body.tituloEs?.trim()) return res.status(400).json({ error: 'Se requiere un título' });
+  if (!SUBREGIONES_VALIDAS.includes(req.body.subregion)) return res.status(400).json({ error: 'Subregión no reconocida' });
   const rel = await saveGcFile(req.file.buffer, mes);
   const count = await GcPhoto.countDocuments({ mes });
   const photo = await GcPhoto.create({
@@ -474,6 +239,10 @@ router.post('/gc/fotos/:mes', requireAdmin, gcUpload.single('foto'), async (req,
 });
 
 router.put('/gc/fotos/:mes/:id', requireAdmin, gcUpload.single('foto'), async (req, res) => {
+  if (!req.body.cuenca?.trim()) return res.status(400).json({ error: 'Se requiere el nombre de la cuenca' });
+  if (!req.body.tituloEs?.trim()) return res.status(400).json({ error: 'Se requiere un título' });
+  if (!SUBREGIONES_VALIDAS.includes(req.body.subregion)) return res.status(400).json({ error: 'Subregión no reconocida' });
+
   const update = {
     credito:      req.body.credito       || '',
     municipio:    req.body.municipio     || '',
@@ -487,10 +256,7 @@ router.put('/gc/fotos/:mes/:id', requireAdmin, gcUpload.single('foto'), async (r
   };
   if (req.file) {
     const old = await GcPhoto.findById(req.params.id);
-    if (old) {
-      const abs = path.join(FRONTEND, 'comunidad/guarda_cuencas', old.foto);
-      if (fs.existsSync(abs)) fs.unlinkSync(abs);
-    }
+    if (old) borrarSiExiste('comunidad/guarda_cuencas', old.foto);
     update.foto = await saveGcFile(req.file.buffer, req.params.mes);
   }
   const photo = await GcPhoto.findByIdAndUpdate(req.params.id, update, { new: true });
@@ -502,72 +268,15 @@ router.put('/gc/fotos/:mes/:id', requireAdmin, gcUpload.single('foto'), async (r
 router.delete('/gc/fotos/:id', requireAdmin, async (req, res) => {
   const photo = await GcPhoto.findByIdAndDelete(req.params.id);
   if (!photo) return res.status(404).json({ error: 'No encontrada' });
-  const abs = path.join(FRONTEND, 'comunidad/guarda_cuencas', photo.foto);
-  if (fs.existsSync(abs)) fs.unlinkSync(abs);
+  borrarSiExiste('comunidad/guarda_cuencas', photo.foto);
   await invalidate(redis, 'gc:fotos:*');
   res.json({ ok: true });
 });
 
 router.post('/gc/publicar/:mes', requireAdmin, async (req, res) => {
-  const mes = req.params.mes;
-  const [año, numMes] = mes.split('-').map(Number);
-  const MESES_ES = ['', 'Enero','Febrero','Marzo','Abril','Mayo','Junio',
-                    'Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
-  const MESES_EN = ['', 'January','February','March','April','May','June',
-                    'July','August','September','October','November','December'];
-
-  const fotos = await GcPhoto.find({ mes }).sort('orden createdAt').lean();
-  if (!fotos.length) return res.status(400).json({ error: 'Sin fotos para publicar' });
-
-  const payload = {
-    mes:   MESES_ES[numMes],
-    mesEn: MESES_EN[numMes],
-    año,
-    fotos: fotos.map((f, i) => ({
-      id:           `gc_${mes}_${String(i + 1).padStart(3, '0')}`,
-      foto:         f.foto,
-      credito:      f.credito,
-      municipio:    f.municipio,
-      subregion:    f.subregion,
-      cuenca:       f.cuenca,
-      tituloEs:     f.tituloEs,
-      tituloEn:     f.tituloEn,
-      descripcionEs:f.descripcionEs,
-      descripcionEn:f.descripcionEn,
-    })),
-  };
-
-  const dataDir = path.join(FRONTEND, 'comunidad/guarda_cuencas/data');
-  fs.mkdirSync(dataDir, { recursive: true });
-  fs.writeFileSync(
-    path.join(dataDir, `cuencas_${mes.replace('-', '_')}.json`),
-    JSON.stringify(payload, null, 2)
-  );
-
-  const indexPath = path.join(dataDir, 'fotos_cuencas.json');
-  const portada   = fotos[0].foto;
-  let index = { meses: [] };
-  if (fs.existsSync(indexPath)) {
-    index = JSON.parse(fs.readFileSync(indexPath, 'utf8'));
-  }
-  const existing = index.meses.findIndex(m => m.id === mes);
-  const entry = {
-    id:      mes,
-    mes:     MESES_ES[numMes],
-    mesEn:   MESES_EN[numMes],
-    año,
-    count:   fotos.length,
-    portada,
-    archivo: `data/cuencas_${mes.replace('-', '_')}.json`,
-  };
-  if (existing >= 0) index.meses[existing] = entry;
-  else index.meses.unshift(entry);
-  index.meses.sort((a, b) => b.id.localeCompare(a.id));
-  fs.writeFileSync(indexPath, JSON.stringify(index, null, 2));
-
-  await GcPhoto.updateMany({ mes }, { publicado: true });
-  await invalidate(redis, 'gc:meses', `gc:fotos:${mes}`);
-  res.json({ ok: true, count: fotos.length });
+  const resultado = await publicacion.publicarGc(req.params.mes);
+  if (!resultado) return res.status(400).json({ error: 'Sin fotos para publicar' });
+  res.json({ ok: true, count: resultado.count });
 });
 
 module.exports = router;

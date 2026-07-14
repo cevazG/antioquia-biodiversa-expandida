@@ -26,8 +26,10 @@ jest.mock('../../models/GcPhoto', () => ({
   findByIdAndDelete: jest.fn(), updateMany: jest.fn(),
 }));
 
-// Contraseña fija para pruebas
-process.env.ADMIN_PASSWORD = 'clave-prueba';
+// Contraseña fija para pruebas — el login ahora compara contra un hash bcrypt,
+// no contra texto plano (ver routes/admin.js).
+const bcrypt = require('bcryptjs');
+process.env.ADMIN_PASSWORD_HASH = bcrypt.hashSync('clave-prueba', 10);
 
 const app = makeApp(require('../../routes/admin'));
 

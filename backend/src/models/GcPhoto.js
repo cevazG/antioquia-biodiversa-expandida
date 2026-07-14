@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const { connCom } = require('../db');
+const { SUBREGIONES_VALIDAS } = require('../config/catalogo');
 
 const GcPhotoSchema = new mongoose.Schema({
   mes:          { type: String, required: true },  // 'YYYY-MM'
@@ -7,7 +8,7 @@ const GcPhotoSchema = new mongoose.Schema({
   foto:         { type: String, required: true },
   credito:      { type: String, default: '' },
   municipio:    { type: String, default: '' },
-  subregion:    { type: String, required: true },
+  subregion:    { type: String, required: true, enum: SUBREGIONES_VALIDAS },
   cuenca:       { type: String, required: true },
   tituloEs:     { type: String, required: true },
   tituloEn:     { type: String, default: '' },

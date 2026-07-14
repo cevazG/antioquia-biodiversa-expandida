@@ -25,6 +25,9 @@ logs/
 *.tmp
 *.temp
 
+# Archivos de bloqueo de Word/Office (se crean al tener un .docx/.xlsx abierto)
+~$*
+
 # Documentos privados de negociación con la Gobernación — NO subir a GitHub
 Documentos gobernacion/TI/Propuesta_Ampliacion_JPL_Participantes.md
 Documentos gobernacion/TI/Propuesta_Ampliacion_JPL_Participantes.docx

@@ -523,6 +523,19 @@ Resultado final: **0 hallazgos de Semgrep**, `npm audit` limpio, lint sin errore
 
 El frontend estático se despliega en Netlify desde la rama `main`. El backend Node.js corre en el servidor de la Gobernación y **no** pasa por Netlify.
 
+### Sitio único — NO crear sitios nuevos
+
+> **Hay un solo sitio de producción. Antes de correr cualquier comando `netlify` que pueda crear un sitio nuevo (`netlify init`, `netlify deploy` sin sitio vinculado, `netlify sites:create`), verificar primero con `netlify status` o `netlify sites:list` que la carpeta ya está vinculada al sitio correcto.**
+
+| Sitio | Project ID | Propósito |
+|---|---|---|
+| **antioquia-biodiversa-expandida** | `050e260c-4478-4814-bfc9-f8928b8f3fcf` | **Producción real.** Único sitio con CI/CD conectado al repo de GitHub (`cevazG/antioquia-biodiversa-expandida`, rama `main`). Cada `git push` a `main` dispara un build y deploy automático — no requiere ningún paso manual en Netlify. |
+| antioquia-biodiversa-demo | `f686c856-5231-489d-a76f-8c306f914114` | Demo aparte, sin conexión a GitHub (deploys manuales). No tocar salvo que se pida explícitamente. |
+
+El vínculo local carpeta↔sitio vive en `.netlify/state.json` (en `.gitignore`, no se sube al repo — por eso cada máquina/checkout nuevo necesita re-vincularse con `netlify link --id 050e260c-4478-4814-bfc9-f8928b8f3fcf`, **nunca** con `netlify init` a menos que `netlify status` confirme que no hay ningún sitio ya conectado a este repo).
+
+**Cómo se originó el CI/CD:** el 14 de julio de 2026 se corrió `netlify init` desde esta carpeta, que autorizó a Netlify contra GitHub (`Authorize with GitHub through app.netlify.com`) y agregó una deploy key + webhook al repo. Ese mismo día se descubrió que el sitio de producción (`antioquia-biodiversa-expandida`) **ya tenía CI/CD configurado desde antes** (deploys automáticos desde el 10 de julio), así que `netlify init` había creado sin querer un segundo sitio duplicado (`effortless-meerkat-5ea004`) con su propia deploy key/webhook redundante sobre el mismo repo. Se eliminó ese sitio duplicado (`netlify sites:delete`) y se re-vinculó la carpeta al sitio original. Moraleja: **siempre correr `netlify status` primero** — si ya existe un sitio con `repo:` apuntando a este repo, solo hace falta `netlify link --id <ese-id>`, nunca `netlify init`.
+
 ### netlify.toml — comportamiento clave
 
 | Sección | Qué hace |
@@ -542,6 +555,22 @@ Modal que aparece **una sola vez** en la primera visita:
 - Checkbox **no pre-marcado** — el botón "Aceptar · Accept" arranca deshabilitado
 - Al aceptar: `localStorage.setItem('ab_privacy_accepted', '1')` → modal no vuelve a aparecer
 - Botón en `--color-green-light` (#3bbb6a) — verde del sistema de diseño oficial
+
+---
+
+## Ambientes — Dev / QA / Producción
+
+Segregación de ambientes según la sección 6.1 de la Guía de Arquitectura y Buenas Prácticas de Desarrollo de la Gobernación. Estado real (2026-07-16):
+
+| Ambiente | Frontend | Backend / Datos |
+|---|---|---|
+| **Desarrollo** | `localhost:3000` | `backend/.env` → BD `antioquia-biodiversa` (MongoDB Atlas). Único ambiente con datos reales hasta hoy (nombres de fotógrafos comunitarios que consintieron participar) — no hay producción separada todavía |
+| **QA / Staging** | Branch deploy de Netlify en `develop` → `develop--antioquia-biodiversa-expandida.netlify.app`, se actualiza solo con `git push origin develop` | `backend/.env.qa` → BD separada `antioquia-biodiversa-qa` (mismo cluster Atlas, puerto local `3001`), poblada 100% con datos sintéticos vía `node src/scripts/seed_qa_data.js` — cero datos reales |
+| **Producción** | Netlify, rama `main` (sitio `antioquia-biodiversa-expandida`) | Pendiente: servidor Ubuntu 24.04 de TI Gobernación (ver "Manual de despliegue" abajo) |
+
+**Regenerar datos de QA:** `node backend/src/scripts/seed_qa_data.js` borra y vuelve a insertar los registros de prueba (`mes: test-2026-07`). El script aborta si `MONGODB_URI_COM` no apunta a una base terminada en `-qa`, como salvaguarda contra ejecutarlo por error sobre datos reales.
+
+`.env.qa` está en `.gitignore` — nunca se sube al repositorio, igual que `.env`.
 
 ---
 

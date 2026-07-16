@@ -72,6 +72,21 @@ Copiar `backend/.env.example` como `backend/.env` y completar:
 
 ---
 
+## Ambiente de QA / Staging
+
+Ambiente de pruebas aislado, separado de Desarrollo y sin ningún dato real:
+
+- **Backend**: `backend/.env.qa` apunta a una base de datos MongoDB separada (`antioquia-biodiversa-qa`, mismo cluster Atlas), puerto `3001`. Poblarla con datos sintéticos:
+  ```bash
+  cd backend
+  node src/scripts/seed_qa_data.js       # inserta registros de prueba (mes: test-2026-07)
+  node -e "require('dotenv').config({ path: '.env.qa' }); require('./src/index.js')"   # levanta en :3001
+  ```
+- **Frontend**: la rama `develop` tiene su propio branch deploy en Netlify, independiente de producción: `develop--antioquia-biodiversa-expandida.netlify.app`. Se actualiza automáticamente con cada `git push origin develop`.
+- `.env.qa` nunca se sube al repositorio (está en `.gitignore`, igual que `.env`).
+
+---
+
 ## Comandos disponibles
 
 ```bash

@@ -202,6 +202,19 @@ function buildDoc() {
     bullet('5. Verificar: pm2 status, pm2 logs, y curl al endpoint /api/health (debe responder mongodb y redis conectados).'),
     para('El procedimiento completo, con cada comando, está en README.md (raíz del repositorio), sección "Despliegue en producción".'),
 
+    heading2('3.4. Estrategia de Entornos'),
+    para('Siguiendo la segregación de ambientes recomendada en la sección 6.1 de la Guía de Arquitectura y Buenas Prácticas de Desarrollo, el proyecto cuenta con los siguientes ambientes lógicos separados:'),
+    makeTable(
+      ['Ambiente', 'Estado'],
+      [
+        ['Desarrollo (Dev)', 'Local (localhost:3000), backend/.env. Único ambiente con datos reales hasta hoy (nombres de fotógrafos comunitarios provistos voluntariamente al participar en los programas) — no existe todavía separación de producción'],
+        ['QA / Staging', 'Activo desde 2026-07-16. Frontend: rama develop desplegada aparte en Netlify (branch deploy), sin afectar el sitio de producción. Backend: base de datos MongoDB separada (antioquia-biodiversa-qa, mismo cluster Atlas) poblada con datos 100% sintéticos (backend/src/scripts/seed_qa_data.js) — ningún dato real de participantes'],
+        ['Producción (Prod)', 'Pendiente de infraestructura provista por TI Gobernación (servidor Ubuntu 24.04, dominio institucional). El manual de despliegue (README.md) ya cubre el procedimiento completo'],
+      ],
+      [2500, 6860]
+    ),
+    para('La gestión de datos de prueba sigue la anonimización obligatoria de la sección 6.2 de la Guía: el ambiente de QA no contiene ningún dato real, y el ambiente de Desarrollo no maneja datos sensibles tipo cédula o identificación (solo nombres de pila de fotógrafos que consintieron participar en los programas comunitarios).'),
+
     // ── 4. MODELO DE BASE DE DATOS ───────────────────────────────────────
     heading1('4. Modelo de Base de Datos'),
     para('MongoDB Atlas, base de datos "comunidad" (variable MONGODB_URI_COM). No hay una segunda conexión activa a una base "biodiversidad" en el backend actual — el catálogo de especies se sirve como JSON estático desde el frontend (biodiversidad/data/species.json), no desde MongoDB.'),
@@ -263,10 +276,13 @@ function buildDoc() {
         ['Cookie de sesión', 'httpOnly explícito, nombre custom (no revela la librería), secure activo en producción'],
         ['Credenciales en código fuente', 'Ninguna — todas se leen de variables de entorno'],
         ['Licencias de dependencias', '13 dependencias de producción: 11 MIT, 1 BSD-2-Clause, 1 Apache-2.0. Ninguna GPL/restrictiva'],
+        ['Cifrado en tránsito (TLS 1.2+)', 'Documentado y listo en el manual de despliegue (Nginx + Let\'s Encrypt/Certbot), pendiente de verificar en vivo hasta que exista un ambiente real desplegado'],
+        ['Cifrado en reposo', 'Provisto por defecto por MongoDB Atlas en todos sus clusters, incluido el plan gratuito M0 usado actualmente'],
+        ['MFA para administradores', 'Pendiente — la solución de fondo es Microsoft Entra ID (ítem B1 del roadmap), sujeta a que TI Gobernación provea Client ID y Tenant ID. Mientras tanto, acceso protegido con sesión + contraseña con hash bcrypt'],
       ],
       [3800, 5560]
     ),
-    nota('Detalle completo, incluyendo los ítems parcialmente cumplidos (WCAG 2.1 AA, GitFlow, confirmación del stack contra el catálogo de referencia), en la Lista de Chequeo de Conformidad entregada por separado.'),
+    nota('Detalle completo, incluyendo los ítems parcialmente cumplidos (patrón de arquitectura del backend y cifrado en un ambiente todavía sin desplegar), en la Lista de Chequeo de Conformidad entregada por separado.'),
 
     // ── 6. CALIDAD Y PRUEBAS ─────────────────────────────────────────────
     heading1('6. Calidad y Pruebas'),

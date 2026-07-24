@@ -466,6 +466,35 @@ Estructura: `biodiversidad/img/species/<grupo>/<familia>/<spXXX_slug>/<slug>_001
 
 ---
 
+## Módulo Agua — Cuencas Hídricas
+
+`agua/mapa.html` muestra las cuencas hidrográficas principales de Antioquia (18 ríos) en un solo mapa Leaflet, con su área de drenaje y el trazado del río, coloreadas por zona hidrográfica. `agua/acueductos.html` es un módulo aparte (cuencas que abastecen acueductos municipales, no confundir con el de cuencas hidrográficas).
+
+### Clasificación oficial (Decreto 1640 de 2012, IDEAM)
+
+Colombia clasifica sus cuencas en **6 niveles jerárquicos**, cada uno anidado dentro del anterior:
+
+| Nivel | Nombre | Qué es | Ejemplo |
+|---|---|---|---|
+| 1 | Área hidrográfica | La gran vertiente continental | Antioquia: Magdalena-Cauca (mayoría) y Caribe (Urabá) |
+| 2 | Zona hidrográfica | Agrupa cuencas de relieve/drenaje similar | Cauca, Nechí, Medio Magdalena, Atrato-Darién, Caribe-Urabá |
+| 3 | Subzona hidrográfica | La cuenca de un río principal | Río Porce, Río Cauca — **nivel que muestra el mapa** |
+| 4-6 | Nivel I / II / III | Subdivisiones cada vez más finas | Afluentes y quebradas — no disponible aún (ver abajo) |
+
+Los niveles 1 y 2 no son cuencas adicionales — son categorías que agrupan las de nivel 3. Cada río en el mapa ya muestra sus 3 primeros niveles como badges en el panel de información.
+
+**Por qué se queda en nivel 3**: los niveles 4-6 requieren el detalle de las Corporaciones Autónomas Regionales (CORANTIOQUIA/CORNARE/CORPOURABA), pendiente de autorización — ver `Mapa/Info agua/FUENTES_DATOS_AGUA.md`.
+
+### Por qué estos 18 ríos
+
+**No es un ranking objetivo único** — es una selección curada que mezcla continuidad con la lista previa del módulo, área real medida (donde la fuente lo permitió, 15 de 18) y reconocimiento regional (los otros 3: Cocorná, Grande, Guatapé, sin área medible en esta fuente). Detalle completo, con el ranking por tamaño y la respuesta sugerida si preguntan "¿por qué estos y no otros?", en `Mapa/Info agua/FUENTES_DATOS_AGUA.md`.
+
+### Datos y regeneración
+
+`generate_cuencas_agua.py` (raíz del proyecto) genera `agua/data/cuencas.json` y `agua/data/antioquia_boundary.json` desde fuentes públicas (GADM + webmap nacional de IDEAM). Detalle completo de fuentes, licencias pendientes y cómo actualizar en `Mapa/Info agua/FUENTES_DATOS_AGUA.md`.
+
+---
+
 ## SAST — Análisis estático de seguridad
 
 ### Scripts de seguridad disponibles

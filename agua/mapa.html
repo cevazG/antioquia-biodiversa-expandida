@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <meta name="theme-color" content="#3561ab">
-  <title>Mapa Hídrico · Antioquia</title>
+  <title>Cuencas Hídricas · Antioquia</title>
   <link rel="stylesheet" href="../biodiversidad/css/main.css">
   <link rel="stylesheet" href="../biodiversidad/css/components.css">
   <link rel="stylesheet" href="../biodiversidad/css/animations.css">
@@ -20,16 +20,59 @@
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5m0 0l7 7m-7-7l7-7"/></svg>
     </button>
     <div>
-      <div class="map-header__title" data-i18n="agua_titulo">Red Hídrica de Antioquia</div>
-      <div class="map-header__subtitle" data-i18n="agua_mapa_sub">Toca una subregión para explorar</div>
+      <div class="map-header__title" data-i18n="agua_cuencas_map_titulo">Cuencas Hídricas</div>
+      <div class="map-header__subtitle" data-i18n="agua_cuencas_map_sub">Toca una cuenca para ver su información</div>
     </div>
-    <span class="tipo-pill" id="tipo-label">Fuentes</span>
     <button data-lang-toggle style="background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.4);color:white;padding:4px 10px;border-radius:20px;font-size:0.78rem;font-weight:700;cursor:pointer;font-family:inherit;">EN</button>
   </div>
 
-  <div id="map"></div>
+  <div class="map-wrap">
+    <div id="map"></div>
 
-  <div class="map-hint" id="map-hint" data-i18n="agua_toca">💧 Toca una subregión</div>
+    <div class="map-floating-controls">
+      <div class="layer-mode-toggle" id="layer-mode-toggle">
+        <button data-mode="rios" data-i18n="agua_modo_rios">Ríos</button>
+        <button data-mode="todo" class="active" data-i18n="agua_modo_todo">Ríos + áreas</button>
+      </div>
+      <button class="legend-btn" id="legend-btn" aria-label="Ver leyenda de niveles" data-i18n="agua_leyenda_btn">
+        ℹ️ Niveles
+      </button>
+    </div>
+  </div>
+
+  <div class="cuencas-chip-row" id="cuencas-chip-row" role="region" aria-label="Mostrar u ocultar cuencas"></div>
+
+  <!-- Panel de leyenda -->
+  <div class="cuenca-overlay" id="legend-overlay"></div>
+  <div class="cuenca-sheet legend-sheet" id="legend-sheet" role="dialog" aria-modal="true" aria-labelledby="legend-title">
+    <div class="cuenca-sheet__handle"></div>
+    <button class="cuenca-sheet__close" id="legend-close" aria-label="Cerrar">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 6L6 18M6 6l12 12"/></svg>
+    </button>
+    <div class="cuenca-sheet__body">
+      <h2 class="cuenca-sheet__name" id="legend-title" data-i18n="agua_leyenda_titulo">Niveles de clasificación hidrográfica</h2>
+      <p class="cuenca-sheet__desc" data-i18n="agua_leyenda_desc">Colombia clasifica sus cuencas en 6 niveles jerárquicos (Decreto 1640 de 2012, IDEAM). Este mapa muestra los niveles 1 a 3.</p>
+      <div id="legend-list"></div>
+      <h3 class="legend-subtitle" data-i18n="agua_leyenda_zonas_titulo">Zonas hidrográficas en este mapa</h3>
+      <div id="legend-zonas"></div>
+    </div>
+  </div>
+
+  <!-- Panel de información de cuenca (bottom sheet) -->
+  <div class="cuenca-overlay" id="cuenca-overlay"></div>
+  <div class="cuenca-sheet" id="cuenca-sheet" role="dialog" aria-modal="true" aria-labelledby="cuenca-sheet-name">
+    <div class="cuenca-sheet__handle"></div>
+    <button class="cuenca-sheet__close" id="cuenca-sheet-close" aria-label="Cerrar">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 6L6 18M6 6l12 12"/></svg>
+    </button>
+    <div class="cuenca-sheet__body">
+      <div class="cuenca-sheet__badges" id="cuenca-sheet-badges"></div>
+      <h2 class="cuenca-sheet__name" id="cuenca-sheet-name">—</h2>
+      <p class="cuenca-sheet__desc" id="cuenca-sheet-desc">—</p>
+      <div class="cuenca-sheet__meta" id="cuenca-sheet-meta"></div>
+      <div class="cuenca-sheet__subregiones" id="cuenca-sheet-subregiones"></div>
+    </div>
+  </div>
 
   <nav class="bottom-bar" aria-label="Navegación">
     <button class="bottom-bar__btn" onclick="window.location.href='../biodiversidad/home.html'">

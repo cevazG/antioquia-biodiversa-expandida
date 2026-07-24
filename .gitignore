@@ -26,6 +26,12 @@ logs/
 *.tmp
 *.temp
 
+# Caché local de generate_cuencas_agua.py (descarga nacional de IDEAM, ~10 MB)
+.cache_*.json
+
+# PDF fuente de IDEAM (documento público, 45 MB) — referencia local, no en git
+Mapa/Info agua/MEMORIAS-MAPA-ZONIFICACION-HIDROGRAFICA.pdf
+
 # Archivos de bloqueo de Word/Office (se crean al tener un .docx/.xlsx abierto)
 ~$*
 

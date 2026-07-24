@@ -35,86 +35,258 @@
       font-size: 0.75rem; color: rgba(255,255,255,0.7); font-weight: 400;
     }
 
-    /* Pill selector tipo */
-    .tipo-pill {
-      background: rgba(255,255,255,0.18);
-      border: 1px solid rgba(255,255,255,0.3);
-      color: white;
-      padding: 4px 12px;
-      border-radius: var(--radius-full);
-      font-size: 0.8rem;
-      font-weight: 600;
-      flex-shrink: 0;
-    }
-
-    /* Mapa ocupa todo el espacio restante */
-    #map {
+    /* Mapa ocupa el espacio restante, deja lugar a la fila de chips */
+    .map-wrap {
+      position: relative;
       flex: 1;
+      min-height: 0;
+    }
+    #map {
+      height: 100%;
       width: 100%;
       z-index: 1;
     }
 
-    /* Instrucción flotante */
-    .map-hint {
+    /* Controles flotantes sobre el mapa: modo de capa + leyenda */
+    .map-floating-controls {
       position: absolute;
-      bottom: calc(var(--bottom-bar-height) + 16px);
-      left: 50%;
-      transform: translateX(-50%);
-      background: rgba(26, 58, 107, 0.92);
-      color: white;
-      padding: 8px 18px;
+      top: 12px;
+      left: 12px;
+      z-index: 500;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      align-items: flex-start;
+    }
+
+    .layer-mode-toggle {
+      display: flex;
+      background: white;
       border-radius: var(--radius-full);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.18);
+      overflow: hidden;
+    }
+    .layer-mode-toggle button {
+      border: none;
+      background: transparent;
+      padding: 8px 14px;
+      font-family: var(--font-primary);
       font-size: 0.8125rem;
-      font-weight: 500;
-      z-index: 900;
-      pointer-events: none;
-      backdrop-filter: blur(6px);
+      font-weight: 600;
+      color: var(--color-text-medium);
+      cursor: pointer;
       white-space: nowrap;
-      animation: fadeInUp 0.5s ease;
+    }
+    .layer-mode-toggle button.active {
+      background: var(--color-agua-dark);
+      color: white;
+    }
+
+    .legend-btn {
+      background: white;
+      border: none;
+      border-radius: var(--radius-full);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.18);
+      padding: 8px 14px;
+      font-family: var(--font-primary);
+      font-size: 0.8125rem;
+      font-weight: 600;
+      color: var(--color-agua-dark);
+      cursor: pointer;
+    }
+
+    /* Fila de chips con las cuencas — cada chip es un toggle de visibilidad */
+    .cuencas-chip-row {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      padding: 10px var(--space-md);
+      background: white;
+      border-top: 1px solid var(--color-border);
+      flex-shrink: 0;
+      z-index: 500;
+    }
+    .cuencas-chip-row::-webkit-scrollbar { display: none; }
+
+    /* Inactivo: borde de color (decorativo, no sujeto a contraste de texto) + texto gris neutro,
+       para no depender de opacidad sobre colores que ya rozan el mínimo WCAG AA */
+    .cuenca-chip {
+      background: white;
+      white-space: nowrap;
+      border-color: var(--chip-color) !important;
+      color: var(--color-text-medium) !important;
+    }
+    .cuenca-chip--active {
+      background: var(--chip-color) !important;
+      color: white !important;
     }
 
     /* Bottom bar */
     .bottom-bar { position: relative; z-index: 1000; }
 
-    /* Popup personalizado de Leaflet */
-    .leaflet-popup-content-wrapper {
-      border-radius: 14px !important;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.15) !important;
-      padding: 0 !important;
-      overflow: hidden;
+    /* ── Bottom sheet de información de cuenca ── */
+    .cuenca-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.5);
+      z-index: 1200;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s ease;
+    }
+    .cuenca-overlay.open { opacity: 1; pointer-events: all; }
+
+    .cuenca-sheet {
+      position: fixed;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%) translateY(100%);
+      width: 100%;
+      max-width: var(--app-max-width);
+      max-height: 70dvh;
+      background: white;
+      border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+      z-index: 1210;
+      transition: transform 0.35s cubic-bezier(0.4,0,0.2,1);
+    }
+    .cuenca-sheet.open { transform: translateX(-50%) translateY(0); }
+
+    .cuenca-sheet__handle {
+      width: 36px; height: 4px;
+      background: var(--color-border);
+      border-radius: 2px;
+      margin: 12px auto 0;
     }
 
-    .leaflet-popup-content { margin: 0 !important; }
-    .leaflet-popup-tip-container { display: none; }
-
-    .popup-card {
-      padding: 16px;
-      min-width: 200px;
+    .cuenca-sheet__close {
+      position: absolute;
+      top: 12px; right: 12px;
+      width: 32px; height: 32px;
+      border-radius: 50%;
+      background: var(--color-bg);
+      border: none;
+      color: var(--color-text-medium);
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer;
     }
 
-    .popup-card__name {
-      font-family: var(--font-primary);
-      font-size: 1rem;
+    .cuenca-sheet__body {
+      padding: var(--space-md) var(--space-lg) calc(var(--space-lg) + env(safe-area-inset-bottom));
+    }
+
+    .cuenca-sheet__badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: var(--space-sm);
+    }
+
+    .cuenca-badge {
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: var(--radius-full);
+      font-size: 0.6875rem;
       font-weight: 700;
-      color: var(--color-agua-dark);
-      margin-bottom: 4px;
+      color: white;
+      letter-spacing: 0.02em;
+    }
+    .cuenca-badge--outline {
+      background: white;
+      border: 1.5px solid;
     }
 
-    .popup-card__count {
+    .cuenca-sheet__name {
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: var(--color-text-dark);
+      margin-bottom: 8px;
+    }
+
+    .cuenca-sheet__desc {
+      font-size: 0.9375rem;
+      color: var(--color-text-medium);
+      line-height: 1.6;
+      margin-bottom: var(--space-md);
+    }
+
+    .cuenca-sheet__meta {
       font-size: 0.8125rem;
       color: var(--color-text-light);
-      margin-bottom: 12px;
+      margin-bottom: var(--space-md);
     }
 
-    .popup-card__btn {
-      display: block;
-      background: var(--color-agua);
+    .cuenca-sheet__subregiones {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .cuenca-sheet__pendiente {
+      display: inline-block;
+      margin-top: 4px;
+      font-size: 0.75rem;
+      font-style: italic;
+      color: var(--color-text-light);
+    }
+
+    /* ── Leyenda de niveles ── */
+    .legend-sheet { max-height: 80dvh; }
+
+    .legend-subtitle {
+      font-size: 0.9375rem;
+      font-weight: 700;
+      color: var(--color-text-dark);
+      margin: var(--space-md) 0 var(--space-sm);
+    }
+
+    .legend-item {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--color-border);
+    }
+    .legend-item:last-child { border-bottom: none; }
+
+    .legend-item__num {
+      flex-shrink: 0;
+      width: 26px; height: 26px;
+      border-radius: 50%;
+      background: var(--color-agua-dark);
       color: white;
-      text-align: center;
-      padding: 8px;
-      border-radius: 8px;
+      font-size: 0.8125rem;
+      font-weight: 800;
+      display: flex; align-items: center; justify-content: center;
+    }
+
+    .legend-item__title {
       font-size: 0.875rem;
-      font-weight: 600;
-      text-decoration: none;
-      font-family: var(--font-primary);
+      font-weight: 700;
+      color: var(--color-text-dark);
+      margin-bottom: 2px;
+    }
+
+    .legend-item__desc {
+      font-size: 0.8125rem;
+      color: var(--color-text-medium);
+      line-height: 1.5;
+    }
+
+    .legend-zona {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.875rem;
+      color: var(--color-text-dark);
+      padding: 6px 0;
+    }
+
+    .legend-zona__dot {
+      width: 14px; height: 14px;
+      border-radius: 50%;
+      flex-shrink: 0;
     }

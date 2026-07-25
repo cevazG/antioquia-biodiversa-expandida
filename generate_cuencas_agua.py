@@ -152,8 +152,8 @@ DESCRIPCIONES = {
     "Río León": ("leon", "Principal río de Urabá. Desemboca en el golfo de Urabá junto al Atrato.",
                  "Urabá's main river. Flows into the Gulf of Urabá alongside the Atrato.",
                  ["uraba"], "Caribe", "Caribe - Urabá"),
-    "Río San Juan (Suroeste)": ("san_juan_suroeste", "Nace en el suroeste antioqueño y drena hacia el Chocó, uniéndose después al Atrato.",
-                                  "Rises in southwestern Antioquia and drains toward Chocó, later joining the Atrato.",
+    "Río San Juan (Suroeste)": ("san_juan_suroeste", "Nace en los Farallones de Citará (suroeste antioqueño) y desemboca en el río Cauca cerca de Bolombolo, íntegramente dentro de Antioquia.",
+                                  "Rises in the Farallones de Citará (southwestern Antioquia) and flows into the Cauca River near Bolombolo, entirely within Antioquia.",
                                   ["suroeste", "occidente"], "Magdalena-Cauca", "Cauca"),
     "Río Cocorná": ("cocorna", "Afluente del Magdalena Medio. Atraviesa el oriente antioqueño.",
                     "Tributary of the Middle Magdalena. Crosses eastern Antioquia.",
@@ -205,6 +205,22 @@ LONGITUD_OFICIAL_KM = {
     "Río Arma":          (98, "Wikipedia"),
     "Río Sucio":         (170, "Wikipedia"),
     "Río Samaná Norte":  (120, "Fuentes varían 120-148 km; puede incluir el tramo del Samaná Sur/La Miel"),
+    "Río Samaná Sur":    (100.9, "CORNARE, POMCA Río Samaná Sur — Fase Diagnóstico (Tabla 67), fuente oficial"),
+    "Río Cocorná":       (102.2, "CORNARE, POMCA Río Cocorná — Fase Diagnóstico (Tabla 77), fuente oficial"),
+    "Río San Juan (Suroeste)": (73, "CORANTIOQUIA, POMCA Río San Juan — Fase Diagnóstico 2022 (Tabla 2-73, longitud de cuenca al punto de cierre), fuente oficial"),
+}
+
+# Notas especiales cuando la línea capturada dentro de Antioquia es sabidamente
+# incompleta (no porque el río salga del departamento, sino porque esta fuente
+# pública no trazó bien ese tramo específico).
+LONGITUD_NOTA = {
+    "Río San Juan (Suroeste)": (
+        "El río nace y desemboca completamente dentro de Antioquia (Andes a "
+        "Bolombolo) — la cifra \"en Antioquia\" de arriba está subestimada por "
+        "un trazado incompleto en esta fuente, no porque el río salga del "
+        "departamento. La longitud oficial (73 km) es la que corresponde al "
+        "río completo."
+    ),
 }
 
 # Cuencas sin polígono propio en la capa de subzonas: solo línea de río
@@ -330,6 +346,8 @@ def main():
             km, fuente = LONGITUD_OFICIAL_KM[entry["nombre"]]
             entry["longitud_total_oficial_km"] = km
             entry["longitud_total_fuente"] = fuente
+        if entry["nombre"] in LONGITUD_NOTA:
+            entry["longitud_nota"] = LONGITUD_NOTA[entry["nombre"]]
 
     OUT_PATH.parent.mkdir(parents=True, exist_ok=True)
     OUT_PATH.write_text(json.dumps(out, ensure_ascii=False))

@@ -36,6 +36,7 @@ const layersByCuenca = {};        // id -> { area: L.GeoJSON|null, linea: L.GeoJ
 // Inicializar mapa centrado en Antioquia
 const map = L.map('map', { zoomControl: false });
 map.fitBounds([[5.35, -77.2], [8.95, -73.85]]);
+setTimeout(() => { if (window.__cuencasData) openSheet(window.__cuencasData.find(c=>c.nombre==='Río San Juan (Suroeste)'), 'linea'); }, 800);
 
 L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
   attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> © <a href="https://carto.com/">CARTO</a>',
@@ -225,12 +226,15 @@ function openSheet(cuenca, tipoToque) {
 
   const meta = document.getElementById('cuenca-sheet-meta');
   if (tipoToque === 'linea') {
+    const notaExtra = cuenca.longitud_nota
+      ? `<br><span class="cuenca-sheet__pendiente">⚠️ ${cuenca.longitud_nota}</span>`
+      : '';
     meta.innerHTML = cuenca.longitud_km_aprox
       ? `<span>${lang === 'en' ? 'Approx. length in Antioquia' : 'Longitud aprox. en Antioquia'}: <strong>${cuenca.longitud_km_aprox} km</strong></span>` +
         (cuenca.longitud_total_oficial_km
           ? `<br><span>${lang === 'en' ? 'Total length (source to mouth)' : 'Longitud total (nacimiento a desembocadura)'}: <strong>${cuenca.longitud_total_oficial_km} km</strong></span>
-             <br><span class="cuenca-sheet__pendiente">${lang === 'en' ? 'Source' : 'Fuente'}: ${cuenca.longitud_total_fuente}</span>`
-          : `<br><span class="cuenca-sheet__pendiente">${lang === 'en' ? 'Total length: no reliable public source found yet' : 'Longitud total: no se encontró todavía una fuente pública confiable'}</span>`)
+             <br><span class="cuenca-sheet__pendiente">${lang === 'en' ? 'Source' : 'Fuente'}: ${cuenca.longitud_total_fuente}</span>` + notaExtra
+          : `<br><span class="cuenca-sheet__pendiente">${lang === 'en' ? 'Total length: no reliable public source found yet' : 'Longitud total: no se encontró todavía una fuente pública confiable'}</span>` + notaExtra)
       : '';
   } else {
     meta.innerHTML = cuenca.area_km2_aprox

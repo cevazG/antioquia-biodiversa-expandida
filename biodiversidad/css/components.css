@@ -105,9 +105,11 @@
   font-size: 2rem;
 }
 
+.mode-card__text h2,
 .mode-card__text h3 {
   color: var(--color-green-dark);
-  margin-bottom: 4px;
+  font-size: 1rem;
+  margin: 0 0 4px;
 }
 
 .mode-card__text p {
@@ -358,7 +360,6 @@
   font-size: 0.75rem;
   font-weight: 700;
   color: white;
-  text-transform: uppercase;
   letter-spacing: 0.03em;
 }
 
@@ -639,7 +640,6 @@
 .species-detail__section-title {
   font-size: 0.75rem;
   font-weight: 700;
-  text-transform: uppercase;
   letter-spacing: 0.08em;
   color: var(--color-text-light);
   margin-bottom: var(--space-sm);
@@ -687,7 +687,6 @@
 .subregion-hero__label {
   font-size: 0.75rem;
   font-weight: 600;
-  text-transform: uppercase;
   letter-spacing: 0.1em;
   color: rgba(255,255,255,0.7);
   margin-bottom: 4px;
@@ -801,7 +800,6 @@
 .section-title {
   font-size: 0.75rem;
   font-weight: 700;
-  text-transform: uppercase;
   letter-spacing: 0.08em;
   color: var(--color-text-light);
   margin-bottom: var(--space-md);
@@ -908,4 +906,322 @@
 .scroll-top.visible {
   opacity: 1;
   pointer-events: auto;
+}
+
+/* ─── CARRETE DE FOTOS ──────────────────────────────────────── */
+
+.photo-reel {
+  display: flex;
+  gap: var(--space-sm);
+  overflow-x: auto;
+  scroll-snap-type: x proximity;
+  -webkit-overflow-scrolling: touch;
+  padding: var(--space-xs) var(--space-md) var(--space-md);
+  margin: 0 calc(var(--space-md) * -1);
+  scrollbar-width: none;
+}
+
+.photo-reel::-webkit-scrollbar { display: none; }
+
+.photo-reel__card {
+  position: relative;
+  scroll-snap-align: start;
+  flex: 0 0 auto;
+  width: 120px;
+  aspect-ratio: 4 / 5;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  background: var(--color-bg);
+  box-shadow: var(--shadow-sm);
+}
+
+.photo-reel__card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.photo-reel__scrim {
+  position: absolute;
+  inset: auto 0 0 0;
+  height: 60%;
+  background: linear-gradient(to top, rgba(0,0,0,0.75), transparent);
+  pointer-events: none;
+}
+
+.photo-reel__name {
+  position: absolute;
+  left: var(--space-sm);
+  right: var(--space-sm);
+  bottom: var(--space-xs);
+  color: var(--color-white);
+  font-size: 0.72rem;
+  font-weight: 700;
+  line-height: 1.2;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.5);
+}
+
+.photo-reel__dot {
+  position: absolute;
+  top: var(--space-xs);
+  right: var(--space-xs);
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(255,255,255,0.85);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+}
+
+.photo-reel__dot--LC { background: var(--iucn-lc); }
+.photo-reel__dot--NT { background: var(--iucn-nt); }
+.photo-reel__dot--VU { background: var(--iucn-vu); }
+.photo-reel__dot--EN { background: var(--iucn-en); }
+.photo-reel__dot--CR { background: var(--iucn-cr); }
+.photo-reel__dot--DD,
+.photo-reel__dot--NE { background: var(--iucn-dd); }
+
+/* ─── CARRETE VERTICAL DE PANTALLA COMPLETA ────────────────── */
+
+/* Selector de modalidad de vista (carrete / cuadrícula / mosaico) —
+   una sola fila de header, junto al selector de idioma */
+.app-header--with-switcher .app-header__title span:first-child {
+  font-size: 0.8125rem;
+}
+
+.view-switcher {
+  display: flex;
+  align-items: center;
+  gap: 1px;
+  flex-shrink: 0;
+}
+
+.view-switcher__btn {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: none;
+  background: transparent;
+  color: var(--color-text-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all var(--transition);
+}
+
+.view-switcher__btn.active {
+  background: var(--color-green-pale);
+  color: var(--color-green-dark);
+}
+
+.reel-screen {
+  position: relative;
+  height: calc(100dvh - var(--header-height));
+  overflow: hidden;
+}
+
+/* Vistas de página normal (cuadrícula / mosaico) — scroll de página, no paginado */
+.photo-view {
+  padding-top: var(--space-sm);
+  padding-bottom: calc(var(--bottom-bar-height) + var(--space-xl) + env(safe-area-inset-bottom));
+}
+
+.photo-grid-3col {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+}
+
+.photo-grid-3col__item {
+  aspect-ratio: 1;
+  display: block;
+  overflow: hidden;
+  background: var(--color-bg);
+}
+
+.photo-grid-3col__item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.photo-masonry {
+  columns: 2;
+  column-gap: var(--space-sm);
+  padding: var(--space-sm);
+}
+
+.photo-masonry__item {
+  display: block;
+  break-inside: avoid;
+  margin-bottom: var(--space-sm);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  position: relative;
+  box-shadow: var(--shadow-sm);
+}
+
+.photo-masonry__item img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.photo-masonry__name {
+  position: absolute;
+  left: var(--space-sm);
+  right: var(--space-sm);
+  bottom: var(--space-sm);
+  color: var(--color-white);
+  font-size: 0.8125rem;
+  font-weight: 700;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.5);
+}
+
+.photo-masonry__scrim {
+  position: absolute;
+  inset: auto 0 0 0;
+  height: 45%;
+  background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+  pointer-events: none;
+}
+
+.photo-reel--vertical {
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+  scroll-snap-type: y mandatory;
+  padding: 0;
+  margin: 0;
+  gap: 0;
+}
+
+.photo-reel--vertical .photo-reel__card {
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+  flex: 0 0 100%;
+  width: 100%;
+  height: 100%;
+  aspect-ratio: auto;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.photo-reel--vertical .photo-reel__scrim {
+  height: 40%;
+  background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+}
+
+.photo-reel--vertical .photo-reel__name {
+  left: var(--space-md);
+  right: calc(90px + var(--space-md));
+  bottom: calc(var(--bottom-bar-height) + var(--space-lg) + env(safe-area-inset-bottom));
+  font-size: 1.25rem;
+  font-weight: 800;
+}
+
+.photo-reel--vertical .photo-reel__dot {
+  top: var(--space-md);
+  right: var(--space-md);
+  width: 12px;
+  height: 12px;
+}
+
+/* Botón flotante que abre el panel de búsqueda */
+.reel-fab {
+  position: fixed;
+  right: var(--space-md);
+  bottom: calc(var(--bottom-bar-height) + var(--space-md) + env(safe-area-inset-bottom));
+  z-index: 60;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 12px 18px;
+  border: none;
+  border-radius: var(--radius-full);
+  background: var(--color-green-primary);
+  color: var(--color-white);
+  font-family: var(--font-primary);
+  font-size: 0.875rem;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: var(--shadow-md);
+}
+
+.reel-fab:active { transform: scale(0.96); }
+
+/* Panel de búsqueda — bottom sheet */
+.filter-sheet-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  z-index: 200;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+}
+
+.filter-sheet-overlay.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.filter-sheet {
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%) translateY(100%);
+  width: 100%;
+  max-width: var(--app-max-width);
+  max-height: 85dvh;
+  background: var(--color-white);
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+  z-index: 201;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+.filter-sheet.open {
+  transform: translateX(-50%) translateY(0);
+}
+
+.filter-sheet__handle {
+  width: 40px;
+  height: 4px;
+  border-radius: var(--radius-full);
+  background: var(--color-border);
+  margin: var(--space-sm) auto 0;
+}
+
+.filter-sheet__close {
+  position: absolute;
+  top: var(--space-sm);
+  right: var(--space-sm);
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: none;
+  background: var(--color-bg);
+  color: var(--color-text-medium);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.filter-sheet__scroll {
+  max-height: 85dvh;
+  overflow-y: auto;
+  padding: var(--space-md);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.filter-sheet__scroll > * {
+  flex-shrink: 0;
 }

@@ -136,6 +136,16 @@
     .photo-card:active { opacity: 0.8; }
     .photo-card.hidden { display: none; }
 
+    /* Con cantidad impar de fotos, la última tarjeta ocupa las 2 columnas
+       en vez de quedar sola dejando la otra columna más corta */
+    .photo-card:last-child:nth-child(odd) {
+      grid-column: 1 / -1;
+    }
+
+    .photo-card:last-child:nth-child(odd) .photo-card__img-wrap {
+      aspect-ratio: 2 / 1;
+    }
+
     /* Image area */
     .photo-card__img-wrap {
       aspect-ratio: 1;

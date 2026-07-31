@@ -283,7 +283,6 @@ em, .scientific-name {
   font-size: 0.7rem;
   font-weight: 400;
   color: var(--color-text-light);
-  text-transform: uppercase;
   letter-spacing: 0.05em;
 }
 

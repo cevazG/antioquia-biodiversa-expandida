@@ -16,7 +16,7 @@
 <body>
   <div class="app-shell">
 
-    <header class="app-header">
+    <header class="app-header app-header--with-switcher">
       <button class="app-header__back" onclick="window.location.href='home.html'" aria-label="Volver">
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5m0 0l7 7m-7-7l7-7"/></svg>
       </button>
@@ -24,67 +24,109 @@
         <span data-i18n="module_bio_header">Módulo Biodiversidad (especies insignia)</span>
         <span>Antioquia</span>
       </div>
+
+      <!-- Selector de modalidad de vista, junto al selector de idioma -->
+      <div class="view-switcher" role="tablist" aria-label="Modalidad de vista">
+        <button class="view-switcher__btn active" data-view="reel" role="tab" aria-selected="true" aria-label="Vista carrete">
+          <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" aria-hidden="true"><rect x="5" y="2" width="14" height="20" rx="4"/></svg>
+        </button>
+        <button class="view-switcher__btn" data-view="grid" role="tab" aria-selected="false" aria-label="Vista cuadrícula">
+          <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" aria-hidden="true"><rect x="2" y="2" width="9" height="9" rx="2.2"/><rect x="13" y="2" width="9" height="9" rx="2.2"/><rect x="2" y="13" width="9" height="9" rx="2.2"/><rect x="13" y="13" width="9" height="9" rx="2.2"/></svg>
+        </button>
+        <button class="view-switcher__btn" data-view="masonry" role="tab" aria-selected="false" aria-label="Vista Mosaico">
+          <svg width="21" height="21" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="2" y="2" width="9" height="20" rx="2.2"/><rect x="13" y="2" width="9" height="8" rx="2.2"/><rect x="13" y="12" width="9" height="10" rx="2.2"/></svg>
+        </button>
+      </div>
+
       <button class="app-header__lang" data-lang-toggle aria-label="Cambiar idioma">EN</button>
     </header>
 
-    <div class="bio-hero">
-      <div class="bio-hero__content">
-        <span class="bio-hero__emoji" aria-hidden="true">🌿</span>
-        <h1 data-i18n="search_by">¿Cómo quieres explorar?</h1>
-        <p data-i18n="app_tagline">Descubre la naturaleza de Antioquia</p>
+    <!-- Carrete vertical de pantalla completa — modalidad por defecto -->
+    <div class="reel-screen" id="view-reel">
+      <div class="photo-reel photo-reel--vertical" id="photo-reel" aria-label="Carrete de especies">
+        <!-- Se genera dinámicamente -->
       </div>
     </div>
 
-    <main class="bio-content anim-stagger">
-
-      <p class="section-label" data-i18n="search_by">Elige modo de búsqueda</p>
-
-      <a href="mapa.html" class="mode-card ripple-container anim-fade-in-up" aria-label="Explorar por subregión">
-        <div class="mode-card__icon" aria-hidden="true">📍</div>
-        <div class="mode-card__text">
-          <h2 data-i18n="by_subregion">Por Subregión</h2>
-          <p data-i18n="by_subregion_desc">Explora la biodiversidad de cada subregión</p>
-        </div>
-        <svg class="mode-card__arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg>
-      </a>
-
-      <a href="listado.html?kingdom=flora" class="mode-card ripple-container anim-fade-in-up" aria-label="Explorar flora">
-        <div class="mode-card__icon" aria-hidden="true">🌿</div>
-        <div class="mode-card__text">
-          <h2 data-i18n="by_flora">Flora</h2>
-          <p data-i18n="by_flora_desc">Orquídeas, plantas y más</p>
-        </div>
-        <svg class="mode-card__arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg>
-      </a>
-
-      <a href="listado.html?kingdom=fauna" class="mode-card ripple-container anim-fade-in-up" aria-label="Explorar fauna">
-        <div class="mode-card__icon" aria-hidden="true">🦜</div>
-        <div class="mode-card__text">
-          <h2 data-i18n="by_fauna">Fauna</h2>
-          <p data-i18n="by_fauna_desc">Aves, mamíferos, anfibios y más</p>
-        </div>
-        <svg class="mode-card__arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg>
-      </a>
-
-      <p class="section-label" style="margin-top: var(--space-md)" data-i18n="quick_access">Acceso rápido por grupo</p>
-
-      <div class="bio-grid anim-stagger" id="bio-grid">
+    <!-- Cuadrícula 3 columnas estilo Instagram -->
+    <div class="photo-view" id="view-grid" hidden>
+      <div class="photo-grid-3col" id="photo-grid-3col" aria-label="Cuadrícula de especies">
         <!-- Se genera dinámicamente -->
       </div>
-    </main>
+    </div>
 
-    <div class="stats-footer" aria-label="Estadísticas">
-      <div class="stats-footer__item">
-        <span class="stats-footer__num">9</span>
-        <span class="stats-footer__label" data-i18n="subregions_label">Subregiones</span>
+    <!-- Cuadrícula estilo Pinterest, proporción real -->
+    <div class="photo-view" id="view-masonry" hidden>
+      <div class="photo-masonry" id="photo-masonry" aria-label="Mosaico de especies">
+        <!-- Se genera dinámicamente -->
       </div>
-      <div class="stats-footer__item">
-        <span class="stats-footer__num">6</span>
-        <span class="stats-footer__label" data-i18n="groups_label">Grupos bio</span>
-      </div>
-      <div class="stats-footer__item">
-        <span class="stats-footer__num" id="total-species">—</span>
-        <span class="stats-footer__label" data-i18n="species_label">Especies</span>
+    </div>
+
+    <button class="reel-fab" id="reel-fab" aria-label="Buscar y explorar">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <span data-i18n="explore_fab">Explorar</span>
+    </button>
+
+    <!-- Panel de búsqueda (bottom sheet) -->
+    <div class="filter-sheet-overlay" id="filter-sheet-overlay"></div>
+    <div class="filter-sheet" id="filter-sheet" role="dialog" aria-label="Modos de búsqueda">
+      <div class="filter-sheet__handle" aria-hidden="true"></div>
+      <button class="filter-sheet__close" id="filter-sheet-close" aria-label="Cerrar">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 6L6 18M6 6l12 12"/></svg>
+      </button>
+
+      <div class="filter-sheet__scroll">
+
+        <div class="stats-row">
+          <div class="stat-chip">
+            <div class="stat-chip__num">9</div>
+            <div class="stat-chip__label" data-i18n="subregions_label">Subregiones</div>
+          </div>
+          <div class="stat-chip">
+            <div class="stat-chip__num">6</div>
+            <div class="stat-chip__label" data-i18n="groups_label">Grupos bio</div>
+          </div>
+          <div class="stat-chip">
+            <div class="stat-chip__num" id="total-species">—</div>
+            <div class="stat-chip__label" data-i18n="species_label">Especies</div>
+          </div>
+        </div>
+
+        <p class="section-label" data-i18n="search_by">Elige modo de búsqueda</p>
+
+        <a href="mapa.html" class="mode-card ripple-container" aria-label="Explorar por subregión">
+          <div class="mode-card__icon" aria-hidden="true">📍</div>
+          <div class="mode-card__text">
+            <h2 data-i18n="by_subregion">Por Subregión</h2>
+            <p data-i18n="by_subregion_desc">Explora la biodiversidad de cada subregión</p>
+          </div>
+          <svg class="mode-card__arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg>
+        </a>
+
+        <a href="listado.html?kingdom=flora" class="mode-card ripple-container" aria-label="Explorar flora">
+          <div class="mode-card__icon" aria-hidden="true">🌿</div>
+          <div class="mode-card__text">
+            <h2 data-i18n="by_flora">Flora</h2>
+            <p data-i18n="by_flora_desc">Orquídeas, plantas y más</p>
+          </div>
+          <svg class="mode-card__arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg>
+        </a>
+
+        <a href="listado.html?kingdom=fauna" class="mode-card ripple-container" aria-label="Explorar fauna">
+          <div class="mode-card__icon" aria-hidden="true">🦜</div>
+          <div class="mode-card__text">
+            <h2 data-i18n="by_fauna">Fauna</h2>
+            <p data-i18n="by_fauna_desc">Aves, mamíferos, anfibios y más</p>
+          </div>
+          <svg class="mode-card__arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg>
+        </a>
+
+        <p class="section-label" style="margin-top: var(--space-md)" data-i18n="quick_access">Acceso rápido por grupo</p>
+
+        <div class="bio-grid anim-stagger" id="bio-grid">
+          <!-- Se genera dinámicamente -->
+        </div>
+
       </div>
     </div>
 

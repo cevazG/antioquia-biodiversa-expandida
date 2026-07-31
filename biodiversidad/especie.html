@@ -36,6 +36,22 @@
 
       <!-- Contador (se activa cuando hay >1 foto) -->
       <div class="gallery-counter" id="gallery-counter" style="display:none">1 / 1</div>
+
+      <!-- Pista de que la foto se puede ver de tamaño completo -->
+      <div class="gallery-expand-hint" aria-hidden="true">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M8 3H5a2 2 0 00-2 2v3m18 0V5a2 2 0 00-2-2h-3m0 18h3a2 2 0 002-2v-3M3 16v3a2 2 0 002 2h3"/></svg>
+      </div>
+    </div>
+
+    <!-- Visor de pantalla completa -->
+    <div class="lightbox" id="lightbox" hidden>
+      <button class="lightbox__close" id="lightbox-close" aria-label="Cerrar">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 6L6 18M6 6l12 12"/></svg>
+      </button>
+      <div class="lightbox__stage" id="lightbox-stage"></div>
+      <div class="lightbox__dots gallery-dots" id="lightbox-dots" style="display:none;"></div>
+      <div class="lightbox__counter" id="lightbox-counter" style="display:none"></div>
+      <div class="lightbox__caption" id="lightbox-caption" style="display:none"></div>
     </div>
 
     <!-- Ficha principal -->

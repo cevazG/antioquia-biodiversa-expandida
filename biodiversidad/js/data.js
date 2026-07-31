@@ -122,6 +122,44 @@ var DataStore = (() => {
       .map(p => 'img/species/' + p);
   }
 
+  // Una tarjeta por especie (foto principal), intercaladas round-robin por
+  // grupo taxonómico para que el carrete no muestre tramos largos del mismo
+  // grupo seguido (ej. 34 polillas consecutivas).
+  function getPhotoReel() {
+    const byGroup = {};
+    const order = [];
+    _data.species.forEach(sp => {
+      const photo = getMainPhoto(sp);
+      if (!photo) return;
+      if (!byGroup[sp.group]) {
+        byGroup[sp.group] = [];
+        order.push(sp.group);
+      }
+      byGroup[sp.group].push({
+        speciesId: sp.id,
+        url: photo,
+        nameEs: sp.nameEs,
+        nameEn: sp.nameEn,
+        group: sp.group,
+        iucn: sp.iucn,
+      });
+    });
+
+    const reel = [];
+    let remaining = true;
+    while (remaining) {
+      remaining = false;
+      for (const group of order) {
+        const bucket = byGroup[group];
+        if (bucket.length) {
+          reel.push(bucket.shift());
+          if (bucket.length) remaining = true;
+        }
+      }
+    }
+    return reel;
+  }
+
   return {
     init,
     getFamilyById,
@@ -131,5 +169,6 @@ var DataStore = (() => {
     getFamiliesWithSpecies,
     getMainPhoto,
     getPhotos,
+    getPhotoReel,
   };
 })();

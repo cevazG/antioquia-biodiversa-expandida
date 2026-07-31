@@ -68,6 +68,7 @@
 
     .agua-mode-card--fuentes .agua-mode-card__icon { background: #e8f4fd; }
     .agua-mode-card--cuencas .agua-mode-card__icon { background: #e8f0fb; }
+    .agua-mode-card--ecosistemas .agua-mode-card__icon { background: #e6f4ec; }
 
     .agua-mode-card__text h2 {
       font-size: 1rem;
@@ -117,7 +118,6 @@
     .section-label {
       font-size: 0.75rem;
       font-weight: 700;
-      text-transform: uppercase;
       letter-spacing: 0.1em;
       color: var(--color-text-light);
     }

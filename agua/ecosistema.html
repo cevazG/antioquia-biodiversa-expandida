@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#3561ab">
+  <title>Ecosistema · Antioquia</title>
+  <link rel="stylesheet" href="../biodiversidad/css/main.css?v=3">
+  <link rel="stylesheet" href="../biodiversidad/css/components.css?v=3">
+  <link rel="stylesheet" href="../biodiversidad/css/animations.css?v=3">
+  <link rel="stylesheet" href="../biodiversidad/css/especie.css">
+  <link rel="stylesheet" href="ecosistemas.css">
+  <link rel="prefetch" href="data/ecosistemas.json" as="fetch">
+  <link rel="prefetch" href="../data/translations.json" as="fetch">
+</head>
+<body>
+  <div class="app-shell especie-page">
+
+  <div class="sp-loading" id="sp-loading">
+    <div class="sp-loading__spinner"></div>
+  </div>
+
+    <div class="gallery-wrapper" id="gallery-wrapper">
+      <button class="gallery-back" onclick="window.location.href='ecosistemas.html'" aria-label="Volver">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5m0 0l7 7m-7-7l7-7"/></svg>
+      </button>
+      <div class="photo-placeholder" id="photo-placeholder">
+        <div class="photo-placeholder__emoji" id="photo-emoji" aria-hidden="true">🏞️</div>
+        <div class="photo-placeholder__label" id="photo-label" data-i18n="ecosystems_detail_no_photos">Aún no hay fotos de este ecosistema</div>
+      </div>
+      <div class="gallery-counter" id="gallery-counter" style="display:none"></div>
+    </div>
+
+    <div class="especie-ficha">
+      <div class="especie-ficha__common" id="eco-name"></div>
+      <p class="especie-ficha__scientific" id="eco-altitude"></p>
+      <div class="especie-ficha__badges">
+        <span class="family-pill" id="eco-tag"></span>
+      </div>
+    </div>
+
+    <div class="info-section">
+      <div class="info-section__label" data-i18n="description">Descripción</div>
+      <p class="info-section__text" id="eco-desc"></p>
+    </div>
+
+    <div class="info-section">
+      <div class="info-section__label" data-i18n="ecosystems_detail_why">Por qué es estratégico</div>
+      <p class="info-section__text" id="eco-why"></p>
+    </div>
+
+    <div class="info-section">
+      <div class="info-section__label" data-i18n="ecosystems_detail_threats">Amenazas</div>
+      <p class="info-section__text" id="eco-threats"></p>
+    </div>
+
+    <div class="info-section">
+      <div class="info-section__label" data-i18n="ecosystems_detail_sites">Sitios representativos</div>
+      <div id="eco-sites"></div>
+    </div>
+
+    <div class="especie-footer"></div>
+
+    <nav class="bottom-bar" aria-label="Navegación principal">
+      <button class="bottom-bar__btn" onclick="window.location.href='../biodiversidad/home.html'" aria-label="Inicio">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        <span>Inicio</span>
+      </button>
+      <button class="bottom-bar__btn" onclick="window.location.href='../biodiversidad/biodiversidad.html'" aria-label="Biodiversidad">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        <span>Bio</span>
+      </button>
+      <button class="bottom-bar__btn active" onclick="window.location.href='index.html'" aria-label="Agua">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C6 8 4 12 4 15a8 8 0 0016 0c0-3-2-7-8-13z"/></svg>
+        <span>Agua</span>
+      </button>
+      <button class="bottom-bar__btn" onclick="window.location.href='../comunidad/index.html'" aria-label="Comunidad">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
+        <span>Comunidad</span>
+      </button>
+    </nav>
+  </div>
+
+  <script src="../biodiversidad/js/i18n.js"></script>
+  <script src="../biodiversidad/js/nav.js"></script>
+  <script src="../biodiversidad/js/app.js"></script>
+  <script src="ecosistema.js"></script>
+</body>
+</html>

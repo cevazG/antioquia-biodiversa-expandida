@@ -1,0 +1,142 @@
+{
+  "_nota_coordenadas": "Los sitiosRepresentativos usan coordenadas aproximadas de lugares reales y conocidos (no un levantamiento topográfico propio). Verificar antes de publicar si se requiere precisión GPS exacta.",
+  "ecosistemas": [
+    {
+      "id": "paramo",
+      "nombreEs": "Páramo",
+      "nombreEn": "Páramo",
+      "icono": "🏔️",
+      "rangoAltitudinal": "> 3.000 msnm",
+      "noAltitudinal": false,
+      "ordenAltitudinal": 6,
+      "descripcionEs": "Ecosistema de alta montaña por encima del límite del bosque andino, dominado por frailejones, pajonales y humedales de altura. Colombia alberga cerca de la mitad de los páramos del mundo, y Antioquia conserva algunos de sus relictos más importantes en el norte y el suroeste del departamento.",
+      "descripcionEn": "High-mountain ecosystem above the Andean forest line, dominated by frailejones (Espeletia), tussock grasslands and high-altitude wetlands. Colombia holds nearly half of the world's páramo area, and Antioquia protects some of its most important remnants in the north and southwest of the department.",
+      "porQueEstrategicoEs": "Funciona como una esponja natural: regula y almacena el agua que abastece a buena parte de los acueductos del departamento. Es también uno de los ecosistemas con mayor endemismo de flora del país.",
+      "porQueEstrategicoEn": "Acts as a natural sponge: it regulates and stores the water that supplies much of the department's aqueducts. It is also one of the ecosystems with the highest plant endemism in the country.",
+      "amenazasEs": "Ampliación de la frontera agrícola y ganadera, minería, quemas y cambio climático (el páramo no puede \"subir\" más alto para escapar del calentamiento).",
+      "amenazasEn": "Expansion of agriculture and cattle ranching, mining, burning, and climate change (páramo ecosystems cannot migrate further upslope to escape warming).",
+      "fotos": [],
+      "sitiosRepresentativos": [
+        { "nombre": "Páramo de Belmira", "lat": 6.62, "lng": -75.67, "municipio": "Belmira", "subregion": "norte" },
+        { "nombre": "Páramo de Frontino (Urrao)", "lat": 6.32, "lng": -76.13, "municipio": "Urrao", "subregion": "occidente" },
+        { "nombre": "Páramo de Sonsón", "lat": 5.75, "lng": -75.28, "municipio": "Sonsón", "subregion": "oriente" }
+      ]
+    },
+    {
+      "id": "bosque_tropical",
+      "nombreEs": "Bosque Húmedo Tropical",
+      "nombreEn": "Tropical Rainforest",
+      "icono": "🌳",
+      "rangoAltitudinal": "0 – 1.000 msnm",
+      "noAltitudinal": false,
+      "ordenAltitudinal": 2,
+      "descripcionEs": "Selva húmeda de tierras bajas, con lluvias abundantes todo el año y una de las mayores densidades de especies por hectárea del planeta. En Antioquia se extiende principalmente por Urabá, Bajo Cauca y el Magdalena Medio, dentro de la región biogeográfica del Chocó, reconocida como una de las más biodiversas del mundo.",
+      "descripcionEn": "Humid lowland rainforest with abundant year-round rainfall and one of the highest species densities per hectare on the planet. In Antioquia it stretches mainly across Urabá, Bajo Cauca and Magdalena Medio, within the Chocó biogeographic region, recognized as one of the most biodiverse on Earth.",
+      "porQueEstrategicoEs": "Concentra la mayor parte de la biodiversidad del departamento y es un enorme sumidero de carbono. Conecta corredores biológicos entre el Pacífico, el Caribe y el valle del Magdalena.",
+      "porQueEstrategicoEn": "Holds most of the department's biodiversity and is a huge carbon sink. It connects biological corridors between the Pacific, the Caribbean and the Magdalena valley.",
+      "amenazasEs": "Deforestación por ganadería extensiva, cultivos de uso ilícito, minería ilegal y expansión de infraestructura vial.",
+      "amenazasEn": "Deforestation driven by extensive cattle ranching, illicit crops, illegal mining and road infrastructure expansion.",
+      "fotos": [],
+      "sitiosRepresentativos": [
+        { "nombre": "Selvas de Urabá (Parque Nacional Los Katíos, zona de amortiguación)", "lat": 7.85, "lng": -77.15, "municipio": "Turbo", "subregion": "uraba" },
+        { "nombre": "Bajo Cauca antioqueño", "lat": 7.53, "lng": -75.02, "municipio": "Caucasia", "subregion": "bajo_cauca" }
+      ]
+    },
+    {
+      "id": "bosque_seco_tropical",
+      "nombreEs": "Bosque Seco Tropical",
+      "nombreEn": "Tropical Dry Forest",
+      "icono": "🌵",
+      "rangoAltitudinal": "0 – 1.000 msnm",
+      "noAltitudinal": false,
+      "ordenAltitudinal": 1,
+      "descripcionEs": "Bosque de tierras bajas con una marcada temporada seca en la que muchos árboles pierden sus hojas. Es uno de los ecosistemas más amenazados de Colombia: queda menos del 8% de su cobertura original en el país. En Antioquia sobrevive en fragmentos del cañón del río Cauca y el Bajo Cauca.",
+      "descripcionEn": "Lowland forest with a marked dry season during which many trees shed their leaves. It is one of Colombia's most threatened ecosystems: less than 8% of its original national coverage remains. In Antioquia it survives in fragments along the Cauca river canyon and Bajo Cauca.",
+      "porQueEstrategicoEs": "Alberga especies adaptadas a la sequía que no se encuentran en ningún otro ecosistema del departamento; es prioritario para la conservación precisamente porque queda muy poco bosque seco en pie.",
+      "porQueEstrategicoEn": "Hosts drought-adapted species found in no other ecosystem in the department; it is a conservation priority precisely because so little dry forest remains standing.",
+      "amenazasEs": "Es el ecosistema histórico más transformado por ganadería y agricultura; los fragmentos que quedan están muy dispersos y poco conectados entre sí.",
+      "amenazasEn": "It is the ecosystem most historically transformed by cattle ranching and agriculture; the remaining fragments are scattered and poorly connected.",
+      "fotos": [],
+      "sitiosRepresentativos": [
+        { "nombre": "Cañón del río Cauca", "lat": 6.55, "lng": -75.35, "municipio": "Sabanalarga", "subregion": "occidente" }
+      ]
+    },
+    {
+      "id": "humedales",
+      "nombreEs": "Humedales",
+      "nombreEn": "Wetlands",
+      "icono": "🪷",
+      "rangoAltitudinal": "Presentes en varios pisos altitudinales",
+      "noAltitudinal": true,
+      "ordenAltitudinal": 3,
+      "descripcionEs": "Ciénagas, pantanos y cuerpos de agua someros que se inundan de forma estacional o permanente. Los más extensos de Antioquia están en el Magdalena Medio, dentro del gran complejo cenagoso asociado al río Magdalena, aunque también existen humedales de alta montaña en los páramos.",
+      "descripcionEn": "Marshes, swamps and shallow water bodies that flood seasonally or permanently. Antioquia's largest wetlands lie in the Magdalena Medio, part of the great swamp complex associated with the Magdalena river, though high-altitude wetlands also exist within páramos.",
+      "porQueEstrategicoEs": "Son criaderos naturales de peces, amortiguan inundaciones y son parada obligada de aves migratorias que viajan entre Norteamérica y Suramérica.",
+      "porQueEstrategicoEn": "They are natural fish nurseries, buffer floods, and serve as essential stopover sites for migratory birds traveling between North and South America.",
+      "amenazasEs": "Drenaje para ganadería y agricultura, sedimentación, contaminación por vertimientos y desconexión de su río o quebrada de origen.",
+      "amenazasEn": "Drainage for cattle ranching and agriculture, sedimentation, pollution from discharges, and disconnection from their source river or stream.",
+      "fotos": [],
+      "sitiosRepresentativos": [
+        { "nombre": "Ciénagas del Magdalena Medio antioqueño", "lat": 6.65, "lng": -74.15, "municipio": "Puerto Berrío", "subregion": "magdalena_medio" }
+      ]
+    },
+    {
+      "id": "manglares",
+      "nombreEs": "Manglares",
+      "nombreEn": "Mangroves",
+      "icono": "🌿",
+      "rangoAltitudinal": "0 msnm (línea de costa)",
+      "noAltitudinal": false,
+      "ordenAltitudinal": 0,
+      "descripcionEs": "Bosques costeros que crecen en la zona donde el agua dulce se mezcla con el agua salada del mar. En Antioquia se concentran en el golfo de Urabá, en municipios como Turbo y Necoclí, formando una franja verde entre la tierra firme y el Caribe.",
+      "descripcionEn": "Coastal forests that grow where fresh water mixes with the sea's salt water. In Antioquia they are concentrated in the Gulf of Urabá, in municipalities such as Turbo and Necoclí, forming a green strip between dry land and the Caribbean.",
+      "porQueEstrategicoEs": "Son guardería de peces y crustáceos de los que depende la pesca artesanal local, protegen la costa de la erosión y del oleaje, y almacenan carbono de forma muy eficiente (carbono azul).",
+      "porQueEstrategicoEn": "They are a nursery for fish and crustaceans on which local artisanal fishing depends, protect the coast from erosion and wave action, and store carbon very efficiently (blue carbon).",
+      "amenazasEs": "Tala para expansión urbana y acuícola, contaminación por residuos sólidos y alteración de los flujos de agua dulce que los alimentan.",
+      "amenazasEn": "Clearing for urban and aquaculture expansion, solid-waste pollution, and disruption of the freshwater flows that feed them.",
+      "fotos": [],
+      "sitiosRepresentativos": [
+        { "nombre": "Manglares del golfo de Urabá", "lat": 8.09, "lng": -76.73, "municipio": "Necoclí", "subregion": "uraba" }
+      ]
+    },
+    {
+      "id": "playas_mar",
+      "nombreEs": "Playas y Mar",
+      "nombreEn": "Beaches and Sea",
+      "icono": "🌊",
+      "rangoAltitudinal": "0 msnm (línea de costa y mar territorial)",
+      "noAltitudinal": false,
+      "ordenAltitudinal": 0,
+      "descripcionEs": "El único tramo de costa de Antioquia sobre el mar Caribe, en el golfo de Urabá, con playas, fondos rocosos y arenosos. Es el litoral que conecta al departamento con el ecosistema marino y con la pesca artesanal de la subregión de Urabá.",
+      "descripcionEn": "Antioquia's only stretch of Caribbean coastline, in the Gulf of Urabá, with beaches and rocky and sandy seabeds. It is the shoreline that connects the department to the marine ecosystem and to artisanal fishing in the Urabá subregion.",
+      "porQueEstrategicoEs": "Sostiene la pesca artesanal de varias comunidades costeras y es hábitat de tránsito y alimentación para especies marinas, incluidas tortugas marinas en algunos sectores.",
+      "porQueEstrategicoEn": "Supports artisanal fishing for several coastal communities and provides transit and feeding habitat for marine species, including sea turtles in some areas.",
+      "amenazasEs": "Erosión costera, contaminación por plásticos, sobrepesca y desarrollo turístico sin planificación.",
+      "amenazasEn": "Coastal erosion, plastic pollution, overfishing and unplanned tourism development.",
+      "fotos": [],
+      "sitiosRepresentativos": [
+        { "nombre": "Playas de Necoclí", "lat": 8.42, "lng": -76.79, "municipio": "Necoclí", "subregion": "uraba" },
+        { "nombre": "Playas de Arboletes", "lat": 8.85, "lng": -76.43, "municipio": "Arboletes", "subregion": "uraba" }
+      ]
+    },
+    {
+      "id": "cavernas_cuevas",
+      "nombreEs": "Cavernas y Cuevas",
+      "nombreEn": "Caves and Caverns",
+      "icono": "🦇",
+      "rangoAltitudinal": "Depende de la geología, no de la altitud",
+      "noAltitudinal": true,
+      "ordenAltitudinal": null,
+      "descripcionEs": "Sistemas subterráneos formados por la disolución de roca caliza a lo largo de miles de años. No siguen un patrón altitudinal como los demás ecosistemas de esta lista: dependen de la geología local. En Antioquia existen formaciones cavernícolas conocidas en la zona del Nus, en el oriente cercano.",
+      "descripcionEn": "Underground systems formed by the dissolution of limestone rock over thousands of years. Unlike the other ecosystems on this list, they do not follow an altitudinal pattern — they depend on local geology. Antioquia has known cave formations in the Nus area, in the near-eastern subregion.",
+      "porQueEstrategicoEs": "Refugio de murciélagos, claves como polinizadores y controladores naturales de insectos; varias especies cavernícolas son endémicas de sistemas kársticos muy puntuales.",
+      "porQueEstrategicoEn": "A refuge for bats, key pollinators and natural insect controllers; several cave-dwelling species are endemic to very specific karst systems.",
+      "amenazasEs": "Turismo sin manejo adecuado, extracción de material calizo y perturbación de las colonias de murciélagos.",
+      "amenazasEn": "Unmanaged tourism, limestone extraction, and disturbance of bat colonies.",
+      "fotos": [],
+      "sitiosRepresentativos": [
+        { "nombre": "Cuevas del Nus", "lat": 6.53, "lng": -74.98, "municipio": "San Roque", "subregion": "nordeste" }
+      ]
+    }
+  ]
+}

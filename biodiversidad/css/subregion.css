@@ -40,7 +40,6 @@
     .subregion-hero__label {
       font-size: 0.75rem;
       font-weight: 700;
-      text-transform: uppercase;
       letter-spacing: 0.12em;
       color: var(--color-gold);
       margin-bottom: 6px;

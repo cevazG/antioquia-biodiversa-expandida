@@ -1,0 +1,107 @@
+.eco-map-page {
+  display: flex;
+  flex-direction: column;
+  height: 100dvh;
+}
+
+.eco-map-header {
+  background: var(--color-blue-primary);
+  padding: calc(var(--space-sm) + env(safe-area-inset-top)) var(--space-md) var(--space-sm);
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  flex-shrink: 0;
+}
+
+.eco-map-header__back {
+  width: 36px;
+  height: 36px;
+  background: rgba(255,255,255,0.15);
+  border: none;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.eco-map-header__title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: white;
+  flex: 1;
+}
+
+.eco-map-header__subtitle {
+  font-size: 0.75rem;
+  color: rgba(255,255,255,0.7);
+  font-weight: 400;
+}
+
+#map {
+  flex: 1;
+  width: 100%;
+  z-index: 1;
+}
+
+.eco-map-counter {
+  position: absolute;
+  top: calc(var(--space-sm) + env(safe-area-inset-top) + 46px + 8px);
+  right: var(--space-md);
+  background: rgba(26, 58, 107, 0.9);
+  color: white;
+  padding: 6px 14px;
+  border-radius: var(--radius-full);
+  font-size: 0.78rem;
+  font-weight: 700;
+  z-index: 400;
+  box-shadow: var(--shadow-sm);
+}
+
+.leaflet-popup-content-wrapper {
+  border-radius: 14px !important;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.15) !important;
+  padding: 0 !important;
+  overflow: hidden;
+}
+
+.leaflet-popup-content { margin: 0 !important; }
+.leaflet-popup-tip-container { display: none; }
+
+.eco-popup {
+  padding: 14px 16px;
+  min-width: 190px;
+}
+
+.eco-popup__eco {
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: var(--color-blue-primary);
+  text-transform: none;
+  margin-bottom: 2px;
+}
+
+.eco-popup__name {
+  font-family: var(--font-primary);
+  font-size: 0.9375rem;
+  font-weight: 700;
+  color: var(--color-text-dark);
+  margin-bottom: 2px;
+}
+
+.eco-popup__sub {
+  font-size: 0.78rem;
+  color: var(--color-text-light);
+  font-weight: 500;
+  margin-bottom: 8px;
+}
+
+.eco-popup__link {
+  display: inline-block;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  color: var(--color-blue-primary);
+  text-decoration: none;
+}

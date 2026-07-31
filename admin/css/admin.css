@@ -58,7 +58,6 @@ body {
   font-size: 13px;
   font-weight: 600;
   color: var(--muted);
-  text-transform: uppercase;
   letter-spacing: .05em;
   margin-bottom: 14px;
 }

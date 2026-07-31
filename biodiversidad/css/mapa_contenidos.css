@@ -252,7 +252,6 @@
       color: var(--green-dk);
       margin-bottom: 16px;
       text-align: center;
-      text-transform: uppercase;
       letter-spacing: 0.08em;
     }
 
@@ -272,7 +271,6 @@
     .data-card__type {
       font-size: 0.68rem;
       font-weight: 700;
-      text-transform: uppercase;
       letter-spacing: 0.08em;
       color: var(--muted);
       margin-bottom: 4px;
@@ -305,7 +303,6 @@
       font-size: 0.875rem;
       font-weight: 800;
       color: var(--green-dk);
-      text-transform: uppercase;
       letter-spacing: 0.08em;
       margin-bottom: 14px;
     }

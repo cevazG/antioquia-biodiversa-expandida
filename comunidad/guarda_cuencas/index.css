@@ -94,7 +94,6 @@
     .gc-info-card__title {
       font-size: 0.875rem;
       font-weight: 700;
-      text-transform: uppercase;
       letter-spacing: 0.06em;
       color: var(--color-gc);
       margin-bottom: var(--space-sm);
@@ -136,7 +135,6 @@
       font-size: 0.6875rem;
       font-weight: 600;
       color: var(--color-gc);
-      text-transform: uppercase;
       letter-spacing: 0.05em;
       line-height: 1.2;
     }

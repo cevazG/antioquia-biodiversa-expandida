@@ -1,0 +1,205 @@
+/* Esta pantalla no carga biodiversidad.css, así que .bio-content necesita su
+   propio padding aquí — incluyendo el espacio para que la barra inferior fija
+   no tape el último elemento (el CTA del mapa). */
+.bio-content {
+  padding: var(--space-md);
+  padding-bottom: calc(var(--bottom-bar-height) + var(--space-md) + env(safe-area-inset-bottom));
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+/* Hero (tono azul — vive dentro de Agua y Ecosistemas) */
+.eco-hero {
+  background: linear-gradient(160deg, #1a3a6b, #3561ab);
+  padding: calc(var(--space-xl) + env(safe-area-inset-top)) var(--space-md) var(--space-xxl);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.eco-hero__content { position: relative; z-index: 1; }
+
+.eco-hero__emoji {
+  font-size: 2.5rem;
+  display: block;
+  margin-bottom: var(--space-sm);
+  filter: drop-shadow(0 4px 12px rgba(0,0,0,.25));
+}
+
+.eco-hero h1 {
+  color: var(--color-white);
+  font-size: 1.5rem;
+  margin-bottom: var(--space-sm);
+}
+
+.eco-hero p {
+  color: rgba(255,255,255,0.85);
+  font-size: 0.9rem;
+  max-width: 320px;
+  margin: 0 auto;
+}
+
+/* Infografía: corte transversal por altitud, estilo Naturgemälde de Humboldt */
+.eco-infografia__hint {
+  font-size: 0.8125rem;
+  color: var(--color-text-light);
+  margin: -8px 0 4px;
+}
+
+.eco-infografia__disclaimer {
+  font-size: 0.6875rem;
+  font-style: italic;
+  color: var(--color-text-light);
+  opacity: 0.85;
+  margin: 0 0 var(--space-md);
+}
+
+.eco-infografia {
+  position: relative;
+  height: 340px;
+  padding: 0 var(--space-xs);
+  margin-bottom: var(--space-md);
+}
+
+/* Silueta decorativa recortada en forma de montaña — solo color, sin texto */
+.eco-mountain {
+  position: absolute;
+  inset: 0 var(--space-xs);
+  display: flex;
+  flex-direction: column;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  clip-path: polygon(
+    0% 100%, 0% 85%, 15% 70%, 30% 48%, 42% 24%,
+    50% 2%, 58% 24%, 70% 48%, 85% 70%, 100% 85%, 100% 100%
+  );
+  box-shadow: var(--shadow-sm);
+}
+
+.eco-band-bg--paramo             { flex: 0 0 20%; background: linear-gradient(180deg, #eef3f5, #b7c9cf); }
+.eco-band-bg--bosque_tropical    { flex: 0 0 25%; background: linear-gradient(180deg, #0b5640, #018d38); }
+.eco-band-bg--humedales          { flex: 0 0 10%; background: linear-gradient(180deg, #1a6b6b, #2e9c9c); }
+.eco-band-bg--bosque_seco_tropical { flex: 0 0 20%; background: linear-gradient(180deg, #a9773a, #cf9d52); }
+.eco-band-bg--manglares          { flex: 0 0 13%; background: linear-gradient(180deg, #144d36, #1f7a4d); }
+.eco-band-bg--playas_mar         { flex: 0 0 12%; background: linear-gradient(180deg, #3561ab, #8FCAF0); }
+
+/* Cuevas incluidas directamente en la ilustración (como en la referencia),
+   no siguen el eje de altitud — por eso van superpuestas, no como una franja más */
+.eco-cave-marker {
+  position: absolute;
+  top: 30%;
+  left: 56%;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: #6b5b5f;
+  border: 2.5px solid white;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  cursor: pointer;
+  padding: 0;
+  z-index: 2;
+}
+
+.eco-cave-marker:active { filter: brightness(0.9); }
+
+/* Capa de etiquetas — mismas proporciones, SIN recorte, para que el texto
+   nunca quede cortado por el ancho angosto de la montaña cerca de la cima */
+.eco-band-labels {
+  position: absolute;
+  inset: 0 var(--space-xs);
+  display: flex;
+  flex-direction: column;
+  z-index: 1;
+}
+
+.eco-band {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: var(--color-white);
+  font-size: 0.7rem;
+  line-height: 1.2;
+  font-weight: 700;
+  text-decoration: none;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.6);
+  transition: opacity var(--transition);
+  padding: 0 6px;
+}
+
+.eco-band:active { opacity: 0.7; }
+
+.eco-band--paramo             { flex: 0 0 20%; color: #1f3a40; text-shadow: 0 1px 2px rgba(255,255,255,0.6); }
+.eco-band--bosque_tropical    { flex: 0 0 25%; }
+.eco-band--humedales          { flex: 0 0 10%; }
+.eco-band--bosque_seco_tropical { flex: 0 0 20%; }
+.eco-band--manglares          { flex: 0 0 13%; }
+.eco-band--playas_mar         { flex: 0 0 12%; }
+
+.eco-altitude-label {
+  position: absolute;
+  left: var(--space-sm);
+  font-size: 0.65rem;
+  font-weight: 600;
+  color: var(--color-text-light);
+  background: rgba(255,255,255,0.85);
+  padding: 2px 6px;
+  border-radius: var(--radius-sm);
+}
+
+.eco-altitude-label--top { top: var(--space-sm); }
+.eco-altitude-label--bottom { bottom: var(--space-sm); }
+
+/* Tarjeta especial de cavernas (no sigue el eje de altitud) */
+.eco-cave-card {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  padding: var(--space-md);
+  border-radius: var(--radius-md);
+  border: 1.5px dashed var(--color-border);
+  background: var(--color-bg);
+  text-decoration: none;
+  color: inherit;
+  transition: all var(--transition);
+}
+
+.eco-cave-card:active { background: var(--color-green-pale); transform: scale(0.98); }
+
+.eco-cave-card__icon {
+  font-size: 1.75rem;
+  flex-shrink: 0;
+}
+
+.eco-cave-card__text h2 {
+  font-size: 0.9375rem;
+  font-weight: 700;
+  color: var(--color-text-dark);
+  margin-bottom: 2px;
+}
+
+.eco-cave-card__text p {
+  font-size: 0.8125rem;
+  color: var(--color-text-light);
+}
+
+/* Grid de ecosistemas — reusa .bio-grid / .bio-card, solo variantes de color */
+.bio-card--paramo               { background: linear-gradient(135deg, #6b8f9c, #a8c3cc); }
+.bio-card--bosque_tropical      { background: linear-gradient(135deg, #0b5640, #018d38); }
+.bio-card--cavernas_cuevas      { background: linear-gradient(135deg, #3a3335, #6b5b5f); }
+.bio-card--humedales            { background: linear-gradient(135deg, #1a6b6b, #2e9c9c); }
+.bio-card--bosque_seco_tropical { background: linear-gradient(135deg, #8a5f27, #cf9d52); }
+.bio-card--manglares            { background: linear-gradient(135deg, #144d36, #1f7a4d); }
+.bio-card--playas_mar           { background: linear-gradient(135deg, #1a3a6b, #3561ab); }
+
+.bio-card__desc {
+  font-size: 0.7rem;
+  font-weight: 500;
+  opacity: 0.9;
+  line-height: 1.3;
+}

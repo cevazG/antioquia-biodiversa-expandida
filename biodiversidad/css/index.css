@@ -43,11 +43,18 @@
       animation: fadeInUp 0.6s ease both;
     }
 
-    /* Logo / escudo oficial */
+    /* Logo / escudo oficial — siempre sobre blanco sostenido (manual de marca p.8) */
+    .brand-logo-plate {
+      display: inline-flex;
+      background: var(--color-white);
+      border-radius: 20px;
+      padding: 16px 20px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.35);
+    }
+
     .brand-logo {
       width: 120px;
       height: auto;
-      filter: drop-shadow(0 8px 24px rgba(0,0,0,0.35));
     }
 
     .brand-title {
@@ -88,7 +95,6 @@
       color: rgba(255,255,255,0.90);
       font-size: 0.8125rem;
       font-weight: 700;
-      text-transform: uppercase;
       letter-spacing: 0.12em;
     }
 

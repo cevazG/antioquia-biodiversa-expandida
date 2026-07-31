@@ -66,42 +66,18 @@ const IUCN_COLORS = {
         const galleryEl = document.getElementById('gallery');
         document.getElementById('photo-placeholder').style.display = 'none';
 
-        let current = 0;
-        const slides = [];
+        // Vista previa: siempre muestra la primera foto; el recorrido entre
+        // varias fotos ocurre dentro del visor de pantalla completa (lightbox)
+        const previewSlide = document.createElement('div');
+        previewSlide.className = 'photo-slide active';
+        const previewImg = document.createElement('img');
+        previewImg.src = photoData[0].url;
+        previewImg.alt = sp.scientificName;
+        previewImg.loading = 'eager';
+        previewSlide.appendChild(previewImg);
+        galleryEl.insertBefore(previewSlide, document.getElementById('gallery-counter'));
+
         const dots = [];
-
-        // Caption overlay
-        const captionEl = document.createElement('div');
-        captionEl.className = 'photo-caption';
-        captionEl.style.display = 'none';
-        galleryEl.appendChild(captionEl);
-
-        // Crear slides
-        photoData.forEach((photo, i) => {
-          const slide = document.createElement('div');
-          slide.className = 'photo-slide' + (i === 0 ? ' active' : '');
-          const img = document.createElement('img');
-          img.src = photo.url;
-          img.alt = sp.scientificName;
-          img.loading = i === 0 ? 'eager' : 'lazy';
-          slide.appendChild(img);
-          galleryEl.insertBefore(slide, document.getElementById('gallery-counter'));
-          slides.push(slide);
-        });
-
-        // Mostrar caption de la foto actual
-        function updateCaption(idx) {
-          const cap = lang === 'en' ? photoData[idx].captionEn : photoData[idx].captionEs;
-          if (cap) {
-            captionEl.textContent = cap;
-            captionEl.style.display = 'block';
-          } else {
-            captionEl.style.display = 'none';
-          }
-        }
-        updateCaption(0);
-
-        // Indicadores (dots) si hay más de 1 foto
         if (photoData.length > 1) {
           const dotsEl = document.createElement('div');
           dotsEl.className = 'gallery-dots';
@@ -113,39 +89,100 @@ const IUCN_COLORS = {
           });
           galleryEl.appendChild(dotsEl);
 
-          // Contador
           const counter = document.getElementById('gallery-counter');
           counter.style.display = 'block';
           counter.textContent = '1 / ' + photoData.length;
-
-          function showSlide(n) {
-            slides[current].classList.remove('active');
-            dots[current].classList.remove('active');
-            current = (n + slides.length) % slides.length;
-            slides[current].classList.add('active');
-            dots[current].classList.add('active');
-            counter.textContent = (current + 1) + ' / ' + slides.length;
-            updateCaption(current);
-          }
-
-          // Click en dots
-          dots.forEach((dot, i) => dot.addEventListener('click', () => showSlide(i)));
-
-          // Toque/click en la foto avanza a la siguiente
-          galleryEl.addEventListener('click', e => {
-            if (!e.target.closest('.gallery-dot') && !e.target.closest('.gallery-back') && !e.target.closest('.gallery-share')) {
-              showSlide(current + 1);
-            }
-          });
-
-          // Swipe táctil
-          let startX = 0;
-          galleryEl.addEventListener('touchstart', e => { startX = e.touches[0].clientX; }, { passive: true });
-          galleryEl.addEventListener('touchend', e => {
-            const diff = startX - e.changedTouches[0].clientX;
-            if (Math.abs(diff) > 40) showSlide(diff > 0 ? current + 1 : current - 1);
-          });
         }
+
+        // ── Lightbox de pantalla completa ──────────────────────────
+        const lightbox = document.getElementById('lightbox');
+        const lightboxStage = document.getElementById('lightbox-stage');
+        const lightboxDots = document.getElementById('lightbox-dots');
+        const lightboxCounter = document.getElementById('lightbox-counter');
+        const lightboxCaption = document.getElementById('lightbox-caption');
+        const lightboxClose = document.getElementById('lightbox-close');
+
+        let lbCurrent = 0;
+        const lbSlides = [];
+        const lbDots = [];
+
+        photoData.forEach((photo, i) => {
+          const slide = document.createElement('div');
+          slide.className = 'photo-slide' + (i === 0 ? ' active' : '');
+          const img = document.createElement('img');
+          img.src = photo.url;
+          img.alt = sp.scientificName;
+          img.loading = 'lazy';
+          slide.appendChild(img);
+          lightboxStage.appendChild(slide);
+          lbSlides.push(slide);
+
+          if (photoData.length > 1) {
+            const dot = document.createElement('div');
+            dot.className = 'gallery-dot' + (i === 0 ? ' active' : '');
+            dot.addEventListener('click', e => { e.stopPropagation(); showLbSlide(i); });
+            lightboxDots.appendChild(dot);
+            lbDots.push(dot);
+          }
+        });
+
+        function updateLbCaption(idx) {
+          const cap = lang === 'en' ? photoData[idx].captionEn : photoData[idx].captionEs;
+          lightboxCaption.textContent = cap || '';
+          lightboxCaption.style.display = cap ? 'block' : 'none';
+        }
+
+        function showLbSlide(n) {
+          lbSlides[lbCurrent].classList.remove('active');
+          if (lbDots[lbCurrent]) lbDots[lbCurrent].classList.remove('active');
+          lbCurrent = (n + lbSlides.length) % lbSlides.length;
+          lbSlides[lbCurrent].classList.add('active');
+          if (lbDots[lbCurrent]) lbDots[lbCurrent].classList.add('active');
+          if (photoData.length > 1) lightboxCounter.textContent = (lbCurrent + 1) + ' / ' + lbSlides.length;
+          updateLbCaption(lbCurrent);
+        }
+
+        function openLightbox(idx) {
+          lightbox.hidden = false;
+          document.body.style.overflow = 'hidden';
+          if (photoData.length > 1) {
+            lightboxDots.style.display = '';
+            lightboxCounter.style.display = 'block';
+          } else {
+            lightboxDots.style.display = 'none';
+            lightboxCounter.style.display = 'none';
+          }
+          showLbSlide(idx);
+        }
+
+        function closeLightbox() {
+          lightbox.hidden = true;
+          document.body.style.overflow = '';
+        }
+
+        lightboxClose.addEventListener('click', closeLightbox);
+
+        lightboxStage.addEventListener('click', e => {
+          if (lbSlides.length > 1) showLbSlide(lbCurrent + 1);
+        });
+
+        let lbStartX = 0;
+        lightboxStage.addEventListener('touchstart', e => { lbStartX = e.touches[0].clientX; }, { passive: true });
+        lightboxStage.addEventListener('touchend', e => {
+          const diff = lbStartX - e.changedTouches[0].clientX;
+          if (Math.abs(diff) > 40 && lbSlides.length > 1) showLbSlide(lbCurrent + (diff > 0 ? 1 : -1));
+        });
+
+        document.addEventListener('keydown', e => {
+          if (e.key === 'Escape' && !lightbox.hidden) closeLightbox();
+        });
+
+        // Tocar la vista previa (foto o punto) abre el visor de pantalla completa
+        dots.forEach((dot, i) => dot.addEventListener('click', e => { e.stopPropagation(); openLightbox(i); }));
+        galleryEl.addEventListener('click', e => {
+          if (e.target.closest('.gallery-dot') || e.target.closest('.gallery-back') || e.target.closest('.gallery-share')) return;
+          openLightbox(0);
+        });
       }
 
       // Nombre

@@ -60,9 +60,16 @@ body {
   align-items: center;
   gap: 18px;
 }
+/* Logo sobre blanco sostenido (manual de marca p.8) */
+.impact-hero__logo-plate {
+  display: inline-flex;
+  align-items: center;
+  background: #fff;
+  border-radius: 10px;
+  padding: 6px 8px;
+}
 .impact-hero__logo {
-  height: 56px;
-  opacity: .9;
+  height: 44px;
 }
 .impact-hero__name {
   font-size: 22px;
@@ -76,7 +83,6 @@ body {
   font-weight: 400;
   opacity: .7;
   letter-spacing: .04em;
-  text-transform: uppercase;
 }
 
 .impact-hero__actions { display: flex; gap: 10px; align-items: center; }
@@ -112,7 +118,6 @@ body {
   display: inline-block;
   margin-top: 14px;
   font-size: 11px;
-  text-transform: uppercase;
   letter-spacing: .08em;
   opacity: .55;
 }
@@ -141,7 +146,6 @@ body {
 .section-label {
   font-size: 10px;
   font-weight: 700;
-  text-transform: uppercase;
   letter-spacing: .1em;
   color: var(--muted);
   margin-bottom: 4px;
@@ -410,7 +414,6 @@ body {
   padding: 8px 10px;
   font-size: 10px;
   font-weight: 700;
-  text-transform: uppercase;
   letter-spacing: .06em;
   color: var(--muted);
   border-bottom: 2px solid var(--border);
@@ -472,7 +475,6 @@ body {
 .roadmap-col-title {
   font-size: 12px;
   font-weight: 700;
-  text-transform: uppercase;
   letter-spacing: .06em;
   padding: 0 0 10px;
   border-bottom: 2px solid var(--border);
@@ -593,7 +595,6 @@ body {
   padding: 7px 10px;
   font-size: 10px;
   font-weight: 700;
-  text-transform: uppercase;
   letter-spacing: .06em;
   color: var(--muted);
   border-bottom: 2px solid var(--border);
@@ -610,7 +611,6 @@ body {
 .heatmap-row__label {
   font-size: 10px;
   font-weight: 700;
-  text-transform: uppercase;
   letter-spacing: .08em;
   color: var(--muted);
   margin-bottom: 6px;

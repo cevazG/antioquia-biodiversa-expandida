@@ -106,6 +106,7 @@
       background: white;
       border-top: 1px solid var(--color-border);
       flex-shrink: 0;
+      min-width: 0;
       z-index: 500;
     }
     .cuencas-chip-row::-webkit-scrollbar { display: none; }

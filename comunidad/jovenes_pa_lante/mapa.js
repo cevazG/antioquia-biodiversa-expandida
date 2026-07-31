@@ -99,7 +99,7 @@
 
   // Construir filtros y marcadores desde JSON
   I18n.init().then(() => {
-    initLangToggle();
+    // I18n.init() ya cablea los [data-lang-toggle] internamente (_wireLangToggles)
     // Update the "Todas" pill text after i18n is ready
     const todasPill = document.querySelector('.filter-pill[data-sr="todas"]');
     if (todasPill) todasPill.textContent = I18n.t('jpl_todas');

@@ -334,6 +334,190 @@
       "group": "orquideas",
       "nameEs": "Cigopétalas",
       "nameEn": "Zygopetalum Alliance"
+    },
+    {
+      "id": "coprinaceae",
+      "group": "hongos",
+      "nameEs": "Sombrereras de Tinta",
+      "nameEn": "Inkcap Mushrooms",
+      "descriptionEs": "Familia de hongos con laminillas que se autodigieren (deliquescencia) al madurar, liberando un líquido negro cargado de esporas.",
+      "descriptionEn": "Family of mushrooms with gills that self-digest (deliquesce) at maturity, releasing a black spore-laden liquid."
+    },
+    {
+      "id": "russulaceae",
+      "group": "hongos",
+      "nameEs": "Rúsulas",
+      "nameEn": "Russulas",
+      "descriptionEs": "Familia de hongos carnosos de laminillas quebradizas (\"como tiza\"), con carne granular característica y a menudo colores vivos en el sombrero.",
+      "descriptionEn": "Family of fleshy mushrooms with brittle, chalk-like gills, characteristic granular flesh and often brightly colored caps."
+    },
+    {
+      "id": "polyporaceae",
+      "group": "hongos",
+      "nameEs": "Poliporos",
+      "nameEn": "Polypores",
+      "descriptionEs": "Familia de hongos de estructura leñosa o correosa que crecen en forma de repisa sobre madera muerta, con superficie inferior porosa (no laminillas).",
+      "descriptionEn": "Family of woody or leathery bracket fungi growing on dead wood, with a porous (not gilled) underside."
+    },
+    {
+      "id": "sclerodermataceae",
+      "group": "hongos",
+      "nameEs": "Bolas de Tierra",
+      "nameEn": "Earthballs",
+      "descriptionEs": "Familia de hongos globosos (\"bolas de tierra\") con una gleba interna que se transforma en polvo de esporas al madurar.",
+      "descriptionEn": "Family of globose \"earthball\" fungi whose internal gleba turns to spore powder at maturity."
+    },
+    {
+      "id": "cortinariaceae",
+      "group": "hongos",
+      "nameEs": "Cortinarios",
+      "nameEn": "Cortinarius Mushrooms",
+      "descriptionEs": "Una de las familias de hongos con laminillas más numerosas en especies, caracterizada por una cortina de hilos que cubre las laminillas jóvenes.",
+      "descriptionEn": "One of the most species-rich gilled-mushroom families, characterized by a cobweb-like partial veil covering the young gills."
+    },
+    {
+      "id": "marasmiaceae",
+      "group": "hongos",
+      "nameEs": "Marasmios",
+      "nameEn": "Marasmius Mushrooms",
+      "descriptionEs": "Familia de hongos pequeños y correosos, muchos capaces de deshidratarse y \"revivir\" al humedecerse de nuevo, que crecen sobre hojarasca y madera.",
+      "descriptionEn": "Family of small, tough mushrooms, many able to dry out and \"revive\" when re-wetted, growing on leaf litter and wood."
+    },
+    {
+      "id": "myxomycetes",
+      "group": "hongos",
+      "nameEs": "Mixomicetos",
+      "nameEn": "Slime Molds",
+      "descriptionEs": "Los mixomicetos (mohos mucilaginosos) no son hongos verdaderos —pertenecen a otro grupo de organismos (Amoebozoa)— pero se estudian tradicionalmente junto a ellos por su aspecto y hábitat similares.",
+      "descriptionEn": "Myxomycetes (slime molds) are not true fungi —they belong to a different group of organisms (Amoebozoa)— but are traditionally studied alongside fungi due to their similar appearance and habitat."
+    },
+    {
+      "id": "rickenellaceae",
+      "group": "hongos",
+      "nameEs": "Rickenelas",
+      "nameEn": "Rickenella Family",
+      "descriptionEs": "Familia de hongos pequeños, a menudo con laminillas decurrentes, presentes sobre musgo, madera o suelo.",
+      "descriptionEn": "Family of small mushrooms, often with decurrent gills, found on moss, wood or soil."
+    },
+    {
+      "id": "xylariaceae",
+      "group": "hongos",
+      "nameEs": "Hongos de Madera Carbonosa",
+      "nameEn": "Dead Man's Fingers Family",
+      "descriptionEs": "Familia de hongos de cuerpo fructífero duro y carbonoso (a menudo negro), muchos con forma de dedo o maza, que descomponen madera.",
+      "descriptionEn": "Family of fungi with hard, carbon-like (often black) fruiting bodies, many finger- or club-shaped, that decompose wood."
+    },
+    {
+      "id": "nidulariaceae",
+      "group": "hongos",
+      "nameEs": "Nidos de Pájaro",
+      "nameEn": "Bird's Nest Fungi",
+      "descriptionEs": "Familia de hongos conocidos como \"nidos de pájaro\": una copa diminuta que contiene estructuras en forma de huevo (peridiolos) con las esporas.",
+      "descriptionEn": "Family known as \"bird's nest fungi\": a tiny cup containing egg-like structures (peridioles) that hold the spores."
+    },
+    {
+      "id": "entomolomataceae",
+      "group": "hongos",
+      "nameEs": "Entomolomas",
+      "nameEn": "Entomoloma Family",
+      "descriptionEs": "Familia de hongos con laminillas, de esporada rosada, próxima a las Entolomataceae.",
+      "descriptionEn": "Family of gilled mushrooms with a pink spore print, closely related to the Entolomataceae."
+    },
+    {
+      "id": "sarcoscyphaceae",
+      "group": "hongos",
+      "nameEs": "Copas Escarlata",
+      "nameEn": "Scarlet Cup Fungi",
+      "descriptionEs": "Familia de hongos en forma de copa, muchos de colores vivos (rojo, naranja) y bordes velludos, que crecen sobre madera en descomposición.",
+      "descriptionEn": "Family of cup-shaped fungi, many brightly colored (red, orange) with hairy margins, growing on decaying wood."
+    },
+    {
+      "id": "mycenaceae",
+      "group": "hongos",
+      "nameEs": "Micenas",
+      "nameEn": "Mycena Mushrooms",
+      "descriptionEs": "Familia de hongos pequeños y delicados de sombrero cónico o acampanado, laminillas finas y tallo delgado, muy diversa en bosques húmedos.",
+      "descriptionEn": "Family of small, delicate mushrooms with conical or bell-shaped caps, thin gills and slender stems, very diverse in humid forests."
+    },
+    {
+      "id": "trechisporaceae",
+      "group": "hongos",
+      "nameEs": "Trechisporas",
+      "nameEn": "Trechispora Family",
+      "descriptionEs": "Familia de hongos resupinados (en forma de costra) que crecen adheridos a madera o suelo.",
+      "descriptionEn": "Family of resupinate (crust-forming) fungi that grow flat against wood or soil."
+    },
+    {
+      "id": "geastraceae",
+      "group": "hongos",
+      "nameEs": "Estrellas de Tierra",
+      "nameEn": "Earthstars",
+      "descriptionEs": "Familia de los \"hongos estrella de tierra\": el peridio externo se abre en puntas a modo de estrella, exponiendo el saco de esporas interno.",
+      "descriptionEn": "Family of the \"earthstar\" fungi: the outer peridium splits into star-like rays, exposing the inner spore sac."
+    },
+    {
+      "id": "pterulaceae",
+      "group": "hongos",
+      "nameEs": "Hongos Coraloides",
+      "nameEn": "Thread Coral Fungi",
+      "descriptionEs": "Familia de hongos coraloides o filamentosos, de estructuras delicadas y ramificadas, sobre hojarasca o madera.",
+      "descriptionEn": "Family of coral-like or thread-like fungi with delicate, branching structures, on leaf litter or wood."
+    },
+    {
+      "id": "ophiocordycipitaceae",
+      "group": "hongos",
+      "nameEs": "Cordyceps",
+      "nameEn": "Cordyceps Family",
+      "descriptionEs": "Familia de hongos entomopatógenos que parasitan insectos, emergiendo de su cuerpo tras la muerte del hospedero.",
+      "descriptionEn": "Family of entomopathogenic fungi that parasitize insects, emerging from the host's body after its death."
+    },
+    {
+      "id": "hymenogastraceae",
+      "group": "hongos",
+      "nameEs": "Galerinas",
+      "nameEn": "Galerina Family",
+      "descriptionEs": "Familia de hongos con laminillas de esporada oscura (marrón óxido a púrpura-negruzca), que incluye géneros tanto comestibles como tóxicos.",
+      "descriptionEn": "Family of gilled mushrooms with dark spore prints (rust-brown to purple-black), including both edible and toxic genera."
+    },
+    {
+      "id": "crepidotaceae",
+      "group": "hongos",
+      "nameEs": "Crepidotos",
+      "nameEn": "Crepidotus Family",
+      "descriptionEs": "Familia de hongos en forma de concha o abanico, sin pie o con pie muy reducido y lateral, que crecen directamente sobre madera.",
+      "descriptionEn": "Family of shell- or fan-shaped fungi with no stem or a very reduced, lateral stem, growing directly on wood."
+    },
+    {
+      "id": "hygrophoraceae",
+      "group": "hongos",
+      "nameEs": "Higróforos",
+      "nameEn": "Waxcaps",
+      "descriptionEs": "Familia de hongos de laminillas cerosas al tacto, muchos de colores vivos (amarillo, naranja, rojo).",
+      "descriptionEn": "Family of mushrooms with waxy-textured gills, many brightly colored (yellow, orange, red)."
+    },
+    {
+      "id": "stereaceae",
+      "group": "hongos",
+      "nameEs": "Costras Peludas",
+      "nameEn": "Parchment Fungi",
+      "descriptionEs": "Familia de hongos en forma de repisa delgada, de superficie inferior lisa (sin poros ni laminillas), que crecen sobre madera muerta.",
+      "descriptionEn": "Family of thin bracket fungi with a smooth underside (no pores or gills), growing on dead wood."
+    },
+    {
+      "id": "meruliaceae",
+      "group": "hongos",
+      "nameEs": "Merulios",
+      "nameEn": "Merulius Family",
+      "descriptionEs": "Familia de hongos costrosos o en repisa, de superficie inferior arrugada, porosa o dentada de forma irregular (merulioide).",
+      "descriptionEn": "Family of crust-like or bracket fungi with a wrinkled, poroid or irregularly toothed (merulioid) underside."
+    },
+    {
+      "id": "fungi_indet",
+      "group": "hongos",
+      "nameEs": "Hongos sin Identificar",
+      "nameEn": "Unidentified Fungi",
+      "descriptionEs": "Especímenes fotografiados en campo que no pudieron identificarse ni a nivel de familia con la información disponible.",
+      "descriptionEn": "Specimens photographed in the field that could not be identified even to family level with the information available."
     }
   ],
   "species": [
@@ -375,7 +559,10 @@
           "captionEs": "Hembra — plumaje natural",
           "captionEn": "Female — natural plumage"
         }
-      ]
+      ],
+      "mainPhotoRatio": 0.8317,
+      "mainPhotoWidth": 998,
+      "mainPhotoHeight": 1200
     },
     {
       "id": "sp020101",
@@ -396,7 +583,10 @@
       "photos": [
         "gr02_anfibios_reptiles/fa01_colubridae/sp020101_lampropeltis_micropholis/sp020101_lampropeltis_micropholis_001.webp",
         "gr02_anfibios_reptiles/fa01_colubridae/sp020101_lampropeltis_micropholis/sp020101_lampropeltis_micropholis_002.webp"
-      ]
+      ],
+      "mainPhotoRatio": 1.0435,
+      "mainPhotoWidth": 1200,
+      "mainPhotoHeight": 1150
     },
     {
       "id": "sp020102",
@@ -419,7 +609,10 @@
         "gr02_anfibios_reptiles/fa01_colubridae/sp020102_leptophis_ahaetulla/sp020102_leptophis_ahaetulla_002.webp",
         "gr02_anfibios_reptiles/fa01_colubridae/sp020102_leptophis_ahaetulla/sp020102_leptophis_ahaetulla_003.webp",
         "gr02_anfibios_reptiles/fa01_colubridae/sp020102_leptophis_ahaetulla/sp020102_leptophis_ahaetulla_004.webp"
-      ]
+      ],
+      "mainPhotoRatio": 1.5957,
+      "mainPhotoWidth": 1200,
+      "mainPhotoHeight": 752
     },
     {
       "id": "sp020201",
@@ -439,7 +632,10 @@
       "photos": [
         "gr02_anfibios_reptiles/fa02_craugastoridae/sp020201_pristimantis_sp/sp020201_pristimantis_sp_001.webp",
         "gr02_anfibios_reptiles/fa02_craugastoridae/sp020201_pristimantis_sp/sp020201_pristimantis_sp_002.webp"
-      ]
+      ],
+      "mainPhotoRatio": 1.3483,
+      "mainPhotoWidth": 1200,
+      "mainPhotoHeight": 890
     },
     {
       "id": "sp020202",
@@ -459,7 +655,10 @@
       "photos": [
         "gr02_anfibios_reptiles/fa02_craugastoridae/sp020202_pristimantis_sp/sp020202_pristimantis_sp_001.webp",
         "gr02_anfibios_reptiles/fa02_craugastoridae/sp020202_pristimantis_sp/sp020202_pristimantis_sp_002.webp"
-      ]
+      ],
+      "mainPhotoRatio": 1.451,
+      "mainPhotoWidth": 1200,
+      "mainPhotoHeight": 827
     },
     {
       "id": "sp020301",
@@ -481,7 +680,10 @@
       "photos": [
         "gr02_anfibios_reptiles/fa03_hylidae/sp020301_boana_pugnax/sp020301_boana_pugnax_001.webp",
         "gr02_anfibios_reptiles/fa03_hylidae/sp020301_boana_pugnax/sp020301_boana_pugnax_002.webp"
-      ]
+      ],
+      "mainPhotoRatio": 1.4269,
+      "mainPhotoWidth": 1200,
+      "mainPhotoHeight": 841
     },
     {
       "id": "sp020401",
@@ -501,7 +703,10 @@
       "descriptionEn": "One of Colombia's largest frogs, reaching over 18 cm in length. Inhabits tropical humid forests of the lowlands. Nocturnal and produces a powerful call audible hundreds of meters away. It builds foam nests on the ground to protect its eggs.",
       "photos": [
         "gr02_anfibios_reptiles/fa04_leptodactylidae/sp020401_leptodactylus_pentadactylus/sp020401_leptodactylus_pentadactylus_001.webp"
-      ]
+      ],
+      "mainPhotoRatio": 1.1215,
+      "mainPhotoWidth": 1200,
+      "mainPhotoHeight": 1070
     },
     {
       "id": "sp030101",
@@ -522,7 +727,10 @@
       "descriptionEn": "Small to medium-sized butterflies (Hesperiidae: tribe Hesperiini), popularly known as “skippers” for their rapid and darting flight. They are distinguished by their robust body, wide head, and characteristic resting posture with forewings and hindwings held at different angles. They are common in forest edges, gardens and open areas at various elevations in Antioquia.",
       "photos": [
         "gr03_mariposas/fa01_hesperiidae/sp030101_hesperiini/sp030101_hesperiini_001.webp"
-      ]
+      ],
+      "mainPhotoRatio": 1.3333,
+      "mainPhotoWidth": 500,
+      "mainPhotoHeight": 375
     },
     {
       "id": "sp030102",
@@ -542,7 +750,10 @@
       "descriptionEn": "Genus of skippers (Hesperiidae: Eudaminae) characterized by their angled forewings and a small tail-like projection on the trailing edge of the hindwings. They inhabit the interior and edges of tropical and subtropical humid forests in lowland areas. Males defend territories by perching on vegetation in spots of filtered sunlight.",
       "photos": [
         "gr03_mariposas/fa01_hesperiidae/sp030102_telegonus/sp030102_telegonus_001.webp"
-      ]
+      ],
+      "mainPhotoRatio": 1.3333,
+      "mainPhotoWidth": 500,
+      "mainPhotoHeight": 375
     },
     {
       "id": "sp030201",
@@ -562,7 +773,10 @@
       "descriptionEn": "Genus of butterflies in the family Lycaenidae (Theclinae), known as hairstreaks for the thin filaments on the trailing edge of their hindwings that mimic false antennae to confuse predators. Many species display iridescent blue coloration on the upperside. Their larvae are primarily associated with plants of the families Leguminosae and Myrtaceae in the Andean forests of Antioquia.",
       "photos": [
         "gr03_mariposas/fa02_lycaenidae/sp030201_arawacus/sp030201_arawacus_001.webp"
-      ]
+      ],
+      "mainPhotoRatio": 1.3333,
+      "mainPhotoWidth": 640,
+      "mainPhotoHeight": 480
     },
     {
       "id": "sp030301",
@@ -582,7 +796,10 @@
       "descriptionEn": "Butterfly with marked sexual dimorphism: the male has black wings with bright orange spots, while the female looks completely different with tiger-striped brown wings. Inhabits the interior of tropical humid forests in lowland and mid-elevation areas of Antioquia.",
       "photos": [
         "gr03_mariposas/fa03_nymphalidae/sp030301_catonephele_numilia/sp030301_catonephele_numilia_001.webp"
-      ]
+      ],
+      "mainPhotoRatio": 1.241,
+      "mainPhotoWidth": 1200,
+      "mainPhotoHeight": 967
     },
     {
       "id": "sp030302",
@@ -603,7 +820,10 @@
       "descriptionEn": "Medium-sized butterfly with unmistakable red and black wings with white markings on the forewings. One of the most common and visible butterflies in Antioquian gardens and open spaces. Adults have a slow flight and are easy to observe when perching on flowers.",
       "photos": [
         "gr03_mariposas/fa03_nymphalidae/sp030302_anartia_amathea/sp030302_anartia_amathea_001.webp"
-      ]
+      ],
+      "mainPhotoRatio": 1.3274,
+      "mainPhotoWidth": 1200,
+      "mainPhotoHeight": 904
     },
     {
       "id": "sp030303",
@@ -623,7 +843,10 @@
       "descriptionEn": "Genus of nymphalid butterflies (Heliconiinae) with aposematic coloration—typically black and red or orange—warning predators of their toxicity. Their larvae feed on plants of the genus Eupatorium and other Asteraceae, from which they obtain defensive compounds. They are common in Andean forest edges and open areas with shrubby vegetation in the mid-elevation zones of Antioquia.",
       "photos": [
         "gr03_mariposas/fa03_nymphalidae/sp030303_actinote/sp030303_actinote_001.webp"
-      ]
+      ],
+      "mainPhotoRatio": 1.4516,
+      "mainPhotoWidth": 495,
+      "mainPhotoHeight": 341
     },
     {
       "id": "sp030304",
@@ -644,7 +867,10 @@
       "descriptionEn": "Diverse genus of nymphalid butterflies (Limenitidinae) with over 100 species in the Neotropics, several present in Antioquia. They are recognized by a white, blue or orange band crossing the center of their wings. Adults visit rotting fruit, dung and damp soil to obtain minerals. They inhabit humid forests from lowlands to the mid-Andes.",
       "photos": [
         "gr03_mariposas/fa03_nymphalidae/sp030304_adelpha/sp030304_adelpha_001.webp"
-      ]
+      ],
+      "mainPhotoRatio": 1.3333,
+      "mainPhotoWidth": 640,
+      "mainPhotoHeight": 480
     },
     {
       "id": "sp030305",
@@ -665,7 +891,10 @@
       "photos": [
         "gr03_mariposas/fa03_nymphalidae/sp030305_anartia/sp030305_anartia_001.webp",
         "gr03_mariposas/fa03_nymphalidae/sp030305_anartia/sp030305_anartia_002.webp"
-      ]
+      ],
+      "mainPhotoRatio": 1.3333,
+      "mainPhotoWidth": 500,
+      "mainPhotoHeight": 375
     },
     {
       "id": "sp030306",
@@ -685,7 +914,10 @@
       "descriptionEn": "Genus of large nymphalid butterflies (Charaxinae) notable for the intense iridescent blue on the upperside of their wings. They inhabit the canopy and edges of lowland tropical humid forests. Adults rarely visit flowers, preferring to feed on rotting fruit, tree sap and minerals from damp soil. Their powerful flight makes them difficult to observe when flying high in the canopy.",
       "photos": [
         "gr03_mariposas/fa03_nymphalidae/sp030306_archaeoprepona/sp030306_archaeoprepona_001.webp"
-      ]
+      ],
+      "mainPhotoRatio": 1.3333,
+      "mainPhotoWidth": 640,
+      "mainPhotoHeight": 480
     },
     {
       "id": "sp030307",
@@ -705,7 +937,10 @@
       "descriptionEn": "Genus of nymphalid butterflies (Biblidinae) recognizable by the characteristic red band on the edge of their hindwings, contrasting with the black background. The most representative species is Biblis hyperia, present in gardens, parks and forest edges in Antioquia. Females lay their eggs on plants of the genus Tragia (Euphorbiaceae). Adults feed on nectar and rotting fruit.",
       "photos": [
         "gr03_mariposas/fa03_nymphalidae/sp030307_biblis/sp030307_biblis_001.webp"
-      ]
+      ],
+      "mainPhotoRatio": 1.3333,
+      "mainPhotoWidth": 640,
+      "mainPhotoHeight": 480
     },
     {
       "id": "sp030401",
@@ -726,7 +961,10 @@
       "descriptionEn": "Butterflies of the family Papilionidae—called swallowtails for the tail-like extensions on the hindwings of many species—include some of the largest and most spectacular butterflies in Antioquia. They inhabit from sea level to Andean forests. Adults visit flowers for nectar and perform puddling: absorbing minerals and salts from damp soil, especially males.",
       "photos": [
         "gr03_mariposas/fa04_papilionidae/sp030401_papilionoidea/sp030401_papilionoidea_001.webp"
-      ]
+      ],
+      "mainPhotoRatio": 1.3333,
+      "mainPhotoWidth": 640,
+      "mainPhotoHeight": 480
     },
     {
       "id": "sp030501",
@@ -747,7 +985,10 @@
       "descriptionEn": "Tribe of butterflies in the family Pieridae (Coliadinae), popularly known as sulfurs or yellows for their predominantly yellow or orange coloration. They are among the most abundant and visible butterflies in Antioquia, common in pastures, gardens, roadsides and agricultural areas. Their larvae feed mainly on legumes. Some species perform seasonal migrations in large groups.",
       "photos": [
         "gr03_mariposas/fa05_pieridae/sp030501_coliadini/sp030501_coliadini_001.webp"
-      ]
+      ],
+      "mainPhotoRatio": 1.3333,
+      "mainPhotoWidth": 500,
+      "mainPhotoHeight": 375
     },
     {
       "id": "sp030601",
@@ -767,7 +1008,10 @@
       "descriptionEn": "Genus of butterflies in the family Riodinidae with a striking marbled pattern: a combination of white, black and red bands that make them unmistakable. They inhabit the understory of tropical and subtropical humid forests at low to mid elevations. As is characteristic of Riodinidae, they frequently perch on leaves with wings held completely open horizontally, displaying their intricate wing pattern.",
       "photos": [
         "gr03_mariposas/fa06_riodinidae/sp030601_amarynthis/sp030601_amarynthis_001.webp"
-      ]
+      ],
+      "mainPhotoRatio": 1.1236,
+      "mainPhotoWidth": 1200,
+      "mainPhotoHeight": 1068
     },
     {
       "id": "sp030602",
@@ -787,7 +1031,10 @@
       "descriptionEn": "Genus of small metallic butterflies (Riodinidae) from Neotropical tropical forests. They display brilliant metallic colors—blues, greens or coppery tones—with complex banding patterns on their wings. They inhabit the understory and edges of lowland humid forests. Adults frequently perch on leaves in a horizontal position with wings fully spread.",
       "photos": [
         "gr03_mariposas/fa06_riodinidae/sp030602_ancyluris/sp030602_ancyluris_001.webp"
-      ]
+      ],
+      "mainPhotoRatio": 1.3333,
+      "mainPhotoWidth": 640,
+      "mainPhotoHeight": 480
     },
     {
       "id": "sp030603",
@@ -807,7 +1054,10 @@
       "descriptionEn": "Genus of metalmark butterflies (Riodinidae) with several species in Colombia. They display complex patterns with frequent blue, violet or coppery reflections that change with the angle of light. They inhabit the understory of tropical humid forests. Adults typically perch on leaf undersides with wings open, typical behavior that makes them relatively easy to observe on forest trails.",
       "photos": [
         "gr03_mariposas/fa06_riodinidae/sp030603_anteros/sp030603_anteros_001.webp"
-      ]
+      ],
+      "mainPhotoRatio": 1.3333,
+      "mainPhotoWidth": 640,
+      "mainPhotoHeight": 480
     },
     {
       "id": "sp030604",
@@ -827,7 +1077,10 @@
       "descriptionEn": "Metalmark butterfly species (Riodinidae) described by Hewitson in 1857. Distinguished from other Anteros species by its orange or coppery markings on a dark background with metallic luster. Inhabits the understory of humid Andean and sub-Andean forests of Colombia. It is an infrequently recorded species, usually observed solitary on vegetation in shaded areas of the forest interior.",
       "photos": [
         "gr03_mariposas/fa06_riodinidae/sp030604_anteros_kupris/sp030604_anteros_kupris_001.webp"
-      ]
+      ],
+      "mainPhotoRatio": 1.3333,
+      "mainPhotoWidth": 640,
+      "mainPhotoHeight": 480
     },
     {
       "id": "sp030605",
@@ -847,7 +1100,10 @@
       "descriptionEn": "Genus of small metalmark butterflies (Riodinidae) featuring characteristic silver or white markings on their wings, from which they take their name. They inhabit humid Andean and sub-Andean forests at mid to high elevations in Antioquia. They are low-flying insects in the understory and forest path edges, where they can be observed perched with wings horizontal on leaves in shaded areas.",
       "photos": [
         "gr03_mariposas/fa06_riodinidae/sp030605_argyrogrammana/sp030605_argyrogrammana_001.webp"
-      ]
+      ],
+      "mainPhotoRatio": 1.3333,
+      "mainPhotoWidth": 640,
+      "mainPhotoHeight": 480
     },
     {
       "id": "sp030606",
@@ -867,7 +1123,10 @@
       "descriptionEn": "Genus of metalmark butterflies (Riodinidae: Nymphidiini) with variable coloration depending on the species: combinations of ochre, orange and white with dark borders. They mainly inhabit Andean and sub-Andean forest edges, clearings with herbaceous vegetation and gardens at mid-elevations. Females lay eggs on plants of the genus Croton (Euphorbiaceae) and related species.",
       "photos": [
         "gr03_mariposas/fa06_riodinidae/sp030606_charis/sp030606_charis_001.webp"
-      ]
+      ],
+      "mainPhotoRatio": 1.2592,
+      "mainPhotoWidth": 1200,
+      "mainPhotoHeight": 953
     },
     {
       "id": "sp030607",
@@ -887,7 +1146,10 @@
       "descriptionEn": "Genus of metalmark butterflies (Riodinidae) with striking iridescent metallic blue coloration on the upperside of their wings, contrasting with the more muted pattern on the underside. They are common in the understory of tropical humid forests in Antioquia's lowlands. Like many Riodinidae, adults perch on leaves with wings open in areas of filtered light, allowing appreciation of their metallic reflections.",
       "photos": [
         "gr03_mariposas/fa06_riodinidae/sp030607_lasaia/sp030607_lasaia_001.webp"
-      ]
+      ],
+      "mainPhotoRatio": 1.0629,
+      "mainPhotoWidth": 1200,
+      "mainPhotoHeight": 1129
     },
     {
       "id": "sp030608",
@@ -906,7 +1168,10 @@
       "descriptionEn": "Genus of metalmark butterflies (Riodinidae) easily recognizable by the long tails on their hindwings, unique among Neotropical Riodinidae. The upperside of the wings displays striking iridescent blue and black colors. They inhabit the understory of lowland tropical humid forests. Adults fly slowly and frequently perch on low vegetation with wings open.",
       "photos": [
         "gr03_mariposas/fa06_riodinidae/sp030608_rhetus/sp030608_rhetus_001.webp"
-      ]
+      ],
+      "mainPhotoRatio": 1.3333,
+      "mainPhotoWidth": 500,
+      "mainPhotoHeight": 375
     },
     {
       "id": "sp030609",
@@ -926,7 +1191,10 @@
       "descriptionEn": "Tribe of butterflies in the family Riodinidae, one of the most diverse in the Neotropics with over 1,500 species. They are characterized by their small size, slow flight and the habit of perching on leaves with wings open horizontally. Many species display metallic reflections on their wings, hence their popular name. They are excellent indicators of the health of Antioquia's humid forests.",
       "photos": [
         "gr03_mariposas/fa06_riodinidae/sp030609_riodinini/sp030609_riodinini_001.webp"
-      ]
+      ],
+      "mainPhotoRatio": 1.3333,
+      "mainPhotoWidth": 500,
+      "mainPhotoHeight": 375
     },
     {
       "id": "sp040101",
@@ -946,7 +1214,10 @@
       "descriptionEn": "Moth of the family Erebidae with striking warning colors that signal toxicity to predators. Inhabits tropical humid forest edges. Like many erebids, it is diurnal and can be confused with a butterfly. Its detailed biology is poorly known.",
       "photos": [
         "gr04_polillas/fa01_erebidae/sp040101_chlorhoda_metamelaena/sp040101_chlorhoda_metamelaena_001.webp"
-      ]
+      ],
+      "mainPhotoRatio": 0.7342,
+      "mainPhotoWidth": 881,
+      "mainPhotoHeight": 1200
     },
     {
       "id": "sp040102",
@@ -966,7 +1237,10 @@
       "descriptionEn": "Diurnal moth with brilliant yellow and black colors serving as aposematic signals. Belongs to the tiger moth tribe within the family Erebidae. Mainly inhabits humid mountain forests and is visible visiting flowers during daylight hours.",
       "photos": [
         "gr04_polillas/fa01_erebidae/sp040102_prepiella_auroides/sp040102_prepiella_auroides_001.webp"
-      ]
+      ],
+      "mainPhotoRatio": 0.785,
+      "mainPhotoWidth": 942,
+      "mainPhotoHeight": 1200
     },
     {
       "id": "sp040103",
@@ -988,7 +1262,10 @@
       "descriptionEn": "Moth of subfamily Arctiinae, one of the most diverse in the tropics. Many species display bright color patterns that warn predators of their toxicity. Frequent at forest edges and secondary vegetation.",
       "photos": [
         "gr04_polillas/fa01_erebidae/sp040103_arctiinea_sp/sp040103_arctiinea_sp_001.webp"
-      ]
+      ],
+      "mainPhotoRatio": 1.2384,
+      "mainPhotoWidth": 1200,
+      "mainPhotoHeight": 969
     },
     {
       "id": "sp040104",
@@ -1010,7 +1287,10 @@
       "descriptionEn": "Genus known for producing ultrasonic clicks that interfere with bat echolocation, being one of the few insects with an active acoustic defense mechanism against predators.",
       "photos": [
         "gr04_polillas/fa01_erebidae/sp040104_bertholdia_sp/sp040104_bertholdia_sp_001.webp"
-      ]
+      ],
+      "mainPhotoRatio": 0.9825,
+      "mainPhotoWidth": 1179,
+      "mainPhotoHeight": 1200
     },
     {
       "id": "sp040105",
@@ -1032,7 +1312,10 @@
       "descriptionEn": "Moth of tribe Euchromiini with aposematic coloration. Inhabits the humid tropical forests of the Andean cordillera. Its exact biology and distribution in Colombia are poorly known.",
       "photos": [
         "gr04_polillas/fa01_erebidae/sp040105_correbia_sp/sp040105_correbia_sp_001.webp"
-      ]
+      ],
+      "mainPhotoRatio": 0.7667,
+      "mainPhotoWidth": 920,
+      "mainPhotoHeight": 1200
     },
     {
       "id": "sp040106",
@@ -1054,7 +1337,10 @@
       "descriptionEn": "Brightly red-colored moth with black spots on the hindwings, an aposematic pattern announcing the presence of toxic compounds in its tissues. Diurnal.",
       "photos": [
         "gr04_polillas/fa01_erebidae/sp040106_edebessa_nigropuncta/sp040106_edebessa_nigropuncta_001.webp"
-      ]
+      ],
+      "mainPhotoRatio": 0.9383,
+      "mainPhotoWidth": 1126,
+      "mainPhotoHeight": 1200
     },
     {
       "id": "sp040107",
@@ -1076,7 +1362,10 @@
       "descriptionEn": "Neotropical genus of family Erebidae with over 100 described species. Frequent in humid forests of Colombia. Wings show variable patterns of earth tones and ochres.",
       "photos": [
         "gr04_polillas/fa01_erebidae/sp040107_eulepidotis_sp/sp040107_eulepidotis_sp_001.webp"
-      ]
+      ],
+      "mainPhotoRatio": 1.1494,
+      "mainPhotoWidth": 1200,
+      "mainPhotoHeight": 1044
     },
     {
       "id": "sp040108",
@@ -1098,7 +1387,10 @@
       "descriptionEn": "Moth of subfamily Arctiinae characterized by yellow spots on a dark body. Inhabits humid and cloud forests of the Andes. Nocturnal and attracted to artificial light sources.",
       "photos": [
         "gr04_polillas/fa01_erebidae/sp040108_heliura_flavopunctata/sp040108_heliura_flavopunctata_001.webp"
-      ]
+      ],
+      "mainPhotoRatio": 1.0444,
+      "mainPhotoWidth": 1200,
+      "mainPhotoHeight": 1149
     },
     {
       "id": "sp040109",
@@ -1120,7 +1412,10 @@
       "descriptionEn": "Striking moth of intense orange color with black and white stripes at the wing tip. Its aposematic coloration signals toxicity to predators. Inhabits tropical forest edges.",
       "photos": [
         "gr04_polillas/fa01_erebidae/sp040109_uranophora_walkeri/sp040109_uranophora_walkeri_001.webp"
-      ]
+      ],
+      "mainPhotoRatio": 0.8617,
+      "mainPhotoWidth": 1034,
+      "mainPhotoHeight": 1200
     },
     {
       "id": "sp040110",
@@ -1142,7 +1437,10 @@
       "descriptionEn": "Moth with a striking bicolor pattern: dark brown upper half and amber lower half with black spots, separated by a white band. Nocturnal, frequent in humid forests.",
       "photos": [
         "gr04_polillas/fa01_erebidae/sp040110_ornarantia_biferana/sp040110_ornarantia_biferana_001.webp"
-      ]
+      ],
+      "mainPhotoRatio": 0.9358,
+      "mainPhotoWidth": 1123,
+      "mainPhotoHeight": 1200
     },
     {
       "id": "sp040201",
@@ -1162,7 +1460,10 @@
       "descriptionEn": "Moth of the family Saturniidae with large eye-spots on the hindwings that mimic vertebrate eyes to intimidate predators. Inhabits the humid Andean forests of Antioquia. Like other saturniids, adults do not feed and live only to reproduce.",
       "photos": [
         "gr04_polillas/fa02_saturniidae/sp040201_pseudautomeris_horsti/sp040201_pseudautomeris_horsti_001.webp"
-      ]
+      ],
+      "mainPhotoRatio": 1.5404,
+      "mainPhotoWidth": 1200,
+      "mainPhotoHeight": 779
     },
     {
       "id": "sp040202",
@@ -1182,7 +1483,10 @@
       "descriptionEn": "Large saturniid moth with earthy and ochre color patterns on its wings. Inhabits tropical humid forests of Antioquia's lowlands and mid-elevation zones. Like all saturniids, it lacks a functional mouthpart as an adult and its short adult life is dedicated exclusively to reproduction.",
       "photos": [
         "gr04_polillas/fa02_saturniidae/sp040202_titaea_leumonti/sp040202_titaea_leumonti_001.webp"
-      ]
+      ],
+      "mainPhotoRatio": 1.7647,
+      "mainPhotoWidth": 1200,
+      "mainPhotoHeight": 680
     },
     {
       "id": "sp040203",
@@ -1205,7 +1509,10 @@
       "photos": [
         "gr04_polillas/fa02_saturniidae/sp040203_adeloneivaia_sp/sp040203_adeloneivaia_sp_001.webp",
         "gr04_polillas/fa02_saturniidae/sp040203_adeloneivaia_sp/sp040203_adeloneivaia_sp_002.webp"
-      ]
+      ],
+      "mainPhotoRatio": 1.5171,
+      "mainPhotoWidth": 1200,
+      "mainPhotoHeight": 791
     },
     {
       "id": "sp040204",
@@ -1228,7 +1535,10 @@
       "photos": [
         "gr04_polillas/fa02_saturniidae/sp040204_ceratocampinae_sp/sp040204_ceratocampinae_sp_001.webp",
         "gr04_polillas/fa02_saturniidae/sp040204_ceratocampinae_sp/sp040204_ceratocampinae_sp_002.webp"
-      ]
+      ],
+      "mainPhotoRatio": 1.5365,
+      "mainPhotoWidth": 1200,
+      "mainPhotoHeight": 781
     },
     {
       "id": "sp040205",
@@ -1251,7 +1561,10 @@
       "photos": [
         "gr04_polillas/fa02_saturniidae/sp040205_rhodirphia_carminata/sp040205_rhodirphia_carminata_001.webp",
         "gr04_polillas/fa02_saturniidae/sp040205_rhodirphia_carminata/sp040205_rhodirphia_carminata_002.webp"
-      ]
+      ],
+      "mainPhotoRatio": 1.2012,
+      "mainPhotoWidth": 1200,
+      "mainPhotoHeight": 999
     },
     {
       "id": "sp040206",
@@ -1273,7 +1586,10 @@
       "descriptionEn": "Saturniid with spectacular eyespots (eye-shaped markings) on hindwings used as a defense mechanism against predators. When suddenly opened, the eyespots simulate the eyes of a larger animal.",
       "photos": [
         "gr04_polillas/fa02_saturniidae/sp040206_saturniidae_sp1/sp040206_saturniidae_sp1_001.webp"
-      ]
+      ],
+      "mainPhotoRatio": 1.6506,
+      "mainPhotoWidth": 1200,
+      "mainPhotoHeight": 727
     },
     {
       "id": "sp040207",
@@ -1295,7 +1611,10 @@
       "descriptionEn": "Large saturniid with green coloration and characteristic dark markings. Possibly belonging to subfamily Arsenurinae. Inhabits the humid Andean and premontane forests of Antioquia.",
       "photos": [
         "gr04_polillas/fa02_saturniidae/sp040207_saturniidae_sp2/sp040207_saturniidae_sp2_001.webp"
-      ]
+      ],
+      "mainPhotoRatio": 1.8809,
+      "mainPhotoWidth": 1200,
+      "mainPhotoHeight": 638
     },
     {
       "id": "sp040301",
@@ -1317,7 +1636,10 @@
       "descriptionEn": "Medium-sized geometrid with silvery and mottled silver-toned wings. Inhabits mid-altitude humid forests of the Andean cordillera. Frequents forest edges and secondary vegetation.",
       "photos": [
         "gr04_polillas/fa03_geometridae/sp040301_argyrotome_prospectata/sp040301_argyrotome_prospectata_001.webp"
-      ]
+      ],
+      "mainPhotoRatio": 1.6973,
+      "mainPhotoWidth": 1200,
+      "mainPhotoHeight": 707
     },
     {
       "id": "sp040302",
@@ -1339,7 +1661,10 @@
       "descriptionEn": "Uniformly orange geometer moth with slightly darkened borders. Extended wings reveal the characteristic family pattern with faint transverse lines. Nocturnal and attracted to light.",
       "photos": [
         "gr04_polillas/fa03_geometridae/sp040302_certima_espuma/sp040302_certima_espuma_001.webp"
-      ]
+      ],
+      "mainPhotoRatio": 1.7673,
+      "mainPhotoWidth": 1200,
+      "mainPhotoHeight": 679
     },
     {
       "id": "sp040303",
@@ -1361,7 +1686,10 @@
       "descriptionEn": "Beautiful green geometrid with brown markings at the wing ends. The contrast between emerald green and brown-purple borders makes it easily recognizable. Inhabits Andean cloud forests.",
       "photos": [
         "gr04_polillas/fa03_geometridae/sp040303_chavarriella_porcius/sp040303_chavarriella_porcius_001.webp"
-      ]
+      ],
+      "mainPhotoRatio": 1.4218,
+      "mainPhotoWidth": 1200,
+      "mainPhotoHeight": 844
     },
     {
       "id": "sp040304",
@@ -1383,7 +1711,10 @@
       "descriptionEn": "Geometrid of genus Eois, one of the species-richest in the family. Its caterpillars are specialists on Piper (piperaceae) plants. Indicator of humid forest health.",
       "photos": [
         "gr04_polillas/fa03_geometridae/sp040304_eois_yvata/sp040304_eois_yvata_001.webp"
-      ]
+      ],
+      "mainPhotoRatio": 1.5707,
+      "mainPhotoWidth": 1200,
+      "mainPhotoHeight": 764
     },
     {
       "id": "sp040305",
@@ -1405,7 +1736,10 @@
       "descriptionEn": "Emerald geometrid of subfamily Geometrinae. Its bright green coloration allows it to perfectly blend with vegetation. Inhabits the premontane humid forests of Antioquia.",
       "photos": [
         "gr04_polillas/fa03_geometridae/sp040305_geometridae_sp1/sp040305_geometridae_sp1_001.webp"
-      ]
+      ],
+      "mainPhotoRatio": 1.444,
+      "mainPhotoWidth": 1200,
+      "mainPhotoHeight": 831
     },
     {
       "id": "sp040306",
@@ -1427,7 +1761,10 @@
       "descriptionEn": "Green geometrid with soft brown markings at the wing center. The green coloration is produced by biliverdin pigments, which degrade with light and age, turning the wings yellow.",
       "photos": [
         "gr04_polillas/fa03_geometridae/sp040306_geometridae_sp2/sp040306_geometridae_sp2_001.webp"
-      ]
+      ],
+      "mainPhotoRatio": 1.2862,
+      "mainPhotoWidth": 1200,
+      "mainPhotoHeight": 933
     },
     {
       "id": "sp040307",
@@ -1449,7 +1786,10 @@
       "descriptionEn": "Spectacular green geometrid with broad golden and white wing margins. The color contrast makes this species one of the most striking in the group in Colombia. Inhabits humid forests.",
       "photos": [
         "gr04_polillas/fa03_geometridae/sp040307_geometridae_sp3/sp040307_geometridae_sp3_001.webp"
-      ]
+      ],
+      "mainPhotoRatio": 1.7266,
+      "mainPhotoWidth": 1200,
+      "mainPhotoHeight": 695
     },
     {
       "id": "sp040308",
@@ -1471,7 +1811,10 @@
       "descriptionEn": "Small three-colored geometrid with a very striking wing pattern. Its small size and contrasting colors are distinctive features. Inhabits the understory of Andean humid forests.",
       "photos": [
         "gr04_polillas/fa03_geometridae/sp040308_geometridea_tricolor/sp040308_geometridea_tricolor_001.webp"
-      ]
+      ],
+      "mainPhotoRatio": 1.7937,
+      "mainPhotoWidth": 1200,
+      "mainPhotoHeight": 669
     },
     {
       "id": "sp040309",
@@ -1496,7 +1839,10 @@
         "gr04_polillas/fa03_geometridae/sp040309_leuciris_fimbriaria/sp040309_leuciris_fimbriaria_002.webp",
         "gr04_polillas/fa03_geometridae/sp040309_leuciris_fimbriaria/sp040309_leuciris_fimbriaria_003.webp",
         "gr04_polillas/fa03_geometridae/sp040309_leuciris_fimbriaria/sp040309_leuciris_fimbriaria_004.webp"
-      ]
+      ],
+      "mainPhotoRatio": 0.6667,
+      "mainPhotoWidth": 800,
+      "mainPhotoHeight": 1200
     },
     {
       "id": "sp040310",
@@ -1518,7 +1864,10 @@
       "descriptionEn": "Emerald geometrid with characteristic fine red lines (\"scriptaria\" = written). Caterpillars feed on flowers and immature fruits, perfectly imitating the plant's reproductive structures.",
       "photos": [
         "gr04_polillas/fa03_geometridae/sp040310_nemoria_scriptaria/sp040310_nemoria_scriptaria_001.webp"
-      ]
+      ],
+      "mainPhotoRatio": 1.8321,
+      "mainPhotoWidth": 1200,
+      "mainPhotoHeight": 655
     },
     {
       "id": "sp040311",
@@ -1540,7 +1889,10 @@
       "descriptionEn": "Geometrid with silvery and metallic reflections on wings. The name \"metargyria\" alludes to its silvery sheen. Poorly documented species in Colombia, inhabits mid-altitude humid forests.",
       "photos": [
         "gr04_polillas/fa03_geometridae/sp040311_opisthoxia_metargyria/sp040311_opisthoxia_metargyria_001.webp"
-      ]
+      ],
+      "mainPhotoRatio": 1.4337,
+      "mainPhotoWidth": 1200,
+      "mainPhotoHeight": 837
     },
     {
       "id": "sp040312",
@@ -1562,7 +1914,10 @@
       "descriptionEn": "Small green geometrid of genus Synchlora, whose caterpillars have the unique habit of decorating themselves with flower petals. The green coloration of adults serves as camouflage in vegetation.",
       "photos": [
         "gr04_polillas/fa03_geometridae/sp040312_synchlora_gerularia/sp040312_synchlora_gerularia_001.webp"
-      ]
+      ],
+      "mainPhotoRatio": 1.4616,
+      "mainPhotoWidth": 1200,
+      "mainPhotoHeight": 821
     },
     {
       "id": "sp040313",
@@ -1584,7 +1939,10 @@
       "descriptionEn": "Geometrid of subfamily Ennominae with cryptic brown pattern that mimics tree bark. Caterpillars are \"inchworms\" (loop caterpillars). Inhabits the Andean forests of Antioquia.",
       "photos": [
         "gr04_polillas/fa03_geometridae/sp040313_epimecis_subroraria/sp040313_epimecis_subroraria_001.webp"
-      ]
+      ],
+      "mainPhotoRatio": 1.519,
+      "mainPhotoWidth": 1200,
+      "mainPhotoHeight": 790
     },
     {
       "id": "sp040401",
@@ -1606,7 +1964,10 @@
       "descriptionEn": "Moth of family Crambidae with semi-transparent wings and characteristic dark markings. Larvae of some Diaphania species are pests of cucurbit crops. Inhabits humid tropical zones.",
       "photos": [
         "gr04_polillas/fa04_crambidae/sp040401_diaphania_costata/sp040401_diaphania_costata_001.webp"
-      ]
+      ],
+      "mainPhotoRatio": 1.2085,
+      "mainPhotoWidth": 1200,
+      "mainPhotoHeight": 993
     },
     {
       "id": "sp040501",
@@ -1629,7 +1990,10 @@
       "photos": [
         "gr04_polillas/fa05_lasiocampidae/sp040501_antachara_ecuadoriensis/sp040501_antachara_ecuadoriensis_001.webp",
         "gr04_polillas/fa05_lasiocampidae/sp040501_antachara_ecuadoriensis/sp040501_antachara_ecuadoriensis_002.webp"
-      ]
+      ],
+      "mainPhotoRatio": 0.9808,
+      "mainPhotoWidth": 1177,
+      "mainPhotoHeight": 1200
     },
     {
       "id": "sp040502",
@@ -1652,7 +2016,10 @@
       "photos": [
         "gr04_polillas/fa05_lasiocampidae/sp040502_nesara_amisena/sp040502_nesara_amisena_001.webp",
         "gr04_polillas/fa05_lasiocampidae/sp040502_nesara_amisena/sp040502_nesara_amisena_002.webp"
-      ]
+      ],
+      "mainPhotoRatio": 1.1505,
+      "mainPhotoWidth": 1200,
+      "mainPhotoHeight": 1043
     },
     {
       "id": "sp040601",
@@ -1674,7 +2041,10 @@
       "descriptionEn": "Moth of family Bombycidae, related to the domestic silkworm (Bombyx mori). Has forewings with the family's characteristic hooked apex. Inhabits tropical humid forests.",
       "photos": [
         "gr04_polillas/fa06_bombycidae/sp040601_bombycidae_sp/sp040601_bombycidae_sp_001.webp"
-      ]
+      ],
+      "mainPhotoRatio": 1.9704,
+      "mainPhotoWidth": 1200,
+      "mainPhotoHeight": 609
     },
     {
       "id": "sp050101",
@@ -1695,7 +2065,10 @@
       "descriptionEn": "The world's only nocturnal primate. Its enormous eyes allow it to see in the darkness of the Andean forest. Forms lifelong pairs and the male carries the young most of the time. Threatened by deforestation of cloud forests.",
       "photos": [
         "gr05_mamiferos/fa01_aotidae/sp050101_aotus_lemurinus/sp050101_aotus_lemurinus_001.webp"
-      ]
+      ],
+      "mainPhotoRatio": 1.1204,
+      "mainPhotoWidth": 1200,
+      "mainPhotoHeight": 1071
     },
     {
       "id": "sp050201",
@@ -1717,7 +2090,10 @@
       "descriptionEn": "The largest primate in Colombia, recognized by its powerful vocalizations that resonate for several kilometers. The adult male is dark reddish in color. Its roar at dawn is one of the most emblematic sounds of the Antioquian jungle.",
       "photos": [
         "gr05_mamiferos/fa02_atelidae/sp050201_alouatta_seniculus/sp050201_alouatta_seniculus_001.webp"
-      ]
+      ],
+      "mainPhotoRatio": 1.3667,
+      "mainPhotoWidth": 1200,
+      "mainPhotoHeight": 878
     },
     {
       "id": "sp050301",
@@ -1739,7 +2115,10 @@
       "descriptionEn": "The most common wild canid in Colombia. Gray fur with black and yellow tones, omnivorous and opportunistic: eats everything from crabs and fruits to carrion. Active mainly at dawn and dusk, inhabits environments from humid forests to savannas.",
       "photos": [
         "gr05_mamiferos/fa03_canidae/sp050301_cerdocyon_thous/sp050301_cerdocyon_thous_001.webp"
-      ]
+      ],
+      "mainPhotoRatio": 1.1073,
+      "mainPhotoWidth": 867,
+      "mainPhotoHeight": 783
     },
     {
       "id": "sp050401",
@@ -1758,7 +2137,10 @@
       "descriptionEn": "The world's largest rodent, can exceed 60 kg. Semi-aquatic, lives in family groups along rivers, swamps and wetlands of Antioquia's lowlands. Its meat was historically consumed during Lent after being classified as \"fish\" by the Catholic Church.",
       "photos": [
         "gr05_mamiferos/fa04_caviidae/sp050401_hydrochoerus_hydrochaeris/sp050401_hydrochoerus_hydrochaeris_001.webp"
-      ]
+      ],
+      "mainPhotoRatio": 1.1799,
+      "mainPhotoWidth": 656,
+      "mainPhotoHeight": 556
     },
     {
       "id": "sp050501",
@@ -1778,7 +2160,10 @@
       "descriptionEn": "Pale-faced capuchin with grayish body and reddish tones. Highly intelligent, uses stones to crack hard fruits and can learn behaviors by observing others. Lives in groups of up to 30 individuals.",
       "photos": [
         "gr05_mamiferos/fa05_cebidae/sp050501_cebus_albifrons/sp050501_cebus_albifrons_001.webp"
-      ]
+      ],
+      "mainPhotoRatio": 1.3173,
+      "mainPhotoWidth": 1121,
+      "mainPhotoHeight": 851
     },
     {
       "id": "sp050601",
@@ -1799,7 +2184,10 @@
       "descriptionEn": "Rodent with brilliant dark fur and long legs enabling high-speed running. Key to forest regeneration through its habit of burying seeds it later forgets. One of the few animals that can crack open the hard endocarp of the peach palm.",
       "photos": [
         "gr05_mamiferos/fa06_dasyproctidae/sp050601_dasyprocta_fuliginosa/sp050601_dasyprocta_fuliginosa_001.webp"
-      ]
+      ],
+      "mainPhotoRatio": 1.2468,
+      "mainPhotoWidth": 586,
+      "mainPhotoHeight": 470
     },
     {
       "id": "sp050701",
@@ -1873,7 +2261,10 @@
       "descriptionEn": "Semi-aquatic mustelid with elongated body and waterproof fur. Indicator of water quality: its presence signals well-preserved rivers and streams. Has disappeared from many Antioquia river basins due to pollution and historical hunting for its pelt.",
       "photos": [
         "gr05_mamiferos/fa08_mustelidae/sp050801_lontra_longicaudis/sp050801_lontra_longicaudis_001.webp"
-      ]
+      ],
+      "mainPhotoRatio": 1.3001,
+      "mainPhotoWidth": 1200,
+      "mainPhotoHeight": 923
     },
     {
       "id": "sp050802",
@@ -1895,7 +2286,10 @@
       "descriptionEn": "Mustelid with black body and brown head, agile both on the ground and in trees. Opportunistic omnivore eating everything from fruits and eggs to small mammals. Capable of planning fruit harvests, returning days later to collect them when ripe.",
       "photos": [
         "gr05_mamiferos/fa08_mustelidae/sp050802_eira_barbara/sp050802_eira_barbara_001.webp"
-      ]
+      ],
+      "mainPhotoRatio": 1.2848,
+      "mainPhotoWidth": 1200,
+      "mainPhotoHeight": 934
     },
     {
       "id": "sp050901",
@@ -1915,7 +2309,10 @@
       "descriptionEn": "The first carnivore of the Western Hemisphere scientifically described in the 21st century (2013). Lives exclusively in Andean cloud forests between 1,500 and 2,750 m. Nocturnal and solitary, feeds mainly on fruits and nectar.",
       "photos": [
         "gr05_mamiferos/fa09_procyonidae/sp050901_bassaricyon_neblina/sp050901_bassaricyon_neblina_001.webp"
-      ]
+      ],
+      "mainPhotoRatio": 0.7817,
+      "mainPhotoWidth": 938,
+      "mainPhotoHeight": 1200
     },
     {
       "id": "sp051001",
@@ -1937,7 +2334,10 @@
       "descriptionEn": "Arboreal squirrel with intense reddish fur, the most common in Andean forests of Antioquia. Adapts well to urban areas with tree-lined parks and is frequent in the Valle de Aburrá. Disperses seeds of numerous tree species.",
       "photos": [
         "gr05_mamiferos/fa10_sciuridae/sp051001_sciurus_granatensis/sp051001_sciurus_granatensis_001.webp"
-      ]
+      ],
+      "mainPhotoRatio": 1.3056,
+      "mainPhotoWidth": 1175,
+      "mainPhotoHeight": 900
     },
     {
       "id": "sp051101",
@@ -1975,7 +2375,10 @@
       "descriptionEn": "Orchid of the genus Cattleya with large, showy flowers recorded in the field. Species-level identification requires taxonomic confirmation by specialists. Like all Antioquian cattleyas, it is epiphytic and inhabits humid mountain forests between 500 and 2,000 meters altitude.",
       "photos": [
         "gr08_orquideas/fa01_cattleyinae/sp080101_cattleya_sp/sp080101_cattleya_sp_001.webp"
-      ]
+      ],
+      "mainPhotoRatio": 1.0919,
+      "mainPhotoWidth": 1200,
+      "mainPhotoHeight": 1099
     },
     {
       "id": "sp080201",
@@ -1999,7 +2402,10 @@
         "gr08_orquideas/fa02_epidendrinae/sp080201_epidendrum_sp/sp080201_epidendrum_sp_002.webp",
         "gr08_orquideas/fa02_epidendrinae/sp080201_epidendrum_sp/sp080201_epidendrum_sp_003.webp",
         "gr08_orquideas/fa02_epidendrinae/sp080201_epidendrum_sp/sp080201_epidendrum_sp_004.webp"
-      ]
+      ],
+      "mainPhotoRatio": 1.3605,
+      "mainPhotoWidth": 1200,
+      "mainPhotoHeight": 882
     },
     {
       "id": "sp080301",
@@ -2019,7 +2425,10 @@
       "descriptionEn": "Epiphytic orchid of the genus Maxillaria with solitary flowers of great beauty, generally fragrant. Grows on the trunks and branches of trees in humid Andean forests. Species identification requires specialized analysis of the flowers and their morphology.",
       "photos": [
         "gr08_orquideas/fa03_maxillarieae/sp080301_maxillaria_sp/sp080301_maxillaria_sp_001.webp"
-      ]
+      ],
+      "mainPhotoRatio": 1.0381,
+      "mainPhotoWidth": 1200,
+      "mainPhotoHeight": 1156
     },
     {
       "id": "sp080401",
@@ -2043,7 +2452,10 @@
         "gr08_orquideas/fa04_oncidiinae/sp080401_oncidium_sp/sp080401_oncidium_sp_002.webp",
         "gr08_orquideas/fa04_oncidiinae/sp080401_oncidium_sp/sp080401_oncidium_sp_003.webp",
         "gr08_orquideas/fa04_oncidiinae/sp080401_oncidium_sp/sp080401_oncidium_sp_004.webp"
-      ]
+      ],
+      "mainPhotoRatio": 0.9333,
+      "mainPhotoWidth": 1120,
+      "mainPhotoHeight": 1200
     },
     {
       "id": "sp010102",
@@ -2064,7 +2476,10 @@
       "photos": [
         "gr01_aves/fa01_trogonidae/sp010102_trogon_viridis/sp010102_trogon_viridis_001.webp",
         "gr01_aves/fa01_trogonidae/sp010102_trogon_viridis/sp010102_trogon_viridis_002.webp"
-      ]
+      ],
+      "mainPhotoRatio": 0.8717,
+      "mainPhotoWidth": 1046,
+      "mainPhotoHeight": 1200
     },
     {
       "id": "sp010201",
@@ -2086,7 +2501,10 @@
       "photos": [
         "gr01_aves/fa02_ramphastidae/sp010201_pteroglossus_torquatus/sp010201_pteroglossus_torquatus_001.webp",
         "gr01_aves/fa02_ramphastidae/sp010201_pteroglossus_torquatus/sp010201_pteroglossus_torquatus_002.webp"
-      ]
+      ],
+      "mainPhotoRatio": 1.2889,
+      "mainPhotoWidth": 1200,
+      "mainPhotoHeight": 931
     },
     {
       "id": "sp010301",
@@ -2106,7 +2524,10 @@
       "descriptionEn": "Colombia's largest motmot, recognizable by its rufous chest and flanks and its long racket-tipped tail that it swings like a pendulum. Digs nest tunnels in earthen banks or under fallen tree roots. Feeds on large insects, lizards, frogs, and fruits.",
       "photos": [
         "gr01_aves/fa03_momotidae/sp010301_baryphthengus_martii/sp010301_baryphthengus_martii_001.webp"
-      ]
+      ],
+      "mainPhotoRatio": 0.8108,
+      "mainPhotoWidth": 973,
+      "mainPhotoHeight": 1200
     },
     {
       "id": "sp010401",
@@ -2126,7 +2547,10 @@
       "descriptionEn": "Small parrot with green body and saffron-yellow head and breast — an unmistakable combination among psittacids in northern Colombia. Inhabits humid and semi-dry lowland forests. Its population faces pressure from deforestation and capture for the pet trade.",
       "photos": [
         "gr01_aves/fa04_psittacidae/sp010401_pyrilia_pyrilia/sp010401_pyrilia_pyrilia_001.webp"
-      ]
+      ],
+      "mainPhotoRatio": 0.8875,
+      "mainPhotoWidth": 1065,
+      "mainPhotoHeight": 1200
     },
     {
       "id": "sp010402",
@@ -2147,7 +2571,10 @@
       "descriptionEn": "Medium-sized green parakeet with an unmistakable scarlet-red forehead. Forms noisy flocks flying over interandean valleys and mountain slopes from 500 to 2,500 m. Highly adaptable to transformed landscapes, it is one of the most common parakeets in rural and peri-urban Antioquia.",
       "photos": [
         "gr01_aves/fa04_psittacidae/sp010402_psittacara_wagleri/sp010402_psittacara_wagleri_001.webp"
-      ]
+      ],
+      "mainPhotoRatio": 1.0979,
+      "mainPhotoWidth": 1200,
+      "mainPhotoHeight": 1093
     },
     {
       "id": "sp010501",
@@ -2169,7 +2596,10 @@
       "photos": [
         "gr01_aves/fa05_thraupidae/sp010501_cyanerpes_cyaneus/sp010501_cyanerpes_cyaneus_001.webp",
         "gr01_aves/fa05_thraupidae/sp010501_cyanerpes_cyaneus/sp010501_cyanerpes_cyaneus_002.webp"
-      ]
+      ],
+      "mainPhotoRatio": 1.1079,
+      "mainPhotoWidth": 832,
+      "mainPhotoHeight": 751
     },
     {
       "id": "sp010502",
@@ -2189,7 +2619,10 @@
       "photos": [
         "gr01_aves/fa05_thraupidae/sp010502_stilpnia_larvata/sp010502_stilpnia_larvata_001.webp",
         "gr01_aves/fa05_thraupidae/sp010502_stilpnia_larvata/sp010502_stilpnia_larvata_002.webp"
-      ]
+      ],
+      "mainPhotoRatio": 0.9558,
+      "mainPhotoWidth": 1147,
+      "mainPhotoHeight": 1200
     },
     {
       "id": "sp010601",
@@ -2209,7 +2642,10 @@
       "descriptionEn": "Small and highly active bird of Andean undergrowth, with olive-green back, white throat, and yellow breast. Lives in family groups that tirelessly inspect lower and middle branches of cloud forest between 1,200 and 2,800 m. One of the most consistent participants in mixed flocks on the Andean ridges of Antioquia.",
       "photos": [
         "gr01_aves/fa06_chlorospingidae/sp010601_chlorospingus_flavopectus/sp010601_chlorospingus_flavopectus_001.webp"
-      ]
+      ],
+      "mainPhotoRatio": 1.0327,
+      "mainPhotoWidth": 1200,
+      "mainPhotoHeight": 1162
     },
     {
       "id": "sp010701",
@@ -2229,7 +2665,10 @@
       "descriptionEn": "Small migratory warbler with olive-green back, yellow underparts with black streaking, and a distinctive yellow stripe below the eye. Winters in northern Colombia, inhabiting coastal scrub, mangrove edges, and low vegetation in warm lowlands. Characteristically pumps its tail up and down.",
       "photos": [
         "gr01_aves/fa07_parulidae/sp010701_setophaga_discolor/sp010701_setophaga_discolor_001.webp"
-      ]
+      ],
+      "mainPhotoRatio": 1.0969,
+      "mainPhotoWidth": 1200,
+      "mainPhotoHeight": 1094
     },
     {
       "id": "sp020103",
@@ -2251,7 +2690,10 @@
       "photos": [
         "gr02_anfibios_reptiles/fa01_colubridae/sp020103_oxyrhopus_petolarius/sp020103_oxyrhopus_petolarius_001.webp",
         "gr02_anfibios_reptiles/fa01_colubridae/sp020103_oxyrhopus_petolarius/sp020103_oxyrhopus_petolarius_002.webp"
-      ]
+      ],
+      "mainPhotoRatio": 1.4981,
+      "mainPhotoWidth": 1200,
+      "mainPhotoHeight": 801
     },
     {
       "id": "sp020203",
@@ -2270,7 +2712,10 @@
       "descriptionEn": "Medium-sized frog that lives among leaf litter and roots of Andean humid forests. Has no free-swimming tadpole stage: eggs are laid on land and hatch directly into fully formed froglets. This direct-development strategy makes it independent of water bodies for reproduction.",
       "photos": [
         "gr02_anfibios_reptiles/fa02_craugastoridae/sp020203_craugastor_metriosistus/sp020203_craugastor_metriosistus_001.webp"
-      ]
+      ],
+      "mainPhotoRatio": 1.1215,
+      "mainPhotoWidth": 1200,
+      "mainPhotoHeight": 1070
     },
     {
       "id": "sp020204",
@@ -2291,7 +2736,10 @@
       "photos": [
         "gr02_anfibios_reptiles/fa02_craugastoridae/sp020204_pristimantis_gaigei/sp020204_pristimantis_gaigei_001.webp",
         "gr02_anfibios_reptiles/fa02_craugastoridae/sp020204_pristimantis_gaigei/sp020204_pristimantis_gaigei_002.webp"
-      ]
+      ],
+      "mainPhotoRatio": 1.2474,
+      "mainPhotoWidth": 1200,
+      "mainPhotoHeight": 962
     },
     {
       "id": "sp020302",
@@ -2312,7 +2760,10 @@
       "photos": [
         "gr02_anfibios_reptiles/fa03_hylidae/sp020302_smilisca_phaeota/sp020302_smilisca_phaeota_001.webp",
         "gr02_anfibios_reptiles/fa03_hylidae/sp020302_smilisca_phaeota/sp020302_smilisca_phaeota_002.webp"
-      ]
+      ],
+      "mainPhotoRatio": 1.3158,
+      "mainPhotoWidth": 1200,
+      "mainPhotoHeight": 912
     },
     {
       "id": "sp020501",
@@ -2332,7 +2783,10 @@
       "photos": [
         "gr02_anfibios_reptiles/fa05_bufonidae/sp020501_rhaebo_haematiticus/sp020501_rhaebo_haematiticus_001.webp",
         "gr02_anfibios_reptiles/fa05_bufonidae/sp020501_rhaebo_haematiticus/sp020501_rhaebo_haematiticus_002.webp"
-      ]
+      ],
+      "mainPhotoRatio": 1.2579,
+      "mainPhotoWidth": 1200,
+      "mainPhotoHeight": 954
     },
     {
       "id": "sp080202",
@@ -2352,7 +2806,10 @@
       "descriptionEn": "Epiphytic orchid with slender stems and small flowers whose petals have finely fringed or toothed margins, giving it its name. Grows in cloud forests between 1,500 and 2,800 m. Like most Colombian epidendrums, it blooms in terminal racemes and depends on specific pollinators of the Andean forest.",
       "photos": [
         "gr08_orquideas/fa02_epidendrinae/sp080202_epidendrum_fimbriatum/sp080202_epidendrum_fimbriatum_001.webp"
-      ]
+      ],
+      "mainPhotoRatio": 0.9842,
+      "mainPhotoWidth": 1181,
+      "mainPhotoHeight": 1200
     },
     {
       "id": "sp080203",
@@ -2373,7 +2830,10 @@
       "descriptionEn": "One of the most common and recognizable orchids of the Colombian Andes, with orange or red flowers in dense racemes on reed-like stems. Very adaptable, grows on roadsides, gardens, pastures, and open slopes between 1,200 and 3,000 m. One of the few truly terrestrial orchids and a colonizer of disturbed environments.",
       "photos": [
         "gr08_orquideas/fa02_epidendrinae/sp080203_epidendrum_ibaguense/sp080203_epidendrum_ibaguense_001.webp"
-      ]
+      ],
+      "mainPhotoRatio": 1.3605,
+      "mainPhotoWidth": 1200,
+      "mainPhotoHeight": 882
     },
     {
       "id": "sp080302",
@@ -2393,7 +2853,10 @@
       "descriptionEn": "Epiphytic or terrestrial orchid with large pleated leaves bearing solitary oversized flowers in white, yellow, or pink tones. Inhabits Andean cloud forests between 1,500 and 2,500 m. The flowers have three prominent sepals forming a star and a complex lip. Several species in the genus are threatened by extraction for the flower trade.",
       "photos": [
         "gr08_orquideas/fa03_maxillarieae/sp080302_lycaste_sp/sp080302_lycaste_sp_001.webp"
-      ]
+      ],
+      "mainPhotoRatio": 0.9492,
+      "mainPhotoWidth": 1139,
+      "mainPhotoHeight": 1200
     },
     {
       "id": "sp080402",
@@ -2413,7 +2876,10 @@
       "descriptionEn": "Epiphytic orchid popularly known as the \"pansy orchid\" for its flowers resemblance to garden pansies. Produces large, showy flowers with color patterns in red, white, and pink. Inhabits Andean cloud forests between 1,500 and 2,800 m. Highly valued in horticulture and heavily collected from natural habitat.",
       "photos": [
         "gr08_orquideas/fa04_oncidiinae/sp080402_miltonia_sp/sp080402_miltonia_sp_001.webp"
-      ]
+      ],
+      "mainPhotoRatio": 0.9,
+      "mainPhotoWidth": 1080,
+      "mainPhotoHeight": 1200
     },
     {
       "id": "sp080403",
@@ -2433,7 +2899,10 @@
       "descriptionEn": "Epiphytic orchid with large flowers bearing wavy, toothed petals and sepals that give it its name (from Greek: tooth-tongue). Inhabits cloud forests and sub-páramos of the Colombian Andes between 2,000 and 3,500 m. Its showy flowers have white or yellow backgrounds spotted with brown. It has been the basis for countless ornamental hybrids.",
       "photos": [
         "gr08_orquideas/fa04_oncidiinae/sp080403_odontoglossum_sp/sp080403_odontoglossum_sp_001.webp"
-      ]
+      ],
+      "mainPhotoRatio": 1.1257,
+      "mainPhotoWidth": 1200,
+      "mainPhotoHeight": 1066
     },
     {
       "id": "sp080404",
@@ -2454,7 +2923,10 @@
       "photos": [
         "gr08_orquideas/fa04_oncidiinae/sp080404_ornithocephalus_sp/sp080404_ornithocephalus_sp_001.webp",
         "gr08_orquideas/fa04_oncidiinae/sp080404_ornithocephalus_sp/sp080404_ornithocephalus_sp_002.webp"
-      ]
+      ],
+      "mainPhotoRatio": 1.0462,
+      "mainPhotoWidth": 1200,
+      "mainPhotoHeight": 1147
     },
     {
       "id": "sp080501",
@@ -2474,7 +2946,10 @@
       "descriptionEn": "Small epiphytic orchid of the subtribe Pleurothallidinae with fleshy leaves and tiny flowers arranged in racemes. Inhabits cloud forests between 1,500 and 2,800 m. The genus Acianthera groups hundreds of species in the tropical Andes, many endemic to small areas and requiring microscopy for identification.",
       "photos": [
         "gr08_orquideas/fa05_pleurothallidinae/sp080501_acianthera_sp/sp080501_acianthera_sp_001.webp"
-      ]
+      ],
+      "mainPhotoRatio": 0.915,
+      "mainPhotoWidth": 1098,
+      "mainPhotoHeight": 1200
     },
     {
       "id": "sp080502",
@@ -2493,7 +2968,10 @@
       "descriptionEn": "Epiphytic orchid of Andean cloud forests whose flowers have long sepals ending in thread-like tails that radiate from the center like spokes, hence its name. The genus Dracula visually mimics specific fungi to attract its pollinators, flies of the genus Drosophila. Grows pendant on humid branches between 1,800 and 2,600 m.",
       "photos": [
         "gr08_orquideas/fa05_pleurothallidinae/sp080502_dracula_radiosa/sp080502_dracula_radiosa_001.webp"
-      ]
+      ],
+      "mainPhotoRatio": 0.9408,
+      "mainPhotoWidth": 1129,
+      "mainPhotoHeight": 1200
     },
     {
       "id": "sp080503",
@@ -2512,7 +2990,10 @@
       "descriptionEn": "Pendant epiphytic orchid of the Andean cloud forest, with flowers that mimic fungi to attract pollinating flies. Flowers emerge on pendant peduncles that hang below the substrate, an adaptation to reach the forest floor where flies are abundant. Colombia harbors the greatest diversity of Dracula in the world.",
       "photos": [
         "gr08_orquideas/fa05_pleurothallidinae/sp080503_dracula_sp/sp080503_dracula_sp_001.webp"
-      ]
+      ],
+      "mainPhotoRatio": 1.5,
+      "mainPhotoWidth": 1200,
+      "mainPhotoHeight": 800
     },
     {
       "id": "sp080504",
@@ -2532,7 +3013,10 @@
       "photos": [
         "gr08_orquideas/fa05_pleurothallidinae/sp080504_lepanthes_ligiae/sp080504_lepanthes_ligiae_001.webp",
         "gr08_orquideas/fa05_pleurothallidinae/sp080504_lepanthes_ligiae/sp080504_lepanthes_ligiae_002.webp"
-      ]
+      ],
+      "mainPhotoRatio": 0.9933,
+      "mainPhotoWidth": 1192,
+      "mainPhotoHeight": 1200
     },
     {
       "id": "sp080505",
@@ -2551,7 +3035,10 @@
       "descriptionEn": "Miniature epiphytic orchid of Colombian cloud forests, with tiny brightly colored flowers on small leaves. Like all Lepanthes, its flowers are so small they require a magnifier to appreciate their complex structure. Pollinated by fungivorous flies attracted by floral mimicry of fungi.",
       "photos": [
         "gr08_orquideas/fa05_pleurothallidinae/sp080505_lepanthes_rutrum/sp080505_lepanthes_rutrum_001.webp"
-      ]
+      ],
+      "mainPhotoRatio": 1.0979,
+      "mainPhotoWidth": 1200,
+      "mainPhotoHeight": 1093
     },
     {
       "id": "sp080506",
@@ -2571,7 +3058,10 @@
       "descriptionEn": "Miniature epiphytic orchid of the subtribe Pleurothallidinae. With over 1,000 species, Lepanthes is one of the most diverse orchid genera in the world and one of the most threatened by deforestation, as many species have extremely restricted distributions to a single mountain or cloud forest fragment.",
       "photos": [
         "gr08_orquideas/fa05_pleurothallidinae/sp080506_lepanthes_sp/sp080506_lepanthes_sp_001.webp"
-      ]
+      ],
+      "mainPhotoRatio": 0.6083,
+      "mainPhotoWidth": 730,
+      "mainPhotoHeight": 1200
     },
     {
       "id": "sp080507",
@@ -2590,7 +3080,10 @@
       "descriptionEn": "Epiphytic orchid of Andean cloud forests with flowers whose sepals are fused into a tube that opens into three thread-like tails. Masdevallias are highly sensitive to temperature changes and require cool, humid environments, making them vulnerable to climate change. Their intensely colored flowers make them favorites in orchid cultivation.",
       "photos": [
         "gr08_orquideas/fa05_pleurothallidinae/sp080507_masdevallia_hortensis/sp080507_masdevallia_hortensis_001.webp"
-      ]
+      ],
+      "mainPhotoRatio": 0.5958,
+      "mainPhotoWidth": 715,
+      "mainPhotoHeight": 1200
     },
     {
       "id": "sp080508",
@@ -2610,7 +3103,10 @@
       "descriptionEn": "Epiphytic orchid of the Andean cloud forest with triangular flowers formed by sepals fused at their bases. Colombia is the country with the greatest diversity of Masdevallia in the world. Many species are endemic to very small areas of the Antioquian Andes and face pressure from deforestation and extraction for the ornamental market.",
       "photos": [
         "gr08_orquideas/fa05_pleurothallidinae/sp080508_masdevallia_sp/sp080508_masdevallia_sp_001.webp"
-      ]
+      ],
+      "mainPhotoRatio": 0.9275,
+      "mainPhotoWidth": 1113,
+      "mainPhotoHeight": 1200
     },
     {
       "id": "sp080509",
@@ -2630,7 +3126,10 @@
       "photos": [
         "gr08_orquideas/fa05_pleurothallidinae/sp080509_platystele_sp/sp080509_platystele_sp_001.webp",
         "gr08_orquideas/fa05_pleurothallidinae/sp080509_platystele_sp/sp080509_platystele_sp_002.webp"
-      ]
+      ],
+      "mainPhotoRatio": 0.9792,
+      "mainPhotoWidth": 1175,
+      "mainPhotoHeight": 1200
     },
     {
       "id": "sp080510",
@@ -2649,7 +3148,10 @@
       "descriptionEn": "Epiphytic orchid of the Andean cloud forest whose flowers have appendages or structures giving it an unusual appearance, suggestive of its name \"diabolica\". Belongs to the enormous genus Pleurothallis, one of the most diverse in the Americas. Many Pleurothallis have very restricted distributions and are highly sensitive to cloud forest loss.",
       "photos": [
         "gr08_orquideas/fa05_pleurothallidinae/sp080510_pleurothallis_diabolica/sp080510_pleurothallis_diabolica_001.webp"
-      ]
+      ],
+      "mainPhotoRatio": 0.5375,
+      "mainPhotoWidth": 645,
+      "mainPhotoHeight": 1200
     },
     {
       "id": "sp080511",
@@ -2671,7 +3173,10 @@
         "gr08_orquideas/fa05_pleurothallidinae/sp080511_pleurothallis_sp/sp080511_pleurothallis_sp_001.webp",
         "gr08_orquideas/fa05_pleurothallidinae/sp080511_pleurothallis_sp/sp080511_pleurothallis_sp_002.webp",
         "gr08_orquideas/fa05_pleurothallidinae/sp080511_pleurothallis_sp/sp080511_pleurothallis_sp_003.webp"
-      ]
+      ],
+      "mainPhotoRatio": 0.7733,
+      "mainPhotoWidth": 928,
+      "mainPhotoHeight": 1200
     },
     {
       "id": "sp080512",
@@ -2690,7 +3195,10 @@
       "descriptionEn": "Andean epiphytic orchid with peculiar flowers whose lateral sepals form a spoon or boat-shaped structure, the trait that names the genus (from Greek: boat-sepal). Inhabits humid cloud forests between 1,800 and 2,800 m. Flowers attract pollinating flies through visual and olfactory cues that simulate decomposing fungi.",
       "photos": [
         "gr08_orquideas/fa05_pleurothallidinae/sp080512_scaphosepalum_decorum/sp080512_scaphosepalum_decorum_001.webp"
-      ]
+      ],
+      "mainPhotoRatio": 1.2685,
+      "mainPhotoWidth": 1200,
+      "mainPhotoHeight": 946
     },
     {
       "id": "sp080513",
@@ -2709,7 +3217,10 @@
       "descriptionEn": "Epiphytic orchid of the Andean cloud forest with flowers that mimic fungi to attract pollinating flies. Scaphosepalums are known for their flowers that open sequentially on the same peduncle over months, producing flowers one after another on the same floral stem, maximizing pollination opportunities.",
       "photos": [
         "gr08_orquideas/fa05_pleurothallidinae/sp080513_scaphosepalum_sp/sp080513_scaphosepalum_sp_001.webp"
-      ]
+      ],
+      "mainPhotoRatio": 1.0093,
+      "mainPhotoWidth": 1200,
+      "mainPhotoHeight": 1189
     },
     {
       "id": "sp080514",
@@ -2729,7 +3240,10 @@
       "descriptionEn": "Small epiphytic orchid forming dense racemes of tiny triangular flowers. The genus Stelis is one of the most diverse in Pleurothallidinae, with hundreds of species in the tropical Andes. Many differ only in microscopic floral details. Grows in cloud forests on mosses and tree branches between 1,500 and 3,000 m.",
       "photos": [
         "gr08_orquideas/fa05_pleurothallidinae/sp080514_stelis_sp/sp080514_stelis_sp_001.webp"
-      ]
+      ],
+      "mainPhotoRatio": 1.2371,
+      "mainPhotoWidth": 1200,
+      "mainPhotoHeight": 970
     },
     {
       "id": "sp080601",
@@ -2747,7 +3261,10 @@
       "descriptionEn": "Miniature monopodial orchid of the tribe Aeridinae with extremely small but perfectly formed flowers. Although its natural distribution is Southeast Asia, it is cultivated and has naturalized in tropical gardens of Colombia. It is one of the orchids with the smallest flowers in its tribe, grown by specialist collectors.",
       "photos": [
         "gr08_orquideas/fa06_aeridinae/sp080601_abdominea_minimiflora/sp080601_abdominea_minimiflora_001.webp"
-      ]
+      ],
+      "mainPhotoRatio": 0.6667,
+      "mainPhotoWidth": 800,
+      "mainPhotoHeight": 1200
     },
     {
       "id": "sp080602",
@@ -2765,7 +3282,10 @@
       "descriptionEn": "Extraordinary epiphytic orchid that performs photosynthesis mainly through its flattened green roots, having virtually no leaves. This extreme adaptation allows it to survive on exposed branches. Produces racemes of small, delicate flowers. Cultivated by collectors of unusual orchids in the Colombian tropics.",
       "photos": [
         "gr08_orquideas/fa06_aeridinae/sp080602_chiloschista_sp/sp080602_chiloschista_sp_001.webp"
-      ]
+      ],
+      "mainPhotoRatio": 0.66,
+      "mainPhotoWidth": 792,
+      "mainPhotoHeight": 1200
     },
     {
       "id": "sp080701",
@@ -2785,7 +3305,687 @@
       "descriptionEn": "Epiphytic orchid of the Colombian Andes with solitary, highly ornate flowers with creamy white or pale green petals and sepals spotted with purple and a complex, decorative lip. Inhabits cloud forests between 1,500 and 2,500 m. A species with restricted distribution in central-western Colombia, with few documented records.",
       "photos": [
         "gr08_orquideas/fa07_zygopetalinae/sp080701_kefersteinia_tolimensis/sp080701_kefersteinia_tolimensis_001.webp"
-      ]
+      ],
+      "mainPhotoRatio": 1.0381,
+      "mainPhotoWidth": 1200,
+      "mainPhotoHeight": 1156
+    },
+    {
+      "id": "sp100101",
+      "familyId": "coprinaceae",
+      "group": "hongos",
+      "scientificName": "Coprinus micaceus",
+      "nameEs": "Barbuda micácea",
+      "nameEn": "Glistening inkcap",
+      "iucn": "DD",
+      "subregions": [],
+      "descriptionEs": "Crece en racimos densos sobre tocones y raíces enterradas. Su nombre común hace referencia al aspecto brillante y granuloso del sombrero joven, similar a mica.",
+      "descriptionEn": "Grows in dense clusters on stumps and buried roots. Its common name refers to the glistening, granular look of the young cap, similar to mica.",
+      "photos": [
+        "gr10_hongos/fa01_coprinaceae/sp100101_coprinus_micaceus/coprinus_micaceus_001.webp"
+      ],
+      "mainPhotoRatio": 0.7725,
+      "mainPhotoWidth": 927,
+      "mainPhotoHeight": 1200
+    },
+    {
+      "id": "sp100201",
+      "familyId": "russulaceae",
+      "group": "hongos",
+      "scientificName": "Russula cyanoxantha",
+      "nameEs": "Rúsula camaleón",
+      "nameEn": "Charcoal burner",
+      "iucn": "DD",
+      "subregions": [],
+      "descriptionEs": "El sombrero puede variar entre tonos púrpura, verde y oliva en un mismo ejemplar, de ahí su apodo \"camaleón\". A diferencia de otras rúsulas, sus laminillas son flexibles, no quebradizas.",
+      "descriptionEn": "The cap can range from purple to green and olive tones on a single specimen, hence its \"chameleon\" nickname. Unlike most Russula species, its gills are flexible rather than brittle.",
+      "photos": [
+        "gr10_hongos/fa02_russulaceae/sp100201_russula_cyanoxantha/russula_cyanoxantha_001.webp",
+        "gr10_hongos/fa02_russulaceae/sp100201_russula_cyanoxantha/russula_cyanoxantha_002.webp"
+      ],
+      "mainPhotoRatio": 1.1628,
+      "mainPhotoWidth": 1200,
+      "mainPhotoHeight": 1032
+    },
+    {
+      "id": "sp100301",
+      "familyId": "polyporaceae",
+      "group": "hongos",
+      "scientificName": "Polyporus sp.",
+      "nameEs": "Poliporo sin identificar 1",
+      "nameEn": "Unidentified polypore 1",
+      "iucn": "DD",
+      "subregions": [],
+      "descriptionEs": "Género identificado con confianza por la superficie porosa característica; la especie exacta requiere revisión de esporas.",
+      "descriptionEn": "Genus confidently identified by the characteristic pore surface; the exact species requires spore examination.",
+      "photos": [
+        "gr10_hongos/fa03_polyporaceae/sp100301_polyporus_sp/polyporus_sp_001.webp"
+      ],
+      "mainPhotoRatio": 0.8425,
+      "mainPhotoWidth": 1011,
+      "mainPhotoHeight": 1200
+    },
+    {
+      "id": "sp100401",
+      "familyId": "sclerodermataceae",
+      "group": "hongos",
+      "scientificName": "Calostoma cinnabarinum",
+      "nameEs": "Hongo gelatina bermellón",
+      "nameEn": "Stalked puffball-in-aspic",
+      "iucn": "DD",
+      "subregions": [],
+      "descriptionEs": "Hongo llamativo de cabeza roja gelatinosa sostenida sobre un pie esponjoso, poco común de observar en campo.",
+      "descriptionEn": "A striking fungus with a gelatinous red head held on a spongy stalk, uncommonly observed in the field.",
+      "photos": [
+        "gr10_hongos/fa04_sclerodermataceae/sp100401_calostoma_cinnabarinum/calostoma_cinnabarinum_001.webp"
+      ],
+      "mainPhotoRatio": 0.9417,
+      "mainPhotoWidth": 1130,
+      "mainPhotoHeight": 1200
+    },
+    {
+      "id": "sp100501",
+      "familyId": "cortinariaceae",
+      "group": "hongos",
+      "scientificName": "Cortinarius iodes",
+      "nameEs": "Cortinario violeta viscoso",
+      "nameEn": "Viscid violet cort",
+      "iucn": "DD",
+      "subregions": [],
+      "descriptionEs": "Sombrero violeta a púrpura, viscoso en tiempo húmedo, típico de bosques con árboles ectomicorrízicos.",
+      "descriptionEn": "Violet to purple cap, viscid in wet weather, typical of forests with ectomycorrhizal trees.",
+      "photos": [
+        "gr10_hongos/fa05_cortinariaceae/sp100501_cortinarius_iodes/cortinarius_iodes_001.webp"
+      ],
+      "mainPhotoRatio": 0.965,
+      "mainPhotoWidth": 1158,
+      "mainPhotoHeight": 1200
+    },
+    {
+      "id": "sp100302",
+      "familyId": "polyporaceae",
+      "group": "hongos",
+      "scientificName": "Pycnoporus cinnabarinus",
+      "nameEs": "Poliporo bermellón",
+      "nameEn": "Cinnabar polypore",
+      "iucn": "DD",
+      "subregions": [],
+      "descriptionEs": "Repisa leñosa de color naranja-rojo intenso y uniforme, tanto en la superficie superior como en los poros, sobre madera muerta.",
+      "descriptionEn": "A woody bracket of intense, uniform orange-red color on both the upper surface and the pores, on dead wood.",
+      "photos": [
+        "gr10_hongos/fa03_polyporaceae/sp100302_pycnoporus_cinnabarinus/pycnoporus_cinnabarinus_001.webp"
+      ],
+      "mainPhotoRatio": 1.145,
+      "mainPhotoWidth": 1200,
+      "mainPhotoHeight": 1048
+    },
+    {
+      "id": "sp100601",
+      "familyId": "marasmiaceae",
+      "group": "hongos",
+      "scientificName": "Marasmius sp.",
+      "nameEs": "Marasmius sin identificar",
+      "nameEn": "Unidentified Marasmius",
+      "iucn": "DD",
+      "subregions": [],
+      "descriptionEs": "Pequeño hongo de hojarasca; el género es claro por el hábito general, la especie exacta requiere más detalle.",
+      "descriptionEn": "Small litter-dwelling mushroom; the genus is clear from its general habit, the exact species requires more detail.",
+      "photos": [
+        "gr10_hongos/fa06_marasmiaceae/sp100601_marasmius_sp/marasmius_sp_001.webp",
+        "gr10_hongos/fa06_marasmiaceae/sp100601_marasmius_sp/marasmius_sp_002.webp"
+      ],
+      "mainPhotoRatio": 0.8225,
+      "mainPhotoWidth": 987,
+      "mainPhotoHeight": 1200
+    },
+    {
+      "id": "sp100303",
+      "familyId": "polyporaceae",
+      "group": "hongos",
+      "scientificName": "Piptoporus sp.",
+      "nameEs": "Poliporo sin identificar 2",
+      "nameEn": "Unidentified polypore 2",
+      "iucn": "DD",
+      "subregions": [],
+      "descriptionEs": "Repisa leñosa típica del género, adherida lateralmente al tronco hospedero.",
+      "descriptionEn": "Woody bracket typical of the genus, laterally attached to its host trunk.",
+      "photos": [
+        "gr10_hongos/fa03_polyporaceae/sp100303_piptoporus_sp/piptoporus_sp_001.webp"
+      ],
+      "mainPhotoRatio": 1.2632,
+      "mainPhotoWidth": 1200,
+      "mainPhotoHeight": 950
+    },
+    {
+      "id": "sp100602",
+      "familyId": "marasmiaceae",
+      "group": "hongos",
+      "scientificName": "Marasmiellus sp.",
+      "nameEs": "Marasmiellus sin identificar",
+      "nameEn": "Unidentified Marasmiellus",
+      "iucn": "DD",
+      "subregions": [],
+      "descriptionEs": "Hongo diminuto, pálido, de hojarasca o madera muy descompuesta.",
+      "descriptionEn": "Tiny, pale mushroom found on leaf litter or heavily decayed wood.",
+      "photos": [
+        "gr10_hongos/fa06_marasmiaceae/sp100602_marasmiellus_sp/marasmiellus_sp_001.webp"
+      ],
+      "mainPhotoRatio": 1.6043,
+      "mainPhotoWidth": 1200,
+      "mainPhotoHeight": 748
+    },
+    {
+      "id": "sp100701",
+      "familyId": "myxomycetes",
+      "group": "hongos",
+      "scientificName": "Dictydiaethalium sp.",
+      "nameEs": "Mixomiceto sin identificar 1",
+      "nameEn": "Unidentified slime mold 1",
+      "iucn": "DD",
+      "subregions": [],
+      "descriptionEs": "No es un hongo verdadero sino un mixomiceto (moho mucilaginoso); forma masas de esporangios agregados sobre madera en descomposición.",
+      "descriptionEn": "Not a true fungus but a myxomycete (slime mold); forms clustered masses of sporangia on decaying wood.",
+      "photos": [
+        "gr10_hongos/fa07_myxomycetes/sp100701_dictydiaethalium_sp/dictydiaethalium_sp_001.webp"
+      ],
+      "mainPhotoRatio": 1.2448,
+      "mainPhotoWidth": 1200,
+      "mainPhotoHeight": 964
+    },
+    {
+      "id": "sp102301",
+      "familyId": "fungi_indet",
+      "group": "hongos",
+      "scientificName": "Fungi indet.",
+      "nameEs": "Hongo pequeño sin identificar 1",
+      "nameEn": "Unidentified small fungus 1",
+      "iucn": "DD",
+      "subregions": [],
+      "descriptionEs": "Fotografiado solo desde arriba; sin vista de laminillas ni tallo completo no fue posible acotar ni el género.",
+      "descriptionEn": "Photographed from above only; without a view of the gills or the full stem it was not possible to narrow down even the genus.",
+      "photos": [
+        "gr10_hongos/fa23_fungi_indet/sp102301_fungi_indet/fungi_indet_001.webp"
+      ],
+      "mainPhotoRatio": 1.4388,
+      "mainPhotoWidth": 1200,
+      "mainPhotoHeight": 834
+    },
+    {
+      "id": "sp100801",
+      "familyId": "rickenellaceae",
+      "group": "hongos",
+      "scientificName": "Cotylidia diaphana",
+      "nameEs": "Cotylidia",
+      "nameEn": "Cotylidia",
+      "iucn": "DD",
+      "subregions": [],
+      "descriptionEs": "Hongo delicado en forma de embudo o abanico, de textura fina y coloración pálida.",
+      "descriptionEn": "Delicate funnel- or fan-shaped fungus, thin-textured and pale colored.",
+      "photos": [
+        "gr10_hongos/fa08_rickenellaceae/sp100801_cotylidia_diaphana/cotylidia_diaphana_001.webp",
+        "gr10_hongos/fa08_rickenellaceae/sp100801_cotylidia_diaphana/cotylidia_diaphana_002.webp"
+      ],
+      "mainPhotoRatio": 1.5094,
+      "mainPhotoWidth": 1200,
+      "mainPhotoHeight": 795
+    },
+    {
+      "id": "sp100901",
+      "familyId": "xylariaceae",
+      "group": "hongos",
+      "scientificName": "Xylaria guazumae",
+      "nameEs": "Xylaria de guácimo",
+      "nameEn": "Guazuma xylaria",
+      "iucn": "DD",
+      "subregions": [],
+      "descriptionEs": "Especie descrita asociada al árbol guácimo (Guazuma), de cuerpo fructífero negro y carbonoso en forma de dedo o maza.",
+      "descriptionEn": "Species described in association with the guácimo tree (Guazuma), with a black, carbon-like, finger- or club-shaped fruiting body.",
+      "photos": [
+        "gr10_hongos/fa09_xylariaceae/sp100901_xylaria_guazumae/xylaria_guazumae_001.webp"
+      ],
+      "mainPhotoRatio": 1.5605,
+      "mainPhotoWidth": 1200,
+      "mainPhotoHeight": 769
+    },
+    {
+      "id": "sp100902",
+      "familyId": "xylariaceae",
+      "group": "hongos",
+      "scientificName": "Xylaria titan",
+      "nameEs": "Xylaria titán",
+      "nameEn": "Titan xylaria",
+      "iucn": "DD",
+      "subregions": [],
+      "descriptionEs": "Especie de gran tamaño dentro del género Xylaria, de cuerpo fructífero negro carbonoso.",
+      "descriptionEn": "A notably large species within the genus Xylaria, with a black, carbon-like fruiting body.",
+      "photos": [
+        "gr10_hongos/fa09_xylariaceae/sp100902_xylaria_titan/xylaria_titan_001.webp"
+      ],
+      "mainPhotoRatio": 1.1142,
+      "mainPhotoWidth": 1200,
+      "mainPhotoHeight": 1077
+    },
+    {
+      "id": "sp101001",
+      "familyId": "nidulariaceae",
+      "group": "hongos",
+      "scientificName": "Cyathus striatus",
+      "nameEs": "Nido de pájaro estriado",
+      "nameEn": "Fluted bird's nest",
+      "iucn": "DD",
+      "subregions": [],
+      "descriptionEs": "Copa diminuta con estrías internas que contiene \"huevos\" (peridiolos) con las esporas, dispersados por el impacto de gotas de lluvia.",
+      "descriptionEn": "A tiny cup with internally fluted walls containing spore-filled \"eggs\" (peridioles), dispersed by the impact of raindrops.",
+      "photos": [
+        "gr10_hongos/fa10_nidulariaceae/sp101001_cyathus_striatus/cyathus_striatus_001.webp"
+      ],
+      "mainPhotoRatio": 0.9642,
+      "mainPhotoWidth": 1157,
+      "mainPhotoHeight": 1200
+    },
+    {
+      "id": "sp101101",
+      "familyId": "entomolomataceae",
+      "group": "hongos",
+      "scientificName": "Entomoloma sp.",
+      "nameEs": "Entomoloma sin identificar",
+      "nameEn": "Unidentified Entomoloma",
+      "iucn": "DD",
+      "subregions": [],
+      "descriptionEs": "Hongo laminado de esporada rosada; el género es identificable, la especie exacta requiere más detalle.",
+      "descriptionEn": "Gilled mushroom with a pink spore print; the genus is identifiable, the exact species requires more detail.",
+      "photos": [
+        "gr10_hongos/fa11_entomolomataceae/sp101101_entomoloma_sp/entomoloma_sp_001.webp"
+      ],
+      "mainPhotoRatio": 0.7975,
+      "mainPhotoWidth": 957,
+      "mainPhotoHeight": 1200
+    },
+    {
+      "id": "sp101201",
+      "familyId": "sarcoscyphaceae",
+      "group": "hongos",
+      "scientificName": "Cookeina tricholoma",
+      "nameEs": "Copa peluda anaranjada",
+      "nameEn": "Hairy orange cup",
+      "iucn": "DD",
+      "subregions": [],
+      "descriptionEs": "Copas de color naranja vivo con largos pelos (cilios) blancos en el borde, comunes sobre ramas caídas en bosque húmedo tropical.",
+      "descriptionEn": "Bright orange cups with long white hairs (cilia) along the rim, common on fallen branches in humid tropical forest.",
+      "photos": [
+        "gr10_hongos/fa12_sarcoscyphaceae/sp101201_cookeina_tricholoma/cookeina_tricholoma_001.webp",
+        "gr10_hongos/fa12_sarcoscyphaceae/sp101201_cookeina_tricholoma/cookeina_tricholoma_002.webp"
+      ],
+      "mainPhotoRatio": 1.2526,
+      "mainPhotoWidth": 1200,
+      "mainPhotoHeight": 958
+    },
+    {
+      "id": "sp101301",
+      "familyId": "mycenaceae",
+      "group": "hongos",
+      "scientificName": "Mycena sp.",
+      "nameEs": "Mycena sin identificar 1",
+      "nameEn": "Unidentified Mycena 1",
+      "iucn": "DD",
+      "subregions": [],
+      "descriptionEs": "Género muy diverso; se registra a nivel de género hasta poder confirmar la especie con más detalle (esporada, olor, sustrato exacto).",
+      "descriptionEn": "A very diverse genus; recorded at genus level until the species can be confirmed with more detail (spore print, odor, exact substrate).",
+      "photos": [
+        "gr10_hongos/fa13_mycenaceae/sp101301_mycena_sp/mycena_sp_001.webp",
+        "gr10_hongos/fa13_mycenaceae/sp101301_mycena_sp/mycena_sp_002.webp"
+      ],
+      "mainPhotoRatio": 0.8075,
+      "mainPhotoWidth": 969,
+      "mainPhotoHeight": 1200
+    },
+    {
+      "id": "sp100304",
+      "familyId": "polyporaceae",
+      "group": "hongos",
+      "scientificName": "Pycnoporus sanguineus",
+      "nameEs": "Poliporo sangre",
+      "nameEn": "Blood-red bracket",
+      "iucn": "DD",
+      "subregions": [],
+      "descriptionEs": "Repisa delgada de color rojo-anaranjado brillante, una de las más comunes y reconocibles en madera muerta de zonas tropicales.",
+      "descriptionEn": "Thin bracket of bright red-orange color, one of the most common and recognizable on dead wood in tropical areas.",
+      "photos": [
+        "gr10_hongos/fa03_polyporaceae/sp100304_pycnoporus_sanguineus/pycnoporus_sanguineus_001.webp"
+      ],
+      "mainPhotoRatio": 0.6683,
+      "mainPhotoWidth": 802,
+      "mainPhotoHeight": 1200
+    },
+    {
+      "id": "sp100305",
+      "familyId": "polyporaceae",
+      "group": "hongos",
+      "scientificName": "Polyporus arcularius",
+      "nameEs": "Poliporo con flecos",
+      "nameEn": "Fringed polypore",
+      "iucn": "DD",
+      "subregions": [],
+      "descriptionEs": "Sombrero con poros grandes y angulares, y un borde característico con pequeños flecos o pelos.",
+      "descriptionEn": "Cap with large, angular pores and a characteristic fringed or hairy margin.",
+      "photos": [
+        "gr10_hongos/fa03_polyporaceae/sp100305_polyporus_arcularius/polyporus_arcularius_001.webp",
+        "gr10_hongos/fa03_polyporaceae/sp100305_polyporus_arcularius/polyporus_arcularius_002.webp"
+      ],
+      "mainPhotoRatio": 1.0517,
+      "mainPhotoWidth": 1200,
+      "mainPhotoHeight": 1141
+    },
+    {
+      "id": "sp101401",
+      "familyId": "trechisporaceae",
+      "group": "hongos",
+      "scientificName": "Trechispora sp.",
+      "nameEs": "Trechispora sin identificar",
+      "nameEn": "Unidentified Trechispora",
+      "iucn": "DD",
+      "subregions": [],
+      "descriptionEs": "Hongo costroso (resupinado); el propio registro de campo marca el género como tentativo.",
+      "descriptionEn": "Crust-like (resupinate) fungus; the original field record itself marks the genus as tentative.",
+      "photos": [
+        "gr10_hongos/fa14_trechisporaceae/sp101401_trechispora_sp/trechispora_sp_001.webp"
+      ],
+      "mainPhotoRatio": 0.9933,
+      "mainPhotoWidth": 1192,
+      "mainPhotoHeight": 1200
+    },
+    {
+      "id": "sp100306",
+      "familyId": "polyporaceae",
+      "group": "hongos",
+      "scientificName": "Polyporus ciliatus",
+      "nameEs": "Poliporo ciliado",
+      "nameEn": "Ciliate polypore",
+      "iucn": "DD",
+      "subregions": [],
+      "descriptionEs": "Poliporo de sombrero pardo y poros finos, con pequeños pelos (cilios) en el margen.",
+      "descriptionEn": "Polypore with a brown cap and fine pores, with small hairs (cilia) along the margin.",
+      "photos": [
+        "gr10_hongos/fa03_polyporaceae/sp100306_polyporus_ciliatus/polyporus_ciliatus_001.webp",
+        "gr10_hongos/fa03_polyporaceae/sp100306_polyporus_ciliatus/polyporus_ciliatus_002.webp"
+      ],
+      "mainPhotoRatio": 0.9933,
+      "mainPhotoWidth": 1192,
+      "mainPhotoHeight": 1200
+    },
+    {
+      "id": "sp101202",
+      "familyId": "sarcoscyphaceae",
+      "group": "hongos",
+      "scientificName": "cf. Sarcoscyphaceae",
+      "nameEs": "Hongo pequeño sin identificar 2",
+      "nameEn": "Unidentified small fungus 2",
+      "iucn": "DD",
+      "subregions": [],
+      "descriptionEs": "Estructura en copa con borde velludo naranja y disco grisáceo, de aspecto similar a Cookeina (ver esa especie) pero sin confirmar.",
+      "descriptionEn": "Cup-shaped structure with a hairy orange rim and grayish disc, similar in appearance to Cookeina (see that species) but unconfirmed.",
+      "photos": [
+        "gr10_hongos/fa12_sarcoscyphaceae/sp101202_cf_sarcoscyphaceae/cf_sarcoscyphaceae_001.webp"
+      ],
+      "mainPhotoRatio": 0.75,
+      "mainPhotoWidth": 900,
+      "mainPhotoHeight": 1200
+    },
+    {
+      "id": "sp101501",
+      "familyId": "geastraceae",
+      "group": "hongos",
+      "scientificName": "Geastrum sp.",
+      "nameEs": "Estrella de tierra",
+      "nameEn": "Earthstar",
+      "iucn": "DD",
+      "subregions": [],
+      "descriptionEs": "El registro original dudaba entre Geastrum y Scleroderma; un ejemplar de la foto muestra el peridio abierto en puntas a modo de estrella, rasgo propio de Geastrum y no de Scleroderma.",
+      "descriptionEn": "The original record was unsure between Geastrum and Scleroderma; one specimen in the photo shows the peridium split into star-like rays, a trait typical of Geastrum and not of Scleroderma.",
+      "photos": [
+        "gr10_hongos/fa15_geastraceae/sp101501_geastrum_sp/geastrum_sp_001.webp"
+      ],
+      "mainPhotoRatio": 0.8833,
+      "mainPhotoWidth": 1060,
+      "mainPhotoHeight": 1200
+    },
+    {
+      "id": "sp101601",
+      "familyId": "pterulaceae",
+      "group": "hongos",
+      "scientificName": "Pterula juruensis",
+      "nameEs": "Coral filamentoso",
+      "nameEn": "Thread coral fungus",
+      "iucn": "DD",
+      "subregions": [],
+      "descriptionEs": "Hongo coraloide de ramificaciones finas y delicadas, similar a un pequeño coral, que crece sobre hojarasca.",
+      "descriptionEn": "Coral-like fungus with fine, delicate branches, resembling a small coral, growing on leaf litter.",
+      "photos": [
+        "gr10_hongos/fa16_pterulaceae/sp101601_pterula_juruensis/pterula_juruensis_001.webp",
+        "gr10_hongos/fa16_pterulaceae/sp101601_pterula_juruensis/pterula_juruensis_002.webp"
+      ],
+      "mainPhotoRatio": 1.0067,
+      "mainPhotoWidth": 1200,
+      "mainPhotoHeight": 1192
+    },
+    {
+      "id": "sp100307",
+      "familyId": "polyporaceae",
+      "group": "hongos",
+      "scientificName": "Polyporaceae sp.",
+      "nameEs": "Poliporo sin identificar 3",
+      "nameEn": "Unidentified polypore 3",
+      "iucn": "DD",
+      "subregions": [],
+      "descriptionEs": "La segunda foto confirma la familia por la superficie inferior porosa; el género no pudo determinarse.",
+      "descriptionEn": "The second photo confirms the family by its porous underside; the genus could not be determined.",
+      "photos": [
+        "gr10_hongos/fa03_polyporaceae/sp100307_polyporaceae_sp/polyporaceae_sp_001.webp",
+        "gr10_hongos/fa03_polyporaceae/sp100307_polyporaceae_sp/polyporaceae_sp_002.webp"
+      ],
+      "mainPhotoRatio": 1.2793,
+      "mainPhotoWidth": 1200,
+      "mainPhotoHeight": 938
+    },
+    {
+      "id": "sp100603",
+      "familyId": "marasmiaceae",
+      "group": "hongos",
+      "scientificName": "Marasmius rotula",
+      "nameEs": "Marasmius rueda",
+      "nameEn": "Pinwheel marasmius",
+      "iucn": "DD",
+      "subregions": [],
+      "descriptionEs": "Diminuto hongo blanco de sombrero acanalado en forma de paracaídas, sostenido por un tallo negro filiforme, sobre ramitas caídas.",
+      "descriptionEn": "Tiny white mushroom with a pleated, parachute-shaped cap held on a wiry black stem, on fallen twigs.",
+      "photos": [
+        "gr10_hongos/fa06_marasmiaceae/sp100603_marasmius_rotula/marasmius_rotula_001.webp",
+        "gr10_hongos/fa06_marasmiaceae/sp100603_marasmius_rotula/marasmius_rotula_002.webp"
+      ],
+      "mainPhotoRatio": 1.0686,
+      "mainPhotoWidth": 1200,
+      "mainPhotoHeight": 1123
+    },
+    {
+      "id": "sp101701",
+      "familyId": "ophiocordycipitaceae",
+      "group": "hongos",
+      "scientificName": "Ophiocordyceps sp.",
+      "nameEs": "Cordyceps sin identificar 1",
+      "nameEn": "Unidentified Cordyceps 1",
+      "iucn": "DD",
+      "subregions": [],
+      "descriptionEs": "Hongo entomopatógeno; el hospedero exacto y la especie requieren más detalle.",
+      "descriptionEn": "Entomopathogenic fungus; the exact host and species require more detail.",
+      "photos": [
+        "gr10_hongos/fa17_ophiocordycipitaceae/sp101701_ophiocordyceps_sp/ophiocordyceps_sp_001.webp"
+      ],
+      "mainPhotoRatio": 0.7175,
+      "mainPhotoWidth": 861,
+      "mainPhotoHeight": 1200
+    },
+    {
+      "id": "sp101901",
+      "familyId": "crepidotaceae",
+      "group": "hongos",
+      "scientificName": "Crepidotus sp.",
+      "nameEs": "Crepidotus",
+      "nameEn": "Crepidotus",
+      "iucn": "DD",
+      "subregions": [],
+      "descriptionEs": "La forma de concha/abanico con inserción lateral y pie casi ausente, creciendo directo sobre madera, es propia de Crepidotus y no de Omphalina (que tiene pie central).",
+      "descriptionEn": "The shell/fan shape with lateral attachment and an almost absent stem, growing directly on wood, is characteristic of Crepidotus and not of Omphalina (which has a central stem).",
+      "photos": [
+        "gr10_hongos/fa19_crepidotaceae/sp101901_crepidotus_sp/crepidotus_sp_001.webp"
+      ],
+      "mainPhotoRatio": 1.1928,
+      "mainPhotoWidth": 1200,
+      "mainPhotoHeight": 1006
+    },
+    {
+      "id": "sp100702",
+      "familyId": "myxomycetes",
+      "group": "hongos",
+      "scientificName": "Ceratiomyxa sp.",
+      "nameEs": "Mixomiceto sin identificar 2",
+      "nameEn": "Unidentified slime mold 2",
+      "iucn": "DD",
+      "subregions": [],
+      "descriptionEs": "No es un hongo verdadero sino un mixomiceto (moho mucilaginoso), de aspecto blanco y coralino sobre madera.",
+      "descriptionEn": "Not a true fungus but a myxomycete (slime mold), white and coral-like in appearance, on wood.",
+      "photos": [
+        "gr10_hongos/fa07_myxomycetes/sp100702_ceratiomyxa_sp/ceratiomyxa_sp_001.webp"
+      ],
+      "mainPhotoRatio": 1.7167,
+      "mainPhotoWidth": 1200,
+      "mainPhotoHeight": 699
+    },
+    {
+      "id": "sp101702",
+      "familyId": "ophiocordycipitaceae",
+      "group": "hongos",
+      "scientificName": "Ophiocordyceps sp.",
+      "nameEs": "Cordyceps sobre saltamontes",
+      "nameEn": "Cordyceps on grasshopper",
+      "iucn": "DD",
+      "subregions": [],
+      "descriptionEs": "Cuerpos fructíferos color crema emergiendo de las articulaciones de un saltamontes de la familia Romaleidae, tras la muerte del insecto.",
+      "descriptionEn": "Cream-colored fruiting bodies emerging from the joints of a grasshopper of the family Romaleidae, following the insect's death.",
+      "photos": [
+        "gr10_hongos/fa17_ophiocordycipitaceae/sp101702_ophiocordyceps_sp/ophiocordyceps_sp_001.webp"
+      ],
+      "mainPhotoRatio": 1.5385,
+      "mainPhotoWidth": 1200,
+      "mainPhotoHeight": 780
+    },
+    {
+      "id": "sp101302",
+      "familyId": "mycenaceae",
+      "group": "hongos",
+      "scientificName": "Mycena sp.",
+      "nameEs": "Mycena sin identificar 2",
+      "nameEn": "Unidentified Mycena 2",
+      "iucn": "DD",
+      "subregions": [],
+      "descriptionEs": "Individuo distinto al registrado como Hongo 20; se mantiene como entrada separada al no poder confirmar si es la misma especie.",
+      "descriptionEn": "A different individual from the one recorded as Hongo 20; kept as a separate entry since it could not be confirmed to be the same species.",
+      "photos": [
+        "gr10_hongos/fa13_mycenaceae/sp101302_mycena_sp/mycena_sp_001.webp",
+        "gr10_hongos/fa13_mycenaceae/sp101302_mycena_sp/mycena_sp_002.webp"
+      ],
+      "mainPhotoRatio": 1.0782,
+      "mainPhotoWidth": 1200,
+      "mainPhotoHeight": 1113
+    },
+    {
+      "id": "sp102001",
+      "familyId": "hygrophoraceae",
+      "group": "hongos",
+      "scientificName": "Chrysomphalina sp.",
+      "nameEs": "Ombligo dorado",
+      "nameEn": "Golden navel cap",
+      "iucn": "DD",
+      "subregions": [],
+      "descriptionEs": "El color amarillo-dorado muy saturado y el crecimiento en racimo denso sobre madera son más consistentes con Chrysomphalina que con Omphalina.",
+      "descriptionEn": "The highly saturated golden-yellow color and dense clustered growth on wood are more consistent with Chrysomphalina than with Omphalina.",
+      "photos": [
+        "gr10_hongos/fa20_hygrophoraceae/sp102001_chrysomphalina_sp/chrysomphalina_sp_001.webp"
+      ],
+      "mainPhotoRatio": 1.2435,
+      "mainPhotoWidth": 1200,
+      "mainPhotoHeight": 965
+    },
+    {
+      "id": "sp101801",
+      "familyId": "hymenogastraceae",
+      "group": "hongos",
+      "scientificName": "Hymenogastraceae sp.",
+      "nameEs": "Hongo sin identificar (Galerina o Psilocybe)",
+      "nameEn": "Unidentified fungus (Galerina or Psilocybe)",
+      "iucn": "DD",
+      "subregions": [],
+      "descriptionEs": "El registro original dudaba entre dos géneros de la misma familia; no fue posible inclinarse por uno solo con la fotografía disponible. Nota de curaduría: si se tratara de Galerina marginata, es mortal — relevante solo para el pie de foto, no para consumo.",
+      "descriptionEn": "The original record was unsure between two genera in the same family; it was not possible to favor one from the available photograph alone. Curatorial note: if this is Galerina marginata, it is deadly poisonous — relevant only for the caption, not for consumption.",
+      "photos": [
+        "gr10_hongos/fa18_hymenogastraceae/sp101801_hymenogastraceae_sp/hymenogastraceae_sp_001.webp"
+      ],
+      "mainPhotoRatio": 1.217,
+      "mainPhotoWidth": 1200,
+      "mainPhotoHeight": 986
+    },
+    {
+      "id": "sp102201",
+      "familyId": "meruliaceae",
+      "group": "hongos",
+      "scientificName": "Meruliaceae sp.",
+      "nameEs": "Hongo blanco sin identificar",
+      "nameEn": "Unidentified white fungus",
+      "iucn": "DD",
+      "subregions": [],
+      "descriptionEs": "Superficie inferior blanca, arrugada e irregularmente porosa (merulioide), propia de la familia; el género no pudo determinarse.",
+      "descriptionEn": "White, wrinkled, irregularly poroid (merulioid) underside typical of the family; the genus could not be determined.",
+      "photos": [
+        "gr10_hongos/fa22_meruliaceae/sp102201_meruliaceae_sp/meruliaceae_sp_001.webp"
+      ],
+      "mainPhotoRatio": 1.048,
+      "mainPhotoWidth": 1200,
+      "mainPhotoHeight": 1145
+    },
+    {
+      "id": "sp102101",
+      "familyId": "stereaceae",
+      "group": "hongos",
+      "scientificName": "Stereum sp.",
+      "nameEs": "Repisa sin identificar",
+      "nameEn": "Unidentified bracket fungus",
+      "iucn": "DD",
+      "subregions": [],
+      "descriptionEs": "La foto, tomada por el envés, no muestra poros —esperables en Trametes— sino una superficie lisa y zonada, más consistente con Stereum.",
+      "descriptionEn": "The photo, taken from underneath, shows no pores —expected in Trametes— but a smooth, zonate surface, more consistent with Stereum.",
+      "photos": [
+        "gr10_hongos/fa21_stereaceae/sp102101_stereum_sp/stereum_sp_001.webp"
+      ],
+      "mainPhotoRatio": 0.6667,
+      "mainPhotoWidth": 800,
+      "mainPhotoHeight": 1200
+    },
+    {
+      "id": "sp102302",
+      "familyId": "fungi_indet",
+      "group": "hongos",
+      "scientificName": "Fungi indet.",
+      "nameEs": "Repisa blanca sin identificar",
+      "nameEn": "Unidentified white bracket fungus",
+      "iucn": "DD",
+      "subregions": [],
+      "descriptionEs": "Repisa blanca y carnosa de gran tamaño, fotografiada junto a larvas y un adulto de escarabajo (Erotylidae) alimentándose de ella. No se pudo determinar ni familia con certeza.",
+      "descriptionEn": "Large, fleshy white bracket, photographed together with larvae and an adult beetle (Erotylidae) feeding on it. Family could not be determined with confidence.",
+      "photos": [
+        "gr10_hongos/fa23_fungi_indet/sp102302_fungi_indet/fungi_indet_001.webp"
+      ],
+      "mainPhotoRatio": 1.1765,
+      "mainPhotoWidth": 1200,
+      "mainPhotoHeight": 1020
     }
   ]
 }

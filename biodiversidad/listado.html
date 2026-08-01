@@ -6,7 +6,7 @@
   <meta name="theme-color" content="#018d38">
   <title>Especies · Antioquia Natural</title>
   <link rel="stylesheet" href="css/main.css?v=4">
-  <link rel="stylesheet" href="css/components.css?v=5">
+  <link rel="stylesheet" href="css/components.css?v=11">
   <link rel="stylesheet" href="css/animations.css?v=4">
   <link rel="stylesheet" href="css/listado.css">
   <link rel="preload" href="data/species.json" as="fetch">
@@ -21,8 +21,43 @@
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M19 12H5m0 0l7 7m-7-7l7-7"/></svg>
       </button>
       <div class="app-header__title" id="header-title">Listado</div>
+      <button class="view-switcher__btn" id="reel-view-btn" aria-label="Ver carrete de fotos" hidden>
+        <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" aria-hidden="true"><rect x="5" y="2" width="14" height="20" rx="4"/></svg>
+      </button>
       <button class="app-header__lang" data-lang-toggle aria-label="Cambiar idioma">EN</button>
     </header>
+
+    <!-- Carrete de fotos del reino actual (flora/fauna/hongos), overlay de pantalla completa.
+         Respeta los filtros activos (chip de grupo, búsqueda) y ofrece las 3 modalidades. -->
+    <div class="reel-overlay" id="reel-overlay" hidden>
+      <div class="reel-overlay__header">
+        <div class="view-switcher" role="tablist" aria-label="Modalidad de vista">
+          <button class="view-switcher__btn active" data-view="reel" role="tab" aria-selected="true" aria-label="Vista carrete">
+            <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" aria-hidden="true"><rect x="5" y="2" width="14" height="20" rx="4"/></svg>
+          </button>
+          <button class="view-switcher__btn" data-view="grid" role="tab" aria-selected="false" aria-label="Vista cuadrícula">
+            <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" aria-hidden="true"><rect x="2" y="2" width="9" height="9" rx="2.2"/><rect x="13" y="2" width="9" height="9" rx="2.2"/><rect x="2" y="13" width="9" height="9" rx="2.2"/><rect x="13" y="13" width="9" height="9" rx="2.2"/></svg>
+          </button>
+          <button class="view-switcher__btn" data-view="masonry" role="tab" aria-selected="false" aria-label="Vista Mosaico">
+            <svg width="21" height="21" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="2" y="2" width="9" height="20" rx="2.2"/><rect x="13" y="2" width="9" height="8" rx="2.2"/><rect x="13" y="12" width="9" height="10" rx="2.2"/></svg>
+          </button>
+        </div>
+        <button class="app-header__back" id="reel-overlay-close" aria-label="Cerrar carrete">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M18 6L6 18M6 6l12 12"/></svg>
+        </button>
+      </div>
+      <div class="reel-overlay__body">
+        <div class="reel-overlay__view reel-overlay__view--reel" id="kreel-view-reel">
+          <div class="photo-reel photo-reel--vertical" id="kingdom-photo-reel" aria-label="Carrete de fotos"></div>
+        </div>
+        <div class="reel-overlay__view photo-view" id="kreel-view-grid" hidden>
+          <div class="photo-grid-3col" id="kingdom-photo-grid" aria-label="Cuadrícula de fotos"></div>
+        </div>
+        <div class="reel-overlay__view photo-view" id="kreel-view-masonry" hidden>
+          <div class="photo-masonry" id="kingdom-photo-masonry" aria-label="Mosaico de fotos"></div>
+        </div>
+      </div>
+    </div>
 
     <!-- Contexto: subregión + grupo -->
     <div class="listado-context" id="listado-context">
@@ -90,10 +125,10 @@
   </div>
 
   <script src="js/i18n.js?v=3"></script>
-  <script src="js/data.js?v=4"></script>
+  <script src="js/data.js?v=10"></script>
   <script src="js/nav.js?v=3"></script>
-  <script src="js/app.js?v=3"></script>
+  <script src="js/app.js?v=4"></script>
 
-  <script src="js/listado.js?v=3"></script>
+  <script src="js/listado.js?v=10"></script>
 </body>
 </html>

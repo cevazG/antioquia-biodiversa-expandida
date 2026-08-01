@@ -14,12 +14,14 @@ const REGION_NAMES = {
       animales_domesticos: { deco: '🐄', kingdom: 'fauna', i18nKey: 'domestic_animals' },
       peces:               { deco: '🐟', kingdom: 'fauna', i18nKey: 'freshwater_fish' },
       orquideas:           { deco: '🌸', kingdom: 'flora', i18nKey: 'orchids' },
-      arboles_nativos:     { deco: '🌳', kingdom: 'flora', i18nKey: 'native_trees' }
+      arboles_nativos:     { deco: '🌳', kingdom: 'flora', i18nKey: 'native_trees' },
+      hongos:              { deco: '🍄', kingdom: 'fungi', i18nKey: 'fungi' }
     };
 
     const KINGDOM_META = {
-      flora: { deco: '🌿', label: 'Flora' },
-      fauna: { deco: '🦜', label: 'Fauna' }
+      flora: { deco: '🌿', i18nKey: 'by_flora' },
+      fauna: { deco: '🦜', i18nKey: 'by_fauna' },
+      fungi: { deco: '🍄', i18nKey: 'by_fungi' }
     };
 
     const FAMILY_EMOJI = {
@@ -47,6 +49,8 @@ const REGION_NAMES = {
       _grupo       = Nav.getParam('grupo');
       _kingdom     = Nav.getParam('kingdom');
 
+      _initKingdomReel();
+
       if (_kingdom) {
         _setupKingdomMode();
       } else {
@@ -58,6 +62,7 @@ const REGION_NAMES = {
         if (_kingdom) {
           const group = _activeGroupFilter === 'all' ? null : _activeGroupFilter;
           await _renderSearchResults(query, group, _kingdom);
+          _refreshKingdomReelViews(query || null, group);
         } else {
           _filterAccordion(query);
         }
@@ -68,11 +73,15 @@ const REGION_NAMES = {
 
     function _setupKingdomMode() {
       const km = KINGDOM_META[_kingdom];
-      document.getElementById('header-title').textContent = km.label;
-      document.getElementById('context-deco').textContent = km.deco;
-      document.getElementById('context-title').textContent = km.label;
-      document.getElementById('context-sub').textContent = I18n.t('by_species_desc');
-      document.getElementById('context-breadcrumb').textContent = 'Antioquia › ' + km.label;
+      _refreshKingdomLabels(km);
+      document.addEventListener('langchange', () => {
+        _refreshKingdomLabels(km);
+        const query = document.getElementById('search-input').value.trim();
+        const group = _activeGroupFilter === 'all' ? null : _activeGroupFilter;
+        _refreshKingdomReelViews(query || null, group);
+      });
+
+      document.getElementById('reel-view-btn').hidden = false;
 
       // Chips de grupo filtrados por reino
       const filterBar = document.getElementById('filter-bar');
@@ -93,10 +102,127 @@ const REGION_NAMES = {
           const query = document.getElementById('search-input').value.trim();
           const group = _activeGroupFilter === 'all' ? null : _activeGroupFilter;
           await _renderAccordion(I18n.getLang(), group, _kingdom);
+          _refreshKingdomReelViews(query || null, group);
         });
       });
 
       _renderAccordion(I18n.getLang(), null, _kingdom);
+      _refreshKingdomReelViews(null, null);
+    }
+
+    // ── Carrete de fotos del reino actual (overlay, 3 modalidades) ───
+    // Refleja siempre los filtros activos del listado (chip de grupo, búsqueda).
+
+    const KINGDOM_VIEW_KEY = 'ab_photo_view';
+    let _kingdomReelData = [];
+
+    function _initKingdomReel() {
+      const btn = document.getElementById('reel-view-btn');
+      const overlay = document.getElementById('reel-overlay');
+      const closeBtn = document.getElementById('reel-overlay-close');
+
+      btn.addEventListener('click', () => { overlay.hidden = false; });
+      closeBtn.addEventListener('click', () => { overlay.hidden = true; });
+
+      const switcherBtns = overlay.querySelectorAll('.view-switcher__btn');
+      const kviews = {
+        reel:    document.getElementById('kreel-view-reel'),
+        grid:    document.getElementById('kreel-view-grid'),
+        masonry: document.getElementById('kreel-view-masonry'),
+      };
+      function setKView(view) {
+        Object.keys(kviews).forEach(key => { kviews[key].hidden = key !== view; });
+        switcherBtns.forEach(b => {
+          const active = b.dataset.view === view;
+          b.classList.toggle('active', active);
+          b.setAttribute('aria-selected', active ? 'true' : 'false');
+        });
+        localStorage.setItem(KINGDOM_VIEW_KEY, view);
+      }
+      switcherBtns.forEach(b => b.addEventListener('click', () => setKView(b.dataset.view)));
+      const saved = localStorage.getItem(KINGDOM_VIEW_KEY);
+      setKView(saved && kviews[saved] ? saved : 'reel');
+    }
+
+    // Recalcula el set de fotos (según reino + grupo activo + búsqueda) y
+    // vuelve a pintar las 3 vistas, para que el carrete quede sincronizado
+    // con lo que el usuario está filtrando en el listado.
+    function _refreshKingdomReelViews(query = null, group = null) {
+      _kingdomReelData = DataStore.getPhotoReel({ kingdom: _kingdom, group, query });
+      _renderKingdomReel();
+      _renderKingdomGrid();
+      _renderKingdomMasonry();
+    }
+
+    function _renderKingdomReel() {
+      const reel = document.getElementById('kingdom-photo-reel');
+      const lang = I18n.getLang();
+      reel.innerHTML = '';
+      _kingdomReelData.forEach((item, i) => {
+        const card = document.createElement('a');
+        card.href = `especie.html?id=${item.speciesId}`;
+        card.className = 'photo-reel__card';
+        const name = lang === 'en' ? item.nameEn : item.nameEs;
+        card.innerHTML = `
+          <img src="${item.url}" alt="${name}" loading="${i < 3 ? 'eager' : 'lazy'}">
+          <div class="photo-reel__scrim" aria-hidden="true"></div>
+          <span class="photo-reel__dot photo-reel__dot--${item.iucn}" aria-hidden="true"></span>
+          <span class="photo-reel__name">${name}</span>
+        `;
+        reel.appendChild(card);
+      });
+    }
+
+    function _renderKingdomGrid() {
+      const grid = document.getElementById('kingdom-photo-grid');
+      const lang = I18n.getLang();
+      grid.innerHTML = '';
+      _kingdomReelData.forEach((item, i) => {
+        const name = lang === 'en' ? item.nameEn : item.nameEs;
+        const cell = document.createElement('a');
+        cell.href = `especie.html?id=${item.speciesId}`;
+        cell.className = 'photo-grid-3col__item';
+        cell.innerHTML = `<img src="${item.url}" alt="${name}" loading="${i < 9 ? 'eager' : 'lazy'}">`;
+        grid.appendChild(cell);
+      });
+    }
+
+    // Columna de cada foto calculada en JS (columna más corta primero, con
+    // el ratio real de cada imagen) — ver nota en biodiversidad.js.
+    function _renderKingdomMasonry() {
+      const masonry = document.getElementById('kingdom-photo-masonry');
+      const lang = I18n.getLang();
+      masonry.innerHTML = '';
+      const cols = [document.createElement('div'), document.createElement('div')];
+      cols.forEach(c => c.className = 'photo-masonry__col');
+      const colHeights = [0, 0];
+
+      _kingdomReelData.forEach((item, i) => {
+        const name = lang === 'en' ? item.nameEn : item.nameEs;
+        const cell = document.createElement('a');
+        cell.href = `especie.html?id=${item.speciesId}`;
+        cell.className = 'photo-masonry__item';
+        cell.innerHTML = `
+          <img src="${item.url}" alt="${name}" loading="${i < 6 ? 'eager' : 'lazy'}" width="${item.width}" height="${item.height}">
+          <div class="photo-masonry__scrim" aria-hidden="true"></div>
+          <span class="photo-masonry__name">${name}</span>
+        `;
+        const target = colHeights[0] <= colHeights[1] ? 0 : 1;
+        cols[target].appendChild(cell);
+        colHeights[target] += 1 / (item.ratio || 1);
+      });
+
+      masonry.appendChild(cols[0]);
+      masonry.appendChild(cols[1]);
+    }
+
+    function _refreshKingdomLabels(km) {
+      const label = I18n.t(km.i18nKey);
+      document.getElementById('header-title').textContent = label;
+      document.getElementById('context-deco').textContent = km.deco;
+      document.getElementById('context-title').textContent = label;
+      document.getElementById('context-sub').textContent = I18n.t('by_species_desc');
+      document.getElementById('context-breadcrumb').textContent = 'Antioquia › ' + label;
     }
 
     // ── Modo subregión / grupo (flujo existente) ────────────

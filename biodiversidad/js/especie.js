@@ -12,7 +12,8 @@ const IUCN_COLORS = {
       mamiferos:           { deco: '🦌', i18nKey: 'mammals' },
       animales_domesticos: { deco: '🐄', i18nKey: 'domestic_animals' },
       peces:               { deco: '🐟', i18nKey: 'freshwater_fish' },
-      arboles_nativos:     { deco: '🌳', i18nKey: 'native_trees' }
+      arboles_nativos:     { deco: '🌳', i18nKey: 'native_trees' },
+      hongos:              { deco: '🍄', i18nKey: 'fungi' }
     };
 
     const FAMILY_EMOJI = {

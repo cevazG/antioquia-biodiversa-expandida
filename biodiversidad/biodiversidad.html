@@ -7,7 +7,7 @@
   <meta name="page-title" content="search_by">
   <title>Biodiversidad · Antioquia</title>
   <link rel="stylesheet" href="css/main.css?v=4">
-  <link rel="stylesheet" href="css/components.css?v=5">
+  <link rel="stylesheet" href="css/components.css?v=11">
   <link rel="stylesheet" href="css/animations.css?v=4">
   <link rel="stylesheet" href="css/biodiversidad.css?v=4">
   <link rel="prefetch" href="data/species.json" as="fetch">
@@ -82,7 +82,7 @@
             <div class="stat-chip__label" data-i18n="subregions_label">Subregiones</div>
           </div>
           <div class="stat-chip">
-            <div class="stat-chip__num">6</div>
+            <div class="stat-chip__num">7</div>
             <div class="stat-chip__label" data-i18n="groups_label">Grupos bio</div>
           </div>
           <div class="stat-chip">
@@ -120,6 +120,15 @@
           <svg class="mode-card__arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg>
         </a>
 
+        <a href="listado.html?kingdom=fungi" class="mode-card ripple-container" aria-label="Explorar hongos">
+          <div class="mode-card__icon" aria-hidden="true">🍄</div>
+          <div class="mode-card__text">
+            <h2 data-i18n="by_fungi">Hongos</h2>
+            <p data-i18n="by_fungi_desc">Setas, poliporos y más</p>
+          </div>
+          <svg class="mode-card__arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg>
+        </a>
+
         <p class="section-label" style="margin-top: var(--space-md)" data-i18n="quick_access">Acceso rápido por grupo</p>
 
         <div class="bio-grid anim-stagger" id="bio-grid">
@@ -150,10 +159,10 @@
   </div>
 
   <script src="js/i18n.js?v=3"></script>
-  <script src="js/data.js?v=4"></script>
+  <script src="js/data.js?v=10"></script>
   <script src="js/nav.js?v=3"></script>
-  <script src="js/app.js?v=3"></script>
+  <script src="js/app.js?v=4"></script>
 
-  <script src="js/biodiversidad.js?v=4"></script>
+  <script src="js/biodiversidad.js?v=9"></script>
 </body>
 </html>

@@ -7,12 +7,14 @@ const HOME_GROUPS = [
       { id: 'animales_domesticos', kingdom: 'fauna', icon: 'img/icons/animales_domesticos.svg' },
       { id: 'peces',               kingdom: 'fauna', icon: 'img/icons/peces.svg' },
       { id: 'arboles_nativos',     kingdom: 'flora', icon: 'img/icons/arboles_nativos.svg' },
-      { id: 'orquideas',           kingdom: 'flora', icon: 'img/icons/orquideas.svg' }
+      { id: 'orquideas',           kingdom: 'flora', icon: 'img/icons/orquideas.svg' },
+      { id: 'hongos',              kingdom: 'fungi', icon: 'img/icons/hongos.svg' }
     ];
 
     function renderPhotoReel() {
       const reel = document.getElementById('photo-reel');
       if (!reel) return;
+      reel.innerHTML = '';
       const lang = I18n.getLang();
       DataStore.getPhotoReel().forEach((item, i) => {
         const card = document.createElement('a');
@@ -33,6 +35,7 @@ const HOME_GROUPS = [
     function renderPhotoGrid3col() {
       const grid = document.getElementById('photo-grid-3col');
       if (!grid) return;
+      grid.innerHTML = '';
       const lang = I18n.getLang();
       DataStore.getPhotoReel().forEach((item, i) => {
         const name = lang === 'en' ? item.nameEn : item.nameEs;
@@ -44,23 +47,37 @@ const HOME_GROUPS = [
       });
     }
 
-    // Mosaico estilo Pinterest — proporción real, sin recortar
+    // Mosaico estilo Pinterest — proporción real, sin recortar.
+    // Se calcula la columna de cada foto en JS (columna más corta primero,
+    // usando el ratio real de cada imagen) en vez de dejar que el navegador
+    // balancee con CSS columns — ese balanceo se recalculaba a medida que
+    // se insertaba contenido y se veía como fotos "saltando" de columna.
     function renderPhotoMasonry() {
       const masonry = document.getElementById('photo-masonry');
       if (!masonry) return;
+      masonry.innerHTML = '';
       const lang = I18n.getLang();
+      const cols = [document.createElement('div'), document.createElement('div')];
+      cols.forEach(c => c.className = 'photo-masonry__col');
+      const colHeights = [0, 0];
+
       DataStore.getPhotoReel().forEach((item, i) => {
         const name = lang === 'en' ? item.nameEn : item.nameEs;
         const cell = document.createElement('a');
         cell.href = `especie.html?id=${item.speciesId}`;
         cell.className = 'photo-masonry__item';
         cell.innerHTML = `
-          <img src="${item.url}" alt="${name}" loading="${i < 6 ? 'eager' : 'lazy'}">
+          <img src="${item.url}" alt="${name}" loading="${i < 6 ? 'eager' : 'lazy'}" width="${item.width}" height="${item.height}">
           <div class="photo-masonry__scrim" aria-hidden="true"></div>
           <span class="photo-masonry__name">${name}</span>
         `;
-        masonry.appendChild(cell);
+        const target = colHeights[0] <= colHeights[1] ? 0 : 1;
+        cols[target].appendChild(cell);
+        colHeights[target] += 1 / (item.ratio || 1);
       });
+
+      masonry.appendChild(cols[0]);
+      masonry.appendChild(cols[1]);
     }
 
     // Selector de modalidad de vista — recuerda la preferencia del usuario
@@ -93,16 +110,11 @@ const HOME_GROUPS = [
       setView(saved && views[saved] ? saved : 'reel');
     }
 
-    document.addEventListener('DOMContentLoaded', async () => {
-      await Promise.all([I18n.init(), DataStore.init()]);
-
-      renderPhotoReel();
-      renderPhotoGrid3col();
-      renderPhotoMasonry();
-      initViewSwitcher();
-
+    async function renderBioGrid() {
       const speciesLabel = I18n.t('species_count');
       const grid = document.getElementById('bio-grid');
+      if (!grid) return;
+      grid.innerHTML = '';
       let total = 0;
 
       await Promise.all(HOME_GROUPS.map(async g => {
@@ -136,6 +148,26 @@ const HOME_GROUPS = [
 
       const totalEl = document.getElementById('total-species');
       if (totalEl) totalEl.textContent = total;
+    }
+
+    document.addEventListener('DOMContentLoaded', async () => {
+      await Promise.all([I18n.init(), DataStore.init()]);
+
+      renderPhotoReel();
+      renderPhotoGrid3col();
+      renderPhotoMasonry();
+      initViewSwitcher();
+      await renderBioGrid();
+
+      // Los nombres de especie/grupo se generan una vez desde JS (no llevan
+      // data-i18n), así que I18n.apply() no los toca — hay que repintarlos
+      // a mano cuando el usuario cambia de idioma.
+      document.addEventListener('langchange', () => {
+        renderPhotoReel();
+        renderPhotoGrid3col();
+        renderPhotoMasonry();
+        renderBioGrid();
+      });
 
       document.querySelectorAll('.mode-card.ripple-container').forEach(btn => {
         btn.addEventListener('click', function(e) {

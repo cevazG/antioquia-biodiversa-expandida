@@ -21,6 +21,13 @@
       animation: pulse 4s ease-in-out infinite;
     }
 
+    .subregion-hero__topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: var(--space-lg);
+    }
+
     .subregion-hero__back {
       display: flex;
       align-items: center;
@@ -32,10 +39,26 @@
       font-size: 0.875rem;
       cursor: pointer;
       padding: 0;
-      margin-bottom: var(--space-lg);
     }
 
     .subregion-hero__back:active { color: white; }
+
+    .subregion-hero__reel-btn {
+      flex-shrink: 0;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border: none;
+      background: rgba(255,255,255,0.18);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      backdrop-filter: blur(4px);
+    }
+
+    .subregion-hero__reel-btn:active { background: rgba(255,255,255,0.3); }
 
     .subregion-hero__label {
       font-size: 0.75rem;
@@ -152,29 +175,37 @@
       opacity: 0.85;
     }
 
-    /* Layout hero: texto izquierda + badges derecha */
+    /* Layout hero: texto arriba, badges de grupo en fila debajo */
     .subregion-hero__body {
       display: flex;
-      align-items: center;
+      flex-direction: column;
       gap: var(--space-md);
     }
 
     .subregion-hero__text {
-      flex: 1;
       min-width: 0;
     }
 
-    /* Columna de badges a la derecha */
+    /* Carrete horizontal de badges — una sola fila, con scroll */
     .subregion-badges {
       display: flex;
-      flex-direction: column;
-      gap: 8px;
-      flex-shrink: 0;
+      flex-direction: row;
+      flex-wrap: nowrap;
+      gap: 10px;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      min-width: 0;
+      margin: 0 calc(var(--space-md) * -1);
+      padding: 2px var(--space-md) 4px;
     }
+
+    .subregion-badges::-webkit-scrollbar { display: none; }
 
     .hero-badge {
       width: 54px;
       height: 54px;
+      flex-shrink: 0;
       background: rgba(255,255,255,0.18);
       border: 1.5px solid rgba(255,255,255,0.35);
       border-radius: 50%;
@@ -183,9 +214,14 @@
       align-items: center;
       justify-content: center;
       color: white;
+      text-decoration: none;
+      cursor: pointer;
       backdrop-filter: blur(4px);
       flex-shrink: 0;
+      transition: background var(--transition);
     }
+
+    .hero-badge:active { background: rgba(255,255,255,0.32); }
 
     .hero-badge__emoji {
       font-size: 1.25rem;

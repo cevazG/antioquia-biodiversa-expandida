@@ -28,6 +28,14 @@ var DataStore = (() => {
     'mamiferos', 'animales_domesticos', 'peces',
   ]);
 
+  const FUNGI_GROUPS = new Set(['hongos']);
+
+  function _kingdomOf(group) {
+    if (FAUNA_GROUPS.has(group)) return 'fauna';
+    if (FUNGI_GROUPS.has(group)) return 'fungi';
+    return 'flora';
+  }
+
   let _data = null;
   let _initPromise = null;
 
@@ -57,9 +65,7 @@ var DataStore = (() => {
     let results = _data.species;
 
     if (group)   results = results.filter(s => s.group === group);
-    if (kingdom) results = results.filter(s =>
-      kingdom === 'fauna' ? FAUNA_GROUPS.has(s.group) : !FAUNA_GROUPS.has(s.group)
-    );
+    if (kingdom) results = results.filter(s => _kingdomOf(s.group) === kingdom);
     if (query) {
       const q = query.toLowerCase();
       results = results.filter(s =>
@@ -88,9 +94,7 @@ var DataStore = (() => {
       const name = _resolveSubregion(subregion);
       species = species.filter(s => s.subregions.includes(name));
     }
-    if (kingdom)   species = species.filter(s =>
-      kingdom === 'fauna' ? FAUNA_GROUPS.has(s.group) : !FAUNA_GROUPS.has(s.group)
-    );
+    if (kingdom)   species = species.filter(s => _kingdomOf(s.group) === kingdom);
 
     const byFamily = {};
     species.forEach(sp => {
@@ -124,11 +128,19 @@ var DataStore = (() => {
 
   // Una tarjeta por especie (foto principal), intercaladas round-robin por
   // grupo taxonómico para que el carrete no muestre tramos largos del mismo
-  // grupo seguido (ej. 34 polillas consecutivas).
-  function getPhotoReel() {
+  // grupo seguido (ej. 34 polillas consecutivas). Acepta los mismos filtros
+  // que searchSpecies (kingdom/group/query) para que el carrete refleje lo
+  // que el usuario está viendo en el listado (reino, chip de grupo, búsqueda).
+  function getPhotoReel({ kingdom = null, group = null, query = null, subregion = null } = {}) {
+    let species = searchSpecies(query, group, kingdom);
+    if (subregion) {
+      const name = _resolveSubregion(subregion);
+      species = species.filter(sp => sp.subregions.includes(name));
+    }
+
     const byGroup = {};
     const order = [];
-    _data.species.forEach(sp => {
+    species.forEach(sp => {
       const photo = getMainPhoto(sp);
       if (!photo) return;
       if (!byGroup[sp.group]) {
@@ -142,6 +154,9 @@ var DataStore = (() => {
         nameEn: sp.nameEn,
         group: sp.group,
         iucn: sp.iucn,
+        ratio: sp.mainPhotoRatio || 1,
+        width: sp.mainPhotoWidth || 1200,
+        height: sp.mainPhotoHeight || 1200,
       });
     });
 

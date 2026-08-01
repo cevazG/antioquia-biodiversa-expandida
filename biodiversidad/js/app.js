@@ -73,7 +73,8 @@ var App = (() => {
       mamiferos: '🦌',
       animales_domesticos: '🐄',
       peces: '🐟',
-      arboles_nativos: '🌳'
+      arboles_nativos: '🌳',
+      hongos: '🍄'
     };
     return icons[group] || '🌿';
   }

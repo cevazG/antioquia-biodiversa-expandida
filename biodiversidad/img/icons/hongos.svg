@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <!-- Hongo pequeño de fondo -->
+  <path d="M14 46 Q14 38 20 38 Q26 38 26 46 Z" fill="#A1887F"/>
+  <rect x="18.5" y="45" width="3" height="8" rx="1.5" fill="#EFEBE9"/>
+  <!-- Sombrero del hongo principal -->
+  <path d="M12 34 Q12 14 32 14 Q52 14 52 34 Q52 38 48 38 L16 38 Q12 38 12 34 Z" fill="#D84315"/>
+  <!-- Sombra interna del sombrero -->
+  <path d="M16 33 Q16 18 32 17 Q48 18 48 33 Q48 35 46 35 L18 35 Q16 35 16 33 Z" fill="#BF360C" opacity="0.35"/>
+  <!-- Puntos característicos -->
+  <circle cx="24" cy="23" r="3" fill="#FFF3E0"/>
+  <circle cx="36" cy="20" r="2.2" fill="#FFF3E0"/>
+  <circle cx="42" cy="28" r="2.6" fill="#FFF3E0"/>
+  <circle cx="28" cy="30" r="1.8" fill="#FFF3E0" opacity="0.85"/>
+  <!-- Borde inferior del sombrero (laminillas) -->
+  <path d="M16 38 L48 38 L46 40.5 L18 40.5 Z" fill="#FBE9E7"/>
+  <!-- Pie del hongo -->
+  <path d="M25 39 Q25 56 28 58 L36 58 Q39 56 39 39 Z" fill="#FFF3E0"/>
+  <!-- Sombra del pie -->
+  <path d="M34 40 Q36 50 35 57" stroke="#D7CCC8" stroke-width="1.5" fill="none" stroke-linecap="round" opacity="0.7"/>
+  <!-- Anillo del pie -->
+  <path d="M26 44 Q32 47 38 44" stroke="#D7CCC8" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+</svg>

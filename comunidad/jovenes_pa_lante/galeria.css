@@ -133,6 +133,7 @@
       background: white;
       cursor: pointer;
       transition: opacity var(--transition);
+      min-width: 0;
     }
 
     .photo-card:active { opacity: 0.8; }

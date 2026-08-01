@@ -1038,6 +1038,7 @@
   display: block;
   overflow: hidden;
   background: var(--color-bg);
+  min-width: 0;
 }
 
 .photo-grid-3col__item img {

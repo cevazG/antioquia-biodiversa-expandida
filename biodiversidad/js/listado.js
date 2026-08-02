@@ -65,6 +65,7 @@ const REGION_NAMES = {
           _refreshKingdomReelViews(query || null, group);
         } else {
           _filterAccordion(query);
+          _refreshKingdomReelViews(query || null, _grupo);
         }
       });
     });
@@ -124,6 +125,12 @@ const REGION_NAMES = {
       btn.addEventListener('click', () => { overlay.hidden = false; });
       closeBtn.addEventListener('click', () => { overlay.hidden = true; });
 
+      // Si el navegador restaura esta página desde el back-forward cache
+      // (gesto de "atrás" en Safari/Chrome), el overlay puede quedar
+      // abierto tal como estaba, sin que el JS vuelva a correr — se fuerza
+      // a cerrado en cada restauración.
+      window.addEventListener('pageshow', (e) => { if (e.persisted) overlay.hidden = true; });
+
       const switcherBtns = overlay.querySelectorAll('.view-switcher__btn');
       const kviews = {
         reel:    document.getElementById('kreel-view-reel'),
@@ -144,11 +151,12 @@ const REGION_NAMES = {
       setKView(saved && kviews[saved] ? saved : 'reel');
     }
 
-    // Recalcula el set de fotos (según reino + grupo activo + búsqueda) y
-    // vuelve a pintar las 3 vistas, para que el carrete quede sincronizado
-    // con lo que el usuario está filtrando en el listado.
+    // Recalcula el set de fotos (según reino/subregión + grupo activo +
+    // búsqueda) y vuelve a pintar las 3 vistas, para que el carrete quede
+    // sincronizado con lo que el usuario está filtrando en el listado.
+    // _subregionId es null en modo flora/fauna, así que ahí no filtra nada.
     function _refreshKingdomReelViews(query = null, group = null) {
-      _kingdomReelData = DataStore.getPhotoReel({ kingdom: _kingdom, group, query });
+      _kingdomReelData = DataStore.getPhotoReel({ kingdom: _kingdom, subregion: _subregionId, group, query });
       _renderKingdomReel();
       _renderKingdomGrid();
       _renderKingdomMasonry();
@@ -242,6 +250,19 @@ const REGION_NAMES = {
       document.getElementById('context-title').textContent = groupLabel || I18n.t('species');
       if (subregionName) document.getElementById('context-sub').textContent = subregionName;
       document.getElementById('header-title').textContent = groupLabel || I18n.t('species');
+
+      // El carrete sí aplica en este modo — muestra solo el grupo de esta
+      // subregión (a diferencia del modo flora/fauna, aquí no hay chips
+      // para cambiar de grupo, así que el filtro queda fijo en _grupo).
+      document.getElementById('reel-view-btn').hidden = false;
+      _refreshKingdomReelViews(null, _grupo);
+
+      document.addEventListener('langchange', () => {
+        _refreshKingdomReelViews(
+          document.getElementById('search-input').value.trim() || null,
+          _grupo
+        );
+      });
 
       _renderAccordion(lang, _grupo, null, _subregionId);
     }

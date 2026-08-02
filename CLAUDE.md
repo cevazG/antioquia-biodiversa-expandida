@@ -101,7 +101,14 @@ Antioquia Natural/
 │   │       ├── generate_analisis_especies_doc.js ← Genera Word con propuesta de 158 especies
 │   │       ├── generate_docs.js       ← Regenera documentos Word para TI
 │   │       ├── add_peces_arboles.js   ← Migración: agrega grupos peces/arboles_nativos
-│   │       └── optimize_photos.js     ← Convierte JPG/PNG → WebP 1200px q82 en batch
+│   │       ├── optimize_photos.js     ← Convierte JPG/PNG → WebP 1200px q82 en batch
+│   │       ├── lib/docx_helpers.js    ← Portada, TOC nativo, headings, tablas, header/footer institucional — compartido por los 4 generadores de "TI Gobernación" abajo
+│   │       ├── generate_levantamiento_requisitos.js ← Levantamiento_Requisitos_Antioquia_Natural.docx (FO-M7-P8-020)
+│   │       ├── generate_propuesta_ajustes.js        ← Propuesta_Ajustes_Tecnicos_v2_Antioquia_Natural.docx (FO-M7-P8-021)
+│   │       ├── generate_documento_integral.js       ← Documento_Integral_Desarrollo_Antioquia_Natural.docx (FO-M7-P8-023)
+│   │       ├── generate_matriz_respuesta.js         ← Respuesta_Observaciones_Revision_Documental_Antioquia_Natural.docx (respuesta punto por punto a los 26 hallazgos de TI)
+│   │       ├── generate_diccionario_datos.js        ← Diccionario_Datos_BD_Comunidad_Antioquia_Natural.xlsx (una hoja por colección)
+│   │       └── generate_presentacion_comite.py       ← Presentacion_Comite_Cientifico_Antioquia_Natural.pptx (python-pptx, criterios de evaluación de especies)
 │
 ├── biodiversidad/                     ← Módulo principal
 │   ├── index.html                     ← Selección de idioma (entrada a la app)
@@ -125,7 +132,8 @@ Antioquia Natural/
 │   │   ├── app.js                     ← App: inicialización y utilidades compartidas
 │   │   └── …                         ← biodiversidad/especie/home/index/listado/mapa/subregion.js
 │   ├── data/
-│   │   └── species.json               ← Familias y especies con fotos, IUCN, subregiones
+│   │   ├── species.json               ← Familias y especies con fotos, IUCN, subregiones, umbrella/endémica/dieta/actividad
+│   │   └── subregiones.json           ← Contenido "sobre esta subregión": tagline, descripción, municipios, sitios destacados
 │   └── img/
 │       ├── mapa/                      ← JPG oficial mapa de Antioquia
 │       ├── icons/                     ← SVG por grupo bio
@@ -135,10 +143,18 @@ Antioquia Natural/
 │           └── GUIA_IMAGENES.md       ← Instrucciones para curadores de fotos
 │
 ├── agua/                              ← Módulo de recursos hídricos
-│   ├── index.html
-│   ├── mapa.html
-│   ├── subregion.html
-│   ├── data/fuentes.json
+│   ├── index.html                     ← Landing: stats interactivos (subregiones/ríos/cuencas → botones)
+│   ├── mapa.html                      ← Mapa Leaflet de cuencas hidrográficas (18 ríos)
+│   ├── subregion.html                 ← Fuentes/cuencas por subregión
+│   ├── acueductos.html                ← Módulo aparte: cuencas que abastecen acueductos municipales
+│   ├── ecosistemas.html               ← Landing de Ecosistemas Estratégicos (grid de 7 tipos)
+│   ├── ecosistema.html                ← Ficha de un ecosistema: galería, sitios representativos (usa especie.css compartido)
+│   ├── ecosistemas_mapa.html          ← Mapa Leaflet de sitios representativos; soporta deep-link `?foco=<id>`
+│   ├── data/
+│   │   ├── fuentes.json
+│   │   ├── cuencas.json
+│   │   ├── antioquia_boundary.json
+│   │   └── ecosistemas.json           ← 7 ecosistemas, cada uno con `sitiosRepresentativos[]` (id, lat, lng, nombre, municipio, subregion)
 │   └── mapas/
 │
 └── comunidad/                         ← Módulo comunidad
@@ -292,13 +308,50 @@ const FAMILY_EMOJI = {
     "photos": [
       "aves/trochilidae/sp001_amazilia_tzacatl/01.jpg",
       { "url": "aves/.../02.jpg", "captionEs": "Macho", "captionEn": "Male" }
-    ]
+    ],
+    "umbrella": true,
+    "endemica": true,
+    "dieta": "carnivoro",
+    "actividad": "nocturno"
   }]
 }
 ```
 
 Las fotos se referencian como rutas relativas a `biodiversidad/img/species/`.
 Si `photos: []`, la app muestra automáticamente el placeholder del grupo.
+
+### Campos de atributo opcionales (badges en especie.html)
+
+| Campo | Tipo | Valores válidos | Notas |
+|---|---|---|---|
+| `umbrella` | Boolean | `true` / ausente | Especie sombrilla — solo se marca en las que de verdad lo son (ej. *Panthera onca*, *Tremarctos ornatus*), nunca por defecto |
+| `endemica` | Boolean | `true` / ausente | Nunca debe marcarse en organismos identificados solo a género/familia (`sp.`, `indet.`, `cf.`) — ver `isUnidentified()` abajo |
+| `dieta` | String | `carnivoro`, `herbivoro`, `omnivoro`, `insectivoro`, `frugivoro`, `nectarivoro`, `granivoro`, `piscivoro`, `detritivoro` | Traducciones en `data/translations.json` (`dieta_*`) |
+| `actividad` | String | `diurno`, `nocturno`, `crepuscular` | Convención por grupo cuando no hay dato específico: todas las mariposas = `diurno`, todas las polillas = `nocturno` |
+
+Todos los campos son opcionales — si faltan, el badge correspondiente simplemente no se renderiza. Nunca se debe inventar un valor sin fuente citable; si no se encuentra dato confiable, se deja el campo fuera en vez de adivinar.
+
+### subregiones.json
+
+Contenido "sobre esta subregión" (identidad económica/cultural, no biodiversidad) que se muestra en `biodiversidad/subregion.html`, tomado de "Antioquia Viva 2025":
+
+```json
+{
+  "subregiones": [{
+    "id": "uraba",
+    "tituloEs": "…", "tituloEn": "…",
+    "descripcionEs": "…", "descripcionEn": "…",
+    "municipios": ["Apartadó", "…"],
+    "distritos": ["…"],
+    "sitios": [
+      { "nombreEs": "Serranía de Abibe", "nombreEn": "…", "ecoSiteId": "serrania-abibe" },
+      { "nombreEs": "Hidroituango", "nombreEn": "…", "ecoSiteId": null }
+    ]
+  }]
+}
+```
+
+`sitios[].ecoSiteId` enlaza al mapa de ecosistemas (`agua/ecosistemas_mapa.html?foco=<ecoSiteId>`) cuando el punto de interés es un sitio real dentro de `agua/data/ecosistemas.json`; se deja `null` para lugares que no son ecosistema/área protegida (represas, cascos urbanos, estaciones de tren) — esos se muestran como tag plano no interactivo, no como enlace.
 
 ### fotos JPL — dos formatos (compatibilidad hacia atrás)
 
@@ -453,6 +506,55 @@ Animación count-up con ease-out cúbico (1 400 ms). Si la API falla en 6 s, usa
 
 > **Nota DD vs NE:** Las mariposas y polillas sin evaluación IUCN formal se almacenan como DD por compatibilidad de display, pero el label en la UI es "Sin evaluación global".
 
+El estado IUCN vive como **badge** en la ficha de especie (`App.iucnStatusBadge(sp.iucn)` en `app.js`), no como tarjeta dedicada — la antigua sección "Estado de conservación" (`.iucn-card`) se eliminó para no duplicar la misma información dos veces en la misma pantalla.
+
+---
+
+## Sistema de etiquetas (badges) en especie.html
+
+`biodiversidad/especie.html` muestra hasta 5 badges de atributo bajo el nombre científico: IUCN, especie sombrilla, endémica, dieta y actividad.
+
+### Flag de activación — `BADGE_TAGS` (`biodiversidad/js/especie.js`)
+
+```js
+const BADGE_TAGS = { umbrella: true, endemica: true, dieta: true, actividad: true };
+```
+
+No hay UI de administración para esto — es un interruptor a nivel de código. Para desactivar un tipo de badge en toda la app (por ejemplo, si falta cobertura de datos), basta con poner su valor en `false` aquí; el badge de IUCN no está en este flag porque siempre se muestra.
+
+### Guard `isUnidentified(sp)` — protege el badge "Endémica"
+
+Antes de mostrar el badge de endémica, `especie.js` verifica que el organismo esté identificado a nivel de especie (no género/familia), usando regex sobre `scientificName`:
+
+```js
+/\bsp\.\s*\d*$/i     // "Genus sp." o "Genus sp. 3"
+/\bindet\.?\b/i       // "Familia indet."
+/^cf\.\s/i            // "cf. Especie" (identificación tentativa)
+```
+
+Esto aplica a todos los grupos taxonómicos (incluye hongos y árboles nativos, no solo fauna) — nunca se debe declarar endémica una especie que en realidad no está identificada a ese nivel, sin importar lo que diga el campo `endemica` en `species.json`.
+
+### Convención visual: chip interactivo vs. tag informativo
+
+Auditoría de agosto 2026: 33 clases con forma de píldora en 22 pantallas, de las cuales solo 5 eran realmente interactivas — el resto confundía al usuario haciéndolo pensar que podía tocarlas. Regla adoptada en toda la app (`biodiversidad/`, `agua/`, `comunidad/`):
+
+| | Interactivo (`<a>`/`<button>` con acción real) | Informativo (`<span>`/`<div>`, solo texto) |
+|---|---|---|
+| Radio | `var(--radius-full)` — píldora completa | `var(--radius-sm)` (8px) — rectángulo suave |
+| Relleno | Borde + sólido/blanco + sombra | Tinte plano, sin sombra |
+| Ejemplo | `.subregion-about__sitio--link`, `.stat-chip--link` | `.badge-attr`, `.badge-iucn`, `.cuenca-badge` |
+
+**Excepción:** badges superpuestos directo sobre una foto (ej. `.photo-card__iucn-overlay` en las galerías JPL) mantienen relleno sólido por legibilidad — solo cambia el radio.
+
+Los tintes de fondo/texto de los badges informativos se generan con `color-mix()` a partir de un solo color base, en vez de elegir a mano cada variante:
+
+```css
+.badge-attr--iucn-lc {
+  background: color-mix(in srgb, var(--iucn-lc) 18%, white);
+  color: color-mix(in srgb, var(--iucn-lc) 65%, black);
+}
+```
+
 ---
 
 ## Guía de imágenes de especies
@@ -492,6 +594,27 @@ Los niveles 1 y 2 no son cuencas adicionales — son categorías que agrupan las
 ### Datos y regeneración
 
 `generate_cuencas_agua.py` (raíz del proyecto) genera `agua/data/cuencas.json` y `agua/data/antioquia_boundary.json` desde fuentes públicas (GADM + webmap nacional de IDEAM). Detalle completo de fuentes, licencias pendientes y cómo actualizar en `Mapa/Info agua/FUENTES_DATOS_AGUA.md`.
+
+### Zona de tap ampliada en el mapa de cuencas
+
+Cada río visible en `agua/mapa.js` tiene una segunda polyline invisible superpuesta (`weight: 22, opacity: 0.02`, mismo trazado y mismo handler de click) para que el área tocable sea mucho más ancha que la línea dibujada — sin esto, tocar un río en un teléfono real requería hacer zoom para acertar el trazo delgado. Se guarda como `entry.lineaHit`/`entry.lineaFueraHit` junto a las líneas visibles y se sincroniza con ellas en `updateVisibility()`.
+
+---
+
+## Ecosistemas Estratégicos (`agua/ecosistemas.html`)
+
+7 ecosistemas de Antioquia (páramo, bosque tropical, bosque seco tropical, humedales, manglares, playas y mar, cavernas y cuevas), con contenido tomado de la bibliografía educativa "Antioquia Viva 2025" (SIDAP/Gobernación).
+
+- **`agua/data/ecosistemas.json`** — cada ecosistema tiene `id`, nombre/descripción/amenazas/por-qué-estratégico bilingües, `fotos[]` y `sitiosRepresentativos[]` (22 sitios reales en total: parques nacionales, páramos, manglares, cañones… cada uno con `id` slug único, `lat`/`lng`, `nombre`, `municipio`, `subregion`).
+- **`agua/ecosistema.html`** — ficha de un ecosistema: descripción, galería (mismo patrón crossfade+dots+swipe+contador que `especie.js`), y sus sitios representativos como tarjetas tocables (`.species-card`, reusa el CSS de `biodiversidad/css/especie.css` que ya importa esta página).
+- **`agua/ecosistemas_mapa.html`** — mapa Leaflet con un marcador por sitio representativo (ícono circular de color por tipo de ecosistema + emoji), popup con nombre/municipio/subregión y enlace a la ficha del ecosistema.
+
+### Deep-link `?foco=<id>` — centrar el mapa en un sitio específico
+
+`ecosistemas_mapa.js` lee `?foco=<siteId>` de la URL; si coincide con el `id` de algún sitio, centra el mapa ahí (`map.setView(…, 11)`) y abre su popup automáticamente al terminar el movimiento (`map.once('moveend', …)`). Dos pantallas enlazan a este mecanismo en vez de tener su propio mini-mapa:
+
+- `biodiversidad/subregion.html` → sección "sobre esta subregión", sitios destacados con `ecoSiteId`
+- `agua/ecosistema.html` → lista de sitios representativos del propio ecosistema
 
 ---
 
@@ -577,6 +700,20 @@ El vínculo local carpeta↔sitio vive en `.netlify/state.json` (en `.gitignore`
 | Cache fotos JPL/GC → 30 días | Se actualizan mensualmente al publicar un mes nuevo |
 | Cache JSON de datos → 1 hora | Pueden cambiar sin nuevo deploy de Netlify |
 
+### Cache-buster `?v=N` — obligatorio al tocar CSS/JS
+
+> **Regla:** cada vez que se edite el CONTENIDO de un archivo CSS o JS, hay que subir el número `?v=N` en **todos** los `<link>`/`<script>` que lo referencian, en **todas** las páginas HTML que lo cargan — no solo en la página que se estaba editando.
+
+Por qué importa tanto: `netlify.toml` cachea `/biodiversidad/css/*.css` y `/biodiversidad/js/*.js` por **1 año** (`Cache-Control: max-age=31536000`), confiando en que el `?v=N` cambie cada vez que el contenido cambia — el navegador solo vuelve a pedir el archivo si la URL (incluyendo el query string) cambió. Si se edita `components.css` pero se deja `?v=3` en el HTML, cualquier visitante que ya haya cargado el sitio antes sigue viendo la versión vieja durante meses, sin ningún error visible ni en consola ni en Network — el archivo "carga bien", solo que es el archivo equivocado.
+
+**Incidente real (2026-07-31):** una sesión completa de cambios a `main.css`, `components.css`, `data.js`, `biodiversidad.js`, `especie.js` y varios CSS de página (carrete/grid/mosaico, header, lightbox, Ecosistemas en Agua) se subió a producción sin tocar los `?v=N`. El bug solo se detectó porque el usuario probó el sitio real en su celular (que ya lo había visitado antes) y mandó una captura de WhatsApp: el header salía en mayúsculas sostenidas y los botones nuevos (selector de vista, "Explorar") aparecían sin ningún estilo — exactamente el aspecto que tenían *antes* de los cambios de esa sesión. En local (`localhost:3000`, sin caché previa) todo se había visto perfecto. Se corrigió subiendo el `?v=N` en las ~30 páginas reales de la app que cargan alguno de esos archivos (commit `bba7f5b`).
+
+**Alcance de la regla:**
+- `biodiversidad/css/*.css` y `biodiversidad/js/*.js` — cache de **1 año** por `netlify.toml`, es el caso más crítico.
+- CSS específicos de página en `agua/`, `comunidad/`, `admin/` (ej. `index.css`, `galeria.css`) — no tienen regla explícita en `netlify.toml`, pero igual conviene versionarlos por consistencia y porque el caché por defecto del navegador/CDN no es cero.
+- Verificar con `grep -rn "nombre_del_archivo" --include="*.html"` antes de dar el cambio por terminado, porque un mismo archivo compartido (`main.css`, `components.css`, `data.js`) se carga desde muchas páginas distintas, no solo la que se tocó.
+- **No probar solo en local** para este tipo de cambio — `localhost:3000` no tiene el historial de caché de un navegador real que ya visitó el sitio, así que un `?v=N` desactualizado nunca se nota ahí. Hay que revisar el HTML final (`grep` del `?v=`) o probar en el sitio real con caché ya cargada.
+
 ### Privacidad Ley 1581 (`biodiversidad/index.html`)
 
 Modal que aparece **una sola vez** en la primera visita:
@@ -621,6 +758,28 @@ Cubre todos los compromisos de documentación del § 8 de la Propuesta Técnica 
 
 ---
 
+## TI Gobernación — Trámite de aval
+
+Contrato de prestación de servicios por 18 meses (ejecución, desarrollo y mantenimiento) ya suscrito entre el contratista y la Secretaría de Ambiente. Contratistas: **Sebastián Guzmán Díaz y Alejandro López**. La ejecución sobre infraestructura institucional todavía no ha podido comenzar porque TI Gobernación no ha entregado el servidor ni activado Azure DevOps.
+
+TI Gobernación revisó una primera versión de los documentos y devolvió 26 hallazgos (`Documentos gobernacion/TI/Revision 2/Observaciones_Revision_Documental Final.pdf`). Los 3 documentos exigidos por sus plantillas, más 2 entregables de soporte, se regeneran con los scripts de `backend/src/scripts/` (ver arriba) y quedan en `Documentos gobernacion/TI/Nuevos documentos TI/`:
+
+| Documento | Plantilla | Script |
+|---|---|---|
+| Levantamiento de Requisitos | FO-M7-P8-020 | `generate_levantamiento_requisitos.js` |
+| Propuesta de Ajustes Técnicos v2 | FO-M7-P8-021 | `generate_propuesta_ajustes.js` |
+| Documento Integral de Desarrollo | FO-M7-P8-023 | `generate_documento_integral.js` |
+| Matriz de Respuesta a Observaciones | — (respuesta a los 26 hallazgos, uno por uno) | `generate_matriz_respuesta.js` |
+| Diccionario de Datos (Excel) | Exigido por FO-M7-P8-023 §6.6 | `generate_diccionario_datos.js` |
+
+**Los 3 ajustes vigentes son: Entra ID, Redis, SAST.** La v2.1 de la propuesta incluía además Observabilidad (Winston+Loki+Prometheus+Grafana) y Backup de MongoDB como Ajustes 3 y 5; ambos se retiraron en v2.2 (2026-07-29) por instrucción directa de TI (monitoreo con Grafana no necesario; la Gobernación tiene su propio protocolo de respaldos) — ver el historial completo en el numeral 9 (Control de Ajustes) del documento generado.
+
+**Regenerar tras cualquier cambio de contenido:** `node src/scripts/generate_<doc>.js` desde `backend/`, luego verificar con `python3 -c "import docx; ..."` que párrafos/tablas/imágenes no cambiaron de forma inesperada antes de considerar el cambio terminado.
+
+**Ojo con `Documentos gobernacion/TI/Revision 2/` (fuera de `Nuevos documentos TI/`):** ahí hay copias editadas a mano (docx y PDFs en `Revision 2/pdfs revision 2/`) que TI puede haber visto — **no se generan desde estos scripts y no se actualizan solas**. Si algo se corrige aquí (código fuente), hay que decidir explícitamente si también se traslada a esas copias manuales o si se reemplazan por una regeneración limpia.
+
+---
+
 ## Roadmap
 
 ### Fase 1 — Prototipo (completado)
@@ -654,10 +813,11 @@ Cubre todos los compromisos de documentación del § 8 de la Propuesta Técnica 
 - [x] Corrección contador galería biodiversidad (`z-index: 10` en `.gallery-counter`)
 - [x] Backward compat foto/fotos: `getImgs()` normaliza datos legados (foto:string) y nuevos (fotos:[])
 
-### Fase 2 — Propuesta Técnica v2.1 (en curso)
+### Fase 2 — Propuesta Técnica v2.2 (en curso)
 
 > Ajustes comprometidos con la Gobernación de Antioquia. Secuencia: A1 → A2 → A3 → B1.
 > Pendientes de TI Gobernación: Azure DevOps, credenciales Entra ID, servidor on-premises.
+> Contrato de 18 meses ya suscrito con la Secretaría de Ambiente — ver sección "TI Gobernación — Trámite de aval" arriba.
 
 - [x] **A1 — Winston + /api/health** — logs JSON estructurados con traceId; health reporta estado MongoDB
 - [x] **A2 — Redis 7 + ioredis** — caché de catálogo con TTLs definidos (RNF02, RNF06)
@@ -665,13 +825,24 @@ Cubre todos los compromisos de documentación del § 8 de la Propuesta Técnica 
 - [x] **npm audit** — agregado al pipeline CI (Paso 3 del PDF); falla en CVE Alta o Crítica
 - [x] **Verificación manual de los 7 pasos del pipeline (2026-07-13)**: 51 tests de integración nuevos (96.81% líneas / 91.93% funciones, cumple el umbral de 90%), 3 vulnerabilidades de dependencias resueltas, Semgrep corrido por primera vez y en 0 hallazgos (ver detalle en "SAST")
 - [x] **README.md / Manual de despliegue** — prerrequisitos, instalación, Redis, Nginx, PM2, variables, comandos
+- [x] **Respuesta a los 26 hallazgos de TI (2026-07-29)** — portada, TOC, diagramas, Estado de Completitud, diccionario de datos en Excel, matriz de respuesta punto por punto — ver "TI Gobernación — Trámite de aval"
+- [x] **Retiro de Observabilidad (Grafana) y Backup como ajustes propios (2026-07-29)** — por instrucción de TI; quedan 3 ajustes: Entra ID, Redis, SAST
 - [ ] **B1 — Microsoft Entra ID** — reemplaza express-session; requiere Client ID + Tenant ID (RNF05, RNF08)
 - [x] **C1 — Ley 1581** — modal de privacidad en entrada de la app, checkbox no pre-marcado, bilingüe, localStorage
 - [x] **C2 — netlify.toml** — redirects para Pretty URLs, cabeceras de seguridad, cache de assets
 - [ ] **WCAG 2.1 AA** — validación con WAVE antes de cada pase a producción
 
 ### Fase 3 — Contenido y producción completa
-- [ ] Ampliar a 150+ especies con fotos y descripciones bilingües
+- [x] **154 especies** en el catálogo — subida desde las 80 de Fase 1
+- [x] **Badges de atributo en especie.html**: sombrilla, endémica, dieta, actividad — con flag `BADGE_TAGS` y guard `isUnidentified()` (ver "Sistema de etiquetas")
+- [x] **IUCN como badge** (se retiró la tarjeta grande dedicada, quedaba duplicada)
+- [x] **Galería swipeable multi-foto en especie.html** — todas las fotos precargadas en el preview, no solo la primera
+- [x] **Ecosistemas Estratégicos** (`agua/ecosistemas.html`) — 7 ecosistemas, 22 sitios representativos, mapa Leaflet con deep-link `?foco=`
+- [x] **Contenido "sobre esta subregión"** en `biodiversidad/subregion.html` — identidad económica/cultural de "Antioquia Viva 2025", municipios, sitios destacados enlazados al mapa
+- [x] **Stats interactivos** en `biodiversidad.html` y `agua/index.html` — los números (subregiones/grupos/especies, subregiones/ríos/cuencas) ahora son botones que navegan
+- [x] **Auditoría y rediseño de píldoras vs. tags** — convención unificada interactivo (píldora+borde) vs. informativo (rectángulo suave+tinte) en toda la app
+- [x] **Zona de tap ampliada** en el mapa de cuencas hídricas (hit-line invisible de 22px sobre cada río)
+- [ ] Ampliar a 150+ especies con fotos y descripciones bilingües *(154 alcanzadas — evaluar seguir creciendo el catálogo o cerrar esta línea)*
 - [ ] Consultar Libro Rojo de Colombia para estados IUCN reales en Lepidoptera
 - [ ] Dominio oficial `.gov.co`
 - [ ] PWA con modo offline (Service Workers)
@@ -681,4 +852,4 @@ Cubre todos los compromisos de documentación del § 8 de la Propuesta Técnica 
 ---
 
 *Proyecto desarrollado con Claude Code — Anthropic*
-*Última actualización: junio 2026*
+*Última actualización: agosto 2026*

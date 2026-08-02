@@ -202,6 +202,11 @@ function isUnidentified(sp) {
           document.body.style.overflow = '';
         }
 
+        // Ver nota en listado.js — el back-forward cache puede restaurar la
+        // página con el lightbox abierto (y el scroll del body bloqueado)
+        // sin volver a ejecutar el JS; se fuerza a cerrado en cada restauración.
+        window.addEventListener('pageshow', (e) => { if (e.persisted) closeLightbox(); });
+
         lightboxClose.addEventListener('click', closeLightbox);
 
         lightboxStage.addEventListener('click', e => {

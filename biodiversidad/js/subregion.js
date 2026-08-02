@@ -164,6 +164,10 @@ const GROUPS = [
       btn.addEventListener('click', () => { overlay.hidden = false; });
       closeBtn.addEventListener('click', () => { overlay.hidden = true; });
 
+      // Ver nota en listado.js — misma protección contra el back-forward
+      // cache dejando el overlay abierto tras un gesto de "atrás".
+      window.addEventListener('pageshow', (e) => { if (e.persisted) overlay.hidden = true; });
+
       const switcherBtns = overlay.querySelectorAll('.view-switcher__btn');
       const views = {
         reel:    document.getElementById('kreel-view-reel'),

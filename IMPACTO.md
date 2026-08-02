@@ -1,7 +1,7 @@
 # Antioquia Natural — Datos de Impacto
 
 > Documento vivo. Se actualiza cada vez que se agregan especies, fotos o participantes.  
-> Última actualización: junio 2026 · 80 especies · 92 fotos bio · 23 fotos JPL
+> Última actualización: agosto 2026 · 154 especies · 199 fotos bio · 20 fotos JPL
 
 ---
 
@@ -9,14 +9,13 @@
 
 | Indicador | Valor actual |
 |---|---|
-| Especies documentadas (módulo biodiversidad) | **80** |
-| Fotos WebP en módulo biodiversidad | **92** |
-| Grupos taxonómicos activos | **6** |
-| Familias representadas | **32** |
-| Fotografías ciudadanas (Jóvenes pa' Lante) | **23** |
+| Especies documentadas (módulo biodiversidad) | **154** |
+| Fotos WebP en módulo biodiversidad | **199** |
+| Grupos taxonómicos activos | **7** |
+| Familias representadas | **65** |
+| Fotografías ciudadanas (Jóvenes pa' Lante) | **20** |
 | Participantes JPL con foto publicada | **≥ 16** |
-| Municipios con presencia en la app | **16** |
-| Subregiones cubiertas | **6 de 9** |
+| Subregiones cubiertas (módulo biodiversidad) | **9 de 9** |
 
 ---
 
@@ -26,13 +25,14 @@
 
 | Grupo | Especies |
 |---|---|
+| Hongos | 37 |
 | Polillas *(Lepidoptera: Heterocera)* | 34 |
+| Orquídeas | 27 |
 | Mariposas *(Lepidoptera: Rhopalocera)* | 21 |
 | Mamíferos | 14 |
-| Anfibios y reptiles | 6 |
-| Orquídeas | 4 |
-| Aves | 1 |
-| **Total** | **80** |
+| Anfibios y reptiles | 11 |
+| Aves | 10 |
+| **Total** | **154** |
 
 ### Estado de conservación (IUCN)
 
@@ -41,11 +41,11 @@
 | CR — Peligro crítico | — | (pendiente asignar en biodiversidad) |
 | EN — En peligro | — | |
 | VU — Vulnerable | 2 | |
-| NT — Casi amenazada | 3 | |
-| LC — Preocupación menor | 16 | |
-| DD — Datos insuficientes | 59 | *Ver nota* |
+| NT — Casi amenazada | 4 | |
+| LC — Preocupación menor | 31 | |
+| DD — Datos insuficientes | 117 | *Ver nota* |
 
-> **Nota DD:** Las 59 especies con DD tienen fotografías y fichas completas en la app. La categoría refleja que aún no tienen evaluación IUCN formal, no que estén en buen estado. Esto refuerza la necesidad del monitoreo ciudadano que la app promueve.
+> **Nota DD:** Las 117 especies con DD tienen fotografías y fichas completas en la app. La categoría refleja que aún no tienen evaluación IUCN formal, no que estén en buen estado. Esto refuerza la necesidad del monitoreo ciudadano que la app promueve.
 
 ---
 
@@ -124,10 +124,10 @@ Tres especies en estado crítico o en peligro fueron fotografiadas y documentada
 | 80 especies en módulo biodiversidad | ✅ Junio 2026 |
 | 92 fotos WebP en módulo biodiversidad | ✅ Junio 2026 |
 | Primera Versión JPL con 17 fotos de participantes | ✅ Junio 2026 |
-| 23 fotos JPL en total (3 versiones/meses) | ✅ Junio 2026 |
-| 6 subregiones cubiertas | ✅ Junio 2026 |
+| 150 especies en módulo biodiversidad | ✅ Agosto 2026 (154 alcanzadas) |
+| 199 fotos WebP en módulo biodiversidad | ✅ Agosto 2026 |
+| 9/9 subregiones cubiertas (módulo biodiversidad) | ✅ Agosto 2026 |
 | Estados IUCN reales para Lepidoptera (Libro Rojo Colombia) | 🔲 Pendiente |
-| 150 especies en módulo biodiversidad | 🔲 Pendiente |
-| 9/9 subregiones cubiertas | 🔲 Pendiente |
+| 9/9 subregiones cubiertas por JPL (fotos ciudadanas) | 🔲 Pendiente |
 | Integración con SiB Colombia / GBIF | 🔲 Pendiente |
 | Módulo de reporte ciudadano (cámara → registro) | 🔲 Pendiente |

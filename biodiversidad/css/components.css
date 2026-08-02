@@ -1026,6 +1026,13 @@
   transition: all var(--transition);
 }
 
+/* El display:flex de arriba gana por origen de cascada sobre el
+   [hidden] { display:none } por defecto del navegador (una regla de
+   autor siempre le gana a la hoja de estilos de usuario, sin importar
+   la especificidad) — sin esto, #reel-view-btn queda visible y
+   clickeable aunque tenga el atributo hidden. */
+.view-switcher__btn[hidden] { display: none; }
+
 .view-switcher__btn.active {
   background: var(--color-green-pale);
   color: var(--color-green-dark);

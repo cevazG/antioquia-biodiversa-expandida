@@ -53,6 +53,10 @@ Web app mobile-first para la Gobernación de Antioquia. Permite consultar la bio
 - **Poppins** (Google Fonts) — pesos 400, 500, 600, 700, 800
 - Poppins Italic para nombres científicos
 
+### Regla de texto: nunca mayúsculas sostenidas
+
+> **No usar `text-transform: uppercase` ni escribir texto directamente en mayúsculas sostenidas en ningún label, kicker, badge o título de la UI.** Usar peso de fuente (bold) y/o `letter-spacing` para dar énfasis en vez de mayúsculas. Aplica a todo el proyecto, en los 3 módulos.
+
 ---
 
 ## Estructura de carpetas
@@ -270,6 +274,9 @@ I18n.apply()         // Re-aplica todas las traducciones [data-i18n] al DOM
 | 🐟 | Peces de Agua Dulce | Freshwater Fish | `peces` | `fauna` |
 | 🌸 | Orquídeas | Orchids | `orquideas` | `flora` |
 | 🌳 | Árboles Nativos | Native Trees | `arboles_nativos` | `flora` |
+| 🍄 | Hongos | Fungi | `hongos` | `fungi` |
+
+**10 grupos en total** (`HOME_GROUPS` en `biodiversidad.js`), no todos con especies cargadas todavía — los que están en 0 se muestran como "Próximamente" en la cuadrícula de `biodiversidad.html`. El stat "Grupos bio" de esa pantalla (`#total-groups`) se calcula como `HOME_GROUPS.length`, nunca hardcodeado, para que no se desincronice del contenido real (incidente 2026-08-02: quedó fijo en "7" mientras la cuadrícula ya mostraba 10).
 
 ### Emojis por familia (FAMILY_EMOJI)
 

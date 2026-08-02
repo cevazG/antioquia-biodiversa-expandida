@@ -36,7 +36,6 @@ const layersByCuenca = {};        // id -> { area: L.GeoJSON|null, linea: L.GeoJ
 // Inicializar mapa centrado en Antioquia
 const map = L.map('map', { zoomControl: false });
 map.fitBounds([[5.35, -77.2], [8.95, -73.85]]);
-setTimeout(() => { if (window.__cuencasData) openSheet(window.__cuencasData.find(c=>c.nombre==='Río San Juan (Suroeste)'), 'linea'); }, 800);
 
 L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
   attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> © <a href="https://carto.com/">CARTO</a>',
@@ -233,7 +232,14 @@ const overlay = document.getElementById('cuenca-overlay');
 
 function openSheet(cuenca, tipoToque) {
   const lang = I18n.getLang();
-  document.getElementById('cuenca-sheet-name').textContent = cuenca.nombre;
+
+  // El toque puede venir del trazado del río o de su área de drenaje —
+  // el panel muestra datos distintos en cada caso (longitud vs. área en
+  // km²), así que el título deja claro cuál de los dos se está viendo.
+  document.getElementById('cuenca-sheet-name').textContent =
+    tipoToque === 'area'
+      ? (lang === 'en' ? `Drainage area of ${cuenca.nombre}` : `Área del ${cuenca.nombre}`)
+      : cuenca.nombre;
   document.getElementById('cuenca-sheet-desc').textContent =
     lang === 'en' ? (cuenca.descripcionEn || cuenca.descripcionEs) : cuenca.descripcionEs;
 

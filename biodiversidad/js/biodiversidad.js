@@ -148,6 +148,12 @@ const HOME_GROUPS = [
 
       const totalEl = document.getElementById('total-species');
       if (totalEl) totalEl.textContent = total;
+
+      // Cuenta los grupos que de verdad se muestran en la cuadrícula de
+      // abajo (con especies o "Próximamente") — así el número del stat de
+      // arriba nunca queda desincronizado del contenido real.
+      const groupsEl = document.getElementById('total-groups');
+      if (groupsEl) groupsEl.textContent = HOME_GROUPS.length;
     }
 
     document.addEventListener('DOMContentLoaded', async () => {

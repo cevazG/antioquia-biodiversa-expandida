@@ -1,0 +1,364 @@
+{
+  "subregiones": [
+    {
+      "id": "uraba",
+      "tituloEs": "Territorio que conecta norte, centro y sur América",
+      "tituloEn": "A territory connecting North, Central and South America",
+      "descripcionEs": "Única subregión de Antioquia con salida al mar, con posición geopolítica estratégica para el comercio internacional. Tierra fértil de plátano y banano, atravesada por el río Atrato hasta el Golfo de Urabá. Sus manglares protegen a las comunidades de tormentas y del aumento del nivel del mar.",
+      "descripcionEn": "Antioquia's only subregion with sea access, holding a strategic position for international trade. Fertile land for plantain and banana, crossed by the Atrato river down to the Gulf of Urabá. Its mangroves protect communities from storms and rising sea levels.",
+      "municipios": [
+        "Apartadó",
+        "Arboletes",
+        "Carepa",
+        "Chigorodó",
+        "Murindó",
+        "Mutatá",
+        "Necoclí",
+        "San Juan de Urabá",
+        "San Pedro de Urabá",
+        "Vigía del Fuerte"
+      ],
+      "distritos": [
+        "Turbo"
+      ],
+      "sitios": [
+        {
+          "nombreEs": "Ensenada de Rionegro",
+          "nombreEn": "Ensenada de Rionegro",
+          "ecoSiteId": "manglares-uraba"
+        },
+        {
+          "nombreEs": "Parque Nacional Los Katíos",
+          "nombreEn": "Los Katíos National Park",
+          "ecoSiteId": "pnn-los-katios"
+        },
+        {
+          "nombreEs": "Serranía de Abibe",
+          "nombreEn": "Serranía de Abibe",
+          "ecoSiteId": "serrania-abibe"
+        }
+      ]
+    },
+    {
+      "id": "norte",
+      "tituloEs": "Vida que sostiene, leche que alimenta, agua y energía productiva",
+      "tituloEn": "Life that sustains, milk that nourishes, water and productive energy",
+      "descripcionEs": "Tierra ganadera y lechera, hogar del Páramo de Santa Inés y del Nudo de Paramillo. El río Cauca es el eje de su sistema hidrográfico, aprovechado para generar energía en embalses como Hidroituango. Por Yarumal sobrevuela el montañerito paisa, un ave que solo existe en esta zona.",
+      "descripcionEn": "Dairy and cattle country, home to the Santa Inés páramo and the Nudo de Paramillo. The Cauca river anchors its water system, harnessed for energy at reservoirs like Hidroituango. Around Yarumal flies the Paisa brushfinch, a bird found only in this area.",
+      "municipios": [
+        "Angostura",
+        "Belmira",
+        "Briceño",
+        "Campamento",
+        "Carolina del Príncipe",
+        "Donmatías",
+        "Entrerríos",
+        "Gómez Plata",
+        "Guadalupe",
+        "Ituango",
+        "San Andrés de Cuerquia",
+        "San José de la Montaña",
+        "San Pedro de los Milagros",
+        "Santa Rosa de Osos",
+        "Toledo",
+        "Valdivia",
+        "Yarumal"
+      ],
+      "distritos": [],
+      "sitios": [
+        {
+          "nombreEs": "Páramo de Santa Inés",
+          "nombreEn": "Santa Inés páramo",
+          "ecoSiteId": "paramo-belmira"
+        },
+        {
+          "nombreEs": "Parque Nacional Natural Paramillo",
+          "nombreEn": "Paramillo National Natural Park",
+          "ecoSiteId": "pnn-paramillo"
+        },
+        {
+          "nombreEs": "Embalse Hidroituango",
+          "nombreEn": "Hidroituango reservoir",
+          "ecoSiteId": null
+        }
+      ]
+    },
+    {
+      "id": "bajo_cauca",
+      "tituloEs": "Donde el oro brilla más fuerte que el sol",
+      "tituloEn": "Where gold shines brighter than the sun",
+      "descripcionEs": "Tierra minera desde hace siglos, con la Serranía de San Lucas junto al río Cauca, hogar de bocachicos y bagres rayados que alimentan a comunidades pesqueras. Al final de su recorrido, el río abre paso a un vasto complejo de humedales vital para Colombia. Su cercanía con Córdoba mezcla costumbres antioqueñas y costeñas.",
+      "descripcionEn": "Mining country for centuries, with the San Lucas range beside the Cauca river, home to bocachico and striped catfish that feed fishing communities. As it exits the subregion, the river opens into a vast wetland complex vital to Colombia. Its proximity to Córdoba blends Antioqueño and coastal traditions.",
+      "municipios": [
+        "Caucasia",
+        "El Bagre",
+        "Nechí",
+        "Tarazá",
+        "Cáceres",
+        "Zaragoza"
+      ],
+      "distritos": [],
+      "sitios": [
+        {
+          "nombreEs": "Serranía de San Lucas",
+          "nombreEn": "San Lucas mountain range",
+          "ecoSiteId": "serrania-san-lucas"
+        },
+        {
+          "nombreEs": "Complejo de ciénagas del Bajo Cauca",
+          "nombreEn": "Bajo Cauca wetland complex",
+          "ecoSiteId": "cienagas-bajo-cauca"
+        }
+      ]
+    },
+    {
+      "id": "nordeste",
+      "tituloEs": "Riqueza natural y mineral",
+      "tituloEn": "Natural and mineral wealth",
+      "descripcionEs": "Desde la época colonial, protagonista de la minería de oro, una actividad que moldeó su historia y cultura. Además de la minería se practica agricultura, ganadería y producción de panela y café. Custodiada por la Serranía de San Lucas, guarda baños naturales, ciénagas y la antigua Estación de Tren de Cisneros.",
+      "descripcionEn": "A gold-mining protagonist since colonial times, an activity that shaped its history and culture. Beyond mining, it practices agriculture, cattle ranching, and panela and coffee production. Guarded by the San Lucas range, it holds natural baths, wetlands, and the old Cisneros train station.",
+      "municipios": [
+        "Amalfi",
+        "Anorí",
+        "Cisneros",
+        "Remedios",
+        "San Roque",
+        "Santo Domingo",
+        "Segovia",
+        "Vegachí",
+        "Yalí",
+        "Yolombó"
+      ],
+      "distritos": [],
+      "sitios": [
+        {
+          "nombreEs": "Serranía de San Lucas",
+          "nombreEn": "San Lucas mountain range",
+          "ecoSiteId": "serrania-san-lucas"
+        },
+        {
+          "nombreEs": "Estación de Tren de Cisneros",
+          "nombreEn": "Cisneros train station",
+          "ecoSiteId": null
+        }
+      ]
+    },
+    {
+      "id": "occidente",
+      "tituloEs": "Paraíso turístico, cultural y colonial",
+      "tituloEn": "A tourist, cultural and colonial paradise",
+      "descripcionEs": "Combina agricultura, ganadería y minería con fuerte potencial turístico. Santa Fe de Antioquia, la \"Ciudad Madre\", es un centro histórico colonial muy visitado. La subregión conserva bosque seco tropical, un ecosistema único adaptado a estaciones marcadas de sequía, y sus páramos son grandes productores de agua.",
+      "descripcionEn": "Combines agriculture, cattle ranching, and mining with strong tourism appeal. Santa Fe de Antioquia, the \"Mother City,\" is a much-visited colonial historic center. The subregion preserves tropical dry forest, a unique ecosystem adapted to pronounced dry seasons, and its páramos are major water producers.",
+      "municipios": [
+        "Abriaquí",
+        "Anzá",
+        "Armenia",
+        "Buriticá",
+        "Caicedo",
+        "Cañasgordas",
+        "Dabeiba",
+        "Ebéjico",
+        "Frontino",
+        "Giraldo",
+        "Heliconia",
+        "Liborina",
+        "Olaya",
+        "Peque",
+        "Sabanalarga",
+        "San Jerónimo",
+        "Santa Fe de Antioquia",
+        "Sopetrán",
+        "Uramita"
+      ],
+      "distritos": [],
+      "sitios": [
+        {
+          "nombreEs": "Santa Fe de Antioquia",
+          "nombreEn": "Santa Fe de Antioquia",
+          "ecoSiteId": null
+        },
+        {
+          "nombreEs": "Cañón del río Cauca",
+          "nombreEn": "Cauca river canyon",
+          "ecoSiteId": "canon-rio-cauca"
+        }
+      ]
+    },
+    {
+      "id": "magdalena_medio",
+      "tituloEs": "Navegación, minería e hidrocarburos",
+      "tituloEn": "Navigation, mining and hydrocarbons",
+      "descripcionEs": "Limitada por el río Magdalena, principal eje fluvial del país. Sus meandros y ciénagas dan refugio al manatí. Sus montañas rocosas forman cavernas del corredor kárstico donde habitan murciélagos y guácharos. Sus comunidades viven de la pesca, la ganadería, la minería y la producción de petróleo.",
+      "descripcionEn": "Bounded by the Magdalena river, the country's main fluvial route. Its meanders and floodplain lakes shelter the manatee. Its rocky mountains form caves along a karst corridor home to bats and oilbirds. Its communities live from fishing, cattle ranching, mining, and oil production.",
+      "municipios": [
+        "Caracolí",
+        "Maceo",
+        "Puerto Berrío",
+        "Puerto Nare",
+        "Puerto Triunfo",
+        "Yondó"
+      ],
+      "distritos": [],
+      "sitios": [
+        {
+          "nombreEs": "Corredor kárstico (cavernas)",
+          "nombreEn": "Karst corridor (caves)",
+          "ecoSiteId": "canon-rio-alicante"
+        },
+        {
+          "nombreEs": "Ciénagas del Magdalena Medio",
+          "nombreEn": "Magdalena Medio wetlands",
+          "ecoSiteId": "cienagas-magdalena-medio"
+        }
+      ]
+    },
+    {
+      "id": "suroeste",
+      "tituloEs": "Aroma a café recién tostado y casas de colores",
+      "tituloEn": "The aroma of freshly roasted coffee and colorful houses",
+      "descripcionEs": "La subregión cafetera por excelencia, con pueblos coloridos y tradiciones arraigadas. Sus páramos y bosques resguardan bromelias, orquídeas y frailejones, hogar del oso andino, el venado de cola blanca y el colibrí del sol. El Parque Nacional Natural Las Orquídeas y los Páramos de Frontino-Urrao conforman un mosaico de tesoros naturales.",
+      "descripcionEn": "Antioquia's coffee subregion par excellence, with colorful towns and deep-rooted traditions. Its páramos and forests shelter bromeliads, orchids, and frailejones, home to the Andean bear, white-tailed deer, and sunangel hummingbird. Las Orquídeas National Natural Park and the Frontino-Urrao páramos form a mosaic of natural treasures.",
+      "municipios": [
+        "Amagá",
+        "Andes",
+        "Angelópolis",
+        "Betania",
+        "Betulia",
+        "Caramanta",
+        "Ciudad Bolívar",
+        "Concordia",
+        "Fredonia",
+        "Hispania",
+        "Jardín",
+        "Jericó",
+        "La Pintada",
+        "Montebello",
+        "Pueblorrico",
+        "Salgar",
+        "Santa Bárbara",
+        "Támesis",
+        "Tarso",
+        "Titiribí",
+        "Urrao",
+        "Valparaíso",
+        "Venecia"
+      ],
+      "distritos": [],
+      "sitios": [
+        {
+          "nombreEs": "Parque Nacional Natural Las Orquídeas",
+          "nombreEn": "Las Orquídeas National Natural Park",
+          "ecoSiteId": "pnn-las-orquideas"
+        },
+        {
+          "nombreEs": "Páramos de Frontino-Urrao",
+          "nombreEn": "Frontino-Urrao páramos",
+          "ecoSiteId": "paramo-frontino-urrao"
+        },
+        {
+          "nombreEs": "Cerro Tusa",
+          "nombreEn": "Cerro Tusa",
+          "ecoSiteId": null
+        },
+        {
+          "nombreEs": "Farallones de Citará",
+          "nombreEn": "Farallones de Citará",
+          "ecoSiteId": "farallones-citara"
+        }
+      ]
+    },
+    {
+      "id": "oriente",
+      "tituloEs": "Polo de desarrollo donde se ubica el principal puerto aéreo del departamento",
+      "tituloEn": "A development hub, home to the department's main air gateway",
+      "descripcionEs": "Alberga el Aeropuerto Internacional José María Córdova y es símbolo de crecimiento económico e industrial. Tiene un complejo paramuno en Sonsón y ríos embalsados que generan energía. Primates, aves, murciélagos y guácharos habitan sus cavernas del corredor kárstico, mientras sus suelos producen flores, frutas y hortalizas.",
+      "descripcionEn": "Home to José María Córdova International Airport, a symbol of economic and industrial growth. It has a páramo complex in Sonsón and dammed rivers generating power. Primates, birds, bats and oilbirds inhabit its karst-corridor caves, while its soils produce flowers, fruit, and vegetables.",
+      "municipios": [
+        "Abejorral",
+        "Alejandría",
+        "Argelia",
+        "El Carmen de Viboral",
+        "Cocorná",
+        "Concepción",
+        "El Peñol",
+        "El Retiro",
+        "El Santuario",
+        "Granada",
+        "Guarne",
+        "Guatapé",
+        "La Ceja",
+        "La Unión",
+        "Marinilla",
+        "Nariño",
+        "Rionegro",
+        "San Carlos",
+        "San Francisco",
+        "San Luis",
+        "San Rafael",
+        "San Vicente",
+        "Sonsón"
+      ],
+      "distritos": [],
+      "sitios": [
+        {
+          "nombreEs": "Complejo paramuno de Sonsón",
+          "nombreEn": "Sonsón páramo complex",
+          "ecoSiteId": "paramo-sonson"
+        },
+        {
+          "nombreEs": "Corredor kárstico KoCOA",
+          "nombreEn": "KoCOA karst corridor",
+          "ecoSiteId": "karst-san-luis"
+        },
+        {
+          "nombreEs": "Embalse Peñol-Guatapé",
+          "nombreEn": "Peñol-Guatapé reservoir",
+          "ecoSiteId": null
+        }
+      ]
+    },
+    {
+      "id": "valle_aburra",
+      "tituloEs": "Un valle cargado de historias, industrialización e innovación",
+      "tituloEn": "A valley steeped in history, industry and innovation",
+      "descripcionEs": "Medellín, capital de Antioquia, se ubica en el centro de esta subregión conurbada, la más poblada del departamento. Es el territorio más urbanizado, pero conserva áreas naturales únicas como el Páramo de Las Baldías, el Alto de San Miguel y el Parque Arví, además de cerros tutelares que actúan como pulmones verdes.",
+      "descripcionEn": "Medellín, the capital of Antioquia, sits at the center of this conurbated subregion, the department's most populous. It is the most urbanized territory, yet preserves unique natural areas such as the Las Baldías páramo, Alto de San Miguel, and Parque Arví, along with guardian hills acting as green lungs.",
+      "municipios": [
+        "Barbosa",
+        "Girardota",
+        "Copacabana",
+        "Bello",
+        "Envigado",
+        "Itagüí",
+        "Sabaneta",
+        "La Estrella",
+        "Caldas"
+      ],
+      "distritos": [
+        "Medellín"
+      ],
+      "sitios": [
+        {
+          "nombreEs": "Páramo de Las Baldías",
+          "nombreEn": "Las Baldías páramo",
+          "ecoSiteId": "paramo-baldias"
+        },
+        {
+          "nombreEs": "Alto de San Miguel",
+          "nombreEn": "Alto de San Miguel",
+          "ecoSiteId": "alto-san-miguel"
+        },
+        {
+          "nombreEs": "Parque Arví",
+          "nombreEn": "Parque Arví",
+          "ecoSiteId": "parque-arvi"
+        },
+        {
+          "nombreEs": "Cerros tutelares de Medellín",
+          "nombreEn": "Medellín's guardian hills",
+          "ecoSiteId": null
+        }
+      ]
+    }
+  ]
+}

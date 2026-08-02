@@ -270,7 +270,7 @@ function renderNotableCards() {
         <div class="notable-card__desc">${sp.descripcion}</div>
         <div class="notable-card__credit">
           📷 ${sp.credito} · ${sp.municipio}, ${sp.subregion}
-          ${sp.endemica ? ' &nbsp;🏔️ <em>Endémica</em>' : ''}
+          ${sp.endemica ? ' &nbsp;🫓 <em>Endémica</em>' : ''}
         </div>
       </div>
     </div>`).join('');
@@ -299,7 +299,7 @@ function renderThreatTable() {
           <td>${sp.es}</td>
           <td>${sp.municipio}</td>
           <td style="font-size:11px">${sp.credito}</td>
-          <td style="text-align:center">${sp.endemica ? '🏔️' : '—'}</td>
+          <td style="text-align:center">${sp.endemica ? '🫓' : '—'}</td>
         </tr>`).join('')}
     </tbody>`;
 }

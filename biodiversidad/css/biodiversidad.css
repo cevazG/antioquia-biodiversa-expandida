@@ -86,6 +86,29 @@
       text-align: center;
     }
 
+    /* Estos tres sí son interactivos (a diferencia de los tags informativos
+       del resto de la app) — llevan a subregiones, grupos o la cuadrícula
+       de especies. Reset de <a>/<button> + leve estado de presión para que
+       se sientan tocables. */
+    .stat-chip--link {
+      display: block;
+      width: 100%;
+      border: none;
+      text-decoration: none;
+      cursor: pointer;
+      font-family: inherit;
+      transition: transform 0.15s ease, background 0.15s ease;
+    }
+
+    .stat-chip--link:active {
+      transform: scale(0.96);
+      background: var(--color-green-light);
+    }
+    .stat-chip--link:active .stat-chip__num,
+    .stat-chip--link:active .stat-chip__label {
+      color: white;
+    }
+
     .stat-chip__num {
       font-size: 1.25rem;
       font-weight: 800;

@@ -34,14 +34,17 @@ document.addEventListener('DOMContentLoaded', async () => {
   if (sites.length === 0) {
     sitesEl.innerHTML = `<p class="info-section__text">—</p>`;
   } else {
+    // Cada sitio con id enlaza al mapa de ecosistemas centrado en su
+    // ubicación — mismo mecanismo (?foco=) que ya usan las subregiones.
     sitesEl.innerHTML = sites.map(s => `
-      <div class="species-card" style="cursor:default">
-        <div class="species-card__photo" aria-hidden="true">📍</div>
+      <a class="species-card" href="ecosistemas_mapa.html?foco=${s.id}">
+        <div class="species-card__photo" aria-hidden="true">🏔️</div>
         <div class="species-card__info">
           <div class="species-card__common">${s.nombre}</div>
           <div class="species-card__scientific" style="font-style:normal">${s.municipio} · ${SUBREGION_NAMES[s.subregion] || s.subregion}</div>
         </div>
-      </div>
+        <svg class="species-card__arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg>
+      </a>
     `).join('');
   }
 

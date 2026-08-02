@@ -65,6 +65,11 @@ document.addEventListener('DOMContentLoaded', async () => {
   const res = await fetch('data/ecosistemas.json');
   const data = await res.json();
 
+  // Enlace directo desde otras pantallas (ej. "sitios destacados" en
+  // subregion.html) — ?foco=<id-del-sitio> centra el mapa ahí y abre su popup.
+  const focoId = new URLSearchParams(window.location.search).get('foco');
+  let focoMarker = null;
+
   let total = 0;
   data.ecosistemas.forEach(eco => {
     const ecoName = lang === 'en' ? eco.nombreEn : eco.nombreEs;
@@ -82,8 +87,17 @@ document.addEventListener('DOMContentLoaded', async () => {
         </div>`;
       marker.bindPopup(popup, { maxWidth: 240, minWidth: 190 });
       marker.addTo(map);
+      if (focoId && site.id === focoId) focoMarker = marker;
     });
   });
+
+  if (focoMarker) {
+    map.setView(focoMarker.getLatLng(), 11);
+    // Se abre después de que el mapa termine de moverse — abrirlo antes
+    // hace que Leaflet posicione mal el popup en algunos navegadores.
+    map.once('moveend', () => focoMarker.openPopup());
+    if (map.getCenter().equals(focoMarker.getLatLng())) focoMarker.openPopup();
+  }
 
   const counterLabel = lang === 'en' ? 'sites' : 'sitios';
   document.getElementById('eco-map-counter').textContent = `${total} ${counterLabel}`;

@@ -103,6 +103,27 @@
       text-align: center;
     }
 
+    /* Interactivos — llevan a subregiones/cuencas abastecedoras o al mapa de
+       ríos y cuencas hídricas. Mismo criterio que en biodiversidad.css. */
+    .stat-chip--link {
+      display: block;
+      width: 100%;
+      border: none;
+      text-decoration: none;
+      cursor: pointer;
+      font-family: inherit;
+      transition: transform 0.15s ease, background 0.15s ease;
+    }
+
+    .stat-chip--link:active {
+      transform: scale(0.96);
+      background: var(--color-agua);
+    }
+    .stat-chip--link:active .stat-chip__num,
+    .stat-chip--link:active .stat-chip__label {
+      color: white;
+    }
+
     .stat-chip__num {
       font-size: 1.375rem;
       font-weight: 800;

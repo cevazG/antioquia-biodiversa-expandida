@@ -228,7 +228,7 @@ const SUBREGION_NAMES = {
             <img src="${getImgs(foto)[0] || ''}" alt="${nombre}" loading="lazy" onerror="this.style.display='none'">
             <div class="photo-card__placeholder">${emoji}</div>
             <span class="photo-card__iucn-overlay badge-iucn badge-iucn--${foto.iucn}">${foto.iucn}</span>
-            ${foto.endemica ? `<span class="photo-card__endemic-overlay">🏔️ Endémica</span>` : ''}
+            ${foto.endemica ? `<span class="photo-card__endemic-overlay">🫓 Endémica</span>` : ''}
           </div>
           <div class="photo-card__info">
             <div class="photo-card__name">${nombre}</div>
@@ -260,7 +260,7 @@ const SUBREGION_NAMES = {
       document.getElementById('modal-sci').textContent  = foto.especieCientifico;
       document.getElementById('modal-badges').innerHTML = `
         <span class="badge-iucn badge-iucn--${foto.iucn}">${foto.iucn} · ${I18n.t('iucn_' + foto.iucn) || foto.iucn}</span>
-        ${foto.endemica ? `<span class="badge-endemic">🏔️ ${I18n.t('endemica') || 'Endémica Antioquia'}</span>` : ''}
+        ${foto.endemica ? `<span class="badge-endemic">🫓 ${I18n.t('endemica') || 'Endémica Antioquia'}</span>` : ''}
         <span class="badge-subregion">📍 ${subNombre}</span>
         <span class="badge-municipio">🏘️ ${foto.municipio}</span>
         <span class="badge-group badge-group--${foto.grupo}">${emoji} ${I18n.t('groups.' + foto.grupo) || foto.grupo}</span>`;

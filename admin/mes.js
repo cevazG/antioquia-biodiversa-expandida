@@ -110,7 +110,7 @@ function renderGrid(fotos) {
             ? `<img src="${imgSrc}" alt="${f.especieEs || ''}" loading="lazy" onerror="this.style.display='none'">`
             : ''}
           <div class="mes-photo-card__iucn" style="background:${iucnColor}">${f.iucn || '—'}</div>
-          ${f.endemica ? '<div class="mes-photo-card__endemic">🏔️</div>' : ''}
+          ${f.endemica ? '<div class="mes-photo-card__endemic">🫓</div>' : ''}
         </div>
         <div class="mes-photo-card__body">
           <div class="mes-photo-card__name">${f.especieEs || '—'}</div>

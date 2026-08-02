@@ -57,7 +57,7 @@
       border: 1.5px solid rgba(255,255,255,0.28);
       color: white;
       padding: 5px 14px;
-      border-radius: var(--radius-full);
+      border-radius: var(--radius-sm);
       font-size: 0.78rem;
       font-weight: 700;
       margin-bottom: var(--space-md);
@@ -99,7 +99,7 @@
       border: 1px solid rgba(255,255,255,0.28);
       color: white;
       padding: 4px 12px;
-      border-radius: var(--radius-full);
+      border-radius: var(--radius-sm);
       font-size: 0.78rem;
       font-weight: 600;
     }
@@ -172,7 +172,7 @@
       font-size: 0.75rem;
       font-weight: 600;
       padding: 3px 12px;
-      border-radius: var(--radius-full);
+      border-radius: var(--radius-sm);
     }
 
     /* ── CTA enviar foto ── */
@@ -260,7 +260,7 @@
       color: var(--color-em);
       background: var(--color-em-pale);
       padding: 3px 10px;
-      border-radius: var(--radius-full);
+      border-radius: var(--radius-sm);
     }
 
     .em-gallery__grid {

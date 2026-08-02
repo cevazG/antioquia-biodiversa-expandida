@@ -24,8 +24,15 @@ const GROUPS = [
       suroeste: 'Suroeste'
     };
 
+    let _subregionesData = [];
+
     document.addEventListener('DOMContentLoaded', async () => {
-      await Promise.all([I18n.init(), DataStore.init()]);
+      const [, , subregionesRes] = await Promise.all([
+        I18n.init(),
+        DataStore.init(),
+        fetch('data/subregiones.json').then(r => r.json()).catch(() => ({ subregiones: [] })),
+      ]);
+      _subregionesData = subregionesRes.subregiones || [];
 
       const subregionId = Nav.getParam('subregion') || 'valle_aburra';
       const subregionName = REGION_NAMES[subregionId] || subregionId;
@@ -34,6 +41,9 @@ const GROUPS = [
       // Nombre en el hero
       document.getElementById('subregion-name').textContent = subregionName;
       document.title = subregionName + ' · Antioquia Natural';
+
+      _renderAbout(subregionId, lang);
+      document.addEventListener('langchange', () => _renderAbout(subregionId, I18n.getLang()));
 
       // Generar cuadrícula de grupos
       const grid = document.getElementById('bio-grid');
@@ -86,6 +96,55 @@ const GROUPS = [
 
       _initSubregionReel(subregionId);
     });
+
+    // ── Sobre esta subregión — identidad económica/cultural (Antioquia Viva
+    // 2025, SIDAP/Gobernación de Antioquia), no biodiversidad. Se re-renderiza
+    // en cada cambio de idioma porque todo el texto viene de subregiones.json.
+    let _municipiosOpen = false;
+
+    function _renderAbout(subregionId, lang) {
+      const info = _subregionesData.find(s => s.id === subregionId);
+      const section = document.getElementById('subregion-about');
+      if (!info) { section.hidden = true; return; }
+
+      document.getElementById('about-tagline').textContent =
+        '"' + (lang === 'en' ? info.tituloEn : info.tituloEs) + '"';
+      document.getElementById('about-desc').textContent =
+        lang === 'en' ? info.descripcionEn : info.descripcionEs;
+
+      // Los sitios con ecoSiteId sí tienen ubicación real en el mapa de
+      // ecosistemas (agua/ecosistemas_mapa.html) y se ven/comportan como un
+      // enlace tocable; los que no, se quedan como tag informativo plano —
+      // mismo criterio de "interactivo se ve distinto a informativo" que ya
+      // aplicamos en el resto de la app.
+      const sitiosEl = document.getElementById('about-sitios');
+      sitiosEl.innerHTML = (info.sitios || []).map(s => {
+        const nombre = lang === 'en' ? s.nombreEn : s.nombreEs;
+        if (s.ecoSiteId) {
+          return `<a class="subregion-about__sitio subregion-about__sitio--link" href="../agua/ecosistemas_mapa.html?foco=${s.ecoSiteId}">🏔️ ${nombre}</a>`;
+        }
+        return `<span class="subregion-about__sitio">${nombre}</span>`;
+      }).join('');
+
+      const todos = [...(info.municipios || []), ...(info.distritos || [])];
+      const toggle = document.getElementById('about-municipios-toggle');
+      const countLabel = lang === 'en'
+        ? `${todos.length} municipalities`
+        : `${todos.length} municipios`;
+      document.getElementById('about-municipios-count').textContent = countLabel;
+
+      const listEl = document.getElementById('about-municipios-list');
+      listEl.innerHTML = todos
+        .map(m => `<span class="subregion-about__municipio">${m}</span>`).join('');
+      listEl.hidden = !_municipiosOpen;
+      toggle.setAttribute('aria-expanded', _municipiosOpen ? 'true' : 'false');
+
+      toggle.onclick = () => {
+        _municipiosOpen = !_municipiosOpen;
+        listEl.hidden = !_municipiosOpen;
+        toggle.setAttribute('aria-expanded', _municipiosOpen ? 'true' : 'false');
+      };
+    }
 
     // ── Carrete de fotos de la subregión actual (overlay, 3 modalidades) ──
 

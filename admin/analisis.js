@@ -195,7 +195,7 @@ function renderAlertas(alertas) {
           <div class="notable-card__name">${sp.es || '—'}</div>
           <div class="notable-card__desc">
             📍 ${[sp.municipio, SUBREGION_NAMES[sp.subregion] || sp.subregion].filter(Boolean).join(' · ')}
-            ${sp.endemica ? '<br>🏔️ <em>Especie endémica</em>' : ''}
+            ${sp.endemica ? '<br>🫓 <em>Especie endémica</em>' : ''}
             ${mesLabel   ? `<br>📅 Registrada en ${mesLabel}` : ''}
           </div>
           <div class="notable-card__credit">📷 ${sp.credito || '—'}</div>
@@ -241,7 +241,7 @@ function renderBio(bio) {
             </td>
             <td>${f.municipio || '—'}</td>
             <td>${SUBREGION_NAMES[f.subregion] || f.subregion || '—'}</td>
-            <td style="text-align:center">${f.endemica ? '🏔️' : '—'}</td>
+            <td style="text-align:center">${f.endemica ? '🫓' : '—'}</td>
             <td style="font-size:11px">${m ? `${MESES_ABR[+m]} ${y}` : '—'}</td>
           </tr>`;
       }).join('')}

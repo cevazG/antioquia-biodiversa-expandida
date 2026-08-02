@@ -1,5 +1,5 @@
 {
-  "_nota_coordenadas": "Los sitiosRepresentativos usan coordenadas aproximadas de lugares reales y conocidos (no un levantamiento topográfico propio). Verificar antes de publicar si se requiere precisión GPS exacta.",
+  "_nota_coordenadas": "Los sitiosRepresentativos usan coordenadas aproximadas de lugares reales y conocidos (no un levantamiento topográfico propio). Verificar antes de publicar si se requiere precisión GPS exacta. IDs de sitio agregados en agosto 2026 para permitir enlace directo desde otras pantallas (ej. subregion.html) — ver ecosistemas_mapa.js (parámetro ?foco=).",
   "ecosistemas": [
     {
       "id": "paramo",
@@ -17,9 +17,46 @@
       "amenazasEn": "Expansion of agriculture and cattle ranching, mining, burning, and climate change (páramo ecosystems cannot migrate further upslope to escape warming).",
       "fotos": [],
       "sitiosRepresentativos": [
-        { "nombre": "Páramo de Belmira", "lat": 6.62, "lng": -75.67, "municipio": "Belmira", "subregion": "norte" },
-        { "nombre": "Páramo de Frontino (Urrao)", "lat": 6.32, "lng": -76.13, "municipio": "Urrao", "subregion": "occidente" },
-        { "nombre": "Páramo de Sonsón", "lat": 5.75, "lng": -75.28, "municipio": "Sonsón", "subregion": "oriente" }
+        {
+          "nombre": "Páramo de Belmira",
+          "lat": 6.62,
+          "lng": -75.67,
+          "municipio": "Belmira",
+          "subregion": "norte",
+          "id": "paramo-belmira"
+        },
+        {
+          "nombre": "Páramo de Frontino (Urrao)",
+          "lat": 6.32,
+          "lng": -76.13,
+          "municipio": "Urrao",
+          "subregion": "occidente",
+          "id": "paramo-frontino-urrao"
+        },
+        {
+          "nombre": "Páramo de Sonsón",
+          "lat": 5.75,
+          "lng": -75.28,
+          "municipio": "Sonsón",
+          "subregion": "oriente",
+          "id": "paramo-sonson"
+        },
+        {
+          "id": "farallones-citara",
+          "nombre": "Farallones de Citará",
+          "lat": 5.814,
+          "lng": -76.092,
+          "municipio": "Andes",
+          "subregion": "suroeste"
+        },
+        {
+          "id": "paramo-baldias",
+          "nombre": "Páramo de Las Baldías",
+          "lat": 6.42,
+          "lng": -75.62,
+          "municipio": "Bello",
+          "subregion": "valle_aburra"
+        }
       ]
     },
     {
@@ -38,8 +75,70 @@
       "amenazasEn": "Deforestation driven by extensive cattle ranching, illicit crops, illegal mining and road infrastructure expansion.",
       "fotos": [],
       "sitiosRepresentativos": [
-        { "nombre": "Selvas de Urabá (Parque Nacional Los Katíos, zona de amortiguación)", "lat": 7.85, "lng": -77.15, "municipio": "Turbo", "subregion": "uraba" },
-        { "nombre": "Bajo Cauca antioqueño", "lat": 7.53, "lng": -75.02, "municipio": "Caucasia", "subregion": "bajo_cauca" }
+        {
+          "nombre": "Selvas de Urabá (Parque Nacional Los Katíos, zona de amortiguación)",
+          "lat": 7.85,
+          "lng": -77.15,
+          "municipio": "Turbo",
+          "subregion": "uraba",
+          "id": "pnn-los-katios"
+        },
+        {
+          "nombre": "Bajo Cauca antioqueño",
+          "lat": 7.53,
+          "lng": -75.02,
+          "municipio": "Caucasia",
+          "subregion": "bajo_cauca",
+          "id": "bosque-bajo-cauca"
+        },
+        {
+          "id": "serrania-abibe",
+          "nombre": "Serranía de Abibe",
+          "lat": 7.8553,
+          "lng": -76.5183,
+          "municipio": "Chigorodó",
+          "subregion": "uraba"
+        },
+        {
+          "id": "pnn-paramillo",
+          "nombre": "Parque Nacional Natural Paramillo",
+          "lat": 7.35,
+          "lng": -76.23,
+          "municipio": "Ituango",
+          "subregion": "norte"
+        },
+        {
+          "id": "serrania-san-lucas",
+          "nombre": "Serranía de San Lucas",
+          "lat": 7.2,
+          "lng": -74.6,
+          "municipio": "Zaragoza",
+          "subregion": "nordeste"
+        },
+        {
+          "id": "pnn-las-orquideas",
+          "nombre": "Parque Nacional Natural Las Orquídeas",
+          "lat": 6.517,
+          "lng": -76.117,
+          "municipio": "Urrao",
+          "subregion": "suroeste"
+        },
+        {
+          "id": "alto-san-miguel",
+          "nombre": "Alto de San Miguel",
+          "lat": 6.0275,
+          "lng": -75.596,
+          "municipio": "Caldas",
+          "subregion": "valle_aburra"
+        },
+        {
+          "id": "parque-arvi",
+          "nombre": "Parque Arví",
+          "lat": 6.2656,
+          "lng": -75.4969,
+          "municipio": "Medellín",
+          "subregion": "valle_aburra"
+        }
       ]
     },
     {
@@ -58,7 +157,14 @@
       "amenazasEn": "It is the ecosystem most historically transformed by cattle ranching and agriculture; the remaining fragments are scattered and poorly connected.",
       "fotos": [],
       "sitiosRepresentativos": [
-        { "nombre": "Cañón del río Cauca", "lat": 6.55, "lng": -75.35, "municipio": "Sabanalarga", "subregion": "occidente" }
+        {
+          "nombre": "Cañón del río Cauca",
+          "lat": 6.55,
+          "lng": -75.35,
+          "municipio": "Sabanalarga",
+          "subregion": "occidente",
+          "id": "canon-rio-cauca"
+        }
       ]
     },
     {
@@ -77,7 +183,22 @@
       "amenazasEn": "Drainage for cattle ranching and agriculture, sedimentation, pollution from discharges, and disconnection from their source river or stream.",
       "fotos": [],
       "sitiosRepresentativos": [
-        { "nombre": "Ciénagas del Magdalena Medio antioqueño", "lat": 6.65, "lng": -74.15, "municipio": "Puerto Berrío", "subregion": "magdalena_medio" }
+        {
+          "nombre": "Ciénagas del Magdalena Medio antioqueño",
+          "lat": 6.65,
+          "lng": -74.15,
+          "municipio": "Puerto Berrío",
+          "subregion": "magdalena_medio",
+          "id": "cienagas-magdalena-medio"
+        },
+        {
+          "id": "cienagas-bajo-cauca",
+          "nombre": "Complejo de ciénagas del Bajo Cauca",
+          "lat": 8.0,
+          "lng": -75.15,
+          "municipio": "Caucasia",
+          "subregion": "bajo_cauca"
+        }
       ]
     },
     {
@@ -96,7 +217,14 @@
       "amenazasEn": "Clearing for urban and aquaculture expansion, solid-waste pollution, and disruption of the freshwater flows that feed them.",
       "fotos": [],
       "sitiosRepresentativos": [
-        { "nombre": "Manglares del golfo de Urabá", "lat": 8.09, "lng": -76.73, "municipio": "Necoclí", "subregion": "uraba" }
+        {
+          "nombre": "Manglares de la Ensenada de Rionegro",
+          "lat": 8.09,
+          "lng": -76.73,
+          "municipio": "Necoclí",
+          "subregion": "uraba",
+          "id": "manglares-uraba"
+        }
       ]
     },
     {
@@ -115,8 +243,22 @@
       "amenazasEn": "Coastal erosion, plastic pollution, overfishing and unplanned tourism development.",
       "fotos": [],
       "sitiosRepresentativos": [
-        { "nombre": "Playas de Necoclí", "lat": 8.42, "lng": -76.79, "municipio": "Necoclí", "subregion": "uraba" },
-        { "nombre": "Playas de Arboletes", "lat": 8.85, "lng": -76.43, "municipio": "Arboletes", "subregion": "uraba" }
+        {
+          "nombre": "Playas de Necoclí",
+          "lat": 8.42,
+          "lng": -76.79,
+          "municipio": "Necoclí",
+          "subregion": "uraba",
+          "id": "playas-necocli"
+        },
+        {
+          "nombre": "Playas de Arboletes",
+          "lat": 8.85,
+          "lng": -76.43,
+          "municipio": "Arboletes",
+          "subregion": "uraba",
+          "id": "playas-arboletes"
+        }
       ]
     },
     {
@@ -135,7 +277,30 @@
       "amenazasEn": "Unmanaged tourism, limestone extraction, and disturbance of bat colonies.",
       "fotos": [],
       "sitiosRepresentativos": [
-        { "nombre": "Cuevas del Nus", "lat": 6.53, "lng": -74.98, "municipio": "San Roque", "subregion": "nordeste" }
+        {
+          "nombre": "Cuevas del Nus",
+          "lat": 6.53,
+          "lng": -74.98,
+          "municipio": "San Roque",
+          "subregion": "nordeste",
+          "id": "cuevas-del-nus"
+        },
+        {
+          "id": "canon-rio-alicante",
+          "nombre": "Cañón del Río Alicante",
+          "lat": 6.58,
+          "lng": -74.75,
+          "municipio": "Maceo",
+          "subregion": "magdalena_medio"
+        },
+        {
+          "id": "karst-san-luis",
+          "nombre": "Corredor kárstico de San Luis (KoCOA)",
+          "lat": 6.04,
+          "lng": -74.99,
+          "municipio": "San Luis",
+          "subregion": "oriente"
+        }
       ]
     }
   ]

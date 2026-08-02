@@ -80,6 +80,19 @@ var App = (() => {
     return _attrBadge('☂️', I18n.t('tag_umbrella'), 'gold');
   }
 
+  // Estado de conservación como badge de texto completo, con el mismo
+  // color semántico de --iucn-* que ya usaba la tarjeta grande que
+  // reemplaza. Va en la fila de atributos junto a sombrilla/endémica/
+  // dieta/actividad, no en la fila de badges de arriba (esa solo mantiene
+  // el badge de grupo).
+  const IUCN_EMOJI = { LC: '🟢', NT: '🟡', VU: '🟠', EN: '🔴', CR: '🟣', DD: '⚪', NE: '⚪' };
+
+  function iucnStatusBadge(code) {
+    if (!code) return '';
+    const label = I18n.t(`iucn_${code}`);
+    return `<span class="badge-attr badge-attr--iucn badge-attr--iucn-${code}"><span class="badge-attr__icon">${IUCN_EMOJI[code] || '⚪'}</span>${label}</span>`;
+  }
+
   function endemicaBadge() {
     return _attrBadge('🫓', I18n.t('tag_endemica'), 'gold');
   }
@@ -178,7 +191,7 @@ var App = (() => {
     });
   }
 
-  return { init, toast, iucnBadge, groupBadge, umbrellaBadge, endemicaBadge, dietaBadge, actividadBadge, groupPlaceholder, initAccordion, initGallery, initSearch };
+  return { init, toast, iucnBadge, iucnStatusBadge, groupBadge, umbrellaBadge, endemicaBadge, dietaBadge, actividadBadge, groupPlaceholder, initAccordion, initGallery, initSearch };
 })();
 
 // Arrancar cuando el DOM esté listo

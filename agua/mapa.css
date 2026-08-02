@@ -189,15 +189,10 @@
     .cuenca-badge {
       display: inline-block;
       padding: 3px 10px;
-      border-radius: var(--radius-full);
+      border-radius: var(--radius-sm);
       font-size: 0.6875rem;
       font-weight: 700;
-      color: white;
       letter-spacing: 0.02em;
-    }
-    .cuenca-badge--outline {
-      background: white;
-      border: 1.5px solid;
     }
 
     .cuenca-sheet__name {

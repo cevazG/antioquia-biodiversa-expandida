@@ -81,6 +81,116 @@
       font-size: 0.9375rem;
     }
 
+    /* ── Sobre esta subregión — identidad económica/cultural, no biodiversidad.
+       Contenido de "Antioquia Viva 2025" (SIDAP/Gobernación de Antioquia). ── */
+    .subregion-about {
+      margin: var(--space-md);
+      padding: var(--space-md) var(--space-lg);
+      background: var(--color-bg);
+      border-radius: var(--radius-lg);
+    }
+
+    .subregion-about__tagline {
+      font-style: italic;
+      font-size: 0.9375rem;
+      font-weight: 600;
+      color: var(--color-green-dark);
+      margin: 0 0 var(--space-sm);
+      line-height: 1.4;
+    }
+
+    .subregion-about__desc {
+      font-size: 0.875rem;
+      line-height: 1.65;
+      color: var(--color-text-medium);
+      margin: 0 0 var(--space-sm);
+    }
+
+    .subregion-about__sitios {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: var(--space-sm);
+    }
+
+    /* Tags puramente informativos — sitios sin ubicación en el mapa de
+       ecosistemas. Mismo lenguaje visual que el resto de la app: rectángulo
+       suave, relleno tenue, sin sombra, para no confundirse con un botón
+       (ver auditoría de agosto 2026). */
+    .subregion-about__sitio {
+      display: inline-block;
+      background: var(--color-green-pale);
+      color: var(--color-green-dark);
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 3px 10px;
+      border-radius: var(--radius-sm);
+    }
+
+    /* Estos sí llevan al mapa de ecosistemas — píldora completa + borde,
+       igual que los demás chips interactivos de la app, para que se sientan
+       tocables a diferencia de los tags planos de arriba. */
+    .subregion-about__sitio--link {
+      border-radius: var(--radius-full);
+      border: 1.5px solid var(--color-green-primary);
+      background: var(--color-white);
+      text-decoration: none;
+      cursor: pointer;
+      transition: transform 0.15s ease, background 0.15s ease;
+    }
+
+    .subregion-about__sitio--link:active {
+      transform: scale(0.96);
+      background: var(--color-green-primary);
+      color: white;
+    }
+
+    /* Este sí es interactivo (despliega/oculta la lista) — por eso se ve
+       distinto a los tags de arriba: es un <button> real. */
+    .subregion-about__municipios-toggle {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      background: none;
+      border: none;
+      border-top: 1px solid var(--color-border);
+      padding: var(--space-sm) 0 0;
+      margin-top: 4px;
+      font-family: var(--font-primary);
+      font-size: 0.8125rem;
+      font-weight: 700;
+      color: var(--color-green-primary);
+      cursor: pointer;
+    }
+
+    .subregion-about__municipios-toggle svg {
+      transition: transform var(--transition);
+      flex-shrink: 0;
+    }
+
+    .subregion-about__municipios-toggle[aria-expanded="true"] svg {
+      transform: rotate(180deg);
+    }
+
+    .subregion-about__municipios-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: var(--space-sm);
+    }
+
+    .subregion-about__municipio {
+      display: inline-block;
+      background: var(--color-white);
+      border: 1px solid var(--color-border);
+      color: var(--color-text-medium);
+      font-size: 0.7rem;
+      font-weight: 500;
+      padding: 2px 9px;
+      border-radius: var(--radius-sm);
+    }
+
     /* Contenido */
     .subregion-content {
       padding: var(--space-lg) var(--space-md);

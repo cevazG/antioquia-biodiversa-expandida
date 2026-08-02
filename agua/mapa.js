@@ -69,9 +69,15 @@ fetch('data/cuencas.json')
 
 const COLOR_FUERA = '#4a7fc9'; // azul estándar — tramo del río fuera de Antioquia (solo contexto)
 
+// Peso del trazo invisible que amplía la zona de clic de cada río — el
+// trazo visible (3.5px / 1.5px) es demasiado delgado para tocarlo sin
+// hacer zoom; esta línea ancha va debajo, sin verse, solo para capturar
+// el toque en un radio más generoso alrededor del río.
+const HIT_WEIGHT = 22;
+
 function addCuencaToMap(cuenca) {
   const color = colorFor(cuenca);
-  const entry = { area: null, linea: null, lineaFuera: null };
+  const entry = { area: null, linea: null, lineaFuera: null, lineaHit: null, lineaFueraHit: null };
 
   if (cuenca.geometry_area) {
     entry.area = L.geoJSON(cuenca.geometry_area, {
@@ -84,6 +90,12 @@ function addCuencaToMap(cuenca) {
   // Tramo fuera de Antioquia primero (más delgado, azul estándar) para que
   // el tramo interior quede siempre por encima visualmente.
   if (cuenca.geometry_linea_fuera) {
+    entry.lineaFueraHit = L.geoJSON(cuenca.geometry_linea_fuera, {
+      style: { color: COLOR_FUERA, weight: HIT_WEIGHT, opacity: 0.02 }
+    });
+    entry.lineaFueraHit.on('click', () => openSheet(cuenca, 'linea'));
+    entry.lineaFueraHit.addTo(map);
+
     entry.lineaFuera = L.geoJSON(cuenca.geometry_linea_fuera, {
       style: { color: COLOR_FUERA, weight: 1.5, opacity: 0.75, dashArray: '4 3' }
     });
@@ -92,6 +104,12 @@ function addCuencaToMap(cuenca) {
   }
 
   if (cuenca.geometry_linea) {
+    entry.lineaHit = L.geoJSON(cuenca.geometry_linea, {
+      style: { color, weight: HIT_WEIGHT, opacity: 0.02 }
+    });
+    entry.lineaHit.on('click', () => openSheet(cuenca, 'linea'));
+    entry.lineaHit.addTo(map);
+
     entry.linea = L.geoJSON(cuenca.geometry_linea, {
       style: { color, weight: 3.5, opacity: 0.9 }
     });
@@ -105,15 +123,23 @@ function addCuencaToMap(cuenca) {
 // ── Visibilidad: combina modo de capa (ríos / ríos+áreas) y chips activos ──
 function updateVisibility() {
   Object.keys(layersByCuenca).forEach(id => {
-    const { area, linea, lineaFuera } = layersByCuenca[id];
+    const { area, linea, lineaFuera, lineaHit, lineaFueraHit } = layersByCuenca[id];
     const on = visibleCuencas.has(id);
     if (linea) {
       if (on && map.hasLayer(linea) === false) linea.addTo(map);
       if (!on && map.hasLayer(linea)) map.removeLayer(linea);
     }
+    if (lineaHit) {
+      if (on && map.hasLayer(lineaHit) === false) lineaHit.addTo(map);
+      if (!on && map.hasLayer(lineaHit)) map.removeLayer(lineaHit);
+    }
     if (lineaFuera) {
       if (on && map.hasLayer(lineaFuera) === false) lineaFuera.addTo(map);
       if (!on && map.hasLayer(lineaFuera)) map.removeLayer(lineaFuera);
+    }
+    if (lineaFueraHit) {
+      if (on && map.hasLayer(lineaFueraHit) === false) lineaFueraHit.addTo(map);
+      if (!on && map.hasLayer(lineaFueraHit)) map.removeLayer(lineaFueraHit);
     }
     if (area) {
       const showArea = on && layerMode === 'todo';
@@ -218,10 +244,14 @@ function openSheet(cuenca, tipoToque) {
     : (lang === 'en' ? 'Level 4-6 (tributary)' : 'Nivel 4-6 (afluente)');
   const n1 = lang === 'en' ? 'Level 1' : 'Nivel 1';
   const n2 = lang === 'en' ? 'Level 2' : 'Nivel 2';
+  // Tags puramente informativos (no se pueden tocar) — relleno tenue del
+  // color con el mismo tono usado en los chips de filtro de abajo, para
+  // que se lean como dato y no como botón. Alfa en hex (últimos 2 dígitos)
+  // en vez de color-mix() porque el color viene dinámico desde JS.
   badges.innerHTML = `
-    <span class="cuenca-badge" style="background:${colorTexto}" title="${n1}">${n1}: ${cuenca.area_hidrografica}</span>
-    <span class="cuenca-badge cuenca-badge--outline" style="border-color:${colorTexto};color:${colorTexto}" title="${n2}">${n2}: ${cuenca.zona_hidrografica}</span>
-    <span class="cuenca-badge cuenca-badge--outline" style="border-color:#666;color:#555">${nivelLabel}</span>
+    <span class="cuenca-badge" style="background:${colorTexto}22;color:${colorTexto}" title="${n1}">${n1}: ${cuenca.area_hidrografica}</span>
+    <span class="cuenca-badge" style="background:${colorTexto}22;color:${colorTexto}" title="${n2}">${n2}: ${cuenca.zona_hidrografica}</span>
+    <span class="cuenca-badge" style="background:#eceded;color:#555">${nivelLabel}</span>
   `;
 
   const meta = document.getElementById('cuenca-sheet-meta');

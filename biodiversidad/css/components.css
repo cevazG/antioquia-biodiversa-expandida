@@ -350,6 +350,18 @@
   gap: var(--space-xs);
 }
 
+/* ─── TAGS INFORMATIVOS vs. CHIPS INTERACTIVOS ──────────────
+   Regla del sistema de diseño (definida agosto 2026, tras auditar 33
+   clases tipo pastilla en 22 pantallas — solo 5 son botones reales):
+   · Interactivo (filter-chip, cuenca-chip, month-chip, filter-pill):
+     píldora completa (--radius-full) + borde/relleno sólido + sombra.
+   · Informativo (badge-*, *-badge, *-pill, *-chip que en realidad son
+     <span>/<div> sin listener — este archivo y los de agua/comunidad):
+     rectángulo suave (--radius-sm) + relleno tenue del color + sin
+     sombra. Nunca se tocan, así que nunca deben parecer tocables.
+   Los colores de fondo/texto se generan con color-mix() a partir del
+   mismo color base — no hay que perseguir un tono manual por variante. */
+
 /* ─── BADGE IUCN ─────────────────────────────────────────── */
 
 .badge-iucn {
@@ -357,22 +369,18 @@
   align-items: center;
   gap: 4px;
   padding: 3px 8px;
-  border-radius: var(--radius-full);
+  border-radius: var(--radius-sm);
   font-size: 0.75rem;
   font-weight: 700;
-  color: white;
   letter-spacing: 0.03em;
 }
 
-/* Texto blanco (color por defecto) solo alcanza WCAG AA sobre --iucn-cr (6.30:1).
-   LC/VU/EN/DD con blanco daban 1.63-3.68:1 — se corrige con texto oscuro (#1a1a1a),
-   que sí pasa sobre esos 5 colores (4.73-10.68:1). CR se queda con el blanco heredado. */
-.badge-iucn--LC { background: var(--iucn-lc); color: #1a1a1a; }
-.badge-iucn--NT { background: var(--iucn-nt); color: #333; }
-.badge-iucn--VU { background: var(--iucn-vu); color: #1a1a1a; }
-.badge-iucn--EN { background: var(--iucn-en); color: #1a1a1a; }
-.badge-iucn--CR { background: var(--iucn-cr); }
-.badge-iucn--DD { background: var(--iucn-dd); color: #1a1a1a; }
+.badge-iucn--LC { background: color-mix(in srgb, var(--iucn-lc) 18%, white); color: color-mix(in srgb, var(--iucn-lc) 65%, black); }
+.badge-iucn--NT { background: color-mix(in srgb, var(--iucn-nt) 22%, white); color: color-mix(in srgb, var(--iucn-nt) 70%, black); }
+.badge-iucn--VU { background: color-mix(in srgb, var(--iucn-vu) 18%, white); color: color-mix(in srgb, var(--iucn-vu) 65%, black); }
+.badge-iucn--EN { background: color-mix(in srgb, var(--iucn-en) 16%, white); color: color-mix(in srgb, var(--iucn-en) 65%, black); }
+.badge-iucn--CR { background: color-mix(in srgb, var(--iucn-cr) 16%, white); color: color-mix(in srgb, var(--iucn-cr) 65%, black); }
+.badge-iucn--DD { background: color-mix(in srgb, var(--iucn-dd) 20%, white); color: color-mix(in srgb, var(--iucn-dd) 70%, black); }
 .badge-iucn--NE {
   background: transparent;
   border: 1.5px solid var(--color-border);
@@ -387,22 +395,21 @@
   align-items: center;
   gap: 4px;
   padding: 3px 8px;
-  border-radius: var(--radius-full);
+  border-radius: var(--radius-sm);
   font-size: 0.75rem;
   font-weight: 600;
-  color: white;
 }
 
-.badge-group--aves              { background: #1565C0; }
-.badge-group--anfibios_reptiles { background: #00695C; }
-.badge-group--mariposas         { background: #6A1B9A; }
-.badge-group--polillas          { background: #4E342E; }
-.badge-group--orquideas         { background: #AD1457; }
-.badge-group--mamiferos          { background: #E65100; }
-.badge-group--animales_domesticos { background: #558B2F; }
-.badge-group--peces               { background: #006064; }
-.badge-group--arboles_nativos     { background: #2E7D32; }
-.badge-group--hongos              { background: #BF360C; }
+.badge-group--aves                { background: color-mix(in srgb, #1565C0 16%, white); color: #1565C0; }
+.badge-group--anfibios_reptiles   { background: color-mix(in srgb, #00695C 16%, white); color: #00695C; }
+.badge-group--mariposas           { background: color-mix(in srgb, #6A1B9A 16%, white); color: #6A1B9A; }
+.badge-group--polillas            { background: color-mix(in srgb, #4E342E 16%, white); color: #4E342E; }
+.badge-group--orquideas           { background: color-mix(in srgb, #AD1457 16%, white); color: #AD1457; }
+.badge-group--mamiferos           { background: color-mix(in srgb, #E65100 16%, white); color: #E65100; }
+.badge-group--animales_domesticos { background: color-mix(in srgb, #558B2F 16%, white); color: #558B2F; }
+.badge-group--peces               { background: color-mix(in srgb, #006064 16%, white); color: #006064; }
+.badge-group--arboles_nativos     { background: color-mix(in srgb, #2E7D32 16%, white); color: #2E7D32; }
+.badge-group--hongos              { background: color-mix(in srgb, #BF360C 16%, white); color: #BF360C; }
 
 /* ─── BADGE DE ATRIBUTO (sombrilla / endémica / dieta / actividad) ──
    Activación/desactivación por tipo: ver BADGE_TAGS en especie.js.
@@ -413,7 +420,7 @@
   align-items: center;
   gap: 5px;
   padding: 3px 10px 3px 8px;
-  border-radius: var(--radius-full);
+  border-radius: var(--radius-sm);
   font-size: 0.75rem;
   font-weight: 600;
 }
@@ -425,14 +432,28 @@
 
 .badge-attr--gold {
   background: var(--color-gold-bg);
-  border: 1.3px solid var(--color-gold-border);
   color: var(--color-gold);
 }
 
 .badge-attr--fact {
   background: var(--color-bg);
-  border: 1.3px solid var(--color-border);
   color: var(--color-text-medium);
+}
+
+/* Estado de conservación con texto completo (reemplaza la tarjeta grande
+   "Estado de conservación" — el badge de la fila de atributos es ahora la
+   única forma en que se muestra). Mismos colores semánticos que .badge-iucn. */
+.badge-attr--iucn { font-weight: 700; }
+.badge-attr--iucn-LC { background: color-mix(in srgb, var(--iucn-lc) 18%, white); color: color-mix(in srgb, var(--iucn-lc) 65%, black); }
+.badge-attr--iucn-NT { background: color-mix(in srgb, var(--iucn-nt) 22%, white); color: color-mix(in srgb, var(--iucn-nt) 70%, black); }
+.badge-attr--iucn-VU { background: color-mix(in srgb, var(--iucn-vu) 18%, white); color: color-mix(in srgb, var(--iucn-vu) 65%, black); }
+.badge-attr--iucn-EN { background: color-mix(in srgb, var(--iucn-en) 16%, white); color: color-mix(in srgb, var(--iucn-en) 65%, black); }
+.badge-attr--iucn-CR { background: color-mix(in srgb, var(--iucn-cr) 16%, white); color: color-mix(in srgb, var(--iucn-cr) 65%, black); }
+.badge-attr--iucn-DD,
+.badge-attr--iucn-NE {
+  background: transparent;
+  border: 1.3px solid var(--color-border);
+  color: var(--color-text-light);
 }
 
 /* Segunda fila de badges (atributos) bajo la de IUCN/grupo en especie.html */
@@ -445,12 +466,11 @@
 .badge-subregion {
   display: inline-block;
   padding: 4px 10px;
-  border-radius: var(--radius-full);
+  border-radius: var(--radius-sm);
   font-size: 0.8125rem;
   font-weight: 500;
   background: var(--color-green-pale);
   color: var(--color-green-dark);
-  border: 1px solid var(--color-border);
 }
 
 /* ─── BUSCADOR ──────────────────────────────────────────── */

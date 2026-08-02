@@ -155,7 +155,7 @@
       font-size: 0.6875rem;
       font-weight: 700;
       padding: 4px 10px;
-      border-radius: var(--radius-full);
+      border-radius: var(--radius-sm);
     }
 
     .badge-cuenca {
@@ -164,7 +164,7 @@
       font-size: 0.6875rem;
       font-weight: 700;
       padding: 4px 10px;
-      border-radius: var(--radius-full);
+      border-radius: var(--radius-sm);
       display: inline-flex;
       align-items: center;
       gap: 4px;
@@ -302,8 +302,7 @@
       font-size: 0.6875rem;
       font-weight: 600;
       padding: 4px 10px;
-      border-radius: var(--radius-full);
-      border: 1px solid var(--color-border);
+      border-radius: var(--radius-sm);
     }
 
     .modal-desc {

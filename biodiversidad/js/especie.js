@@ -8,10 +8,15 @@ const BADGE_TAGS = {
   actividad: true,
 };
 
-const IUCN_COLORS = {
-      LC: '#4CAF50', NT: '#FFC107', VU: '#FF9800',
-      EN: '#F44336', CR: '#9C27B0', DD: '#9E9E9E', NE: '#e0e0e0'
-    };
+// "Endémica" es una afirmación a nivel de especie — no se puede sostener
+// para algo identificado solo hasta género/familia (ej. "Polyporus sp.",
+// "Pristimantis sp. 1", "Fungi indet.", "cf. Sarcoscyphaceae"). Este candado
+// evita que el badge aparezca aunque species.json tuviera "endemica": true
+// puesto por error, para cualquier grupo, no solo hongos.
+function isUnidentified(sp) {
+  const name = sp.scientificName.trim();
+  return /\bsp\.\s*\d*$/i.test(name) || /\bindet\.?\b/i.test(name) || /^cf\.\s/i.test(name);
+}
 
     const GROUP_META = {
       aves:              { deco: '🦜', i18nKey: 'birds' },
@@ -77,16 +82,24 @@ const IUCN_COLORS = {
         const galleryEl = document.getElementById('gallery');
         document.getElementById('photo-placeholder').style.display = 'none';
 
-        // Vista previa: siempre muestra la primera foto; el recorrido entre
-        // varias fotos ocurre dentro del visor de pantalla completa (lightbox)
-        const previewSlide = document.createElement('div');
-        previewSlide.className = 'photo-slide active';
-        const previewImg = document.createElement('img');
-        previewImg.src = photoData[0].url;
-        previewImg.alt = sp.scientificName;
-        previewImg.loading = 'eager';
-        previewSlide.appendChild(previewImg);
-        galleryEl.insertBefore(previewSlide, document.getElementById('gallery-counter'));
+        // Vista previa: todas las fotos como slides apiladas (mismo patrón
+        // que el visor de pantalla completa), con deslizar directo aquí —
+        // antes solo se veía la primera y había que abrir el visor para
+        // pasar de foto en foto.
+        let previewCurrent = 0;
+        const previewSlides = [];
+        const counterEl = document.getElementById('gallery-counter');
+        photoData.forEach((photo, i) => {
+          const slide = document.createElement('div');
+          slide.className = 'photo-slide' + (i === 0 ? ' active' : '');
+          const img = document.createElement('img');
+          img.src = photo.url;
+          img.alt = sp.scientificName;
+          img.loading = i === 0 ? 'eager' : 'lazy';
+          slide.appendChild(img);
+          galleryEl.insertBefore(slide, counterEl);
+          previewSlides.push(slide);
+        });
 
         const dots = [];
         if (photoData.length > 1) {
@@ -100,9 +113,27 @@ const IUCN_COLORS = {
           });
           galleryEl.appendChild(dotsEl);
 
-          const counter = document.getElementById('gallery-counter');
-          counter.style.display = 'block';
-          counter.textContent = '1 / ' + photoData.length;
+          counterEl.style.display = 'block';
+          counterEl.textContent = '1 / ' + photoData.length;
+        }
+
+        function showPreviewSlide(n) {
+          previewSlides[previewCurrent].classList.remove('active');
+          if (dots[previewCurrent]) dots[previewCurrent].classList.remove('active');
+          previewCurrent = (n + previewSlides.length) % previewSlides.length;
+          previewSlides[previewCurrent].classList.add('active');
+          if (dots[previewCurrent]) dots[previewCurrent].classList.add('active');
+          counterEl.textContent = (previewCurrent + 1) + ' / ' + photoData.length;
+        }
+
+        // Deslizar con el dedo en la vista previa (antes de abrir el visor)
+        if (photoData.length > 1) {
+          let previewStartX = 0;
+          galleryEl.addEventListener('touchstart', e => { previewStartX = e.touches[0].clientX; }, { passive: true });
+          galleryEl.addEventListener('touchend', e => {
+            const diff = previewStartX - e.changedTouches[0].clientX;
+            if (Math.abs(diff) > 40) showPreviewSlide(previewCurrent + (diff > 0 ? 1 : -1));
+          });
         }
 
         // ── Lightbox de pantalla completa ──────────────────────────
@@ -188,11 +219,12 @@ const IUCN_COLORS = {
           if (e.key === 'Escape' && !lightbox.hidden) closeLightbox();
         });
 
-        // Tocar la vista previa (foto o punto) abre el visor de pantalla completa
-        dots.forEach((dot, i) => dot.addEventListener('click', e => { e.stopPropagation(); openLightbox(i); }));
+        // Los puntos cambian la vista previa (igual que deslizar); tocar la
+        // foto abre el visor de pantalla completa en la que se esté viendo.
+        dots.forEach((dot, i) => dot.addEventListener('click', e => { e.stopPropagation(); showPreviewSlide(i); }));
         galleryEl.addEventListener('click', e => {
           if (e.target.closest('.gallery-dot') || e.target.closest('.gallery-back') || e.target.closest('.gallery-share')) return;
-          openLightbox(0);
+          openLightbox(previewCurrent);
         });
       }
 
@@ -202,36 +234,22 @@ const IUCN_COLORS = {
 
       // Badges
       const badgesEl = document.getElementById('sp-badges');
-      badgesEl.innerHTML = App.iucnBadge(sp.iucn) + ' ' + App.groupBadge(sp.group);
+      badgesEl.innerHTML = App.groupBadge(sp.group);
 
       // Badges de atributo (segunda fila) — cada tipo se puede apagar en BADGE_TAGS
       // sin tocar los datos de species.json, y cada uno solo aparece si la especie
-      // tiene el dato correspondiente.
+      // tiene el dato correspondiente. IUCN va primero: es el dato más importante
+      // de la ficha, por eso dejó de tener su propia tarjeta grande más abajo.
       const attrsEl = document.getElementById('sp-badges-attrs');
       const attrBadges = [
+        App.iucnStatusBadge(sp.iucn),
         BADGE_TAGS.umbrella  && sp.umbrella  ? App.umbrellaBadge()        : '',
-        BADGE_TAGS.endemica  && sp.endemica  ? App.endemicaBadge()        : '',
+        BADGE_TAGS.endemica  && sp.endemica && !isUnidentified(sp) ? App.endemicaBadge() : '',
         BADGE_TAGS.dieta                     ? App.dietaBadge(sp.dieta)   : '',
         BADGE_TAGS.actividad                 ? App.actividadBadge(sp.actividad) : '',
       ].filter(Boolean);
       attrsEl.innerHTML = attrBadges.join(' ');
       attrsEl.style.display = attrBadges.length ? '' : 'none';
-
-      // IUCN expandido
-      const iucnCircle = document.getElementById('iucn-circle');
-      if (sp.iucn === 'NE') {
-        iucnCircle.textContent = '—';
-        iucnCircle.style.background = IUCN_COLORS.NE;
-        iucnCircle.style.color = '#999';
-      } else {
-        iucnCircle.textContent = sp.iucn;
-        iucnCircle.style.background = IUCN_COLORS[sp.iucn] || '#9E9E9E';
-        // Texto blanco (default en CSS) solo cumple WCAG AA sobre CR; LC/NT/VU/EN/DD
-        // necesitan texto oscuro sobre esos fondos claros (ver components.css .badge-iucn--*)
-        iucnCircle.style.color = sp.iucn === 'CR' ? '#fff' : '#1a1a1a';
-      }
-      document.getElementById('iucn-code').textContent = sp.iucn === 'NE' ? '—' : sp.iucn;
-      document.getElementById('iucn-label').textContent = I18n.t('iucn_' + sp.iucn);
 
       // Familia
       const familyEl = document.getElementById('sp-family');

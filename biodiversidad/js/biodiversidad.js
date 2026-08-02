@@ -169,7 +169,7 @@ const HOME_GROUPS = [
         renderBioGrid();
       });
 
-      document.querySelectorAll('.mode-card.ripple-container').forEach(btn => {
+      document.querySelectorAll('.mode-card.ripple-container, .stat-chip--link.ripple-container').forEach(btn => {
         btn.addEventListener('click', function(e) {
           const ripple = document.createElement('span');
           ripple.className = 'ripple';
@@ -198,4 +198,14 @@ const HOME_GROUPS = [
       fab.addEventListener('click', openSheet);
       sheetClose.addEventListener('click', closeSheet);
       sheetOverlay.addEventListener('click', closeSheet);
+
+      // Stat "Especies" — cierra el panel y cambia el carrete principal a
+      // vista cuadrícula, reusando el mismo botón del header (misma lógica
+      // de guardar preferencia en localStorage que ya tiene initViewSwitcher).
+      const statEspecies = document.getElementById('stat-especies-link');
+      const gridBtn = document.querySelector('.view-switcher__btn[data-view="grid"]');
+      statEspecies?.addEventListener('click', () => {
+        closeSheet();
+        gridBtn?.click();
+      });
     });

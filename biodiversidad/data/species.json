@@ -562,7 +562,9 @@
       ],
       "mainPhotoRatio": 0.8317,
       "mainPhotoWidth": 998,
-      "mainPhotoHeight": 1200
+      "mainPhotoHeight": 1200,
+      "actividad": "diurno",
+      "dieta": "frugivoro"
     },
     {
       "id": "sp020101",
@@ -586,7 +588,9 @@
       ],
       "mainPhotoRatio": 1.0435,
       "mainPhotoWidth": 1200,
-      "mainPhotoHeight": 1150
+      "mainPhotoHeight": 1150,
+      "actividad": "diurno",
+      "dieta": "carnivoro"
     },
     {
       "id": "sp020102",
@@ -612,7 +616,9 @@
       ],
       "mainPhotoRatio": 1.5957,
       "mainPhotoWidth": 1200,
-      "mainPhotoHeight": 752
+      "mainPhotoHeight": 752,
+      "actividad": "diurno",
+      "dieta": "carnivoro"
     },
     {
       "id": "sp020201",
@@ -635,7 +641,9 @@
       ],
       "mainPhotoRatio": 1.3483,
       "mainPhotoWidth": 1200,
-      "mainPhotoHeight": 890
+      "mainPhotoHeight": 890,
+      "actividad": "nocturno",
+      "dieta": "insectivoro"
     },
     {
       "id": "sp020202",
@@ -658,7 +666,9 @@
       ],
       "mainPhotoRatio": 1.451,
       "mainPhotoWidth": 1200,
-      "mainPhotoHeight": 827
+      "mainPhotoHeight": 827,
+      "actividad": "nocturno",
+      "dieta": "insectivoro"
     },
     {
       "id": "sp020301",
@@ -683,7 +693,9 @@
       ],
       "mainPhotoRatio": 1.4269,
       "mainPhotoWidth": 1200,
-      "mainPhotoHeight": 841
+      "mainPhotoHeight": 841,
+      "actividad": "nocturno",
+      "dieta": "insectivoro"
     },
     {
       "id": "sp020401",
@@ -706,7 +718,9 @@
       ],
       "mainPhotoRatio": 1.1215,
       "mainPhotoWidth": 1200,
-      "mainPhotoHeight": 1070
+      "mainPhotoHeight": 1070,
+      "actividad": "nocturno",
+      "dieta": "carnivoro"
     },
     {
       "id": "sp030101",
@@ -730,7 +744,8 @@
       ],
       "mainPhotoRatio": 1.3333,
       "mainPhotoWidth": 500,
-      "mainPhotoHeight": 375
+      "mainPhotoHeight": 375,
+      "actividad": "diurno"
     },
     {
       "id": "sp030102",
@@ -753,7 +768,8 @@
       ],
       "mainPhotoRatio": 1.3333,
       "mainPhotoWidth": 500,
-      "mainPhotoHeight": 375
+      "mainPhotoHeight": 375,
+      "actividad": "diurno"
     },
     {
       "id": "sp030201",
@@ -776,7 +792,8 @@
       ],
       "mainPhotoRatio": 1.3333,
       "mainPhotoWidth": 640,
-      "mainPhotoHeight": 480
+      "mainPhotoHeight": 480,
+      "actividad": "diurno"
     },
     {
       "id": "sp030301",
@@ -799,7 +816,8 @@
       ],
       "mainPhotoRatio": 1.241,
       "mainPhotoWidth": 1200,
-      "mainPhotoHeight": 967
+      "mainPhotoHeight": 967,
+      "actividad": "diurno"
     },
     {
       "id": "sp030302",
@@ -823,7 +841,8 @@
       ],
       "mainPhotoRatio": 1.3274,
       "mainPhotoWidth": 1200,
-      "mainPhotoHeight": 904
+      "mainPhotoHeight": 904,
+      "actividad": "diurno"
     },
     {
       "id": "sp030303",
@@ -846,7 +865,8 @@
       ],
       "mainPhotoRatio": 1.4516,
       "mainPhotoWidth": 495,
-      "mainPhotoHeight": 341
+      "mainPhotoHeight": 341,
+      "actividad": "diurno"
     },
     {
       "id": "sp030304",
@@ -870,7 +890,8 @@
       ],
       "mainPhotoRatio": 1.3333,
       "mainPhotoWidth": 640,
-      "mainPhotoHeight": 480
+      "mainPhotoHeight": 480,
+      "actividad": "diurno"
     },
     {
       "id": "sp030305",
@@ -894,7 +915,8 @@
       ],
       "mainPhotoRatio": 1.3333,
       "mainPhotoWidth": 500,
-      "mainPhotoHeight": 375
+      "mainPhotoHeight": 375,
+      "actividad": "diurno"
     },
     {
       "id": "sp030306",
@@ -917,7 +939,8 @@
       ],
       "mainPhotoRatio": 1.3333,
       "mainPhotoWidth": 640,
-      "mainPhotoHeight": 480
+      "mainPhotoHeight": 480,
+      "actividad": "diurno"
     },
     {
       "id": "sp030307",
@@ -940,7 +963,8 @@
       ],
       "mainPhotoRatio": 1.3333,
       "mainPhotoWidth": 640,
-      "mainPhotoHeight": 480
+      "mainPhotoHeight": 480,
+      "actividad": "diurno"
     },
     {
       "id": "sp030401",
@@ -964,7 +988,8 @@
       ],
       "mainPhotoRatio": 1.3333,
       "mainPhotoWidth": 640,
-      "mainPhotoHeight": 480
+      "mainPhotoHeight": 480,
+      "actividad": "diurno"
     },
     {
       "id": "sp030501",
@@ -988,7 +1013,8 @@
       ],
       "mainPhotoRatio": 1.3333,
       "mainPhotoWidth": 500,
-      "mainPhotoHeight": 375
+      "mainPhotoHeight": 375,
+      "actividad": "diurno"
     },
     {
       "id": "sp030601",
@@ -1011,7 +1037,8 @@
       ],
       "mainPhotoRatio": 1.1236,
       "mainPhotoWidth": 1200,
-      "mainPhotoHeight": 1068
+      "mainPhotoHeight": 1068,
+      "actividad": "diurno"
     },
     {
       "id": "sp030602",
@@ -1034,7 +1061,8 @@
       ],
       "mainPhotoRatio": 1.3333,
       "mainPhotoWidth": 640,
-      "mainPhotoHeight": 480
+      "mainPhotoHeight": 480,
+      "actividad": "diurno"
     },
     {
       "id": "sp030603",
@@ -1057,7 +1085,8 @@
       ],
       "mainPhotoRatio": 1.3333,
       "mainPhotoWidth": 640,
-      "mainPhotoHeight": 480
+      "mainPhotoHeight": 480,
+      "actividad": "diurno"
     },
     {
       "id": "sp030604",
@@ -1080,7 +1109,8 @@
       ],
       "mainPhotoRatio": 1.3333,
       "mainPhotoWidth": 640,
-      "mainPhotoHeight": 480
+      "mainPhotoHeight": 480,
+      "actividad": "diurno"
     },
     {
       "id": "sp030605",
@@ -1103,7 +1133,8 @@
       ],
       "mainPhotoRatio": 1.3333,
       "mainPhotoWidth": 640,
-      "mainPhotoHeight": 480
+      "mainPhotoHeight": 480,
+      "actividad": "diurno"
     },
     {
       "id": "sp030606",
@@ -1126,7 +1157,8 @@
       ],
       "mainPhotoRatio": 1.2592,
       "mainPhotoWidth": 1200,
-      "mainPhotoHeight": 953
+      "mainPhotoHeight": 953,
+      "actividad": "diurno"
     },
     {
       "id": "sp030607",
@@ -1149,7 +1181,8 @@
       ],
       "mainPhotoRatio": 1.0629,
       "mainPhotoWidth": 1200,
-      "mainPhotoHeight": 1129
+      "mainPhotoHeight": 1129,
+      "actividad": "diurno"
     },
     {
       "id": "sp030608",
@@ -1171,7 +1204,8 @@
       ],
       "mainPhotoRatio": 1.3333,
       "mainPhotoWidth": 500,
-      "mainPhotoHeight": 375
+      "mainPhotoHeight": 375,
+      "actividad": "diurno"
     },
     {
       "id": "sp030609",
@@ -1194,7 +1228,8 @@
       ],
       "mainPhotoRatio": 1.3333,
       "mainPhotoWidth": 500,
-      "mainPhotoHeight": 375
+      "mainPhotoHeight": 375,
+      "actividad": "diurno"
     },
     {
       "id": "sp040101",
@@ -1217,7 +1252,8 @@
       ],
       "mainPhotoRatio": 0.7342,
       "mainPhotoWidth": 881,
-      "mainPhotoHeight": 1200
+      "mainPhotoHeight": 1200,
+      "actividad": "nocturno"
     },
     {
       "id": "sp040102",
@@ -1240,7 +1276,8 @@
       ],
       "mainPhotoRatio": 0.785,
       "mainPhotoWidth": 942,
-      "mainPhotoHeight": 1200
+      "mainPhotoHeight": 1200,
+      "actividad": "nocturno"
     },
     {
       "id": "sp040103",
@@ -1265,7 +1302,8 @@
       ],
       "mainPhotoRatio": 1.2384,
       "mainPhotoWidth": 1200,
-      "mainPhotoHeight": 969
+      "mainPhotoHeight": 969,
+      "actividad": "nocturno"
     },
     {
       "id": "sp040104",
@@ -1290,7 +1328,8 @@
       ],
       "mainPhotoRatio": 0.9825,
       "mainPhotoWidth": 1179,
-      "mainPhotoHeight": 1200
+      "mainPhotoHeight": 1200,
+      "actividad": "nocturno"
     },
     {
       "id": "sp040105",
@@ -1315,7 +1354,8 @@
       ],
       "mainPhotoRatio": 0.7667,
       "mainPhotoWidth": 920,
-      "mainPhotoHeight": 1200
+      "mainPhotoHeight": 1200,
+      "actividad": "nocturno"
     },
     {
       "id": "sp040106",
@@ -1340,7 +1380,8 @@
       ],
       "mainPhotoRatio": 0.9383,
       "mainPhotoWidth": 1126,
-      "mainPhotoHeight": 1200
+      "mainPhotoHeight": 1200,
+      "actividad": "nocturno"
     },
     {
       "id": "sp040107",
@@ -1365,7 +1406,8 @@
       ],
       "mainPhotoRatio": 1.1494,
       "mainPhotoWidth": 1200,
-      "mainPhotoHeight": 1044
+      "mainPhotoHeight": 1044,
+      "actividad": "nocturno"
     },
     {
       "id": "sp040108",
@@ -1390,7 +1432,8 @@
       ],
       "mainPhotoRatio": 1.0444,
       "mainPhotoWidth": 1200,
-      "mainPhotoHeight": 1149
+      "mainPhotoHeight": 1149,
+      "actividad": "nocturno"
     },
     {
       "id": "sp040109",
@@ -1415,7 +1458,8 @@
       ],
       "mainPhotoRatio": 0.8617,
       "mainPhotoWidth": 1034,
-      "mainPhotoHeight": 1200
+      "mainPhotoHeight": 1200,
+      "actividad": "nocturno"
     },
     {
       "id": "sp040110",
@@ -1440,7 +1484,8 @@
       ],
       "mainPhotoRatio": 0.9358,
       "mainPhotoWidth": 1123,
-      "mainPhotoHeight": 1200
+      "mainPhotoHeight": 1200,
+      "actividad": "nocturno"
     },
     {
       "id": "sp040201",
@@ -1463,7 +1508,8 @@
       ],
       "mainPhotoRatio": 1.5404,
       "mainPhotoWidth": 1200,
-      "mainPhotoHeight": 779
+      "mainPhotoHeight": 779,
+      "actividad": "nocturno"
     },
     {
       "id": "sp040202",
@@ -1486,7 +1532,8 @@
       ],
       "mainPhotoRatio": 1.7647,
       "mainPhotoWidth": 1200,
-      "mainPhotoHeight": 680
+      "mainPhotoHeight": 680,
+      "actividad": "nocturno"
     },
     {
       "id": "sp040203",
@@ -1512,7 +1559,8 @@
       ],
       "mainPhotoRatio": 1.5171,
       "mainPhotoWidth": 1200,
-      "mainPhotoHeight": 791
+      "mainPhotoHeight": 791,
+      "actividad": "nocturno"
     },
     {
       "id": "sp040204",
@@ -1538,7 +1586,8 @@
       ],
       "mainPhotoRatio": 1.5365,
       "mainPhotoWidth": 1200,
-      "mainPhotoHeight": 781
+      "mainPhotoHeight": 781,
+      "actividad": "nocturno"
     },
     {
       "id": "sp040205",
@@ -1564,7 +1613,8 @@
       ],
       "mainPhotoRatio": 1.2012,
       "mainPhotoWidth": 1200,
-      "mainPhotoHeight": 999
+      "mainPhotoHeight": 999,
+      "actividad": "nocturno"
     },
     {
       "id": "sp040206",
@@ -1589,7 +1639,8 @@
       ],
       "mainPhotoRatio": 1.6506,
       "mainPhotoWidth": 1200,
-      "mainPhotoHeight": 727
+      "mainPhotoHeight": 727,
+      "actividad": "nocturno"
     },
     {
       "id": "sp040207",
@@ -1614,7 +1665,8 @@
       ],
       "mainPhotoRatio": 1.8809,
       "mainPhotoWidth": 1200,
-      "mainPhotoHeight": 638
+      "mainPhotoHeight": 638,
+      "actividad": "nocturno"
     },
     {
       "id": "sp040301",
@@ -1639,7 +1691,8 @@
       ],
       "mainPhotoRatio": 1.6973,
       "mainPhotoWidth": 1200,
-      "mainPhotoHeight": 707
+      "mainPhotoHeight": 707,
+      "actividad": "nocturno"
     },
     {
       "id": "sp040302",
@@ -1664,7 +1717,8 @@
       ],
       "mainPhotoRatio": 1.7673,
       "mainPhotoWidth": 1200,
-      "mainPhotoHeight": 679
+      "mainPhotoHeight": 679,
+      "actividad": "nocturno"
     },
     {
       "id": "sp040303",
@@ -1689,7 +1743,8 @@
       ],
       "mainPhotoRatio": 1.4218,
       "mainPhotoWidth": 1200,
-      "mainPhotoHeight": 844
+      "mainPhotoHeight": 844,
+      "actividad": "nocturno"
     },
     {
       "id": "sp040304",
@@ -1714,7 +1769,8 @@
       ],
       "mainPhotoRatio": 1.5707,
       "mainPhotoWidth": 1200,
-      "mainPhotoHeight": 764
+      "mainPhotoHeight": 764,
+      "actividad": "nocturno"
     },
     {
       "id": "sp040305",
@@ -1739,7 +1795,8 @@
       ],
       "mainPhotoRatio": 1.444,
       "mainPhotoWidth": 1200,
-      "mainPhotoHeight": 831
+      "mainPhotoHeight": 831,
+      "actividad": "nocturno"
     },
     {
       "id": "sp040306",
@@ -1764,7 +1821,8 @@
       ],
       "mainPhotoRatio": 1.2862,
       "mainPhotoWidth": 1200,
-      "mainPhotoHeight": 933
+      "mainPhotoHeight": 933,
+      "actividad": "nocturno"
     },
     {
       "id": "sp040307",
@@ -1789,7 +1847,8 @@
       ],
       "mainPhotoRatio": 1.7266,
       "mainPhotoWidth": 1200,
-      "mainPhotoHeight": 695
+      "mainPhotoHeight": 695,
+      "actividad": "nocturno"
     },
     {
       "id": "sp040308",
@@ -1814,7 +1873,8 @@
       ],
       "mainPhotoRatio": 1.7937,
       "mainPhotoWidth": 1200,
-      "mainPhotoHeight": 669
+      "mainPhotoHeight": 669,
+      "actividad": "nocturno"
     },
     {
       "id": "sp040309",
@@ -1842,7 +1902,8 @@
       ],
       "mainPhotoRatio": 0.6667,
       "mainPhotoWidth": 800,
-      "mainPhotoHeight": 1200
+      "mainPhotoHeight": 1200,
+      "actividad": "nocturno"
     },
     {
       "id": "sp040310",
@@ -1867,7 +1928,8 @@
       ],
       "mainPhotoRatio": 1.8321,
       "mainPhotoWidth": 1200,
-      "mainPhotoHeight": 655
+      "mainPhotoHeight": 655,
+      "actividad": "nocturno"
     },
     {
       "id": "sp040311",
@@ -1892,7 +1954,8 @@
       ],
       "mainPhotoRatio": 1.4337,
       "mainPhotoWidth": 1200,
-      "mainPhotoHeight": 837
+      "mainPhotoHeight": 837,
+      "actividad": "nocturno"
     },
     {
       "id": "sp040312",
@@ -1917,7 +1980,8 @@
       ],
       "mainPhotoRatio": 1.4616,
       "mainPhotoWidth": 1200,
-      "mainPhotoHeight": 821
+      "mainPhotoHeight": 821,
+      "actividad": "nocturno"
     },
     {
       "id": "sp040313",
@@ -1942,7 +2006,8 @@
       ],
       "mainPhotoRatio": 1.519,
       "mainPhotoWidth": 1200,
-      "mainPhotoHeight": 790
+      "mainPhotoHeight": 790,
+      "actividad": "nocturno"
     },
     {
       "id": "sp040401",
@@ -1967,7 +2032,8 @@
       ],
       "mainPhotoRatio": 1.2085,
       "mainPhotoWidth": 1200,
-      "mainPhotoHeight": 993
+      "mainPhotoHeight": 993,
+      "actividad": "nocturno"
     },
     {
       "id": "sp040501",
@@ -1993,7 +2059,8 @@
       ],
       "mainPhotoRatio": 0.9808,
       "mainPhotoWidth": 1177,
-      "mainPhotoHeight": 1200
+      "mainPhotoHeight": 1200,
+      "actividad": "nocturno"
     },
     {
       "id": "sp040502",
@@ -2019,7 +2086,8 @@
       ],
       "mainPhotoRatio": 1.1505,
       "mainPhotoWidth": 1200,
-      "mainPhotoHeight": 1043
+      "mainPhotoHeight": 1043,
+      "actividad": "nocturno"
     },
     {
       "id": "sp040601",
@@ -2044,7 +2112,8 @@
       ],
       "mainPhotoRatio": 1.9704,
       "mainPhotoWidth": 1200,
-      "mainPhotoHeight": 609
+      "mainPhotoHeight": 609,
+      "actividad": "nocturno"
     },
     {
       "id": "sp050101",
@@ -2068,7 +2137,9 @@
       ],
       "mainPhotoRatio": 1.1204,
       "mainPhotoWidth": 1200,
-      "mainPhotoHeight": 1071
+      "mainPhotoHeight": 1071,
+      "actividad": "nocturno",
+      "dieta": "frugivoro"
     },
     {
       "id": "sp050201",
@@ -2093,7 +2164,9 @@
       ],
       "mainPhotoRatio": 1.3667,
       "mainPhotoWidth": 1200,
-      "mainPhotoHeight": 878
+      "mainPhotoHeight": 878,
+      "actividad": "diurno",
+      "dieta": "herbivoro"
     },
     {
       "id": "sp050301",
@@ -2118,7 +2191,9 @@
       ],
       "mainPhotoRatio": 1.1073,
       "mainPhotoWidth": 867,
-      "mainPhotoHeight": 783
+      "mainPhotoHeight": 783,
+      "actividad": "nocturno",
+      "dieta": "omnivoro"
     },
     {
       "id": "sp050401",
@@ -2140,7 +2215,9 @@
       ],
       "mainPhotoRatio": 1.1799,
       "mainPhotoWidth": 656,
-      "mainPhotoHeight": 556
+      "mainPhotoHeight": 556,
+      "actividad": "crepuscular",
+      "dieta": "herbivoro"
     },
     {
       "id": "sp050501",
@@ -2163,7 +2240,9 @@
       ],
       "mainPhotoRatio": 1.3173,
       "mainPhotoWidth": 1121,
-      "mainPhotoHeight": 851
+      "mainPhotoHeight": 851,
+      "actividad": "diurno",
+      "dieta": "omnivoro"
     },
     {
       "id": "sp050601",
@@ -2187,7 +2266,9 @@
       ],
       "mainPhotoRatio": 1.2468,
       "mainPhotoWidth": 586,
-      "mainPhotoHeight": 470
+      "mainPhotoHeight": 470,
+      "actividad": "diurno",
+      "dieta": "frugivoro"
     },
     {
       "id": "sp050701",
@@ -2204,6 +2285,9 @@
       ],
       "descriptionEs": "El mayor félido de América y el tercero más grande del mundo. En Antioquia habita principalmente en las tierras bajas de Urabá y el Bajo Cauca, donde la selva húmeda ofrece cobertura y presas abundantes.",
       "descriptionEn": "The largest felid in the Americas and the third largest in the world. In Antioquia it mainly inhabits the lowlands of Urabá and Bajo Cauca.",
+      "umbrella": true,
+      "dieta": "carnivoro",
+      "actividad": "nocturno",
       "photos": []
     },
     {
@@ -2222,6 +2306,8 @@
       ],
       "descriptionEs": "El mamífero terrestre de mayor distribución en el hemisferio occidental. Adaptable a múltiples ecosistemas, desde bosques andinos hasta zonas secas del norte antioqueño.",
       "descriptionEn": "The land mammal with the widest distribution in the Western Hemisphere. Adaptable to multiple ecosystems.",
+      "dieta": "carnivoro",
+      "actividad": "crepuscular",
       "photos": []
     },
     {
@@ -2240,7 +2326,9 @@
       ],
       "descriptionEs": "Félido de mediano tamaño con un pelaje moteado de gran belleza. Fuertemente cazado en el siglo XX por su piel; hoy depende de la protección de los bosques húmedos del norte de Antioquia.",
       "descriptionEn": "A medium-sized felid with beautifully spotted fur. Heavily hunted in the 20th century; today depends on protection of humid forests in northern Antioquia.",
-      "photos": []
+      "photos": [],
+      "actividad": "nocturno",
+      "dieta": "carnivoro"
     },
     {
       "id": "sp050801",
@@ -2264,7 +2352,9 @@
       ],
       "mainPhotoRatio": 1.3001,
       "mainPhotoWidth": 1200,
-      "mainPhotoHeight": 923
+      "mainPhotoHeight": 923,
+      "actividad": "crepuscular",
+      "dieta": "carnivoro"
     },
     {
       "id": "sp050802",
@@ -2289,7 +2379,9 @@
       ],
       "mainPhotoRatio": 1.2848,
       "mainPhotoWidth": 1200,
-      "mainPhotoHeight": 934
+      "mainPhotoHeight": 934,
+      "actividad": "diurno",
+      "dieta": "omnivoro"
     },
     {
       "id": "sp050901",
@@ -2312,7 +2404,9 @@
       ],
       "mainPhotoRatio": 0.7817,
       "mainPhotoWidth": 938,
-      "mainPhotoHeight": 1200
+      "mainPhotoHeight": 1200,
+      "actividad": "nocturno",
+      "dieta": "frugivoro"
     },
     {
       "id": "sp051001",
@@ -2337,7 +2431,9 @@
       ],
       "mainPhotoRatio": 1.3056,
       "mainPhotoWidth": 1175,
-      "mainPhotoHeight": 900
+      "mainPhotoHeight": 900,
+      "actividad": "diurno",
+      "dieta": "granivoro"
     },
     {
       "id": "sp051101",
@@ -2355,7 +2451,10 @@
       ],
       "descriptionEs": "Único oso nativo de Sudamérica, llamado así por los característicos anillos claros alrededor de sus ojos. Habita los bosques andinos entre 1.800 y 3.500 m de altitud.",
       "descriptionEn": "The only bear native to South America, named for the distinctive pale rings around its eyes. Inhabits Andean forests between 1,800 and 3,500 m.",
-      "photos": []
+      "umbrella": true,
+      "dieta": "omnivoro",
+      "photos": [],
+      "actividad": "diurno"
     },
     {
       "id": "sp080101",
@@ -2479,7 +2578,9 @@
       ],
       "mainPhotoRatio": 0.8717,
       "mainPhotoWidth": 1046,
-      "mainPhotoHeight": 1200
+      "mainPhotoHeight": 1200,
+      "actividad": "diurno",
+      "dieta": "frugivoro"
     },
     {
       "id": "sp010201",
@@ -2504,7 +2605,9 @@
       ],
       "mainPhotoRatio": 1.2889,
       "mainPhotoWidth": 1200,
-      "mainPhotoHeight": 931
+      "mainPhotoHeight": 931,
+      "actividad": "diurno",
+      "dieta": "omnivoro"
     },
     {
       "id": "sp010301",
@@ -2527,7 +2630,9 @@
       ],
       "mainPhotoRatio": 0.8108,
       "mainPhotoWidth": 973,
-      "mainPhotoHeight": 1200
+      "mainPhotoHeight": 1200,
+      "actividad": "diurno",
+      "dieta": "omnivoro"
     },
     {
       "id": "sp010401",
@@ -2550,7 +2655,9 @@
       ],
       "mainPhotoRatio": 0.8875,
       "mainPhotoWidth": 1065,
-      "mainPhotoHeight": 1200
+      "mainPhotoHeight": 1200,
+      "actividad": "diurno",
+      "dieta": "frugivoro"
     },
     {
       "id": "sp010402",
@@ -2574,7 +2681,9 @@
       ],
       "mainPhotoRatio": 1.0979,
       "mainPhotoWidth": 1200,
-      "mainPhotoHeight": 1093
+      "mainPhotoHeight": 1093,
+      "actividad": "diurno",
+      "dieta": "frugivoro"
     },
     {
       "id": "sp010501",
@@ -2599,7 +2708,9 @@
       ],
       "mainPhotoRatio": 1.1079,
       "mainPhotoWidth": 832,
-      "mainPhotoHeight": 751
+      "mainPhotoHeight": 751,
+      "actividad": "diurno",
+      "dieta": "omnivoro"
     },
     {
       "id": "sp010502",
@@ -2622,7 +2733,9 @@
       ],
       "mainPhotoRatio": 0.9558,
       "mainPhotoWidth": 1147,
-      "mainPhotoHeight": 1200
+      "mainPhotoHeight": 1200,
+      "actividad": "diurno",
+      "dieta": "frugivoro"
     },
     {
       "id": "sp010601",
@@ -2645,7 +2758,9 @@
       ],
       "mainPhotoRatio": 1.0327,
       "mainPhotoWidth": 1200,
-      "mainPhotoHeight": 1162
+      "mainPhotoHeight": 1162,
+      "actividad": "diurno",
+      "dieta": "omnivoro"
     },
     {
       "id": "sp010701",
@@ -2668,7 +2783,9 @@
       ],
       "mainPhotoRatio": 1.0969,
       "mainPhotoWidth": 1200,
-      "mainPhotoHeight": 1094
+      "mainPhotoHeight": 1094,
+      "actividad": "diurno",
+      "dieta": "insectivoro"
     },
     {
       "id": "sp020103",
@@ -2693,7 +2810,9 @@
       ],
       "mainPhotoRatio": 1.4981,
       "mainPhotoWidth": 1200,
-      "mainPhotoHeight": 801
+      "mainPhotoHeight": 801,
+      "actividad": "nocturno",
+      "dieta": "carnivoro"
     },
     {
       "id": "sp020203",
@@ -2715,7 +2834,9 @@
       ],
       "mainPhotoRatio": 1.1215,
       "mainPhotoWidth": 1200,
-      "mainPhotoHeight": 1070
+      "mainPhotoHeight": 1070,
+      "actividad": "nocturno",
+      "dieta": "insectivoro"
     },
     {
       "id": "sp020204",
@@ -2739,7 +2860,9 @@
       ],
       "mainPhotoRatio": 1.2474,
       "mainPhotoWidth": 1200,
-      "mainPhotoHeight": 962
+      "mainPhotoHeight": 962,
+      "actividad": "nocturno",
+      "dieta": "insectivoro"
     },
     {
       "id": "sp020302",
@@ -2763,7 +2886,9 @@
       ],
       "mainPhotoRatio": 1.3158,
       "mainPhotoWidth": 1200,
-      "mainPhotoHeight": 912
+      "mainPhotoHeight": 912,
+      "actividad": "nocturno",
+      "dieta": "insectivoro"
     },
     {
       "id": "sp020501",
@@ -2786,7 +2911,9 @@
       ],
       "mainPhotoRatio": 1.2579,
       "mainPhotoWidth": 1200,
-      "mainPhotoHeight": 954
+      "mainPhotoHeight": 954,
+      "actividad": "nocturno",
+      "dieta": "insectivoro"
     },
     {
       "id": "sp080202",
@@ -3010,6 +3137,7 @@
       ],
       "descriptionEs": "Miniorquídea epífita endémica de los Andes colombianos con flores de pocos milímetros sobre hojas ovaladas con vainas peciolares aladas. El género Lepanthes es uno de los más diversos de las Américas, con más de 1.000 especies descritas, muchas de ellas conocidas solo de un único municipio o montaña. Su polinización es realizada por moscas pequeñas.",
       "descriptionEn": "Miniature epiphytic orchid endemic to the Colombian Andes with flowers just a few millimeters wide on oval leaves with winged petiolar sheaths. The genus Lepanthes is one of the most diverse in the Americas, with over 1,000 described species, many known only from a single municipality or mountain. Pollinated by tiny flies.",
+      "endemica": true,
       "photos": [
         "gr08_orquideas/fa05_pleurothallidinae/sp080504_lepanthes_ligiae/sp080504_lepanthes_ligiae_001.webp",
         "gr08_orquideas/fa05_pleurothallidinae/sp080504_lepanthes_ligiae/sp080504_lepanthes_ligiae_002.webp"

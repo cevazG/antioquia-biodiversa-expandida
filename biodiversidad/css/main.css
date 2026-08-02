@@ -136,6 +136,13 @@
   --iucn-cr:  #9C27B0;
   --iucn-dd:  #9E9E9E;
 
+  /* Etiquetas de atributo (sombrilla/endémica/dieta/actividad) — ver especie.js BADGE_TAGS.
+     El dorado reutiliza --color-earth (paleta secundaria institucional) para las etiquetas
+     de reconocimiento; dieta/actividad usan un tono neutro por ser solo un dato, no un honor. */
+  --color-gold:        var(--color-earth);
+  --color-gold-bg:      #faf1da;
+  --color-gold-border:  #e3c883;
+
   /* Colores por grupo biodiversidad */
   --group-aves:              #1565C0;
   --group-anfibios_reptiles: #2E7D32;

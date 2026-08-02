@@ -404,6 +404,42 @@
 .badge-group--arboles_nativos     { background: #2E7D32; }
 .badge-group--hongos              { background: #BF360C; }
 
+/* ─── BADGE DE ATRIBUTO (sombrilla / endémica / dieta / actividad) ──
+   Activación/desactivación por tipo: ver BADGE_TAGS en especie.js.
+   --gold: reconocimiento (sombrilla, endémica) · --fact: solo dato (dieta, actividad) */
+
+.badge-attr {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 10px 3px 8px;
+  border-radius: var(--radius-full);
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.badge-attr .badge-attr__icon {
+  font-size: 0.85em;
+  line-height: 1;
+}
+
+.badge-attr--gold {
+  background: var(--color-gold-bg);
+  border: 1.3px solid var(--color-gold-border);
+  color: var(--color-gold);
+}
+
+.badge-attr--fact {
+  background: var(--color-bg);
+  border: 1.3px solid var(--color-border);
+  color: var(--color-text-medium);
+}
+
+/* Segunda fila de badges (atributos) bajo la de IUCN/grupo en especie.html */
+.especie-ficha__badges + .especie-ficha__badges {
+  margin-top: 8px;
+}
+
 /* ─── BADGE SUBREGION ──────────────────────────────────────── */
 
 .badge-subregion {
@@ -1102,6 +1138,20 @@
   right: var(--space-md);
   width: 12px;
   height: 12px;
+}
+
+/* El carrete vertical llenaba toda la pantalla con object-fit:cover, lo que
+   recortaba fuerte cualquier foto que no fuera casi tan angosta y alta como
+   el propio celular (no solo apaisadas — hasta una foto casi cuadrada como
+   la Falsa Coral, ratio 1.04, perdía la mayor parte del cuerpo del animal).
+   En vez de perseguir un umbral de ratio que siempre deja casos afuera, la
+   foto se muestra completa sin recortar (contain) sobre fondo negro. */
+.photo-reel--vertical .photo-reel__card {
+  background: #000;
+}
+
+.photo-reel--vertical .photo-reel__card img {
+  object-fit: contain;
 }
 
 /* Carrete en overlay de pantalla completa (listado.html, filtrado por reino

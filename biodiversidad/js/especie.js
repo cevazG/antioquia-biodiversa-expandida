@@ -1,3 +1,13 @@
+// Etiquetas nuevas (sombrilla/endémica/dieta/actividad) — activar/desactivar aquí.
+// "actividad" prendida a modo de prueba (2026-08-01) — la mayoría de las 154
+// especies aún no tiene este dato investigado, así que no aparecerá para ellas.
+const BADGE_TAGS = {
+  umbrella:  true,
+  endemica:  true,
+  dieta:     true,
+  actividad: true,
+};
+
 const IUCN_COLORS = {
       LC: '#4CAF50', NT: '#FFC107', VU: '#FF9800',
       EN: '#F44336', CR: '#9C27B0', DD: '#9E9E9E', NE: '#e0e0e0'
@@ -193,6 +203,19 @@ const IUCN_COLORS = {
       // Badges
       const badgesEl = document.getElementById('sp-badges');
       badgesEl.innerHTML = App.iucnBadge(sp.iucn) + ' ' + App.groupBadge(sp.group);
+
+      // Badges de atributo (segunda fila) — cada tipo se puede apagar en BADGE_TAGS
+      // sin tocar los datos de species.json, y cada uno solo aparece si la especie
+      // tiene el dato correspondiente.
+      const attrsEl = document.getElementById('sp-badges-attrs');
+      const attrBadges = [
+        BADGE_TAGS.umbrella  && sp.umbrella  ? App.umbrellaBadge()        : '',
+        BADGE_TAGS.endemica  && sp.endemica  ? App.endemicaBadge()        : '',
+        BADGE_TAGS.dieta                     ? App.dietaBadge(sp.dieta)   : '',
+        BADGE_TAGS.actividad                 ? App.actividadBadge(sp.actividad) : '',
+      ].filter(Boolean);
+      attrsEl.innerHTML = attrBadges.join(' ');
+      attrsEl.style.display = attrBadges.length ? '' : 'none';
 
       // IUCN expandido
       const iucnCircle = document.getElementById('iucn-circle');

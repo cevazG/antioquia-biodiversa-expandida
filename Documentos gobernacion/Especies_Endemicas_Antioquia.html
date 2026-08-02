@@ -1,0 +1,890 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Especies endémicas y epónimas de Antioquia</title>
+<style>
+  :root{
+    --paper:#EEF0E6;
+    --card:#FBFCF6;
+    --ink:#20261F;
+    --ink-soft:#4B5245;
+    --ink-faint:#7A8070;
+    --line:#D7D9C9;
+    --line-strong:#C1C4AF;
+    --rust:#A8542E;
+    --rust-soft:#F1E3DA;
+    --gold:#8C6416;
+    --gold-soft:#F0E7D2;
+    --green:#2E7D32;
+    --green-soft:#E3ECE1;
+
+    --aves:#1565C0;         --aves-soft:#E4EDFA;
+    --anfibios:#00695C;     --anfibios-soft:#DFF0EC;
+    --mariposas:#6A1B9A;    --mariposas-soft:#EEE1F5;
+    --polillas:#4E342E;     --polillas-soft:#E9E1DF;
+    --mamiferos:#C1440E;    --mamiferos-soft:#F6E4D8;
+    --peces:#006064;        --peces-soft:#DFEDEE;
+    --orquideas:#AD1457;    --orquideas-soft:#F5DEE9;
+    --arboles:#2E7D32;      --arboles-soft:#E3ECE1;
+    --hongos:#8D3B12;       --hongos-soft:#F0DED2;
+    --domesticos:#6B7A1E;   --domesticos-soft:#E9EDD9;
+    --otros:#455A64;        --otros-soft:#E2E7E9;
+
+    --serif: 'Iowan Old Style', 'Palatino Linotype', Palatino, 'Book Antiqua', Georgia, serif;
+    --sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    --mono: 'SF Mono', 'Söhne Mono', Menlo, 'Courier New', ui-monospace, monospace;
+  }
+
+  :root[data-theme="dark"]{
+    --paper:#14170F;
+    --card:#1B1F16;
+    --ink:#E9EAE0;
+    --ink-soft:#B2B7A5;
+    --ink-faint:#7D8371;
+    --line:#2B3025;
+    --line-strong:#3A4030;
+    --rust:#E08F63;         --rust-soft:#3A2A20;
+    --gold:#D9B25C;         --gold-soft:#332A15;
+    --green:#7BC084;        --green-soft:#1E2B1E;
+
+    --aves:#7CACE8;          --aves-soft:#1B2A3C;
+    --anfibios:#5FC9B4;      --anfibios-soft:#183330;
+    --mariposas:#C79AE0;     --mariposas-soft:#2C1F38;
+    --polillas:#C6A99E;      --polillas-soft:#2E2724;
+    --mamiferos:#F0996B;     --mamiferos-soft:#3A2418;
+    --peces:#5FC7CC;         --peces-soft:#153033;
+    --orquideas:#EA85B2;     --orquideas-soft:#3A1E2A;
+    --arboles:#7BC084;       --arboles-soft:#1E2B1E;
+    --hongos:#E0A075;        --hongos-soft:#332218;
+    --domesticos:#C4D07E;    --domesticos-soft:#282E15;
+    --otros:#9FB2BA;         --otros-soft:#212B2E;
+  }
+
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --paper:#14170F;
+      --card:#1B1F16;
+      --ink:#E9EAE0;
+      --ink-soft:#B2B7A5;
+      --ink-faint:#7D8371;
+      --line:#2B3025;
+      --line-strong:#3A4030;
+      --rust:#E08F63;         --rust-soft:#3A2A20;
+      --gold:#D9B25C;         --gold-soft:#332A15;
+      --green:#7BC084;        --green-soft:#1E2B1E;
+
+      --aves:#7CACE8;          --aves-soft:#1B2A3C;
+      --anfibios:#5FC9B4;      --anfibios-soft:#183330;
+      --mariposas:#C79AE0;     --mariposas-soft:#2C1F38;
+      --polillas:#C6A99E;      --polillas-soft:#2E2724;
+      --mamiferos:#F0996B;     --mamiferos-soft:#3A2418;
+      --peces:#5FC7CC;         --peces-soft:#153033;
+      --orquideas:#EA85B2;     --orquideas-soft:#3A1E2A;
+      --arboles:#7BC084;       --arboles-soft:#1E2B1E;
+      --hongos:#E0A075;        --hongos-soft:#332218;
+      --domesticos:#C4D07E;    --domesticos-soft:#282E15;
+      --otros:#9FB2BA;         --otros-soft:#212B2E;
+    }
+  }
+
+  *{box-sizing:border-box;}
+  html{-webkit-text-size-adjust:100%;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:var(--sans);
+    line-height:1.5;
+    font-size:16px;
+  }
+  a{color:var(--green);}
+  a:focus-visible, button:focus-visible{outline:2px solid var(--green); outline-offset:2px;}
+
+  .wrap{max-width:960px; margin:0 auto; padding:0 24px 96px;}
+
+  /* ---------- Masthead ---------- */
+  header.masthead{
+    padding:56px 24px 40px;
+    border-bottom:1px solid var(--line-strong);
+    background:
+      radial-gradient(ellipse 700px 260px at 12% -10%, var(--green-soft), transparent 60%),
+      var(--paper);
+  }
+  .masthead-inner{max-width:960px; margin:0 auto;}
+  .eyebrow{
+    font-family:var(--mono);
+    font-size:12px;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--ink-faint);
+    margin-bottom:14px;
+  }
+  h1{
+    font-family:var(--serif);
+    font-weight:400;
+    font-size:clamp(2rem, 4.4vw, 2.9rem);
+    line-height:1.12;
+    margin:0 0 16px;
+    text-wrap:balance;
+    color:var(--ink);
+  }
+  .dek{
+    font-size:1.05rem;
+    color:var(--ink-soft);
+    max-width:640px;
+    margin:0 0 28px;
+  }
+  .stats-row{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+  }
+  .stat{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:8px;
+    padding:10px 16px;
+    min-width:108px;
+  }
+  .stat .n{
+    font-family:var(--serif);
+    font-size:1.5rem;
+    font-variant-numeric:tabular-nums;
+    display:block;
+    line-height:1.1;
+  }
+  .stat .l{
+    font-size:11.5px;
+    color:var(--ink-faint);
+    text-transform:uppercase;
+    letter-spacing:0.06em;
+  }
+
+  /* ---------- TOC ---------- */
+  nav.toc{
+    max-width:960px;
+    margin:0 auto;
+    padding:20px 24px;
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px 10px;
+    border-bottom:1px solid var(--line);
+  }
+  nav.toc a{
+    font-size:13px;
+    text-decoration:none;
+    color:var(--ink-soft);
+    padding:5px 11px;
+    border-radius:999px;
+    border:1px solid var(--line);
+    white-space:nowrap;
+  }
+  nav.toc a:hover{border-color:var(--line-strong); color:var(--ink);}
+
+  /* ---------- Sections ---------- */
+  section.group{
+    padding:44px 0 8px;
+    border-bottom:1px solid var(--line);
+  }
+  section.group:last-of-type{border-bottom:none;}
+
+  .group-head{
+    display:flex;
+    align-items:baseline;
+    gap:14px;
+    flex-wrap:wrap;
+    margin-bottom:6px;
+  }
+  .group-tag{
+    font-family:var(--mono);
+    font-size:11px;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    padding:4px 10px;
+    border-radius:5px;
+    font-weight:600;
+  }
+  h2{
+    font-family:var(--serif);
+    font-weight:400;
+    font-size:1.6rem;
+    margin:0;
+    color:var(--ink);
+  }
+  .group-count{
+    font-family:var(--mono);
+    font-size:12.5px;
+    color:var(--ink-faint);
+  }
+  .group-note{
+    color:var(--ink-soft);
+    font-size:0.95rem;
+    max-width:680px;
+    margin:10px 0 24px;
+  }
+
+  .tbl-scroll{overflow-x:auto; margin-bottom:8px;}
+  table{
+    width:100%;
+    border-collapse:collapse;
+    font-size:14.5px;
+    min-width:640px;
+  }
+  thead th{
+    text-align:left;
+    font-family:var(--mono);
+    font-weight:600;
+    font-size:10.5px;
+    letter-spacing:0.07em;
+    text-transform:uppercase;
+    color:var(--ink-faint);
+    padding:0 12px 8px;
+    border-bottom:1px solid var(--line-strong);
+  }
+  tbody td{
+    padding:13px 12px;
+    border-bottom:1px solid var(--line);
+    vertical-align:top;
+  }
+  tbody tr:last-child td{border-bottom:none;}
+  .sci{
+    font-family:var(--serif);
+    font-style:italic;
+    font-size:1.02rem;
+    color:var(--ink);
+    white-space:nowrap;
+  }
+  .common{display:block; font-size:12.5px; color:var(--ink-soft); font-style:normal; margin-top:2px;}
+  td.loc{color:var(--ink-soft); max-width:220px;}
+  td.note{color:var(--ink-soft); max-width:260px;}
+  .src{font-size:12px; white-space:nowrap;}
+  .src a{color:var(--ink-faint); text-decoration:underline; text-decoration-color:var(--line-strong);}
+  .src a:hover{color:var(--green);}
+
+  .pill{
+    display:inline-block;
+    font-family:var(--mono);
+    font-size:10.5px;
+    letter-spacing:0.03em;
+    padding:2px 8px;
+    border-radius:999px;
+    white-space:nowrap;
+    margin:1px 3px 1px 0;
+  }
+  .pill.endemica{background:var(--green-soft); color:var(--green);}
+  .pill.eponimo{background:var(--rust-soft); color:var(--rust);}
+  .pill.riesgo{background:var(--gold-soft); color:var(--gold);}
+  .pill.pendiente{background:var(--line); color:var(--ink-soft);}
+
+  /* ---------- Domestic animals note box ---------- */
+  .note-box{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-left:3px solid var(--domesticos);
+    border-radius:6px;
+    padding:18px 20px;
+    margin:8px 0 24px;
+    font-size:0.95rem;
+    color:var(--ink-soft);
+  }
+  .note-box strong{color:var(--ink);}
+
+  /* ---------- Toponyms cross-cutting ---------- */
+  .epithet{
+    font-family:var(--mono);
+    font-size:12.5px;
+    background:var(--rust-soft);
+    color:var(--rust);
+    padding:2px 7px;
+    border-radius:5px;
+  }
+
+  /* ---------- Methodology / footer ---------- */
+  section.meta{padding:44px 0 8px;}
+  .meta h2{margin-bottom:14px;}
+  .meta ul{padding-left:20px; color:var(--ink-soft); font-size:0.95rem;}
+  .meta li{margin-bottom:8px;}
+  .caveat{
+    background:var(--gold-soft);
+    border-radius:6px;
+    padding:14px 18px;
+    font-size:0.9rem;
+    color:var(--ink-soft);
+    margin:20px 0;
+  }
+  .caveat strong{color:var(--gold);}
+
+  footer{
+    text-align:center;
+    padding:36px 24px 8px;
+    font-size:12px;
+    color:var(--ink-faint);
+    font-family:var(--mono);
+  }
+
+  @media (max-width:640px){
+    .sci{white-space:normal;}
+    table{min-width:560px;}
+  }
+</style>
+</head>
+<body>
+
+<header class="masthead">
+  <div class="masthead-inner">
+    <div class="eyebrow">Antioquia Natural · Investigación biológica</div>
+    <h1>Especies endémicas y con nombre propio de Antioquia</h1>
+    <p class="dek">Búsqueda exhaustiva por grupo taxonómico de especies endémicas del departamento, y de especies de cualquier grupo nombradas científicamente en honor a sus municipios, personajes o cultura — para evaluar cuáles incorporar al catálogo de la app.</p>
+    <div class="stats-row">
+      <div class="stat"><span class="n">43</span><span class="l">Especies identificadas</span></div>
+      <div class="stat"><span class="n">9</span><span class="l">Grupos del catálogo cubiertos</span></div>
+      <div class="stat"><span class="n">24</span><span class="l">Con epíteto o nombre propio</span></div>
+      <div class="stat"><span class="n">1</span><span class="l">Grupo sin hallazgo confirmado</span></div>
+    </div>
+  </div>
+</header>
+
+<nav class="toc">
+  <a href="#aves">Aves</a>
+  <a href="#anfibios">Anfibios y reptiles</a>
+  <a href="#mariposas">Mariposas</a>
+  <a href="#polillas">Polillas</a>
+  <a href="#mamiferos">Mamíferos</a>
+  <a href="#peces">Peces</a>
+  <a href="#orquideas">Orquídeas</a>
+  <a href="#arboles">Árboles nativos</a>
+  <a href="#hongos">Hongos</a>
+  <a href="#domesticos">Animales domésticos</a>
+  <a href="#toponimos">Topónimos y epónimos</a>
+  <a href="#otros">Otros grupos</a>
+  <a href="#metodologia">Metodología</a>
+</nav>
+
+<div class="wrap">
+
+  <!-- AVES -->
+  <section class="group" id="aves">
+    <div class="group-head">
+      <span class="group-tag" style="background:var(--aves-soft); color:var(--aves)">Aves</span>
+      <h2>Aves</h2>
+      <span class="group-count">4 especies · SAO registra 24 endémicas + 72 casi-endémicas en el departamento</span>
+    </div>
+    <p class="group-note">La Sociedad Antioqueña de Ornitología (SAO) documentó 24 especies endémicas del departamento en su inventario de más de 1.000 especies de aves, pero no publica el listado completo en fuentes abiertas — solo estas 4 aparecen nombradas individualmente en la literatura consultada.</p>
+    <div class="tbl-scroll">
+      <table>
+        <thead><tr><th>Especie</th><th>Estado</th><th>Localidad</th><th>Nota</th><th>Fuente</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><span class="sci">Atlapetes blancae<span class="common">Gorrión-Montés Paisa / Montañerito Paisa</span></span></td>
+            <td><span class="pill endemica">Endémica</span><span class="pill riesgo">En peligro crítico</span></td>
+            <td class="loc">Altiplano de Santa Rosa de Osos, San Pedro de los Milagros</td>
+            <td class="note">Conocida solo de 3 ejemplares colectados hace 47 años; redescubierta en 2018.</td>
+            <td class="src"><a href="https://birdsoftheworld.org/bow/species/antbrf1/cur/introduction" target="_blank" rel="noopener">Birds of the World</a></td>
+          </tr>
+          <tr>
+            <td><span class="sci">Thryophilus sernai<span class="common">Cucarachero Paisa / Antioquia Wren</span></span></td>
+            <td><span class="pill endemica">Endémica</span><span class="pill riesgo">Vulnerable</span><span class="pill eponimo">Epónimo</span></td>
+            <td class="loc">Cañón del río Cauca, de Ituango a Concordia/Salgar</td>
+            <td class="note">Descubierta 2010, descrita 2012. Nombrada en honor a Marco Antonio Serna Díaz, fundador de la SAO.</td>
+            <td class="src"><a href="https://es.wikipedia.org/wiki/Thryophilus_sernai" target="_blank" rel="noopener">Wikipedia</a></td>
+          </tr>
+          <tr>
+            <td><span class="sci">Grallaria urraoensis<span class="common">Tororoi de Urrao / Urrao Antpitta</span></span></td>
+            <td><span class="pill endemica">Endémica</span><span class="pill eponimo">Topónimo</span></td>
+            <td class="loc">Páramo de Frontino, Reserva Colibrí del Sol, Urrao</td>
+            <td class="note">Descrita en 2010; sotobosque de bosque de niebla dominado por chusque, 2.500–3.200 m.</td>
+            <td class="src"><a href="https://www.gbif.org/species/6101111" target="_blank" rel="noopener">GBIF</a></td>
+          </tr>
+          <tr>
+            <td><span class="sci">Grallaria rufocinerea<span class="common">Tororoí Bicolor / Bicolored Antpitta</span></span></td>
+            <td><span class="pill riesgo">Casi endémica</span></td>
+            <td class="loc">El Retiro, Valle de Aburrá</td>
+            <td class="note">Redescubierta en 2006 tras 130 años sin registros en el departamento.</td>
+            <td class="src"><a href="https://birdsoftheworld.org/bow/species/bicant3/cur/introduction" target="_blank" rel="noopener">Birds of the World</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ANFIBIOS Y REPTILES -->
+  <section class="group" id="anfibios">
+    <div class="group-head">
+      <span class="group-tag" style="background:var(--anfibios-soft); color:var(--anfibios)">Anfibios y reptiles</span>
+      <h2>Anfibios y reptiles</h2>
+      <span class="group-count">12 especies — el grupo con más hallazgos</span>
+    </div>
+    <div class="tbl-scroll">
+      <table>
+        <thead><tr><th>Especie</th><th>Estado</th><th>Localidad</th><th>Nota</th><th>Fuente</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><span class="sci">Hyloscirtus antioquia<span class="common">Rana chocolate antioqueña / Rana Paisa</span></span></td>
+            <td><span class="pill endemica">Endémica</span><span class="pill eponimo">Epónimo</span></td>
+            <td class="loc">Quebradas de alta montaña, 2.200–3.200 m</td>
+            <td class="note">Nombrada como tributo al Bicentenario del departamento de Antioquia.</td>
+            <td class="src"><a href="https://en.wikipedia.org/wiki/Hyloscirtus_antioquia" target="_blank" rel="noopener">Wikipedia</a></td>
+          </tr>
+          <tr>
+            <td><span class="sci">Caecilia antioquiaensis<span class="common">Cecilia de Antioquia</span></span></td>
+            <td><span class="pill endemica">Endémica</span><span class="pill eponimo">Topónimo</span></td>
+            <td class="loc">Valdivia, Cordillera Central, ~1.100 m</td>
+            <td class="note">Anfibio ápodo (sin patas), subterráneo; solo se conoce de su localidad tipo.</td>
+            <td class="src"><a href="https://en.wikipedia.org/wiki/Caecilia_antioquiaensis" target="_blank" rel="noopener">Wikipedia</a></td>
+          </tr>
+          <tr>
+            <td><span class="sci">Centrolene antioquiensis<span class="common">Rana de cristal gigante de Antioquia</span></span></td>
+            <td><span class="pill riesgo">Casi amenazada</span><span class="pill eponimo">Topónimo</span></td>
+            <td class="loc">Cordillera Central: Antioquia, Caldas, Tolima</td>
+            <td class="note">Bosques ribereños submontanos, 1.730–2.450 m; habita principalmente el dosel.</td>
+            <td class="src"><a href="https://en.wikipedia.org/wiki/Centrolene_antioquiensis" target="_blank" rel="noopener">Wikipedia</a></td>
+          </tr>
+          <tr>
+            <td><span class="sci">Rhinella tenrec<span class="common">Sapo picudo de Antioquia</span></span></td>
+            <td><span class="pill endemica">Endémica</span><span class="pill riesgo">En peligro</span></td>
+            <td class="loc">Vertiente occidental Cordillera Occidental, oeste de Antioquia y norte de Chocó</td>
+            <td class="note">Bosque húmedo tropical de tierras bajas, 805–950 m.</td>
+            <td class="src"><a href="https://en.wikipedia.org/wiki/Rhinella_tenrec" target="_blank" rel="noopener">Wikipedia</a></td>
+          </tr>
+          <tr>
+            <td><span class="sci">Pristimantis campesino<span class="common">Rana de lluvia</span></span></td>
+            <td><span class="pill eponimo">Epónimo</span></td>
+            <td class="loc">Anorí</td>
+            <td class="note">Nombrada en honor a "la resiliencia y el valor de los habitantes del campo de Colombia".</td>
+            <td class="src"><a href="https://www.elcolombiano.com/antioquia/descubren-nueva-especie-de-rana-en-antioquia-se-llamara-pristimantis-campesino-NI18324081" target="_blank" rel="noopener">El Colombiano</a></td>
+          </tr>
+          <tr>
+            <td><span class="sci">Pristimantis carylae<span class="common">Rana de lluvia</span></span></td>
+            <td></td>
+            <td class="loc">Reserva La Selva, Valdivia</td>
+            <td class="note">Menos de 4 cm, tonos café-amarillo, manchas felinas.</td>
+            <td class="src"><a href="https://www.bluradio.com/blu360/antioquia/descubren-dos-nuevas-especies-de-ranas-de-lluvia-en-valdivia-antioquia" target="_blank" rel="noopener">Blu Radio</a></td>
+          </tr>
+          <tr>
+            <td><span class="sci">Pristimantis chocolatebari<span class="common">Rana de lluvia</span></span></td>
+            <td></td>
+            <td class="loc">Reserva La Selva, Valdivia</td>
+            <td class="note">Hocico grande y sobresaliente, dorso liso, ingles amarillas.</td>
+            <td class="src"><a href="https://www.bluradio.com/blu360/antioquia/descubren-dos-nuevas-especies-de-ranas-de-lluvia-en-valdivia-antioquia" target="_blank" rel="noopener">Blu Radio</a></td>
+          </tr>
+          <tr>
+            <td><span class="sci">Pristimantis jaguensis<span class="common">Rana de lluvia</span></span></td>
+            <td></td>
+            <td class="loc">San Rafael</td>
+            <td class="note">Colectada en 2006, descrita en 2014 por el Grupo Herpetológico de Antioquia.</td>
+            <td class="src"><a href="https://www.udea.edu.co/wps/portal/udea/web/inicio/udea-noticias/udea-noticia/contenido/asnoticias/ciencia/pristimantis-jaguensis-colorida-nueva-especie-rana" target="_blank" rel="noopener">UdeA Noticias</a></td>
+          </tr>
+          <tr>
+            <td><span class="sci">Anadia antioquensis<span class="common">Anadia de Antioquia</span></span></td>
+            <td><span class="pill endemica">Endémica</span><span class="pill eponimo">Topónimo</span></td>
+            <td class="loc">Bosques húmedos, Cordillera Central</td>
+            <td class="note">Endémica de Antioquia y Caldas; hocico-cloaca hasta 89 mm.</td>
+            <td class="src"><a href="https://animalesdecolombia.com.co/reptiles/caribe/lagartija-anadia-de-antioquia/" target="_blank" rel="noopener">Animales de Colombia</a></td>
+          </tr>
+          <tr>
+            <td><span class="sci">Anolis antioquiae<span class="common">Camaleón de Antioquia</span></span></td>
+            <td><span class="pill eponimo">Topónimo</span></td>
+            <td class="loc">Colombia (Antioquia)</td>
+            <td class="note">Lagartija arbórea del género Anolis.</td>
+            <td class="src"><a href="https://en.wikipedia.org/wiki/Anolis_antioquiae" target="_blank" rel="noopener">Wikipedia</a></td>
+          </tr>
+          <tr>
+            <td><span class="sci">Anolis mariarum<span class="common">Abaniquillo de Medellín</span></span></td>
+            <td><span class="pill endemica">Endémica</span></td>
+            <td class="loc">1.300–2.900 m, incluso en parques urbanos de Medellín</td>
+            <td class="note">Habita bosque, pero tolera zonas verdes urbanas y bordes de bosque perturbados.</td>
+            <td class="src"><a href="https://en.wikipedia.org/wiki/Anolis_mariarum" target="_blank" rel="noopener">Wikipedia</a></td>
+          </tr>
+          <tr>
+            <td><span class="sci">Bolitoglossa hypacra<span class="common">Salamandra del Páramo de Frontino</span></span></td>
+            <td><span class="pill endemica">Endémica</span><span class="pill riesgo">En peligro</span></td>
+            <td class="loc">Páramo Frontino y Reserva Colibrí del Sol, Urrao, 3.600–3.700 m</td>
+            <td class="note">Descrita en 1962 a partir de un único ejemplar hembra. Su epíteto no deriva de Frontino, pero el nombre común sí — hallazgo nuevo de esta segunda revisión (fuente: "Antioquia Viva 2025", SIDAP/Gobernación de Antioquia), agregada por su endemismo estricto al mismo páramo que <em>Espeletia frontinoensis</em>.</td>
+            <td class="src"><a href="https://en.wikipedia.org/wiki/Paramo_Frontino_salamander" target="_blank" rel="noopener">Wikipedia / IUCN</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- MARIPOSAS -->
+  <section class="group" id="mariposas">
+    <div class="group-head">
+      <span class="group-tag" style="background:var(--mariposas-soft); color:var(--mariposas)">Mariposas</span>
+      <h2>Mariposas</h2>
+      <span class="group-count">3 especies</span>
+    </div>
+    <div class="tbl-scroll">
+      <table>
+        <thead><tr><th>Especie</th><th>Estado</th><th>Localidad</th><th>Nota</th><th>Fuente</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><span class="sci">Perisama antioquia<span class="common"></span></span></td>
+            <td><span class="pill endemica">Endémica</span><span class="pill eponimo">Topónimo</span></td>
+            <td class="loc">Solo registrada en Frontino y Jardín</td>
+            <td class="note">Cordillera Occidental norte. Familia Nymphalidae.</td>
+            <td class="src"><a href="https://colombia.inaturalist.org/taxa/363232-Perisama" target="_blank" rel="noopener">iNaturalist</a></td>
+          </tr>
+          <tr>
+            <td><span class="sci">Emesis pacis<span class="common">Mariposa "símbolo de paz"</span></span></td>
+            <td><span class="pill endemica">Endémica de Colombia</span></td>
+            <td class="loc">Bosques nublados Cordillera Occidental: Antioquia, Chocó, Risaralda, Valle del Cauca</td>
+            <td class="note">Descrita en 2024 por el Instituto Humboldt; 21 mm, sobre 1.900 m.</td>
+            <td class="src"><a href="https://www.humboldt.org.co/noticias/colombia-revela-una-nueva-mariposa-endemica-un-simbolo-de-paz-y-riqueza-biologica" target="_blank" rel="noopener">Instituto Humboldt</a></td>
+          </tr>
+          <tr>
+            <td><span class="sci">Catasticta ctemene rubricata<span class="common">(subespecie)</span></span></td>
+            <td></td>
+            <td class="loc">Vertiente occidental Cordillera Central hacia el Cauca, hasta el norte de Antioquia</td>
+            <td class="note">1.800–2.100 m. Familia Pieridae.</td>
+            <td class="src"><a href="http://www.scielo.org.co/scielo.php?script=sci_arttext&pid=S0123-30682016000100014" target="_blank" rel="noopener">SciELO</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- POLILLAS -->
+  <section class="group" id="polillas">
+    <div class="group-head">
+      <span class="group-tag" style="background:var(--polillas-soft); color:var(--polillas)">Polillas</span>
+      <h2>Polillas</h2>
+      <span class="group-count">0 especies con endemismo confirmado</span>
+    </div>
+    <div class="note-box" style="border-left-color:var(--polillas)">
+      <strong>Hallazgo negativo relevante:</strong> a diferencia de todos los demás grupos, no encontré ninguna especie de polilla con endemismo documentado y exclusivo de Antioquia, ni con epíteto toponímico antioqueño, en prensa, iNaturalist, GBIF ni literatura científica accesible. Sí hay registros de género en la región (Automeris, Rothschildia, Copaxa en los Farallones del Citará) y un proyecto activo "Polillas de Antioquia" en iNaturalist, pero sin una especie nombrada y descrita como endémica. Es probable que existan — las polillas son el grupo taxonómicamente menos estudiado y con mayor vacío de conocimiento en Colombia — pero no hay una fuente pública que lo confirme todavía.
+    </div>
+  </section>
+
+  <!-- MAMÍFEROS -->
+  <section class="group" id="mamiferos">
+    <div class="group-head">
+      <span class="group-tag" style="background:var(--mamiferos-soft); color:var(--mamiferos)">Mamíferos</span>
+      <h2>Mamíferos</h2>
+      <span class="group-count">1 especie confirmada · 264 spp. registradas en el departamento</span>
+    </div>
+    <p class="group-note">Antioquia tiene 264 especies de mamíferos registradas en 81 municipios (Colección Teriológica UdeA), pero solo esta especie aparece documentada como endémica exclusiva del departamento en fuentes abiertas.</p>
+    <div class="tbl-scroll">
+      <table>
+        <thead><tr><th>Especie</th><th>Estado</th><th>Localidad</th><th>Nota</th><th>Fuente</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><span class="sci">Saccopteryx antioquensis<span class="common">Murciélago de saco antioqueño</span></span></td>
+            <td><span class="pill endemica">Endémica</span><span class="pill riesgo">En peligro</span><span class="pill eponimo">Topónimo</span></td>
+            <td class="loc">SE de Antioquia, vertiente oriental de la Cordillera Central</td>
+            <td class="note">Requiere formaciones kársticas y bosque húmedo no disturbado; redescubierto tras 20 años sin registros.</td>
+            <td class="src"><a href="https://www.batcon.org/bat/saccopteryx-antioquensis/" target="_blank" rel="noopener">Bat Conservation Int'l</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="caveat"><strong>Descartado tras verificar:</strong> Coendou vossi (puercoespín, descrito 2025) se reportó inicialmente como posible hallazgo antioqueño, pero su rango confirmado son los bosques secos e interandinos de Caldas, Cesar, Cundinamarca, Santander, Sucre y Tolima — no incluye Antioquia según las fuentes consultadas.</div>
+  </section>
+
+  <!-- PECES -->
+  <section class="group" id="peces">
+    <div class="group-head">
+      <span class="group-tag" style="background:var(--peces-soft); color:var(--peces)">Peces de agua dulce</span>
+      <h2>Peces de agua dulce</h2>
+      <span class="group-count">3 especies</span>
+    </div>
+    <div class="tbl-scroll">
+      <table>
+        <thead><tr><th>Especie</th><th>Estado</th><th>Localidad</th><th>Nota</th><th>Fuente</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><span class="sci">Astroblepus dux<span class="common">Capitán de Medellín</span></span></td>
+            <td><span class="pill riesgo">Redescubierta</span></td>
+            <td class="loc">Quebradas del Valle de Aburrá, ríos Porce y Nare</td>
+            <td class="note">Descrita en 1909; redescubierta por EPM y la UdeA tras más de un siglo.</td>
+            <td class="src"><a href="https://www.elcolombiano.com/medio-ambiente/investigadores-redescubrieron-peces-descritos-hace-100-anos-en-el-rio-medellin-AG23348293" target="_blank" rel="noopener">El Colombiano</a></td>
+          </tr>
+          <tr>
+            <td><span class="sci">Trichomycterus medellinensis<span class="common"></span></span></td>
+            <td><span class="pill pendiente">Validez por confirmar</span><span class="pill eponimo">Topónimo</span></td>
+            <td class="loc">Quebradas del Valle de Aburrá</td>
+            <td class="note">Sobrevive en el río Medellín hace más de un siglo; su identidad taxonómica exacta aún debe establecerse formalmente.</td>
+            <td class="src"><a href="https://www.elcolombiano.com/medio-ambiente/investigadores-redescubrieron-peces-descritos-hace-100-anos-en-el-rio-medellin-AG23348293" target="_blank" rel="noopener">El Colombiano</a></td>
+          </tr>
+          <tr>
+            <td><span class="sci">Brycon henni<span class="common">Sabaleta</span></span></td>
+            <td><span class="pill endemica">Endémica de la Cordillera Central</span></td>
+            <td class="loc">Cuencas Cauca, Magdalena, San Jorge, San Juan — abundante en el Porce</td>
+            <td class="note">Especie promisoria para repoblamiento y piscicultura; hasta 35 cm.</td>
+            <td class="src"><a href="https://es.wikipedia.org/wiki/Brycon_henni" target="_blank" rel="noopener">Wikipedia</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ORQUÍDEAS -->
+  <section class="group" id="orquideas">
+    <div class="group-head">
+      <span class="group-tag" style="background:var(--orquideas-soft); color:var(--orquideas)">Orquídeas</span>
+      <h2>Orquídeas</h2>
+      <span class="group-count">5 especies</span>
+    </div>
+    <div class="tbl-scroll">
+      <table>
+        <thead><tr><th>Especie</th><th>Estado</th><th>Localidad</th><th>Nota</th><th>Fuente</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><span class="sci">Dracula colombiana<span class="common">Orquídea "vampiresa"</span></span></td>
+            <td><span class="pill endemica">Rango muy restringido</span></td>
+            <td class="loc">~5 km de Urrao, 1.700–2.300 m (también Risaralda y Quindío)</td>
+            <td class="note">Descrita en Phytotaxa, junio 2025; confundida por décadas con Dracula benedictii.</td>
+            <td class="src"><a href="https://www.udea.edu.co/wps/portal/udea/web/inicio/udea-noticias/udea-noticia/Contenido/asNoticias/PeriodicoAlmaMater/dracula-colombiana" target="_blank" rel="noopener">UdeA Noticias</a></td>
+          </tr>
+          <tr>
+            <td><span class="sci">Cyclopogon antioquiensis<span class="common"></span></span></td>
+            <td><span class="pill endemica">Endémica</span><span class="pill eponimo">Topónimo</span></td>
+            <td class="loc">Cordillera Occidental, ~1.350 m</td>
+            <td class="note">Descrita por investigadores de la Universidad de Gdansk (Polonia); florece en enero.</td>
+            <td class="src"><a href="https://www.dicyt.com/noticias/describen-una-nueva-especie-de-orquidea-en-colombia" target="_blank" rel="noopener">DiCYT</a></td>
+          </tr>
+          <tr>
+            <td><span class="sci">Epidendrum sonsonense<span class="common"></span></span></td>
+            <td><span class="pill endemica">Endémica</span><span class="pill eponimo">Topónimo</span></td>
+            <td class="loc">Páramo de Sonsón</td>
+            <td class="note">Tallos engrosados, racimos densamente florecidos, flores color crema.</td>
+            <td class="src"><a href="https://www.infobae.com/america/colombia/2022/10/04/descubrieron-una-nueva-especie-de-orquidea-en-colombia-los-investigadores-analizaron-la-planta-durante-cuatro-anos/" target="_blank" rel="noopener">Infobae</a></td>
+          </tr>
+          <tr>
+            <td><span class="sci">Pleurothallis maitamae<span class="common"></span></span></td>
+            <td><span class="pill endemica">Endémica</span></td>
+            <td class="loc">Páramo de Sonsón</td>
+            <td class="note">Nueva para la ciencia, hallada en este ecosistema estratégico.</td>
+            <td class="src"><a href="https://www.infobae.com/america/colombia/2022/10/04/descubrieron-una-nueva-especie-de-orquidea-en-colombia-los-investigadores-analizaron-la-planta-durante-cuatro-anos/" target="_blank" rel="noopener">Infobae</a></td>
+          </tr>
+          <tr>
+            <td><span class="sci">Epidendrum pembertonii<span class="common"></span></span></td>
+            <td><span class="pill endemica">Exclusiva de Yarumal</span></td>
+            <td class="loc">Yarumal (localidad tipo única)</td>
+            <td class="note">Grupo Incomptum del género Epidendrum.</td>
+            <td class="src"><a href="https://www.semana.com/mejor-colombia/articulo/nueva-orquidea-se-suma-al-patrimonio-natural-del-pais-estudiantes-la-descubrieron-en-antioquia/202649/" target="_blank" rel="noopener">Semana</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ÁRBOLES NATIVOS -->
+  <section class="group" id="arboles">
+    <div class="group-head">
+      <span class="group-tag" style="background:var(--arboles-soft); color:var(--arboles)">Árboles nativos</span>
+      <h2>Árboles nativos</h2>
+      <span class="group-count">12 especies — el grupo con más epítetos toponímicos</span>
+    </div>
+    <div class="tbl-scroll">
+      <table>
+        <thead><tr><th>Especie</th><th>Estado</th><th>Localidad</th><th>Nota</th><th>Fuente</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><span class="sci">Calliandra medellinensis<span class="common">Carbonero antioqueño</span></span></td>
+            <td><span class="pill endemica">Exclusiva de Medellín</span><span class="pill riesgo">En peligro crítico</span><span class="pill eponimo">Topónimo</span></td>
+            <td class="loc">Parque Bolívar, Jardín Botánico, EAFIT, Cerro El Volador</td>
+            <td class="note">~30 individuos conocidos en el mundo, todos en Medellín.</td>
+            <td class="src"><a href="https://arbolesdeantioquia.wordpress.com/2009/02/23/arbol-de-medellin-calliandra-medellinensis/" target="_blank" rel="noopener">Árboles de Antioquia</a></td>
+          </tr>
+          <tr>
+            <td><span class="sci">Magnolia yarumalensis<span class="common">Almanegra de Yarumal</span></span></td>
+            <td><span class="pill endemica">Endémica</span><span class="pill riesgo">En peligro</span><span class="pill eponimo">Topónimo</span></td>
+            <td class="loc">Yarumal</td>
+            <td class="note">Nombrada por las vetas oscuras de su madera y su localidad de descubrimiento.</td>
+            <td class="src"><a href="https://www.iucnredlist.org/species/pdf/2884340" target="_blank" rel="noopener">Lista Roja UICN</a></td>
+          </tr>
+          <tr>
+            <td><span class="sci">Magnolia jardinensis<span class="common"></span></span></td>
+            <td><span class="pill endemica">Endémica</span><span class="pill eponimo">Topónimo</span></td>
+            <td class="loc">Jardín, Cordillera Occidental, 1.900–2.800 m</td>
+            <td class="note">Bosque tropical de montaña.</td>
+            <td class="src"><a href="https://en.wikipedia.org/wiki/Magnolia_jardinensis" target="_blank" rel="noopener">Wikipedia</a></td>
+          </tr>
+          <tr>
+            <td><span class="sci">Magnolia guatapensis<span class="common"></span></span></td>
+            <td><span class="pill endemica">Endémica</span><span class="pill riesgo">En peligro</span><span class="pill eponimo">Topónimo</span></td>
+            <td class="loc">Guatapé, Oriente antioqueño</td>
+            <td class="note">Primer registro en el municipio que le da nombre; redescubierta en el embalse Peñol-Guatapé.</td>
+            <td class="src"><a href="https://en.wikipedia.org/wiki/Magnolia_guatapensis" target="_blank" rel="noopener">Wikipedia</a></td>
+          </tr>
+          <tr>
+            <td><span class="sci">Magnolia urraoensis<span class="common"></span></span></td>
+            <td><span class="pill endemica">Endémica</span><span class="pill eponimo">Topónimo</span></td>
+            <td class="loc">Urrao</td>
+            <td class="note">Bioma tropical húmedo.</td>
+            <td class="src"><a href="https://en.wikipedia.org/wiki/Magnolia_urraoense" target="_blank" rel="noopener">Wikipedia</a></td>
+          </tr>
+          <tr>
+            <td><span class="sci">Magnolia frontinensis<span class="common"></span></span></td>
+            <td><span class="pill pendiente">En publicación</span><span class="pill eponimo">Topónimo</span></td>
+            <td class="loc">Frontino / Urrao, Cordillera Occidental, 1.700–2.000 m</td>
+            <td class="note">Aún en proceso formal de descripción y publicación.</td>
+            <td class="src"><a href="https://www.researchgate.net/publication/330251166_Una_nueva_especie_y_otros_registros_de_Magnoliaceae_para_Colombia" target="_blank" rel="noopener">ResearchGate</a></td>
+          </tr>
+          <tr>
+            <td><span class="sci">Cyathea toroi<span class="common">Helecho arbóreo</span></span></td>
+            <td><span class="pill endemica">Endémica</span><span class="pill eponimo">Epónimo</span></td>
+            <td class="loc">Alto de Ventanas, Yarumal</td>
+            <td class="note">Nombrada en honor a Juan Lázaro Toro, coordinador forestal de CORANTIOQUIA.</td>
+            <td class="src"><a href="https://proaves.org/en/blog/nueva-especie-de-helecho-arboreo-es-nombrada-en-honor-a-juan-lazaro/" target="_blank" rel="noopener">ProAves</a></td>
+          </tr>
+          <tr>
+            <td><span class="sci">Freziera antioquensis<span class="common"></span></span></td>
+            <td><span class="pill eponimo">Topónimo</span></td>
+            <td class="loc">Cordillera Occidental, región biogeográfica del Chocó</td>
+            <td class="note">Familia Pentaphylacaceae; densa pubescencia de tricomas largos.</td>
+            <td class="src"><a href="https://link.springer.com/article/10.1007/s12228-024-09794-y" target="_blank" rel="noopener">Brittonia / Springer</a></td>
+          </tr>
+          <tr>
+            <td><span class="sci">Espeletia occidentalis var. antioquensis<span class="common">Frailejón</span></span></td>
+            <td><span class="pill endemica">Endémica</span><span class="pill riesgo">Casi amenazada</span><span class="pill eponimo">Topónimo</span></td>
+            <td class="loc">Páramo de Belmira / Santa Inés, 3.000–3.400 m</td>
+            <td class="note">Proyecto de micropropagación en Belmira con >70% de supervivencia.</td>
+            <td class="src"><a href="https://link.springer.com/article/10.1007/s11240-025-03083-6" target="_blank" rel="noopener">Plant Cell, Tissue and Organ Culture</a></td>
+          </tr>
+          <tr>
+            <td><span class="sci">Espeletia restricta<span class="common">Frailejón</span></span></td>
+            <td><span class="pill endemica">Endémica</span></td>
+            <td class="loc">Páramo de Sonsón, 3.300 m</td>
+            <td class="note">Antes confundida con E. occidentalis; hasta 1,2 m de altura.</td>
+            <td class="src"><a href="https://mioriente.com/paramo/espeletia-restricta-la-nueva-especie-de-frailejon-descubierta-en-sonson.html" target="_blank" rel="noopener">MiOriente</a></td>
+          </tr>
+          <tr>
+            <td><span class="sci">Rinorea antioquiensis<span class="common"></span></span></td>
+            <td><span class="pill pendiente">Sinonimizada</span><span class="pill eponimo">Topónimo</span></td>
+            <td class="loc">—</td>
+            <td class="note">Trabajo taxonómico reciente la reclasificó como sinónimo de R. squamata — ya no es válida como especie separada.</td>
+            <td class="src"><a href="https://en.wikipedia.org/wiki/Rinorea_antioquiensis" target="_blank" rel="noopener">Wikipedia</a></td>
+          </tr>
+          <tr>
+            <td><span class="sci">Espeletia frontinoensis<span class="common">Frailejón de Frontino</span></span></td>
+            <td><span class="pill endemica">Endémica</span><span class="pill eponimo">Topónimo</span></td>
+            <td class="loc">Páramo de Frontino-Urrao / Páramo del Sol, &gt; 3.500 m</td>
+            <td class="note">Descrita por el botánico José Cuatrecasas. Aparece en la portada de la sección de páramos de "Antioquia Viva 2025" (Gobernación de Antioquia / SIDAP) — hallazgo de esta segunda revisión.</td>
+            <td class="src"><a href="https://powo.science.kew.org/taxon/urn:lsid:ipni.org:names:97669-2" target="_blank" rel="noopener">Plants of the World Online (Kew)</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- HONGOS -->
+  <section class="group" id="hongos">
+    <div class="group-head">
+      <span class="group-tag" style="background:var(--hongos-soft); color:var(--hongos)">Hongos</span>
+      <h2>Hongos</h2>
+      <span class="group-count">2 especies</span>
+    </div>
+    <p class="group-note">El reino menos estudiado en Colombia: se estima que existen más de 100.000 especies de hongos en el país, de las cuales solo una fracción mínima está descrita.</p>
+    <div class="tbl-scroll">
+      <table>
+        <thead><tr><th>Especie</th><th>Estado</th><th>Localidad</th><th>Nota</th><th>Fuente</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><span class="sci">Psilocybe bispora<span class="common"></span></span></td>
+            <td></td>
+            <td class="loc">Támesis, Río Frío (5°43'1"N, 75°44'9"O)</td>
+            <td class="note">Descrita en 2007 por el micólogo Gastón Guzmán; dos tipos de basidiosporas.</td>
+            <td class="src"><a href="https://raccefyn.co/index.php/raccefyn/article/view/2202" target="_blank" rel="noopener">Rev. Acad. Colomb. Ciencias</a></td>
+          </tr>
+          <tr>
+            <td><span class="sci">Puccinia baccharidis-antioquensis<span class="common">Roya</span></span></td>
+            <td><span class="pill eponimo">Topónimo</span></td>
+            <td class="loc">Páramos de Antioquia</td>
+            <td class="note">Hongo fitopatógeno (roya) descrito en páramos del departamento.</td>
+            <td class="src"><a href="https://www.dicyt.com/noticias/nuevas-especies-y-registros-de-royas-en-paramos-de-antioquia" target="_blank" rel="noopener">DiCYT</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ANIMALES DOMÉSTICOS -->
+  <section class="group" id="domesticos">
+    <div class="group-head">
+      <span class="group-tag" style="background:var(--domesticos-soft); color:var(--domesticos)">Animales domésticos</span>
+      <h2>Animales domésticos</h2>
+      <span class="group-count">No aplica endemismo biológico</span>
+    </div>
+    <div class="note-box">
+      <strong>Nota conceptual:</strong> el endemismo es una categoría biológica de especies silvestres; los animales domésticos son razas dentro de una misma especie, así que no hay "razas endémicas de Antioquia" en sentido estricto. Lo más cercano en el patrimonio genético del departamento es el <strong>Caballo Criollo Colombiano de Paso Fino</strong>, declarado patrimonio genético y raza autóctona nacional por la Ley 1842 de 2017 — entró al país por Urabá, Antioquia, en 1509, uno de los primeros asentamientos españoles. También existe la <strong>gallina criolla colombiana</strong>, de interés académico creciente por su valor genético y cultural rural, aunque sin una variedad formalmente registrada como exclusiva de Antioquia.
+    </div>
+  </section>
+
+  <!-- TOPÓNIMOS -->
+  <section class="group" id="toponimos">
+    <div class="group-head">
+      <span class="group-tag" style="background:var(--rust-soft); color:var(--rust)">Transversal</span>
+      <h2>Topónimos y epónimos antioqueños</h2>
+      <span class="group-count">22 especies nombradas en honor a un lugar o persona de Antioquia</span>
+    </div>
+    <p class="group-note">Agrupa por epíteto o motivo del nombre, cruzando todos los grupos de arriba — el ángulo que pediste explícitamente ("medellinensis", "yarumalensis", etc.).</p>
+    <div class="tbl-scroll">
+      <table>
+        <thead><tr><th>Epíteto / motivo</th><th>Especies</th><th>Origen del nombre</th></tr></thead>
+        <tbody>
+          <tr><td><span class="epithet">medellinensis</span></td><td class="loc"><em>Calliandra medellinensis</em>, <em>Trichomycterus medellinensis</em></td><td class="note">Ciudad de Medellín</td></tr>
+          <tr><td><span class="epithet">yarumalensis</span></td><td class="loc"><em>Magnolia yarumalensis</em></td><td class="note">Municipio de Yarumal</td></tr>
+          <tr><td><span class="epithet">jardinensis</span></td><td class="loc"><em>Magnolia jardinensis</em></td><td class="note">Municipio de Jardín</td></tr>
+          <tr><td><span class="epithet">guatapensis</span></td><td class="loc"><em>Magnolia guatapensis</em></td><td class="note">Municipio de Guatapé</td></tr>
+          <tr><td><span class="epithet">urraoensis</span></td><td class="loc"><em>Magnolia urraoensis</em>, <em>Grallaria urraoensis</em></td><td class="note">Municipio de Urrao</td></tr>
+          <tr><td><span class="epithet">frontinensis / frontinoensis</span></td><td class="loc"><em>Magnolia frontinensis</em> (en publicación), <em>Espeletia frontinoensis</em></td><td class="note">Municipio de Frontino</td></tr>
+          <tr><td><span class="epithet">sonsonense</span></td><td class="loc"><em>Epidendrum sonsonense</em></td><td class="note">Municipio de Sonsón</td></tr>
+          <tr><td><span class="epithet">tulenapa</span></td><td class="loc"><em>Pseudocerocoma tulenapa</em></td><td class="note">Reserva Tulenapa, Carepa (Urabá) — voz Guna Dule</td></tr>
+          <tr><td><span class="epithet">antioquensis / antioquiensis</span></td><td class="loc"><em>Freziera antioquensis</em>, <em>Cyclopogon antioquiensis</em>, <em>Saccopteryx antioquensis</em>, <em>Anadia antioquensis</em>, <em>Centrolene antioquiensis</em>, <em>Rinorea antioquiensis</em> (sinonimizada)</td><td class="note">Departamento de Antioquia</td></tr>
+          <tr><td><span class="epithet">antioquiaensis / antioquiae / antioquia</span></td><td class="loc"><em>Caecilia antioquiaensis</em>, <em>Anolis antioquiae</em>, <em>Hyloscirtus antioquia</em>, <em>Perisama antioquia</em>, <em>Espeletia occidentalis var. antioquensis</em></td><td class="note">Departamento de Antioquia (variantes latinas del mismo gentilicio)</td></tr>
+          <tr><td><span class="epithet">sernai</span></td><td class="loc"><em>Thryophilus sernai</em></td><td class="note">Marco Antonio Serna Díaz, fundador de la SAO</td></tr>
+          <tr><td><span class="epithet">toroi</span></td><td class="loc"><em>Cyathea toroi</em></td><td class="note">Juan Lázaro Toro, ingeniero forestal de CORANTIOQUIA</td></tr>
+          <tr><td><span class="epithet">campesino</span></td><td class="loc"><em>Pristimantis campesino</em></td><td class="note">Homenaje a los habitantes rurales de Colombia (no un topónimo, pero motivado por la ruralidad antioqueña)</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- OTROS GRUPOS -->
+  <section class="group" id="otros">
+    <div class="group-head">
+      <span class="group-tag" style="background:var(--otros-soft); color:var(--otros)">Fuera del catálogo</span>
+      <h2>Otros grupos taxonómicos</h2>
+      <span class="group-count">1 especie — insectos no lepidópteros</span>
+    </div>
+    <p class="group-note">Como pediste, esto es lo que apareció de grupos que la app no cataloga hoy (el catálogo actual no incluye insectos fuera de mariposas/polillas).</p>
+    <div class="tbl-scroll">
+      <table>
+        <thead><tr><th>Especie</th><th>Grupo</th><th>Localidad</th><th>Nota</th><th>Fuente</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><span class="sci">Pseudocerocoma tulenapa<span class="common"></span></span></td>
+            <td class="loc">Coleoptera (escarabajo), fam. Cantharidae</td>
+            <td class="loc">Reserva Natural Tulenapa, Carepa, Urabá</td>
+            <td class="note">Descrito en 2024; primer registro de la tribu Ichthyurini en Colombia. Hallado por estudiantes de la UdeA.</td>
+            <td class="src"><a href="http://novataxa.blogspot.com/2024/08/pseudocerocoma.html" target="_blank" rel="noopener">Novataxa</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="note-box" style="border-left-color:var(--otros)">
+      La <strong>Bioexpedición Anorí</strong> (2018, UdeA/EAFIT/Humboldt) encontró 14 especies nuevas para la ciencia en un solo bosque de 38.000 ha: 2 escarabajos, 10 plantas, 1 ratón arbóreo y 1 lagartija — sin nombres individuales publicados en las fuentes consultadas, pero es evidencia directa de cuánto falta por describir en el departamento.
+    </div>
+  </section>
+
+  <!-- METODOLOGÍA -->
+  <section class="meta" id="metodologia">
+    <h2>Metodología y advertencias</h2>
+    <ul>
+      <li><strong>Fuentes:</strong> prensa colombiana (El Colombiano, El Tiempo, Infobae, Semana, DiCYT), portales institucionales (Universidad de Antioquia, Instituto Humboldt, SAO, CORANTIOQUIA, EPM), bases taxonómicas (GBIF, Wikipedia especializada, Amphibian Species of the World, Birds of the World, IUCN Red List) y literatura científica (Zootaxa, Brittonia, Herpetologica, Revista de la Academia Colombiana de Ciencias). La API de endemismo de iNaturalist para el place_id de Antioquia no devolvió resultados útiles (solo especies globales comunes), así que la búsqueda se hizo dirigida por nombre de especie y por patrón de epíteto.</li>
+      <li><strong>"Endémica" vs. "epónimo/topónimo":</strong> son categorías distintas que a veces coinciden. Una especie puede tener nombre antioqueño sin ser endémica del departamento (ej. <em>Freziera antioquensis</em>, cuyo rango exacto no está confirmado como exclusivo), y viceversa (ej. <em>Anolis mariarum</em> es endémica pero no lleva un nombre toponímico).</li>
+      <li><strong>Esta lista no es definitiva.</strong> Antioquia tiene, según el Instituto Humboldt, del orden de 78 especies endémicas documentadas y 24 aves endémicas solo según la SAO — cifras que superan lo que aquí se nombra individualmente, porque muchas fuentes citan el número total sin publicar el listado completo en acceso abierto. Los grupos con más vacío de información fueron mamíferos y polillas.</li>
+      <li><strong>Actualización (agosto 2026):</strong> <em>Espeletia frontinoensis</em> y <em>Bolitoglossa hypacra</em> se agregaron tras revisar la cartilla educativa <em>"Antioquia Viva 2025"</em> (Andrea Sanín / Gobernación de Antioquia / SIDAP / Corplanes), que muestra el frailejón de Frontino en la portada de su sección de páramos — confirmado como especie válida (Cuatrecasas) y endémica del complejo Frontino-Urrao mediante fuentes independientes (Kew POWO, literatura sobre el páramo).</li>
+    </ul>
+    <div class="caveat"><strong>Antes de usar cualquiera de estos datos en la app:</strong> verificar directamente contra la publicación científica original (no solo la nota de prensa) para nombre común definitivo, estado IUCN actualizado y coordenadas de distribución — varias notas de prensa simplifican o tienen imprecisiones menores frente al paper taxonómico.</div>
+  </section>
+
+</div>
+
+<footer>Antioquia Natural · Investigación compilada para evaluar ampliación del catálogo de especies · Todas las fuentes son enlaces verificables arriba</footer>
+</body>
+</html>

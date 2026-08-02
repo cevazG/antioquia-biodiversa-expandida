@@ -62,6 +62,38 @@ var App = (() => {
     return `<span class="badge-group badge-group--${group}">${label}</span>`;
   }
 
+  // ── Badges de atributo (sombrilla / endémica / dieta / actividad) ──
+  // Activación/desactivación por tipo: ver BADGE_TAGS en especie.js.
+
+  const DIETA_ICONS = {
+    omnivoro: '🍽️', carnivoro: '🥩', herbivoro: '🌿', insectivoro: '🦗',
+    frugivoro: '🍈', nectarivoro: '🌸', carronero: '💀', granivoro: '🌾', filtrador: '💧'
+  };
+
+  const ACTIVIDAD_ICONS = { diurno: '☀️', nocturno: '🌙', crepuscular: '🌆' };
+
+  function _attrBadge(icon, label, variant) {
+    return `<span class="badge-attr badge-attr--${variant}"><span class="badge-attr__icon">${icon}</span>${label}</span>`;
+  }
+
+  function umbrellaBadge() {
+    return _attrBadge('☂️', I18n.t('tag_umbrella'), 'gold');
+  }
+
+  function endemicaBadge() {
+    return _attrBadge('🫓', I18n.t('tag_endemica'), 'gold');
+  }
+
+  function dietaBadge(value) {
+    if (!value || !DIETA_ICONS[value]) return '';
+    return _attrBadge(DIETA_ICONS[value], I18n.t(`dieta_${value}`), 'fact');
+  }
+
+  function actividadBadge(value) {
+    if (!value || !ACTIVIDAD_ICONS[value]) return '';
+    return _attrBadge(ACTIVIDAD_ICONS[value], I18n.t(`actividad_${value}`), 'fact');
+  }
+
   // Renderiza placeholder de foto según grupo
   function groupPlaceholder(group) {
     const icons = {
@@ -146,7 +178,7 @@ var App = (() => {
     });
   }
 
-  return { init, toast, iucnBadge, groupBadge, groupPlaceholder, initAccordion, initGallery, initSearch };
+  return { init, toast, iucnBadge, groupBadge, umbrellaBadge, endemicaBadge, dietaBadge, actividadBadge, groupPlaceholder, initAccordion, initGallery, initSearch };
 })();
 
 // Arrancar cuando el DOM esté listo

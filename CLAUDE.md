@@ -33,6 +33,8 @@ Web app mobile-first para la Gobernación de Antioquia. Permite consultar la bio
 | Logs | Winston 3 — JSON estructurado con traceId por petición (ajuste v2.1) |
 | Caché | Redis 7 + ioredis — TTLs por ruta; modo degradado si Redis no está disponible (ajuste v2.1) |
 | SAST | ESLint-security + Semgrep (`p/nodejs`, `p/owasp-top-ten`) — 0 errores en código de API (ajuste v2.1) |
+| Autenticación admin | Usuarios individuales (colección `Usuario`) + bcrypt + reCAPTCHA v2 en el login — ver "Panel admin — Autenticación y usuarios" |
+| Contenedores | Docker (multi-stage, usuario non-root, `.dockerignore`, `HEALTHCHECK`, escaneo Trivy en CI/CD) — ver "Docker — Containerización del backend" |
 
 ---
 
@@ -71,48 +73,60 @@ Antioquia Natural/
 │   └── translations.json              ← Textos ES/EN compartidos por todos los módulos
 │
 ├── admin/                             ← Panel de administración para curadores
-│   ├── index.html                     ← Login
+│   ├── index.html                     ← Login (usuario + contraseña + reCAPTCHA v2)
+│   ├── usuarios.html                  ← Gestión de usuarios (crear/editar/desactivar) — solo rol Admin.Contenido
 │   ├── jpl.html                       ← Panel curador JPL (fotos biodiversidad)
 │   ├── gc.html                        ← Panel curador Guarda Cuencas
 │   ├── css/admin.css                  ← Diseño del panel (incluye .foto-slot para multi-foto)
 │   └── js/api.js                      ← Cliente HTTP del panel
 │
-├── backend/                           ← API REST (Node.js/Express + MongoDB Atlas)
+├── Dockerfile                         ← Imagen del backend: multi-stage, usuario non-root, HEALTHCHECK
+├── .dockerignore                      ← Excluye node_modules, secretos, volúmenes dinámicos, documentos institucionales
+├── docker-compose.yml                 ← Servicio app + volúmenes nombrados (fotos/JSON publicados/logs)
+├── backend/                           ← API REST (Node.js/Express + MongoDB Atlas), arquitectura hexagonal por módulo
 │   ├── package.json
-│   ├── .env                           ← MONGODB_URI_COM, SESSION_SECRET, ADMIN_PASSWORD, LOG_LEVEL, REDIS_URL
+│   ├── .env                           ← MONGODB_URI_COM, SESSION_SECRET, REDIS_URL, RECAPTCHA_SITE_KEY/SECRET_KEY, LOG_LEVEL
 │   ├── src/
 │   │   ├── index.js                   ← Express app, rutas, CORS, sesiones, requestLogger
 │   │   ├── db.js                      ← Conexión MongoDB + Redis (exporta connCom, redis)
 │   │   ├── swagger.yaml               ← Spec OpenAPI 3.0.3
+│   │   ├── config/catalogo.js         ← Única fuente de verdad: GRUPOS_VALIDOS, SUBREGIONES_VALIDAS, IUCN_VALIDOS, ROLES_VALIDOS, ROL_SUPERADMIN
 │   │   ├── middleware/
-│   │   │   ├── adminAuth.js           ← Guard de sesión para rutas admin
 │   │   │   └── requestLogger.js       ← Log de cada request: método, path, status, ms, traceId
 │   │   ├── utils/
 │   │   │   ├── logger.js              ← Winston: JSON estructurado, traceId, archivos en logs/
 │   │   │   └── cache.js               ← getCached() + invalidate() con TTLs de la propuesta
-│   ├── .eslintrc.json                 ← ESLint + eslint-plugin-security; overrides para tests/scripts
-├── .semgrep.yml                       ← Reglas SAST locales + apunta a p/nodejs y p/owasp-top-ten
-├── azure-pipelines.yml                ← CI: lint → lint:security → semgrep → tests → SonarQube → deploy
-├── netlify.toml                       ← Publish dir, redirects trailing slash, security headers, cache
 │   │   ├── models/
 │   │   │   ├── JplPhoto.js            ← fotos:[String] (array 1-3), mes, especie, grupo, IUCN…
-│   │   │   └── GcPhoto.js             ← foto:String (único), mes, cuenca, subregion…
+│   │   │   ├── GcPhoto.js             ← foto:String (único), mes, cuenca, subregion…
+│   │   │   └── Usuario.js             ← nombre, usuario, passwordHash, roles[], activo — ver "Panel admin — Autenticación y usuarios"
+│   │   ├── modules/                   ← Hexagonal por módulo: domain/ (reglas puras) → application/casos_uso/ → infrastructure/ (Mongoose, Redis, bcrypt) → interfaces/http/ (router, composition root)
+│   │   │   ├── jpl/                   ← CRUD + estadísticas + publicación de galería JPL
+│   │   │   ├── gc/                    ← CRUD + publicación de galería Guarda Cuencas
+│   │   │   └── auth/                  ← Login, usuarios individuales, RBAC, reCAPTCHA — ver sección dedicada abajo
+│   │   ├── routes/admin.js            ← Composition root: monta authRouter + jplRouter/gcRouter/usuariosRouter detrás de requireRole()
 │   │   └── scripts/
 │   │       ├── import_excel.js        ← Importa especies desde plantilla Excel
 │   │       ├── generate_template.js   ← Genera plantilla Excel para curadores
 │   │       ├── generate_evaluacion_especies.js  ← Genera plantilla Excel de evaluación (4 hojas)
 │   │       ├── export_evaluacion_csv.js         ← Exporta LISTADO diligenciado a CSV
 │   │       ├── generate_analisis_especies_doc.js ← Genera Word con propuesta de 158 especies
-│   │       ├── generate_docs.js       ← Regenera documentos Word para TI
+│   │       ├── generate_docs.js       ← Regenera documentos Word para TI (parcialmente obsoleto, ver "TI Gobernación")
 │   │       ├── add_peces_arboles.js   ← Migración: agrega grupos peces/arboles_nativos
 │   │       ├── optimize_photos.js     ← Convierte JPG/PNG → WebP 1200px q82 en batch
-│   │       ├── lib/docx_helpers.js    ← Portada, TOC nativo, headings, tablas, header/footer institucional — compartido por los 4 generadores de "TI Gobernación" abajo
-│   │       ├── generate_levantamiento_requisitos.js ← Levantamiento_Requisitos_Antioquia_Natural.docx (FO-M7-P8-020)
-│   │       ├── generate_propuesta_ajustes.js        ← Propuesta_Ajustes_Tecnicos_v2_Antioquia_Natural.docx (FO-M7-P8-021)
-│   │       ├── generate_documento_integral.js       ← Documento_Integral_Desarrollo_Antioquia_Natural.docx (FO-M7-P8-023)
-│   │       ├── generate_matriz_respuesta.js         ← Respuesta_Observaciones_Revision_Documental_Antioquia_Natural.docx (respuesta punto por punto a los 26 hallazgos de TI)
+│   │       ├── seed_usuario_admin.js  ← Bootstrap: crea el primer usuario Admin.Contenido
+│   │       ├── lib/docx_helpers.js    ← Portada, TOC nativo, headings, tablas, header/footer institucional — compartido por los generadores de "TI Gobernación" abajo
+│   │       ├── generate_levantamiento_requisitos.js ← Levantamiento_Requisitos_Antioquia_Natural.docx (FO-M7-P8-020) — script orphan, ver nota en "TI Gobernación"
+│   │       ├── generate_propuesta_ajustes.js        ← Propuesta_Ajustes_Tecnicos_v2_Antioquia_Natural.docx (FO-M7-P8-021) — script orphan, ver nota en "TI Gobernación"
+│   │       ├── generate_documento_integral.js       ← Documento_Integral_Desarrollo_Antioquia_Natural.docx (FO-M7-P8-023) — script orphan, ver nota en "TI Gobernación"
+│   │       ├── generate_matriz_respuesta.js         ← Respuesta a los 26 hallazgos de REVISION 2 (histórico)
+│   │       ├── generate_respuesta_revision3.js      ← Respuesta a los hallazgos de REVISION 3 — ver "TI Gobernación"
 │   │       ├── generate_diccionario_datos.js        ← Diccionario_Datos_BD_Comunidad_Antioquia_Natural.xlsx (una hoja por colección)
 │   │       └── generate_presentacion_comite.py       ← Presentacion_Comite_Cientifico_Antioquia_Natural.pptx (python-pptx, criterios de evaluación de especies)
+│   └── __tests__/                     ← supertest (HTTP) + tests unitarios por capa hexagonal (domain/application aislados con fakes, sin Mongoose)
+├── .semgrep.yml                       ← Reglas SAST locales + apunta a p/nodejs y p/owasp-top-ten
+├── azure-pipelines.yml                ← CI → BuildImage (Docker + Trivy) → DeployDev/DeployProd (docker compose)
+├── netlify.toml                       ← Publish dir, redirects trailing slash, security headers, cache
 │
 ├── biodiversidad/                     ← Módulo principal
 │   ├── index.html                     ← Selección de idioma (entrada a la app)
@@ -442,6 +456,36 @@ Las entradas sin fecha usan `titulo`/`tituloEn` en lugar de `mes`/`año`.
 
 ---
 
+## Panel admin — Autenticación y usuarios
+
+Cada curador tiene usuario y contraseña propios — **no** una sola contraseña compartida (así era antes; se corrigió por un hallazgo crítico de TI Gobernación, ver "TI Gobernación" abajo).
+
+- **Modelo** (`backend/src/models/Usuario.js`): `nombre`, `usuario` (único, minúsculas), `passwordHash` (bcrypt, factor 10), `roles: [String]`, `activo: Boolean`.
+- **Roles** (`backend/src/config/catalogo.js`): `Curador.Biodiversidad`, `Curador.GuardaCuencas`, `Admin.Contenido` — este último es superrole (pasa cualquier `requireRole(...)`, incluida la gestión de usuarios). Los nombres coinciden a propósito con los que ya están comprometidos con TI como mapeo de roles de Microsoft Entra ID, para que una futura migración solo cambie el mecanismo de verificación, no el modelo de permisos.
+- **Sesión**: `express-session`, cookie `httpOnly`, nombre custom (`antioquia.sid`), `secure` en producción, 8h de expiración. El usuario de la sesión se busca en Mongo **en cada petición** (no se cachea en la sesión), para que desactivar una cuenta revoque el acceso de inmediato — trade-off deliberado de rendimiento por seguridad.
+- **`GET /api/admin/me` nunca responde 401** — siempre 200 con `{isAdmin:false}` si no hay sesión válida, para que el frontend pueda usarlo como probe sin tratar "no logueado" como error.
+- **reCAPTCHA v2** en `admin/index.html`: verificado en el servidor (`modules/auth/infrastructure/verificarRecaptcha.js`) antes de siquiera consultar la base de usuarios. Usa las claves de prueba oficiales de Google (`RECAPTCHA_SITE_KEY`/`RECAPTCHA_SECRET_KEY` en `.env`) mientras el dominio real no está desplegado — **reemplazar por claves reales registradas para el dominio antes de producción**.
+- **Panel de gestión** (`admin/usuarios.html`, solo `Admin.Contenido`): crear, editar, desactivar. Desactivar no borra el registro (soft-delete vía `activo:false`).
+- **Bootstrap**: `node src/scripts/seed_usuario_admin.js "Nombre" usuario clave12345678 Admin.Contenido` crea el primer usuario.
+- **Futuro**: migración a Microsoft Entra ID (OAuth 2.0 + OIDC) documentada como Ajuste 1 en la PTF — no bloqueante, ya que el módulo de usuarios individuales resuelve el hallazgo de fondo (cuentas genéricas). Ver Roadmap Técnico del DI.
+
+---
+
+## Docker — Containerización del backend
+
+Se containeriza solo el backend (proceso Node, sirve también el frontend estático). Redis, Nginx y MongoDB Atlas quedan fuera del contenedor, igual que antes.
+
+- **`Dockerfile`** (raíz del proyecto, no `backend/`): multi-stage — etapa `deps` (`npm ci --omit=dev`) + etapa `runtime` (`node:22-slim`, usuario `node` non-root, `HEALTHCHECK` contra `/api/health`).
+- **`.dockerignore`**: excluye secretos, `node_modules`, contenido dinámico (fotos/JSON publicados) y documentos institucionales grandes/privados — reduce tamaño de imagen y no expone `Documentos gobernacion/` dentro del contenedor.
+- **`docker-compose.yml`**: 5 volúmenes nombrados para lo que el backend escribe en tiempo de ejecución — `jpl_fotos`, `jpl_data`, `gc_fotos`, `gc_data`, `backend_logs`. **Primer despliegue**: hay que copiar el contenido actual de esas carpetas al volumen (`docker compose cp`), incluyendo archivos estáticos que viven en la misma carpeta que el contenido dinámico (ej. `municipios.json` en `jovenes_pa_lante/data/`) — el volumen arranca vacío, no hereda nada de la imagen. Rotación de logs vía driver `json-file` (`max-size: 10m`, `max-file: 5`).
+- **`azure-pipelines.yml`**: nueva stage `BuildImage` entre CI y los despliegues — build de la imagen, escaneo de vulnerabilidades con Trivy (falla en Alta/Crítica), push al registry. `DeployDev`/`DeployProd` pasaron de `git pull && pm2 restart` por SSH a `docker compose pull && docker compose up -d`.
+- **Registry de imágenes**: placeholder `<acr-name>.azurecr.io/antioquia-natural`, a confirmar con TI Gobernación (mismo tratamiento que el resto del pipeline, listo pero bloqueado por credenciales institucionales).
+- **Rollback**: ahora es cambiar `IMAGE_TAG` al tag anterior + `docker compose up -d` — más simple que el procedimiento previo (`git checkout` + `npm install` + reinicio).
+- **Desarrollo local no cambia**: `npm run dev` en `localhost:3000` sigue siendo el flujo de trabajo diario; Docker reemplaza el despliegue documentado en QA/Producción, no el desarrollo.
+- Detalle completo del procedimiento (pre-requisitos, despliegue, subir/bajar, rollback, monitoreo) en el Manual Técnico del DI (`Documentos gobernacion/TI/REVISION 3/Documento Integral de Desarrollo Tecnico de la Aplicacion.docx`, numeral 10) y en `README.md` § Despliegue en producción.
+
+---
+
 ## Panel admin JPL — funcionalidades
 
 ### Multi-foto (1–3 imágenes por especie)
@@ -564,6 +608,22 @@ Los tintes de fondo/texto de los badges informativos se generan con `color-mix()
 
 ---
 
+## CSS — el atributo `hidden` necesita un guard explícito
+
+> **Regla:** cualquier elemento que se oculte/muestre con el atributo HTML `hidden` (no con una clase) necesita una regla `.mi-clase[hidden] { display: none; }` explícita en el CSS **si esa misma clase también fija `display` por su cuenta** (`display: flex`, `display: block`, etc).
+
+**Por qué:** el navegador oculta `[hidden]` por defecto, pero esa regla vive en su propia hoja de estilos de *usuario-agente* (la de más baja prioridad en la cascada). Si una clase de autor (la tuya) también declara `display` para ese mismo elemento, **la regla de autor gana siempre**, sin importar la especificidad ni el atributo `hidden` — el elemento se queda visible.
+
+**Incidente real (2026-08-02):** `.view-switcher__btn { display: flex; }` en `components.css` hacía que `#reel-view-btn` (con atributo `hidden`) quedara visible y clickeable en `listado.html` incluso en modo subregión+grupo, donde debía estar oculto — al tocarlo se abría un carrete vacío. Mismo patrón exacto en `.subregion-about__municipios-list`, que aparecía expandida desde el primer render aunque el JS arrancara con `_municipiosOpen = false`. Se corrigió agregando `.view-switcher__btn[hidden] { display: none; }` y `.subregion-about__municipios-list[hidden] { display: none; }` justo debajo de cada regla base.
+
+**Antes de dar por buena cualquier clase nueva que combine `display` + toggle por `hidden`**, agregar el guard `[hidden]` en el mismo lugar donde se define `display`, no como una ocurrencia tardía.
+
+### Overlays/lightbox: reset defensivo en `pageshow`
+
+Los overlays de pantalla completa que se abren con `overlay.hidden = false` (carrete de `listado.js`/`subregion.js`, lightbox de `especie.js`) escuchan también `window.addEventListener('pageshow', e => { if (e.persisted) ... })` para forzar el cierre si el navegador restaura la página desde el *back-forward cache* (gesto de "atrás") con el overlay tal como quedó abierto, sin volver a ejecutar el JS. Aplicar el mismo patrón a cualquier overlay/modal nuevo de pantalla completa que se agregue más adelante.
+
+---
+
 ## Guía de imágenes de especies
 
 Estructura: `biodiversidad/img/species/<grupo>/<familia>/<spXXX_slug>/<slug>_001.webp`
@@ -605,6 +665,10 @@ Los niveles 1 y 2 no son cuencas adicionales — son categorías que agrupan las
 ### Zona de tap ampliada en el mapa de cuencas
 
 Cada río visible en `agua/mapa.js` tiene una segunda polyline invisible superpuesta (`weight: 22, opacity: 0.02`, mismo trazado y mismo handler de click) para que el área tocable sea mucho más ancha que la línea dibujada — sin esto, tocar un río en un teléfono real requería hacer zoom para acertar el trazo delgado. Se guarda como `entry.lineaHit`/`entry.lineaFueraHit` junto a las líneas visibles y se sincroniza con ellas en `updateVisibility()`.
+
+### Panel de información: toque en el área vs. toque en la línea
+
+Un mismo río se puede tocar en dos lugares distintos del mapa (su polígono de drenaje o su trazado), y `openSheet(cuenca, tipoToque)` en `agua/mapa.js` muestra contenido distinto según cuál fue: longitud aprox. si `tipoToque === 'linea'`, área en km² si `tipoToque === 'area'`. Para que quede claro cuál de los dos se está viendo, el título antepone **"Área del"** al nombre del río solo en el caso de área (`"Área del Río Sucio"`) — nunca como una etiqueta/kicker aparte, y nunca en mayúsculas sostenidas (ver regla de estilo arriba).
 
 ---
 
@@ -656,6 +720,8 @@ Según la Propuesta Técnica v2.0, el pipeline ejecuta en cada push a `main` o `
 | 7 | Build + deploy (solo `develop`/`main`) | — |
 
 Semgrep publica el reporte JSON como artefacto `semgrep-sast`. Las reglas locales en `.semgrep.yml` detectan session cookies sin `secure`, contraseñas hardcodeadas y errores internos expuestos al cliente.
+
+**Ampliado desde entonces (2026-08-06):** el paso 7 ahora es una stage `BuildImage` dedicada (build de la imagen Docker + escaneo de vulnerabilidades con Trivy, falla en Alta/Crítica) seguida de `DeployDev`/`DeployProd` vía `docker compose pull && up -d` — ver "Docker — Containerización del backend".
 
 > **Pendiente de activar:** requiere acceso al proyecto Azure DevOps de TI Gobernación. `azure-pipelines.yml` está listo; solo necesita las Service Connections configuradas por TI.
 
@@ -753,13 +819,13 @@ Cubre todos los compromisos de documentación del § 8 de la Propuesta Técnica 
 
 | Sección | Contenido |
 |---|---|
-| Prerrequisitos | Node.js 22 LTS, npm 10+, MongoDB Atlas 7.x, Redis 7.x |
-| Instalación local | Clonar, instalar, configurar `.env`, levantar Redis, `npm run dev` |
-| Variables de entorno | `MONGODB_URI_COM`, `SESSION_SECRET`, `ADMIN_PASSWORD`, `REDIS_URL`, `LOG_LEVEL`, `PORT` |
+| Prerrequisitos | Node.js 22 LTS, npm 10+, MongoDB Atlas 7.x, Redis 7.x (Docker Engine + Compose solo para despliegue) |
+| Instalación local | Clonar, instalar, configurar `.env`, levantar Redis, `npm run dev` — **sin Docker**, no cambió |
+| Variables de entorno | `MONGODB_URI_COM`, `SESSION_SECRET`, `REDIS_URL`, `RECAPTCHA_SITE_KEY`/`RECAPTCHA_SECRET_KEY`, `LOG_LEVEL`, `PORT` |
 | Comandos | `dev`, `start`, `lint`, `lint:security`, `npm audit`, `test`, `test:coverage`, `optimize-photos` |
-| Despliegue producción | Ubuntu 24.04: Node.js, Redis (256 MB, allkeys-lru), PM2, Nginx, Certbot/SSL |
-| Nginx | Config completa con proxy inverso, `X-Real-IP`, health check upstream, SSL |
-| Verificación | `pm2 status`, `pm2 logs`, `curl /api/health` — respuesta esperada `mongodb+redis connected` |
+| Despliegue producción | Ubuntu 24.04: Docker Engine + Compose, Nginx, Certbot/SSL, Redis nativo — imagen construida/escaneada/publicada por el pipeline, servidor solo corre `docker compose pull && up -d` |
+| Nginx | Config completa con proxy inverso, `X-Real-IP`, health check upstream, SSL (sigue igual, proxy al puerto 3000 del contenedor) |
+| Verificación | `docker compose ps` (estado "healthy"), `docker compose logs app`, `curl /api/health` — respuesta esperada `mongodb+redis connected` |
 | API REST | Tabla de endpoints con método, ruta, descripción y nivel de auth |
 | Stack tecnológico | Tabla completa al día (Winston, ioredis, SAST, CI/CD) |
 
@@ -769,21 +835,38 @@ Cubre todos los compromisos de documentación del § 8 de la Propuesta Técnica 
 
 Contrato de prestación de servicios por 18 meses (ejecución, desarrollo y mantenimiento) ya suscrito entre el contratista y la Secretaría de Ambiente. Contratistas: **Sebastián Guzmán Díaz y Alejandro López**. La ejecución sobre infraestructura institucional todavía no ha podido comenzar porque TI Gobernación no ha entregado el servidor ni activado Azure DevOps.
 
-TI Gobernación revisó una primera versión de los documentos y devolvió 26 hallazgos (`Documentos gobernacion/TI/Revision 2/Observaciones_Revision_Documental Final.pdf`). Los 3 documentos exigidos por sus plantillas, más 2 entregables de soporte, se regeneran con los scripts de `backend/src/scripts/` (ver arriba) y quedan en `Documentos gobernacion/TI/Nuevos documentos TI/`:
+### Estado actual: REVISION 3
 
-| Documento | Plantilla | Script |
-|---|---|---|
-| Levantamiento de Requisitos | FO-M7-P8-020 | `generate_levantamiento_requisitos.js` |
-| Propuesta de Ajustes Técnicos v2 | FO-M7-P8-021 | `generate_propuesta_ajustes.js` |
-| Documento Integral de Desarrollo | FO-M7-P8-023 | `generate_documento_integral.js` |
-| Matriz de Respuesta a Observaciones | — (respuesta a los 26 hallazgos, uno por uno) | `generate_matriz_respuesta.js` |
-| Diccionario de Datos (Excel) | Exigido por FO-M7-P8-023 §6.6 | `generate_diccionario_datos.js` |
+Los documentos vivos y actuales están en `Documentos gobernacion/TI/REVISION 3/` — 3 archivos `.docx` que se editan **directamente** con `python-docx` (formato preservado, verificado con `assert run.text == old_text` antes de cualquier cambio, nunca reemplazo de párrafo/celda completo):
 
-**Los 3 ajustes vigentes son: Entra ID, Redis, SAST.** La v2.1 de la propuesta incluía además Observabilidad (Winston+Loki+Prometheus+Grafana) y Backup de MongoDB como Ajustes 3 y 5; ambos se retiraron en v2.2 (2026-07-29) por instrucción directa de TI (monitoreo con Grafana no necesario; la Gobernación tiene su propio protocolo de respaldos) — ver el historial completo en el numeral 9 (Control de Ajustes) del documento generado.
+| Documento | Plantilla |
+|---|---|
+| `Documento Integral de Desarrollo Tecnico de la Aplicacion.docx` | FO-M7-P8-023 |
+| `Levantamiento de Requisitos de Software.docx` | FO-M7-P8-020 |
+| `Propuesta tecnica y financiera de desarrollo de software.docx` | FO-M7-P8-021 |
+| `Respuesta_Observaciones_Revision_Documental_Verificacion_Final_v3_Antioquia_Natural.docx` | — respuesta punto por punto a los hallazgos de REVISION 3, generado con `generate_respuesta_revision3.js` |
 
-**Regenerar tras cualquier cambio de contenido:** `node src/scripts/generate_<doc>.js` desde `backend/`, luego verificar con `python3 -c "import docx; ..."` que párrafos/tablas/imágenes no cambiaron de forma inesperada antes de considerar el cambio terminado.
+**Los 3 ajustes vigentes son: Entra ID, Redis, SAST.** Entra ID quedó reencuadrado como "a futuro, se evaluará la posibilidad" (no bloqueante) desde que el módulo de usuarios individuales resolvió de fondo el hallazgo de cuenta genérica — ver "Panel admin — Autenticación y usuarios".
 
-**Ojo con `Documentos gobernacion/TI/Revision 2/` (fuera de `Nuevos documentos TI/`):** ahí hay copias editadas a mano (docx y PDFs en `Revision 2/pdfs revision 2/`) que TI puede haber visto — **no se generan desde estos scripts y no se actualizan solas**. Si algo se corrige aquí (código fuente), hay que decidir explícitamente si también se traslada a esas copias manuales o si se reemplazan por una regeneración limpia.
+**Hallazgos de REVISION 3 (`Observaciones_Revision_Documental_Verificacion_Final_v3.pdf`) — estado (2026-08-06): 12 de 13 resueltos.**
+- ✅ Resueltos: índice de contenido del LRS (numerales 7-10), Roadmap Técnico del DI, contradicción Redis/catálogo (PTF vs. DI vs. LRS), **containerización con Docker** y sus 6 controles de hardening, wording de RQP09, 2 errores de redacción/referencia cruzada, columna "Estado" en la tabla de Stack Tecnológico de la PTF, la **Figura 1 del DI rediseñada** (Redis pasó a la caja del servidor institucional, MongoDB quedó marcado "proveedor externo", y se agregó la anotación de Entra ID como pendiente), y **autenticación** (cuenta genérica eliminada — usuarios individuales, roles, panel de gestión, reCAPTCHA; ya no aplica el formato de excepción FO-M7-P8-016 y Acceso según Funciones/Mínimo Privilegio/Revisión Mensual ya son auditables).
+- ⏳ En espera de TI (1): integración con el **pipeline de CI/CD institucional** (nota formal en el DI pidiendo la plantilla a TI).
+
+**Sobre el "Gestor de Contraseñas/Acceso de la Entidad"** (el único punto del hallazgo de autenticación que quedaba abierto): el "Manual de Lineamientos de Seguridad de la Información de la Gobernación de Antioquia" citado como fuente de ese requisito **no aparece entre los documentos que TI ha compartido formalmente** (`Documentos gobernacion/TI/DOCUMENTOS ENVIADOS POR TI/` — verificado 2026-08-06 contra los 6 archivos ahí: Guía de Arquitectura y Buenas Prácticas, Lista de Chequeo de Conformidad, Guía de Azure DevOps, Propuesta Técnica, Levantamiento de Requerimientos, y su propia revisión anterior). El único requisito de autenticación verificable en esos documentos (Guía de Arquitectura, numeral 9) es "MFA para administradores, **sugiriendo** integración con Microsoft Entra ID" — sugerencia, no obligación de un Gestor de Acceso específico — y ya está en el Roadmap Técnico. Consistente con lo que Sebastián recuerda que TI dijo verbalmente en reunión (que esa integración no era obligatoria).
+
+Diagrama de Figura 1 regenerado con `backend/src/scripts/generate_figura1_arquitectura_general.py` (graphviz) — no existía una fuente editable para este diagrama antes de esto.
+
+Nota menor sin cerrar del todo: la columna "Entrada" de la fila RQP09 en el LRS sigue describiendo mejor una API que un archivo estático.
+
+Detalle completo, hallazgo por hallazgo, en el propio documento de respuesta.
+
+### Scripts de generación — cuáles siguen vigentes
+
+`backend/src/scripts/generate_levantamiento_requisitos.js`, `generate_propuesta_ajustes.js` y `generate_documento_integral.js` (los 3 generadores originales de REVISION 1/2) están **huérfanos**: 6 de los 10 scripts de este tipo apuntan a un `OUT_DIR` (`Nuevos documentos TI/`) que ya no es donde viven los documentos reales — **no editar estos 3 documentos regenerándolos**, se pierde todo lo corregido a mano en REVISION 3. El método vigente es editar el `.docx` de REVISION 3 directamente con `python-docx` (ver ejemplos de sesiones anteriores: scripts ad-hoc en el scratchpad, no versionados).
+
+`generate_matriz_respuesta.js` (histórico, respuesta a REVISION 2) y `generate_respuesta_revision3.js` (vigente) sí siguen el flujo normal: usan `lib/docx_helpers.js` (paquete `docx` de npm) y generan el documento desde cero — apropiado porque son documentos *nuevos* en cada revisión, no ediciones incrementales de uno ya aprobado.
+
+**Ojo con `Documentos gobernacion/TI/Revision 2/`** (fuera de `REVISION 3/`): ahí quedan copias históricas de la ronda anterior — no se actualizan solas ni se deben confundir con los documentos vigentes.
 
 ---
 
@@ -831,13 +914,18 @@ TI Gobernación revisó una primera versión de los documentos y devolvió 26 ha
 - [x] **A3 — ESLint-security + Semgrep** — SAST en dos capas + pipeline CI Azure DevOps (RNF05)
 - [x] **npm audit** — agregado al pipeline CI (Paso 3 del PDF); falla en CVE Alta o Crítica
 - [x] **Verificación manual de los 7 pasos del pipeline (2026-07-13)**: 51 tests de integración nuevos (96.81% líneas / 91.93% funciones, cumple el umbral de 90%), 3 vulnerabilidades de dependencias resueltas, Semgrep corrido por primera vez y en 0 hallazgos (ver detalle en "SAST")
-- [x] **README.md / Manual de despliegue** — prerrequisitos, instalación, Redis, Nginx, PM2, variables, comandos
+- [x] **README.md / Manual de despliegue** — prerrequisitos, instalación, Redis, Nginx, Docker Compose, variables, comandos
 - [x] **Respuesta a los 26 hallazgos de TI (2026-07-29)** — portada, TOC, diagramas, Estado de Completitud, diccionario de datos en Excel, matriz de respuesta punto por punto — ver "TI Gobernación — Trámite de aval"
 - [x] **Retiro de Observabilidad (Grafana) y Backup como ajustes propios (2026-07-29)** — por instrucción de TI; quedan 3 ajustes: Entra ID, Redis, SAST
-- [ ] **B1 — Microsoft Entra ID** — reemplaza express-session; requiere Client ID + Tenant ID (RNF05, RNF08)
+- [x] **Arquitectura hexagonal** — módulos JPL, Guarda Cuencas y Auth migrados a domain/application/infrastructure/interfaces, con tests unitarios aislados por capa además de los tests HTTP existentes
+- [x] **Autenticación con usuarios individuales + RBAC** (2026-08-03/06) — reemplaza la contraseña compartida (hallazgo crítico de TI); colección `Usuario`, 3 roles, panel de gestión, reCAPTCHA v2 en el login — ver "Panel admin — Autenticación y usuarios"
+- [x] **Containerización con Docker** (2026-08-06) — Dockerfile multi-stage, usuario non-root, `.dockerignore`, `HEALTHCHECK`, escaneo Trivy en CI/CD; Manual Técnico del DI y `azure-pipelines.yml` reescritos — ver "Docker — Containerización del backend"
+- [x] **Respuesta a los hallazgos de REVISION 3 de TI** (2026-08-06) — ver "TI Gobernación — Trámite de aval"
+- [ ] **B1 — Microsoft Entra ID** — ya no bloqueante (usuarios individuales resuelven el hallazgo de cuenta genérica); reemplazaría express-session; requiere Client ID + Tenant ID (RNF05, RNF08)
+- [ ] Integración con el pipeline de CI/CD institucional de TI Gobernación — bloqueado hasta que TI comparta su plantilla (nota formal ya enviada en el DI)
 - [x] **C1 — Ley 1581** — modal de privacidad en entrada de la app, checkbox no pre-marcado, bilingüe, localStorage
 - [x] **C2 — netlify.toml** — redirects para Pretty URLs, cabeceras de seguridad, cache de assets
-- [ ] **WCAG 2.1 AA** — validación con WAVE antes de cada pase a producción
+- [x] **WCAG 2.1 AA — validación inicial** — axe-core (equivalente a WAVE) en las 19 páginas públicas, 0 hallazgos (ver DI, numeral 9.2 / Chequeo de Lineamientos). Queda como compromiso recurrente re-validar antes de cada futuro pase a producción, no una tarea pendiente de arrancar.
 
 ### Fase 3 — Contenido y producción completa
 - [x] **154 especies** en el catálogo — subida desde las 80 de Fase 1
@@ -849,8 +937,13 @@ TI Gobernación revisó una primera versión de los documentos y devolvió 26 ha
 - [x] **Stats interactivos** en `biodiversidad.html` y `agua/index.html` — los números (subregiones/grupos/especies, subregiones/ríos/cuencas) ahora son botones que navegan
 - [x] **Auditoría y rediseño de píldoras vs. tags** — convención unificada interactivo (píldora+borde) vs. informativo (rectángulo suave+tinte) en toda la app
 - [x] **Zona de tap ampliada** en el mapa de cuencas hídricas (hit-line invisible de 22px sobre cada río)
+- [x] **Fix: carrete atascado en `listado.html`/`subregion.html`** — bug de cascada CSS (`[hidden]` sin guard, ver "CSS — el atributo `hidden`"), no bfcache como se sospechó al inicio; de paso se restauró el carrete filtrado por subregión+grupo (antes solo funcionaba en modo flora/fauna)
+- [x] **Fix: stat "Grupos bio" desincronizado** — pasó de estar fijo en el HTML a calcularse desde `HOME_GROUPS.length`
+- [x] **Fix: panel de Cuencas Hídricas** — título distingue toque en área ("Área del Río X") vs. línea (longitud); se quitó una línea de depuración que abría un panel automáticamente en cada carga de producción
+- [x] **Marca de agua eliminada** del mapa de subregiones (inpainting, 3 copias del archivo)
 - [ ] Ampliar a 150+ especies con fotos y descripciones bilingües *(154 alcanzadas — evaluar seguir creciendo el catálogo o cerrar esta línea)*
 - [ ] Consultar Libro Rojo de Colombia para estados IUCN reales en Lepidoptera
+- [ ] **Proceso de build para el frontend** — script que hashea el contenido de cada `.css`/`.js` y reescribe las referencias en los HTML, para eliminar el `?v=N` manual (ver incidente 2026-07-31 arriba). Netlify pasaría a servir una carpeta `dist/` en vez de la raíz del repo. No requiere bundler/framework — mantiene la arquitectura vanilla actual.
 - [ ] Dominio oficial `.gov.co`
 - [ ] PWA con modo offline (Service Workers)
 - [ ] Analytics de uso
@@ -858,5 +951,23 @@ TI Gobernación revisó una primera versión de los documentos y devolvió 26 ha
 
 ---
 
+## Control de Versiones
+
+**GitFlow adoptado (2026-08-06)**, siguiendo el estándar institucional descrito en la Guía de Azure DevOps de TI Gobernación:
+
+| Rama | Rol |
+|---|---|
+| `main` | Solo código estable, ya desplegado en producción. No se trabaja directo aquí. |
+| `develop` | Rama de integración — el trabajo del día a día ocurre aquí (directo o vía `feature/*`). Existía en el remoto desde antes pero llevaba 10 commits desactualizada respecto a `main`; se puso al día por fast-forward. |
+| `feature/*` | Opcional, para trabajo aislado que no se quiera integrar de inmediato. |
+| `hotfix/*` | Arreglo urgente sobre `main` sin esperar el ciclo normal de `develop`. |
+
+`main` solo se actualiza (merge desde `develop`) cuando el usuario confirma explícitamente que una versión está lista para producción — mismo criterio que ya regía el flujo de trabajo ("implementar → probar en localhost → aprobar → sübelo"), solo que ahora "súbelo" aterriza primero en `develop`.
+
+
+Commits en estándar **Conventional Commits** (`feat:`, `fix:`, `docs:`, `refactor:`). Código y comentarios en **español neutro**.
+
+---
+
 *Proyecto desarrollado con Claude Code — Anthropic*
-*Última actualización: agosto 2026*
+*Última actualización: 2026-08-06*

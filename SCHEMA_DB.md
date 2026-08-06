@@ -303,6 +303,27 @@ Un documento por cada foto de cuencas subida por el curador del mes.
 
 ---
 
+### 11. `usuarios` — Usuarios del panel de administración
+
+Un documento por curador/administrador. Reemplaza el mecanismo anterior de una sola contraseña compartida (ver `CLAUDE.md` § "Panel admin — Autenticación y usuarios").
+
+```json
+{
+  "_id": "ObjectId",
+  "nombre": "María González",
+  "usuario": "mgonzalez",
+  "passwordHash": "$2b$10$...",
+  "roles": ["Curador.Biodiversidad"],
+  "activo": true,
+  "createdAt": "2026-08-03T00:00:00Z",
+  "updatedAt": "2026-08-03T00:00:00Z"
+}
+```
+
+`roles` es un array de: `Curador.Biodiversidad`, `Curador.GuardaCuencas`, `Admin.Contenido` (superrole). `passwordHash` nunca se expone en las respuestas de la API (`.select('-passwordHash')` en todas las consultas salvo la de login). `activo:false` revoca el acceso de inmediato — se valida en cada petición, no solo al iniciar sesión.
+
+---
+
 ## Índices recomendados
 
 ### BD `biodiversidad`
@@ -327,6 +348,7 @@ community_sightings: { speciesMonthId: 1, approved: 1 }
 jpl_photos:          { mes: 1, orden: 1 }
 jpl_photos:          { mes: 1, publicado: 1 }
 gc_photos:           { mes: 1, orden: 1 }
+usuarios:            { usuario: 1 } (unique)
 ```
 
 ---

@@ -122,7 +122,7 @@ Tres programas que conectan a la ciudadanía con el territorio y los programas d
 - Lazy loading en fotos secundarias
 
 **Panel de administración web (curadores)**
-- Login con sesión protegida por contraseña
+- Login con usuario y contraseña individuales por curador (no una sola contraseña compartida), protegido con reCAPTCHA y gestión de sesión
 - Panel JPL: subir, editar y eliminar fotos de biodiversidad por mes; publicar JSON del mes
 - Panel Guarda Cuencas: mismo flujo para fotos de cuencas (16:9)
 - Las fotos se convierten automáticamente a WebP optimizado al guardar (sharp, servidor)

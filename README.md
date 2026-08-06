@@ -61,7 +61,6 @@ Copiar `backend/.env.example` como `backend/.env` y completar:
 |---|---|---|
 | `MONGODB_URI_COM` | URI BD Comunidad (JPL, Guarda Cuencas) | ✅ |
 | `SESSION_SECRET` | Secreto sesiones panel admin (mín. 32 chars) | ✅ |
-| `ADMIN_PASSWORD_HASH` | Hash bcrypt de la contraseña del panel de curadores (nunca texto plano; ver `.env.example` para el comando que lo genera) | ✅ |
 | `REDIS_URL` | URL Redis (`redis://localhost:6379`) | Opcional* |
 | `LOG_LEVEL` | Nivel de log: `error`, `warn`, `info`, `debug` | Opcional |
 | `LOG_DIR` | Carpeta de archivos de log | Opcional |
@@ -69,6 +68,14 @@ Copiar `backend/.env.example` como `backend/.env` y completar:
 
 > \* Sin Redis la app funciona en modo degradado — las consultas van directo a MongoDB.  
 > **IMPORTANTE:** Nunca subir el archivo `.env` al repositorio. Está incluido en `.gitignore`.
+
+El acceso al panel de curadores usa usuarios individuales (usuario + contraseña propios, colección `Usuario`), no una contraseña compartida por variable de entorno. Crear el primer usuario administrador con:
+
+```bash
+node src/scripts/seed_usuario_admin.js "Nombre completo" usuario clave12345678 Admin.Contenido
+```
+
+Desde ahí, el resto de usuarios se gestionan en `/admin/usuarios.html` (rol `Admin.Contenido`).
 
 ---
 
@@ -141,8 +148,11 @@ antioquia-natural/
 ├── agua/                            # Módulo de recursos hídricos (frontend)
 ├── comunidad/                       # Módulo comunidad (JPL, Guarda Cuencas, Especie del Mes)
 ├── data/                            # Traducciones globales ES/EN
+├── Dockerfile                       # Imagen del backend — multi-stage, usuario non-root, HEALTHCHECK
+├── .dockerignore                    # Excluye node_modules, secretos, volúmenes dinámicos, documentos institucionales
+├── docker-compose.yml               # Servicio app + volúmenes nombrados (fotos/JSON publicados/logs)
 ├── .semgrep.yml                     # Reglas SAST locales
-├── azure-pipelines.yml              # Pipeline CI/CD Azure DevOps
+├── azure-pipelines.yml              # Pipeline CI/CD Azure DevOps (build + Trivy + push + deploy)
 └── netlify.toml                     # Configuración Netlify (frontend estático)
 ```
 
@@ -150,20 +160,21 @@ antioquia-natural/
 
 ## Despliegue en producción (Ubuntu Server 24.04 LTS)
 
+La aplicación se despliega como contenedor Docker (imagen construida, escaneada con Trivy y publicada por el pipeline CI/CD — ver `azure-pipelines.yml`). El servidor solo necesita Docker, Redis, Nginx y el archivo `docker-compose.yml` del repo; no requiere Node.js ni PM2 instalados directamente.
+
 ### 1. Preparar el servidor
 
 ```bash
 sudo apt update && sudo apt upgrade -y
 
-# Node.js 22 LTS
-curl -fsSL https://deb.nodesource.com/setup_22.x | sudo -E bash -
-sudo apt install -y nodejs
+# Docker Engine + Docker Compose plugin
+curl -fsSL https://get.docker.com | sudo sh
+sudo usermod -aG docker $USER   # cerrar sesión y volver a entrar para que aplique
 
-# PM2, Nginx, Certbot
-sudo npm install -g pm2
+# Nginx, Certbot
 sudo apt install -y nginx certbot python3-certbot-nginx
 
-# Redis 7
+# Redis 7 — sigue corriendo directo en el servidor, fuera del contenedor
 sudo apt install -y redis-server
 sudo systemctl enable redis-server
 ```
@@ -186,24 +197,40 @@ redis-cli ping   # debe responder: PONG
 
 ### 3. Clonar y configurar la aplicación
 
+El repo solo se clona para tener `docker-compose.yml` y `backend/.env` en el servidor — el código de la aplicación ya viene empaquetado en la imagen.
+
 ```bash
 git clone https://dev.azure.com/GobernacionAntioquia/antioquia-natural /var/www/antioquia-natural
 cd /var/www/antioquia-natural/backend
-npm install --omit=dev
-
 cp .env.example .env
 nano .env
-# Completar: MONGODB_URI_COM, SESSION_SECRET, ADMIN_PASSWORD, REDIS_URL, LOG_LEVEL
+# Completar: MONGODB_URI_COM, SESSION_SECRET, REDIS_URL, LOG_LEVEL
+
+cd /var/www/antioquia-natural
+docker login <acr-name>.azurecr.io   # placeholder — credenciales las provee TI Gobernación
 ```
 
-### 4. Iniciar con PM2
+**Primer despliegue únicamente** — migrar a los volúmenes nombrados las fotos y JSON ya publicados (el `docker-compose.yml` no trae contenido, arranca con volúmenes vacíos):
 
 ```bash
-cd /var/www/antioquia-natural/backend
-pm2 start src/index.js --name antioquia-natural
-pm2 save
-pm2 startup   # Copiar y ejecutar el comando que muestre
+docker compose up -d   # crea los volúmenes nombrados (jpl_fotos, jpl_data, gc_fotos, gc_data, backend_logs)
+docker compose cp comunidad/jovenes_pa_lante/img/fotos/. app:/app/comunidad/jovenes_pa_lante/img/fotos/
+docker compose cp comunidad/jovenes_pa_lante/data/.       app:/app/comunidad/jovenes_pa_lante/data/
+docker compose cp comunidad/guarda_cuencas/img/fotos/.    app:/app/comunidad/guarda_cuencas/img/fotos/
+docker compose cp comunidad/guarda_cuencas/data/.         app:/app/comunidad/guarda_cuencas/data/
+docker compose restart app
 ```
+
+### 4. Iniciar / actualizar con Docker Compose
+
+```bash
+cd /var/www/antioquia-natural
+export IMAGE_TAG=<tag-a-desplegar>   # el pipeline lo fija automáticamente al desplegar
+docker compose pull
+docker compose up -d
+```
+
+Esto es lo mismo que ejecuta `azure-pipelines.yml` por SSH en cada despliegue a Dev/Producción — no requiere `pm2 save`/`pm2 startup`, `restart: unless-stopped` en `docker-compose.yml` ya cubre el reinicio automático del contenedor si el servidor se reinicia.
 
 ### 5. Configurar Nginx
 
@@ -246,8 +273,8 @@ sudo certbot --nginx -d natural.antioquia.gov.co
 ### 6. Verificar despliegue
 
 ```bash
-pm2 status
-pm2 logs antioquia-natural --lines 50
+docker compose ps                          # STATUS debe mostrar "healthy" (usa el HEALTHCHECK de la imagen)
+docker compose logs app --tail 50
 curl https://natural.antioquia.gov.co/api/health
 # Respuesta esperada: {"status":"ok","mongodb":"connected","redis":"connected","uptime":...}
 ```
@@ -312,8 +339,9 @@ Las imágenes se convierten automáticamente a WebP (máx. 1200 px, calidad 82) 
 | Imágenes | sharp (WebP auto-conversión) | ^0.34 |
 | Uploads | multer | ^1.4 |
 | Autenticación admin | express-session + bcrypt (temporal → Entra ID) | — |
-| Servidor web | Nginx + PM2 | — |
-| SAST | ESLint-security + Semgrep | — |
+| Servidor web | Nginx + Docker Compose | — |
+| Contenedores | Docker (multi-stage, usuario non-root, `HEALTHCHECK`) | 22-slim |
+| SAST | ESLint-security + Semgrep + Trivy (imagen) | — |
 | CI/CD | Azure DevOps (plantillas TI Gobernación) | — |
 | Infraestructura | Ubuntu Server 24.04 LTS | 24.04 |
 

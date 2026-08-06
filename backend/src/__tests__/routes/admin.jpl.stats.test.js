@@ -11,6 +11,8 @@ jest.mock('../../db', () => ({
   },
 }));
 
+jest.mock('../../modules/auth/infrastructure/verificarRecaptcha', () => jest.fn().mockResolvedValue(true));
+
 const JplPhoto = require('../../models/JplPhoto');
 jest.mock('../../models/JplPhoto', () => ({
   distinct: jest.fn(), find: jest.fn(), aggregate: jest.fn(), countDocuments: jest.fn(),
@@ -22,15 +24,26 @@ jest.mock('../../models/GcPhoto', () => ({
   create: jest.fn(), findById: jest.fn(), findByIdAndUpdate: jest.fn(),
   findByIdAndDelete: jest.fn(), updateMany: jest.fn(),
 }));
+jest.mock('../../models/Usuario', () => ({
+  findOne: jest.fn(), findById: jest.fn(), find: jest.fn(),
+  create: jest.fn(), findByIdAndUpdate: jest.fn(),
+}));
 
 const bcrypt = require('bcryptjs');
-process.env.ADMIN_PASSWORD_HASH = bcrypt.hashSync('clave-prueba', 10);
+const Usuario = require('../../models/Usuario');
+const PASSWORD_HASH = bcrypt.hashSync('clave-prueba', 10);
+const CURADOR_JPL = {
+  _id: 'u1', nombre: 'Curador JPL', usuario: 'curador', passwordHash: PASSWORD_HASH,
+  roles: ['Curador.Biodiversidad'], activo: true,
+};
 
 const testApp = makeApp(require('../../routes/admin'));
 
 async function agenteLogueado() {
+  Usuario.findOne.mockReturnValue(mockQuery(CURADOR_JPL));
+  Usuario.findById.mockReturnValue(mockQuery(CURADOR_JPL));
   const agente = request.agent(testApp);
-  await agente.post('/login').send({ password: 'clave-prueba' });
+  await agente.post('/login').send({ usuario: 'curador', password: 'clave-prueba' });
   return agente;
 }
 

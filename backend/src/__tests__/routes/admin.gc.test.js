@@ -14,6 +14,8 @@ jest.mock('../../db', () => ({
   },
 }));
 
+jest.mock('../../modules/auth/infrastructure/verificarRecaptcha', () => jest.fn().mockResolvedValue(true));
+
 jest.mock('sharp', () => {
   const chain = { resize: jest.fn().mockReturnThis(), webp: jest.fn().mockReturnThis(), toFile: jest.fn().mockResolvedValue({}) };
   return jest.fn(() => chain);
@@ -40,16 +42,29 @@ jest.mock('../../models/GcPhoto', () => ({
   create: jest.fn(), findById: jest.fn(), findByIdAndUpdate: jest.fn(),
   findByIdAndDelete: jest.fn(), updateMany: jest.fn(),
 }));
+// Requerido transitivamente por routes/admin.js -> modules/auth/... — este
+// archivo no ejercita login, solo necesita que requerir admin.js no truene.
+jest.mock('../../models/Usuario', () => ({
+  findOne: jest.fn(), findById: jest.fn(), find: jest.fn(),
+  create: jest.fn(), findByIdAndUpdate: jest.fn(),
+}));
 
 const bcrypt = require('bcryptjs');
-process.env.ADMIN_PASSWORD_HASH = bcrypt.hashSync('clave-prueba', 10);
+const Usuario = require('../../models/Usuario');
+const PASSWORD_HASH = bcrypt.hashSync('clave-prueba', 10);
+const CURADOR_GC = {
+  _id: 'u1', nombre: 'Curador GC', usuario: 'curador', passwordHash: PASSWORD_HASH,
+  roles: ['Curador.GuardaCuencas'], activo: true,
+};
 
 const app = require('../../routes/admin');
 const testApp = makeApp(app);
 
 async function agenteLogueado() {
+  Usuario.findOne.mockReturnValue(mockQuery(CURADOR_GC));
+  Usuario.findById.mockReturnValue(mockQuery(CURADOR_GC));
   const agente = request.agent(testApp);
-  await agente.post('/login').send({ password: 'clave-prueba' });
+  await agente.post('/login').send({ usuario: 'curador', password: 'clave-prueba' });
   return agente;
 }
 

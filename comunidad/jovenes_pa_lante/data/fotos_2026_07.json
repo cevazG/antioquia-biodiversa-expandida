@@ -1,0 +1,24 @@
+{
+  "mes": "Julio",
+  "mesEn": "July",
+  "año": 2026,
+  "fotos": [
+    {
+      "id": "jpl_2026-07_001",
+      "fotos": [
+        "img/fotos/bio/2026-07/arboles_nativos/sin_nombre/sin_nombre_001.webp"
+      ],
+      "credito": "Carlos Andres Zuluaga",
+      "municipio": "Envigado",
+      "subregion": "valle_aburra",
+      "especieEs": "arbol seco",
+      "especieEn": "",
+      "especieCientifico": "",
+      "grupo": "arboles_nativos",
+      "iucn": "LC",
+      "endemica": true,
+      "descripcionEs": "no tiene aun",
+      "descripcionEn": ""
+    }
+  ]
+}

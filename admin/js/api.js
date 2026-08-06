@@ -9,7 +9,11 @@ async function req(method, url, body) {
     opts.body = JSON.stringify(body);
   }
   const res = await fetch(API + url, opts);
-  if (res.status === 401) { location.href = '/admin/'; return; }
+  // El 401 de /login significa "usuario o contraseña incorrectos", no
+  // "tu sesión expiró" — hay que dejar que caiga al throw de abajo para
+  // que el formulario de login muestre el error, no redirigir en silencio
+  // (si no, se ve como si el formulario se reseteara sin explicación).
+  if (res.status === 401 && url !== '/login') { location.href = '/admin/'; return; }
   const data = await res.json();
   if (!res.ok) throw new Error(data.error || 'Error del servidor');
   return data;
@@ -17,8 +21,13 @@ async function req(method, url, body) {
 
 const api = {
   me:              () => req('GET',  '/me'),
-  login:           (pw) => req('POST', '/login', { password: pw }),
+  login:           (usuario, pw, recaptchaToken) => req('POST', '/login', { usuario, password: pw, recaptchaToken }),
   logout:          () => req('POST', '/logout'),
+
+  usuarios:        () => req('GET',  '/usuarios'),
+  usuarioCrear:    (datos) => req('POST', '/usuarios', datos),
+  usuarioEditar:   (id, datos) => req('PUT', `/usuarios/${id}`, datos),
+  usuarioDesactivar: (id) => req('DELETE', `/usuarios/${id}`),
 
   jplMeses:        () => req('GET',  '/jpl/meses'),
   jplFotos:        (mes) => req('GET',  `/jpl/fotos/${mes}`),
@@ -49,6 +58,14 @@ function showToast(msg, duration = 2500) {
 }
 
 async function checkAuth() {
-  const { isAdmin } = await api.me();
-  if (!isAdmin) location.href = '/admin/';
+  const { isAdmin, nombre, roles } = await api.me();
+  if (!isAdmin) { location.href = '/admin/'; return null; }
+  // Elementos marcados con data-requiere-rol solo se muestran si el
+  // usuario tiene ese rol (Admin.Contenido = superrole, ver backend).
+  document.querySelectorAll('[data-requiere-rol]').forEach(el => {
+    const requerido = el.dataset.requiereRol;
+    const tieneAcceso = (roles || []).includes('Admin.Contenido') || (roles || []).includes(requerido);
+    el.style.display = tieneAcceso ? '' : 'none';
+  });
+  return { nombre, roles };
 }

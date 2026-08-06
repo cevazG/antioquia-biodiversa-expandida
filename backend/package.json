@@ -14,7 +14,7 @@
     "optimize-photos-dry": "node src/scripts/optimize_photos.js --dry-run",
     "lint": "eslint src/ --ext .js",
     "lint:fix": "eslint src/ --ext .js --fix",
-    "lint:security": "eslint src/routes/ src/middleware/ src/utils/ src/services/ src/index.js src/db.js --ext .js",
+    "lint:security": "eslint src/routes/ src/middleware/ src/utils/ src/services/ src/modules/ src/index.js src/db.js --ext .js",
     "test": "jest",
     "test:coverage": "jest --coverage"
   },
@@ -26,7 +26,11 @@
     "collectCoverageFrom": [
       "src/routes/admin.js",
       "src/middleware/**/*.js",
-      "src/services/**/*.js"
+      "src/services/**/*.js",
+      "src/modules/jpl/**/*.js",
+      "src/modules/gc/**/*.js",
+      "src/modules/auth/**/*.js",
+      "!src/modules/*/domain/ports/**"
     ],
     "coverageReporters": [
       "lcov",

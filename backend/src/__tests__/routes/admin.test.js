@@ -1,6 +1,7 @@
 'use strict';
 const request = require('supertest');
 const { makeApp } = require('../helpers/app');
+const { mockQuery } = require('../helpers/mockQuery');
 
 // Mock de db para evitar conexión real a MongoDB/Redis en tests
 jest.mock('../../db', () => ({
@@ -14,7 +15,8 @@ jest.mock('../../db', () => ({
   },
 }));
 
-// Mocks de modelos para que el router no intente conectar a BD
+// Mocks de modelos para que el router no intente conectar a BD (requeridos
+// transitivamente vía routes/admin.js -> modules/jpl|gc/... )
 jest.mock('../../models/JplPhoto', () => ({
   distinct: jest.fn(), find: jest.fn(), countDocuments: jest.fn(),
   create: jest.fn(), findByIdAndUpdate: jest.fn(),
@@ -26,52 +28,119 @@ jest.mock('../../models/GcPhoto', () => ({
   findByIdAndDelete: jest.fn(), updateMany: jest.fn(),
 }));
 
-// Contraseña fija para pruebas — el login ahora compara contra un hash bcrypt,
-// no contra texto plano (ver routes/admin.js).
+jest.mock('../../modules/auth/infrastructure/verificarRecaptcha');
+const verificarRecaptcha = require('../../modules/auth/infrastructure/verificarRecaptcha');
+
 const bcrypt = require('bcryptjs');
-process.env.ADMIN_PASSWORD_HASH = bcrypt.hashSync('clave-prueba', 10);
+const PASSWORD_HASH = bcrypt.hashSync('clave-prueba', 10);
+
+jest.mock('../../models/Usuario', () => ({
+  findOne: jest.fn(), findById: jest.fn(), find: jest.fn(),
+  create: jest.fn(), findByIdAndUpdate: jest.fn(),
+}));
+const Usuario = require('../../models/Usuario');
+
+const USUARIO_ACTIVO = {
+  _id: 'u1', nombre: 'María González', usuario: 'mgonzalez',
+  passwordHash: PASSWORD_HASH, roles: ['Admin.Contenido'], activo: true,
+};
 
 const app = makeApp(require('../../routes/admin'));
 
+// Configura los mocks para un login exitoso Y para que requireAuth siga
+// resolviendo a ese mismo usuario en peticiones posteriores del agente.
+async function agenteLogueado() {
+  Usuario.findOne.mockReturnValue(mockQuery(USUARIO_ACTIVO));
+  Usuario.findById.mockReturnValue(mockQuery(USUARIO_ACTIVO));
+  const agente = request.agent(app);
+  await agente.post('/login').send({ usuario: 'mgonzalez', password: 'clave-prueba' });
+  return agente;
+}
+
+beforeEach(() => {
+  jest.clearAllMocks();
+  verificarRecaptcha.mockResolvedValue(true);
+});
+
 describe('POST /login', () => {
-  test('inicia sesion con contrasena correcta', async () => {
-    const res = await request(app).post('/login').send({ password: 'clave-prueba' });
+  test('rechaza con 401 si la verificación reCAPTCHA falla, sin llegar a validar credenciales', async () => {
+    verificarRecaptcha.mockResolvedValue(false);
+    Usuario.findOne.mockReturnValue(mockQuery(USUARIO_ACTIVO));
+
+    const res = await request(app).post('/login').send({ usuario: 'mgonzalez', password: 'clave-prueba', recaptchaToken: 'token-invalido' });
+
+    expect(res.status).toBe(401);
+    expect(res.body).toEqual({ error: 'Verificación de seguridad fallida. Vuelve a intentarlo.' });
+    expect(Usuario.findOne).not.toHaveBeenCalled();
+  });
+
+  test('inicia sesión con usuario y contraseña correctos', async () => {
+    Usuario.findOne.mockReturnValue(mockQuery(USUARIO_ACTIVO));
+
+    const res = await request(app).post('/login').send({ usuario: 'mgonzalez', password: 'clave-prueba' });
 
     expect(res.status).toBe(200);
     expect(res.body).toEqual({ ok: true });
   });
 
-  test('rechaza contrasena incorrecta con 401', async () => {
-    const res = await request(app).post('/login').send({ password: 'incorrecta' });
+  test('rechaza con 401 si el usuario no existe', async () => {
+    Usuario.findOne.mockReturnValue(mockQuery(null));
+
+    const res = await request(app).post('/login').send({ usuario: 'noexiste', password: 'x' });
 
     expect(res.status).toBe(401);
-    expect(res.body).toEqual({ error: 'Contraseña incorrecta' });
+    expect(res.body).toEqual({ error: 'Usuario o contraseña incorrectos' });
+  });
+
+  test('rechaza con 401 si la contraseña es incorrecta', async () => {
+    Usuario.findOne.mockReturnValue(mockQuery(USUARIO_ACTIVO));
+
+    const res = await request(app).post('/login').send({ usuario: 'mgonzalez', password: 'incorrecta' });
+
+    expect(res.status).toBe(401);
+    expect(res.body).toEqual({ error: 'Usuario o contraseña incorrectos' });
+  });
+
+  test('rechaza con 401 si el usuario está inactivo — mismo mensaje genérico', async () => {
+    Usuario.findOne.mockReturnValue(mockQuery({ ...USUARIO_ACTIVO, activo: false }));
+
+    const res = await request(app).post('/login').send({ usuario: 'mgonzalez', password: 'clave-prueba' });
+
+    expect(res.status).toBe(401);
+    expect(res.body).toEqual({ error: 'Usuario o contraseña incorrectos' });
   });
 });
 
 describe('GET /me', () => {
-  test('devuelve isAdmin:false cuando no hay sesion activa', async () => {
+  test('devuelve isAdmin:false cuando no hay sesión activa (nunca 401)', async () => {
     const res = await request(app).get('/me');
 
     expect(res.status).toBe(200);
     expect(res.body).toEqual({ isAdmin: false });
   });
 
-  test('devuelve isAdmin:true despues de un login exitoso', async () => {
-    const agente = request.agent(app);
-    await agente.post('/login').send({ password: 'clave-prueba' });
+  test('devuelve isAdmin:true con nombre y roles después de un login exitoso', async () => {
+    const agente = await agenteLogueado();
 
     const res = await agente.get('/me');
 
     expect(res.status).toBe(200);
-    expect(res.body).toEqual({ isAdmin: true });
+    expect(res.body).toEqual({ isAdmin: true, nombre: 'María González', roles: ['Admin.Contenido'] });
+  });
+
+  test('devuelve isAdmin:false si el usuario fue desactivado después del login', async () => {
+    const agente = await agenteLogueado();
+    Usuario.findById.mockReturnValue(mockQuery({ ...USUARIO_ACTIVO, activo: false }));
+
+    const res = await agente.get('/me');
+
+    expect(res.body).toEqual({ isAdmin: false });
   });
 });
 
 describe('POST /logout', () => {
-  test('cierra la sesion activa', async () => {
-    const agente = request.agent(app);
-    await agente.post('/login').send({ password: 'clave-prueba' });
+  test('cierra la sesión activa', async () => {
+    const agente = await agenteLogueado();
 
     const resLogout = await agente.post('/logout');
     expect(resLogout.status).toBe(200);

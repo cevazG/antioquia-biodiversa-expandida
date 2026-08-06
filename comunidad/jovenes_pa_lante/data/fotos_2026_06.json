@@ -54,6 +54,24 @@
       "endemica": false,
       "descripcionEs": "El yagrumo, yarumo o guarumbo (Cecropia peltata), es un árbol representativo de la zona intertropical americana y se extiende desde México hasta América del Sur, incluyendo las Antillas. Es común en clima cálido, aunque puede llegar a crecer a alturas de más de 2.",
       "descripcionEn": "Cecropia peltata is a fast-growing tree in the genus Cecropia. Common names include trumpet tree and snakewood. It is listed as one of the world's 100 worst invasive alien species."
+    },
+    {
+      "id": "jpl_2026-06_004",
+      "fotos": [
+        "img/fotos/bio/2026-06/aves/sin_nombre/sin_nombre_001.webp",
+        "img/fotos/bio/2026-06/aves/sin_nombre/sin_nombre_002.webp"
+      ],
+      "credito": "Carlos Zuluaga",
+      "municipio": "Medellin",
+      "subregion": "valle_aburra",
+      "especieEs": "Cajas de cemento",
+      "especieEn": "",
+      "especieCientifico": "",
+      "grupo": "aves",
+      "iucn": "VU",
+      "endemica": true,
+      "descripcionEs": "lrem ipsum",
+      "descripcionEn": ""
     }
   ]
 }

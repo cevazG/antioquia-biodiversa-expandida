@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Usuarios — Admin Antioquia Natural</title>
+<link rel="stylesheet" href="css/admin.css?v=2">
+</head>
+<body>
+
+<header class="admin-header" style="background:#5e2c68">
+  <h1>👤 Usuarios del panel</h1>
+  <div class="admin-header__actions">
+    <a href="/admin/jpl.html">← Jóvenes pa' Lante</a>
+    <a href="/admin/gc.html">Guarda Cuencas →</a>
+    <button class="btn btn--ghost btn--sm" id="logoutBtn">Salir</button>
+  </div>
+</header>
+
+<main class="admin-main">
+  <div class="card">
+    <div class="card__title">Curadores y administradores</div>
+    <div id="usuariosList"></div>
+    <div id="emptyUsuarios" class="empty-state" style="display:none">
+      <div class="empty-state__icon">👤</div>
+      <p>Sin usuarios todavía.</p>
+    </div>
+  </div>
+</main>
+
+<div class="publish-bar">
+  <span></span>
+  <button class="btn btn--primary" id="nuevoUsuarioBtn">+ Nuevo usuario</button>
+</div>
+
+<!-- Sheet nuevo / editar usuario -->
+<div class="sheet-overlay" id="sheetOverlay">
+  <div class="sheet">
+    <div class="sheet__handle"></div>
+    <div class="sheet__title" id="sheetTitle">Nuevo usuario</div>
+    <form id="usuarioForm">
+      <input type="hidden" id="editId">
+
+      <div class="form-grid">
+        <div class="form-group form-group--full">
+          <label>Nombre completo *</label>
+          <input type="text" id="nombre" placeholder="María González" required>
+        </div>
+        <div class="form-group form-group--full">
+          <label>Usuario (para ingresar) *</label>
+          <input type="text" id="usuario" placeholder="mgonzalez" required autocomplete="username">
+        </div>
+        <div class="form-group form-group--full">
+          <label id="passwordLabel">Contraseña * <small style="color:var(--muted)">(mínimo 8 caracteres)</small></label>
+          <input type="password" id="password" autocomplete="new-password">
+        </div>
+        <div class="form-group form-group--full">
+          <label>Roles *</label>
+          <div class="toggle-row">
+            <input type="checkbox" id="rolBiodiversidad" value="Curador.Biodiversidad">
+            <label for="rolBiodiversidad">🦜 Curador — Jóvenes pa' Lante (Biodiversidad)</label>
+          </div>
+          <div class="toggle-row">
+            <input type="checkbox" id="rolGuardaCuencas" value="Curador.GuardaCuencas">
+            <label for="rolGuardaCuencas">💧 Curador — Guarda Cuencas</label>
+          </div>
+          <div class="toggle-row">
+            <input type="checkbox" id="rolAdmin" value="Admin.Contenido">
+            <label for="rolAdmin">👑 Admin de Contenido (acceso a todo, incluida esta pantalla)</label>
+          </div>
+        </div>
+        <div class="form-group form-group--full">
+          <div class="toggle-row">
+            <input type="checkbox" id="activo" checked>
+            <label for="activo">Cuenta activa</label>
+          </div>
+        </div>
+      </div>
+
+      <div style="display:flex;gap:10px;margin-top:20px">
+        <button type="button" class="btn btn--ghost btn--full" id="cancelSheetBtn">Cancelar</button>
+        <button type="submit" class="btn btn--primary btn--full" id="saveUsuarioBtn">Guardar usuario</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script src="js/api.js"></script>
+<script src="js/usuarios.js"></script>
+</body>
+</html>

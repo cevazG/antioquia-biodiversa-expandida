@@ -1,8 +1,12 @@
 'use strict';
-// Agregaciones sobre las fotos JPL — separado de routes/admin.js para que el
-// cálculo no dependa de Express. Las rutas envuelven estas funciones en
-// getCached() (ver utils/cache.js), aquí no se toca Redis.
-const JplPhoto = require('../models/JplPhoto');
+// Adaptador de estadísticas — agregaciones sobre las fotos JPL. Movido tal
+// cual desde services/jplStats.js (exclusivo de JPL, no compartido con GC,
+// así que se mueve en vez de duplicarse). Las agregaciones usan operadores
+// específicos de MongoDB ($group, $project), por eso viven en
+// infraestructura y no detrás de un puerto genérico de repositorio: un
+// cambio de motor de base de datos exigiría reescribir esta lógica de
+// todas formas.
+const JplPhoto = require('../../../models/JplPhoto');
 
 // Fotógrafos únicos por subregión, cobertura municipal, alertas de especies
 // en peligro (CR/EN) y bioindicadores hídricos (anfibios/reptiles y peces).

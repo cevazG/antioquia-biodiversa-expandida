@@ -753,6 +753,8 @@ Resultado final: **0 hallazgos de Semgrep**, `npm audit` limpio, lint sin errore
 
 El frontend estático se despliega en Netlify desde la rama `main`. El backend Node.js corre en el servidor de la Gobernación y **no** pasa por Netlify.
 
+**Limpieza de repositorio (2026-08-06):** `main` tenía ~550 MB de material de referencia/respaldo trackeado por error (`Respaldo Fotos/` — fotos RAW y JPG sin procesar de un fotógrafo, `Manual de marca gobernacion/`, `Bibliografia/`, `Informes menusales/`) — como `netlify.toml` publica todo el repo (`publish = "."`), Netlify lo estaba sirviendo públicamente. Se dejaron de trackear (`.gitignore`) en `main` y `develop`, sin reescribir el historial existente (los archivos siguen en disco local). De paso se corrigió el *upstream tracking* de la rama local `develop`, que apuntaba mal a `origin/main` en vez de `origin/develop` desde antes de esta sesión.
+
 ### Sitio único — NO crear sitios nuevos
 
 > **Hay un solo sitio de producción. Antes de correr cualquier comando `netlify` que pueda crear un sitio nuevo (`netlify init`, `netlify deploy` sin sitio vinculado, `netlify sites:create`), verificar primero con `netlify status` o `netlify sites:list` que la carpeta ya está vinculada al sitio correcto.**

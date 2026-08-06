@@ -48,3 +48,17 @@ Documentos gobernacion/TI/Cotizacion_Formal_Ampliacion_JPL_v2.pdf
 # Documentos personales sensibles de participantes (cédulas, antecedentes,
 # declaración de renta, etc.) — NUNCA subir a GitHub
 comunidad/Ampliacion Jovenes/backend/uploads/
+
+# Proyecto de Ampliación JPL completo — cotización y tarifas privadas de
+# negociación con la Gobernación en desarrollo activo. NUNCA subir a GitHub.
+comunidad/Ampliacion Jovenes/
+
+# Material de referencia/respaldo personal — no forma parte de la app ni de
+# los documentos oficiales para TI. Estaba trackeado por error (~550 MB
+# combinados) y Netlify lo estaba sirviendo públicamente al desplegar main
+# (netlify.toml publica todo el repo). Limpieza 2026-08-06: se deja de
+# trackear desde ahora (sin reescribir el historial existente).
+Respaldo Fotos/
+Manual de marca gobernacion/
+Bibliografia/
+Informes menusales/

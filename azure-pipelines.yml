@@ -2,10 +2,16 @@
 # CI/CD — Antioquia Natural
 # Requiere configurar en Azure DevOps:
 #   - Service connection SonarQube: nombre exacto en SONARQUBE_SERVICE_CONNECTION
+#   - Service connection Docker Registry: nombre exacto en DOCKER_REGISTRY_SERVICE_CONNECTION
 #   - Service connection SSH Dev:  nombre exacto en SSH_DEV_SERVICE_CONNECTION
 #   - Service connection SSH Prod: nombre exacto en SSH_PROD_SERVICE_CONNECTION
 #   - Variable group "antioquia-natural-secrets" con: SERVER_DEV_USER, SERVER_DEV_HOST,
-#     SERVER_PROD_USER, SERVER_PROD_HOST, APP_PATH (ruta del repo en el servidor)
+#     SERVER_PROD_USER, SERVER_PROD_HOST, APP_PATH (ruta de docker-compose.yml en el servidor)
+#
+# Despliegue vía Docker: la etapa BuildImage construye la imagen, la escanea
+# con Trivy y la publica en el registry; DeployDev/DeployProd solo hacen
+# `docker compose pull && up -d` sobre el docker-compose.yml ya presente en
+# cada servidor (ver README.md § Despliegue en producción).
 
 trigger:
   branches:
@@ -17,9 +23,11 @@ pool:
   vmImage: ubuntu-latest
 
 variables:
-  NODE_VERSION: '20.x'
+  NODE_VERSION: '22.x'
   WORKING_DIR: 'backend'
   SONARQUBE_SERVICE_CONNECTION: 'SonarQube-AntioquiaNatural'
+  DOCKER_REGISTRY_SERVICE_CONNECTION: 'ACR-AntioquiaNatural' # placeholder — ajustar cuando TI confirme el registry
+  IMAGE_REPOSITORY: '<acr-name>.azurecr.io/antioquia-natural' # placeholder — ajustar cuando TI confirme el registry
   SSH_DEV_SERVICE_CONNECTION:  'SSH-Dev-AntioquiaNatural'
   SSH_PROD_SERVICE_CONNECTION: 'SSH-Prod-AntioquiaNatural'
 
@@ -133,19 +141,60 @@ stages:
         pollingTimeoutSec: 300
 
 # ─────────────────────────────────────────────
-# STAGE 2 — Deploy a Dev
+# STAGE 2 — Construir, escanear y publicar la imagen Docker
+# Solo en develop/main (no en cada rama de feature)
+# ─────────────────────────────────────────────
+- stage: BuildImage
+  displayName: 'Build, escaneo y push de imagen Docker'
+  dependsOn: CI
+  condition: and(succeeded(), in(variables['Build.SourceBranch'], 'refs/heads/main', 'refs/heads/develop'))
+
+  jobs:
+  - job: BuildImage
+    displayName: 'docker build + Trivy + push'
+    steps:
+
+    - task: Docker@2
+      displayName: 'Build de la imagen'
+      inputs:
+        command: build
+        Dockerfile: 'Dockerfile'
+        buildContext: '.'
+        repository: $(IMAGE_REPOSITORY)
+        tags: |
+          $(Build.BuildId)
+
+    - script: |
+        curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh | sh -s -- -b /usr/local/bin
+        trivy image \
+          --severity HIGH,CRITICAL \
+          --exit-code 1 \
+          $(IMAGE_REPOSITORY):$(Build.BuildId)
+      displayName: 'SAST de imagen — Trivy (falla en vulnerabilidad Alta o Crítica)'
+
+    - task: Docker@2
+      displayName: 'Push de la imagen al registry'
+      inputs:
+        command: push
+        containerRegistry: $(DOCKER_REGISTRY_SERVICE_CONNECTION)
+        repository: $(IMAGE_REPOSITORY)
+        tags: |
+          $(Build.BuildId)
+
+# ─────────────────────────────────────────────
+# STAGE 3 — Deploy a Dev
 # Solo en la rama develop
 # ─────────────────────────────────────────────
 - stage: DeployDev
   displayName: 'Deploy → Dev'
-  dependsOn: CI
+  dependsOn: BuildImage
   condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/develop'))
   variables:
     - group: antioquia-natural-secrets
 
   jobs:
   - deployment: DeployDev
-    displayName: 'Desplegar en servidor Dev'
+    displayName: 'Desplegar contenedor en servidor Dev'
     environment: Dev
     strategy:
       runOnce:
@@ -153,32 +202,31 @@ stages:
           steps:
 
           - task: SSH@0
-            displayName: 'Actualizar y reiniciar en Dev'
+            displayName: 'docker compose pull + up en Dev'
             inputs:
               sshServiceConnection: $(SSH_DEV_SERVICE_CONNECTION)
               runOptions: commands
               commands: |
                 cd $(APP_PATH) &&
-                git pull origin develop &&
-                cd backend &&
-                npm install --omit=dev &&
-                pm2 restart antioquia-natural || pm2 start src/index.js --name antioquia-natural
+                export IMAGE_TAG=$(Build.BuildId) &&
+                docker compose pull &&
+                docker compose up -d
               failOnStdErr: false
 
 # ─────────────────────────────────────────────
-# STAGE 3 — Deploy a Producción
+# STAGE 4 — Deploy a Producción
 # Solo en la rama main · requiere aprobación manual
 # ─────────────────────────────────────────────
 - stage: DeployProd
   displayName: 'Deploy → Producción'
-  dependsOn: CI
+  dependsOn: BuildImage
   condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/main'))
   variables:
     - group: antioquia-natural-secrets
 
   jobs:
   - deployment: DeployProd
-    displayName: 'Desplegar en servidor Producción'
+    displayName: 'Desplegar contenedor en servidor Producción'
     environment: Produccion   # La aprobación manual se configura en este environment en Azure DevOps
     strategy:
       runOnce:
@@ -186,14 +234,13 @@ stages:
           steps:
 
           - task: SSH@0
-            displayName: 'Actualizar y reiniciar en Producción'
+            displayName: 'docker compose pull + up en Producción'
             inputs:
               sshServiceConnection: $(SSH_PROD_SERVICE_CONNECTION)
               runOptions: commands
               commands: |
                 cd $(APP_PATH) &&
-                git pull origin main &&
-                cd backend &&
-                npm install --omit=dev &&
-                pm2 restart antioquia-natural || pm2 start src/index.js --name antioquia-natural
+                export IMAGE_TAG=$(Build.BuildId) &&
+                docker compose pull &&
+                docker compose up -d
               failOnStdErr: false

@@ -1,0 +1,40 @@
+# docker-compose.yml — Antioquia Natural
+#
+# Levanta únicamente el backend (sirve también el frontend estático). Redis,
+# MongoDB Atlas y Nginx quedan fuera del contenedor, igual que hoy — Redis
+# corre en el mismo servidor (o uno dedicado) y se referencia por REDIS_URL
+# en backend/.env; Nginx hace de proxy inverso hacia el puerto 3000.
+#
+# Uso en el servidor (Dev/Producción):
+#   docker compose pull && docker compose up -d
+#
+# La imagen se referencia por tag (ver variable IMAGE_TAG) — el pipeline de
+# CI/CD la construye, escanea y publica; este archivo solo la consume.
+
+services:
+  app:
+    image: ${REGISTRY:-<acr-name>.azurecr.io/antioquia-natural}:${IMAGE_TAG:-latest} # placeholder — ajustar cuando TI confirme el registry
+    container_name: antioquia-natural
+    restart: unless-stopped
+    env_file:
+      - backend/.env
+    ports:
+      - "3000:3000"
+    volumes:
+      - jpl_fotos:/app/comunidad/jovenes_pa_lante/img/fotos
+      - jpl_data:/app/comunidad/jovenes_pa_lante/data
+      - gc_fotos:/app/comunidad/guarda_cuencas/img/fotos
+      - gc_data:/app/comunidad/guarda_cuencas/data
+      - backend_logs:/app/backend/logs
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "5"
+
+volumes:
+  jpl_fotos:
+  jpl_data:
+  gc_fotos:
+  gc_data:
+  backend_logs:

@@ -50,11 +50,13 @@ jest.mock('../../models/Usuario', () => ({
 }));
 
 const bcrypt = require('bcryptjs');
+const { authenticator } = require('otplib');
 const Usuario = require('../../models/Usuario');
 const PASSWORD_HASH = bcrypt.hashSync('clave-prueba', 10);
+const MFA_SECRET_PRUEBA = 'JBSWY3DPEHPK3PXP';
 const CURADOR_GC = {
   _id: 'u1', nombre: 'Curador GC', usuario: 'curador', passwordHash: PASSWORD_HASH,
-  roles: ['Curador.GuardaCuencas'], activo: true,
+  roles: ['Curador.GuardaCuencas'], activo: true, mfaSecret: MFA_SECRET_PRUEBA,
 };
 
 const app = require('../../routes/admin');
@@ -65,6 +67,7 @@ async function agenteLogueado() {
   Usuario.findById.mockReturnValue(mockQuery(CURADOR_GC));
   const agente = request.agent(testApp);
   await agente.post('/login').send({ usuario: 'curador', password: 'clave-prueba' });
+  await agente.post('/login/mfa').send({ codigo: authenticator.generate(MFA_SECRET_PRUEBA) });
   return agente;
 }
 

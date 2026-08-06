@@ -9,11 +9,11 @@ async function req(method, url, body) {
     opts.body = JSON.stringify(body);
   }
   const res = await fetch(API + url, opts);
-  // El 401 de /login significa "usuario o contraseña incorrectos", no
-  // "tu sesión expiró" — hay que dejar que caiga al throw de abajo para
+  // El 401 de /login o /login/mfa significa "credencial/código incorrecto",
+  // no "tu sesión expiró" — hay que dejar que caiga al throw de abajo para
   // que el formulario de login muestre el error, no redirigir en silencio
   // (si no, se ve como si el formulario se reseteara sin explicación).
-  if (res.status === 401 && url !== '/login') { location.href = '/admin/'; return; }
+  if (res.status === 401 && url !== '/login' && url !== '/login/mfa') { location.href = '/admin/'; return; }
   const data = await res.json();
   if (!res.ok) throw new Error(data.error || 'Error del servidor');
   return data;
@@ -22,12 +22,14 @@ async function req(method, url, body) {
 const api = {
   me:              () => req('GET',  '/me'),
   login:           (usuario, pw, recaptchaToken) => req('POST', '/login', { usuario, password: pw, recaptchaToken }),
+  loginMfa:        (codigo) => req('POST', '/login/mfa', { codigo }),
   logout:          () => req('POST', '/logout'),
 
   usuarios:        () => req('GET',  '/usuarios'),
   usuarioCrear:    (datos) => req('POST', '/usuarios', datos),
   usuarioEditar:   (id, datos) => req('PUT', `/usuarios/${id}`, datos),
   usuarioDesactivar: (id) => req('DELETE', `/usuarios/${id}`),
+  usuarioResetearMfa: (id) => req('POST', `/usuarios/${id}/reset-mfa`),
 
   jplMeses:        () => req('GET',  '/jpl/meses'),
   jplFotos:        (mes) => req('GET',  `/jpl/fotos/${mes}`),

@@ -321,6 +321,9 @@ input[type=checkbox] { width: 18px; height: 18px; accent-color: var(--green); }
 .login-card__sub { font-size: 13px; color: var(--muted); margin-bottom: 28px; }
 .login-card form { display: flex; flex-direction: column; gap: 14px; }
 .error-msg { color: var(--danger); font-size: 12px; margin-top: -6px; }
+.mfa-setup__intro { font-size: 13px; color: var(--muted); line-height: 1.5; text-align: left; }
+.mfa-setup__qr { width: 180px; height: 180px; align-self: center; border-radius: 8px; border: 1px solid var(--border); }
+#mfaCodigo { text-align: center; font-size: 20px; letter-spacing: 6px; }
 
 /* ── Badges ─────────────────────────────────────────────── */
 .badge {

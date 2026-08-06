@@ -33,7 +33,7 @@ Web app mobile-first para la Gobernación de Antioquia. Permite consultar la bio
 | Logs | Winston 3 — JSON estructurado con traceId por petición (ajuste v2.1) |
 | Caché | Redis 7 + ioredis — TTLs por ruta; modo degradado si Redis no está disponible (ajuste v2.1) |
 | SAST | ESLint-security + Semgrep (`p/nodejs`, `p/owasp-top-ten`) — 0 errores en código de API (ajuste v2.1) |
-| Autenticación admin | Usuarios individuales (colección `Usuario`) + bcrypt + reCAPTCHA v2 en el login — ver "Panel admin — Autenticación y usuarios" |
+| Autenticación admin | Usuarios individuales (colección `Usuario`) + bcrypt + reCAPTCHA v2 + MFA (TOTP) obligatorio — ver "Panel admin — Autenticación y usuarios" |
 | Contenedores | Docker (multi-stage, usuario non-root, `.dockerignore`, `HEALTHCHECK`, escaneo Trivy en CI/CD) — ver "Docker — Containerización del backend" |
 
 ---
@@ -95,7 +95,8 @@ Antioquia Natural/
 │   │   │   └── requestLogger.js       ← Log de cada request: método, path, status, ms, traceId
 │   │   ├── utils/
 │   │   │   ├── logger.js              ← Winston: JSON estructurado, traceId, archivos en logs/
-│   │   │   └── cache.js               ← getCached() + invalidate() con TTLs de la propuesta
+│   │   │   ├── cache.js               ← getCached() + invalidate() con TTLs de la propuesta
+│   │   │   └── rateLimit.js           ← Rate limiting en /login, /login/mfa, /autofill — se autodesactiva en NODE_ENV=test
 │   │   ├── models/
 │   │   │   ├── JplPhoto.js            ← fotos:[String] (array 1-3), mes, especie, grupo, IUCN…
 │   │   │   ├── GcPhoto.js             ← foto:String (único), mes, cuenca, subregion…
@@ -122,7 +123,9 @@ Antioquia Natural/
 │   │       ├── generate_matriz_respuesta.js         ← Respuesta a los 26 hallazgos de REVISION 2 (histórico)
 │   │       ├── generate_respuesta_revision3.js      ← Respuesta a los hallazgos de REVISION 3 — ver "TI Gobernación"
 │   │       ├── generate_diccionario_datos.js        ← Diccionario_Datos_BD_Comunidad_Antioquia_Natural.xlsx (una hoja por colección)
-│   │       └── generate_presentacion_comite.py       ← Presentacion_Comite_Cientifico_Antioquia_Natural.pptx (python-pptx, criterios de evaluación de especies)
+│   │       ├── generate_presentacion_comite.py       ← Presentacion_Comite_Cientifico_Antioquia_Natural.pptx (python-pptx, criterios de evaluación de especies)
+│   │       ├── generate_figura1_arquitectura_general.py ← Figura 1 del DI (graphviz) — única fuente editable, ver "Docker" y "TI Gobernación"
+│   │       └── generate_figura3_infraestructura.py      ← Figura 3 del DI (graphviz), mismo patrón
 │   └── __tests__/                     ← supertest (HTTP) + tests unitarios por capa hexagonal (domain/application aislados con fakes, sin Mongoose)
 ├── .semgrep.yml                       ← Reglas SAST locales + apunta a p/nodejs y p/owasp-top-ten
 ├── azure-pipelines.yml                ← CI → BuildImage (Docker + Trivy) → DeployDev/DeployProd (docker compose)
@@ -465,7 +468,9 @@ Cada curador tiene usuario y contraseña propios — **no** una sola contraseña
 - **Sesión**: `express-session`, cookie `httpOnly`, nombre custom (`antioquia.sid`), `secure` en producción, 8h de expiración. El usuario de la sesión se busca en Mongo **en cada petición** (no se cachea en la sesión), para que desactivar una cuenta revoque el acceso de inmediato — trade-off deliberado de rendimiento por seguridad.
 - **`GET /api/admin/me` nunca responde 401** — siempre 200 con `{isAdmin:false}` si no hay sesión válida, para que el frontend pueda usarlo como probe sin tratar "no logueado" como error.
 - **reCAPTCHA v2** en `admin/index.html`: verificado en el servidor (`modules/auth/infrastructure/verificarRecaptcha.js`) antes de siquiera consultar la base de usuarios. Usa las claves de prueba oficiales de Google (`RECAPTCHA_SITE_KEY`/`RECAPTCHA_SECRET_KEY` en `.env`) mientras el dominio real no está desplegado — **reemplazar por claves reales registradas para el dominio antes de producción**.
-- **Panel de gestión** (`admin/usuarios.html`, solo `Admin.Contenido`): crear, editar, desactivar. Desactivar no borra el registro (soft-delete vía `activo:false`).
+- **MFA (TOTP) obligatorio para todos los curadores** (2026-08-06, anticipando el requisito "Obligatorio" de MFA para administradores de la Guía de Arquitectura de TI, numeral 9 — independiente de Entra ID): login en dos pasos — `POST /login` valida password+reCAPTCHA y marca `req.session.usuarioIdPendienteMfa` (todavía NO abre sesión completa); si el usuario no tiene `mfaSecret` genera uno nuevo y devuelve un QR (`otplib` + `qrcode`, RFC 6238) para enrolar; `POST /login/mfa` verifica el código de 6 dígitos y recién ahí promueve la sesión a `usuarioId`. Un `Admin.Contenido` puede resetear el MFA de un curador que pierda su dispositivo (`POST /usuarios/:id/reset-mfa`, botón 🔑 en `admin/usuarios.html`) — vuelve a pedirle enrolar un dispositivo nuevo en su próximo login. `mfaSecret` nunca se expone en respuestas HTTP (mismo criterio que `passwordHash`).
+- **Panel de gestión** (`admin/usuarios.html`, solo `Admin.Contenido`): crear, editar, desactivar, resetear MFA. Desactivar no borra el registro (soft-delete vía `activo:false`).
+- **Rate limiting** (`backend/src/utils/rateLimit.js`, `express-rate-limit`): `/login` y `/login/mfa` a 10 solicitudes/15 min por IP, `/autofill` a 30/min — capa adicional contra fuerza bruta más allá de reCAPTCHA y del keyspace del código TOTP. Se autodesactiva en `NODE_ENV=test` (si no, la suite agotaría el límite en la primera decena de tests que hacen login); el comportamiento real se prueba aparte en `__tests__/utils/rateLimit.test.js`, forzando otro `NODE_ENV`.
 - **Bootstrap**: `node src/scripts/seed_usuario_admin.js "Nombre" usuario clave12345678 Admin.Contenido` crea el primer usuario.
 - **Futuro**: migración a Microsoft Entra ID (OAuth 2.0 + OIDC) documentada como Ajuste 1 en la PTF — no bloqueante, ya que el módulo de usuarios individuales resuelve el hallazgo de fondo (cuentas genéricas). Ver Roadmap Técnico del DI.
 
@@ -858,6 +863,15 @@ Diagrama de Figura 1 regenerado con `backend/src/scripts/generate_figura1_arquit
 
 Nota menor sin cerrar del todo: la columna "Entrada" de la fila RQP09 en el LRS sigue describiendo mejor una API que un archivo estático.
 
+**Mejoras proactivas (2026-08-06), anticipando lo que TI probablemente pida en la próxima revisión** — no son respuesta a un hallazgo formal, se adelantaron por análisis propio de la Guía de Arquitectura y la Guía de Azure DevOps:
+- **MFA (TOTP) obligatorio** — a diferencia del "Gestor de Acceso" (ver arriba, ese sí depende de Entra ID), la Guía de Arquitectura exige "Implementación de MFA para administradores" como su propio punto "Obligatorio" (numeral 9), separado de la sugerencia de Entra ID — esto sí era implementable sin depender de TI, y ya quedó hecho.
+- **Figura 3 del DI actualizada** — seguía mostrando PM2 después de containerizar con Docker, la misma clase de inconsistencia que ya se había corregido en la Figura 1. Regenerada con `backend/src/scripts/generate_figura3_infraestructura.py` (mismo patrón que Figura 1).
+- **Rate limiting** en `/login`, `/login/mfa` y `/autofill` — ver "Panel admin — Autenticación y usuarios".
+- **Nombre de repositorio para Azure Repos, ya decidido**: `antioquia-natural` (17 caracteres, kebab-case, cumple la tabla de buenas prácticas de la Guía de Azure DevOps — claro, descriptivo, sin nombres genéricos, dentro del límite de 25 caracteres). No se renombra el repositorio de GitHub actual (`cevazG/antioquia-biodiversa-expandida`) — este nombre queda listo solo para cuando se cree el repo espejo en Azure Repos.
+- **`Documentos gobernacion/TI/Solicitud_Servidor_Antioquia_Natural.docx`** diligenciado con las specs reales del proyecto (Ubuntu 24.04, Docker, Node 22, MongoDB Atlas externo, Redis nativo) — listo para cuando TI pida formalizar la solicitud del servidor de producción.
+
+Ambas están documentadas en el documento de respuesta (sección "Mejoras proactivas") y en el DI (numeral 8.1).
+
 Detalle completo, hallazgo por hallazgo, en el propio documento de respuesta.
 
 ### Scripts de generación — cuáles siguen vigentes
@@ -921,6 +935,7 @@ Detalle completo, hallazgo por hallazgo, en el propio documento de respuesta.
 - [x] **Autenticación con usuarios individuales + RBAC** (2026-08-03/06) — reemplaza la contraseña compartida (hallazgo crítico de TI); colección `Usuario`, 3 roles, panel de gestión, reCAPTCHA v2 en el login — ver "Panel admin — Autenticación y usuarios"
 - [x] **Containerización con Docker** (2026-08-06) — Dockerfile multi-stage, usuario non-root, `.dockerignore`, `HEALTHCHECK`, escaneo Trivy en CI/CD; Manual Técnico del DI y `azure-pipelines.yml` reescritos — ver "Docker — Containerización del backend"
 - [x] **Respuesta a los hallazgos de REVISION 3 de TI** (2026-08-06) — ver "TI Gobernación — Trámite de aval"
+- [x] **MFA (TOTP) obligatorio, rate limiting y Figura 3 actualizada a Docker** (2026-08-06) — anticipado antes de que TI lo pidiera como hallazgo formal, ver "Panel admin — Autenticación y usuarios" y "TI Gobernación — Trámite de aval"
 - [ ] **B1 — Microsoft Entra ID** — ya no bloqueante (usuarios individuales resuelven el hallazgo de cuenta genérica); reemplazaría express-session; requiere Client ID + Tenant ID (RNF05, RNF08)
 - [ ] Integración con el pipeline de CI/CD institucional de TI Gobernación — bloqueado hasta que TI comparta su plantilla (nota formal ya enviada en el DI)
 - [x] **C1 — Ley 1581** — modal de privacidad en entrada de la app, checkbox no pre-marcado, bilingüe, localStorage

@@ -41,6 +41,7 @@ function renderList() {
       </div>
       <div class="photo-card__actions">
         <button class="btn btn--ghost btn--sm" onclick="openEdit('${u._id}')">✏️</button>
+        <button class="btn btn--ghost btn--sm" onclick="resetearMfa('${u._id}')" title="Resetear MFA (perdió su dispositivo)">🔑</button>
         ${u.activo ? `<button class="btn btn--danger btn--sm" onclick="desactivar('${u._id}')">🚫</button>` : ''}
       </div>
     </div>`).join('');
@@ -139,4 +140,10 @@ async function desactivar(id) {
   _usuarios = await api.usuarios();
   renderList();
   showToast('Usuario desactivado');
+}
+
+async function resetearMfa(id) {
+  if (!confirm('¿Resetear el MFA de este usuario? En su próximo login deberá escanear un código QR nuevo (por ejemplo, si perdió su celular).')) return;
+  await api.usuarioResetearMfa(id);
+  showToast('MFA reseteado — se le pedirá enrolar un dispositivo nuevo en su próximo login');
 }

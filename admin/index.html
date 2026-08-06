@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Admin — Antioquia Natural</title>
-<link rel="stylesheet" href="css/admin.css?v=2">
+<link rel="stylesheet" href="css/admin.css?v=3">
 </head>
 <body>
 <div class="login-wrap">
@@ -20,6 +20,19 @@
       <div class="g-recaptcha" data-sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"></div>
       <p class="error-msg" id="errorMsg" style="display:none"></p>
       <button type="submit" class="btn btn--primary btn--full">Ingresar</button>
+    </form>
+
+    <form id="mfaForm" hidden>
+      <p class="mfa-setup__intro" id="mfaSetupIntro" hidden>
+        Primer ingreso: escanea este código con tu app de autenticación
+        (Google Authenticator, Authy, 1Password…) y luego escribe el código
+        de 6 dígitos que te muestre.
+      </p>
+      <img id="mfaQr" class="mfa-setup__qr" alt="Código QR para configurar el segundo factor" hidden>
+      <input type="text" id="mfaCodigo" placeholder="Código de 6 dígitos" required autofocus
+             inputmode="numeric" pattern="[0-9]*" maxlength="6" autocomplete="one-time-code">
+      <p class="error-msg" id="mfaErrorMsg" style="display:none"></p>
+      <button type="submit" class="btn btn--primary btn--full">Verificar</button>
     </form>
   </div>
 </div>

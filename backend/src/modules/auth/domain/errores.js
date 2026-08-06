@@ -40,7 +40,15 @@ class ErrorUsuarioDuplicado extends Error {
   }
 }
 
+// Código TOTP incorrecto o sesión pendiente de MFA inexistente/expirada.
+class ErrorCodigoMfaInvalido extends Error {
+  constructor(mensaje) {
+    super(mensaje);
+    this.name = 'ErrorCodigoMfaInvalido';
+  }
+}
+
 module.exports = {
   ErrorValidacion, ErrorNoEncontrado, ErrorCredencialInvalida,
-  ErrorUsuarioInactivo, ErrorUsuarioDuplicado,
+  ErrorUsuarioInactivo, ErrorUsuarioDuplicado, ErrorCodigoMfaInvalido,
 };

@@ -178,8 +178,33 @@ function buildDoc() {
     ),
     spacer(),
 
+    heading1('Mejoras proactivas (anticipadas, no exigidas explícitamente por un hallazgo)'),
+    para('Adicional a la respuesta punto por punto de las secciones anteriores, se adelantaron dos mejoras identificadas por análisis propio de los documentos institucionales de TI (Guía de Arquitectura y Buenas Prácticas de Desarrollo, Guía de Azure DevOps), antes de que aparecieran como hallazgo formal:'),
+    makeTable(
+      ['Mejora', 'Por qué se anticipó', 'Cómo quedó'],
+      [
+        [
+          'MFA (segundo factor) obligatorio para todos los curadores',
+          'La Guía de Arquitectura marca "Implementación de MFA para administradores" como Obligatorio (numeral 9), de forma independiente a la sugerencia de Entra ID — un requisito propio que el hallazgo de autenticación de esta misma revisión no llegó a exigir explícitamente.',
+          'TOTP (RFC 6238) vía las librerías otplib + qrcode: enrolamiento obligatorio con código QR en el primer login, código de 6 dígitos en logins siguientes. Un Admin.Contenido puede resetear el MFA de un curador que pierda su dispositivo. Ver DI, numeral 8.1.',
+        ],
+        [
+          'Figura 3 del DI (Infraestructura) actualizada',
+          'Seguía mostrando "PM2 → Node.js 22" después de containerizar con Docker — la misma clase de inconsistencia diagrama-vs-texto que ya se había corregido en la Figura 1 (hallazgo Moderado de esta revisión).',
+          'Diagrama regenerado con el mismo script versionado (graphviz) usado para la Figura 1, reemplazando PM2 por Docker Compose y actualizando la etiqueta del pipeline (CI + BuildImage + CD).',
+        ],
+        [
+          'Rate limiting en endpoints sensibles a fuerza bruta',
+          'reCAPTCHA y el keyspace del código TOTP reducen el riesgo de fuerza bruta, pero no lo eliminan — un atacante decidido puede resolver reCAPTCHA con servicios automatizados de terceros.',
+          '/login y /login/mfa limitados a 10 solicitudes cada 15 minutos por IP; /autofill a 30/minuto (evita abuso del proxy a la API pública de iNaturalist). Desactivado en tests (NODE_ENV=test), verificado con test dedicado.',
+        ],
+      ],
+      [2900, 4100, 3360]
+    ),
+    spacer(),
+
     heading1('Cierre'),
-    para('De los 13 hallazgos evaluados en este documento, 12 quedaron resueltos por completo, incluidos los dos hallazgos de la Figura 1 del DI (rediseño completo del diagrama de arquitectura) y la autenticación (cuenta genérica eliminada, usuarios individuales, reCAPTCHA — la integración con el Gestor de Acceso de la Entidad depende de un documento que TI no ha compartido con el equipo de desarrollo, y el único requisito verificable al respecto ya está en el Roadmap Técnico). Queda 1 en espera de TI Gobernación: la integración con el pipeline de CI/CD institucional (solicitud formal ya enviada, a la espera de respuesta). Ninguno de los hallazgos [Crítico] queda sin una acción concreta tomada. Una nota menor sin cerrar del todo: la columna "Entrada" de RQP09 en el LRS sigue describiendo mejor una API que un archivo estático — ajuste de redacción pendiente para una próxima iteración.'),
+    para('De los 13 hallazgos evaluados en este documento, 12 quedaron resueltos por completo, incluidos los dos hallazgos de la Figura 1 del DI (rediseño completo del diagrama de arquitectura) y la autenticación (cuenta genérica eliminada, usuarios individuales, reCAPTCHA — la integración con el Gestor de Acceso de la Entidad depende de un documento que TI no ha compartido con el equipo de desarrollo, y el único requisito verificable al respecto ya está en el Roadmap Técnico). Queda 1 en espera de TI Gobernación: la integración con el pipeline de CI/CD institucional (solicitud formal ya enviada, a la espera de respuesta). Ninguno de los hallazgos [Crítico] queda sin una acción concreta tomada. Adicionalmente, se adelantaron 2 mejoras no exigidas todavía por ningún hallazgo formal (MFA obligatorio, Figura 3 actualizada — ver sección anterior). Una nota menor sin cerrar del todo: la columna "Entrada" de RQP09 en el LRS sigue describiendo mejor una API que un archivo estático — ajuste de redacción pendiente para una próxima iteración.'),
   ];
 
   return new Document({

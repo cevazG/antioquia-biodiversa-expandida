@@ -28,7 +28,9 @@ jest.mock('../../models/GcPhoto', () => ({
 }));
 
 const bcrypt = require('bcryptjs');
+const { authenticator } = require('otplib');
 const PASSWORD_HASH = bcrypt.hashSync('clave-prueba', 10);
+const MFA_SECRET_PRUEBA = 'JBSWY3DPEHPK3PXP';
 
 jest.mock('../../models/Usuario', () => ({
   findOne: jest.fn(), findById: jest.fn(), find: jest.fn(),
@@ -40,7 +42,7 @@ const app = makeApp(require('../../routes/admin'));
 
 const ADMIN = {
   _id: 'admin1', nombre: 'Admin Test', usuario: 'admin', passwordHash: PASSWORD_HASH,
-  roles: ['Admin.Contenido'], activo: true,
+  roles: ['Admin.Contenido'], activo: true, mfaSecret: MFA_SECRET_PRUEBA,
 };
 
 async function agenteAdmin() {
@@ -48,6 +50,7 @@ async function agenteAdmin() {
   Usuario.findById.mockReturnValue(mockQuery(ADMIN));
   const agente = request.agent(app);
   await agente.post('/login').send({ usuario: 'admin', password: 'clave-prueba' });
+  await agente.post('/login/mfa').send({ codigo: authenticator.generate(MFA_SECRET_PRUEBA) });
   return agente;
 }
 
@@ -161,6 +164,29 @@ describe('DELETE /usuarios/:id', () => {
     Usuario.findByIdAndUpdate.mockReturnValue(mockQuery(null));
 
     const res = await agente.delete('/usuarios/no-existe');
+
+    expect(res.status).toBe(404);
+  });
+});
+
+describe('POST /usuarios/:id/reset-mfa', () => {
+  test('deja mfaSecret en null — el usuario deberá enrolar un dispositivo nuevo en su próximo login', async () => {
+    const agente = await agenteAdmin();
+    const reseteado = { _id: 'u1', nombre: 'Ana', usuario: 'aruiz', roles: ['Curador.GuardaCuencas'], activo: true };
+    Usuario.findByIdAndUpdate.mockReturnValue(mockQuery(reseteado));
+
+    const res = await agente.post('/usuarios/u1/reset-mfa');
+
+    expect(res.status).toBe(200);
+    expect(res.body).toEqual(reseteado);
+    expect(Usuario.findByIdAndUpdate).toHaveBeenCalledWith('u1', { mfaSecret: null }, { new: true });
+  });
+
+  test('responde 404 si el usuario no existe', async () => {
+    const agente = await agenteAdmin();
+    Usuario.findByIdAndUpdate.mockReturnValue(mockQuery(null));
+
+    const res = await agente.post('/usuarios/no-existe/reset-mfa');
 
     expect(res.status).toBe(404);
   });

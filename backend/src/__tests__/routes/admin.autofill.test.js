@@ -27,11 +27,13 @@ jest.mock('../../models/Usuario', () => ({
 }));
 
 const bcrypt = require('bcryptjs');
+const { authenticator } = require('otplib');
 const Usuario = require('../../models/Usuario');
 const PASSWORD_HASH = bcrypt.hashSync('clave-prueba', 10);
+const MFA_SECRET_PRUEBA = 'JBSWY3DPEHPK3PXP';
 const CUALQUIER_USUARIO = {
   _id: 'u1', nombre: 'Curador', usuario: 'curador', passwordHash: PASSWORD_HASH,
-  roles: ['Curador.Biodiversidad'], activo: true, // /autofill solo exige requireAuth, no un rol específico
+  roles: ['Curador.Biodiversidad'], activo: true, mfaSecret: MFA_SECRET_PRUEBA, // /autofill solo exige requireAuth, no un rol específico
 };
 
 const testApp = makeApp(require('../../routes/admin'));
@@ -41,6 +43,7 @@ async function agenteLogueado() {
   Usuario.findById.mockReturnValue(mockQuery(CUALQUIER_USUARIO));
   const agente = request.agent(testApp);
   await agente.post('/login').send({ usuario: 'curador', password: 'clave-prueba' });
+  await agente.post('/login/mfa').send({ codigo: authenticator.generate(MFA_SECRET_PRUEBA) });
   return agente;
 }
 

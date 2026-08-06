@@ -315,12 +315,13 @@ Un documento por curador/administrador. Reemplaza el mecanismo anterior de una s
   "passwordHash": "$2b$10$...",
   "roles": ["Curador.Biodiversidad"],
   "activo": true,
+  "mfaSecret": "JBSWY3DPEHPK3PXP",
   "createdAt": "2026-08-03T00:00:00Z",
   "updatedAt": "2026-08-03T00:00:00Z"
 }
 ```
 
-`roles` es un array de: `Curador.Biodiversidad`, `Curador.GuardaCuencas`, `Admin.Contenido` (superrole). `passwordHash` nunca se expone en las respuestas de la API (`.select('-passwordHash')` en todas las consultas salvo la de login). `activo:false` revoca el acceso de inmediato — se valida en cada petición, no solo al iniciar sesión.
+`roles` es un array de: `Curador.Biodiversidad`, `Curador.GuardaCuencas`, `Admin.Contenido` (superrole). `passwordHash` nunca se expone en las respuestas de la API (`.select('-passwordHash')` en todas las consultas salvo la de login). `activo:false` revoca el acceso de inmediato — se valida en cada petición, no solo al iniciar sesión. `mfaSecret` (secreto TOTP del segundo factor, obligatorio) tampoco se expone nunca — `null` hasta que el usuario complete el enrolamiento en su primer login; un `Admin.Contenido` puede resetearlo a `null` desde el panel si el curador pierde su dispositivo.
 
 ---
 

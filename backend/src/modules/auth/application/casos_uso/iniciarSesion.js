@@ -16,7 +16,10 @@ function crearIniciarSesion({ repositorio }) {
       throw new ErrorCredencialInvalida(MENSAJE_GENERICO);
     }
 
-    return { id: encontrado._id, nombre: encontrado.nombre, usuario: encontrado.usuario, roles: encontrado.roles };
+    return {
+      id: encontrado._id, nombre: encontrado.nombre, usuario: encontrado.usuario, roles: encontrado.roles,
+      mfaHabilitado: !!encontrado.mfaSecret,
+    };
   };
 }
 

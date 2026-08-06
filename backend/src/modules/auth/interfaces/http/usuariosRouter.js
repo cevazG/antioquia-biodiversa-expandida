@@ -9,6 +9,7 @@ const { crearListarUsuarios }    = require('../../application/casos_uso/listarUs
 const { crearCrearUsuario }      = require('../../application/casos_uso/crearUsuario');
 const { crearActualizarUsuario } = require('../../application/casos_uso/actualizarUsuario');
 const { crearDesactivarUsuario } = require('../../application/casos_uso/desactivarUsuario');
+const { crearResetearMfa }       = require('../../application/casos_uso/resetearMfa');
 
 const { ErrorValidacion, ErrorNoEncontrado, ErrorUsuarioDuplicado } = require('../../domain/errores');
 
@@ -16,6 +17,7 @@ const listarUsuarios    = crearListarUsuarios({ repositorio });
 const crearUsuario      = crearCrearUsuario({ repositorio, hasher });
 const actualizarUsuario = crearActualizarUsuario({ repositorio, hasher });
 const desactivarUsuario = crearDesactivarUsuario({ repositorio });
+const resetearMfa       = crearResetearMfa({ repositorio });
 
 // Traduce errores de dominio a códigos HTTP, mismo patrón que
 // modules/jpl y modules/gc.
@@ -60,6 +62,16 @@ router.put('/:id', async (req, res) => {
 router.delete('/:id', async (req, res) => {
   try {
     res.json(await desactivarUsuario(req.params.id));
+  } catch (err) {
+    manejarError(err, res);
+  }
+});
+
+// El usuario vuelve a quedar "sin MFA enrolado" — su próximo login le pide
+// escanear un QR nuevo. Pensado para cuando pierde el dispositivo.
+router.post('/:id/reset-mfa', async (req, res) => {
+  try {
+    res.json(await resetearMfa(req.params.id));
   } catch (err) {
     manejarError(err, res);
   }

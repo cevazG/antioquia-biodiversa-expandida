@@ -28,13 +28,22 @@ describe('iniciarSesion (caso de uso)', () => {
     await expect(iniciarSesion({ usuario: 'test', password: 'incorrecta' })).rejects.toThrow(ErrorCredencialInvalida);
   });
 
-  test('devuelve id/nombre/usuario/roles si todo es correcto', async () => {
+  test('devuelve id/nombre/usuario/roles y mfaHabilitado:false si el usuario no tiene MFA configurado', async () => {
     const repositorio = { buscarPorUsuario: jest.fn().mockResolvedValue(USUARIO_ACTIVO) };
     const iniciarSesion = crearIniciarSesion({ repositorio });
 
     const sesion = await iniciarSesion({ usuario: 'test', password: 'clave-correcta' });
 
-    expect(sesion).toEqual({ id: 'u1', nombre: 'Test', usuario: 'test', roles: ['Admin.Contenido'] });
+    expect(sesion).toEqual({ id: 'u1', nombre: 'Test', usuario: 'test', roles: ['Admin.Contenido'], mfaHabilitado: false });
+  });
+
+  test('devuelve mfaHabilitado:true si el usuario ya tiene un secreto TOTP guardado', async () => {
+    const repositorio = { buscarPorUsuario: jest.fn().mockResolvedValue({ ...USUARIO_ACTIVO, mfaSecret: 'JBSWY3DPEHPK3PXP' }) };
+    const iniciarSesion = crearIniciarSesion({ repositorio });
+
+    const sesion = await iniciarSesion({ usuario: 'test', password: 'clave-correcta' });
+
+    expect(sesion.mfaHabilitado).toBe(true);
   });
 
   test('normaliza el usuario a minúsculas y sin espacios antes de buscar', async () => {

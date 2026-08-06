@@ -40,13 +40,15 @@ jest.mock('../../models/Usuario', () => ({
 }));
 
 const bcrypt = require('bcryptjs');
+const { authenticator } = require('otplib');
 const Usuario = require('../../models/Usuario');
 const PASSWORD_HASH = bcrypt.hashSync('clave-prueba', 10);
+const MFA_SECRET_PRUEBA = 'JBSWY3DPEHPK3PXP';
 // Admin.Contenido (superrole) porque este archivo ejercita tanto
 // /jpl/publicar como /gc/publicar con el mismo agente logueado.
 const ADMIN = {
   _id: 'u1', nombre: 'Admin', usuario: 'admin', passwordHash: PASSWORD_HASH,
-  roles: ['Admin.Contenido'], activo: true,
+  roles: ['Admin.Contenido'], activo: true, mfaSecret: MFA_SECRET_PRUEBA,
 };
 
 const testApp = makeApp(require('../../routes/admin'));
@@ -56,6 +58,7 @@ async function agenteLogueado() {
   Usuario.findById.mockReturnValue(mockQuery(ADMIN));
   const agente = request.agent(testApp);
   await agente.post('/login').send({ usuario: 'admin', password: 'clave-prueba' });
+  await agente.post('/login/mfa').send({ codigo: authenticator.generate(MFA_SECRET_PRUEBA) });
   return agente;
 }
 

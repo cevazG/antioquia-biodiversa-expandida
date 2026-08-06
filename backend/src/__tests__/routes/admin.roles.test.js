@@ -32,7 +32,9 @@ jest.mock('../../models/GcPhoto', () => ({
 }));
 
 const bcrypt = require('bcryptjs');
+const { authenticator } = require('otplib');
 const PASSWORD_HASH = bcrypt.hashSync('clave-prueba', 10);
+const MFA_SECRET_PRUEBA = 'JBSWY3DPEHPK3PXP';
 
 jest.mock('../../models/Usuario', () => ({
   findOne: jest.fn(), findById: jest.fn(), find: jest.fn(),
@@ -45,7 +47,10 @@ const GcPhoto   = require('../../models/GcPhoto');
 const app = makeApp(require('../../routes/admin'));
 
 function usuarioConRoles(roles) {
-  return { _id: 'u1', nombre: 'Test', usuario: 'test', passwordHash: PASSWORD_HASH, roles, activo: true };
+  return {
+    _id: 'u1', nombre: 'Test', usuario: 'test', passwordHash: PASSWORD_HASH, roles, activo: true,
+    mfaSecret: MFA_SECRET_PRUEBA,
+  };
 }
 
 async function agenteConRoles(roles) {
@@ -54,6 +59,7 @@ async function agenteConRoles(roles) {
   Usuario.findById.mockReturnValue(mockQuery(usuario));
   const agente = request.agent(app);
   await agente.post('/login').send({ usuario: 'test', password: 'clave-prueba' });
+  await agente.post('/login/mfa').send({ codigo: authenticator.generate(MFA_SECRET_PRUEBA) });
   return agente;
 }
 

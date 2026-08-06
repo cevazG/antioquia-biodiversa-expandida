@@ -3,6 +3,7 @@ const router   = express.Router();
 
 const { requireAuth, requireRole } = require('../modules/auth/interfaces/http/middleware');
 const inaturalist = require('../services/inaturalistLookup');
+const { limiterAutofill } = require('../utils/rateLimit');
 
 // ─── Auth ──────────────────────────────────────────────────────────────────
 // /login, /logout, /me — módulo completo de usuarios individuales (puente
@@ -14,7 +15,7 @@ router.use(require('../modules/auth/interfaces/http/authRouter'));
 // ─── Autofill iNaturalist ─────────────────────────────────────────────────
 // Compartido entre JPL y Guarda Cuencas — no es específico de ningún módulo,
 // se queda acá en vez de moverse a modules/jpl/ o modules/gc/.
-router.post('/autofill', requireAuth, async (req, res) => {
+router.post('/autofill', limiterAutofill, requireAuth, async (req, res) => {
   const { scientificName } = req.body;
   if (!scientificName?.trim()) return res.status(400).json({ error: 'Se requiere nombre científico' });
 

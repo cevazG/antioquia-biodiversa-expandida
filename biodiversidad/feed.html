@@ -9,7 +9,7 @@
   <link rel="stylesheet" href="css/main.css?v=5">
   <link rel="stylesheet" href="css/components.css?v=17">
   <link rel="stylesheet" href="css/animations.css?v=4">
-  <link rel="stylesheet" href="css/feed.css?v=1">
+  <link rel="stylesheet" href="css/feed.css?v=2">
   <link rel="prefetch" href="data/species.json" as="fetch">
   <link rel="prefetch" href="../data/translations.json" as="fetch">
 </head>
@@ -96,6 +96,9 @@
         <div class="modal-photo__placeholder" id="modal-placeholder" style="display:none"></div>
         <div class="modal-dots" id="modal-dots" style="display:none"></div>
         <div class="modal-counter" id="modal-counter" style="display:none"></div>
+        <div class="gallery-expand-hint" aria-hidden="true">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M8 3H5a2 2 0 00-2 2v3m18 0V5a2 2 0 00-2-2h-3m0 18h3a2 2 0 002-2v-3M3 16v3a2 2 0 002 2h3"/></svg>
+        </div>
       </div>
       <div class="modal-body">
         <div class="modal-handle" aria-hidden="true"></div>
@@ -112,6 +115,17 @@
           <span data-i18n="feed_view_ficha">Ver ficha</span>
         </a>
       </div>
+    </div>
+
+    <!-- Visor de pantalla completa (mismo patrón que especie.html) -->
+    <div class="lightbox" id="feed-lightbox" hidden>
+      <button class="lightbox__close" id="feed-lightbox-close" aria-label="Cerrar">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 6L6 18M6 6l12 12"/></svg>
+      </button>
+      <div class="lightbox__stage" id="feed-lightbox-stage"></div>
+      <div class="lightbox__dots gallery-dots" id="feed-lightbox-dots" style="display:none"></div>
+      <div class="lightbox__counter" id="feed-lightbox-counter" style="display:none"></div>
+      <div class="lightbox__caption" id="feed-lightbox-caption" style="display:none"></div>
     </div>
 
     <nav class="bottom-bar" aria-label="Navegación principal">
@@ -139,6 +153,6 @@
   <script src="js/nav.js?v=3"></script>
   <script src="js/app.js?v=7"></script>
   <script src="js/feed-data.js?v=1"></script>
-  <script src="js/feed.js?v=1"></script>
+  <script src="js/feed.js?v=2"></script>
 </body>
 </html>

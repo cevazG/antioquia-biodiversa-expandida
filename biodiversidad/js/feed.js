@@ -202,6 +202,7 @@ function openModal(item) {
   photoEl.classList.toggle('modal-photo--wide', item.source === 'gc');
   document.getElementById('modal-placeholder').textContent = emojiOf(item);
   showModalImg(0);
+  buildLightbox(item);
 
   document.getElementById('modal-name').textContent = name;
   const sciEl = document.getElementById('modal-sci');
@@ -262,22 +263,100 @@ function showModalImg(idx) {
 function closeModal() {
   document.getElementById('modal-overlay').classList.remove('open');
   document.getElementById('modal-sheet').classList.remove('open');
-  document.body.style.overflow = '';
+  if (document.getElementById('feed-lightbox').hidden) document.body.style.overflow = '';
+}
+
+// ── Visor de pantalla completa (mismo patrón que especie.html) ──
+let _lbSlides = [];
+let _lbDots = [];
+let _lbCurrent = 0;
+let _lbItem = null;
+
+function buildLightbox(item) {
+  _lbItem = item;
+  _lbSlides = [];
+  _lbDots = [];
+  _lbCurrent = 0;
+  const stage = document.getElementById('feed-lightbox-stage');
+  const dotsC = document.getElementById('feed-lightbox-dots');
+  stage.innerHTML = '';
+  dotsC.innerHTML = '';
+  item.imgs.forEach((u, i) => {
+    const slide = document.createElement('div');
+    slide.className = 'photo-slide' + (i === 0 ? ' active' : '');
+    const img = document.createElement('img');
+    img.src = u;
+    img.alt = titleOf(item);
+    img.loading = 'lazy';
+    slide.appendChild(img);
+    stage.appendChild(slide);
+    _lbSlides.push(slide);
+    if (item.imgs.length > 1) {
+      const d = document.createElement('div');
+      d.className = 'gallery-dot' + (i === 0 ? ' active' : '');
+      d.addEventListener('click', (e) => { e.stopPropagation(); showLbSlide(i); });
+      dotsC.appendChild(d);
+      _lbDots.push(d);
+    }
+  });
+}
+
+function showLbSlide(n) {
+  if (!_lbSlides.length) return;
+  _lbSlides[_lbCurrent].classList.remove('active');
+  if (_lbDots[_lbCurrent]) _lbDots[_lbCurrent].classList.remove('active');
+  _lbCurrent = (n + _lbSlides.length) % _lbSlides.length;
+  _lbSlides[_lbCurrent].classList.add('active');
+  if (_lbDots[_lbCurrent]) _lbDots[_lbCurrent].classList.add('active');
+
+  const counter = document.getElementById('feed-lightbox-counter');
+  const caption = document.getElementById('feed-lightbox-caption');
+  if (_lbItem && _lbItem.imgs.length > 1) {
+    counter.textContent = `${_lbCurrent + 1} / ${_lbSlides.length}`;
+    counter.style.display = 'block';
+  } else {
+    counter.style.display = 'none';
+  }
+  const bits = _lbItem ? [titleOf(_lbItem), _lbItem.credito].filter(Boolean) : [];
+  caption.textContent = bits.join(' · ');
+  caption.style.display = bits.length ? 'block' : 'none';
+}
+
+function openLightbox(idx) {
+  const lb = document.getElementById('feed-lightbox');
+  lb.hidden = false;
+  document.body.style.overflow = 'hidden';
+  document.getElementById('feed-lightbox-dots').style.display =
+    _lbItem && _lbItem.imgs.length > 1 ? '' : 'none';
+  showLbSlide(idx || 0);
+}
+
+function closeLightbox() {
+  document.getElementById('feed-lightbox').hidden = true;
+  // Si la hoja de detalle sigue abierta, mantener el scroll del body bloqueado
+  if (!document.getElementById('modal-sheet').classList.contains('open')) {
+    document.body.style.overflow = '';
+  }
 }
 
 function initModal() {
   document.getElementById('modal-overlay').addEventListener('click', closeModal);
   document.querySelectorAll('[data-modal-close]').forEach((b) => b.addEventListener('click', closeModal));
-  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
-  // bfcache: el gesto "atrás" puede restaurar la página con el modal abierto
-  window.addEventListener('pageshow', (e) => { if (e.persisted) closeModal(); });
+  document.getElementById('feed-lightbox-close').addEventListener('click', closeLightbox);
+  document.addEventListener('keydown', (e) => {
+    if (e.key !== 'Escape') return;
+    if (!document.getElementById('feed-lightbox').hidden) closeLightbox();
+    else closeModal();
+  });
+  // bfcache: el gesto "atrás" puede restaurar la página con el visor/hoja abiertos
+  window.addEventListener('pageshow', (e) => { if (e.persisted) { closeLightbox(); closeModal(); } });
 
+  // Hoja de detalle: deslizar/puntos navegan la vista chica; tocar la foto la abre grande
   const photoEl = document.getElementById('modal-photo');
   let startX = 0;
   photoEl.addEventListener('click', (e) => {
     if (e.target.closest('.modal-close') || e.target.closest('.modal-dot')) return;
-    const imgs = _modalItem ? _modalItem.imgs : [];
-    if (imgs.length > 1) showModalImg((_modalImgIdx + 1) % imgs.length);
+    openLightbox(_modalImgIdx);
   });
   photoEl.addEventListener('touchstart', (e) => { startX = e.touches[0].clientX; }, { passive: true });
   photoEl.addEventListener('touchend', (e) => {
@@ -287,6 +366,16 @@ function initModal() {
       const next = Math.max(0, Math.min(imgs.length - 1, _modalImgIdx + (diff > 0 ? 1 : -1)));
       showModalImg(next);
     }
+  });
+
+  // Visor de pantalla completa: tocar avanza; deslizar navega
+  const stage = document.getElementById('feed-lightbox-stage');
+  let lbStartX = 0;
+  stage.addEventListener('click', () => { if (_lbSlides.length > 1) showLbSlide(_lbCurrent + 1); });
+  stage.addEventListener('touchstart', (e) => { lbStartX = e.touches[0].clientX; }, { passive: true });
+  stage.addEventListener('touchend', (e) => {
+    const diff = lbStartX - e.changedTouches[0].clientX;
+    if (Math.abs(diff) > 40 && _lbSlides.length > 1) showLbSlide(_lbCurrent + (diff > 0 ? 1 : -1));
   });
 }
 

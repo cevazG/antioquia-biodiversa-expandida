@@ -1,0 +1,359 @@
+/* ============================================================
+   ANTIOQUIA NATURAL — feed.css
+   Feed unificado: catálogo + Jóvenes pa' Lante + Guarda Cuencas.
+   Reutiliza de components.css todo el sistema de 3 vistas
+   (.photo-reel*, .view-switcher*, .photo-grid-3col*, .photo-masonry*)
+   y .search-bar*. Aquí solo va lo propio del feed: el filtro de
+   fuente, el badge de origen sobre la foto, y el modal (copiado de
+   comunidad/jovenes_pa_lante/galeria.css, que no está en components.css).
+   ============================================================ */
+
+:root {
+  --feed-sources-h: 47px;   /* alto real de .feed-sources (incluye su borde) */
+  --color-jpl-dark: #6b5216; /* texto blanco AA sobre este tono, no sobre #B0942B */
+}
+
+/* ── Filtro de fuente (acceso rápido) — control segmentado, siempre visible ── */
+.feed-sources {
+  position: sticky;
+  top: var(--header-height);
+  z-index: 90;
+  display: flex;
+  gap: 6px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+  padding: 7px var(--space-md);
+  background: var(--color-white);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.feed-sources::-webkit-scrollbar { display: none; }
+
+/* Chip interactivo → píldora completa + borde (convención del proyecto) */
+.feed-sources__btn {
+  flex-shrink: 0;
+  height: 32px;
+  padding: 0 14px;
+  border-radius: var(--radius-full);
+  border: 1.5px solid var(--color-border);
+  background: var(--color-white);
+  font-family: var(--font-primary);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--color-text-medium);
+  white-space: nowrap;
+  cursor: pointer;
+  transition: all var(--transition);
+}
+
+.feed-sources__btn.active {
+  background: var(--color-green-dark);
+  border-color: var(--color-green-dark);
+  color: var(--color-white);
+}
+
+.feed-sources__btn--jpl.active {
+  background: var(--color-jpl-dark);
+  border-color: var(--color-jpl-dark);
+}
+
+.feed-sources__btn--gc.active {
+  background: var(--color-blue-primary);
+  border-color: var(--color-blue-primary);
+}
+
+/* ── Fila de búsqueda — visible solo en cuadrícula / mosaico (en carrete estorba) ── */
+.feed-search {
+  position: sticky;
+  top: calc(var(--header-height) + var(--feed-sources-h));
+  z-index: 89;
+  padding: var(--space-sm) var(--space-md);
+  background: var(--color-white);
+  border-bottom: 1px solid var(--color-border);
+}
+
+/* Guard [hidden]: .feed-search fija display por su cuenta, hay que apagarlo
+   explícito o la regla de autor le gana a la hoja del navegador. */
+.feed-search[hidden] { display: none; }
+
+.feed-search .search-bar { margin-bottom: 0; }
+
+.feed-search .search-bar__input { height: 44px; }
+
+/* ── Vista carrete: descuenta también la altura del filtro de fuente ── */
+#view-reel {
+  height: calc(100dvh - var(--header-height) - var(--feed-sources-h));
+}
+
+/* ── Badge de origen — tag informativo SOBRE la foto ──
+   Excepción de la convención: relleno sólido (legibilidad sobre cualquier
+   imagen), pero forma de dato (--radius-sm), sin sombra, sin hover. */
+.feed-badge {
+  position: absolute;
+  top: 6px;
+  left: 6px;
+  z-index: 3;
+  padding: 3px 7px;
+  border-radius: var(--radius-sm);
+  font-size: 0.5625rem;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 0.02em;
+  color: var(--color-white);
+  pointer-events: none;
+}
+
+.feed-badge--jpl      { background: var(--color-jpl-dark); }
+.feed-badge--gc       { background: var(--color-blue-primary); }
+.feed-badge--catalogo { background: var(--color-green-dark); }
+
+/* La cuadrícula 3-col no trae position:relative de fábrica; lo necesita
+   para anclar el .feed-badge. (reel__card y masonry__item ya lo traen.) */
+.photo-grid-3col__item { position: relative; }
+
+/* Carrete vertical de pantalla completa — badge más grande y separado del borde */
+.photo-reel--vertical .feed-badge {
+  top: calc(var(--space-md) + 2px);
+  left: var(--space-md);
+  font-size: 0.6875rem;
+  padding: 4px 9px;
+}
+
+/* Tarjetas de comunidad (abren modal, no navegan) */
+.feed-card--tappable { cursor: pointer; }
+.feed-card--tappable:active { opacity: 0.85; }
+
+/* ── Estado vacío ── */
+.feed-empty {
+  text-align: center;
+  padding: var(--space-xxl) var(--space-lg);
+  color: var(--color-text-light);
+}
+.feed-empty__icon { font-size: 3rem; line-height: 1; margin-bottom: var(--space-sm); }
+.feed-empty__title { font-weight: 700; color: var(--color-text-medium); margin-bottom: 4px; }
+.feed-empty__desc { font-size: 0.875rem; }
+
+/* ============================================================
+   MODAL / VISOR  — copiado de comunidad/jovenes_pa_lante/galeria.css
+   (estos estilos no viven en components.css)
+   ============================================================ */
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.55);
+  z-index: 200;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+}
+.modal-overlay.open { opacity: 1; pointer-events: all; }
+
+.modal-sheet {
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%) translateY(100%);
+  width: 100%;
+  max-width: var(--app-max-width);
+  max-height: 92dvh;
+  background: var(--color-white);
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  z-index: 210;
+  transition: transform 0.35s cubic-bezier(0.4,0,0.2,1);
+}
+.modal-sheet.open { transform: translateX(-50%) translateY(0); }
+
+.modal-photo {
+  position: relative;
+  aspect-ratio: 4/3;
+  background: #0d1f0f;
+  overflow: hidden;
+}
+.modal-photo img { width: 100%; height: 100%; object-fit: contain; display: block; }
+
+/* Guarda Cuencas es 16:9 apaisado; se lo damos al modal cuando aplica */
+.modal-photo--wide { aspect-ratio: 16/9; }
+.modal-photo--wide img { object-fit: cover; }
+
+.modal-photo__placeholder {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 5rem;
+  background: linear-gradient(135deg, var(--color-green-pale), var(--color-border));
+}
+
+.modal-close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(0,0,0,0.5);
+  border: none;
+  color: var(--color-white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  backdrop-filter: blur(4px);
+  z-index: 5;
+}
+
+.modal-body {
+  padding: var(--space-md) var(--space-md) calc(var(--space-lg) + env(safe-area-inset-bottom));
+}
+
+.modal-handle {
+  width: 36px;
+  height: 4px;
+  background: var(--color-border);
+  border-radius: 2px;
+  margin: 0 auto var(--space-md);
+}
+
+.modal-name {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--color-text-dark);
+  line-height: 1.25;
+  margin-bottom: 4px;
+}
+
+.modal-sci {
+  font-style: italic;
+  font-size: 0.9375rem;
+  color: var(--color-text-light);
+  margin-bottom: var(--space-md);
+}
+
+.modal-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: var(--space-md);
+}
+
+.badge-endemic {
+  background: var(--color-green-pale);
+  color: var(--color-green-dark);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  padding: 5px 12px;
+  border-radius: var(--radius-sm);
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.badge-municipio {
+  background: var(--color-bg);
+  color: var(--color-text-medium);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  padding: 5px 12px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--color-border);
+}
+
+.badge-cuenca {
+  background: color-mix(in srgb, var(--color-blue-primary) 14%, white);
+  color: var(--color-blue-primary);
+  font-size: 0.6875rem;
+  font-weight: 700;
+  padding: 5px 12px;
+  border-radius: var(--radius-sm);
+}
+
+.modal-desc {
+  font-size: 0.9375rem;
+  color: var(--color-text-medium);
+  line-height: 1.7;
+  margin-bottom: var(--space-md);
+}
+
+.modal-credit {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 0.8125rem;
+  color: var(--color-text-light);
+  padding-top: var(--space-sm);
+  border-top: 1px solid var(--color-border);
+  margin-bottom: var(--space-md);
+}
+
+/* Enlace "Ver ficha" — píldora interactiva (borde + relleno + sombra) */
+.feed-ficha-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 9px 16px;
+  border-radius: var(--radius-full);
+  border: 1.5px solid var(--color-green-primary);
+  background: var(--color-green-primary);
+  color: var(--color-white);
+  font-size: 0.8125rem;
+  font-weight: 700;
+  text-decoration: none;
+  box-shadow: var(--shadow-sm);
+}
+.feed-ficha-link[hidden] { display: none; }
+.feed-ficha-link:active { background: var(--color-green-dark); }
+
+/* Carousel dots del modal — mismo formato que biodiversidad */
+.modal-dots {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 5px;
+  z-index: 10;
+  padding: 8px 4px;
+}
+.modal-dot {
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.45);
+  transition: all 0.2s;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+.modal-dot.active { background: var(--color-white); width: 14px; border-radius: 3px; }
+
+.modal-counter {
+  position: absolute;
+  bottom: var(--space-md);
+  right: var(--space-md);
+  background: rgba(0,0,0,0.45);
+  color: var(--color-white);
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  backdrop-filter: blur(4px);
+  z-index: 10;
+}
+
+/* ── Enlace discreto a la selección de módulos ── */
+.feed-modules-link {
+  display: block;
+  text-align: center;
+  padding: var(--space-md);
+  padding-bottom: calc(var(--bottom-bar-height) + var(--space-lg) + env(safe-area-inset-bottom));
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--color-green-dark);
+  text-decoration: none;
+}
+
+/* Guard [hidden]: .feed-modules-link fija display:block por su cuenta */
+.feed-modules-link[hidden] { display: none; }

@@ -31,7 +31,7 @@ function selectLang(lang) {
   content.style.opacity = '0';
   content.style.transform = 'translateY(-20px) scale(0.97)';
 
-  setTimeout(() => { window.location.href = 'home.html'; }, 300);
+  setTimeout(() => { window.location.href = 'feed.html'; }, 300);
 }
 
 // Si ya eligió idioma antes, mostrar el prompt en ese idioma

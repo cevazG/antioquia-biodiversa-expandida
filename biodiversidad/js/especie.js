@@ -47,6 +47,14 @@ function isUnidentified(sp) {
       return FAMILY_EMOJI[sp.familyId] || GROUP_META[sp.group]?.deco || '🌿';
     }
 
+    // Badge "Jóvenes pa' Lante" sobre las fotos de la comunidad anexadas a la galería
+    function communityBadge() {
+      const b = document.createElement('span');
+      b.className = 'feed-badge feed-badge--jpl';
+      b.textContent = I18n.t('feed_badge_jpl');
+      return b;
+    }
+
     document.addEventListener('DOMContentLoaded', async () => {
       await Promise.all([I18n.init(), DataStore.init()]);
 
@@ -78,6 +86,24 @@ function isUnidentified(sp) {
         .filter(p => p.url && !p.url.startsWith('placeholder_'))
         .map(p => ({ ...p, url: 'img/species/' + p.url }));
 
+      // Nivel 2 — fotos de la comunidad (Jóvenes pa' Lante) cuya especie
+      // coincide por nombre científico con esta ficha. Se anexan al final
+      // de la galería, con el crédito del participante como caption. El
+      // feed comunitario es opcional: si falla, la ficha funciona igual.
+      if (typeof FeedStore !== 'undefined') {
+        try {
+          await FeedStore.init();
+          FeedStore.getCommunityForSpecies(sp.scientificName).forEach(ci => {
+            const cred = ci.credito
+              ? `📷 ${ci.credito} · ${I18n.t('feed_badge_jpl')}`
+              : I18n.t('feed_community_credit');
+            (ci.imgs || []).forEach(u => {
+              photoData.push({ url: u, captionEs: cred, captionEn: cred, community: true });
+            });
+          });
+        } catch (e) { /* sin fotos comunitarias, seguimos con las del catálogo */ }
+      }
+
       if (photoData.length > 0) {
         const galleryEl = document.getElementById('gallery');
         document.getElementById('photo-placeholder').style.display = 'none';
@@ -97,6 +123,7 @@ function isUnidentified(sp) {
           img.alt = sp.scientificName;
           img.loading = i === 0 ? 'eager' : 'lazy';
           slide.appendChild(img);
+          if (photo.community) slide.appendChild(communityBadge());
           galleryEl.insertBefore(slide, counterEl);
           previewSlides.push(slide);
         });
@@ -156,6 +183,7 @@ function isUnidentified(sp) {
           img.alt = sp.scientificName;
           img.loading = 'lazy';
           slide.appendChild(img);
+          if (photo.community) slide.appendChild(communityBadge());
           lightboxStage.appendChild(slide);
           lbSlides.push(slide);
 

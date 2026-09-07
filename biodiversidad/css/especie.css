@@ -209,6 +209,23 @@
       display: block;
     }
 
+    /* Badge "Jóvenes pa' Lante" sobre fotos de la comunidad anexadas (Nivel 2).
+       Tag informativo sobre foto: relleno sólido, forma de dato (--radius-sm). */
+    .photo-slide .feed-badge {
+      position: absolute;
+      top: 14px;
+      left: 14px;
+      z-index: 12;
+      padding: 4px 9px;
+      border-radius: var(--radius-sm);
+      font-size: 0.625rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      line-height: 1;
+      background: #6b5216;
+      color: #fff;
+    }
+
     /* Indicadores de foto */
     .gallery-dots {
       position: absolute;

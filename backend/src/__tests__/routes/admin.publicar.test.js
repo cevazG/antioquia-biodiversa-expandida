@@ -11,6 +11,8 @@ jest.mock('../../db', () => ({
   },
 }));
 
+jest.mock('../../modules/auth/infrastructure/verificarRecaptcha', () => jest.fn().mockResolvedValue(true));
+
 jest.mock('fs', () => ({
   ...jest.requireActual('fs'),
   mkdirSync:     jest.fn(),
@@ -32,15 +34,31 @@ jest.mock('../../models/GcPhoto', () => ({
   create: jest.fn(), findById: jest.fn(), findByIdAndUpdate: jest.fn(),
   findByIdAndDelete: jest.fn(), updateMany: jest.fn(),
 }));
+jest.mock('../../models/Usuario', () => ({
+  findOne: jest.fn(), findById: jest.fn(), find: jest.fn(),
+  create: jest.fn(), findByIdAndUpdate: jest.fn(),
+}));
 
 const bcrypt = require('bcryptjs');
-process.env.ADMIN_PASSWORD_HASH = bcrypt.hashSync('clave-prueba', 10);
+const { authenticator } = require('otplib');
+const Usuario = require('../../models/Usuario');
+const PASSWORD_HASH = bcrypt.hashSync('clave-prueba', 10);
+const MFA_SECRET_PRUEBA = 'JBSWY3DPEHPK3PXP';
+// Admin.Contenido (superrole) porque este archivo ejercita tanto
+// /jpl/publicar como /gc/publicar con el mismo agente logueado.
+const ADMIN = {
+  _id: 'u1', nombre: 'Admin', usuario: 'admin', passwordHash: PASSWORD_HASH,
+  roles: ['Admin.Contenido'], activo: true, mfaSecret: MFA_SECRET_PRUEBA,
+};
 
 const testApp = makeApp(require('../../routes/admin'));
 
 async function agenteLogueado() {
+  Usuario.findOne.mockReturnValue(mockQuery(ADMIN));
+  Usuario.findById.mockReturnValue(mockQuery(ADMIN));
   const agente = request.agent(testApp);
-  await agente.post('/login').send({ password: 'clave-prueba' });
+  await agente.post('/login').send({ usuario: 'admin', password: 'clave-prueba' });
+  await agente.post('/login/mfa').send({ codigo: authenticator.generate(MFA_SECRET_PRUEBA) });
   return agente;
 }
 

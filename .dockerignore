@@ -1,0 +1,51 @@
+# Control de versiones y config local
+.git
+.gitignore
+.netlify
+.DS_Store
+~$*
+
+# Dependencias — se instalan de cero en la etapa "deps" del Dockerfile
+node_modules
+**/node_modules
+
+# Secretos — nunca deben quedar horneados en la imagen
+.env
+.env.*
+!backend/.env.example
+
+# Backend: artefactos que no pertenecen a la imagen
+backend/logs
+backend/coverage
+**/__tests__
+
+# Contenido dinámico (fotos subidas + JSON publicados por el panel admin) —
+# se monta como volumen en tiempo de ejecución, no se hornea en la imagen
+comunidad/jovenes_pa_lante/img/fotos
+comunidad/jovenes_pa_lante/data
+comunidad/guarda_cuencas/img/fotos
+comunidad/guarda_cuencas/data
+
+# Documentos y material institucional — no forman parte de la app servida
+# (reducen tamaño de imagen y evitan exponer documentos internos/privados
+# de TI Gobernación dentro del contenedor)
+Documentos gobernacion
+Bibliografia
+Informes menusales
+Manual de marca gobernacion
+Mapa
+Respaldo Fotos
+*.pptx
+*.docx
+*.xlsx
+.cache_*.json
+
+# Scripts de un solo uso / documentación de repo, no necesarios en runtime
+generate_cuencas_agua.py
+migrate_jpl_v0.py
+migrate_polillas.py
+serve.json
+serve.sh
+IMPACTO.md
+RESUMEN_PROYECTO.md
+SCHEMA_DB.md

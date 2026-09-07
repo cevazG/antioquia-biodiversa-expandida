@@ -12,8 +12,11 @@ const { connectDB, connCom, redis } = require('./db');
 
 const swaggerDoc = YAML.load(fs.readFileSync(path.join(__dirname, 'swagger.yaml'), 'utf8'));
 
-// Validar variables de entorno obligatorias antes de arrancar
-const VARS_REQUERIDAS = ['MONGODB_URI_COM', 'SESSION_SECRET', 'ADMIN_PASSWORD_HASH'];
+// Validar variables de entorno obligatorias antes de arrancar. ADMIN_PASSWORD_HASH
+// ya no es obligatoria: el login pasó de una sola clave compartida a
+// usuarios individuales (modules/auth/), con las credenciales en la
+// colección Usuario, no en una variable de entorno.
+const VARS_REQUERIDAS = ['MONGODB_URI_COM', 'SESSION_SECRET'];
 // eslint-disable-next-line security/detect-object-injection -- v proviene de array literal hardcoded, no de input externo
 const faltantes = VARS_REQUERIDAS.filter(v => !process.env[v]);
 if (faltantes.length > 0) {

@@ -16,4 +16,11 @@ const SUBREGIONES_VALIDAS = [
 
 const IUCN_VALIDOS = ['LC', 'NT', 'VU', 'EN', 'CR', 'DD', 'NE'];
 
-module.exports = { GRUPOS_VALIDOS, SUBREGIONES_VALIDAS, IUCN_VALIDOS };
+// Roles del panel admin — mismos nombres ya comprometidos con TI Gobernación
+// para el mapeo futuro a Microsoft Entra ID (Ajuste 1/B1): cuando llegue esa
+// migración, cambia cómo se autentica un usuario, no qué roles existen.
+// Admin.Contenido es superrole — pasa cualquier chequeo de rol.
+const ROLES_VALIDOS = ['Curador.Biodiversidad', 'Curador.GuardaCuencas', 'Admin.Contenido'];
+const ROL_SUPERADMIN = 'Admin.Contenido';
+
+module.exports = { GRUPOS_VALIDOS, SUBREGIONES_VALIDAS, IUCN_VALIDOS, ROLES_VALIDOS, ROL_SUPERADMIN };

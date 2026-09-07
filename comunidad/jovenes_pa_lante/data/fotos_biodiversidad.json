@@ -9,11 +9,20 @@
       "archivo": "data/fotos_v0.json"
     },
     {
+      "id": "2026-07",
+      "mes": "Julio",
+      "mesEn": "July",
+      "año": 2026,
+      "count": 1,
+      "portada": "img/fotos/bio/2026-07/arboles_nativos/sin_nombre/sin_nombre_001.webp",
+      "archivo": "data/fotos_2026_07.json"
+    },
+    {
       "id": "2026-06",
       "mes": "Junio",
       "mesEn": "June",
       "año": 2026,
-      "count": 3,
+      "count": 4,
       "portada": "img/fotos/bio/2026-06/aves/coereba_flaveola/coereba_flaveola_002.webp",
       "archivo": "data/fotos_2026_06.json"
     }

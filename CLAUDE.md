@@ -263,6 +263,7 @@ Antioquia Natural/
 └── comunidad/                         ← Módulo comunidad
     ├── index.html                     ← Landing con 3 programas (JPL, GC, EDM)
     ├── especie_del_mes.html           ← Especie del mes + galería comunitaria
+    ├── consejos_fotos.html            ← Tips para mejores fotos (portado de Ampliación JPL)
     ├── data/especie_mes.json
     ├── jovenes_pa_lante/              ← Programa JPL
     │   ├── index.html                 ← Landing: stats iNaturalist en vivo + acceso a galería/mapa
@@ -762,6 +763,8 @@ Estructura: `biodiversidad/img/species/<grupo>/<familia>/<spXXX_slug>/<slug>_001
 
 `agua/mapa.html` muestra las cuencas hidrográficas principales de Antioquia (19 ríos) en un solo mapa Leaflet, con su área de drenaje y el trazado del río, coloreadas por zona hidrográfica. `agua/acueductos.html` es un módulo aparte (cuencas que abastecen acueductos municipales, no confundir con el de cuencas hidrográficas).
 
+**Orden de las 3 tarjetas en `agua/index.html`** (septiembre 2026, a pedido de Sebastián): Cuencas Hídricas → Ecosistemas Estratégicos → Cuencas Abastecedoras. Es solo el orden del DOM (`.agua-mode-card`), no cambia rutas ni ids.
+
 ### Clasificación oficial (Decreto 1640 de 2012, IDEAM)
 
 Colombia clasifica sus cuencas en **6 niveles jerárquicos**, cada uno anidado dentro del anterior:
@@ -844,6 +847,68 @@ Las 32 fotos reales de `cuencas_2026_06.json` a `cuencas_2026_09.json` (ver estr
 2. **Esquema simplificado, distinto al que espera el backend**: el modelo `GcPhoto` (`backend/src/models/GcPhoto.js`) y el formulario de `admin/gc.js` todavía piden `cuenca` (obligatorio) y `descripcionEs/En` — campos que **no existían en el Excel real** (`Respaldo Fotos/Fotos App/Fotos App_link.xlsx`, solo trae autor/vereda/municipio/subregión) y que no se quisieron inventar. Los 4 meses reales solo tienen `id, foto, credito, municipio, subregion, tituloEs, tituloEn`. El frontend (`galeria.js`) ya tolera la ausencia de `cuenca`/descripción (badge y párrafo se omiten si no hay dato), pero **si un futuro mes se publica desde el panel admin, va a traer esos dos campos de más** — inconsistencia conocida, no es un bug.
 
 Mismo lote trajo el rediseño de foto completa sin recortar (`object-fit: contain`, ya no `16:9` con `cover`) — las fotos reales son mezcla de retrato y paisaje, no todas horizontales como asumía el diseño original.
+
+---
+
+## Especie del Mes — datos reales de iNaturalist (septiembre 2026)
+
+`comunidad/data/especie_mes.json` tenía datos 100% de prueba (usuarios falsos tipo "María G.", `foto: null` en todas, especies genéricas sin relación con ningún dato real). Se reemplazó por completo con datos reales del proyecto de iNaturalist **["Jóvenes Palante Con El Ambiente"](https://www.inaturalist.org/projects/jovenes-palante-con-el-ambiente)** (id 269450), que reúne los avistamientos que suben los participantes del programa.
+
+### Metodología
+
+1. **"Especie más observada del mes"** = la especie con más observaciones ese mes dentro del proyecto (`GET /v1/observations/species_counts?project_id=269450&month=M&year=Y`, API pública de iNaturalist, sin autenticación).
+2. **Regla anti-repetición, orden cronológico**: se procesan los meses de enero a junio en orden; cada mes se queda con su especie más observada que ningún mes **anterior** ya haya usado — si hay conflicto, se baja a la 2ª, 3ª... más observada de ese mes hasta encontrar una libre. (Decisión de Sebastián: cronológico enero→junio, no al revés.)
+3. **Rango de meses = enero-junio 2026**: es el único período con actividad real y sustancial del proyecto (miles de observaciones/mes). De julio a septiembre 2026 (mes calendario "actual") casi no hay datos (20, 5 y 3 observaciones en total respectivamente) — no alcanza para calcular una especie "más observada" con sentido. Por eso `data.actual` en el JSON es **junio 2026** (el mes más reciente con datos suficientes), no el mes calendario real. Ver histograma completo de observaciones por mes en el chat si hace falta re-derivar esto.
+4. **Fotos**: hasta 6 por especie (5 para Tití Gris, que solo tiene 6 observaciones en total ese mes y una no mostraba el animal), elegidas a mano revisando *contact sheets* (grillas de miniaturas generadas con PIL, mucho más eficiente que revisar una por una) — se prefirieron fotos nítidas, con el animal bien visible, sin marcas de agua/GPS grandes encima. Solo se usaron fotos con licencia (`license_code` presente, casi todas CC BY-NC — las "todos los derechos reservados" se descartaron).
+5. **Crédito**: cada foto guarda `usuario` (nombre real si el observador lo puso público, si no su usuario de iNaturalist), `municipio` (parseado de `place_guess`), `fecha`, y un objeto `creditoINaturalist` (usuario, licencia, atribución textual, y link a la observación original) — se muestra en la app como línea "CC BY NC · iNaturalist" debajo de cada foto, enlazando a la observación.
+6. **Fotos convertidas a WebP** (`cwebp -q 82 -resize 1200 0`) en `comunidad/img/especie_del_mes/`.
+7. **Descripciones bilingües, curiosidad y pistas de identificación**: texto original (no copiado de Wikipedia/iNaturalist), basado en información biológica general de cada especie.
+
+### Las 6 especies elegidas
+
+| Mes | Especie | Grupo | IUCN |
+|---|---|---|---|
+| Enero | Sapo Gigante (*Rhinella horribilis*) | anfibios_reptiles | LC |
+| Febrero | Zopilote Común (*Coragyps atratus*) | aves | LC |
+| Marzo | Tangara Azulgrís (*Thraupis episcopus*) | aves | LC |
+| Abril | Iguana Verde (*Iguana iguana*) | anfibios_reptiles | LC |
+| Mayo | Canario Coronado (*Sicalis flaveola*) | aves | LC |
+| Junio (**actual**) | Tití Gris (*Saguinus leucopus*) | mamiferos | **VU** |
+
+**Tití Gris es un caso especial**: es un primate endémico de Colombia (solo existe en el valle del Magdalena y zonas de Antioquia), clasificado Vulnerable. Por eso iNaturalist aplica `geoprivacy: "obscured"` a sus observaciones — no expone el municipio exacto, solo "Antioquia". El campo `municipio` de sus 5 fotos quedó como `"Antioquia (ubicación protegida)"` y `subregiones: []`; la app muestra un texto explicativo en vez de la lista de chips vacía (`edm_subregiones_protegida` en `translations.json`).
+
+### Cambios de esquema y frontend (antes solo "actual" tenía galería completa)
+
+- `anteriores[]` pasó de ser un resumen (nombre + conteo de fotos como número) a tener **exactamente el mismo esquema que `actual`** (descripción, curiosidad, pistas, galería completa con créditos) — decisión de Sebastián: "galería completa en todos los meses", no solo el destacado.
+- Cada entrada tiene un `slug` (`"junio-2026"`, `"mayo-2026"`...). `especie_del_mes.js` ahora lee `?mes=<slug>` de la URL para decidir qué mes mostrar (`data.actual` si no hay parámetro o no matchea); las tarjetas de "Meses anteriores" pasaron de `<div>` a `<a href="especie_del_mes.html?mes=...">`.
+- `link-ficha` ("Ver ficha completa de la especie") se oculta si `especieId` es `null` — las 6 especies son nuevas, ninguna existe todavía en el catálogo principal de `biodiversidad/data/species.json`, así que antes quedaba un link muerto a `#`.
+- **Visor de pantalla completa (lightbox)**: la galería no tenía forma de ampliar una foto ni verlas en carrete, a diferencia del resto de la app. Se agregó el mismo patrón de `especie.html`/`feed.html` (slides con crossfade, puntos, contador, caption, swipe) — CSS copiado tal cual a `especie_del_mes.css` (no está en el `components.css` compartido, cada página lo duplica). A diferencia de `feed.js` (que tiene una hoja de detalle intermedia + lightbox anidado, porque el feed mezcla muchas especies distintas), acá el toque en cualquier foto de la grilla abre el visor directo, ya que la página entera ya es el "detalle" de una sola especie — más simple, un solo nivel.
+
+### Foto principal del hero (`foto_oficial`) — la misma que muestra iNaturalist en vista de especies
+
+Sebastián pidió reemplazar el emoji del hero por la foto que se ve al entrar a [la vista de especies del proyecto](https://www.inaturalist.org/observations?project_id=269450&view=species) — es el `default_photo` de cada taxón (foto global "representativa" de la especie en iNaturalist, **no** necesariamente de un participante del proyecto).
+
+- **5 de las 6 especies** tienen `default_photo` con licencia reutilizable (casi todas CC BY-NC) — se descargaron, convirtieron a WebP (`<slug>_hero.webp`) y se guardan en `foto_oficial` con su propio crédito (fotógrafo distinto al de la galería, porque el `default_photo` es global, no del proyecto).
+- **Tití Gris es la excepción**: su `default_photo` en iNaturalist tiene `license_code: null` ("todos los derechos reservados" — visible como el ícono © en vez de CC en la propia vista de especies del proyecto) — no se podía reutilizar. Sebastián lo confirmó comparando directamente esa vista. Primero se probó con la mejor foto de la galería del propio proyecto (`titi_00.webp`), pero se reemplazó por una foto de mejor calidad: otra observación de la especie en iNaturalist (fuera del proyecto, `alexguthrie`, CC BY-NC) — `titi_hero.webp`. Queda registrado en `foto_oficial.nota` de esa entrada (`fuente: "inaturalist_otra_observacion"`).
+- El carrete de pantalla completa (ver arriba) ahora es **un solo recorrido**: si hay `foto_oficial`, es la diapositiva 0, seguida de las fotos de la comunidad — tocar el hero o cualquier foto de la grilla abre el mismo visor en la posición correspondiente.
+- Crédito visible debajo del nombre científico en el hero (`#hero-credito`), no solo al abrir el visor — importante porque varias licencias (CC BY-NC, CC BY-SA) exigen atribución visible, no oculta tras un toque.
+- Foto ampliada un 10% adicional (148px → 163px de diámetro), a pedido de Sebastián.
+- Las tarjetas de "Meses anteriores" también muestran `foto_oficial.foto` en vez del emoji (con el emoji como *fallback* si algún mes futuro no tuviera foto) — `.em-mes-card__foto`, 84px de alto, `object-fit: cover`.
+
+### Consejos para mejores fotos (`comunidad/consejos_fotos.html`) — portado de Ampliación JPL
+
+Sebastián ya tenía un apartado de tips fotográficos hecho para el proyecto de Ampliación de Jóvenes pa' Lante (`comunidad/Ampliacion Jovenes/participante/consejos-fotos.html` — **carpeta con `.gitignore` propio, nunca se sube a GitHub**, cotización/negociación privada con la Gobernación). Pidió reutilizar ese contenido (8 tips con carrusel horizontal, cada uno con ejemplo ❌/✅ en SVG) como una página nueva, propia de la app principal (sí versionada), enlazada desde Especie del Mes.
+
+- **Página nueva**: `comunidad/consejos_fotos.html` + `consejos_fotos.css` — mismo patrón de header/page-bg/bottom-bar que `especie_del_mes.html` (reutiliza `app-shell--em`, mismo fondo `fondo-especie-del-mes.webp`).
+- **8 tips**: enfoque, lente limpio, encuadre, zoom digital, luz, fondo simple, estabilidad, orientación — contenido y SVGs de ejemplo copiados del original, solo se recoloreó el acento de naranja/JPL (`#f28e18`) a morado/Especie del Mes (`#8b4a97`) para que combine con la página que enlaza.
+- **Bilingüe completo** (`consejos_*` en `data/translations.json`, ES y EN) — el original de Ampliación JPL era solo español.
+- **Acceso**: tarjeta propia "💡 Consejos para tomar mejores fotos" (`.em-tips-card`) en `especie_del_mes.html`, debajo (no dentro) de la tarjeta "¿La encontraste?" — Sebastián pidió sacarla de ahí para que no compitiera visualmente con los botones de WhatsApp/Correo.
+
+### Pendiente / no resuelto en esta sesión
+
+- **`contacto_whatsapp`/`contacto_email`** siguen siendo el placeholder original (`+573001234567` / `natural@antioquia.gov.co`) — no se inventó un contacto nuevo porque no hay uno real confirmado en ningún otro punto de la app. Si la Gobernación da un WhatsApp/correo real para "envía tu foto", reemplazar ahí.
+- **`foto_oficial`** queda `null` en las 6 — nunca se renderiza en la UI actual (campo sin uso, ya estaba así antes de esta sesión).
+- El botón de idioma (EN) traduce todo el texto propio de la página, pero `nombre`/`municipio`/`comentario` de cada foto quedan solo en español (igual que el resto del catálogo del proyecto — no se generó traducción de nombres comunes ni comentarios).
 
 ---
 
@@ -1151,6 +1216,10 @@ Detalle completo, hallazgo por hallazgo, en el propio documento de respuesta.
 - [x] **Trazado de línea agregado para Porce, San Juan de Urabá y Regla** (los 3 únicos de los 19 sin línea en el webmap de IDEAM) — completados con datos de OpenStreetMap vía Overpass API, ver nota arriba
 - [x] **Fix: línea de Río Grande duplicaba la del Porce** (0-110 m de distancia en todo su recorrido, dato preexistente del webmap de IDEAM) — re-trazada desde OpenStreetMap, ver nota arriba
 - [x] **Área aproximada para Grande, Cocorná y Guatapé** (antes solo tenían línea) — polígonos de HydroBASINS, renderizados con menor opacidad y borde punteado por superponerse a propósito con el área de su río anfitrión, ver nota arriba
+- [x] **Especie del Mes con datos reales de iNaturalist** (enero-junio 2026) — reemplaza los datos 100% de prueba que había; 6 especies, hasta 6 fotos con crédito cada una, galería completa en todos los meses (no solo el actual), ver sección dedicada arriba
+- [x] **Foto principal de Especie del Mes** (`foto_oficial`) reemplaza el emoji del hero, con visor de pantalla completa unificado (hero + galería en un solo carrete) y crédito visible — ver sección dedicada arriba
+- [x] **Consejos para mejores fotos** (`comunidad/consejos_fotos.html`) — portado de Ampliación JPL, bilingüe, enlazado desde Especie del Mes en su propia tarjeta, ver sección dedicada arriba
+- [x] **Headers transparentes** en `agua/index.html`, `biodiversidad/listado.html`, `biodiversidad/biodiversidad.html`, `biodiversidad/feed.html` y `comunidad/jovenes_pa_lante/index.html` — mismo fondo fotográfico que el resto de la pantalla, en vez de la barra blanca sólida que traían
 - [ ] Ampliar a 150+ especies con fotos y descripciones bilingües *(154 alcanzadas — evaluar seguir creciendo el catálogo o cerrar esta línea)*
 - [ ] Consultar Libro Rojo de Colombia para estados IUCN reales en Lepidoptera
 - [ ] **Proceso de build para el frontend** — script que hashea el contenido de cada `.css`/`.js` y reescribe las referencias en los HTML, para eliminar el `?v=N` manual (ver incidente 2026-07-31 arriba). Netlify pasaría a servir una carpeta `dist/` en vez de la raíz del repo. No requiere bundler/framework — mantiene la arquitectura vanilla actual.

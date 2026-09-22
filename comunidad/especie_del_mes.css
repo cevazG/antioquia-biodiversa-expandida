@@ -83,9 +83,31 @@
     .em-hero__emoji {
       font-size: 5rem;
       line-height: 1;
-      margin-bottom: var(--space-sm);
       display: block;
       filter: drop-shadow(0 4px 18px rgba(0,0,0,0.35));
+    }
+
+    .em-hero__foto {
+      width: 163px;
+      height: 163px;
+      margin: 0 auto var(--space-sm);
+      border-radius: 50%;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255,255,255,0.14);
+      border: 3px solid rgba(255,255,255,0.5);
+      box-shadow: 0 4px 18px rgba(0,0,0,0.35);
+    }
+
+    .em-hero__foto--con-foto { cursor: pointer; }
+
+    .em-hero__foto img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
     }
 
     .em-hero__nombre {
@@ -101,6 +123,14 @@
       font-size: 0.9375rem;
       color: var(--color-em);
       margin-bottom: var(--space-md);
+    }
+
+    .em-hero__credito {
+      display: inline-block;
+      font-size: 0.6875rem;
+      color: var(--color-em-dark);
+      text-decoration: none;
+      margin: -8px 0 var(--space-md);
     }
 
     .em-hero__chips {
@@ -191,6 +221,12 @@
       border-radius: var(--radius-sm);
     }
 
+    .subregion-chips__vacio {
+      font-size: 0.8125rem;
+      color: var(--color-text-light);
+      line-height: 1.5;
+    }
+
     /* ── CTA enviar foto ── */
     .em-upload-card {
       margin: var(--space-md) var(--space-md) 0;
@@ -257,6 +293,29 @@
       border: 1.5px solid rgba(255,255,255,0.35);
       color: white;
     }
+
+    /* ── Tarjeta propia: consejos para mejores fotos ── */
+    .em-tips-card {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: white;
+      border-left: 4px solid var(--color-em);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-sm);
+      padding: var(--space-md);
+      margin: var(--space-md) var(--space-md) 0;
+      text-decoration: none;
+    }
+    .em-tips-card:active { background: var(--color-em-pale); }
+    .em-tips-card__emoji { font-size: 1.375rem; flex-shrink: 0; }
+    .em-tips-card__texto {
+      flex: 1;
+      font-size: 0.875rem;
+      font-weight: 700;
+      color: var(--color-em-dark);
+    }
+    .em-tips-card__arrow { color: var(--color-em); flex-shrink: 0; }
 
     /* ── Galería comunidad ── */
     .em-gallery {
@@ -346,6 +405,15 @@
       margin-top: 4px;
     }
 
+    .em-foto-card__credito {
+      display: block;
+      font-size: 0.625rem;
+      color: var(--color-text-light);
+      margin-top: 3px;
+      text-decoration: none;
+    }
+    .em-foto-card__credito:active { text-decoration: underline; }
+
     /* Sin fotos aún */
     .em-no-fotos {
       background: white;
@@ -378,17 +446,31 @@
       width: 120px;
       background: white;
       border-radius: var(--radius-md);
-      padding: var(--space-md) var(--space-sm);
+      overflow: hidden;
       box-shadow: var(--shadow-sm);
       text-align: center;
       border-top: 4px solid #ccc;
+      display: block;
+      text-decoration: none;
+      color: inherit;
+      cursor: pointer;
     }
 
-    .em-mes-card__emoji     { font-size: 2rem; line-height: 1; margin-bottom: 6px; display: block; }
-    .em-mes-card__mes       { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.06em; color: var(--color-text-light); margin-bottom: 3px; }
-    .em-mes-card__nombre    { font-size: 0.78rem; font-weight: 700; color: var(--color-text-dark); line-height: 1.3; margin-bottom: 2px; }
-    .em-mes-card__cientifico{ font-size: 0.68rem; font-style: italic; color: var(--color-text-light); margin-bottom: 6px; }
-    .em-mes-card__fotos     { font-size: 0.7rem; color: var(--color-em); font-weight: 700; }
+    .em-mes-card__foto {
+      width: 100%;
+      height: 84px;
+      background: var(--color-em-pale);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .em-mes-card__foto img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .em-mes-card__emoji     { font-size: 2rem; line-height: 1; display: block; }
+
+    .em-mes-card__mes       { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.06em; color: var(--color-text-light); margin: var(--space-sm) var(--space-sm) 3px; }
+    .em-mes-card__nombre    { font-size: 0.78rem; font-weight: 700; color: var(--color-text-dark); line-height: 1.3; margin: 0 var(--space-sm) 2px; }
+    .em-mes-card__cientifico{ font-size: 0.68rem; font-style: italic; color: var(--color-text-light); margin: 0 var(--space-sm) 6px; }
+    .em-mes-card__fotos     { font-size: 0.7rem; color: var(--color-em); font-weight: 700; margin: 0 var(--space-sm) var(--space-sm); }
 
     /* ── Link ficha ── */
     .em-link-ficha {
@@ -406,3 +488,98 @@
       margin: var(--space-md) var(--space-md) 0;
     }
     .em-link-ficha:active { background: #d9b8e0; }
+
+    /* ── Visor de pantalla completa (lightbox) — mismo patrón que especie.css/feed.css ── */
+    .em-foto-card__img { cursor: pointer; }
+
+    .photo-slide {
+      position: absolute;
+      top: 0; right: 0; bottom: 0; left: 0;
+      opacity: 0;
+      transition: opacity 0.35s ease;
+      pointer-events: none;
+      z-index: 1;
+    }
+    .photo-slide.active { opacity: 1; pointer-events: auto; }
+    .photo-slide img { width: 100%; height: 100%; object-fit: contain; display: block; }
+
+    .gallery-dots {
+      position: absolute;
+      bottom: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 5px;
+      z-index: 10;
+      pointer-events: auto;
+      padding: 8px 4px;
+    }
+    .gallery-dot {
+      width: 5px; height: 5px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.45);
+      transition: all 0.2s;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+    .gallery-dot.active { background: white; width: 14px; border-radius: 3px; }
+
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      z-index: 300;
+      background: #000;
+    }
+    .lightbox[hidden] { display: none; }
+
+    .lightbox__close {
+      position: absolute;
+      top: calc(12px + env(safe-area-inset-top));
+      right: 12px;
+      z-index: 20;
+      width: 40px;
+      height: 40px;
+      background: rgba(255,255,255,0.15);
+      border-radius: 50%;
+      border: none;
+      color: white;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .lightbox__stage { position: relative; width: 100%; height: 100%; }
+    .lightbox__stage .photo-slide img { object-fit: contain; padding: 0; }
+
+    .lightbox__counter {
+      position: absolute;
+      bottom: calc(24px + env(safe-area-inset-bottom));
+      right: var(--space-md);
+      background: rgba(255,255,255,0.15);
+      color: white;
+      padding: 4px 10px;
+      border-radius: var(--radius-full);
+      font-size: 0.75rem;
+      font-weight: 600;
+      z-index: 10;
+    }
+
+    .lightbox__caption {
+      position: absolute;
+      bottom: calc(24px + env(safe-area-inset-bottom));
+      left: var(--space-md);
+      right: 90px;
+      color: white;
+      font-size: 0.8125rem;
+      font-weight: 600;
+      background: rgba(0,0,0,0.4);
+      padding: 4px 10px;
+      border-radius: var(--radius-full);
+      z-index: 10;
+    }
+
+    .lightbox .gallery-dots {
+      bottom: calc(64px + env(safe-area-inset-bottom));
+      z-index: 10;
+    }

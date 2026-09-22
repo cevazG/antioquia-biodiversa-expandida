@@ -181,8 +181,8 @@
       line-height: 1.6;
     }
 
-    /* Header naranja */
-    .app-header { border-bottom: 3px solid var(--color-jpl); }
+    /* Header naranja — transparente para que se vea el mismo fondo que el resto de la pantalla (.page-bg, fixed, ya detrás) */
+    .app-header { background: transparent; border-bottom: 3px solid var(--color-jpl); }
 
     /* iNaturalist live panel */
     .inat-panel {

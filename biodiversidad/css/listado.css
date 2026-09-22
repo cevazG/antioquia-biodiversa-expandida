@@ -3,6 +3,9 @@
       background: var(--color-green-dark);
     }
 
+    /* Header transparente para que se vea el mismo fondo que el resto de la pantalla (.page-bg, fixed, ya detrás) */
+    .app-header { background: transparent; }
+
     .page-bg {
       position: fixed;
       top: 0;

@@ -9,11 +9,22 @@
   <link rel="stylesheet" href="../biodiversidad/css/components.css?v=21">
   <link rel="stylesheet" href="../biodiversidad/css/animations.css?v=4">
   <link rel="preload" as="image" href="img/fondos/fondo-especie-del-mes.webp">
-  <link rel="stylesheet" href="especie_del_mes.css?v=7">
+  <link rel="stylesheet" href="especie_del_mes.css?v=14">
 </head>
 <body>
 <div class="app-shell app-shell--em">
   <div class="page-bg" aria-hidden="true"></div>
+
+  <!-- Visor de pantalla completa (mismo patrón que especie.html / feed.html) -->
+  <div class="lightbox" id="lightbox" hidden>
+    <button class="lightbox__close" id="lightbox-close" aria-label="Cerrar">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 6L6 18M6 6l12 12"/></svg>
+    </button>
+    <div class="lightbox__stage" id="lightbox-stage"></div>
+    <div class="lightbox__dots gallery-dots" id="lightbox-dots" style="display:none;"></div>
+    <div class="lightbox__counter" id="lightbox-counter" style="display:none"></div>
+    <div class="lightbox__caption" id="lightbox-caption" style="display:none"></div>
+  </div>
 
   <!-- Header -->
   <div class="em-header">
@@ -33,9 +44,12 @@
     <div class="em-hero">
       <div class="em-hero__content">
         <div class="em-badge-mes">🏆 <span id="badge-mes">—</span></div>
-        <span class="em-hero__emoji" id="hero-emoji">🦋</span>
+        <div class="em-hero__foto" id="hero-foto">
+          <span class="em-hero__emoji" id="hero-emoji">🦋</span>
+        </div>
         <div class="em-hero__nombre" id="hero-nombre">Cargando…</div>
         <div class="em-hero__cientifico" id="hero-cientifico"></div>
+        <a class="em-hero__credito" id="hero-credito" target="_blank" rel="noopener" style="display:none"></a>
         <div class="em-hero__chips" id="hero-chips"></div>
       </div>
     </div>
@@ -97,6 +111,13 @@
       </div>
     </div>
 
+    <!-- Consejos para mejores fotos: caja propia, separada del CTA de subir foto -->
+    <a class="em-tips-card" href="consejos_fotos.html">
+      <span class="em-tips-card__emoji">💡</span>
+      <span class="em-tips-card__texto" data-i18n="edm_ver_consejos">Consejos para tomar mejores fotos</span>
+      <svg class="em-tips-card__arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 18l6-6-6-6"/></svg>
+    </a>
+
     <!-- Galería comunidad -->
     <div class="em-gallery">
       <div class="em-gallery__header">
@@ -136,6 +157,6 @@
 </div>
 
 <script src="../biodiversidad/js/i18n.js"></script>
-<script src="especie_del_mes.js"></script>
+<script src="especie_del_mes.js?v=3"></script>
 </body>
 </html>

@@ -13,6 +13,53 @@
   --color-jpl-dark: #6b5216; /* texto blanco AA sobre este tono, no sobre #B0942B */
 }
 
+/* Fondo de pantalla completa (mismo patrón que biodiversidad.html) — solo
+   el header queda transparente; .feed-sources y la barra de búsqueda se
+   dejan con su fondo blanco sólido porque necesitan buen contraste con
+   sus controles interactivos. */
+.app-shell--feed { background: var(--color-green-dark); }
+
+.page-bg {
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: var(--app-max-width);
+  height: 100dvh;
+  z-index: 0;
+  pointer-events: none;
+  background: url("../img/fondos/fondo-biodiversidad.webp") center / cover no-repeat;
+}
+
+.app-header,
+.feed-sources,
+.feed-search,
+.reel-screen,
+.photo-view {
+  position: relative;
+  z-index: 1;
+}
+
+.app-header { background: transparent; }
+
+/* Logo sobre blanco sostenido (manual de marca p.8) — el escudo de la
+   Gobernación nunca va directo sobre un fondo con textura, siempre en su
+   propio recuadro blanco. Necesario aquí porque el header ya es
+   transparente (ver arriba); en home.html ya existe la misma regla. */
+.app-header__logo-plate {
+  display: inline-flex;
+  align-items: center;
+  background: var(--color-white);
+  border-radius: 8px;
+  padding: 4px 6px;
+}
+
+.app-header__logo {
+  height: 28px;
+  width: auto;
+}
+
 /* ── Filtro de fuente (acceso rápido) — control segmentado, siempre visible ── */
 .feed-sources {
   position: sticky;

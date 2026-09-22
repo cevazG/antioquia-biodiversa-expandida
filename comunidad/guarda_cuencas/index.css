@@ -5,26 +5,37 @@
     }
 
     /* Hero */
-    .gc-hero {
-      background: linear-gradient(160deg, var(--color-gc-dark), var(--color-gc));
-      padding: calc(var(--space-xl) + env(safe-area-inset-top)) var(--space-md) var(--space-xxl);
+    .app-shell--gc {
+      background: var(--color-gc-dark);
+    }
+
+    .page-bg {
+      position: fixed;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100%;
+      max-width: var(--app-max-width);
+      height: 100dvh;
+      z-index: 0;
+      pointer-events: none;
+      background: url("img/fondos/fondo-guardacuencas.webp") center / cover no-repeat;
+    }
+
+    .gc-hero,
+    .gc-content {
       position: relative;
+      z-index: 1;
+    }
+
+    .gc-hero {
+      background: transparent;
+      padding: calc(var(--space-xl) + env(safe-area-inset-top)) var(--space-md) var(--space-xxl);
       overflow: hidden;
       display: flex;
       flex-direction: column;
       align-items: center;
       text-align: center;
-    }
-
-    .gc-hero::after {
-      content: '💧';
-      position: absolute;
-      right: -16px;
-      bottom: -20px;
-      font-size: 9rem;
-      opacity: 0.10;
-      line-height: 1;
-      pointer-events: none;
     }
 
     .gc-hero__back {
@@ -34,7 +45,7 @@
       gap: var(--space-sm);
       background: none;
       border: none;
-      color: rgba(255,255,255,0.75);
+      color: var(--color-gc);
       font-family: var(--font-primary);
       font-size: 0.875rem;
       cursor: pointer;
@@ -42,7 +53,7 @@
       margin-bottom: var(--space-lg);
     }
 
-    .gc-hero__back:active { color: white; }
+    .gc-hero__back:active { color: var(--color-gc-dark); }
 
     .gc-hero__logo {
       width: 80px;
@@ -61,14 +72,14 @@
     .gc-hero__title {
       font-size: 2rem;
       font-weight: 800;
-      color: white;
+      color: var(--color-gc);
       line-height: 1.1;
       margin-bottom: var(--space-sm);
     }
 
     .gc-hero__subtitle {
       font-size: 0.9375rem;
-      color: rgba(255,255,255,0.8);
+      color: var(--color-gc);
       max-width: 280px;
       line-height: 1.5;
     }

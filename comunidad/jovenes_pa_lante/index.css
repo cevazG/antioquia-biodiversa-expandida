@@ -5,24 +5,44 @@
       --color-jpl-text: #8f4c08; /* variante de --color-jpl oscurecida para texto (2.21:1 -> 5.97:1); --color-jpl se deja igual para bordes/íconos decorativos */
     }
 
+    /* Título del header en blanco (.app-header, fondo blanco): el ocre exacto
+       #B0942B no alcanza WCAG AA en texto (ver nota arriba), se usa la
+       variante --color-jpl-text ya validada para este mismo caso. */
+    .app-header__title { color: var(--color-jpl-text); }
+
     /* Hero */
-    .jpl-hero {
-      background: linear-gradient(160deg, #B0942B, #f28e18);
-      padding: calc(var(--space-xl) + env(safe-area-inset-top)) var(--space-md) var(--space-xxl);
+    .app-shell--jpl {
+      background: #B0942B;
+    }
+
+    .page-bg {
+      position: fixed;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100%;
+      max-width: var(--app-max-width);
+      height: 100dvh;
+      z-index: 0;
+      pointer-events: none;
+      background: url("img/fondos/fondo-jpl.webp") center / cover no-repeat;
+    }
+
+    .app-shell--jpl .app-header,
+    .jpl-hero,
+    .jpl-content {
       position: relative;
+      z-index: 1;
+    }
+
+    .jpl-hero {
+      background: transparent;
+      padding: calc(var(--space-xl) + env(safe-area-inset-top)) var(--space-md) var(--space-xxl);
       overflow: hidden;
       display: flex;
       flex-direction: column;
       align-items: center;
       text-align: center;
-    }
-
-    .jpl-hero::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60' viewBox='0 0 60 60'%3E%3Ccircle cx='30' cy='30' r='20' fill='none' stroke='%23ffffff08' stroke-width='1.5'/%3E%3C/svg%3E");
-      background-size: 60px 60px;
     }
 
     .jpl-hero__content { position: relative; z-index: 1; }
@@ -35,13 +55,13 @@
     }
 
     .jpl-hero h1 {
-      color: white;
+      color: var(--color-jpl-text);
       font-size: 1.5rem;
       margin-bottom: var(--space-sm);
     }
 
     .jpl-hero p {
-      color: rgba(255,255,255,0.85);
+      color: var(--color-jpl-text);
       font-size: 0.9375rem;
       line-height: 1.5;
       max-width: 320px;
@@ -54,7 +74,7 @@
       display: flex;
       flex-direction: column;
       gap: var(--space-md);
-      background: var(--color-bg);
+      background: transparent;
     }
 
     /* Stats */

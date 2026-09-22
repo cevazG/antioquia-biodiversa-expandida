@@ -1,18 +1,40 @@
 {
   "meses": [
     {
-      "id": "2026-06",
-      "mes": "Junio", "mesEn": "June", "año": 2026,
-      "count": 10,
-      "portada": "img/fotos/gc_001.jpg",
-      "archivo": "data/cuencas_2026_06.json"
+      "id": "2026-09",
+      "mes": "Septiembre",
+      "mesEn": "September",
+      "año": 2026,
+      "count": 8,
+      "portada": "img/fotos/2026-09/gc_001.webp",
+      "archivo": "data/cuencas_2026_09.json"
     },
     {
-      "id": "2026-05",
-      "mes": "Mayo",  "mesEn": "May",  "año": 2026,
-      "count": 3,
-      "portada": "img/fotos/gc_2026_05/gc_may_001.jpg",
-      "archivo": "data/cuencas_2026_05.json"
+      "id": "2026-08",
+      "mes": "Agosto",
+      "mesEn": "August",
+      "año": 2026,
+      "count": 8,
+      "portada": "img/fotos/2026-08/gc_001.webp",
+      "archivo": "data/cuencas_2026_08.json"
+    },
+    {
+      "id": "2026-07",
+      "mes": "Julio",
+      "mesEn": "July",
+      "año": 2026,
+      "count": 8,
+      "portada": "img/fotos/2026-07/gc_001.webp",
+      "archivo": "data/cuencas_2026_07.json"
+    },
+    {
+      "id": "2026-06",
+      "mes": "Junio",
+      "mesEn": "June",
+      "año": 2026,
+      "count": 8,
+      "portada": "img/fotos/2026-06/gc_001.webp",
+      "archivo": "data/cuencas_2026_06.json"
     }
   ]
 }

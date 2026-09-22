@@ -37,7 +37,7 @@ const layersByCuenca = {};        // id -> { area: L.GeoJSON|null, linea: L.GeoJ
 const map = L.map('map', { zoomControl: false });
 map.fitBounds([[5.35, -77.2], [8.95, -73.85]]);
 
-L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
+L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png?key=cb1_3sxm_1_2825e209e4237ada849ab056', {
   attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> © <a href="https://carto.com/">CARTO</a>',
   subdomains: 'abcd',
   maxZoom: 19

@@ -34,6 +34,11 @@
       gap: var(--space-md);
     }
 
+    /* Panel "Explorar" (filter-sheet, definido en components.css) — fondo de biodiversidad */
+    .filter-sheet {
+      background: url("../img/fondos/fondo-biodiversidad-2.webp") center / cover no-repeat, var(--color-white);
+    }
+
     .section-label {
       font-size: 0.75rem;
       font-weight: 700;

@@ -59,6 +59,75 @@ Web app mobile-first para la Gobernación de Antioquia. Permite consultar la bio
 
 > **No usar `text-transform: uppercase` ni escribir texto directamente en mayúsculas sostenidas en ningún label, kicker, badge o título de la UI.** Usar peso de fuente (bold) y/o `letter-spacing` para dar énfasis en vez de mayúsculas. Aplica a todo el proyecto, en los 3 módulos.
 
+### Fondos de pantalla completa — patrón `.page-bg`
+
+Desde septiembre 2026 cada módulo tiene una fotografía real de fondo (entregada por el diseñador, no gradiente/patrón CSS) cubriendo toda la pantalla, fija detrás del contenido que hace scroll — no solo el hero. Implementado en `biodiversidad/home.html`, `listado.html`, `index.html` (selector de idioma), `agua/index.html`, `agua/ecosistemas.html`, `comunidad/index.html`, `comunidad/especie_del_mes.html`, `comunidad/guarda_cuencas/index.html`, `comunidad/jovenes_pa_lante/index.html`.
+
+```html
+<div class="app-shell app-shell--<modulo>">
+  <div class="page-bg" aria-hidden="true"></div>
+  <!-- resto del contenido, con position:relative; z-index:1 -->
+</div>
+```
+
+```css
+.page-bg {
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: var(--app-max-width);   /* 430px — misma técnica que .bottom-bar */
+  height: 100dvh;
+  z-index: 0;
+  pointer-events: none;
+  background: url("img/fondos/fondo-xxx.webp") center / cover no-repeat;
+}
+```
+
+**Por qué no `background-attachment: fixed` directo en `.app-shell`:** esa propiedad se posiciona contra el viewport completo, no contra el elemento — en una ventana de escritorio ancha la imagen se escala contra el ancho total de la ventana en vez de los 430px de la columna de la app, y el resultado es un zoom exagerado que recorta casi toda la foto (se detectó así: en una ventana ancha solo se veía la nariz de un oso de la ilustración). El `.page-bg` fijo + centrado + `max-width` evita ese problema en cualquier ancho de ventana.
+
+Imágenes en `<módulo>/img/fondos/*.webp` (JPG del diseñador convertidos con `cwebp -q 82..85`; fuente original en `Diseño/Exportados APP/fondos/`):
+
+| Módulo | Archivo |
+|---|---|
+| Biodiversidad (home, listado, selector de idioma) | `biodiversidad/img/fondos/fondo-biodiversidad.webp` |
+| Panel "Explorar" de `biodiversidad.html` | `biodiversidad/img/fondos/fondo-biodiversidad-2.webp` |
+| Agua + Ecosistemas | `agua/img/fondos/fondo-agua.webp` |
+| Comunidad (landing) | `comunidad/img/fondos/fondo-comunidad.webp` |
+| Especie del Mes | `comunidad/img/fondos/fondo-especie-del-mes.webp` |
+| Guarda Cuencas | `comunidad/guarda_cuencas/img/fondos/fondo-guardacuencas.webp` |
+| Jóvenes pa' Lante (landing + contexto de galería) | `comunidad/jovenes_pa_lante/img/fondos/fondo-jpl.webp` |
+
+**Cualquier elemento opaco (tarjetas blancas, barras de filtro sticky) debe declarar su propio `background`** — si no, queda transparente y deja ver la foto detrás donde no corresponde.
+
+**Títulos de hero: color de marca sólido, no blanco.** Al pasar de gradiente CSS a foto real, el texto blanco quedó ilegible contra las zonas claras de las fotos nuevas. Se cambió a texto de color sólido (ya no depende de que el fondo sea oscuro):
+
+| Módulo | Color | Hex |
+|---|---|---|
+| Biodiversidad | Verde oscuro | `#0b5640` (`--color-green-dark`) |
+| Agua / Guarda Cuencas | Azul | `#3561ab` |
+| Comunidad / Jóvenes pa' Lante | Ocre (variante accesible) | `#8f4c08` (`--color-jpl-text`) — el ocre exacto de marca `#B0942B` da 2.7:1 sobre blanco, no alcanza WCAG AA |
+| Especie del Mes | Púrpura | `#8b4a97` (`--color-em`) |
+
+Mismo criterio aplicado a `.app-header__title` (la barra blanca superior — antes fija en verde oscuro sin importar el módulo) en cada CSS de página fuera de biodiversidad.
+
+### Íconos SVG de grupos taxonómicos
+
+Reemplazados en septiembre 2026 con el set del diseñador (`biodiversidad/img/icons/`), a color (paleta verde/menta/blanco), no monocromos con `currentColor` como los anteriores — no hace falta recolorearlos dinámicamente en los contextos donde se usan (listados, fichas, sobre fondo claro).
+
+Reemplazados: `aves`, `anfibios_reptiles` (mapeado desde el `anfibios-reptiles.svg` del diseñador), `animales_domesticos`, `arboles_nativos`, `mamiferos`, `mariposas`, `orquideas`, `peces`, `polillas`.
+
+**Pendientes** (no entregados en esta ronda): `anfibios.svg` (anfibios sin reptiles, uso standalone) y `hongos.svg` — quedan con el SVG viejo `currentColor`. El diseñador sí entregó un `reptiles.svg` standalone nuevo que no se usa todavía (el ícono vigente para el grupo combinado sigue siendo `anfibios_reptiles`).
+
+Inventario completo de emojis de la app (grupos, placeholders por familia, IUCN, ecosistemas, badges de interfaz) entregado al diseñador en `Diseño/Referencias para diseñador/Antioquia_Natural_Inventario_Emojis.xlsx` — candidatos a ilustrarse como íconos propios.
+
+### Tarjetas de grupo (`.bio-card`) — borde de color, no relleno
+
+Rediseño de septiembre 2026: `.bio-card` pasó de relleno sólido de color (gradiente) a fondo blanco + borde grueso (4px) del color del grupo, texto oscuro — mismo mapeo de colores que antes, solo cambió de "relleno" a "borde". Afecta la cuadrícula de 10 grupos en `biodiversidad.html`.
+
+**La cuadrícula de ecosistemas (`agua/ecosistemas.html`, `#eco-grid`) reutiliza `.bio-card` pero conserva el relleno de color original**, con texto blanco fijado explícitamente vía `#eco-grid .bio-card` — no se le aplicó el rediseño de borde.
+
 ---
 
 ## Estructura de carpetas
@@ -125,6 +194,7 @@ Antioquia Natural/
 │   │       ├── generate_diccionario_datos.js        ← Diccionario_Datos_BD_Comunidad_Antioquia_Natural.xlsx (una hoja por colección)
 │   │       ├── generate_presentacion_comite.py       ← Presentacion_Comite_Cientifico_Antioquia_Natural.pptx (python-pptx, criterios de evaluación de especies)
 │   │       ├── generate_figura1_arquitectura_general.py ← Figura 1 del DI (graphviz) — única fuente editable, ver "Docker" y "TI Gobernación"
+│   │       ├── generate_figura1_ajustes_arquitectura.py ← Figura 1 de la Propuesta Técnica (graphviz), mismo patrón — ver "TI Gobernación"
 │   │       └── generate_figura3_infraestructura.py      ← Figura 3 del DI (graphviz), mismo patrón
 │   └── __tests__/                     ← supertest (HTTP) + tests unitarios por capa hexagonal (domain/application aislados con fakes, sin Mongoose)
 ├── .semgrep.yml                       ← Reglas SAST locales + apunta a p/nodejs y p/owasp-top-ten
@@ -132,8 +202,9 @@ Antioquia Natural/
 ├── netlify.toml                       ← Publish dir, redirects trailing slash, security headers, cache
 │
 ├── biodiversidad/                     ← Módulo principal
-│   ├── index.html                     ← Selección de idioma (entrada a la app)
-│   ├── home.html                      ← Selección de módulo (Bio / Agua / Comunidad)
+│   ├── index.html                     ← Selección de idioma (entrada a la app) → feed.html
+│   ├── feed.html                      ← Feed unificado (pantalla de entrada tras elegir idioma): catálogo + JPL + Guarda Cuencas, 3 vistas, filtro de fuente
+│   ├── home.html                      ← Selección de módulo (Bio / Agua / Comunidad) — pantalla secundaria, enlazada desde el feed
 │   ├── biodiversidad.html             ← Landing bio: buscar por subregión o especie
 │   ├── mapa.html                      ← Mapa SVG interactivo — toca subregión → navega directo
 │   ├── subregion.html                 ← Grupos de biodiversidad por subregión
@@ -141,12 +212,15 @@ Antioquia Natural/
 │   ├── especie.html                   ← Ficha: galería, IUCN, distribución, descripción
 │   ├── css/
 │   │   ├── main.css                   ← Variables globales, tipografía, reset
-│   │   ├── components.css             ← Componentes UI reutilizables
+│   │   ├── components.css             ← Componentes UI reutilizables (incluye el sistema de 3 vistas)
 │   │   ├── animations.css             ← Transiciones y animaciones
 │   │   ├── especie.css                ← Galería con slides, dots, contador (z-index:10), swipe
+│   │   ├── feed.css                   ← Feed: filtro de fuente, badge de origen, modal (copiado de galeria.css JPL)
 │   │   └── …                         ← biodiversidad/home/index/listado/mapa/subregion.css
 │   ├── js/
 │   │   ├── i18n.js                    ← Sistema de traducción ES/EN
+│   │   ├── feed-data.js               ← FeedStore: fusiona en runtime catálogo + JPL + GC → modelo FeedItem
+│   │   ├── feed.js                    ← Controlador de feed.html (3 vistas + filtro de fuente + modal)
 │   │   ├── data.js                    ← DataStore: carga y filtrado de species.json
 │   │   ├── map.js                     ← MapController: SVG interactivo (CSS-only hover)
 │   │   ├── nav.js                     ← Nav: navegación con parámetros URL
@@ -195,10 +269,13 @@ Antioquia Natural/
     │       └── fotos_2026_06.json       ← Junio 2026 (campo foto:string — legado, 2 entradas)
     └── guarda_cuencas/               ← Programa Guarda Cuencas
         ├── index.html                 ← Landing con acceso a galería
-        ├── galeria.html               ← Galería 10 fotos/mes (paisaje 16:9) + archivo mensual
+        ├── galeria.html               ← Galería foto completa sin recortar (no 16:9) + archivo mensual
         └── data/
-            ├── fotos_cuencas.json     ← Índice de meses
-            └── cuencas_2026_06.json   ← 10 fotos junio 2026 (cuenca, subregion, municipio…)
+            ├── fotos_cuencas.json     ← Índice de meses (2026-06 a 2026-09, más reciente primero)
+            ├── cuencas_2026_06.json   ← 8 fotos reales junio 2026 (id, foto, credito, municipio, subregion, tituloEs/En)
+            ├── cuencas_2026_07.json   ← 8 fotos reales julio 2026
+            ├── cuencas_2026_08.json   ← 8 fotos reales agosto 2026
+            └── cuencas_2026_09.json   ← 8 fotos reales septiembre 2026
 ```
 
 ---
@@ -259,7 +336,10 @@ I18n.apply()         // Re-aplica todas las traducciones [data-i18n] al DOM
 ```
 / (index.html)
   └─→ biodiversidad/index.html          Selección de idioma
-        └─→ biodiversidad/home.html     Selección de módulo
+        └─→ biodiversidad/feed.html     Feed unificado — PANTALLA DE ENTRADA
+              │                          (catálogo + JPL + Guarda Cuencas; 3 vistas; filtro de fuente)
+              │                          "Inicio" en la barra inferior de toda la app apunta aquí
+              ├─→ biodiversidad/home.html     Selección de módulo (secundaria, enlace "Ver todos los módulos")
               ├─→ biodiversidad/biodiversidad.html
               │     ├─→ biodiversidad/mapa.html → subregion.html → listado.html → especie.html
               │     ├─→ biodiversidad/listado.html?kingdom=flora
@@ -275,6 +355,18 @@ I18n.apply()         // Re-aplica todas las traducciones [data-i18n] al DOM
                     │     └─→ comunidad/guarda_cuencas/galeria.html
                     └─→ comunidad/especie_del_mes.html
 ```
+
+### Feed unificado (`biodiversidad/feed.html`)
+
+Pantalla de entrada de la app tras elegir idioma. Fusiona **en runtime** (sin build step, sin backend nuevo) las 3 colecciones de fotos y las muestra juntas:
+
+- **`biodiversidad/js/feed-data.js` (`FeedStore`)** — `init()` llama a `DataStore.init()` y hace fetch de los índices de JPL (`../comunidad/jovenes_pa_lante/data/fotos_biodiversidad.json`) y Guarda Cuencas (`../comunidad/guarda_cuencas/data/fotos_cuencas.json`) + todos sus archivos de mes. Normaliza todo a un modelo común `FeedItem` (`source: 'catalogo'|'jpl'|'gc'`, `imgs[]`, `titleEs/En`, `sciName`, `group`, `iucn`, `subregionName`, `municipio`, `credito`, `cuenca`, `speciesId`, `link`, `dateKey`). Rutas de imagen: catálogo tal cual (`img/species/...`), JPL/GC con prefijo `../comunidad/<programa>/`. Si un fetch de comunidad falla, esa fuente se omite y el feed sigue.
+- **`getItems({source,group,subregion,query})`** — filtra y ordena. Orden por defecto ("Todo"): buckets por grupo (GC → bucket `_gc`), dentro de cada bucket comunidad antes que catálogo y `dateKey` desc, luego round-robin entre buckets (misma técnica que `DataStore.getPhotoReel`) → el tope alterna grupos con las fotos ciudadanas más recientes arriba.
+- **`getCommunityForSpecies(sciName)`** — usado por `especie.js` (Nivel 2): las fotos de JPL cuyo nombre científico coincide con una especie del catálogo se **anexan** al final de la galería de `especie.html`, con el crédito del participante y un badge "Jóvenes pa' Lante". El cruce normaliza el nombre (minúsculas, quita `sp.`/`cf.`/`indet.`) y descarta identificaciones solo a género. GC no cruza (no tiene nombre científico). Hoy solo 1 especie cruza (`Baryphthengus martii`); es infraestructura para cuando crezcan catálogo y JPL en paralelo.
+- **`biodiversidad/js/feed.js`** — controlador: 3 vistas (carrete/cuadrícula/mosaico, reutiliza `.photo-reel*`/`.photo-grid-3col*`/`.photo-masonry*` de `components.css`, misma clave `ab_photo_view` que el catálogo), filtro de fuente `.feed-sources` (persiste en `ab_feed_source`), búsqueda (solo en cuadrícula/mosaico), y un modal para las fotos de comunidad (patrón dots/swipe/contador de `galeria.js`, con fila "Ver ficha" si la especie cruza el catálogo). Las tarjetas de catálogo son `<a href="especie.html?id=…">`; las de comunidad abren el modal.
+- **Badge de origen** (`.feed-badge--jpl/--gc/--catalogo`): tag informativo sobre la foto (relleno sólido, `--radius-sm`), color por módulo.
+- **`.bottom-bar` "Inicio"** de todas las páginas apunta a `feed.html` (antes `home.html`); los botones "Volver" del header siguen apuntando a `home.html`.
+- **Vista por defecto: cuadrícula, no carrete** (desde septiembre 2026) — `initViewSwitcher()` cae a `'grid'` si no hay preferencia guardada en `ab_photo_view`; el HTML inicial (botón activo, `hidden` de cada vista) se ajustó para coincidir y evitar parpadeo antes de que corra el JS.
 
 ---
 
@@ -530,6 +622,14 @@ Cuando una entrada tiene 2 o 3 fotos, el modal usa el mismo patrón que `especie
 
 El mismo patrón se aplica en `biodiversidad/especie.html` (galería de fotos de especies).
 
+### Grid de `galeria.html` — mismo criterio visual que el feed de biodiversidad
+
+Rediseño de septiembre 2026: el grid pasó de recorte a cuadrado con fondo negro (`object-fit: cover` sobre `#0d1f0f`) a **fondo blanco + recorte a cuadrado tipo feed** (`object-fit: cover` sobre `var(--color-bg)`, mismo criterio que `.photo-grid-3col__item` del feed), manteniendo 2 columnas (no 3, para que quepan nombre/científico/badges/crédito debajo de cada foto — el feed de 3 columnas no tiene esa info visible). Badges de Endémica/IUCN sobre la foto y toda la info debajo se conservan igual; el modal de detalle sigue mostrando la foto completa sin recortar.
+
+La barra de contexto ("Primera Versión" / mes activo, arriba del grid) usa como fondo `fondo-jpl.webp` en vez del gradiente dorado plano — mismo criterio de fondo fotográfico que el resto de la app.
+
+**Logo de Jóvenes pa' Lante** reemplazado en `comunidad/jovenes_pa_lante/img/logo/logo_jovenes_pa_lante.png` (único lugar que lo usa: `index.html`) — cambió de proporción rectangular (691×389) a cuadrada (1080×1080); el CSS lo muestra a `width:190px; height:auto`, así que ahora ocupa 190×190 en vez de 190×107.
+
 ---
 
 ## iNaturalist — panel de estadísticas JPL
@@ -675,6 +775,12 @@ Cada río visible en `agua/mapa.js` tiene una segunda polyline invisible superpu
 
 Un mismo río se puede tocar en dos lugares distintos del mapa (su polígono de drenaje o su trazado), y `openSheet(cuenca, tipoToque)` en `agua/mapa.js` muestra contenido distinto según cuál fue: longitud aprox. si `tipoToque === 'linea'`, área en km² si `tipoToque === 'area'`. Para que quede claro cuál de los dos se está viendo, el título antepone **"Área del"** al nombre del río solo en el caso de área (`"Área del Río Sucio"`) — nunca como una etiqueta/kicker aparte, y nunca en mayúsculas sostenidas (ver regla de estilo arriba).
 
+### Mapas Leaflet — CARTO ahora requiere API key
+
+CARTO cambió su política el 28 de agosto de 2026: las teselas del basemap (`basemaps.cartocdn.com/rastertiles/voyager`) sin key devuelven la marca de agua "API KEY REQUIRED" en vez del mapa real. Se agregó `?key=...` a la URL de tiles en los 5 archivos que cargan este basemap: `agua/mapa.js`, `agua/subregion.js`, `agua/acueductos.js`, `agua/ecosistemas_mapa.js`, `comunidad/jovenes_pa_lante/mapa.js`. Key gratuita (5M teselas/mes, sin aprobación ni cuenta), solicitada por Sebastián en carto.com/basemaps/apikey/.
+
+**A futuro:** CARTO está retirando los basemaps raster (PNG) a favor de mapas vectoriales — la key resuelve el problema actual, pero eventualmente tocaría migrar a su sistema nuevo (cambio grande: MapLibre GL en vez de tiles raster de Leaflet).
+
 ---
 
 ## Ecosistemas Estratégicos (`agua/ecosistemas.html`)
@@ -685,12 +791,31 @@ Un mismo río se puede tocar en dos lugares distintos del mapa (su polígono de 
 - **`agua/ecosistema.html`** — ficha de un ecosistema: descripción, galería (mismo patrón crossfade+dots+swipe+contador que `especie.js`), y sus sitios representativos como tarjetas tocables (`.species-card`, reusa el CSS de `biodiversidad/css/especie.css` que ya importa esta página).
 - **`agua/ecosistemas_mapa.html`** — mapa Leaflet con un marcador por sitio representativo (ícono circular de color por tipo de ecosistema + emoji), popup con nombre/municipio/subregión y enlace a la ficha del ecosistema.
 
+### Fotos reales (septiembre 2026)
+
+7 fotos reales de participantes cargadas en `fotos[]`: Páramo, Bosque Húmedo Tropical, Humedales, Manglares (1 c/u) y Playas y Mar (3). Cada entrada es `{ url, creditoEs, creditoEn }` — sin título ni descripción, el componente (`agua/ecosistema.js`) ya soportaba ese esquema simple desde antes. **Bosque Seco Tropical y Cavernas y Cuevas siguen sin foto** — no había ninguna en el lote entregado. Fuente: `Respaldo Fotos/Fotos App/Ecosistemas/` + `Fotos App_link.xlsx` (autor, municipio, subregión, tipo de ecosistema — sin cuenca/título/descripción, por eso el esquema se mantuvo mínimo).
+
+### Infografía del corte transversal — imagen real + zonas táctiles medidas
+
+El diagrama de franjas hecho en CSS (`clip-path`) se reemplazó por la ilustración del diseñador (`agua/img/ecosistemas/infografia-transversal.webp`) — la regla de escala vertical que traía la imagen se removió a nivel de píxel (relleno con textura clonada de un área limpia cercana, no un recorte que hubiera cortado la montaña). Encima de la imagen van 6 enlaces `<a>` invisibles (`.eco-hotspot`) posicionados por porcentaje — **medidos con análisis de color sobre la imagen fuente, no a ojo** — que llevan a cada ficha de ecosistema, igual que las franjas clicables de antes. Cavernas y Cuevas no tiene franja en la imagen (nunca la tuvo) — se accede solo por la tarjeta `.eco-cave-card` debajo del gráfico.
+
 ### Deep-link `?foco=<id>` — centrar el mapa en un sitio específico
 
 `ecosistemas_mapa.js` lee `?foco=<siteId>` de la URL; si coincide con el `id` de algún sitio, centra el mapa ahí (`map.setView(…, 11)`) y abre su popup automáticamente al terminar el movimiento (`map.once('moveend', …)`). Dos pantallas enlazan a este mecanismo en vez de tener su propio mini-mapa:
 
 - `biodiversidad/subregion.html` → sección "sobre esta subregión", sitios destacados con `ecoSiteId`
 - `agua/ecosistema.html` → lista de sitios representativos del propio ecosistema
+
+---
+
+## Guarda Cuencas — fotos reales (septiembre 2026) y desvío del pipeline de admin
+
+Las 32 fotos reales de `cuencas_2026_06.json` a `cuencas_2026_09.json` (ver estructura de carpetas arriba) se publicaron **directo como JSON estático**, sin pasar por el panel admin ni MongoDB — reemplazaron datos de prueba inventados que había antes (créditos falsos tipo "Juan Pérez"). Dos consecuencias a tener en cuenta:
+
+1. **Estos 4 meses no aparecen en `admin/gc.html`** (que lista fotos desde MongoDB, no desde el JSON publicado) — no se pueden editar ni republicar desde el panel tal como están. Si un curador necesita editarlos, hay que decidir si se migran a Mongo primero o se editan el JSON a mano.
+2. **Esquema simplificado, distinto al que espera el backend**: el modelo `GcPhoto` (`backend/src/models/GcPhoto.js`) y el formulario de `admin/gc.js` todavía piden `cuenca` (obligatorio) y `descripcionEs/En` — campos que **no existían en el Excel real** (`Respaldo Fotos/Fotos App/Fotos App_link.xlsx`, solo trae autor/vereda/municipio/subregión) y que no se quisieron inventar. Los 4 meses reales solo tienen `id, foto, credito, municipio, subregion, tituloEs, tituloEn`. El frontend (`galeria.js`) ya tolera la ausencia de `cuenca`/descripción (badge y párrafo se omiten si no hay dato), pero **si un futuro mes se publica desde el panel admin, va a traer esos dos campos de más** — inconsistencia conocida, no es un bug.
+
+Mismo lote trajo el rediseño de foto completa sin recortar (`object-fit: contain`, ya no `16:9` con `cover`) — las fotos reales son mezcla de retrato y paisaje, no todas horizontales como asumía el diseño original.
 
 ---
 
@@ -842,6 +967,8 @@ Cubre todos los compromisos de documentación del § 8 de la Propuesta Técnica 
 
 Contrato de prestación de servicios por 18 meses (ejecución, desarrollo y mantenimiento) ya suscrito entre el contratista y la Secretaría de Ambiente. Contratistas: **Sebastián Guzmán Díaz y Alejandro López**. La ejecución sobre infraestructura institucional todavía no ha podido comenzar porque TI Gobernación no ha entregado el servidor ni activado Azure DevOps.
 
+> **Próximo paso pendiente (2026-08-12): enviar el correo a TI Gobernación.** Los documentos de `REVISION 3/` (ver tabla abajo) ya están verificados y en 13/13 hallazgos resueltos — el correo con `Respuesta_Observaciones_Revision_Documental_Verificacion_Final_v3_Antioquia_Natural.docx` adjunto **todavía no se ha enviado**. No enviarlo sin que Sebastián lo confirme explícitamente (ver regla de autorización en la cabecera de este archivo).
+
 ### Estado actual: REVISION 3
 
 Los documentos vivos y actuales están en `Documentos gobernacion/TI/REVISION 3/` — 3 archivos `.docx` que se editan **directamente** con `python-docx` (formato preservado, verificado con `assert run.text == old_text` antes de cualquier cambio, nunca reemplazo de párrafo/celda completo):
@@ -855,9 +982,18 @@ Los documentos vivos y actuales están en `Documentos gobernacion/TI/REVISION 3/
 
 **Los 3 ajustes vigentes son: Entra ID, Redis, SAST.** Entra ID quedó reencuadrado como "a futuro, se evaluará la posibilidad" (no bloqueante) desde que el módulo de usuarios individuales resolvió de fondo el hallazgo de cuenta genérica — ver "Panel admin — Autenticación y usuarios".
 
-**Hallazgos de REVISION 3 (`Observaciones_Revision_Documental_Verificacion_Final_v3.pdf`) — estado (2026-08-06): 12 de 13 resueltos.**
-- ✅ Resueltos: índice de contenido del LRS (numerales 7-10), Roadmap Técnico del DI, contradicción Redis/catálogo (PTF vs. DI vs. LRS), **containerización con Docker** y sus 6 controles de hardening, wording de RQP09, 2 errores de redacción/referencia cruzada, columna "Estado" en la tabla de Stack Tecnológico de la PTF, la **Figura 1 del DI rediseñada** (Redis pasó a la caja del servidor institucional, MongoDB quedó marcado "proveedor externo", y se agregó la anotación de Entra ID como pendiente), y **autenticación** (cuenta genérica eliminada — usuarios individuales, roles, panel de gestión, reCAPTCHA; ya no aplica el formato de excepción FO-M7-P8-016 y Acceso según Funciones/Mínimo Privilegio/Revisión Mensual ya son auditables).
-- ⏳ En espera de TI (1): integración con el **pipeline de CI/CD institucional** (nota formal en el DI pidiendo la plantilla a TI).
+**Hallazgos de REVISION 3 (`Observaciones_Revision_Documental_Verificacion_Final_v3.pdf`) — estado (2026-08-12): 13 de 13 resueltos.**
+- ✅ Resueltos: índice de contenido del LRS (numerales 7-10), Roadmap Técnico del DI, contradicción Redis/catálogo (PTF vs. DI vs. LRS — incluida una recurrencia de la misma contradicción encontrada y corregida el 2026-08-12 en el numeral 6.5 del DI, que había quedado sin tocar en la primera pasada), **containerización con Docker** y sus 6 controles de hardening, wording de RQP09, 2 errores de redacción/referencia cruzada, columna "Estado" en la tabla de Stack Tecnológico de la PTF, la **Figura 1 del DI rediseñada** (Redis pasó a la caja del servidor institucional, MongoDB quedó marcado "proveedor externo", y se agregó la anotación de Entra ID como pendiente), **autenticación** (cuenta genérica eliminada — usuarios individuales, roles, panel de gestión, reCAPTCHA; ya no aplica el formato de excepción FO-M7-P8-016 y Acceso según Funciones/Mínimo Privilegio/Revisión Mensual ya son auditables), y el **pipeline de CI/CD** (ver siguiente párrafo — reencuadrado 2026-08-12, ya no depende de TI).
+- **Pipeline de CI/CD (reencuadrado 2026-08-12):** ante la demora de TI Gobernación en compartir su plantilla institucional (solicitud formal enviada desde REVISION 3, sin respuesta), se dejó de tratar como "en espera de TI" y se documentó en el DI (numeral 5.4) y en la Respuesta v3 que `azure-pipelines.yml` implementa la **arquitectura de línea base oficial de Microsoft para Azure Pipelines** ("CI/CD baseline architecture", learn.microsoft.com/azure/devops/pipelines/architectures/devops-pipelines-baseline-architecture) — el estándar del propio fabricante de la plataforma, no un diseño propio del contratista. Si TI comparte su plantilla en el futuro, el proyecto se alinea a ella sin costo adicional. De paso se le agregó a `azure-pipelines.yml` lo que a ese estándar le faltaba: **smoke test post-despliegue** (`curl /api/health`, hasta 60s) y **rollback automático** al último tag sano (registrado en `.last_successful_tag` en el servidor) si el smoke test falla, en las etapas `DeployDev` y `DeployProd`.
+- **Auditoría de consistencia interna antes de enviar (2026-08-12):** antes de dar por cerrada la Respuesta v3, se releyeron los 6 archivos de `REVISION 3/` completos (no solo el documento de respuesta) y aparecieron 2 inconsistencias que el documento de respuesta no reportaba: (1) el numeral 6.5 del DI seguía con una frase suelta que reintroducía la contradicción Redis/catálogo ya "resuelta" en otras secciones — corregida; (2) la tabla de hallazgos [Crítico] de la Respuesta v3 decía que la Figura 3 "todavía no representa el contenedor" cuando en realidad ya lo hacía (contradecía la propia sección de Mejoras proactivas del mismo documento) — corregida. Lección para próximas rondas: verificar el contenido real de los `.docx`, no solo lo que dice el documento de respuesta sobre sí mismo.
+
+**Corrección 2026-08-18 — el "13/13 resueltos" del 08-12 no era exacto: TI reportó 4 hallazgos Críticos aún abiertos**, todos por inconsistencias entre lo corregido en tablas/prosa y lo que quedó sin actualizar en otro lugar del mismo o de otro documento — ya corregidos:
+1. **Contradicción Redis/catálogo en la Figura 1 de la PTF** (no la del DI, que ya estaba bien): la tabla de Stack Tecnológico (numeral 2.2) ya decía que Redis cachea lecturas del panel admin, pero el diagrama (`ajustes_arquitectura.png`, un PNG suelto sin fuente versionada) seguía rotulando el nodo Redis "catálogo en caché, menos de 5 ms vs. 60-120 ms". Se creó `backend/src/scripts/generate_figura1_ajustes_arquitectura.py` (mismo patrón que la Figura 1 del DI) con el rótulo corregido ("caché de lecturas del panel admin (JPL/GC)"), se regeneró el PNG y se reemplazó la imagen embebida directamente en el `.docx` (bytes del media part, sin tocar el resto del documento).
+2. **MFA marcado "Pendiente" en la tabla de numeral 8.3 del DI**, mientras el numeral 8.1 ya narraba el MFA como implementado desde 2026-08-06 — la fila now dice "Implementado", con referencia cruzada a 8.1.
+3. **Falta de confirmación explícita sobre el pipeline institucional**: la justificación del reencuadre (`azure-pipelines.yml` = arquitectura de línea base de Microsoft, se alinea a la plantilla de TI sin costo si aparece) solo vivía en el DI (numeral 5.4) — se agregó la misma justificación, resumida, a la PTF (numeral 2.1) y al LRS (RNF07, columna Comentarios), ambas con referencia cruzada al DI.
+4. **PM2 vs. Docker inconsistente en los 3 documentos**: DI numeral 6.2 (fila Producción) y 6.4 (fila Proceso) todavía decían PM2 pese a que el numeral 10 completo ya asume contenedores — corregidas a Docker/Docker Compose. LRS numeral 3.5 y PTF numeral 3.2 no mencionaban Docker en absoluto (instalación nativa implícita) — se agregó Docker Compose al primero y un bullet nuevo de contenerización al segundo.
+
+**Pendiente de acción humana:** los 3 `.docx` de `REVISION 3/` quedaron editados con `python-docx` (mismo método ya establecido, `assert` de texto viejo antes de cada reemplazo); los `.pdf` correspondientes **no se regeneraron** (no hay LibreOffice/soffice en esta máquina para exportar sin Word) — quedan desactualizados frente a los `.docx` hasta que alguien los reexporte a PDF desde Word antes de reenviar el paquete a TI.
 
 **Sobre el "Gestor de Contraseñas/Acceso de la Entidad"** (el único punto del hallazgo de autenticación que quedaba abierto): el "Manual de Lineamientos de Seguridad de la Información de la Gobernación de Antioquia" citado como fuente de ese requisito **no aparece entre los documentos que TI ha compartido formalmente** (`Documentos gobernacion/TI/DOCUMENTOS ENVIADOS POR TI/` — verificado 2026-08-06 contra los 6 archivos ahí: Guía de Arquitectura y Buenas Prácticas, Lista de Chequeo de Conformidad, Guía de Azure DevOps, Propuesta Técnica, Levantamiento de Requerimientos, y su propia revisión anterior). El único requisito de autenticación verificable en esos documentos (Guía de Arquitectura, numeral 9) es "MFA para administradores, **sugiriendo** integración con Microsoft Entra ID" — sugerencia, no obligación de un Gestor de Acceso específico — y ya está en el Roadmap Técnico. Consistente con lo que Sebastián recuerda que TI dijo verbalmente en reunión (que esa integración no era obligatoria).
 
@@ -938,8 +1074,9 @@ Detalle completo, hallazgo por hallazgo, en el propio documento de respuesta.
 - [x] **Containerización con Docker** (2026-08-06) — Dockerfile multi-stage, usuario non-root, `.dockerignore`, `HEALTHCHECK`, escaneo Trivy en CI/CD; Manual Técnico del DI y `azure-pipelines.yml` reescritos — ver "Docker — Containerización del backend"
 - [x] **Respuesta a los hallazgos de REVISION 3 de TI** (2026-08-06) — ver "TI Gobernación — Trámite de aval"
 - [x] **MFA (TOTP) obligatorio, rate limiting y Figura 3 actualizada a Docker** (2026-08-06) — anticipado antes de que TI lo pidiera como hallazgo formal, ver "Panel admin — Autenticación y usuarios" y "TI Gobernación — Trámite de aval"
+- [x] **Pipeline de CI/CD — adoptado el estándar de Microsoft en vez de esperar a TI** (2026-08-12) — `azure-pipelines.yml` documentado como implementación de la arquitectura de línea base oficial de Azure Pipelines; se le agregó smoke test post-despliegue y rollback automático — ver "TI Gobernación — Trámite de aval"
 - [ ] **B1 — Microsoft Entra ID** — ya no bloqueante (usuarios individuales resuelven el hallazgo de cuenta genérica); reemplazaría express-session; requiere Client ID + Tenant ID (RNF05, RNF08)
-- [ ] Integración con el pipeline de CI/CD institucional de TI Gobernación — bloqueado hasta que TI comparta su plantilla (nota formal ya enviada en el DI)
+- [ ] Espejo del repositorio en Azure Repos y activación de las Service Connections del pipeline — bloqueado hasta que TI active el proyecto institucional en Azure DevOps (el pipeline en sí ya no depende de una plantilla de TI, ver punto anterior)
 - [x] **C1 — Ley 1581** — modal de privacidad en entrada de la app, checkbox no pre-marcado, bilingüe, localStorage
 - [x] **C2 — netlify.toml** — redirects para Pretty URLs, cabeceras de seguridad, cache de assets
 - [x] **WCAG 2.1 AA — validación inicial** — axe-core (equivalente a WAVE) en las 19 páginas públicas, 0 hallazgos (ver DI, numeral 9.2 / Chequeo de Lineamientos). Queda como compromiso recurrente re-validar antes de cada futuro pase a producción, no una tarea pendiente de arrancar.
@@ -958,6 +1095,17 @@ Detalle completo, hallazgo por hallazgo, en el propio documento de respuesta.
 - [x] **Fix: stat "Grupos bio" desincronizado** — pasó de estar fijo en el HTML a calcularse desde `HOME_GROUPS.length`
 - [x] **Fix: panel de Cuencas Hídricas** — título distingue toque en área ("Área del Río X") vs. línea (longitud); se quitó una línea de depuración que abría un panel automáticamente en cada carga de producción
 - [x] **Marca de agua eliminada** del mapa de subregiones (inpainting, 3 copias del archivo)
+- [x] **Fondos fotográficos de pantalla completa** en 9 pantallas (patrón `.page-bg`, ver "Fondos de pantalla completa" arriba) — reemplazan los gradientes/patrones CSS generados de Fase 1/2
+- [x] **Títulos de hero recoloreados** de blanco a color de marca sólido por módulo (verde/azul/ocre/púrpura) — se volvieron ilegibles contra las zonas claras de las fotos nuevas
+- [x] **9 íconos SVG de grupos taxonómicos reemplazados** por el set a color del diseñador — pendientes `anfibios` (standalone) y `hongos`
+- [x] **Rediseño de `.bio-card`**: borde de color + fondo blanco en vez de relleno sólido (cuadrícula de 10 grupos en `biodiversidad.html`)
+- [x] **Infografía de ecosistemas**: imagen ilustrada real del diseñador reemplaza el diagrama CSS, con 6 zonas táctiles medidas por análisis de color (no a ojo) hacia cada ficha
+- [x] **7 fotos reales en Ecosistemas** (Páramo, Bosque Húmedo Tropical, Humedales, Manglares, Playas y Mar×3) — Bosque Seco Tropical y Cavernas y Cuevas siguen sin foto
+- [x] **32 fotos reales en Guarda Cuencas** (junio-septiembre 2026), reemplazando datos de prueba inventados — publicadas fuera del pipeline de admin/MongoDB, ver "Guarda Cuencas — fotos reales" arriba
+- [x] **Fix: mapas Leaflet con "API KEY REQUIRED"** — CARTO exige key desde el 28 de agosto de 2026, agregada a los 5 mapas del proyecto
+- [x] **Feed (`feed.html`) por defecto en cuadrícula**, no carrete
+- [x] **Galería de JPL rediseñada** al criterio visual del feed (recorte a cuadrado, fondo blanco) + fondo fotográfico en la barra de contexto + logo JPL actualizado
+- [x] **Inventario de emojis de la app** entregado al diseñador en Excel (`Diseño/Referencias para diseñador/Antioquia_Natural_Inventario_Emojis.xlsx`) — candidatos a ilustrarse como íconos propios
 - [ ] Ampliar a 150+ especies con fotos y descripciones bilingües *(154 alcanzadas — evaluar seguir creciendo el catálogo o cerrar esta línea)*
 - [ ] Consultar Libro Rojo de Colombia para estados IUCN reales en Lepidoptera
 - [ ] **Proceso de build para el frontend** — script que hashea el contenido de cada `.css`/`.js` y reescribe las referencias en los HTML, para eliminar el `?v=N` manual (ver incidente 2026-07-31 arriba). Netlify pasaría a servir una carpeta `dist/` en vez de la raíz del repo. No requiere bundler/framework — mantiene la arquitectura vanilla actual.
@@ -987,4 +1135,4 @@ Commits en estándar **Conventional Commits** (`feat:`, `fix:`, `docs:`, `refact
 ---
 
 *Proyecto desarrollado con Claude Code — Anthropic*
-*Última actualización: 2026-08-06*
+*Última actualización: 2026-09-21*

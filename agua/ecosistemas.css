@@ -1,3 +1,5 @@
+.app-header__title { color: #3561ab; }
+
 /* Esta pantalla no carga biodiversidad.css, así que .bio-content necesita su
    propio padding aquí — incluyendo el espacio para que la barra inferior fija
    no tape el último elemento (el CTA del mapa). */
@@ -9,12 +11,35 @@
   gap: var(--space-md);
 }
 
+.app-shell--eco {
+  background: #1a3a6b;
+}
+
+.page-bg {
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: var(--app-max-width);
+  height: 100dvh;
+  z-index: 0;
+  pointer-events: none;
+  background: url("img/fondos/fondo-agua.webp") center / cover no-repeat;
+}
+
+.app-shell--eco .app-header,
+.eco-hero,
+.bio-content {
+  position: relative;
+  z-index: 1;
+}
+
 /* Hero (tono azul — vive dentro de Agua y Ecosistemas) */
 .eco-hero {
-  background: linear-gradient(160deg, #1a3a6b, #3561ab);
+  background: transparent;
   padding: calc(var(--space-xl) + env(safe-area-inset-top)) var(--space-md) var(--space-xxl);
   text-align: center;
-  position: relative;
   overflow: hidden;
 }
 
@@ -28,19 +53,19 @@
 }
 
 .eco-hero h1 {
-  color: var(--color-white);
+  color: #3561ab;
   font-size: 1.5rem;
   margin-bottom: var(--space-sm);
 }
 
 .eco-hero p {
-  color: rgba(255,255,255,0.85);
+  color: #3561ab;
   font-size: 0.9rem;
   max-width: 320px;
   margin: 0 auto;
 }
 
-/* Infografía: corte transversal por altitud, estilo Naturgemälde de Humboldt */
+/* Infografía: corte transversal por altitud (ilustración del diseñador) */
 .eco-infografia__hint {
   font-size: 0.8125rem;
   color: var(--color-text-light);
@@ -57,103 +82,43 @@
 
 .eco-infografia {
   position: relative;
-  height: 340px;
-  padding: 0 var(--space-xs);
   margin-bottom: var(--space-md);
 }
 
-/* Silueta decorativa recortada en forma de montaña — solo color, sin texto */
-.eco-mountain {
-  position: absolute;
-  inset: 0 var(--space-xs);
-  display: flex;
-  flex-direction: column;
+.eco-infografia__img {
+  display: block;
+  width: 100%;
+  height: auto;
   border-radius: var(--radius-md);
-  overflow: hidden;
-  clip-path: polygon(
-    0% 100%, 0% 85%, 15% 70%, 30% 48%, 42% 24%,
-    50% 2%, 58% 24%, 70% 48%, 85% 70%, 100% 85%, 100% 100%
-  );
   box-shadow: var(--shadow-sm);
 }
 
-.eco-band-bg--paramo             { flex: 0 0 20%; background: linear-gradient(180deg, #eef3f5, #b7c9cf); }
-.eco-band-bg--bosque_tropical    { flex: 0 0 25%; background: linear-gradient(180deg, #0b5640, #018d38); }
-.eco-band-bg--humedales          { flex: 0 0 10%; background: linear-gradient(180deg, #1a6b6b, #2e9c9c); }
-.eco-band-bg--bosque_seco_tropical { flex: 0 0 20%; background: linear-gradient(180deg, #a9773a, #cf9d52); }
-.eco-band-bg--manglares          { flex: 0 0 13%; background: linear-gradient(180deg, #144d36, #1f7a4d); }
-.eco-band-bg--playas_mar         { flex: 0 0 12%; background: linear-gradient(180deg, #3561ab, #8FCAF0); }
-
-/* Cuevas incluidas directamente en la ilustración (como en la referencia),
-   no siguen el eje de altitud — por eso van superpuestas, no como una franja más */
-.eco-cave-marker {
+/* Zonas táctiles invisibles alineadas a cada franja de la ilustración
+   (porcentajes medidos por color sobre la imagen fuente, no inventados) */
+.eco-infografia__hotspots {
   position: absolute;
-  top: 30%;
-  left: 56%;
-  width: 34px;
-  height: 34px;
-  border-radius: 50%;
-  background: #6b5b5f;
-  border: 2.5px solid white;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.35);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1rem;
-  cursor: pointer;
-  padding: 0;
-  z-index: 2;
+  inset: 0;
+  border-radius: var(--radius-md);
+  overflow: hidden;
 }
 
-.eco-cave-marker:active { filter: brightness(0.9); }
-
-/* Capa de etiquetas — mismas proporciones, SIN recorte, para que el texto
-   nunca quede cortado por el ancho angosto de la montaña cerca de la cima */
-.eco-band-labels {
+.eco-hotspot {
   position: absolute;
-  inset: 0 var(--space-xs);
-  display: flex;
-  flex-direction: column;
-  z-index: 1;
+  left: 0;
+  right: 0;
+  display: block;
+  -webkit-tap-highlight-color: transparent;
+  transition: background var(--transition);
 }
 
-.eco-band {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  color: var(--color-white);
-  font-size: 0.7rem;
-  line-height: 1.2;
-  font-weight: 700;
-  text-decoration: none;
-  text-shadow: 0 1px 4px rgba(0,0,0,0.6);
-  transition: opacity var(--transition);
-  padding: 0 6px;
-}
+.eco-hotspot:active { background: rgba(255,255,255,0.22); }
 
-.eco-band:active { opacity: 0.7; }
-
-.eco-band--paramo             { flex: 0 0 20%; color: #1f3a40; text-shadow: 0 1px 2px rgba(255,255,255,0.6); }
-.eco-band--bosque_tropical    { flex: 0 0 25%; }
-.eco-band--humedales          { flex: 0 0 10%; }
-.eco-band--bosque_seco_tropical { flex: 0 0 20%; }
-.eco-band--manglares          { flex: 0 0 13%; }
-.eco-band--playas_mar         { flex: 0 0 12%; }
-
-.eco-altitude-label {
-  position: absolute;
-  left: var(--space-sm);
-  font-size: 0.65rem;
-  font-weight: 600;
-  color: var(--color-text-light);
-  background: rgba(255,255,255,0.85);
-  padding: 2px 6px;
-  border-radius: var(--radius-sm);
-}
-
-.eco-altitude-label--top { top: var(--space-sm); }
-.eco-altitude-label--bottom { bottom: var(--space-sm); }
+.eco-hotspot--paramo               { top: 0%;      height: 22.7%; }
+.eco-hotspot--bosque_tropical      { top: 22.7%;   height: 23.2%; }
+.eco-hotspot--humedales            { top: 45.9%;   height: 10.3%; }
+.eco-hotspot--bosque_seco_tropical { top: 56.2%;   height: 18.5%; }
+.eco-hotspot--manglares            { top: 74.7%;   height: 8.3%;  }
+.eco-hotspot--playas_mar           { top: 83.0%;   height: 17%;   }
 
 /* Tarjeta especial de cavernas (no sigue el eje de altitud) */
 .eco-cave-card {
@@ -188,7 +153,21 @@
   color: var(--color-text-light);
 }
 
-/* Grid de ecosistemas — reusa .bio-grid / .bio-card, solo variantes de color */
+/* Grid de ecosistemas — reusa .bio-grid / .bio-card, con relleno de color
+   (a diferencia de la cuadrícula de grupos de biodiversidad, que ahora usa
+   fondo blanco + borde de color); por eso fija texto blanco explícito, ya
+   que la base de .bio-card cambió a texto oscuro. */
+#eco-grid .bio-card { border: none; color: var(--color-white); }
+#eco-grid .bio-card__name, #eco-grid .bio-card__count { color: var(--color-white); }
+/* Aquí el ícono sigue siendo un emoji en texto (no <img> como en biodiversidad) */
+#eco-grid .bio-card__icon {
+  width: auto;
+  height: auto;
+  font-size: 2.5rem;
+  line-height: 1;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
+}
+
 .bio-card--paramo               { background: linear-gradient(135deg, #6b8f9c, #a8c3cc); }
 .bio-card--bosque_tropical      { background: linear-gradient(135deg, #0b5640, #018d38); }
 .bio-card--cavernas_cuevas      { background: linear-gradient(135deg, #3a3335, #6b5b5f); }
@@ -202,4 +181,5 @@
   font-weight: 500;
   opacity: 0.9;
   line-height: 1.3;
+  color: var(--color-white);
 }

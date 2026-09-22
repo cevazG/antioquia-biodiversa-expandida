@@ -170,7 +170,7 @@ function initViewSwitcher() {
 
   buttons.forEach((btn) => btn.addEventListener('click', () => setView(btn.dataset.view)));
   const saved = localStorage.getItem(VIEW_KEY);
-  setView(saved && views[saved] ? saved : 'reel');
+  setView(saved && views[saved] ? saved : 'grid');
 }
 
 // ── Filtro de fuente (acceso rápido) ──────────────────────

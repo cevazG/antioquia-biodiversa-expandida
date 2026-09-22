@@ -1,3 +1,29 @@
+	/* Fondo de pantalla completa (mismo patrón que home.html/listado.html) */
+	.app-shell--bio { background: var(--color-green-dark); }
+
+	.page-bg {
+	  position: fixed;
+	  top: 0;
+	  left: 50%;
+	  transform: translateX(-50%);
+	  width: 100%;
+	  max-width: var(--app-max-width);
+	  height: 100dvh;
+	  z-index: 0;
+	  pointer-events: none;
+	  background: url("../img/fondos/fondo-biodiversidad.webp") center / cover no-repeat;
+	}
+
+	.app-header,
+	.reel-screen,
+	.photo-view {
+	  position: relative;
+	  z-index: 1;
+	}
+
+	/* Header transparente para que se vea el mismo fondo que el resto de la pantalla (.page-bg, fixed, ya detrás) */
+	.app-header { background: transparent; }
+
 	.bio-hero {
       background: linear-gradient(160deg, var(--color-green-dark), var(--color-green-primary));
       padding: var(--space-xl) var(--space-md) var(--space-xxl);

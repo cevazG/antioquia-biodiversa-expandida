@@ -26,8 +26,11 @@ logs/
 *.tmp
 *.temp
 
-# Caché local de generate_cuencas_agua.py (descarga nacional de IDEAM, ~10 MB)
+# Caché local de generate_cuencas_agua.py (descarga nacional de IDEAM, ~10 MB;
+# HydroBASINS nivel 8 Suramérica, ~30 MB zip + shapefile extraído)
 .cache_*.json
+.cache_hybas_sa_lev08.zip
+.cache_hybas_sa_lev08/
 
 # PDF fuente de IDEAM (documento público, 45 MB) — referencia local, no en git
 Mapa/Info agua/MEMORIAS-MAPA-ZONIFICACION-HIDROGRAFICA.pdf

@@ -1,92 +1,683 @@
 {
   "actual": {
-    "mes": "Mayo",
+    "mes": "Junio",
     "año": 2026,
-    "especieId": "sp010",
-    "nombre": "Mariposa Morpho Azul",
-    "nombreCientifico": "Morpho peleides",
-    "grupo": "mariposas",
-    "emoji": "🦋",
-    "colorGrupo": "#4A148C",
-    "subregiones": ["Oriente", "Suroeste", "Norte"],
-    "iucn": "LC",
-    "descripcionEs": "La Mariposa Morpho fue elegida especie de mayo por su extraordinario color azul iridiscente, resultado de la microestructura de sus alas y no de pigmentos. Habita los bosques húmedos del Oriente antioqueño y es un emblema de la riqueza lepidopterológica del departamento.",
-    "descripcionEn": "The Morpho Butterfly was chosen as the species of May for its extraordinary iridescent blue color, produced by the microstructure of its wings rather than pigments. It inhabits the humid forests of eastern Antioquia and is an emblem of the department's lepidopterological richness.",
-    "curiosidadEs": "Sus alas no contienen pigmento azul: el color es producido por la interferencia de la luz en capas nanométricas de su estructura alar, un fenómeno llamado color estructural.",
-    "curiosidadEn": "Its wings contain no blue pigment: the color is produced by light interference in nanometric layers of its wing structure, a phenomenon known as structural color.",
-    "como_identificarlaEs": "Busca un destello azul brillante en los bordes de los bosques húmedos. En reposo, las alas cerradas muestran un patrón marrón con ocelos. Mide entre 10 y 15 cm de envergadura.",
-    "como_identificarlaEn": "Look for a brilliant blue flash at forest edges in humid areas. At rest, the closed wings show a brown pattern with eyespots. Wingspan is between 10 and 15 cm.",
-    "foto_oficial": null,
+    "especieId": null,
+    "nombre": "Tití Gris",
+    "nombreEn": null,
+    "nombreCientifico": "Saguinus leucopus",
+    "grupo": "mamiferos",
+    "emoji": "🐒",
+    "colorGrupo": "#E65100",
+    "subregiones": [],
+    "iucn": "VU",
+    "descripcionEs": "El Tití Gris cierra el semestre como la especie de junio, y es sin duda la más especial de esta lista: es un primate EXCLUSIVO de Colombia, que solo vive en el valle del río Magdalena y algunas zonas de Antioquia. Está clasificado como Vulnerable por la pérdida de su hábitat de bosque.",
+    "descripcionEn": "The White-footed Tamarin closes out the semester as June's species, and it's without question the most special one on this list: a primate found ONLY in Colombia, living exclusively in the Magdalena River valley and parts of Antioquia. It's classified as Vulnerable due to forest habitat loss.",
+    "curiosidadEs": "Vive en grupos familiares pequeños donde casi siempre se reproduce un solo macho por grupo, y el resto de los machos ayudan a cargar y cuidar a las crías — un comportamiento poco común entre primates.",
+    "curiosidadEn": "It lives in small family groups where usually only one male in the group breeds, while the other males help carry and care for the offspring — an unusual behavior among primates.",
+    "como_identificarlaEs": "Es un primate pequeño (apenas 220-240 g) de pelaje gris oscuro a negro, con las manos y los pies de color blanco muy notorio — de ahí su nombre. Vive en las copas de los árboles, en grupos, y es difícil de ver por su tamaño y agilidad.",
+    "como_identificarlaEn": "It's a small primate (only 220–240 g) with dark gray to black fur and strikingly white hands and feet — hence its name. It lives high in the tree canopy, in groups, and is hard to spot due to its small size and agility.",
+    "foto_oficial": {
+      "foto": "img/especie_del_mes/titi_hero.webp",
+      "fuente": "inaturalist_otra_observacion",
+      "usuario": "alexguthrie",
+      "licencia": "cc-by-nc",
+      "atribucion": "(c) alexguthrie, some rights reserved (CC BY-NC)",
+      "obs_url": "https://www.inaturalist.org/observations/335763874",
+      "nota": "La foto \"por defecto\" del Tití Gris en iNaturalist es de \"todos los derechos reservados\" (no reutilizable) — se usó en su lugar otra observación con licencia CC BY-NC de la especie (no es del proyecto Jóvenes Pa'lante, es de otro observador de iNaturalist en Colombia)."
+    },
+    "fuente": "iNaturalist — proyecto Jóvenes Pa'lante con el Ambiente (observaciones de participantes)",
+    "criterioSeleccion": "Especie con más observaciones registradas ese mes en el proyecto, sin repetir especie ya elegida en un mes anterior.",
     "contacto_whatsapp": "+573001234567",
     "contacto_email": "natural@antioquia.gov.co",
     "fotos_comunidad": [
       {
-        "usuario": "María G.",
-        "municipio": "El Retiro",
-        "fecha": "2026-05-08",
-        "foto": null,
-        "comentario": "La vi en el sendero del parque en la mañana"
+        "usuario": "Xiomara Duque",
+        "municipio": "Antioquia (ubicación protegida)",
+        "fecha": "2026-06-04",
+        "foto": "img/especie_del_mes/titi_00.webp",
+        "comentario": "Se veían moviéndose entre las ramas altas",
+        "creditoINaturalist": {
+          "usuario_inat": "maradu",
+          "licencia": "cc-by-nc",
+          "atribucion": "(c) Xiomara Duque, some rights reserved (CC BY-NC)",
+          "obs_url": "https://www.inaturalist.org/observations/368468823"
+        }
       },
       {
-        "usuario": "Camilo R.",
-        "municipio": "Guatapé",
-        "fecha": "2026-05-11",
-        "foto": null,
-        "comentario": "Volando cerca del río, increíble el color"
+        "usuario": "Laura Botero",
+        "municipio": "Antioquia (ubicación protegida)",
+        "fecha": "2026-06-05",
+        "foto": "img/especie_del_mes/titi_01.webp",
+        "comentario": "Un grupito pasó por los árboles del patio",
+        "creditoINaturalist": {
+          "usuario_inat": "laura83757",
+          "licencia": "cc-by-nc",
+          "atribucion": "(c) Laura Botero, some rights reserved (CC BY-NC)",
+          "obs_url": "https://www.inaturalist.org/observations/372616987"
+        }
       },
       {
-        "usuario": "Sofía M.",
-        "municipio": "San Rafael",
-        "fecha": "2026-05-13",
-        "foto": null,
-        "comentario": "Encontré dos juntas en el jardín"
+        "usuario": "Fabian Steven Ruiz Salazar",
+        "municipio": "Antioquia (ubicación protegida)",
+        "fecha": "2026-06-06",
+        "foto": "img/especie_del_mes/titi_02.webp",
+        "comentario": "Estaban jugando entre las copas de los árboles",
+        "creditoINaturalist": {
+          "usuario_inat": "fabian_steven",
+          "licencia": "cc-by-nc",
+          "atribucion": "(c) Fabian Steven Ruiz Salazar, some rights reserved (CC BY-NC)",
+          "obs_url": "https://www.inaturalist.org/observations/370894726"
+        }
+      },
+      {
+        "usuario": "Laura Botero",
+        "municipio": "Antioquia (ubicación protegida)",
+        "fecha": "2026-06-05",
+        "foto": "img/especie_del_mes/titi_03.webp",
+        "comentario": "Se quedó quieto un momento entre las hojas",
+        "creditoINaturalist": {
+          "usuario_inat": "laura83757",
+          "licencia": "cc-by-nc",
+          "atribucion": "(c) Laura Botero, some rights reserved (CC BY-NC)",
+          "obs_url": "https://www.inaturalist.org/observations/372617559"
+        }
+      },
+      {
+        "usuario": "Laura Botero",
+        "municipio": "Antioquia (ubicación protegida)",
+        "fecha": "2026-06-02",
+        "foto": "img/especie_del_mes/titi_04.webp",
+        "comentario": "Pasaron rápido de un árbol a otro",
+        "creditoINaturalist": {
+          "usuario_inat": "laura83757",
+          "licencia": "cc-by-nc",
+          "atribucion": "(c) Laura Botero, some rights reserved (CC BY-NC)",
+          "obs_url": "https://www.inaturalist.org/observations/368139933"
+        }
       }
-    ]
+    ],
+    "slug": "junio-2026"
   },
   "anteriores": [
     {
+      "mes": "Mayo",
+      "año": 2026,
+      "especieId": null,
+      "nombre": "Canario Coronado",
+      "nombreEn": null,
+      "nombreCientifico": "Sicalis flaveola",
+      "grupo": "aves",
+      "emoji": "🐤",
+      "colorGrupo": "#1565C0",
+      "subregiones": [
+        "Oriente",
+        "Urabá",
+        "Occidente",
+        "Nordeste",
+        "Magdalena Medio"
+      ],
+      "iucn": "LC",
+      "descripcionEs": "El Canario Coronado fue el ave más registrada en mayo: su plumaje amarillo brillante lo hace destacar en potreros, jardines y bordes de carretera, donde suele verse en grupos buscando semillas en el suelo.",
+      "descripcionEn": "The Saffron Finch was the most-recorded bird in May: its bright yellow plumage makes it stand out in pastures, gardens, and roadsides, where it's often seen in flocks foraging for seeds on the ground.",
+      "curiosidadEs": "Los machos adultos tienen una mancha naranja intensa en la corona que se hace más notoria con la edad — entre más viejo el macho, más marcada la mancha.",
+      "curiosidadEn": "Adult males have an intense orange patch on the crown that becomes more noticeable with age — the older the male, the more pronounced the patch.",
+      "como_identificarlaEs": "Busca un ave pequeña (unos 14 cm), amarillo brillante en el cuerpo, con una mancha naranja en la frente y la coronilla en los machos adultos. Casi siempre está en el suelo o en pastizales abiertos, nunca en bosque cerrado.",
+      "como_identificarlaEn": "Look for a small bird (about 14 cm), bright yellow overall, with an orange patch on the forehead and crown in adult males. It's almost always on the ground or in open grassland, never in closed forest.",
+      "foto_oficial": {
+        "foto": "img/especie_del_mes/canario_hero.webp",
+        "fuente": "inaturalist_taxon_default",
+        "usuario": "Alejandro  Bayer Tamayo",
+        "licencia": "cc-by-sa",
+        "atribucion": "(c) Alejandro  Bayer Tamayo, some rights reserved (CC BY-SA)",
+        "obs_url": "https://www.inaturalist.org/photos/220765971"
+      },
+      "fuente": "iNaturalist — proyecto Jóvenes Pa'lante con el Ambiente (observaciones de participantes)",
+      "criterioSeleccion": "Especie con más observaciones registradas ese mes en el proyecto, sin repetir especie ya elegida en un mes anterior.",
+      "contacto_whatsapp": "+573001234567",
+      "contacto_email": "natural@antioquia.gov.co",
+      "fotos_comunidad": [
+        {
+          "usuario": "Juan ma Torres",
+          "municipio": "San Rafael",
+          "fecha": "2026-05-29",
+          "foto": "img/especie_del_mes/canario_03.webp",
+          "comentario": "Estaba en el potrero buscando comida",
+          "creditoINaturalist": {
+            "usuario_inat": "juan_ma_torres",
+            "licencia": "cc-by-nc",
+            "atribucion": "(c) Juan ma Torres, some rights reserved (CC BY-NC)",
+            "obs_url": "https://www.inaturalist.org/observations/366486737"
+          }
+        },
+        {
+          "usuario": "Yurani Domico",
+          "municipio": "Mutatá",
+          "fecha": "2026-05-01",
+          "foto": "img/especie_del_mes/canario_09.webp",
+          "comentario": "Un grupo grande cerca de la carretera",
+          "creditoINaturalist": {
+            "usuario_inat": "yurani47659",
+            "licencia": "cc-by-nc",
+            "atribucion": "(c) Yurani Domico, some rights reserved (CC BY-NC)",
+            "obs_url": "https://www.inaturalist.org/observations/357148973"
+          }
+        },
+        {
+          "usuario": "Juan pablo Cardona lopez",
+          "municipio": "Cañasgordas",
+          "fecha": "2026-05-14",
+          "foto": "img/especie_del_mes/canario_10.webp",
+          "comentario": "Se posó en la rama de un árbol frutal",
+          "creditoINaturalist": {
+            "usuario_inat": "juan_pablo_cardona",
+            "licencia": "cc-by-nc",
+            "atribucion": "(c) Juan pablo Cardona lopez, some rights reserved (CC BY-NC)",
+            "obs_url": "https://www.inaturalist.org/observations/361578153"
+          }
+        },
+        {
+          "usuario": "Valeria Arias",
+          "municipio": "Cañasgordas",
+          "fecha": "2026-05-30",
+          "foto": "img/especie_del_mes/canario_16.webp",
+          "comentario": "Andaba solo en el jardín",
+          "creditoINaturalist": {
+            "usuario_inat": "valeria79895",
+            "licencia": "cc-by-nc",
+            "atribucion": "(c) Valeria Arias, some rights reserved (CC BY-NC)",
+            "obs_url": "https://www.inaturalist.org/observations/366608527"
+          }
+        },
+        {
+          "usuario": "Wilder Restrepo",
+          "municipio": "San Roque",
+          "fecha": "2026-05-23",
+          "foto": "img/especie_del_mes/canario_18.webp",
+          "comentario": "Comiendo semillas junto a otros pájaros",
+          "creditoINaturalist": {
+            "usuario_inat": "wilder62261",
+            "licencia": "cc-by-nc",
+            "atribucion": "(c) Wilder Restrepo, some rights reserved (CC BY-NC)",
+            "obs_url": "https://www.inaturalist.org/observations/365049489"
+          }
+        },
+        {
+          "usuario": "Miladys Muñoz",
+          "municipio": "Maceo",
+          "fecha": "2026-05-12",
+          "foto": "img/especie_del_mes/canario_22.webp",
+          "comentario": "Cerca de la casa, en la grama",
+          "creditoINaturalist": {
+            "usuario_inat": "miladysm",
+            "licencia": "cc-by-nc",
+            "atribucion": "(c) Miladys Muñoz, some rights reserved (CC BY-NC)",
+            "obs_url": "https://www.inaturalist.org/observations/360922442"
+          }
+        }
+      ],
+      "slug": "mayo-2026"
+    },
+    {
       "mes": "Abril",
       "año": 2026,
-      "nombre": "Jaguar",
-      "nombreCientifico": "Panthera onca",
-      "grupo": "mamiferos",
-      "emoji": "🐆",
-      "colorGrupo": "#BF360C",
-      "iucn": "NT",
-      "fotos_comunidad": 18
+      "especieId": null,
+      "nombre": "Iguana Verde",
+      "nombreEn": null,
+      "nombreCientifico": "Iguana iguana",
+      "grupo": "anfibios_reptiles",
+      "emoji": "🦎",
+      "colorGrupo": "#00695C",
+      "subregiones": [
+        "Urabá",
+        "Occidente"
+      ],
+      "iucn": "LC",
+      "descripcionEs": "La Iguana Verde dominó las observaciones de abril: es el reptil más vistoso y fácil de fotografiar en zonas cálidas de Antioquia, sobre todo en Urabá, donde aparece tomando sol en árboles, techos y orillas de camino.",
+      "descripcionEn": "The Green Iguana dominated April's observations: it's the showiest, easiest-to-photograph reptile in Antioquia's warmer areas, especially Urabá, where it turns up basking in trees, on rooftops, and along roadsides.",
+      "curiosidadEs": "A pesar de su nombre, los machos adultos suelen perder el verde y tornarse naranja o anaranjado-grisáceo durante la época reproductiva — el color cambia con la edad y las hormonas, no es una especie distinta.",
+      "curiosidadEn": "Despite its name, adult males often lose their green coloring and turn orange or grayish-orange during breeding season — the color changes with age and hormones, not because it's a different species.",
+      "como_identificarlaEs": "Es un lagarto grande (hasta 1.5 m con cola) con una cresta de espinas en el lomo y una papada grande bajo el cuello. Los juveniles son verde brillante; los adultos pueden verse más opacos o anaranjados.",
+      "como_identificarlaEn": "It's a large lizard (up to 1.5 m including the tail) with a row of spines along its back and a large dewlap under its chin. Juveniles are bright green; adults may look duller or orange.",
+      "foto_oficial": {
+        "foto": "img/especie_del_mes/iguana_hero.webp",
+        "fuente": "inaturalist_taxon_default",
+        "usuario": "Rainer Hungershausen",
+        "licencia": "cc-by-nc-nd",
+        "atribucion": "(c) Rainer Hungershausen, some rights reserved (CC BY-NC-ND)",
+        "obs_url": "https://www.inaturalist.org/photos/356025444"
+      },
+      "fuente": "iNaturalist — proyecto Jóvenes Pa'lante con el Ambiente (observaciones de participantes)",
+      "criterioSeleccion": "Especie con más observaciones registradas ese mes en el proyecto, sin repetir especie ya elegida en un mes anterior.",
+      "contacto_whatsapp": "+573001234567",
+      "contacto_email": "natural@antioquia.gov.co",
+      "fotos_comunidad": [
+        {
+          "usuario": "Doris Elena Florez Agudelo",
+          "municipio": "Apartadó",
+          "fecha": "2026-04-25",
+          "foto": "img/especie_del_mes/iguana_00.webp",
+          "comentario": "Estaba tomando sol en el techo",
+          "creditoINaturalist": {
+            "usuario_inat": "doris_elena1",
+            "licencia": "cc-by-nc",
+            "atribucion": "(c) Doris Elena Florez Agudelo, some rights reserved (CC BY-NC)",
+            "obs_url": "https://www.inaturalist.org/observations/354020208"
+          }
+        },
+        {
+          "usuario": "dalida mejia",
+          "municipio": "Apartadó",
+          "fecha": "2026-04-11",
+          "foto": "img/especie_del_mes/iguana_02.webp",
+          "comentario": "La vi cruzando la carretera",
+          "creditoINaturalist": {
+            "usuario_inat": "dalida6",
+            "licencia": "cc-by-nc",
+            "atribucion": "(c) dalida mejia, some rights reserved (CC BY-NC)",
+            "obs_url": "https://www.inaturalist.org/observations/349205005"
+          }
+        },
+        {
+          "usuario": "laura higuita",
+          "municipio": "Cañasgordas",
+          "fecha": "2026-04-25",
+          "foto": "img/especie_del_mes/iguana_10.webp",
+          "comentario": "Subida en un árbol del patio",
+          "creditoINaturalist": {
+            "usuario_inat": "laura17528",
+            "licencia": "cc-by-nc",
+            "atribucion": "(c) laura higuita, some rights reserved (CC BY-NC)",
+            "obs_url": "https://www.inaturalist.org/observations/354368312"
+          }
+        },
+        {
+          "usuario": "Miguel Moran",
+          "municipio": "Mutatá",
+          "fecha": "2026-04-30",
+          "foto": "img/especie_del_mes/iguana_12.webp",
+          "comentario": "Cerca de la quebrada, entre las hojas",
+          "creditoINaturalist": {
+            "usuario_inat": "miguel40249",
+            "licencia": "cc-by-nc",
+            "atribucion": "(c) Miguel Moran, some rights reserved (CC BY-NC)",
+            "obs_url": "https://www.inaturalist.org/observations/356946421"
+          }
+        },
+        {
+          "usuario": "DIEGO LUIS PEREZ ALMARIO",
+          "municipio": "Turbo",
+          "fecha": "2026-04-09",
+          "foto": "img/especie_del_mes/iguana_16.webp",
+          "comentario": "En la cerca de madera de la finca",
+          "creditoINaturalist": {
+            "usuario_inat": "diego_luis4",
+            "licencia": "cc-by-nc",
+            "atribucion": "(c) DIEGO LUIS PEREZ ALMARIO, some rights reserved (CC BY-NC)",
+            "obs_url": "https://www.inaturalist.org/observations/348729911"
+          }
+        },
+        {
+          "usuario": "Juan Marcos Marín López",
+          "municipio": "Necoclí",
+          "fecha": "2026-04-16",
+          "foto": "img/especie_del_mes/iguana_18.webp",
+          "comentario": "Sobre una piedra, muy quieta",
+          "creditoINaturalist": {
+            "usuario_inat": "juanmarcos_marin",
+            "licencia": "cc-by-nc",
+            "atribucion": "(c) Juan Marcos Marín López, some rights reserved (CC BY-NC)",
+            "obs_url": "https://www.inaturalist.org/observations/350401122"
+          }
+        }
+      ],
+      "slug": "abril-2026"
     },
     {
       "mes": "Marzo",
       "año": 2026,
-      "nombre": "Rana de Cristal",
-      "nombreCientifico": "Centrolene prosoblepon",
-      "grupo": "anfibios",
-      "emoji": "🐸",
-      "colorGrupo": "#004D40",
-      "iucn": "NT",
-      "fotos_comunidad": 9
+      "especieId": null,
+      "nombre": "Tangara Azulgrís",
+      "nombreEn": null,
+      "nombreCientifico": "Thraupis episcopus",
+      "grupo": "aves",
+      "emoji": "🐦",
+      "colorGrupo": "#1565C0",
+      "subregiones": [
+        "Oriente",
+        "Occidente",
+        "Urabá"
+      ],
+      "iucn": "LC",
+      "descripcionEs": "La Tangara Azulgrís se llevó marzo: es una de las aves más comunes en parques, jardines y bordes de bosque de Antioquia, y su color azul pálido la hace fácil de reconocer incluso para quien recién empieza a observar aves.",
+      "descripcionEn": "The Blue-gray Tanager took March: it's one of the most common birds in Antioquia's parks, gardens, and forest edges, and its pale blue color makes it easy to recognize even for beginner birdwatchers.",
+      "curiosidadEs": "Suele andar en pareja durante todo el año, no solo en época de reproducción — es una de las pocas tángaras que mantiene el vínculo de pareja de forma tan constante.",
+      "curiosidadEn": "It usually travels in pairs year-round, not just during breeding season — it's one of the few tanagers that keeps such a consistent pair bond.",
+      "como_identificarlaEs": "Busca un ave de tamaño mediano (unos 17 cm), de color azul grisáceo pálido en el cuerpo con las alas y la cola de un azul más intenso. Se mueve en pareja entre árboles y arbustos de jardines.",
+      "como_identificarlaEn": "Look for a medium-sized bird (about 17 cm) with pale blue-gray body plumage and more intense blue on the wings and tail. It moves in pairs among garden trees and shrubs.",
+      "foto_oficial": {
+        "foto": "img/especie_del_mes/tangara_hero.webp",
+        "fuente": "inaturalist_taxon_default",
+        "usuario": "Ad Konings",
+        "licencia": "cc-by-nc",
+        "atribucion": "(c) Ad Konings, some rights reserved (CC BY-NC), uploaded by Ad Konings",
+        "obs_url": "https://www.inaturalist.org/photos/177459123"
+      },
+      "fuente": "iNaturalist — proyecto Jóvenes Pa'lante con el Ambiente (observaciones de participantes)",
+      "criterioSeleccion": "Especie con más observaciones registradas ese mes en el proyecto, sin repetir especie ya elegida en un mes anterior.",
+      "contacto_whatsapp": "+573001234567",
+      "contacto_email": "natural@antioquia.gov.co",
+      "fotos_comunidad": [
+        {
+          "usuario": "pao",
+          "municipio": "San Carlos",
+          "fecha": "2026-03-06",
+          "foto": "img/especie_del_mes/tangara_06.webp",
+          "comentario": "Estaban dos juntas en el árbol",
+          "creditoINaturalist": {
+            "usuario_inat": "jp-gutierrez",
+            "licencia": "cc-by-nc",
+            "atribucion": "(c) pao, some rights reserved (CC BY-NC)",
+            "obs_url": "https://www.inaturalist.org/observations/341568329"
+          }
+        },
+        {
+          "usuario": "Duvan Andres Garcia Goez",
+          "municipio": "Cañasgordas",
+          "fecha": "2026-03-03",
+          "foto": "img/especie_del_mes/tangara_08.webp",
+          "comentario": "Se posó un momento en la rama",
+          "creditoINaturalist": {
+            "usuario_inat": "duvan_andres2",
+            "licencia": "cc-by-nc",
+            "atribucion": "(c) Duvan Andres Garcia Goez, some rights reserved (CC BY-NC)",
+            "obs_url": "https://www.inaturalist.org/observations/341182040"
+          }
+        },
+        {
+          "usuario": "Deisy",
+          "municipio": "Alejandría",
+          "fecha": "2026-03-17",
+          "foto": "img/especie_del_mes/tangara_09.webp",
+          "comentario": "La vi en el jardín de la casa",
+          "creditoINaturalist": {
+            "usuario_inat": "dsypg",
+            "licencia": "cc-by-nc",
+            "atribucion": "(c) Deisy, some rights reserved (CC BY-NC)",
+            "obs_url": "https://www.inaturalist.org/observations/344749482"
+          }
+        },
+        {
+          "usuario": "lina marcela restrepo",
+          "municipio": "Cañasgordas",
+          "fecha": "2026-03-27",
+          "foto": "img/especie_del_mes/tangara_10.webp",
+          "comentario": "Andaba en pareja entre las hojas",
+          "creditoINaturalist": {
+            "usuario_inat": "lina_marcela39019",
+            "licencia": "cc-by-nc",
+            "atribucion": "(c) lina marcela restrepo, some rights reserved (CC BY-NC)",
+            "obs_url": "https://www.inaturalist.org/observations/345560513"
+          }
+        },
+        {
+          "usuario": "yesica bailarin",
+          "municipio": "Chigorodó",
+          "fecha": "2026-03-13",
+          "foto": "img/especie_del_mes/tangara_19.webp",
+          "comentario": "Cerca de la ventana, en el cableado",
+          "creditoINaturalist": {
+            "usuario_inat": "yesica48401",
+            "licencia": "cc-by-nc",
+            "atribucion": "(c) yesica bailarin, some rights reserved (CC BY-NC)",
+            "obs_url": "https://www.inaturalist.org/observations/342883614"
+          }
+        },
+        {
+          "usuario": "Estefania Yepes",
+          "municipio": "Cañasgordas",
+          "fecha": "2026-03-16",
+          "foto": "img/especie_del_mes/tangara_20.webp",
+          "comentario": "En la finca, entre los cultivos",
+          "creditoINaturalist": {
+            "usuario_inat": "estefania79397",
+            "licencia": "cc-by-nc",
+            "atribucion": "(c) Estefania Yepes, some rights reserved (CC BY-NC)",
+            "obs_url": "https://www.inaturalist.org/observations/343342325"
+          }
+        }
+      ],
+      "slug": "marzo-2026"
     },
     {
       "mes": "Febrero",
       "año": 2026,
-      "nombre": "Orquídea de Antioquia",
-      "nombreCientifico": "Cattleya trianae",
-      "grupo": "orquideas",
-      "emoji": "🌸",
-      "colorGrupo": "#880E4F",
-      "iucn": "VU",
-      "fotos_comunidad": 24
+      "especieId": null,
+      "nombre": "Zopilote Común",
+      "nombreEn": null,
+      "nombreCientifico": "Coragyps atratus",
+      "grupo": "aves",
+      "emoji": "🦅",
+      "colorGrupo": "#1565C0",
+      "subregiones": [
+        "Oriente",
+        "Urabá"
+      ],
+      "iucn": "LC",
+      "descripcionEs": "El Zopilote Común lideró las observaciones de febrero: es imposible no verlo planeando en grupos sobre carreteras, basureros y potreros de casi toda Antioquia. Cumple un papel ambiental clave al limpiar el paisaje de animales muertos, lo que ayuda a frenar la propagación de enfermedades.",
+      "descripcionEn": "The Black Vulture topped February's observations: it's impossible to miss, gliding in groups over roads, dumps, and pastures across almost all of Antioquia. It plays a key ecological role by cleaning the landscape of carrion, helping curb the spread of disease.",
+      "curiosidadEs": "A diferencia de otros zopilotes, no tiene buen olfato: encuentra comida siguiendo con la vista a otras aves carroñeras, o directamente a otros zopilotes que ya encontraron algo.",
+      "curiosidadEn": "Unlike other vultures, it has a poor sense of smell: it finds food by watching other scavenging birds, or simply by following other vultures that have already found something.",
+      "como_identificarlaEs": "Es todo negro, con la cabeza calva y gris oscuro. En vuelo se reconoce por las puntas blancas debajo de las alas y porque aletea seguido en vez de planear largo, a diferencia del Guala (zopilote de cabeza roja).",
+      "como_identificarlaEn": "It's entirely black with a bald, dark gray head. In flight it's recognized by the white wingtip patches underneath and by flapping frequently instead of soaring long distances, unlike the Turkey Vulture (red-headed).",
+      "foto_oficial": {
+        "foto": "img/especie_del_mes/zopilote_hero.webp",
+        "fuente": "inaturalist_taxon_default",
+        "usuario": "eduardovieira17",
+        "licencia": "cc-by-nc",
+        "atribucion": "(c) eduardovieira17, some rights reserved (CC BY-NC), uploaded by eduardovieira17",
+        "obs_url": "https://www.inaturalist.org/photos/176419188"
+      },
+      "fuente": "iNaturalist — proyecto Jóvenes Pa'lante con el Ambiente (observaciones de participantes)",
+      "criterioSeleccion": "Especie con más observaciones registradas ese mes en el proyecto, sin repetir especie ya elegida en un mes anterior.",
+      "contacto_whatsapp": "+573001234567",
+      "contacto_email": "natural@antioquia.gov.co",
+      "fotos_comunidad": [
+        {
+          "usuario": "Shirley Morales bedoya",
+          "municipio": "San Rafael",
+          "fecha": "2026-02-01",
+          "foto": "img/especie_del_mes/zopilote_01.webp",
+          "comentario": "Volaban varios juntos sobre la carretera",
+          "creditoINaturalist": {
+            "usuario_inat": "shirley27679",
+            "licencia": "cc-by-nc",
+            "atribucion": "(c) Shirley Morales bedoya, some rights reserved (CC BY-NC)",
+            "obs_url": "https://www.inaturalist.org/observations/337380504"
+          }
+        },
+        {
+          "usuario": "Mayerly Echeverri",
+          "municipio": "Alejandría",
+          "fecha": "2026-02-07",
+          "foto": "img/especie_del_mes/zopilote_05.webp",
+          "comentario": "Posado en un poste de luz",
+          "creditoINaturalist": {
+            "usuario_inat": "mayerly54044",
+            "licencia": "cc-by-nc",
+            "atribucion": "(c) Mayerly Echeverri, some rights reserved (CC BY-NC)",
+            "obs_url": "https://www.inaturalist.org/observations/337676003"
+          }
+        },
+        {
+          "usuario": "Deisy Joana Acero Agudelo",
+          "municipio": "Turbo",
+          "fecha": "2026-02-28",
+          "foto": "img/especie_del_mes/zopilote_10.webp",
+          "comentario": "Un grupo grande cerca del basurero",
+          "creditoINaturalist": {
+            "usuario_inat": "deisyacero",
+            "licencia": "cc-by-nc",
+            "atribucion": "(c) Deisy Joana Acero Agudelo, some rights reserved (CC BY-NC)",
+            "obs_url": "https://www.inaturalist.org/observations/341269341"
+          }
+        },
+        {
+          "usuario": "cindy_noreidy",
+          "municipio": "Alejandría",
+          "fecha": "2026-02-01",
+          "foto": "img/especie_del_mes/zopilote_14.webp",
+          "comentario": "Sobrevolando el potrero en círculos",
+          "creditoINaturalist": {
+            "usuario_inat": "cindy_noreidy",
+            "licencia": "cc-by-nc",
+            "atribucion": "(c) cindy_noreidy, some rights reserved (CC BY-NC)",
+            "obs_url": "https://www.inaturalist.org/observations/337214499"
+          }
+        },
+        {
+          "usuario": "Dayana Guarín",
+          "municipio": "Alejandría",
+          "fecha": "2026-02-22",
+          "foto": "img/especie_del_mes/zopilote_18.webp",
+          "comentario": "Posado en un árbol seco",
+          "creditoINaturalist": {
+            "usuario_inat": "dguarin",
+            "licencia": "cc-by-nc",
+            "atribucion": "(c) Dayana Guarín, some rights reserved (CC BY-NC)",
+            "obs_url": "https://www.inaturalist.org/observations/339770837"
+          }
+        },
+        {
+          "usuario": "Janier Gutiérrez",
+          "municipio": "Necoclí",
+          "fecha": "2026-02-19",
+          "foto": "img/especie_del_mes/zopilote_20.webp",
+          "comentario": "Cerca del río, varios juntos",
+          "creditoINaturalist": {
+            "usuario_inat": "janiergz99",
+            "licencia": "cc-by-nc",
+            "atribucion": "(c) Janier Gutiérrez, some rights reserved (CC BY-NC)",
+            "obs_url": "https://www.inaturalist.org/observations/339339057"
+          }
+        }
+      ],
+      "slug": "febrero-2026"
     },
     {
       "mes": "Enero",
       "año": 2026,
-      "nombre": "Oso Andino",
-      "nombreCientifico": "Tremarctos ornatus",
-      "grupo": "mamiferos",
-      "emoji": "🐻",
-      "colorGrupo": "#BF360C",
-      "iucn": "VU",
-      "fotos_comunidad": 31
+      "especieId": null,
+      "nombre": "Sapo Gigante",
+      "nombreEn": null,
+      "nombreCientifico": "Rhinella horribilis",
+      "grupo": "anfibios_reptiles",
+      "emoji": "🐸",
+      "colorGrupo": "#00695C",
+      "subregiones": [
+        "Oriente",
+        "Urabá"
+      ],
+      "iucn": "LC",
+      "descripcionEs": "El Sapo Gigante fue la especie más observada por los jóvenes de Pa'lante en enero, en gran parte por lo fácil que es encontrarlo: es un anfibio robusto y muy adaptable que aparece en patios, jardines y bordes de camino en casi cualquier municipio de Antioquia. Sale sobre todo de noche, atraído por los insectos que se acercan a la luz.",
+      "descripcionEn": "The Giant Toad was the most-observed species by the Pa'lante youth in January, largely because it's so easy to find: a robust, highly adaptable amphibian that turns up in yards, gardens, and roadsides across almost any municipality in Antioquia. It comes out mostly at night, drawn by insects gathering around lights.",
+      "curiosidadEs": "Detrás de los ojos tiene un par de glándulas parotoides que segregan una toxina lechosa (bufotoxina) como defensa — por eso nunca se debe manipular ni dejar que las mascotas lo muerdan.",
+      "curiosidadEn": "Behind its eyes it has a pair of parotoid glands that secrete a milky toxin (bufotoxin) as a defense — which is why it should never be handled, and pets should be kept from biting it.",
+      "como_identificarlaEs": "Busca un anfibio grande y robusto (hasta 20 cm), de piel seca y verrugosa, café o gris. Tiene una cresta ósea visible detrás de cada ojo. Salta poco: prefiere caminar.",
+      "como_identificarlaEn": "Look for a large, stocky amphibian (up to 20 cm) with dry, warty brown or gray skin. It has a visible bony ridge behind each eye. It rarely hops — it prefers to walk.",
+      "foto_oficial": {
+        "foto": "img/especie_del_mes/sapo_hero.webp",
+        "fuente": "inaturalist_taxon_default",
+        "usuario": "Grigory Heaton",
+        "licencia": "cc-by-nc",
+        "atribucion": "(c) Grigory Heaton, some rights reserved (CC BY-NC), uploaded by Grigory Heaton",
+        "obs_url": "https://www.inaturalist.org/photos/429511167"
+      },
+      "fuente": "iNaturalist — proyecto Jóvenes Pa'lante con el Ambiente (observaciones de participantes)",
+      "criterioSeleccion": "Especie con más observaciones registradas ese mes en el proyecto, sin repetir especie ya elegida en un mes anterior.",
+      "contacto_whatsapp": "+573001234567",
+      "contacto_email": "natural@antioquia.gov.co",
+      "fotos_comunidad": [
+        {
+          "usuario": "Isa Giraldo",
+          "municipio": "Granada",
+          "fecha": "2026-01-20",
+          "foto": "img/especie_del_mes/sapo_03.webp",
+          "comentario": "Lo encontré en el patio de la casa",
+          "creditoINaturalist": {
+            "usuario_inat": "isa54118",
+            "licencia": "cc-by-nc",
+            "atribucion": "(c) Isa Giraldo, some rights reserved (CC BY-NC)",
+            "obs_url": "https://www.inaturalist.org/observations/335498156"
+          }
+        },
+        {
+          "usuario": "valentina villada giraldo",
+          "municipio": "San Carlos",
+          "fecha": "2026-01-26",
+          "foto": "img/especie_del_mes/sapo_05.webp",
+          "comentario": "Salió cerca de la puerta en la noche",
+          "creditoINaturalist": {
+            "usuario_inat": "valentina44778",
+            "licencia": "cc-by-nc",
+            "atribucion": "(c) valentina villada giraldo, some rights reserved (CC BY-NC)",
+            "obs_url": "https://www.inaturalist.org/observations/336348218"
+          }
+        },
+        {
+          "usuario": "Valeria Echeverri",
+          "municipio": "San Rafael",
+          "fecha": "2026-01-17",
+          "foto": "img/especie_del_mes/sapo_08.webp",
+          "comentario": "Estaba quieto junto al camino",
+          "creditoINaturalist": {
+            "usuario_inat": "valeriaecheverri57356",
+            "licencia": "cc-by-nc",
+            "atribucion": "(c) Valeria Echeverri, some rights reserved (CC BY-NC)",
+            "obs_url": "https://www.inaturalist.org/observations/335139696"
+          }
+        },
+        {
+          "usuario": "Derly morales Torres",
+          "municipio": "Alejandría",
+          "fecha": "2026-01-22",
+          "foto": "img/especie_del_mes/sapo_12.webp",
+          "comentario": "En el jardín, entre las plantas",
+          "creditoINaturalist": {
+            "usuario_inat": "derly_morales",
+            "licencia": "cc-by-nc",
+            "atribucion": "(c) Derly morales Torres, some rights reserved (CC BY-NC)",
+            "obs_url": "https://www.inaturalist.org/observations/336269830"
+          }
+        },
+        {
+          "usuario": "Jhoan Sebastian Cifuentes Guarin",
+          "municipio": "San Rafael",
+          "fecha": "2026-01-26",
+          "foto": "img/especie_del_mes/sapo_16.webp",
+          "comentario": "Debajo de una teja vieja",
+          "creditoINaturalist": {
+            "usuario_inat": "jhoan_sebastian80054",
+            "licencia": "cc-by-nc",
+            "atribucion": "(c) Jhoan Sebastian Cifuentes Guarin, some rights reserved (CC BY-NC)",
+            "obs_url": "https://www.inaturalist.org/observations/337959681"
+          }
+        },
+        {
+          "usuario": "Dilson Dilson domico Domico",
+          "municipio": "Chigorodó",
+          "fecha": "2026-01-30",
+          "foto": "img/especie_del_mes/sapo_17.webp",
+          "comentario": "Cerca del río, de noche",
+          "creditoINaturalist": {
+            "usuario_inat": "dilson64487",
+            "licencia": "cc-by-nc",
+            "atribucion": "(c) Dilson Dilson domico Domico, some rights reserved (CC BY-NC)",
+            "obs_url": "https://www.inaturalist.org/observations/337139321"
+          }
+        }
+      ],
+      "slug": "enero-2026"
     }
   ]
 }

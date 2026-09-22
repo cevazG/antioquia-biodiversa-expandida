@@ -247,7 +247,7 @@ Antioquia Natural/
 │
 ├── agua/                              ← Módulo de recursos hídricos
 │   ├── index.html                     ← Landing: stats interactivos (subregiones/ríos/cuencas → botones)
-│   ├── mapa.html                      ← Mapa Leaflet de cuencas hidrográficas (18 ríos)
+│   ├── mapa.html                      ← Mapa Leaflet de cuencas hidrográficas (19 ríos)
 │   ├── subregion.html                 ← Fuentes/cuencas por subregión
 │   ├── acueductos.html                ← Módulo aparte: cuencas que abastecen acueductos municipales
 │   ├── ecosistemas.html               ← Landing de Ecosistemas Estratégicos (grid de 7 tipos)
@@ -263,6 +263,7 @@ Antioquia Natural/
 └── comunidad/                         ← Módulo comunidad
     ├── index.html                     ← Landing con 3 programas (JPL, GC, EDM)
     ├── especie_del_mes.html           ← Especie del mes + galería comunitaria
+    ├── consejos_fotos.html            ← Tips para mejores fotos (portado de Ampliación JPL)
     ├── data/especie_mes.json
     ├── jovenes_pa_lante/              ← Programa JPL
     │   ├── index.html                 ← Landing: stats iNaturalist en vivo + acceso a galería/mapa
@@ -646,7 +647,7 @@ Bug presente en las galerías de JPL y Guarda Cuencas: el `<div class="photo-car
 
 ### Badge de ubicación → enlace al mapa de cuencas (Guarda Cuencas)
 
-El badge 📍 (subregión) en `comunidad/guarda_cuencas/galeria.js` — tanto en la tarjeta como en el modal — ahora es un `<a href="../../agua/mapa.html">`, no un `<span>` informativo. Cambió también su estilo de rectángulo suave (`--radius-sm`, tag informativo) a píldora con borde (`--radius-full` + `border`, `.badge-subregion--link`) — sigue la convención del proyecto de diferenciar visualmente lo tocable de lo puramente informativo (ver "Convención visual: chip interactivo vs. tag informativo"). El link en la tarjeta lleva `onclick="event.stopPropagation()"` porque la tarjeta entera también es clickeable (abre el modal) — sin eso, tocar el badge dispararía ambas acciones.
+El badge 📍 muestra la **subregión** de la foto (`foto.subregion`, uno de los 9 ids internos) — no hay dato de cuenca/río específico en esta foto (ver nota de esquema simplificado arriba). En `comunidad/guarda_cuencas/galeria.js` — tarjeta y modal — ahora es un `<a href="../../agua/subregion.html?subregion=${foto.subregion}&tipo=cuencas">`, no un `<span>` informativo; usa el deep-link que ya existía en el proyecto (mismo patrón que `biodiversidad/subregion.html`) en vez de mandar al mapa general sin filtrar. Cambió también su estilo de rectángulo suave (`--radius-sm`, tag informativo) a píldora con borde (`--radius-full` + `border`, `.badge-subregion--link`) — sigue la convención del proyecto de diferenciar visualmente lo tocable de lo puramente informativo (ver "Convención visual: chip interactivo vs. tag informativo"). El link en la tarjeta lleva `onclick="event.stopPropagation()"` porque la tarjeta entera también es clickeable (abre el modal) — sin eso, tocar el badge dispararía ambas acciones.
 
 ---
 
@@ -760,7 +761,9 @@ Estructura: `biodiversidad/img/species/<grupo>/<familia>/<spXXX_slug>/<slug>_001
 
 ## Módulo Agua — Cuencas Hídricas
 
-`agua/mapa.html` muestra las cuencas hidrográficas principales de Antioquia (18 ríos) en un solo mapa Leaflet, con su área de drenaje y el trazado del río, coloreadas por zona hidrográfica. `agua/acueductos.html` es un módulo aparte (cuencas que abastecen acueductos municipales, no confundir con el de cuencas hidrográficas).
+`agua/mapa.html` muestra las cuencas hidrográficas principales de Antioquia (19 ríos) en un solo mapa Leaflet, con su área de drenaje y el trazado del río, coloreadas por zona hidrográfica. `agua/acueductos.html` es un módulo aparte (cuencas que abastecen acueductos municipales, no confundir con el de cuencas hidrográficas).
+
+**Orden de las 3 tarjetas en `agua/index.html`** (septiembre 2026, a pedido de Sebastián): Cuencas Hídricas → Ecosistemas Estratégicos → Cuencas Abastecedoras. Es solo el orden del DOM (`.agua-mode-card`), no cambia rutas ni ids.
 
 ### Clasificación oficial (Decreto 1640 de 2012, IDEAM)
 
@@ -777,9 +780,19 @@ Los niveles 1 y 2 no son cuencas adicionales — son categorías que agrupan las
 
 **Por qué se queda en nivel 3**: los niveles 4-6 requieren el detalle de las Corporaciones Autónomas Regionales (CORANTIOQUIA/CORNARE/CORPOURABA), pendiente de autorización — ver `Mapa/Info agua/FUENTES_DATOS_AGUA.md`.
 
-### Por qué estos 18 ríos
+### Por qué estos 19 ríos
 
-**No es un ranking objetivo único** — es una selección curada que mezcla continuidad con la lista previa del módulo, área real medida (donde la fuente lo permitió, 15 de 18) y reconocimiento regional (los otros 3: Cocorná, Grande, Guatapé, sin área medible en esta fuente). Detalle completo, con el ranking por tamaño y la respuesta sugerida si preguntan "¿por qué estos y no otros?", en `Mapa/Info agua/FUENTES_DATOS_AGUA.md`.
+**No es un ranking objetivo único** — es una selección curada que mezcla continuidad con la lista previa del módulo, área real medida (donde la fuente lo permitió, 16 de 19) y reconocimiento regional (los otros 3: Cocorná, Grande, Guatapé, sin área medible en esta fuente). Detalle completo, con el ranking por tamaño y la respuesta sugerida si preguntan "¿por qué estos y no otros?", en `Mapa/Info agua/FUENTES_DATOS_AGUA.md`.
+
+**Septiembre 2026 — se agregó el Río Regla (19º río):** Sebastián notó en el mapa una zona sin cobertura al sur de Yalí (cerca de Vegachí). Investigación con Playwright (conversión exacta píxel→coordenada vía la API de Leaflet, hit-testing nativo de SVG) confirmó que el centroide de Yalí sí caía dentro del Porce, pero un punto real ~3 km al sur, sin ningún río de los 18 encima, sí era un hueco genuino. Se encontró en la fuente IDEAM una subzona hidrográfica no usada hasta entonces, "Río Regla" (SZH 2310, zona Medio Magdalena), con área real dentro de Antioquia de 2.530 km² dentro de la jurisdicción de Vegachí, Yolombó y Maceo — tamaño comparable a 6 de los 18 ríos ya existentes. Se agregó como entrada 19 en `agua/data/cuencas.json` y se replicó en `generate_cuencas_agua.py` (`GRUPOS`/`DESCRIPCIONES`) para que la regeneración futura sea reproducible.
+
+**Los 19 ríos ya tienen trazado de línea (no solo área).** Tres ríos (Porce, San Juan de Urabá y el propio Regla) no tenían línea propia en el webmap de IDEAM — Porce porque la única línea nacional con ese nombre en realidad traza el tramo del Nechí (ver comentario en `GRUPOS`), y San Juan de Urabá/Regla porque esa fuente simplemente no los trazó. Se completaron con datos de **OpenStreetMap** (© colaboradores de OpenStreetMap, licencia ODbL — ya se cita en el pie de mapa junto a CARTO): `generate_cuencas_agua.py` tiene ahora una función `fetch_osm_line()` que consulta la API Overpass por nombre y bbox (diccionario `OSM_LINEAS`), evitando el problema de nombres de río duplicados en Colombia (ej. "San Juan" aparece más de una vez). Detalle: para el Río Regla, la línea se trazó como **"Río San Bartolomé"** — el nombre oficial completo de esa subzona en las memorias del IDEAM (Decreto 1640) es *"Río San Bartolo y otros directos al Magdalena Medio"*; "Regla" es el nombre corto usado solo en el webmap de origen (con nota "ó San Bernardo"). No se cambió el nombre público del río en la app (se mantiene "Río Regla", consistente con el resto de la fuente), pero vale la pena tenerlo presente si alguien pregunta por qué el trazado se llama distinto internamente. Ver detalle completo en `Mapa/Info agua/FUENTES_DATOS_AGUA.md`.
+
+**Bug real encontrado y corregido de paso: la línea de Río Grande estaba mal — coincidía con la del Porce.** Sebastián notó, alternando el chip "Río Porce" con dos capturas de pantalla, que la línea visible en el mapa no cambiaba al apagarlo. Investigación con Playwright (comparación de rutas DOM/SVG antes y después del toggle, no solo visual) confirmó que el propio toggle de Porce sí funcionaba correctamente — el problema era que la línea preexistente de **Río Grande** (fuente: webmap de IDEAM, dato que ya existía antes de esta sesión) estaba a 0-110 m de distancia del trazado del Porce en todo su recorrido entre Gómez Plata y Amalfi/Anorí, es decir, prácticamente la misma línea duplicada bajo otro nombre y color idéntico (ambos "Nechí" = teal). El Río Grande real (nace cerca de Santa Rosa de Osos/Belmira, alimenta el embalse Riogrande II) está bastante más al oeste. Se re-trazó desde OpenStreetMap igual que los 3 ríos anteriores — ahora Grande y Porce se ven como líneas claramente distintas y el toggle cambia visiblemente el mapa. `Río Grande` se agregó también a `OSM_LINEAS` en `generate_cuencas_agua.py` (con comentario explicando el hallazgo), y el bucle de `SOLO_LINEA` ahora prefiere OpenStreetMap sobre el webmap de IDEAM cuando el río está en ese diccionario.
+
+**Área aproximada para Grande, Cocorná y Guatapé (los 3 ríos sin subzona propia).** Al corregir la línea de Grande, Sebastián notó que su línea quedaba "flotando" sin color de fondo si se apagaba el área del Porce (su río anfitrión) — porque estos 3 ríos nunca tuvieron polígono de área propio (solo línea, ver "Criterio de selección" en `FUENTES_DATOS_AGUA.md`). Se investigó agregar un área aproximada con **HydroBASINS** (HydroSHEDS/WWF, nivel 8, Suramérica — mismo linaje de datos que ya cita el webmap de IDEAM como base). Los polígonos encontrados resultaron superponerse 99-100% con el área oficial del río anfitrión (Porce para Grande, Samaná Norte para Cocorná y Guatapé) — hidrológicamente correcto, porque la Subzona Hidrográfica oficial del anfitrión ya incluye a estos afluentes por definición. Sebastián pidió agregarlas de todos modos, con menos opacidad y borde punteado para diferenciarlas visualmente del área del anfitrión (`areaEsAproximada: true` en `cuencas.json`, estilo condicional en `addCuencaToMap()` de `agua/mapa.js`, y una nota de advertencia (`area_nota`/`area_notaEn`) en el panel de información explicando la superposición intencional). Reproducible vía `HYBAS_IDS` + `fetch_hybas_geometry()` en `generate_cuencas_agua.py` (lee el shapefile de HydroBASINS con `pyshp`, puro Python, sin GDAL/PROJ — mismo motivo que con la fórmula esférica de Web Mercator).
+
+**⚠️ Esto es una solución provisional, pendiente de validar con un experto en cuencas hidrográficas de la Gobernación** — la superposición al 100% con el área del anfitrión es un dilema real (¿mostrar un área aproximada y superpuesta, o dejarlo solo con línea?), no un error de cálculo. Preguntas concretas para llevarle al experto, y el detalle completo, en la sección **"⚠️ Pendiente — validar con experto en cuencas hidrográficas de la Gobernación"** de `Mapa/Info agua/FUENTES_DATOS_AGUA.md`.
 
 ### Datos y regeneración
 
@@ -834,6 +847,68 @@ Las 32 fotos reales de `cuencas_2026_06.json` a `cuencas_2026_09.json` (ver estr
 2. **Esquema simplificado, distinto al que espera el backend**: el modelo `GcPhoto` (`backend/src/models/GcPhoto.js`) y el formulario de `admin/gc.js` todavía piden `cuenca` (obligatorio) y `descripcionEs/En` — campos que **no existían en el Excel real** (`Respaldo Fotos/Fotos App/Fotos App_link.xlsx`, solo trae autor/vereda/municipio/subregión) y que no se quisieron inventar. Los 4 meses reales solo tienen `id, foto, credito, municipio, subregion, tituloEs, tituloEn`. El frontend (`galeria.js`) ya tolera la ausencia de `cuenca`/descripción (badge y párrafo se omiten si no hay dato), pero **si un futuro mes se publica desde el panel admin, va a traer esos dos campos de más** — inconsistencia conocida, no es un bug.
 
 Mismo lote trajo el rediseño de foto completa sin recortar (`object-fit: contain`, ya no `16:9` con `cover`) — las fotos reales son mezcla de retrato y paisaje, no todas horizontales como asumía el diseño original.
+
+---
+
+## Especie del Mes — datos reales de iNaturalist (septiembre 2026)
+
+`comunidad/data/especie_mes.json` tenía datos 100% de prueba (usuarios falsos tipo "María G.", `foto: null` en todas, especies genéricas sin relación con ningún dato real). Se reemplazó por completo con datos reales del proyecto de iNaturalist **["Jóvenes Palante Con El Ambiente"](https://www.inaturalist.org/projects/jovenes-palante-con-el-ambiente)** (id 269450), que reúne los avistamientos que suben los participantes del programa.
+
+### Metodología
+
+1. **"Especie más observada del mes"** = la especie con más observaciones ese mes dentro del proyecto (`GET /v1/observations/species_counts?project_id=269450&month=M&year=Y`, API pública de iNaturalist, sin autenticación).
+2. **Regla anti-repetición, orden cronológico**: se procesan los meses de enero a junio en orden; cada mes se queda con su especie más observada que ningún mes **anterior** ya haya usado — si hay conflicto, se baja a la 2ª, 3ª... más observada de ese mes hasta encontrar una libre. (Decisión de Sebastián: cronológico enero→junio, no al revés.)
+3. **Rango de meses = enero-junio 2026**: es el único período con actividad real y sustancial del proyecto (miles de observaciones/mes). De julio a septiembre 2026 (mes calendario "actual") casi no hay datos (20, 5 y 3 observaciones en total respectivamente) — no alcanza para calcular una especie "más observada" con sentido. Por eso `data.actual` en el JSON es **junio 2026** (el mes más reciente con datos suficientes), no el mes calendario real. Ver histograma completo de observaciones por mes en el chat si hace falta re-derivar esto.
+4. **Fotos**: hasta 6 por especie (5 para Tití Gris, que solo tiene 6 observaciones en total ese mes y una no mostraba el animal), elegidas a mano revisando *contact sheets* (grillas de miniaturas generadas con PIL, mucho más eficiente que revisar una por una) — se prefirieron fotos nítidas, con el animal bien visible, sin marcas de agua/GPS grandes encima. Solo se usaron fotos con licencia (`license_code` presente, casi todas CC BY-NC — las "todos los derechos reservados" se descartaron).
+5. **Crédito**: cada foto guarda `usuario` (nombre real si el observador lo puso público, si no su usuario de iNaturalist), `municipio` (parseado de `place_guess`), `fecha`, y un objeto `creditoINaturalist` (usuario, licencia, atribución textual, y link a la observación original) — se muestra en la app como línea "CC BY NC · iNaturalist" debajo de cada foto, enlazando a la observación.
+6. **Fotos convertidas a WebP** (`cwebp -q 82 -resize 1200 0`) en `comunidad/img/especie_del_mes/`.
+7. **Descripciones bilingües, curiosidad y pistas de identificación**: texto original (no copiado de Wikipedia/iNaturalist), basado en información biológica general de cada especie.
+
+### Las 6 especies elegidas
+
+| Mes | Especie | Grupo | IUCN |
+|---|---|---|---|
+| Enero | Sapo Gigante (*Rhinella horribilis*) | anfibios_reptiles | LC |
+| Febrero | Zopilote Común (*Coragyps atratus*) | aves | LC |
+| Marzo | Tangara Azulgrís (*Thraupis episcopus*) | aves | LC |
+| Abril | Iguana Verde (*Iguana iguana*) | anfibios_reptiles | LC |
+| Mayo | Canario Coronado (*Sicalis flaveola*) | aves | LC |
+| Junio (**actual**) | Tití Gris (*Saguinus leucopus*) | mamiferos | **VU** |
+
+**Tití Gris es un caso especial**: es un primate endémico de Colombia (solo existe en el valle del Magdalena y zonas de Antioquia), clasificado Vulnerable. Por eso iNaturalist aplica `geoprivacy: "obscured"` a sus observaciones — no expone el municipio exacto, solo "Antioquia". El campo `municipio` de sus 5 fotos quedó como `"Antioquia (ubicación protegida)"` y `subregiones: []`; la app muestra un texto explicativo en vez de la lista de chips vacía (`edm_subregiones_protegida` en `translations.json`).
+
+### Cambios de esquema y frontend (antes solo "actual" tenía galería completa)
+
+- `anteriores[]` pasó de ser un resumen (nombre + conteo de fotos como número) a tener **exactamente el mismo esquema que `actual`** (descripción, curiosidad, pistas, galería completa con créditos) — decisión de Sebastián: "galería completa en todos los meses", no solo el destacado.
+- Cada entrada tiene un `slug` (`"junio-2026"`, `"mayo-2026"`...). `especie_del_mes.js` ahora lee `?mes=<slug>` de la URL para decidir qué mes mostrar (`data.actual` si no hay parámetro o no matchea); las tarjetas de "Meses anteriores" pasaron de `<div>` a `<a href="especie_del_mes.html?mes=...">`.
+- `link-ficha` ("Ver ficha completa de la especie") se oculta si `especieId` es `null` — las 6 especies son nuevas, ninguna existe todavía en el catálogo principal de `biodiversidad/data/species.json`, así que antes quedaba un link muerto a `#`.
+- **Visor de pantalla completa (lightbox)**: la galería no tenía forma de ampliar una foto ni verlas en carrete, a diferencia del resto de la app. Se agregó el mismo patrón de `especie.html`/`feed.html` (slides con crossfade, puntos, contador, caption, swipe) — CSS copiado tal cual a `especie_del_mes.css` (no está en el `components.css` compartido, cada página lo duplica). A diferencia de `feed.js` (que tiene una hoja de detalle intermedia + lightbox anidado, porque el feed mezcla muchas especies distintas), acá el toque en cualquier foto de la grilla abre el visor directo, ya que la página entera ya es el "detalle" de una sola especie — más simple, un solo nivel.
+
+### Foto principal del hero (`foto_oficial`) — la misma que muestra iNaturalist en vista de especies
+
+Sebastián pidió reemplazar el emoji del hero por la foto que se ve al entrar a [la vista de especies del proyecto](https://www.inaturalist.org/observations?project_id=269450&view=species) — es el `default_photo` de cada taxón (foto global "representativa" de la especie en iNaturalist, **no** necesariamente de un participante del proyecto).
+
+- **5 de las 6 especies** tienen `default_photo` con licencia reutilizable (casi todas CC BY-NC) — se descargaron, convirtieron a WebP (`<slug>_hero.webp`) y se guardan en `foto_oficial` con su propio crédito (fotógrafo distinto al de la galería, porque el `default_photo` es global, no del proyecto).
+- **Tití Gris es la excepción**: su `default_photo` en iNaturalist tiene `license_code: null` ("todos los derechos reservados" — visible como el ícono © en vez de CC en la propia vista de especies del proyecto) — no se podía reutilizar. Sebastián lo confirmó comparando directamente esa vista. Primero se probó con la mejor foto de la galería del propio proyecto (`titi_00.webp`), pero se reemplazó por una foto de mejor calidad: otra observación de la especie en iNaturalist (fuera del proyecto, `alexguthrie`, CC BY-NC) — `titi_hero.webp`. Queda registrado en `foto_oficial.nota` de esa entrada (`fuente: "inaturalist_otra_observacion"`).
+- El carrete de pantalla completa (ver arriba) ahora es **un solo recorrido**: si hay `foto_oficial`, es la diapositiva 0, seguida de las fotos de la comunidad — tocar el hero o cualquier foto de la grilla abre el mismo visor en la posición correspondiente.
+- Crédito visible debajo del nombre científico en el hero (`#hero-credito`), no solo al abrir el visor — importante porque varias licencias (CC BY-NC, CC BY-SA) exigen atribución visible, no oculta tras un toque.
+- Foto ampliada un 10% adicional (148px → 163px de diámetro), a pedido de Sebastián.
+- Las tarjetas de "Meses anteriores" también muestran `foto_oficial.foto` en vez del emoji (con el emoji como *fallback* si algún mes futuro no tuviera foto) — `.em-mes-card__foto`, 84px de alto, `object-fit: cover`.
+
+### Consejos para mejores fotos (`comunidad/consejos_fotos.html`) — portado de Ampliación JPL
+
+Sebastián ya tenía un apartado de tips fotográficos hecho para el proyecto de Ampliación de Jóvenes pa' Lante (`comunidad/Ampliacion Jovenes/participante/consejos-fotos.html` — **carpeta con `.gitignore` propio, nunca se sube a GitHub**, cotización/negociación privada con la Gobernación). Pidió reutilizar ese contenido (8 tips con carrusel horizontal, cada uno con ejemplo ❌/✅ en SVG) como una página nueva, propia de la app principal (sí versionada), enlazada desde Especie del Mes.
+
+- **Página nueva**: `comunidad/consejos_fotos.html` + `consejos_fotos.css` — mismo patrón de header/page-bg/bottom-bar que `especie_del_mes.html` (reutiliza `app-shell--em`, mismo fondo `fondo-especie-del-mes.webp`).
+- **8 tips**: enfoque, lente limpio, encuadre, zoom digital, luz, fondo simple, estabilidad, orientación — contenido y SVGs de ejemplo copiados del original, solo se recoloreó el acento de naranja/JPL (`#f28e18`) a morado/Especie del Mes (`#8b4a97`) para que combine con la página que enlaza.
+- **Bilingüe completo** (`consejos_*` en `data/translations.json`, ES y EN) — el original de Ampliación JPL era solo español.
+- **Acceso**: tarjeta propia "💡 Consejos para tomar mejores fotos" (`.em-tips-card`) en `especie_del_mes.html`, debajo (no dentro) de la tarjeta "¿La encontraste?" — Sebastián pidió sacarla de ahí para que no compitiera visualmente con los botones de WhatsApp/Correo.
+
+### Pendiente / no resuelto en esta sesión
+
+- **`contacto_whatsapp`/`contacto_email`** siguen siendo el placeholder original (`+573001234567` / `natural@antioquia.gov.co`) — no se inventó un contacto nuevo porque no hay uno real confirmado en ningún otro punto de la app. Si la Gobernación da un WhatsApp/correo real para "envía tu foto", reemplazar ahí.
+- **`foto_oficial`** queda `null` en las 6 — nunca se renderiza en la UI actual (campo sin uso, ya estaba así antes de esta sesión).
+- El botón de idioma (EN) traduce todo el texto propio de la página, pero `nombre`/`municipio`/`comentario` de cada foto quedan solo en español (igual que el resto del catálogo del proyecto — no se generó traducción de nombres comunes ni comentarios).
 
 ---
 
@@ -1136,10 +1211,19 @@ Detalle completo, hallazgo por hallazgo, en el propio documento de respuesta.
 - [x] **Segunda entrega de fondos "ajustados"** para Biodiversidad, Agua, Guardacuencas, Especie del Mes y JPL
 - [x] **`.bio-card__name` siempre verde oscuro**, independiente del color del borde
 - [x] **Fix: emoji de respaldo tapaba la foto cargada** en galerías JPL y Guarda Cuencas (faltaba `display:none` por defecto)
-- [x] **Badge de ubicación → enlace al mapa de cuencas** en la galería de Guarda Cuencas, con estilo de chip interactivo
+- [x] **Badge de ubicación → enlace a las cuencas de esa subregión** en la galería de Guarda Cuencas, con estilo de chip interactivo
+- [x] **19º río agregado al mapa de cuencas: Río Regla** — hueco real detectado al sur de Yalí (cerca de Vegachí), cubierto por la subzona IDEAM "Río Regla" (SZH 2310, 2.530 km² dentro de Antioquia), ver "Por qué estos 19 ríos" arriba
+- [x] **Trazado de línea agregado para Porce, San Juan de Urabá y Regla** (los 3 únicos de los 19 sin línea en el webmap de IDEAM) — completados con datos de OpenStreetMap vía Overpass API, ver nota arriba
+- [x] **Fix: línea de Río Grande duplicaba la del Porce** (0-110 m de distancia en todo su recorrido, dato preexistente del webmap de IDEAM) — re-trazada desde OpenStreetMap, ver nota arriba
+- [x] **Área aproximada para Grande, Cocorná y Guatapé** (antes solo tenían línea) — polígonos de HydroBASINS, renderizados con menor opacidad y borde punteado por superponerse a propósito con el área de su río anfitrión, ver nota arriba
+- [x] **Especie del Mes con datos reales de iNaturalist** (enero-junio 2026) — reemplaza los datos 100% de prueba que había; 6 especies, hasta 6 fotos con crédito cada una, galería completa en todos los meses (no solo el actual), ver sección dedicada arriba
+- [x] **Foto principal de Especie del Mes** (`foto_oficial`) reemplaza el emoji del hero, con visor de pantalla completa unificado (hero + galería en un solo carrete) y crédito visible — ver sección dedicada arriba
+- [x] **Consejos para mejores fotos** (`comunidad/consejos_fotos.html`) — portado de Ampliación JPL, bilingüe, enlazado desde Especie del Mes en su propia tarjeta, ver sección dedicada arriba
+- [x] **Headers transparentes** en `agua/index.html`, `biodiversidad/listado.html`, `biodiversidad/biodiversidad.html`, `biodiversidad/feed.html` y `comunidad/jovenes_pa_lante/index.html` — mismo fondo fotográfico que el resto de la pantalla, en vez de la barra blanca sólida que traían
 - [ ] Ampliar a 150+ especies con fotos y descripciones bilingües *(154 alcanzadas — evaluar seguir creciendo el catálogo o cerrar esta línea)*
 - [ ] Consultar Libro Rojo de Colombia para estados IUCN reales en Lepidoptera
 - [ ] **Proceso de build para el frontend** — script que hashea el contenido de cada `.css`/`.js` y reescribe las referencias en los HTML, para eliminar el `?v=N` manual (ver incidente 2026-07-31 arriba). Netlify pasaría a servir una carpeta `dist/` en vez de la raíz del repo. No requiere bundler/framework — mantiene la arquitectura vanilla actual.
+- [ ] **Validar con experto en cuencas hidrográficas de la Gobernación** el área aproximada (HydroBASINS) de Grande/Cocorná/Guatapé — se superpone 99-100% con el área de su río anfitrión, ver sección dedicada en `FUENTES_DATOS_AGUA.md`
 - [ ] Dominio oficial `.gov.co`
 - [ ] PWA con modo offline (Service Workers)
 - [ ] Analytics de uso

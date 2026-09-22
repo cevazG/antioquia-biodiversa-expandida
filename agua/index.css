@@ -160,8 +160,8 @@
       color: var(--color-text-light);
     }
 
-    /* Header azul agua */
-    .app-header { border-bottom: 3px solid var(--color-agua); }
+    /* Header azul agua — transparente para que se vea el mismo fondo que el hero de abajo (.page-bg, fixed, ya detrás) */
+    .app-header { background: transparent; border-bottom: 3px solid var(--color-agua); }
 
     /* Bottom bar activo */
     .bottom-bar__btn--agua.active svg,

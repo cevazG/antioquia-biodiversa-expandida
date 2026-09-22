@@ -27,7 +27,7 @@ Cada nivel vive *dentro* del anterior, como muñecas rusas:
 
 **¿Por qué no vemos ríos "de nivel 1" o "nivel 2" en la lista?**
 Porque no son cuencas adicionales — son categorías que *agrupan* las cuencas
-de nivel 3 que sí se muestran. Cada uno de los 18 ríos del mapa ya pertenece
+de nivel 3 que sí se muestran. Cada uno de los 19 ríos del mapa ya pertenece
 a un nivel 1 y un nivel 2 (se ven como los primeros dos badges en el panel de
 información de cada río), además de ser él mismo el nivel 3.
 
@@ -39,8 +39,8 @@ Antioquia eso significa CORANTIOQUIA, CORNARE y CORPOURABA — la misma fuente
 con licencia restringida que se documenta más abajo, pendiente de
 autorización.
 
-**¿Los 18 ríos del mapa son todos nivel 3?**
-15 de 18 sí — su área se construye directamente a partir de códigos
+**¿Los 19 ríos del mapa son todos nivel 3?**
+16 de 19 sí — su área se construye directamente a partir de códigos
 oficiales de subzona del IDEAM (ver `GRUPOS` en `generate_cuencas_agua.py`,
 campo `nivel_ideam: 3` en `cuencas.json`). Los otros 3 (Cocorná, Grande,
 Guatapé) no tienen código de subzona propio en esta fuente — son afluentes
@@ -48,9 +48,9 @@ reconocidos dentro de una subzona mayor, aproximadamente nivel 4-6, pero sin
 poder precisar cuál sin la cartografía de la Corporación correspondiente
 (campo `nivel_ideam: null`).
 
-## Criterio de selección de los 18 ríos
+## Criterio de selección de los 19 ríos
 
-**No es un ranking objetivo único** (ej. "las 18 subzonas más grandes por
+**No es un ranking objetivo único** (ej. "las 19 subzonas más grandes por
 área"). Es una selección curada que combina tres criterios distintos, sin un
 peso definido entre ellos:
 
@@ -60,7 +60,7 @@ peso definido entre ellos:
    partida.
 2. **Tamaño real, donde se pudo medir**: al cruzar las subzonas hidrográficas
    oficiales del IDEAM contra el límite de Antioquia (ver sección de fuentes
-   más abajo), se obtuvo el área real en km² de 15 de los 18 ríos. Se
+   más abajo), se obtuvo el área real en km² de 16 de los 19 ríos. Se
    descartaron subzonas con una superposición mínima con Antioquia (<5%,
    salvo que fueran la continuación de un río ya incluido — ver el caso del
    Cauca en la sección de correcciones de geometría).
@@ -71,8 +71,16 @@ peso definido entre ellos:
    de datos no les asigna un código de subzona propio, así que **no se pudo
    medir su área** y no se sabe si son más grandes o más pequeños que otras
    subzonas que quedaron fuera.
+4. **Corrección de un hueco real detectado en el mapa** (septiembre 2026): el
+   Río Regla (subzona IDEAM SZH 2310, zona Medio Magdalena) se agregó como
+   19º río tras confirmar, con hit-testing exacto sobre el mapa Leaflet, que
+   una zona visible al sur de Yalí (cerca de Vegachí, Yolombó y Maceo) no
+   estaba cubierta por ninguno de los 18 ríos existentes. No es un criterio
+   distinto a los anteriores — es el mismo criterio 2 (tamaño real medido,
+   2.530 km² dentro de Antioquia) aplicado después del lanzamiento inicial,
+   al notarse el hueco.
 
-### Los 18, ordenados por área real dentro de Antioquia (donde se pudo medir)
+### Los 19, ordenados por área real dentro de Antioquia (donde se pudo medir)
 
 | Río | Área en Antioquia |
 |---|---|
@@ -85,6 +93,7 @@ peso definido entre ellos:
 | Río Magdalena | 3.482 km² |
 | Río Murrí | 3.440 km² |
 | Río Mulatos | 3.070 km² |
+| Río Regla | 2.530 km² |
 | Río León | 2.130 km² |
 | Río Cimitarra | 2.095 km² |
 | Río Arma | 1.442 km² |
@@ -95,7 +104,7 @@ peso definido entre ellos:
 | Río Grande | sin medir (sin subzona propia en la fuente) |
 | Río Guatapé | sin medir (sin subzona propia en la fuente) |
 
-**Si preguntan "¿por qué estos 18 y no otros?"**: la respuesta honesta es que
+**Si preguntan "¿por qué estos 19 y no otros?"**: la respuesta honesta es que
 es una selección curada, no un ranking automático. Si se necesita un criterio
 100% objetivo y defendible (ej. "todas las subzonas de nivel 3 con más de X
 km² dentro de Antioquia, sin excepción"), es un cambio de metodología que
@@ -133,13 +142,36 @@ base de datos PROJ.
 - **Acceso**: público, sin restricción de licencia.
 - **⚠️ Importante**: el propio ítem indica explícitamente *"Mapa indicativo para consulta, no es información oficial. Está en proceso de edición... Favor consultar también al IDEAM (www.ideam.gov.co)"*. Es la mejor fuente pública gratuita encontrada, pero no es el dato oficial certificado.
 - **Capas usadas**: `SubZonas Hidrográficas` (polígonos, para el área de cada cuenca) y `Ríos de Colombia (Niveles 3 a 6)` + `Ríos de Colombia (Nivel 2)` (líneas, para el trazado/recorrido).
+- **Limitación conocida**: esta capa de líneas no trae trazado para 3 de los 19 ríos (Porce, San Juan de Urabá, Regla) — ver fuente complementaria (2b) más abajo.
+
+### 2b. Trazado de línea para los 3 ríos sin línea en la fuente anterior
+- **Fuente**: OpenStreetMap, vía API Overpass (`overpass-api.de`)
+- **Licencia**: ODbL (Open Database License) — requiere atribución, ya presente en el pie de mapa de `agua/mapa.html` ("© OpenStreetMap © CARTO").
+- **Por qué hizo falta**: la capa de líneas de IDEAM (punto 2) no trae trazado propio para el Río Porce (la única línea nacional con ese nombre en realidad traza el tramo del Nechí, ver comentario en `GRUPOS` de `generate_cuencas_agua.py`), ni para el Río San Juan de Urabá ni el Río Regla (esa fuente simplemente no los trazó).
+- **Metodología**: `fetch_osm_line()` en `generate_cuencas_agua.py` consulta Overpass filtrando por nombre exacto de vía (`waterway=river|stream`, `name=...`) dentro de un bbox elegido a mano por río (diccionario `OSM_LINEAS`) — el bbox evita mezclar ríos homónimos, un problema real en Colombia (ej. "San Juan" se repite; ver también el caso de "Grande"/"San Juan" en `keep_connected_parts`). Se seleccionó el nombre de OSM por longitud trazada dominante dentro del polígono de cada subzona (ej. para Regla, "Río San Bartolomé" superaba por mucho a cualquier otro afluente).
+- **Detalle del Río Regla → "Río San Bartolomé"**: el nombre "R. Regla" (con nota "ó San Bernardo") aparece solo en la capa del webmap de IDEAM (punto 2). El nombre oficial completo de esa subzona en las memorias del propio IDEAM (Decreto 1640, `MEMORIAS-MAPA-ZONIFICACION-HIDROGRAFICA.pdf`) es *"Río San Bartolo y otros directos al Magdalena Medio"*. En OpenStreetMap el cauce principal de esa subzona está mapeado como "Río San Bartolomé" (variante ortográfica del mismo nombre) — es, por mucho, el curso más largo trazado dentro del polígono de la subzona (~150 km vs. el siguiente candidato con ~90 km), lo que confirma que es el río correcto. **No se cambió el nombre público "Río Regla" en la app** (se mantiene consistente con el nombre corto de la fuente principal), pero vale tenerlo presente si alguien pregunta por la discrepancia de nombres.
+- **Verificación**: los 3 trazados se revisaron visualmente en el mapa (siguen el curso esperado por los municipios que atraviesan) y se probó con Playwright que el toque sobre la línea abre el panel del río correcto.
+
+### 2c. Corrección: la línea de Río Grande (preexistente) duplicaba la del Porce
+Al agregar el trazado propio de Porce (punto 2b) se hizo visible un problema que ya existía antes de esta sesión: la línea de **Río Grande** (SOLO_LINEA, tomada del webmap de IDEAM con `linea_key: "Grande"`) resultó estar a solo 0-110 m de distancia del trazado del Porce en todo el tramo entre Gómez Plata y Amalfi/Anorí — prácticamente la misma línea, con el mismo color (ambos pertenecen a la zona "Nechí"). Esto hacía que alternar el chip "Río Porce" no cambiara nada visible en el mapa (la línea de Grande, casi idéntica, se quedaba encima), un bug detectado por Sebastián comparando dos capturas de pantalla (chip encendido vs. apagado, mapa idéntico en ambas).
+
+Se verificó con Playwright, a nivel de DOM (no solo visual), que el toggle de Porce sí funcionaba correctamente — el problema era la geometría duplicada de Grande, no el mecanismo de encendido/apagado. Se investigó el curso real del Río Grande en OpenStreetMap: nace cerca de Santa Rosa de Osos/Belmira y alimenta el embalse Riogrande II, bastante al oeste del corredor del Porce (bounds nuevos: lon -75.62 a -75.21, lat 6.41-6.85, longitud aprox. 120 km — vs. los bounds viejos, prácticamente idénticos a los de Porce: lon -75.45 a -74.92, lat 6.50-7.29, 148 km). Se reemplazó la línea de Grande por el trazado de OpenStreetMap, agregándolo a `OSM_LINEAS` en `generate_cuencas_agua.py`; el bucle de `SOLO_LINEA` ahora usa OpenStreetMap en vez del webmap de IDEAM para cualquier río presente en `OSM_LINEAS`.
+
+### 2d. Área aproximada de Grande, Cocorná y Guatapé — HydroBASINS
+Al corregir la línea de Grande quedó expuesto que este río (y Cocorná y Guatapé, los otros dos de `SOLO_LINEA`) nunca tuvo polígono de área propio — solo línea, porque no tienen código de subzona propio en la fuente de IDEAM (ver "Criterio de selección de los 19 ríos" arriba). Antes esto no se notaba porque la línea vieja de Grande coincidía con el área del Porce; al corregirla, su línea quedaba "flotando" sin color si se apagaba el área del Porce.
+
+- **Fuente**: [HydroBASINS](https://www.hydrosheds.org/products/hydrobasins) (HydroSHEDS, dirigido por WWF), nivel 8, región Suramérica (`hybas_sa_lev08_v1c`). Mismo linaje de datos que ya cita el webmap de IDEAM como base de su propio modelamiento (SRTM 3", HydroSHEDS 2006).
+- **Licencia**: uso libre para fines no comerciales, académicos y científicos (ver los términos en hydrosheds.org).
+- **Metodología**: se identificó, por superposición con la línea ya trazada de cada río, el polígono de HydroBASINS nivel 8 que mejor la cubre (`HYBAS_IDS` en `generate_cuencas_agua.py`, hallado a mano una sola vez — no hay forma automática de re-derivarlo si la fuente cambia). El shapefile se lee con `pyshp` (puro Python), no con geopandas/fiona, por el mismo problema de base de datos PROJ que ya se documenta para GADM/IDEAM.
+- **Hallazgo importante — por qué la opacidad es distinta**: los 3 polígonos resultantes se superponen 99-100% con el área oficial de su río anfitrión (Porce para Grande, Samaná Norte para Cocorná y Guatapé). Esto es correcto hidrológicamente — la Subzona Hidrográfica oficial del anfitrión ya incluye a estos afluentes por definición, por eso nunca tuvieron su propio código SZH — pero significa que agregar el área tal cual la duplicaría visualmente. Se optó (decisión de Sebastián) por agregarla de todos modos, con menor opacidad (`fillOpacity: 0.10` vs. `0.22`) y borde punteado, más una nota de advertencia en el panel explicando la superposición intencional (`areaEsAproximada`, `area_nota`/`area_notaEn` en `cuencas.json`, estilo condicional en `agua/mapa.js`).
+- **Áreas resultantes**: Grande 1.272 km², Cocorná 1.932 km², Guatapé 87 km² (dentro de Antioquia).
 
 ### Clasificación oficial de referencia (no se usó como fuente de datos, solo de metodología)
 - **Documento**: IDEAM, *"Zonificación y Codificación de Cuencas Hidrográficas"* (2013), en `Mapa/Info agua/MEMORIAS-MAPA-ZONIFICACION-HIDROGRAFICA.pdf`
 - Define los 6 niveles jerárquicos oficiales (Decreto 1640 de 2012): Área hidrográfica → Zona hidrográfica → Subzona hidrográfica → Nivel I → Nivel II → Nivel III. El mapa de la app usa esta terminología y llega hasta el nivel 3 (Subzona).
 
 ### 3. Longitud total de cada río (nacimiento a desembocadura)
-No se calcula de nuestra propia geometría — la fuente pública del punto 2 no capta el curso completo de la mayoría de los ríos fuera de Antioquia (es un dataset preliminar), así que un cálculo propio habría sido incompleto y engañoso. En su lugar, se investigó en fuentes públicas citables para 12 de los 18 ríos; ver el diccionario `LONGITUD_OFICIAL_KM` en `generate_cuencas_agua.py` para el detalle y la fuente de cada cifra.
+No se calcula de nuestra propia geometría — la fuente pública del punto 2 no capta el curso completo de la mayoría de los ríos fuera de Antioquia (es un dataset preliminar), así que un cálculo propio habría sido incompleto y engañoso. En su lugar, se investigó en fuentes públicas citables para 12 de los 19 ríos; ver el diccionario `LONGITUD_OFICIAL_KM` en `generate_cuencas_agua.py` para el detalle y la fuente de cada cifra. (Los 19 ríos sí muestran una "longitud aprox. en Antioquia" calculada de su propio trazado — ver punto 2b para Porce, San Juan de Urabá y Regla, trazados desde OpenStreetMap.)
 
 **Fuentes generales (Wikipedia/EcuRed)**: Cauca, Magdalena, Atrato, Nechí, Porce, León, Arma, Sucio, Samaná Norte.
 
@@ -161,6 +193,18 @@ No se calcula de nuestra propia geometría — la fuente pública del punto 2 no
 
 **Cuidado con nombres repetidos**: "San Juan" existe como nombre de al menos 2 ríos distintos y no relacionados en Colombia (el de Andes/Bolombolo en Antioquia, tributario del Cauca, y el mucho más largo que desemboca en el Pacífico por Chocó/Valle del Cauca). "Turbo-Currulao" vs. "Mulatos" es otro ejemplo real encontrado en este proyecto: nombres de POMCA que no coinciden 1:1 con el nombre del río/subzona que se está buscando. Verificar siempre el código de subzona IDEAM (no solo el nombre) antes de usar una cifra encontrada en una búsqueda.
 
+## ⚠️ Pendiente — validar con experto en cuencas hidrográficas de la Gobernación
+
+**El dilema, en una frase**: Grande, Cocorná y Guatapé son afluentes reconocidos que la fuente oficial de IDEAM no delimita como subzona propia — su área ya está *incluida* dentro de la subzona de su río anfitrión (Porce para Grande, Samaná Norte para Cocorná y Guatapé). Para que el mapa no los deje sin ningún área visible, se les agregó una desde otra fuente (HydroBASINS) que, al no ser la misma fuente ni el mismo criterio de delimitación que el resto del mapa, **se superpone casi al 100% con el área oficial del anfitrión** en vez de repartir el territorio entre ambos como pasa con el resto de las cuencas vecinas.
+
+**Qué se hizo mientras tanto (decisión de Sebastián, provisional)**: mostrar igual el área aproximada, pero con menos opacidad, borde punteado y una nota de advertencia visible en el panel ("Área aproximada de HydroBASINS... se superponen a propósito"), para no ocultar la superposición ni presentarla como dato oficial. Ver el detalle técnico completo en "2d. Área aproximada de Grande, Cocorná y Guatapé" más arriba.
+
+**Preguntas concretas para llevarle a un experto en cuencas de la Gobernación (o de CORANTIOQUIA/CORNARE)**:
+1. ¿Es correcto mostrar un área "aproximada y superpuesta" para un afluente que no tiene subzona propia, o es mejor dejarlo solo con línea (como estaba antes) y evitar la superposición por completo?
+2. Si se debe mostrar un área, ¿existe una fuente oficial (POMCA de CORNARE/CORANTIOQUIA, u otra) que sí delimite estos 3 afluentes como polígonos propios, recortados dentro de la subzona del anfitrión, en vez de aproximarlos con HydroBASINS?
+3. ¿Hay otros ríos del listado de 19 en la misma situación que debieran tratarse igual, por consistencia?
+4. Una vez resuelto, considerar si esta pregunta es un buen caso para justificar avanzar con el acceso a **CORANTIOQUIA** (ver "Pendiente — fuente con licencia restringida" abajo), que sí tiene 776 cuencas/quebradas nombradas y probablemente resolvería esto con datos oficiales en vez de una aproximación.
+
 ## Pendiente — fuente con licencia restringida (no usada todavía)
 
 **CORANTIOQUIA — "Cuencas Hidrográficas Principales-Antioquia"** (ArcGIS item
@@ -174,8 +218,8 @@ la Gobernación — ver conversación de julio 2026 sobre el módulo de agua.
 
 ## Cómo actualizar
 
-1. Editar el diccionario `GRUPOS` / `DESCRIPCIONES` en `generate_cuencas_agua.py` si se agrega o quita una cuenca.
-2. Volver a correr `python3 generate_cuencas_agua.py`.
+1. Editar el diccionario `GRUPOS` / `DESCRIPCIONES` en `generate_cuencas_agua.py` si se agrega o quita una cuenca. Si el río nuevo tampoco tiene línea en el webmap de IDEAM, agregarlo a `OSM_LINEAS` (nombre exacto en OpenStreetMap + bbox que lo acote).
+2. Volver a correr `python3 generate_cuencas_agua.py`. Los archivos `.cache_osm_<id>.json` (uno por río trazado desde OpenStreetMap) se cachean igual que los demás — borrarlos si se necesita forzar una nueva consulta a Overpass. `.cache_hybas_sa_lev08.zip`/`.cache_hybas_sa_lev08/` (HydroBASINS, ~30 MB) se descargan una sola vez y se reusan — requiere el paquete `pyshp` (`pip install pyshp`).
 3. Revisar visualmente en `localhost:3000/agua/mapa.html` antes de subir.
 
 Si en el futuro se obtiene la autorización de CORANTIOQUIA (o de CORNARE /

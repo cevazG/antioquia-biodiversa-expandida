@@ -1,0 +1,142 @@
+:root {
+      --color-em:       #8b4a97;
+      --color-em-dark:  #5e2c68;
+      --color-em-mid:   #a05dae;
+      --color-em-pale:  #f0e4f3;
+      --color-em-light: #b870c4;
+    }
+
+    /* ── Header ── */
+    .em-header {
+      background: var(--color-em-dark);
+      padding: calc(var(--space-sm) + env(safe-area-inset-top)) var(--space-md) var(--space-sm);
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+      position: sticky;
+      top: 0;
+      z-index: 200;
+    }
+
+    .em-header__back {
+      width: 36px; height: 36px;
+      background: rgba(255,255,255,0.15);
+      border: none; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      color: white; cursor: pointer; flex-shrink: 0;
+    }
+    .em-header__back:active { background: rgba(255,255,255,0.28); }
+
+    .em-header__text { flex: 1; }
+    .em-header__title { font-size: 1rem; font-weight: 700; color: white; }
+    .em-header__sub   { font-size: 0.72rem; color: rgba(255,255,255,0.6); }
+
+    /* ── Fondo de pantalla completa ── */
+    .app-shell--em { background: var(--color-em-dark); }
+
+    .page-bg {
+      position: fixed;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100%;
+      max-width: var(--app-max-width);
+      height: 100dvh;
+      z-index: 0;
+      pointer-events: none;
+      background: url("img/fondos/fondo-especie-del-mes.webp") center / cover no-repeat;
+    }
+
+    .em-header,
+    .em-page {
+      position: relative;
+      z-index: 1;
+    }
+
+    .em-page {
+      padding-bottom: calc(var(--bottom-bar-height) + var(--space-lg) + env(safe-area-inset-bottom));
+    }
+
+    /* ── Contenido ── */
+    .consejos-content {
+      padding: var(--space-md);
+    }
+
+    .consejos-intro-card {
+      background: white;
+      border-radius: var(--radius-lg);
+      padding: var(--space-md);
+      box-shadow: var(--shadow-sm);
+      border-left: 4px solid var(--color-em);
+      font-size: 0.875rem;
+      color: var(--color-text-medium);
+      line-height: 1.6;
+      margin-bottom: var(--space-md);
+    }
+
+    .consejos-scroll-hint {
+      font-size: 0.8125rem;
+      color: var(--color-em-dark);
+      font-weight: 600;
+      margin: 0 0 var(--space-sm);
+    }
+
+    /* ── Carrete horizontal de tips (mismo patrón que consejos-fotos.html
+       de Ampliación Jóvenes, adaptado a las variables de Antioquia Natural) ── */
+    .tip-carousel {
+      display: flex;
+      gap: 12px;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      padding: 4px 4px 14px;
+      scrollbar-width: none;
+    }
+    .tip-carousel::-webkit-scrollbar { display: none; }
+
+    .tip-card {
+      scroll-snap-align: start;
+      flex: 0 0 auto;
+      width: 80vw;
+      max-width: 300px;
+      padding: var(--space-md);
+      border-radius: var(--radius-lg);
+      background: white;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .tip-card__emoji { font-size: 1.8rem; line-height: 1; }
+    .tip-card__titulo {
+      font-weight: 700;
+      font-size: 0.9375rem;
+      color: var(--color-em-dark);
+      margin: 6px 0 4px;
+    }
+    .tip-card__texto {
+      font-size: 0.8125rem;
+      color: var(--color-text-light);
+      margin: 0 0 var(--space-sm);
+      line-height: 1.5;
+    }
+
+    .tip-example { display: flex; gap: 8px; }
+    .tip-example__box {
+      flex: 1;
+      text-align: center;
+      background: var(--color-bg);
+      border-radius: var(--radius-sm);
+      padding: 6px 4px 8px;
+    }
+    .tip-example__label { font-size: 0.66rem; font-weight: 700; margin-top: 2px; }
+    .tip-example__label--malo  { color: #c62828; }
+    .tip-example__label--bueno { color: #2e7d32; }
+
+    .consejos-extra-card {
+      background: var(--color-em-pale);
+      border-radius: var(--radius-lg);
+      padding: var(--space-md);
+      font-size: 0.8125rem;
+      color: var(--color-em-dark);
+      line-height: 1.6;
+    }
+    .consejos-extra-card strong { color: var(--color-em); }

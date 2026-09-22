@@ -1,0 +1,79 @@
+{
+  "mes": "Agosto",
+  "mesEn": "August",
+  "año": 2026,
+  "fotos": [
+    {
+      "id": "gc_2026_08_001",
+      "foto": "img/fotos/2026-08/gc_001.webp",
+      "credito": "Claudia Mazo",
+      "municipio": "Belmira",
+      "subregion": "norte",
+      "tituloEs": "La Miel, Belmira",
+      "tituloEn": "La Miel, Belmira"
+    },
+    {
+      "id": "gc_2026_08_002",
+      "foto": "img/fotos/2026-08/gc_002.webp",
+      "credito": "David Mondragón",
+      "municipio": "Tarazá",
+      "subregion": "bajo_cauca",
+      "tituloEs": "Cañón de Iglesias, Tarazá",
+      "tituloEn": "Cañón de Iglesias, Tarazá"
+    },
+    {
+      "id": "gc_2026_08_003",
+      "foto": "img/fotos/2026-08/gc_003.webp",
+      "credito": "Duvan Fuentes",
+      "municipio": "Santa Fe de Antioquia",
+      "subregion": "occidente",
+      "tituloEs": "Tonusco, Santa Fe de Antioquia",
+      "tituloEn": "Tonusco, Santa Fe de Antioquia"
+    },
+    {
+      "id": "gc_2026_08_004",
+      "foto": "img/fotos/2026-08/gc_004.webp",
+      "credito": "Esteban Muñoz Garcia",
+      "municipio": "Cisneros",
+      "subregion": "nordeste",
+      "tituloEs": "Bella Fátima, Cisneros",
+      "tituloEn": "Bella Fátima, Cisneros"
+    },
+    {
+      "id": "gc_2026_08_005",
+      "foto": "img/fotos/2026-08/gc_005.webp",
+      "credito": "José David Mendoza",
+      "municipio": "Támesis",
+      "subregion": "suroeste",
+      "tituloEs": "Corregimiento Palermo, Támesis",
+      "tituloEn": "Corregimiento Palermo, Támesis"
+    },
+    {
+      "id": "gc_2026_08_006",
+      "foto": "img/fotos/2026-08/gc_006.webp",
+      "credito": "Juan Esteban Torres Torres",
+      "municipio": "Chigorodó",
+      "subregion": "uraba",
+      "tituloEs": "Barranquillita, Chigorodó",
+      "tituloEn": "Barranquillita, Chigorodó"
+    },
+    {
+      "id": "gc_2026_08_007",
+      "foto": "img/fotos/2026-08/gc_007.webp",
+      "credito": "Lucila Berenice Garcés",
+      "municipio": "El Carmen de Viboral",
+      "subregion": "oriente",
+      "tituloEs": "La Chapa, El Carmen de Viboral",
+      "tituloEn": "La Chapa, El Carmen de Viboral"
+    },
+    {
+      "id": "gc_2026_08_008",
+      "foto": "img/fotos/2026-08/gc_008.webp",
+      "credito": "Rafael Alonso Pérez",
+      "municipio": "Itagüi",
+      "subregion": "valle_aburra",
+      "tituloEs": "El Progreso, Itagüi",
+      "tituloEn": "El Progreso, Itagüi"
+    }
+  ]
+}

@@ -1,0 +1,79 @@
+{
+  "mes": "Septiembre",
+  "mesEn": "September",
+  "año": 2026,
+  "fotos": [
+    {
+      "id": "gc_2026_09_001",
+      "foto": "img/fotos/2026-09/gc_001.webp",
+      "credito": "Julio Correa Espinal",
+      "municipio": "Santa Rosa de Osos",
+      "subregion": "norte",
+      "tituloEs": "Palestina, Santa Rosa de Osos",
+      "tituloEn": "Palestina, Santa Rosa de Osos"
+    },
+    {
+      "id": "gc_2026_09_002",
+      "foto": "img/fotos/2026-09/gc_002.webp",
+      "credito": "Johan Benjumea Montes",
+      "municipio": "Nechí",
+      "subregion": "bajo_cauca",
+      "tituloEs": "Caño Pescao, Nechí",
+      "tituloEn": "Caño Pescao, Nechí"
+    },
+    {
+      "id": "gc_2026_09_003",
+      "foto": "img/fotos/2026-09/gc_003.webp",
+      "credito": "Eliana Elena Pino",
+      "municipio": "Caramanta",
+      "subregion": "suroeste",
+      "tituloEs": "La Frisolera, Caramanta",
+      "tituloEn": "La Frisolera, Caramanta"
+    },
+    {
+      "id": "gc_2026_09_004",
+      "foto": "img/fotos/2026-09/gc_004.webp",
+      "credito": "Jorge Mario Gaviria",
+      "municipio": "El Retiro",
+      "subregion": "oriente",
+      "tituloEs": "El Carmen, El Retiro",
+      "tituloEn": "El Carmen, El Retiro"
+    },
+    {
+      "id": "gc_2026_09_005",
+      "foto": "img/fotos/2026-09/gc_005.webp",
+      "credito": "Rodolfo Trujillo",
+      "municipio": "Carepa",
+      "subregion": "uraba",
+      "tituloEs": "El Zángano, Carepa",
+      "tituloEn": "El Zángano, Carepa"
+    },
+    {
+      "id": "gc_2026_09_006",
+      "foto": "img/fotos/2026-09/gc_006.webp",
+      "credito": "Rosa Elena Trujillo",
+      "municipio": "Abriaquí",
+      "subregion": "occidente",
+      "tituloEs": "Santa Teresa, Abriaquí",
+      "tituloEn": "Santa Teresa, Abriaquí"
+    },
+    {
+      "id": "gc_2026_09_007",
+      "foto": "img/fotos/2026-09/gc_007.webp",
+      "credito": "Lorena Angarita Martínez",
+      "municipio": "Yolombó",
+      "subregion": "nordeste",
+      "tituloEs": "Santa Gestrudiz, Yolombó",
+      "tituloEn": "Santa Gestrudiz, Yolombó"
+    },
+    {
+      "id": "gc_2026_09_008",
+      "foto": "img/fotos/2026-09/gc_008.webp",
+      "credito": "Maria Elena Salazar",
+      "municipio": "Barbosa",
+      "subregion": "valle_aburra",
+      "tituloEs": "Villa Sara, Barbosa",
+      "tituloEn": "Villa Sara, Barbosa"
+    }
+  ]
+}

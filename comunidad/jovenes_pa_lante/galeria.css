@@ -2,13 +2,15 @@
       --color-jpl:      #f28e18;
       --color-jpl-dark: #6b5216; /* antes #B0942B: texto blanco sobre este fondo daba 2.95:1, no alcanza WCAG AA (4.5:1) */
       --color-jpl-pale: #fff3e0;
+      --color-jpl-text: #8f4c08; /* variante de --color-jpl oscurecida para texto sobre fondo claro, ver comunidad/jovenes_pa_lante/index.css */
     }
 
     .app-header { border-bottom: 3px solid var(--color-jpl); }
+    .app-header__title { color: var(--color-jpl-text); }
 
     /* Context bar */
     .gallery-context {
-      background: linear-gradient(135deg, var(--color-jpl-dark), var(--color-jpl));
+      background: url("img/fondos/fondo-jpl.webp") center / cover no-repeat, var(--color-jpl-dark);
       padding: var(--space-md) var(--space-md) var(--space-sm);
     }
 
@@ -124,8 +126,6 @@
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 2px;
-      background: var(--color-border);
-      padding: 2px;
       padding-bottom: calc(var(--bottom-bar-height) + var(--space-md));
     }
 
@@ -152,7 +152,7 @@
     /* Image area */
     .photo-card__img-wrap {
       aspect-ratio: 1;
-      background: #0d1f0f;
+      background: var(--color-bg);
       overflow: hidden;
       position: relative;
     }
@@ -160,7 +160,7 @@
     .photo-card__img-wrap img {
       width: 100%;
       height: 100%;
-      object-fit: contain;
+      object-fit: cover;
       display: block;
     }
 

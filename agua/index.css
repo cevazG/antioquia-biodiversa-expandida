@@ -1,19 +1,36 @@
 :root { --color-agua: #3561ab; --color-agua-dark: #1a3a6b; --color-agua-pale: #e8f0fb; }
 
-    .agua-hero {
-      background: linear-gradient(160deg, var(--color-agua-dark), var(--color-agua));
-      padding: var(--space-xl) var(--space-md) var(--space-xxl);
-      text-align: center;
-      position: relative;
-      overflow: hidden;
+    .app-header__title { color: var(--color-agua); }
+
+    .app-shell--agua {
+      background: var(--color-agua-dark);
     }
 
-    .agua-hero::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='40' viewBox='0 0 80 40'%3E%3Cpath d='M0 20 Q20 5 40 20 Q60 35 80 20' fill='none' stroke='%23ffffff08' stroke-width='2'/%3E%3C/svg%3E");
-      background-size: 80px 40px;
+    .page-bg {
+      position: fixed;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100%;
+      max-width: var(--app-max-width);
+      height: 100dvh;
+      z-index: 0;
+      pointer-events: none;
+      background: url("img/fondos/fondo-agua.webp") center / cover no-repeat;
+    }
+
+    .app-shell--agua .app-header,
+    .agua-hero,
+    .agua-content {
+      position: relative;
+      z-index: 1;
+    }
+
+    .agua-hero {
+      background: transparent;
+      padding: var(--space-xl) var(--space-md) var(--space-xxl);
+      text-align: center;
+      overflow: hidden;
     }
 
     .agua-hero__content { position: relative; z-index: 1; }
@@ -25,8 +42,8 @@
       animation: pulse 3s ease-in-out infinite;
     }
 
-    .agua-hero h1 { color: white; font-size: 1.625rem; margin-bottom: var(--space-sm); }
-    .agua-hero p  { color: rgba(255,255,255,0.8); font-size: 0.9375rem; }
+    .agua-hero h1 { color: var(--color-agua); font-size: 1.625rem; margin-bottom: var(--space-sm); }
+    .agua-hero p  { color: var(--color-agua); font-size: 0.9375rem; }
 
     .agua-content {
       padding: var(--space-lg) var(--space-md);

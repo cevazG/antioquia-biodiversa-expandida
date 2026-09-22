@@ -143,11 +143,12 @@
   transition: all var(--transition);
   text-align: center;
   text-decoration: none;
-  color: var(--color-white);
+  color: var(--color-text-dark);
   min-height: 130px;
   position: relative;
   overflow: hidden;
-  border: none;
+  background: var(--color-white);
+  border: 4px solid transparent;
   width: 100%;
 }
 
@@ -155,7 +156,7 @@
   content: '';
   position: absolute;
   inset: 0;
-  background: rgba(255,255,255,0.12);
+  background: rgba(0,0,0,0.05);
   opacity: 0;
   transition: opacity var(--transition);
 }
@@ -163,16 +164,16 @@
 .bio-card:active::before { opacity: 1; }
 .bio-card:active { transform: scale(0.96); }
 
-.bio-card--aves              { background: linear-gradient(135deg, #1565C0, #1E88E5); }
-.bio-card--anfibios_reptiles { background: linear-gradient(135deg, #00695C, #26A69A); }
-.bio-card--mariposas         { background: linear-gradient(135deg, #6A1B9A, #AB47BC); }
-.bio-card--polillas          { background: linear-gradient(135deg, #4E342E, #795548); }
-.bio-card--orquideas         { background: linear-gradient(135deg, #AD1457, #E91E63); }
-.bio-card--mamiferos          { background: linear-gradient(135deg, #E65100, #FF8F00); }
-.bio-card--animales_domesticos { background: linear-gradient(135deg, #558B2F, #8BC34A); }
-.bio-card--peces               { background: linear-gradient(135deg, #006064, #0097A7); }
-.bio-card--arboles_nativos     { background: linear-gradient(135deg, #2E7D32, #66BB6A); }
-.bio-card--hongos              { background: linear-gradient(135deg, #BF360C, #D84315); }
+.bio-card--aves              { border-color: #1565C0; }
+.bio-card--anfibios_reptiles { border-color: #00695C; }
+.bio-card--mariposas         { border-color: #6A1B9A; }
+.bio-card--polillas          { border-color: #4E342E; }
+.bio-card--orquideas         { border-color: #AD1457; }
+.bio-card--mamiferos          { border-color: #E65100; }
+.bio-card--animales_domesticos { border-color: #558B2F; }
+.bio-card--peces               { border-color: #006064; }
+.bio-card--arboles_nativos     { border-color: #2E7D32; }
+.bio-card--hongos              { border-color: #BF360C; }
 
 /* Última tarjeta impar ocupa columna completa */
 .bio-card:last-child:nth-child(odd) {
@@ -181,21 +182,20 @@
 }
 
 .bio-card__icon {
-  font-size: 2.5rem;
-  line-height: 1;
-  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
+  width: 48px;
+  height: 48px;
 }
 
 .bio-card__name {
   font-size: 1rem;
   font-weight: 700;
-  text-shadow: 0 1px 3px rgba(0,0,0,0.3);
+  color: var(--color-text-dark);
 }
 
 .bio-card__count {
   font-size: 0.75rem;
   font-weight: 500;
-  opacity: 0.85;
+  color: var(--color-text-light);
 }
 
 /* ─── TARJETAS DE ESPECIE (listado.html) ──────────────────── */

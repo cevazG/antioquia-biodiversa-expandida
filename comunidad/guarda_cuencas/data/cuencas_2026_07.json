@@ -1,0 +1,79 @@
+{
+  "mes": "Julio",
+  "mesEn": "July",
+  "año": 2026,
+  "fotos": [
+    {
+      "id": "gc_2026_07_001",
+      "foto": "img/fotos/2026-07/gc_001.webp",
+      "credito": "Ana María Montoya",
+      "municipio": "Yalí",
+      "subregion": "nordeste",
+      "tituloEs": "La Argentina, Yalí",
+      "tituloEn": "La Argentina, Yalí"
+    },
+    {
+      "id": "gc_2026_07_002",
+      "foto": "img/fotos/2026-07/gc_002.webp",
+      "credito": "Cristian Alexis Torres",
+      "municipio": "Yarumal",
+      "subregion": "norte",
+      "tituloEs": "El Cedro, Yarumal",
+      "tituloEn": "El Cedro, Yarumal"
+    },
+    {
+      "id": "gc_2026_07_003",
+      "foto": "img/fotos/2026-07/gc_003.webp",
+      "credito": "Dennis Alzate Niño",
+      "municipio": "Ciudad Bolivar",
+      "subregion": "suroeste",
+      "tituloEs": "Mochuela Bajo, Ciudad Bolivar",
+      "tituloEn": "Mochuela Bajo, Ciudad Bolivar"
+    },
+    {
+      "id": "gc_2026_07_004",
+      "foto": "img/fotos/2026-07/gc_004.webp",
+      "credito": "Federico Hoyos Puerta",
+      "municipio": "El Retiro",
+      "subregion": "oriente",
+      "tituloEs": "La Luz, El Retiro",
+      "tituloEn": "La Luz, El Retiro"
+    },
+    {
+      "id": "gc_2026_07_005",
+      "foto": "img/fotos/2026-07/gc_005.webp",
+      "credito": "Juan Guillermo López",
+      "municipio": "Zaragoza",
+      "subregion": "bajo_cauca",
+      "tituloEs": "El Pato, Zaragoza",
+      "tituloEn": "El Pato, Zaragoza"
+    },
+    {
+      "id": "gc_2026_07_006",
+      "foto": "img/fotos/2026-07/gc_006.webp",
+      "credito": "Moises de Jesús Loaiza",
+      "municipio": "Cañasgordas",
+      "subregion": "occidente",
+      "tituloEs": "Corregimiento de Cestillal, Cañasgordas",
+      "tituloEn": "Corregimiento de Cestillal, Cañasgordas"
+    },
+    {
+      "id": "gc_2026_07_007",
+      "foto": "img/fotos/2026-07/gc_007.webp",
+      "credito": "Ramon Elías Sandoval",
+      "municipio": "Necoclí",
+      "subregion": "uraba",
+      "tituloEs": "Corregimiento de Mulatos, Necoclí",
+      "tituloEn": "Corregimiento de Mulatos, Necoclí"
+    },
+    {
+      "id": "gc_2026_07_008",
+      "foto": "img/fotos/2026-07/gc_008.webp",
+      "credito": "Stephanie Ramírez Arredondo",
+      "municipio": "Copacabana",
+      "subregion": "valle_aburra",
+      "tituloEs": "Las Lomitas, Copacabana",
+      "tituloEn": "Las Lomitas, Copacabana"
+    }
+  ]
+}

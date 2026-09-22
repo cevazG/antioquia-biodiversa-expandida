@@ -15,7 +15,13 @@
       "porQueEstrategicoEn": "Acts as a natural sponge: it regulates and stores the water that supplies much of the department's aqueducts. It is also one of the ecosystems with the highest plant endemism in the country.",
       "amenazasEs": "Ampliación de la frontera agrícola y ganadera, minería, quemas y cambio climático (el páramo no puede \"subir\" más alto para escapar del calentamiento).",
       "amenazasEn": "Expansion of agriculture and cattle ranching, mining, burning, and climate change (páramo ecosystems cannot migrate further upslope to escape warming).",
-      "fotos": [],
+      "fotos": [
+        {
+          "url": "img/ecosistemas/paramo_001.webp",
+          "creditoEs": "© Claudia Mazo · Belmira",
+          "creditoEn": "© Claudia Mazo · Belmira"
+        }
+      ],
       "sitiosRepresentativos": [
         {
           "nombre": "Páramo de Belmira",
@@ -73,7 +79,13 @@
       "porQueEstrategicoEn": "Holds most of the department's biodiversity and is a huge carbon sink. It connects biological corridors between the Pacific, the Caribbean and the Magdalena valley.",
       "amenazasEs": "Deforestación por ganadería extensiva, cultivos de uso ilícito, minería ilegal y expansión de infraestructura vial.",
       "amenazasEn": "Deforestation driven by extensive cattle ranching, illicit crops, illegal mining and road infrastructure expansion.",
-      "fotos": [],
+      "fotos": [
+        {
+          "url": "img/ecosistemas/bosque_tropical_001.webp",
+          "creditoEs": "© Rodolfo Trujillo · Carepa",
+          "creditoEn": "© Rodolfo Trujillo · Carepa"
+        }
+      ],
       "sitiosRepresentativos": [
         {
           "nombre": "Selvas de Urabá (Parque Nacional Los Katíos, zona de amortiguación)",
@@ -181,7 +193,13 @@
       "porQueEstrategicoEn": "They are natural fish nurseries, buffer floods, and serve as essential stopover sites for migratory birds traveling between North and South America.",
       "amenazasEs": "Drenaje para ganadería y agricultura, sedimentación, contaminación por vertimientos y desconexión de su río o quebrada de origen.",
       "amenazasEn": "Drainage for cattle ranching and agriculture, sedimentation, pollution from discharges, and disconnection from their source river or stream.",
-      "fotos": [],
+      "fotos": [
+        {
+          "url": "img/ecosistemas/humedales_001.webp",
+          "creditoEs": "© Juan Ernesto Caviria · Nechí",
+          "creditoEn": "© Juan Ernesto Caviria · Nechí"
+        }
+      ],
       "sitiosRepresentativos": [
         {
           "nombre": "Ciénagas del Magdalena Medio antioqueño",
@@ -215,7 +233,13 @@
       "porQueEstrategicoEn": "They are a nursery for fish and crustaceans on which local artisanal fishing depends, protect the coast from erosion and wave action, and store carbon very efficiently (blue carbon).",
       "amenazasEs": "Tala para expansión urbana y acuícola, contaminación por residuos sólidos y alteración de los flujos de agua dulce que los alimentan.",
       "amenazasEn": "Clearing for urban and aquaculture expansion, solid-waste pollution, and disruption of the freshwater flows that feed them.",
-      "fotos": [],
+      "fotos": [
+        {
+          "url": "img/ecosistemas/manglares_001.webp",
+          "creditoEs": "© Santiago Paternina · Turbo",
+          "creditoEn": "© Santiago Paternina · Turbo"
+        }
+      ],
       "sitiosRepresentativos": [
         {
           "nombre": "Manglares de la Ensenada de Rionegro",
@@ -241,7 +265,23 @@
       "porQueEstrategicoEn": "Supports artisanal fishing for several coastal communities and provides transit and feeding habitat for marine species, including sea turtles in some areas.",
       "amenazasEs": "Erosión costera, contaminación por plásticos, sobrepesca y desarrollo turístico sin planificación.",
       "amenazasEn": "Coastal erosion, plastic pollution, overfishing and unplanned tourism development.",
-      "fotos": [],
+      "fotos": [
+        {
+          "url": "img/ecosistemas/playas_mar_001.webp",
+          "creditoEs": "© Paula Rosa Gil Zapata · Necoclí",
+          "creditoEn": "© Paula Rosa Gil Zapata · Necoclí"
+        },
+        {
+          "url": "img/ecosistemas/playas_mar_002.webp",
+          "creditoEs": "© Paula Rosa Gil Zapata · Necoclí",
+          "creditoEn": "© Paula Rosa Gil Zapata · Necoclí"
+        },
+        {
+          "url": "img/ecosistemas/playas_mar_003.webp",
+          "creditoEs": "© Paula Rosa Gil Zapata · Turbo",
+          "creditoEn": "© Paula Rosa Gil Zapata · Turbo"
+        }
+      ],
       "sitiosRepresentativos": [
         {
           "nombre": "Playas de Necoclí",

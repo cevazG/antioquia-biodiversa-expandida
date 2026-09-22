@@ -10,8 +10,12 @@ Fuentes (ver también Mapa/Info agua/FUENTES_DATOS_AGUA.md):
      (Fernando Salazar Holguín, item ArcGIS Online 57edccf4f4474e1ebbbada737c307bfb)
      https://www.arcgis.com/sharing/rest/content/items/57edccf4f4474e1ebbbada737c307bfb/data?f=json
      Nota: el propio item indica "no es información oficial" (versión preliminar).
+  3. Trazado de línea para Porce, San Juan de Urabá, Regla y Grande, y área
+     aproximada de Grande/Cocorná/Guatapé: OpenStreetMap (Overpass API) y
+     HydroBASINS (HydroSHEDS/WWF) — ver OSM_LINEAS y HYBAS_IDS más abajo.
 
-Requiere: shapely (pyproj NO es necesario — se usa la fórmula esférica de
+Requiere: shapely, pyshp (lectura pura en Python de shapefiles, sin GDAL/PROJ
+— pyproj tampoco es necesario para lo demás: se usa la fórmula esférica de
 Web Mercator directamente porque en este entorno pyproj no encuentra su base
 de datos PROJ).
 
@@ -21,11 +25,12 @@ Escribe: agua/data/cuencas.json
 
 import json
 import math
+import urllib.parse
 import urllib.request
 from pathlib import Path
 
-from shapely.geometry import shape, mapping
-from shapely.ops import transform, unary_union
+from shapely.geometry import LineString, shape, mapping
+from shapely.ops import linemerge, transform, unary_union
 
 ROOT = Path(__file__).parent
 OUT_PATH = ROOT / "agua" / "data" / "cuencas.json"
@@ -104,6 +109,90 @@ def get_layer(webmap_data, title):
             return l["featureCollection"]["layers"][0]
 
 
+OVERPASS_URL = "https://overpass-api.de/api/interpreter"
+
+
+def fetch_osm_line(osm_name, bbox, cache_name):
+    """Trazado de río desde OpenStreetMap (© colaboradores de OpenStreetMap,
+    licencia ODbL) — solo para los ríos que el webmap de IDEAM no trae
+    trazados (ver OSM_LINEAS). bbox = (south, west, north, east) en WGS84,
+    elegido a mano alrededor de cada río para no mezclar otro río homónimo
+    (Colombia repite nombres como "San Juan")."""
+    cache = ROOT / f".cache_osm_{cache_name}.json"
+    if cache.exists():
+        data = json.loads(cache.read_text())
+    else:
+        south, west, north, east = bbox
+        query = (
+            f'[out:json][timeout:100];'
+            f'(way["waterway"~"river|stream"]["name"="{osm_name}"]'
+            f'({south},{west},{north},{east}););out tags geom;'
+        )
+        req = urllib.request.Request(
+            OVERPASS_URL,
+            data=urllib.parse.urlencode({"data": query}).encode(),
+            headers={"User-Agent": "AntioquiaNaturalResearch/1.0 (contact: sguzmand@gmail.com)"},
+        )
+        with urllib.request.urlopen(req, timeout=110) as r:
+            data = json.loads(r.read())
+        cache.write_text(json.dumps(data))
+
+    lines = []
+    for e in data.get("elements", []):
+        if e.get("type") != "way":
+            continue
+        if e.get("tags", {}).get("name") != osm_name:
+            continue
+        geom = e.get("geometry")
+        if not geom:
+            continue
+        coords = [(pt["lon"], pt["lat"]) for pt in geom]
+        if len(coords) < 2:
+            continue
+        lines.append(LineString(coords))
+    return lines
+
+
+HYDROBASINS_LEV08_URL = (
+    "https://data.hydrosheds.org/file/hydrobasins/standard/hybas_sa_lev08_v1c.zip"
+)
+
+
+def fetch_hybas_geometry(hybas_id):
+    """Polígono de cuenca de HydroBASINS (HydroSHEDS/WWF, nivel 8, Suramérica)
+    para un HYBAS_ID puntual — usado solo para Grande/Cocorná/Guatapé, que no
+    tienen subzona propia en la fuente de IDEAM (ver HYBAS_IDS). Se lee con
+    pyshp (puro Python) en vez de geopandas/fiona porque este entorno no
+    encuentra la base de datos PROJ que esas librerías necesitan al abrir un
+    .shp — HydroBASINS ya viene en WGS84 así que no hace falta reproyectar.
+    IMPORTANTE: el HYBAS_ID de cada río se buscó a mano una sola vez (el
+    polígono, de los que tocaba la línea ya trazada del río, con más overlap
+    con esa línea) — no hay una forma automática de re-derivarlo aquí."""
+    import shapefile
+    import zipfile
+
+    zip_path = ROOT / ".cache_hybas_sa_lev08.zip"
+    shp_dir = ROOT / ".cache_hybas_sa_lev08"
+    if not zip_path.exists():
+        req = urllib.request.Request(
+            HYDROBASINS_LEV08_URL,
+            headers={"User-Agent": "AntioquiaNaturalResearch/1.0 (contact: sguzmand@gmail.com)"},
+        )
+        with urllib.request.urlopen(req, timeout=180) as r:
+            zip_path.write_bytes(r.read())
+    if not shp_dir.exists():
+        shp_dir.mkdir(parents=True, exist_ok=True)
+        with zipfile.ZipFile(zip_path) as z:
+            z.extractall(shp_dir)
+
+    shp_file = next(shp_dir.glob("*.shp"))
+    sf = shapefile.Reader(str(shp_file))
+    for sr in sf.iterShapeRecords():
+        if sr.record["HYBAS_ID"] == hybas_id:
+            return shape(sr.shape.__geo_interface__)
+    return None
+
+
 # Cuencas principales: nombre final -> (códigos SZH a fusionar, clave en la capa de ríos)
 GRUPOS = {
     # 2502 tiene solo 2.1% de su área en Antioquia, pero es justo el tramo que
@@ -130,6 +219,10 @@ GRUPOS = {
     "Río León":             ([1201], "León"),
     "Río Mulatos":          ([1202], "Mulatos"),
     "Río San Juan de Urabá": ([1203], None),
+    # Agregado septiembre 2026: cubre el hueco visible en el mapa entre las
+    # cuencas del Porce y el Samaná Norte (Vegachí, Yolombó, Maceo — sur de
+    # Yalí). No tiene línea propia en la fuente (mismo caso que el Porce).
+    "Río Regla":            ([2310], None),
 }
 
 # id, nombre, descripción ES/EN, subregiones, líneas de río extra sin polígono propio
@@ -182,6 +275,9 @@ DESCRIPCIONES = {
     "Río San Juan de Urabá": ("san_juan_uraba", "Río costero del norte de Urabá, cerca del municipio de San Juan de Urabá.",
                                 "Coastal river in northern Urabá, near the municipality of San Juan de Urabá.",
                                 ["uraba"], "Caribe", "Caribe - Urabá"),
+    "Río Regla": ("regla", "Drena parte del Nordeste y el Magdalena Medio antioqueños, en jurisdicción de Vegachí, Yolombó y Maceo.",
+                  "Drains part of the Nordeste and Magdalena Medio regions of Antioquia, in the jurisdiction of Vegachí, Yolombó and Maceo.",
+                  ["nordeste", "magdalena_medio"], "Magdalena-Cauca", "Medio Magdalena"),
     "Río Grande": ("grande", "Abastece el embalse Riogrande II, una de las principales fuentes de agua potable del Valle de Aburrá.",
                    "Supplies the Riogrande II reservoir, one of the main drinking-water sources for the Aburrá Valley.",
                    ["norte", "valle_aburra"], "Magdalena-Cauca", "Nechí"),
@@ -229,6 +325,68 @@ SOLO_LINEA = {
     "Río Grande": "Grande",
     "Río Guatapé": "Guatapé",
 }
+
+# Ríos con polígono de área pero sin trazado en el webmap de IDEAM (linea_key
+# None en GRUPOS) — se traza desde OpenStreetMap en su lugar (ver
+# fetch_osm_line). bbox elegido a mano alrededor de cada río para evitar
+# nombres duplicados en otras partes de Colombia.
+# nombre -> (nombre en OSM, (south, west, north, east))
+OSM_LINEAS = {
+    # SZH 2310 ("R. Regla" en el webmap de IDEAM, nota "ó San Bernardo") —
+    # el nombre oficial en el Decreto 1640/memorias IDEAM es "Río San Bartolo
+    # y otros directos al Magdalena Medio". En OpenStreetMap el cauce
+    # principal está trazado como "Río San Bartolomé" (variante del mismo
+    # nombre), confirmado por ser, por lejos, el curso con más longitud
+    # trazada dentro del polígono de esta subzona.
+    "Río Regla": ("Río San Bartolomé", (6.35, -75.20, 7.05, -74.30)),
+    # "San Juan" se repite varias veces en Colombia (ver GRUPOS, comentario
+    # de Río San Juan (Suroeste)) — bbox acotado a la zona costera de Urabá
+    # para no mezclarlo con el San Juan del suroeste antioqueño.
+    "Río San Juan de Urabá": ("Río San Juan", (8.05, -76.65, 8.85, -76.10)),
+    # La línea nacional "Porce / Nechí" del webmap de IDEAM traza el tramo
+    # bajo (Nechí), no el propio Porce (ver GRUPOS) — en OpenStreetMap sí
+    # existe un trazado propio con el nombre "Río Porce".
+    "Río Porce": ("Río Porce", (5.90, -75.80, 7.55, -74.60)),
+    # La línea "Grande" del webmap de IDEAM (usada antes, ver SOLO_LINEA)
+    # resultó estar mal — coincide casi exactamente (0-110 m de distancia)
+    # con el propio trazado del Porce entre Gómez Plata y Amalfi/Anorí, en
+    # vez de seguir el curso real del Río Grande (que nace cerca de Santa
+    # Rosa de Osos/Belmira y desemboca en el embalse Riogrande II). Se
+    # detectó porque, al agregar el trazado propio de Porce, los dos ríos
+    # se veían idénticos en el mapa — encontrado por Sebastián al alternar
+    # el chip de Río Porce y notar que la línea visible no cambiaba
+    # (septiembre 2026). Reemplazado por el trazado real de OpenStreetMap.
+    "Río Grande": ("Río Grande", (6.30, -75.65, 7.35, -74.80)),
+}
+
+# Área aproximada para los 3 ríos SOLO_LINEA (sin subzona propia en IDEAM):
+# HYBAS_ID de HydroBASINS nivel 8 (Suramérica) cuyo polígono coincide con la
+# línea ya trazada de cada río. Se superpone a propósito con el área oficial
+# del río anfitrión que ya la incluye (ver areaEsAproximada en mapa.js —
+# opacidad más baja + borde punteado, y nota explicativa en el panel).
+HYBAS_IDS = {
+    "Río Grande": (6080097460, "Río Porce"),
+    "Río Cocorná": (6080102390, "Río Samaná Norte"),
+    "Río Guatapé": (6080102230, "Río Samaná Norte"),
+}
+AREA_NOTA_ES = (
+    "Área aproximada de HydroBASINS (HydroSHEDS/WWF), no de la fuente oficial de IDEAM — "
+    "este afluente no tiene código de subzona propio, así que su drenaje ya está incluido "
+    "dentro del área oficial de {host} (se superponen a propósito)."
+)
+AREA_NOTA_EN = (
+    "Approximate area from HydroBASINS (HydroSHEDS/WWF), not from IDEAM's official source — "
+    "this tributary has no subzone code of its own, so its drainage is already included "
+    "within {host}'s official area (the overlap is intentional)."
+)
+
+LONGITUD_NOTA["Río Porce"] = (
+    "La línea trazada (~138 km, fuente OpenStreetMap) cubre solo el tramo "
+    "con nombre \"Río Porce\" propiamente dicho (desde la salida del Valle "
+    "de Aburrá hasta la confluencia con el Nechí). La longitud oficial de "
+    "226 km corresponde al río completo, incluyendo el tramo aguas arriba "
+    "donde se llama Río Aburrá/Medellín."
+)
 
 
 def main():
@@ -313,11 +471,27 @@ def main():
     # subzonas no separa como unidad propia a esta escala)
     for nombre, linea_key in SOLO_LINEA.items():
         cid, desc_es, desc_en, subregiones, area_h, zona_h = DESCRIPCIONES[nombre]
-        if linea_key not in lines_by_name:
-            print(f"AVISO: sin línea para {nombre}")
-            continue
-        merged_line = unary_union(lines_by_name[linea_key])
         antioquia_buf = antioquia.buffer(0.005)
+
+        if nombre in OSM_LINEAS:
+            # Preferido sobre la línea del webmap de IDEAM para este río — ver
+            # comentario en OSM_LINEAS (línea del webmap resultó incorrecta).
+            osm_name, bbox = OSM_LINEAS[nombre]
+            raw_lines = fetch_osm_line(osm_name, bbox, cid)
+            if not raw_lines:
+                print(f"AVISO: sin línea en OSM para {nombre}")
+                continue
+            merged_line = linemerge(unary_union(raw_lines))
+            outside_line = None
+        else:
+            if linea_key not in lines_by_name:
+                print(f"AVISO: sin línea para {nombre}")
+                continue
+            merged_line = unary_union(lines_by_name[linea_key])
+            outside_line = merged_line.difference(antioquia_buf)
+            if not outside_line.is_empty:
+                outside_line = keep_connected_parts(outside_line, antioquia)
+
         clipped_line = merged_line.intersection(antioquia_buf)
         if clipped_line.is_empty:
             continue
@@ -334,12 +508,42 @@ def main():
             "geometry_linea": mapping(simplified_line),
             "longitud_km_aprox": round(line_length_km(mapping(simplified_line))),
         }
-        outside_line = merged_line.difference(antioquia_buf)
-        if not outside_line.is_empty:
-            outside_line = keep_connected_parts(outside_line, antioquia)
         if outside_line is not None and not outside_line.is_empty:
             entry["geometry_linea_fuera"] = mapping(outside_line.simplify(0.005, preserve_topology=True))
+
+        if nombre in HYBAS_IDS:
+            hybas_id, host = HYBAS_IDS[nombre]
+            basin_geom = fetch_hybas_geometry(hybas_id)
+            if basin_geom is not None:
+                clipped_area = basin_geom.intersection(antioquia)
+                if not clipped_area.is_empty:
+                    simplified_area = clipped_area.simplify(0.003, preserve_topology=True)
+                    area_km2 = clipped_area.area * 111 * 111 * math.cos(math.radians(clipped_area.centroid.y))
+                    entry["geometry_area"] = mapping(simplified_area)
+                    entry["area_km2_aprox"] = round(area_km2)
+                    entry["areaEsAproximada"] = True
+                    entry["area_nota"] = AREA_NOTA_ES.format(host=host)
+                    entry["area_notaEn"] = AREA_NOTA_EN.format(host=host)
+
         out.append(entry)
+
+    print("Trazando desde OpenStreetMap los ríos sin línea en el webmap de IDEAM...")
+    antioquia_buf = antioquia.buffer(0.005)
+    for entry in out:
+        if entry["nombre"] not in OSM_LINEAS or "geometry_linea" in entry:
+            continue
+        osm_name, bbox = OSM_LINEAS[entry["nombre"]]
+        raw_lines = fetch_osm_line(osm_name, bbox, entry["id"])
+        if not raw_lines:
+            print(f"AVISO: sin línea en OSM para {entry['nombre']}")
+            continue
+        merged_line = linemerge(unary_union(raw_lines))
+        clipped_line = merged_line.intersection(antioquia_buf)
+        if clipped_line.is_empty:
+            continue
+        simplified_line = clipped_line.simplify(0.001, preserve_topology=True)
+        entry["geometry_linea"] = mapping(simplified_line)
+        entry["longitud_km_aprox"] = round(line_length_km(entry["geometry_linea"]))
 
     for entry in out:
         if entry["nombre"] in LONGITUD_OFICIAL_KM:

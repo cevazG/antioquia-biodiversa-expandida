@@ -79,8 +79,15 @@ function addCuencaToMap(cuenca) {
   const entry = { area: null, linea: null, lineaFuera: null, lineaHit: null, lineaFueraHit: null };
 
   if (cuenca.geometry_area) {
+    // areaEsAproximada: afluentes sin subzona propia en IDEAM (Grande,
+    // Cocorná, Guatapé) — su "área" viene de HydroBASINS y se superpone a
+    // propósito con la del río anfitrión que ya la incluye oficialmente.
+    // Opacidad más baja + borde punteado para que no se confunda con un
+    // área oficial nivel 3, ver openSheet() para la nota explicativa.
     entry.area = L.geoJSON(cuenca.geometry_area, {
-      style: { color, weight: 1, fillColor: color, fillOpacity: 0.22 }
+      style: cuenca.areaEsAproximada
+        ? { color, weight: 1, dashArray: '5 4', fillColor: color, fillOpacity: 0.10 }
+        : { color, weight: 1, fillColor: color, fillOpacity: 0.22 }
     });
     entry.area.on('click', () => openSheet(cuenca, 'area'));
     entry.area.addTo(map);
@@ -273,8 +280,11 @@ function openSheet(cuenca, tipoToque) {
           : `<br><span class="cuenca-sheet__pendiente">${lang === 'en' ? 'Total length: no reliable public source found yet' : 'Longitud total: no se encontró todavía una fuente pública confiable'}</span>` + notaExtra)
       : '';
   } else {
+    const notaArea = cuenca.areaEsAproximada
+      ? `<br><span class="cuenca-sheet__pendiente">⚠️ ${lang === 'en' ? (cuenca.area_notaEn || cuenca.area_nota) : cuenca.area_nota}</span>`
+      : '';
     meta.innerHTML = cuenca.area_km2_aprox
-      ? `<span>${lang === 'en' ? 'Approx. area in Antioquia' : 'Área aprox. en Antioquia'}: <strong>${cuenca.area_km2_aprox.toLocaleString(lang === 'en' ? 'en-US' : 'es-CO')} km²</strong></span>`
+      ? `<span>${lang === 'en' ? 'Approx. area in Antioquia' : 'Área aprox. en Antioquia'}: <strong>${cuenca.area_km2_aprox.toLocaleString(lang === 'en' ? 'en-US' : 'es-CO')} km²</strong></span>` + notaArea
       : '';
   }
 

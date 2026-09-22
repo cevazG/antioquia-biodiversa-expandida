@@ -247,7 +247,7 @@ Antioquia Natural/
 │
 ├── agua/                              ← Módulo de recursos hídricos
 │   ├── index.html                     ← Landing: stats interactivos (subregiones/ríos/cuencas → botones)
-│   ├── mapa.html                      ← Mapa Leaflet de cuencas hidrográficas (18 ríos)
+│   ├── mapa.html                      ← Mapa Leaflet de cuencas hidrográficas (19 ríos)
 │   ├── subregion.html                 ← Fuentes/cuencas por subregión
 │   ├── acueductos.html                ← Módulo aparte: cuencas que abastecen acueductos municipales
 │   ├── ecosistemas.html               ← Landing de Ecosistemas Estratégicos (grid de 7 tipos)
@@ -646,7 +646,7 @@ Bug presente en las galerías de JPL y Guarda Cuencas: el `<div class="photo-car
 
 ### Badge de ubicación → enlace al mapa de cuencas (Guarda Cuencas)
 
-El badge 📍 (subregión) en `comunidad/guarda_cuencas/galeria.js` — tanto en la tarjeta como en el modal — ahora es un `<a href="../../agua/mapa.html">`, no un `<span>` informativo. Cambió también su estilo de rectángulo suave (`--radius-sm`, tag informativo) a píldora con borde (`--radius-full` + `border`, `.badge-subregion--link`) — sigue la convención del proyecto de diferenciar visualmente lo tocable de lo puramente informativo (ver "Convención visual: chip interactivo vs. tag informativo"). El link en la tarjeta lleva `onclick="event.stopPropagation()"` porque la tarjeta entera también es clickeable (abre el modal) — sin eso, tocar el badge dispararía ambas acciones.
+El badge 📍 muestra la **subregión** de la foto (`foto.subregion`, uno de los 9 ids internos) — no hay dato de cuenca/río específico en esta foto (ver nota de esquema simplificado arriba). En `comunidad/guarda_cuencas/galeria.js` — tarjeta y modal — ahora es un `<a href="../../agua/subregion.html?subregion=${foto.subregion}&tipo=cuencas">`, no un `<span>` informativo; usa el deep-link que ya existía en el proyecto (mismo patrón que `biodiversidad/subregion.html`) en vez de mandar al mapa general sin filtrar. Cambió también su estilo de rectángulo suave (`--radius-sm`, tag informativo) a píldora con borde (`--radius-full` + `border`, `.badge-subregion--link`) — sigue la convención del proyecto de diferenciar visualmente lo tocable de lo puramente informativo (ver "Convención visual: chip interactivo vs. tag informativo"). El link en la tarjeta lleva `onclick="event.stopPropagation()"` porque la tarjeta entera también es clickeable (abre el modal) — sin eso, tocar el badge dispararía ambas acciones.
 
 ---
 
@@ -760,7 +760,7 @@ Estructura: `biodiversidad/img/species/<grupo>/<familia>/<spXXX_slug>/<slug>_001
 
 ## Módulo Agua — Cuencas Hídricas
 
-`agua/mapa.html` muestra las cuencas hidrográficas principales de Antioquia (18 ríos) en un solo mapa Leaflet, con su área de drenaje y el trazado del río, coloreadas por zona hidrográfica. `agua/acueductos.html` es un módulo aparte (cuencas que abastecen acueductos municipales, no confundir con el de cuencas hidrográficas).
+`agua/mapa.html` muestra las cuencas hidrográficas principales de Antioquia (19 ríos) en un solo mapa Leaflet, con su área de drenaje y el trazado del río, coloreadas por zona hidrográfica. `agua/acueductos.html` es un módulo aparte (cuencas que abastecen acueductos municipales, no confundir con el de cuencas hidrográficas).
 
 ### Clasificación oficial (Decreto 1640 de 2012, IDEAM)
 
@@ -777,9 +777,19 @@ Los niveles 1 y 2 no son cuencas adicionales — son categorías que agrupan las
 
 **Por qué se queda en nivel 3**: los niveles 4-6 requieren el detalle de las Corporaciones Autónomas Regionales (CORANTIOQUIA/CORNARE/CORPOURABA), pendiente de autorización — ver `Mapa/Info agua/FUENTES_DATOS_AGUA.md`.
 
-### Por qué estos 18 ríos
+### Por qué estos 19 ríos
 
-**No es un ranking objetivo único** — es una selección curada que mezcla continuidad con la lista previa del módulo, área real medida (donde la fuente lo permitió, 15 de 18) y reconocimiento regional (los otros 3: Cocorná, Grande, Guatapé, sin área medible en esta fuente). Detalle completo, con el ranking por tamaño y la respuesta sugerida si preguntan "¿por qué estos y no otros?", en `Mapa/Info agua/FUENTES_DATOS_AGUA.md`.
+**No es un ranking objetivo único** — es una selección curada que mezcla continuidad con la lista previa del módulo, área real medida (donde la fuente lo permitió, 16 de 19) y reconocimiento regional (los otros 3: Cocorná, Grande, Guatapé, sin área medible en esta fuente). Detalle completo, con el ranking por tamaño y la respuesta sugerida si preguntan "¿por qué estos y no otros?", en `Mapa/Info agua/FUENTES_DATOS_AGUA.md`.
+
+**Septiembre 2026 — se agregó el Río Regla (19º río):** Sebastián notó en el mapa una zona sin cobertura al sur de Yalí (cerca de Vegachí). Investigación con Playwright (conversión exacta píxel→coordenada vía la API de Leaflet, hit-testing nativo de SVG) confirmó que el centroide de Yalí sí caía dentro del Porce, pero un punto real ~3 km al sur, sin ningún río de los 18 encima, sí era un hueco genuino. Se encontró en la fuente IDEAM una subzona hidrográfica no usada hasta entonces, "Río Regla" (SZH 2310, zona Medio Magdalena), con área real dentro de Antioquia de 2.530 km² dentro de la jurisdicción de Vegachí, Yolombó y Maceo — tamaño comparable a 6 de los 18 ríos ya existentes. Se agregó como entrada 19 en `agua/data/cuencas.json` y se replicó en `generate_cuencas_agua.py` (`GRUPOS`/`DESCRIPCIONES`) para que la regeneración futura sea reproducible.
+
+**Los 19 ríos ya tienen trazado de línea (no solo área).** Tres ríos (Porce, San Juan de Urabá y el propio Regla) no tenían línea propia en el webmap de IDEAM — Porce porque la única línea nacional con ese nombre en realidad traza el tramo del Nechí (ver comentario en `GRUPOS`), y San Juan de Urabá/Regla porque esa fuente simplemente no los trazó. Se completaron con datos de **OpenStreetMap** (© colaboradores de OpenStreetMap, licencia ODbL — ya se cita en el pie de mapa junto a CARTO): `generate_cuencas_agua.py` tiene ahora una función `fetch_osm_line()` que consulta la API Overpass por nombre y bbox (diccionario `OSM_LINEAS`), evitando el problema de nombres de río duplicados en Colombia (ej. "San Juan" aparece más de una vez). Detalle: para el Río Regla, la línea se trazó como **"Río San Bartolomé"** — el nombre oficial completo de esa subzona en las memorias del IDEAM (Decreto 1640) es *"Río San Bartolo y otros directos al Magdalena Medio"*; "Regla" es el nombre corto usado solo en el webmap de origen (con nota "ó San Bernardo"). No se cambió el nombre público del río en la app (se mantiene "Río Regla", consistente con el resto de la fuente), pero vale la pena tenerlo presente si alguien pregunta por qué el trazado se llama distinto internamente. Ver detalle completo en `Mapa/Info agua/FUENTES_DATOS_AGUA.md`.
+
+**Bug real encontrado y corregido de paso: la línea de Río Grande estaba mal — coincidía con la del Porce.** Sebastián notó, alternando el chip "Río Porce" con dos capturas de pantalla, que la línea visible en el mapa no cambiaba al apagarlo. Investigación con Playwright (comparación de rutas DOM/SVG antes y después del toggle, no solo visual) confirmó que el propio toggle de Porce sí funcionaba correctamente — el problema era que la línea preexistente de **Río Grande** (fuente: webmap de IDEAM, dato que ya existía antes de esta sesión) estaba a 0-110 m de distancia del trazado del Porce en todo su recorrido entre Gómez Plata y Amalfi/Anorí, es decir, prácticamente la misma línea duplicada bajo otro nombre y color idéntico (ambos "Nechí" = teal). El Río Grande real (nace cerca de Santa Rosa de Osos/Belmira, alimenta el embalse Riogrande II) está bastante más al oeste. Se re-trazó desde OpenStreetMap igual que los 3 ríos anteriores — ahora Grande y Porce se ven como líneas claramente distintas y el toggle cambia visiblemente el mapa. `Río Grande` se agregó también a `OSM_LINEAS` en `generate_cuencas_agua.py` (con comentario explicando el hallazgo), y el bucle de `SOLO_LINEA` ahora prefiere OpenStreetMap sobre el webmap de IDEAM cuando el río está en ese diccionario.
+
+**Área aproximada para Grande, Cocorná y Guatapé (los 3 ríos sin subzona propia).** Al corregir la línea de Grande, Sebastián notó que su línea quedaba "flotando" sin color de fondo si se apagaba el área del Porce (su río anfitrión) — porque estos 3 ríos nunca tuvieron polígono de área propio (solo línea, ver "Criterio de selección" en `FUENTES_DATOS_AGUA.md`). Se investigó agregar un área aproximada con **HydroBASINS** (HydroSHEDS/WWF, nivel 8, Suramérica — mismo linaje de datos que ya cita el webmap de IDEAM como base). Los polígonos encontrados resultaron superponerse 99-100% con el área oficial del río anfitrión (Porce para Grande, Samaná Norte para Cocorná y Guatapé) — hidrológicamente correcto, porque la Subzona Hidrográfica oficial del anfitrión ya incluye a estos afluentes por definición. Sebastián pidió agregarlas de todos modos, con menos opacidad y borde punteado para diferenciarlas visualmente del área del anfitrión (`areaEsAproximada: true` en `cuencas.json`, estilo condicional en `addCuencaToMap()` de `agua/mapa.js`, y una nota de advertencia (`area_nota`/`area_notaEn`) en el panel de información explicando la superposición intencional). Reproducible vía `HYBAS_IDS` + `fetch_hybas_geometry()` en `generate_cuencas_agua.py` (lee el shapefile de HydroBASINS con `pyshp`, puro Python, sin GDAL/PROJ — mismo motivo que con la fórmula esférica de Web Mercator).
+
+**⚠️ Esto es una solución provisional, pendiente de validar con un experto en cuencas hidrográficas de la Gobernación** — la superposición al 100% con el área del anfitrión es un dilema real (¿mostrar un área aproximada y superpuesta, o dejarlo solo con línea?), no un error de cálculo. Preguntas concretas para llevarle al experto, y el detalle completo, en la sección **"⚠️ Pendiente — validar con experto en cuencas hidrográficas de la Gobernación"** de `Mapa/Info agua/FUENTES_DATOS_AGUA.md`.
 
 ### Datos y regeneración
 
@@ -1136,10 +1146,15 @@ Detalle completo, hallazgo por hallazgo, en el propio documento de respuesta.
 - [x] **Segunda entrega de fondos "ajustados"** para Biodiversidad, Agua, Guardacuencas, Especie del Mes y JPL
 - [x] **`.bio-card__name` siempre verde oscuro**, independiente del color del borde
 - [x] **Fix: emoji de respaldo tapaba la foto cargada** en galerías JPL y Guarda Cuencas (faltaba `display:none` por defecto)
-- [x] **Badge de ubicación → enlace al mapa de cuencas** en la galería de Guarda Cuencas, con estilo de chip interactivo
+- [x] **Badge de ubicación → enlace a las cuencas de esa subregión** en la galería de Guarda Cuencas, con estilo de chip interactivo
+- [x] **19º río agregado al mapa de cuencas: Río Regla** — hueco real detectado al sur de Yalí (cerca de Vegachí), cubierto por la subzona IDEAM "Río Regla" (SZH 2310, 2.530 km² dentro de Antioquia), ver "Por qué estos 19 ríos" arriba
+- [x] **Trazado de línea agregado para Porce, San Juan de Urabá y Regla** (los 3 únicos de los 19 sin línea en el webmap de IDEAM) — completados con datos de OpenStreetMap vía Overpass API, ver nota arriba
+- [x] **Fix: línea de Río Grande duplicaba la del Porce** (0-110 m de distancia en todo su recorrido, dato preexistente del webmap de IDEAM) — re-trazada desde OpenStreetMap, ver nota arriba
+- [x] **Área aproximada para Grande, Cocorná y Guatapé** (antes solo tenían línea) — polígonos de HydroBASINS, renderizados con menor opacidad y borde punteado por superponerse a propósito con el área de su río anfitrión, ver nota arriba
 - [ ] Ampliar a 150+ especies con fotos y descripciones bilingües *(154 alcanzadas — evaluar seguir creciendo el catálogo o cerrar esta línea)*
 - [ ] Consultar Libro Rojo de Colombia para estados IUCN reales en Lepidoptera
 - [ ] **Proceso de build para el frontend** — script que hashea el contenido de cada `.css`/`.js` y reescribe las referencias en los HTML, para eliminar el `?v=N` manual (ver incidente 2026-07-31 arriba). Netlify pasaría a servir una carpeta `dist/` en vez de la raíz del repo. No requiere bundler/framework — mantiene la arquitectura vanilla actual.
+- [ ] **Validar con experto en cuencas hidrográficas de la Gobernación** el área aproximada (HydroBASINS) de Grande/Cocorná/Guatapé — se superpone 99-100% con el área de su río anfitrión, ver sección dedicada en `FUENTES_DATOS_AGUA.md`
 - [ ] Dominio oficial `.gov.co`
 - [ ] PWA con modo offline (Service Workers)
 - [ ] Analytics de uso

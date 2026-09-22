@@ -100,13 +100,13 @@ const SUBREGION_NAMES = {
 
         card.innerHTML = `
           <div class="photo-card__img-wrap">
-            <img src="${foto.foto}" alt="${titulo}" loading="lazy" onerror="this.style.display='none'">
+            <img src="${foto.foto}" alt="${titulo}" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
             <div class="photo-card__placeholder">💧</div>
           </div>
           <div class="photo-card__info">
             <div class="photo-card__title">${titulo}</div>
             <div class="photo-card__badges">
-              <span class="badge-subregion">📍 ${subNombre}</span>
+              <a href="../../agua/mapa.html" class="badge-subregion badge-subregion--link" onclick="event.stopPropagation()" aria-label="Ver cuencas en el mapa">📍 ${subNombre}</a>
             </div>
             <div class="photo-card__credit">
               <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M6 20v-2a6 6 0 0112 0v2"/></svg>
@@ -137,7 +137,7 @@ const SUBREGION_NAMES = {
 
       document.getElementById('modal-title').textContent = titulo;
       document.getElementById('modal-badges').innerHTML = `
-        <span class="badge-subregion">📍 ${subNombre}</span>
+        <a href="../../agua/mapa.html" class="badge-subregion badge-subregion--link" aria-label="Ver cuencas en el mapa">📍 ${subNombre}</a>
         <span class="badge-municipio">🏘️ ${foto.municipio}</span>`;
       const descEl = document.getElementById('modal-desc');
       descEl.textContent = desc || '';

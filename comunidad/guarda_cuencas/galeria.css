@@ -125,7 +125,7 @@
     .photo-card__placeholder {
       position: absolute;
       inset: 0;
-      display: flex;
+      display: none;
       align-items: center;
       justify-content: center;
       font-size: 4rem;
@@ -159,6 +159,27 @@
       font-weight: 700;
       padding: 4px 10px;
       border-radius: var(--radius-sm);
+    }
+
+    /* A diferencia del tag informativo de arriba, este SÍ navega
+       (lleva al mapa de cuencas) — por eso usa la forma de chip
+       interactivo: píldora + borde, en vez de rectángulo suave. */
+    .badge-subregion--link {
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+      border-radius: var(--radius-full);
+      border: 1.5px solid var(--color-gc);
+      background: var(--color-white);
+      text-decoration: none;
+      cursor: pointer;
+      transition: transform 0.15s ease, background 0.15s ease;
+    }
+
+    .badge-subregion--link:active {
+      transform: scale(0.96);
+      background: var(--color-gc);
+      color: var(--color-white);
     }
 
     .photo-card__credit {

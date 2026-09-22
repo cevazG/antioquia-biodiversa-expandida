@@ -101,6 +101,8 @@ Imágenes en `<módulo>/img/fondos/*.webp` (JPG del diseñador convertidos con `
 
 **Cualquier elemento opaco (tarjetas blancas, barras de filtro sticky) debe declarar su propio `background`** — si no, queda transparente y deja ver la foto detrás donde no corresponde.
 
+**`<link rel="preload" as="image">` obligatorio en el `<head>`, antes del CSS de la página.** Un `background-image` en CSS se descubre tarde (el navegador no lo pide hasta terminar de parsear el CSSOM), así que sin preload se ve primero el color sólido de respaldo de `.app-shell--<modulo>` y la foto aparece después, de golpe — más notorio en la primera visita sin caché. El preload adelanta la descarga de la foto al mismo momento que el CSS/JS, en paralelo. Cada una de las 9 pantallas con `.page-bg` tiene el suyo, apuntando exactamente a la imagen que usa esa página (ver tabla arriba).
+
 **Títulos de hero: color de marca sólido, no blanco.** Al pasar de gradiente CSS a foto real, el texto blanco quedó ilegible contra las zonas claras de las fotos nuevas. Se cambió a texto de color sólido (ya no depende de que el fondo sea oscuro):
 
 | Módulo | Color | Hex |
@@ -264,9 +266,9 @@ Antioquia Natural/
     │   ├── galeria.js                 ← Carousel: dots + tap + swipe; getImgs() compatibilidad foto/fotos
     │   └── data/
     │       ├── municipios.json          ← 90 municipios con coords y subregión
-    │       ├── fotos_biodiversidad.json ← Índice de versiones/meses (id, titulo/mes, archivo, count)
+    │       ├── fotos_biodiversidad.json ← Índice de versiones/meses (id, titulo/mes, archivo, count) — solo "v0" activo
     │       ├── fotos_v0.json            ← Primera Versión: 17 fotos (campo foto:string — legado)
-    │       └── fotos_2026_06.json       ← Junio 2026 (campo foto:string — legado, 2 entradas)
+    │       └── fotos_2026_05.json       ← Mayo 2026 — datos de prueba, NUNCA estuvo en el índice, no se publica
     └── guarda_cuencas/               ← Programa Guarda Cuencas
         ├── index.html                 ← Landing con acceso a galería
         ├── galeria.html               ← Galería foto completa sin recortar (no 16:9) + archivo mensual
@@ -630,6 +632,8 @@ La barra de contexto ("Primera Versión" / mes activo, arriba del grid) usa como
 
 **Logo de Jóvenes pa' Lante** reemplazado en `comunidad/jovenes_pa_lante/img/logo/logo_jovenes_pa_lante.png` (único lugar que lo usa: `index.html`) — cambió de proporción rectangular (691×389) a cuadrada (1080×1080); el CSS lo muestra a `width:190px; height:auto`, así que ahora ocupa 190×190 en vez de 190×107.
 
+**Meses Junio y Julio 2026 eliminados** (septiembre 2026) — eran subidas de prueba durante el arranque del programa, no contenido curado: nombres tipo "sin_nombre"/"Cajas de cemento", descripciones tipo "lorem ipsum"/"no tiene aun". Se quitaron del índice (`fotos_biodiversidad.json`), se borraron `fotos_2026_06.json`/`fotos_2026_07.json` y sus fotos (`img/fotos/bio/2026-06/`, `img/fotos/bio/2026-07/`). Solo queda **"Primera Versión" (`v0`, 17 fotos)** como contenido real. La desaparición se propaga sola al feed unificado (`biodiversidad/feed.html`), que lee el mismo índice.
+
 ---
 
 ## iNaturalist — panel de estadísticas JPL
@@ -926,6 +930,12 @@ Modal que aparece **una sola vez** en la primera visita:
 - Checkbox **no pre-marcado** — el botón "Aceptar · Accept" arranca deshabilitado
 - Al aceptar: `localStorage.setItem('ab_privacy_accepted', '1')` → modal no vuelve a aparecer
 - Botón en `--color-green-light` (#3bbb6a) — verde del sistema de diseño oficial
+
+### Selector de idioma — texto verde, sin país, bandera UK (septiembre 2026)
+
+Título, subtítulo, "Elige tu idioma", pie de página y las tarjetas de Español/English estaban en blanco (o vidrio translúcido `rgba(255,255,255,0.12)` + blur, pensado para el gradiente oscuro de antes) — ilegibles sobre el nuevo fondo fotográfico claro. Todo pasó a `var(--color-green-dark)` sólido; las tarjetas de idioma ahora son fondo blanco opaco + borde verde (mismo lenguaje visual que `.bio-card`), no vidrio translúcido.
+
+De paso: se quitó el subtítulo de país bajo cada idioma (`.lang-option__native`: "Colombia · Colombia" / "United States · EE.UU", clase ahora eliminada del CSS por quedar sin uso) y la bandera de English pasó de 🇺🇸 a 🇬🇧 — no se usa la bandera específica de Inglaterra (tag sequence `🏴󠁧󠁢󠁥󠁮󠁧󠁿`) porque se renderiza mal o no aparece en varios celulares; 🇬🇧 es la opción confiable multiplataforma.
 
 ---
 

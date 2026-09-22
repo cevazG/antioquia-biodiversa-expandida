@@ -130,6 +130,12 @@ Rediseño de septiembre 2026: `.bio-card` pasó de relleno sólido de color (gra
 
 **La cuadrícula de ecosistemas (`agua/ecosistemas.html`, `#eco-grid`) reutiliza `.bio-card` pero conserva el relleno de color original**, con texto blanco fijado explícitamente vía `#eco-grid .bio-card` — no se le aplicó el rediseño de borde.
 
+`.bio-card__name` (el nombre del grupo, ej. "Mariposas") es siempre verde oscuro (`--color-green-dark`), independiente del color del borde de cada tarjeta — antes usaba `--color-text-dark` (gris casi negro).
+
+### Fondos "ajustados" (segunda entrega, septiembre 2026)
+
+El diseñador entregó una segunda versión de los fondos de Biodiversidad, Agua, Guardacuencas, Especie del Mes y Jóvenes pa' Lante en `Diseño/Exportados APP/fondos/Fondos ajustados/` (mismas dimensiones 1170×2532, mismos nombres de archivo de salida) — reemplazan directamente los `.webp` existentes, sin tocar CSS/HTML. Fondo de Comunidad (landing) y el de "Explorar" en biodiversidad.html **no se actualizaron** en esta ronda (el diseñador no entregó versión ajustada de esos dos).
+
 ---
 
 ## Estructura de carpetas
@@ -634,6 +640,14 @@ La barra de contexto ("Primera Versión" / mes activo, arriba del grid) usa como
 
 **Meses Junio y Julio 2026 eliminados** (septiembre 2026) — eran subidas de prueba durante el arranque del programa, no contenido curado: nombres tipo "sin_nombre"/"Cajas de cemento", descripciones tipo "lorem ipsum"/"no tiene aun". Se quitaron del índice (`fotos_biodiversidad.json`), se borraron `fotos_2026_06.json`/`fotos_2026_07.json` y sus fotos (`img/fotos/bio/2026-06/`, `img/fotos/bio/2026-07/`). Solo queda **"Primera Versión" (`v0`, 17 fotos)** como contenido real. La desaparición se propaga sola al feed unificado (`biodiversidad/feed.html`), que lee el mismo índice.
 
+### Fix: emoji de respaldo (`.photo-card__placeholder`) tapaba la foto ya cargada
+
+Bug presente en las galerías de JPL y Guarda Cuencas: el `<div class="photo-card__placeholder">` (💧 en Guarda Cuencas, el emoji de familia en JPL) es `position:absolute; inset:0` sobre la miniatura, pensado para mostrarse **solo si la foto falla al cargar** — pero le faltaba `display:none` por defecto, así que se veía siempre, encima de la foto, incluso cuando cargaba bien. Corregido en ambas: `display:none` por defecto en el CSS, y el `onerror` de la `<img>` ahora también hace `this.nextElementSibling.style.display='flex'` para mostrarlo solo en el caso real de fallo. El modal de detalle de ambas galerías ya estaba bien implementado (no tenía este bug).
+
+### Badge de ubicación → enlace al mapa de cuencas (Guarda Cuencas)
+
+El badge 📍 (subregión) en `comunidad/guarda_cuencas/galeria.js` — tanto en la tarjeta como en el modal — ahora es un `<a href="../../agua/mapa.html">`, no un `<span>` informativo. Cambió también su estilo de rectángulo suave (`--radius-sm`, tag informativo) a píldora con borde (`--radius-full` + `border`, `.badge-subregion--link`) — sigue la convención del proyecto de diferenciar visualmente lo tocable de lo puramente informativo (ver "Convención visual: chip interactivo vs. tag informativo"). El link en la tarjeta lleva `onclick="event.stopPropagation()"` porque la tarjeta entera también es clickeable (abre el modal) — sin eso, tocar el badge dispararía ambas acciones.
+
 ---
 
 ## iNaturalist — panel de estadísticas JPL
@@ -1116,6 +1130,13 @@ Detalle completo, hallazgo por hallazgo, en el propio documento de respuesta.
 - [x] **Feed (`feed.html`) por defecto en cuadrícula**, no carrete
 - [x] **Galería de JPL rediseñada** al criterio visual del feed (recorte a cuadrado, fondo blanco) + fondo fotográfico en la barra de contexto + logo JPL actualizado
 - [x] **Inventario de emojis de la app** entregado al diseñador en Excel (`Diseño/Referencias para diseñador/Antioquia_Natural_Inventario_Emojis.xlsx`) — candidatos a ilustrarse como íconos propios
+- [x] **Pantalla de idioma**: texto de blanco a verde oscuro, quita subtítulo de país, bandera de English a 🇬🇧
+- [x] **`<link rel="preload" as="image">`** en las 9 pantallas con fondo fotográfico, evita el flash del color de respaldo
+- [x] **JPL: meses Junio y Julio 2026 eliminados** (subidas de prueba, no contenido curado) — solo queda "Primera Versión"
+- [x] **Segunda entrega de fondos "ajustados"** para Biodiversidad, Agua, Guardacuencas, Especie del Mes y JPL
+- [x] **`.bio-card__name` siempre verde oscuro**, independiente del color del borde
+- [x] **Fix: emoji de respaldo tapaba la foto cargada** en galerías JPL y Guarda Cuencas (faltaba `display:none` por defecto)
+- [x] **Badge de ubicación → enlace al mapa de cuencas** en la galería de Guarda Cuencas, con estilo de chip interactivo
 - [ ] Ampliar a 150+ especies con fotos y descripciones bilingües *(154 alcanzadas — evaluar seguir creciendo el catálogo o cerrar esta línea)*
 - [ ] Consultar Libro Rojo de Colombia para estados IUCN reales en Lepidoptera
 - [ ] **Proceso de build para el frontend** — script que hashea el contenido de cada `.css`/`.js` y reescribe las referencias en los HTML, para eliminar el `?v=N` manual (ver incidente 2026-07-31 arriba). Netlify pasaría a servir una carpeta `dist/` en vez de la raíz del repo. No requiere bundler/framework — mantiene la arquitectura vanilla actual.
@@ -1145,4 +1166,4 @@ Commits en estándar **Conventional Commits** (`feat:`, `fix:`, `docs:`, `refact
 ---
 
 *Proyecto desarrollado con Claude Code — Anthropic*
-*Última actualización: 2026-09-21*
+*Última actualización: 2026-09-22*

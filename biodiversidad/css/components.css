@@ -189,7 +189,7 @@
 .bio-card__name {
   font-size: 1rem;
   font-weight: 700;
-  color: var(--color-text-dark);
+  color: var(--color-green-dark);
 }
 
 .bio-card__count {

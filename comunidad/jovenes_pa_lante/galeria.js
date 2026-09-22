@@ -225,7 +225,7 @@ const SUBREGION_NAMES = {
         card.setAttribute('aria-label', `${nombre} · ${subNombre}`);
         card.innerHTML = `
           <div class="photo-card__img-wrap">
-            <img src="${getImgs(foto)[0] || ''}" alt="${nombre}" loading="lazy" onerror="this.style.display='none'">
+            <img src="${getImgs(foto)[0] || ''}" alt="${nombre}" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
             <div class="photo-card__placeholder">${emoji}</div>
             <span class="photo-card__iucn-overlay badge-iucn badge-iucn--${foto.iucn}">${foto.iucn}</span>
             ${foto.endemica ? `<span class="photo-card__endemic-overlay">🫓 Endémica</span>` : ''}

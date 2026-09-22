@@ -167,7 +167,7 @@
     .photo-card__placeholder {
       position: absolute;
       inset: 0;
-      display: flex;
+      display: none;
       align-items: flex-end;
       justify-content: flex-start;
       padding: 7px;

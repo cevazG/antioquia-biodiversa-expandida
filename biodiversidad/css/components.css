@@ -867,20 +867,19 @@
   align-items: center;
   gap: var(--space-md);
   padding: var(--space-lg);
-  background: rgba(255,255,255,0.12);
-  border: 2px solid rgba(255,255,255,0.25);
+  background: var(--color-white);
+  border: 2px solid var(--color-green-dark);
   border-radius: var(--radius-lg);
   cursor: pointer;
   transition: all var(--transition);
   width: 100%;
-  color: white;
+  color: var(--color-green-dark);
   font-family: var(--font-primary);
   text-align: left;
-  backdrop-filter: blur(4px);
 }
 
 .lang-option:active {
-  background: rgba(255,255,255,0.25);
+  background: var(--color-green-pale);
   transform: scale(0.97);
 }
 
@@ -893,7 +892,7 @@
 
 .lang-option__native {
   font-size: 0.875rem;
-  color: rgba(255,255,255,0.95);
+  color: var(--color-green-dark);
 }
 
 /* ─── SCROLL TOP BUTTON ─────────────────────────────────────── */

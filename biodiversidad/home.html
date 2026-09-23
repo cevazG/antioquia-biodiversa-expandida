@@ -9,7 +9,7 @@
   <link rel="stylesheet" href="css/components.css?v=21">
   <link rel="stylesheet" href="css/animations.css?v=4">
   <link rel="preload" as="image" href="img/fondos/fondo-biodiversidad.webp">
-  <link rel="stylesheet" href="css/home.css?v=11">
+  <link rel="stylesheet" href="css/home.css?v=13">
   <link rel="prefetch" href="data/species.json" as="fetch">
   <link rel="prefetch" href="../data/translations.json" as="fetch">
 </head>
@@ -34,8 +34,7 @@
       <div class="home-hero__content">
         <!-- Espacio reservado para el logo propio de Antioquia Natural (lo entrega el diseñador) -->
         <div class="home-hero__logo-placeholder" aria-hidden="true">
-          <span class="home-hero__logo-placeholder__icon">🌿</span>
-          <span class="home-hero__logo-placeholder__label" data-i18n="logo_placeholder_label">Logo Antioquia Natural — próximamente</span>
+          <img class="home-hero__logo-placeholder__icon" src="img/icons/biodiversidad-general.svg" alt="">
         </div>
         <h1 data-i18n="app_name">Antioquia Natural</h1>
         <p data-i18n="home_tagline">Explora el patrimonio natural y social del departamento</p>
@@ -64,7 +63,7 @@
 
       <!-- Módulo Biodiversidad -->
       <a href="biodiversidad.html" class="module-card module-card--bio ripple-container anim-fade-in-up">
-        <div class="module-card__icon">🌿</div>
+        <div class="module-card__icon"><img src="img/icons/biodiversidad-general.svg" alt="" width="36" height="36"></div>
         <div class="module-card__text">
           <h2 data-i18n="module_bio_name">Biodiversidad (especies insignia)</h2>
           <p data-i18n="module_bio_desc">Aves, anfibios, mariposas, orquídeas y más por subregión</p>
@@ -74,7 +73,7 @@
 
       <!-- Módulo Agua -->
       <a href="../agua/index.html" class="module-card module-card--agua ripple-container anim-fade-in-up">
-        <div class="module-card__icon">💧</div>
+        <div class="module-card__icon"><img src="img/icons/cuenca-rio.svg" alt="" width="36" height="36"></div>
         <div class="module-card__text">
           <h2 data-i18n="module_agua_name">Agua</h2>
           <p data-i18n="module_agua_desc">Red hídrica, fuentes y cuencas abastecedoras de Antioquia</p>
@@ -84,7 +83,7 @@
 
       <!-- Módulo Comunidad -->
       <a href="../comunidad/index.html" class="module-card module-card--com ripple-container anim-fade-in-up">
-        <div class="module-card__icon">🎓</div>
+        <div class="module-card__icon"><img src="img/icons/jovenes-pa-lante.svg" alt="" width="36" height="36"></div>
         <div class="module-card__text">
           <h2 data-i18n="module_com_name">Comunidad</h2>
           <p data-i18n="module_com_desc">Jóvenes pa' Lante — 90 municipios beneficiados</p>

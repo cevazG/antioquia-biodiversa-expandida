@@ -12,7 +12,7 @@
 }
 
 .app-shell--eco {
-  background: #1a3a6b;
+  background: var(--color-bg);
 }
 
 .page-bg {

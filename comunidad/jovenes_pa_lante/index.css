@@ -12,7 +12,7 @@
 
     /* Hero */
     .app-shell--jpl {
-      background: #B0942B;
+      background: var(--color-bg);
     }
 
     .page-bg {

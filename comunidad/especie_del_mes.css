@@ -33,7 +33,7 @@
 
     /* ── Hero ── */
     .app-shell--em {
-      background: var(--color-em-dark);
+      background: var(--color-bg);
     }
 
     .page-bg {

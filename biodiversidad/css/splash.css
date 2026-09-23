@@ -27,17 +27,22 @@ html, body {
   overflow: hidden;
 }
 
+/* Visible desde ya (con el poster, ver splash.html) en vez de partir en
+   opacity:0 esperando el video — eso era lo que dejaba ver el verde de
+   fondo mientras el .mp4 (mucho más pesado que el poster) terminaba de
+   llegar. El fade sigue existiendo, pero ahora es solo de SALIDA
+   (.is-hidden, ver goToFeed en splash.js). */
 .splash-video {
   width: 100%;
   height: 100%;
   object-fit: cover;
   display: block;
-  opacity: 0;
+  opacity: 1;
   transition: opacity 0.5s ease;
 }
 
-.splash-video.is-visible {
-  opacity: 1;
+.splash-video.is-hidden {
+  opacity: 0;
 }
 
 .splash-skip {

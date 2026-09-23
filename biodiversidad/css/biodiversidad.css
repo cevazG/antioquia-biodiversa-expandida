@@ -1,5 +1,5 @@
 	/* Fondo de pantalla completa (mismo patrón que home.html/listado.html) */
-	.app-shell--bio { background: var(--color-green-dark); }
+	.app-shell--bio { background: var(--color-bg); }
 
 	.page-bg {
 	  position: fixed;

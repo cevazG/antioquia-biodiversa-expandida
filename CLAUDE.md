@@ -866,6 +866,20 @@ Video fuente: `Diseño/Exportados APP/Animación/Animación Inicio 1.mp4` (720×
   1. **Respaldo manual garantizado** (funciona en cualquier navegador): al salir de `splash.html`, el video y el botón "Saltar" se desvanecen (0.5s) hacia el verde institucional de fondo; `feed.html` detecta que viene de `splash.html` vía `document.referrer` (clase `from-splash` agregada por un `<script>` inline muy temprano en el `<head>`, antes de que cargue el CSS, para evitar flash de contenido) y arranca en opacidad 0, con fade-in (0.5s) tras un `requestAnimationFrame`. No afecta la navegación normal al feed (bottom bar, etc.), que sigue apareciendo de inmediato.
   2. **Mejora nativa donde el navegador la soporte**: `@view-transition { navigation: auto; }` declarado en `splash.css` y `feed.css` (debe estar en ambos documentos). Se intentó usar esto como mecanismo *principal* pero Sebastián reportó corte abrupto — la API es poco confiable capturando el snapshot de un `<video>` reproduciéndose en algunos navegadores. Se dejó como mejora silenciosa adicional, no como el mecanismo del que depende el efecto.
 
+## Flash de color de fondo al entrar a un módulo (septiembre 2026)
+
+Sebastián notó que al entrar por primera vez (caché frío) a Agua y Comunidad se alcanzaba a ver el color de fondo sólido antes de que cargara la foto. Investigando, resultó ser un bug de **toda la app, no solo esas dos pantallas**: cada `.app-shell--*` tiene un color de `background` de respaldo (visible mientras `.page-bg` con la foto termina de cargar), y esos colores databan de la época de fondos con degradado CSS — antes de que se instalaran las fotos actuales de "fondos ajustados" (casi blancas, `~rgb(242,242,242)` de promedio en las 6 revisadas). El resultado: un salto brusco de un color de marca oscuro/saturado a una foto casi blanca.
+
+Se corrigieron los **11 módulos** con este desfase, todos a `var(--color-bg)` (`#F4F8F5`, el mismo neutro que ya usa `body` en `main.css` — no un color nuevo): `biodiversidad/css/biodiversidad.css`, `listado.css`, `home.css`, `feed.css` (`.app-shell--bio`/`--listado`/`--feed`), `agua/index.css` (`.app-shell--agua`), `agua/ecosistemas.css` (`.app-shell--eco`), y en `comunidad/`: `index.css` (`--com`), `especie_del_mes.css` y `consejos_fotos.css` (`--em`), `guarda_cuencas/index.css` (`--gc`), `jovenes_pa_lante/index.css` (`--jpl`).
+
+## Splash: poster + prefetch del video (septiembre 2026)
+
+Sebastián reportó que la animación de bienvenida tardaba en arrancar y se veía el fondo verde institucional bastante tiempo antes de que apareciera el video. Causa: el `<video>` partía en `opacity:0` y solo se revelaba (`is-visible`) cuando el evento `loadeddata` confirmaba que había datos del `.mp4` (557 KB) — en conexiones no instantáneas, eso deja el fondo verde visible varios cientos de ms o más.
+
+- **Poster** (`biodiversidad/img/fondos/intro-poster.webp`, primer frame del video, WebP q35 → 100 KB): se muestra instantáneo vía el atributo `poster` del `<video>` mientras el `.mp4` completo sigue bajando — mucho más liviano que el video, así que aparece casi de inmediato.
+- El `<video>` ahora **parte visible por defecto** (`opacity:1`) en vez de esperar `loadeddata` — el fade-in-desde-invisible ya no hace falta porque el poster cubre ese momento. El fade que queda es solo el de **salida** (`.is-hidden`, ver "Animación de bienvenida" arriba).
+- **Prefetch del video desde la pantalla de idioma** (`biodiversidad/index.html`, `<link rel="prefetch" href="video/intro.mp4">`, no `preload` — es para la *siguiente* navegación, no le compite recursos a esta pantalla) — empieza a bajar en segundo plano mientras el usuario lee/elige idioma, antes de siquiera llegar a `splash.html`.
+
 ## Caché HTTP — por qué alternar entre pantallas se sentía lento (septiembre 2026)
 
 Sebastián notó que navegar Inicio ↔ Bio (`feed.html` ↔ `biodiversidad.html`) se sentía lento cada vez, "como si necesitara cargar todo de nuevo". Causa real: **no había prácticamente ningún caché HTTP activo**, ni en local ni en producción.

@@ -11,12 +11,6 @@
   const video = document.getElementById('splash-video');
   const skip  = document.getElementById('splash-skip');
 
-  // Fade-in: recién hay un primer frame disponible, se revela el video
-  // en vez de aparecer de golpe.
-  video.addEventListener('loadeddata', () => {
-    requestAnimationFrame(() => video.classList.add('is-visible'));
-  }, { once: true });
-
   let done = false;
 
   // Fade-out antes de navegar: @view-transition (splash.css/feed.css) da
@@ -29,7 +23,7 @@
     if (done) return;
     done = true;
     clearTimeout(fallback);
-    video.classList.remove('is-visible');
+    video.classList.add('is-hidden');
     skip.classList.add('is-hidden');
     setTimeout(() => { window.location.href = 'feed.html'; }, 500);
   }
@@ -65,7 +59,7 @@
       'css/main.css?v=6',
       'css/components.css?v=21',
       'css/animations.css?v=4',
-      'css/feed.css?v=6',
+      'css/feed.css?v=7',
       'js/nav.js?v=3',
       'js/app.js?v=7',
       'js/feed.js?v=3',

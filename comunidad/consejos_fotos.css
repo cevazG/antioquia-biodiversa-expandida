@@ -32,7 +32,7 @@
     .em-header__sub   { font-size: 0.72rem; color: rgba(255,255,255,0.6); }
 
     /* ── Fondo de pantalla completa ── */
-    .app-shell--em { background: var(--color-em-dark); }
+    .app-shell--em { background: var(--color-bg); }
 
     .page-bg {
       position: fixed;

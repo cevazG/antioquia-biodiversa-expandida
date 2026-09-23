@@ -27,11 +27,18 @@ html, body {
   overflow: hidden;
 }
 
-/* Visible desde ya (con el poster, ver splash.html) en vez de partir en
-   opacity:0 esperando el video — eso era lo que dejaba ver el verde de
-   fondo mientras el .mp4 (mucho más pesado que el poster) terminaba de
-   llegar. El fade sigue existiendo, pero ahora es solo de SALIDA
-   (.is-hidden, ver goToFeed en splash.js). */
+/* Entrada: fade-in corto (0.3s) que arranca solo con la carga de la
+   página (no espera datos del video, a diferencia de la versión anterior
+   que sí esperaba 'loadeddata' — eso era lo que dejaba ver el verde de
+   fondo mientras el .mp4, mucho más pesado que el poster, terminaba de
+   llegar). Como el poster ya está visible desde ya, este fade es puro
+   detalle estético, no una espera. Salida: transition + .is-hidden, ver
+   goToFeed en splash.js. */
+@keyframes splash-fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
 .splash-video {
   width: 100%;
   height: 100%;
@@ -39,6 +46,7 @@ html, body {
   display: block;
   opacity: 1;
   transition: opacity 0.5s ease;
+  animation: splash-fade-in 0.3s ease;
 }
 
 .splash-video.is-hidden {

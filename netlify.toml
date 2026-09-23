@@ -58,15 +58,79 @@
   [headers.values]
     Cache-Control = "public, max-age=31536000"
 
+# agua/ y comunidad/ no separan css/js en subcarpeta propia (van sueltos en
+# la raíz del módulo o de cada submódulo) — el * de Netlify sí cruza "/",
+# así que "/comunidad/*.css" también cubre comunidad/guarda_cuencas/*.css,
+# comunidad/jovenes_pa_lante/*.css, etc. Misma cache-busting ?v=N que arriba.
+[[headers]]
+  for = "/agua/*.css"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000"
+
+[[headers]]
+  for = "/agua/*.js"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000"
+
+[[headers]]
+  for = "/comunidad/*.css"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000"
+
+[[headers]]
+  for = "/comunidad/*.js"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000"
+
 [[headers]]
   for = "/comunidad/jovenes_pa_lante/img/*"
   [headers.values]
     Cache-Control = "public, max-age=2592000"   # 30 días — fotos cambian mensualmente
 
 [[headers]]
+  for = "/comunidad/guarda_cuencas/img/*"
+  [headers.values]
+    Cache-Control = "public, max-age=2592000"   # 30 días — fotos cambian mensualmente
+
+[[headers]]
+  for = "/comunidad/img/*"
+  [headers.values]
+    Cache-Control = "public, max-age=2592000"   # 30 días — íconos/fondos que se reemplazan en el mismo nombre de archivo (no 1 año, para no dejar una versión vieja pegada mucho tiempo)
+
+[[headers]]
+  for = "/agua/img/*"
+  [headers.values]
+    Cache-Control = "public, max-age=2592000"   # 30 días, mismo motivo que /comunidad/img/*
+
+[[headers]]
   for = "/biodiversidad/img/species/*"
   [headers.values]
     Cache-Control = "public, max-age=31536000"
+
+[[headers]]
+  for = "/biodiversidad/img/*"
+  [headers.values]
+    Cache-Control = "public, max-age=2592000"   # 30 días — íconos/fondos, mismo motivo que arriba (species/* ya cubierto aparte con 1 año)
+
+# El JSON de datos de cada módulo puede actualizarse sin cambiar de URL
+# (a diferencia de css/js, no lleva ?v=N) — 1h es el mismo criterio que ya
+# regía para /data/*.json (traducciones), extendido a los que faltaban:
+# éste es el hueco que hacía sentir lenta la navegación Inicio ↔ Bio,
+# species.json no tenía ningún Cache-Control explícito.
+[[headers]]
+  for = "/biodiversidad/data/*.json"
+  [headers.values]
+    Cache-Control = "public, max-age=3600"
+
+[[headers]]
+  for = "/agua/data/*.json"
+  [headers.values]
+    Cache-Control = "public, max-age=3600"
+
+[[headers]]
+  for = "/comunidad/*.json"
+  [headers.values]
+    Cache-Control = "public, max-age=3600"
 
 [[headers]]
   for = "/data/*.json"

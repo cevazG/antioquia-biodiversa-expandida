@@ -70,7 +70,18 @@ app.use('/api/docs',   swaggerUi.serve, swaggerUi.setup(swaggerDoc));
 
 // Sirve el frontend estático desde la raíz del proyecto
 // extensions: ['html'] permite acceder a /biodiversidad/home sin .html
-app.use(express.static(path.join(__dirname, '../../'), { extensions: ['html'] }));
+// maxAge: sin esto, express.static manda Cache-Control: max-age=0 y el
+// navegador revalida (o re-descarga) cada asset en cada navegación —
+// notable al alternar entre pantallas (ver CLAUDE.md "Caché HTTP"). 1h es
+// consistente con la política ya usada para JSON en netlify.toml/producción;
+// durante desarrollo activo, un hard refresh (Cmd+Shift+R) sigue forzando
+// la versión más reciente.
+app.use(express.static(path.join(__dirname, '../../'), {
+  extensions: ['html'],
+  maxAge: '1h',
+  etag: true,
+  lastModified: true,
+}));
 
 const PORT = process.env.PORT || 3000;
 

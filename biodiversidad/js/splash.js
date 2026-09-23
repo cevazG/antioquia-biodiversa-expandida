@@ -66,18 +66,32 @@
       'css/components.css?v=21',
       'css/animations.css?v=4',
       'css/feed.css?v=6',
-      'js/data.js?v=10',
       'js/nav.js?v=3',
       'js/app.js?v=7',
-      'js/feed-data.js?v=1',
       'js/feed.js?v=3',
       'data/species.json',
+      '../comunidad/jovenes_pa_lante/data/fotos_biodiversidad.json',
+      '../comunidad/guarda_cuencas/data/fotos_cuencas.json',
     ];
     files.forEach(url => {
       fetch(url, { cache: 'force-cache' }).catch(() => {});
     });
 
-    const img = new Image();
-    img.src = 'img/fondos/fondo-biodiversidad.webp';
+    const bg = new Image();
+    bg.src = 'img/fondos/fondo-biodiversidad.webp';
+
+    // Lo más pesado del feed no es el HTML/CSS/JS sino las fotos en sí —
+    // se arma el mismo FeedStore que usará feed.html y se precargan las
+    // primeras miniaturas (las que salen con loading="eager" en la
+    // cuadrícula, la vista por defecto), para que ya estén en caché del
+    // navegador cuando el feed las pida.
+    FeedStore.init().then(() => {
+      FeedStore.getItems({ source: 'all' }).slice(0, 9).forEach(item => {
+        const url = item.imgs && item.imgs[0];
+        if (!url) return;
+        const img = new Image();
+        img.src = url;
+      });
+    }).catch(() => {});
   }
 }());

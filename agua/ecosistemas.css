@@ -46,9 +46,10 @@
 .eco-hero__content { position: relative; z-index: 1; }
 
 .eco-hero__emoji {
-  font-size: 2.5rem;
+  width: 48px;
+  height: 48px;
   display: block;
-  margin-bottom: var(--space-sm);
+  margin: 0 auto var(--space-sm);
   filter: drop-shadow(0 4px 12px rgba(0,0,0,.25));
 }
 

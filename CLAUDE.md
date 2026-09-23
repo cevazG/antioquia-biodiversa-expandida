@@ -846,6 +846,10 @@ Sebastián pidió reemplazar los emojis de 3 pantallas más. Resultado:
 
 Con esto, de los 4 pendientes de la tanda anterior solo siguen sin resolver: el 🚧 "Próximamente", los badges chicos texto+emoji (📍🏘️🌊), y los 6 íconos de estado IUCN (sigue pendiente decidir si reemplazan el badge de texto completo o no).
 
+### Tercera tanda: `biodiversidad/home.html` y `agua/ecosistemas.html`
+- **`biodiversidad/home.html`**: 🌿 del placeholder del logo propio (pendiente de diseño) y 🌿 de la tarjeta "Módulo Biodiversidad" → ambos `img/icons/biodiversidad-general.svg` (el escudo con árbol/hoja/ave, mismo usado en las hojas decorativas de la pantalla de idioma). 💧 "Módulo Agua" → `img/icons/cuenca-rio.svg` (copia local desde `agua/`, más acorde a "Red hídrica" que el ícono de Guarda Cuencas). 🎓 "Módulo Comunidad" → `img/icons/jovenes-pa-lante.svg` (copia local desde `comunidad/`, la tarjeta menciona específicamente Jóvenes pa' Lante). De paso, a pedido de Sebastián, se quitó el label "Logo Antioquia Natural — próximamente" del placeholder del hero y se agrandó el ícono (28px → 48px).
+- **`agua/ecosistemas.html`**: 🏞️ del hero → `img/icons/ecosistemas.svg` (ya vivía en `agua/img/icons/`, es el mismo que usa la tarjeta "Ecosistemas Estratégicos" en `agua/index.html`, no hizo falta copiarlo).
+
 ## Ecosistemas — fix de tamaño de ícono y halo de contraste (septiembre 2026)
 
 Dos bugs encontrados por Sebastián en las 7 tarjetas de `agua/ecosistemas.js` (`#eco-grid .bio-card`) después de la tanda de íconos:

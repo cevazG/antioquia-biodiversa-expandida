@@ -37,7 +37,7 @@ html.from-splash.splash-fade-in .app-shell--feed {
    el header queda transparente; .feed-sources y la barra de búsqueda se
    dejan con su fondo blanco sólido porque necesitan buen contraste con
    sus controles interactivos. */
-.app-shell--feed { background: var(--color-green-dark); }
+.app-shell--feed { background: var(--color-bg); }
 
 .page-bg {
   position: fixed;

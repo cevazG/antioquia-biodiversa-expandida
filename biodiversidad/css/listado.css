@@ -1,6 +1,6 @@
 /* Header de contexto (subregión + grupo) */
     .app-shell--listado {
-      background: var(--color-green-dark);
+      background: var(--color-bg);
     }
 
     /* Header transparente para que se vea el mismo fondo que el resto de la pantalla (.page-bg, fixed, ya detrás) */

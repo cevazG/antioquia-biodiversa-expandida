@@ -11,6 +11,11 @@
   <link rel="stylesheet" href="css/components.css?v=21">
   <link rel="stylesheet" href="css/animations.css?v=4">
   <link rel="preload" as="image" href="img/fondos/fondo-biodiversidad.webp">
+  <!-- El video de bienvenida se reproduce en la siguiente pantalla
+       (splash.html) — prefetch (no preload) para que empiece a bajar en
+       segundo plano sin competir con lo que esta pantalla necesita ya
+       mismo, dándole más tiempo mientras el usuario lee/elige idioma. -->
+  <link rel="prefetch" href="video/intro.mp4">
   <link rel="stylesheet" href="css/index.css?v=7">
 </head>
 <body>

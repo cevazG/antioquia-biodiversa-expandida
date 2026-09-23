@@ -1,5 +1,7 @@
+/* var(--color-bg): mismo fix que agua/index.css — ver CLAUDE.md
+   "Flash de color de fondo". */
 .app-shell--com {
-      background: var(--color-green-dark);
+      background: var(--color-bg);
     }
 
     .page-bg {

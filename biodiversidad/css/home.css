@@ -38,7 +38,7 @@
 
 /* Hero */
     .app-shell--bio {
-      background: var(--color-green-dark);
+      background: var(--color-bg);
     }
 
     .page-bg {

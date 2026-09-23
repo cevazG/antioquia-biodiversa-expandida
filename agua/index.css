@@ -2,8 +2,12 @@
 
     .app-header__title { color: var(--color-agua); }
 
+    /* var(--color-bg): fallback visible antes de que cargue fondo-agua.webp
+       (imagen casi blanca, ~rgb(242,242,242)) — con el azul oscuro de antes
+       se veía un flash notorio la primera vez (caché frío), ver CLAUDE.md
+       "Flash de color de fondo". */
     .app-shell--agua {
-      background: var(--color-agua-dark);
+      background: var(--color-bg);
     }
 
     .page-bg {

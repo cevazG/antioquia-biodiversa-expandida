@@ -6,7 +6,7 @@
 
     /* Hero */
     .app-shell--gc {
-      background: var(--color-gc-dark);
+      background: var(--color-bg);
     }
 
     .page-bg {

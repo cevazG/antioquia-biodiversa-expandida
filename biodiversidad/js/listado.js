@@ -40,6 +40,13 @@ const REGION_NAMES = {
       return FAMILY_EMOJI[sp.familyId] || GROUP_META[sp.group]?.deco || '🌿';
     }
 
+    // Ícono SVG a color por familia/grupo (septiembre 2026) — ver misma lógica en especie.js
+    const FAMILY_ICON = {};
+    Object.keys(FAMILY_EMOJI).forEach(fam => { FAMILY_ICON[fam] = `img/icons/familias/${fam}.svg`; });
+    function getSpeciesIconUrl(sp) {
+      return FAMILY_ICON[sp.familyId] || (GROUP_META[sp.group] ? `img/icons/${sp.group}.svg` : null);
+    }
+
     let _subregionId, _grupo, _kingdom, _activeGroupFilter = 'all';
 
     document.addEventListener('DOMContentLoaded', async () => {
@@ -292,7 +299,11 @@ const REGION_NAMES = {
         accordion.className = 'family-accordion anim-fade-in-up';
         accordion.innerHTML = `
           <button class="family-header" aria-expanded="false">
-            <div class="family-header__icon" style="font-size:1.5rem">${FAMILY_EMOJI[family.id] || gm?.deco || '🌿'}</div>
+            <div class="family-header__icon" style="font-size:1.5rem">${
+              FAMILY_ICON[family.id]
+                ? `<img src="${FAMILY_ICON[family.id]}" alt="" style="width:26px;height:26px;display:block;">`
+                : (gm ? `<img src="img/icons/${family.group}.svg" alt="" style="width:26px;height:26px;display:block;">` : (FAMILY_EMOJI[family.id] || gm?.deco || '🌿'))
+            }</div>
             <div class="family-header__text">
               <div class="family-header__name">${familyNameLang}</div>
               <div class="family-header__count">
@@ -344,7 +355,9 @@ const REGION_NAMES = {
           <div class="search-result-card__photo" style="overflow:hidden;">${
             mainPhoto
               ? `<img src="${mainPhoto}" alt="${nameComun}" style="width:100%;height:100%;object-fit:cover;">`
-              : getSpeciesEmoji(sp)
+              : (getSpeciesIconUrl(sp)
+                  ? `<img src="${getSpeciesIconUrl(sp)}" alt="" style="width:44px;height:44px;">`
+                  : getSpeciesEmoji(sp))
           }</div>
           <div class="search-result-card__info">
             <div class="search-result-card__common">${nameComun}</div>
@@ -365,9 +378,12 @@ const REGION_NAMES = {
       const nameComun = lang === 'en' ? sp.nameEn : sp.nameEs;
       const gm = GROUP_META[sp.group];
       const mainPhoto = DataStore.getMainPhoto(sp);
+      const speciesIconUrl = getSpeciesIconUrl(sp);
       const photoContent = mainPhoto
         ? `<img src="${mainPhoto}" alt="${nameComun}" style="width:100%;height:100%;object-fit:cover;">`
-        : `<span style="font-size:1.75rem;display:flex;align-items:center;justify-content:center;width:100%;height:100%;">${getSpeciesEmoji(sp)}</span>`;
+        : speciesIconUrl
+          ? `<img src="${speciesIconUrl}" alt="" style="width:50px;height:50px;">`
+          : `<span style="font-size:1.75rem;display:flex;align-items:center;justify-content:center;width:100%;height:100%;">${getSpeciesEmoji(sp)}</span>`;
       return `
         <a href="especie.html?id=${sp.id}" class="species-card" aria-label="${nameComun}">
           <div class="species-card__photo" style="overflow:hidden;">${photoContent}</div>

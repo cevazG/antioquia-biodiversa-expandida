@@ -5,27 +5,40 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <meta name="theme-color" content="#f28e18">
   <title>Fotos Biodiversidad · Jóvenes pa' Lante</title>
-  <link rel="stylesheet" href="../../biodiversidad/css/main.css?v=5">
+  <link rel="stylesheet" href="../../biodiversidad/css/main.css?v=6">
   <link rel="stylesheet" href="../../biodiversidad/css/components.css?v=21">
   <link rel="stylesheet" href="../../biodiversidad/css/animations.css?v=4">
-  <link rel="stylesheet" href="galeria.css?v=9">
+  <link rel="stylesheet" href="galeria.css?v=11">
 </head>
 <body>
   <div class="app-shell">
 
-    <header class="app-header">
+    <header class="app-header app-header--with-switcher">
       <button class="app-header__back" onclick="history.back()" aria-label="Volver">
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5m0 0l7 7m-7-7l7-7"/></svg>
       </button>
       <div class="app-header__title">
         <span data-i18n="jpl_fotos_titulo">Fotos de Biodiversidad</span>
-        <span>Jóvenes pa' Lante</span>
       </div>
+
+      <!-- Selector de modalidad de vista, junto al selector de idioma -->
+      <div class="view-switcher" role="tablist" aria-label="Modalidad de vista">
+        <button class="view-switcher__btn" data-view="reel" role="tab" aria-selected="false" aria-label="Vista carrete">
+          <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" aria-hidden="true"><rect x="5" y="2" width="14" height="20" rx="4"/></svg>
+        </button>
+        <button class="view-switcher__btn active" data-view="grid" role="tab" aria-selected="true" aria-label="Vista cuadrícula">
+          <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" aria-hidden="true"><rect x="2" y="2" width="9" height="9" rx="2.2"/><rect x="13" y="2" width="9" height="9" rx="2.2"/><rect x="2" y="13" width="9" height="9" rx="2.2"/><rect x="13" y="13" width="9" height="9" rx="2.2"/></svg>
+        </button>
+        <button class="view-switcher__btn" data-view="masonry" role="tab" aria-selected="false" aria-label="Vista Mosaico">
+          <svg width="21" height="21" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><rect x="2" y="2" width="9" height="20" rx="2.2"/><rect x="13" y="2" width="9" height="8" rx="2.2"/><rect x="13" y="12" width="9" height="10" rx="2.2"/></svg>
+        </button>
+      </div>
+
       <button class="app-header__lang" data-lang-toggle style="border-color:#f28e18;color:#6b5216;">EN</button>
     </header>
 
     <!-- Context bar -->
-    <div class="gallery-context">
+    <div class="gallery-context" id="gallery-context">
       <div class="gallery-context__title" id="gallery-title">—</div>
       <div class="gallery-context__sub" id="gallery-sub">—</div>
     </div>
@@ -45,14 +58,26 @@
 
     <p class="results-count" id="results-count"></p>
 
-    <!-- Grid -->
-    <main>
-      <div class="photo-grid" id="photo-grid">
-        <div class="no-results" id="no-results" style="display:none">
-          <p data-i18n="no_results">No se encontraron resultados</p>
+    <!-- Vista carrete (pantalla completa) -->
+    <div class="reel-screen" id="view-reel" hidden>
+      <div class="photo-reel photo-reel--vertical" id="jpl-reel" aria-label="Fotos en carrete"></div>
+    </div>
+
+    <!-- Vista cuadrícula (la que ya existía) -->
+    <div class="photo-view" id="view-grid">
+      <main>
+        <div class="photo-grid" id="photo-grid">
+          <div class="no-results" id="no-results" style="display:none">
+            <p data-i18n="no_results">No se encontraron resultados</p>
+          </div>
         </div>
-      </div>
-    </main>
+      </main>
+    </div>
+
+    <!-- Vista mosaico -->
+    <div class="photo-view" id="view-masonry" hidden>
+      <div class="photo-masonry" id="jpl-masonry" aria-label="Fotos en mosaico"></div>
+    </div>
 
   </div>
 
@@ -82,6 +107,6 @@
   </div>
 
   <script src="../../biodiversidad/js/i18n.js"></script>
-  <script src="galeria.js?v=1"></script>
+  <script src="galeria.js?v=3"></script>
 </body>
 </html>

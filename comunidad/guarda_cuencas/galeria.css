@@ -38,6 +38,11 @@
       z-index: 50;
     }
 
+    /* .gallery-toolbar fuerza display:flex, que le gana en cascada al
+       display:none del atributo [hidden] del navegador — mismo bug que en
+       listado.html, ver CLAUDE.md "CSS — el atributo hidden". */
+    .gallery-toolbar[hidden] { display: none; }
+
     .month-row {
       display: flex;
       gap: 6px;
@@ -121,6 +126,8 @@
       object-fit: contain;
       display: block;
     }
+
+    .photo-card__img-wrap img.photo-card__placeholder-icon { width: 72px; height: 72px; }
 
     .photo-card__placeholder {
       position: absolute;
@@ -241,6 +248,8 @@
       object-fit: contain;
       display: block;
     }
+
+    .modal-photo img.modal-photo__placeholder-icon { width: 110px; height: 110px; }
 
     .modal-photo__placeholder {
       position: absolute;

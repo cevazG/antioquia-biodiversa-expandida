@@ -1,5 +1,15 @@
 # azure-pipelines.yml
 # CI/CD — Antioquia Natural
+#
+# Implementa la arquitectura de línea base oficial de Microsoft para Azure
+# Pipelines ("CI/CD baseline architecture"), adoptada como estándar de
+# referencia ante la falta de una plantilla institucional de TI Gobernación:
+# https://learn.microsoft.com/es-es/azure/devops/pipelines/architectures/devops-pipelines-baseline-architecture
+# No es un pipeline propio o improvisado — sigue el mismo patrón: quality
+# gates en CI, un único artefacto (imagen Docker) construido/escaneado/
+# publicado una sola vez, y despliegue con aprobación manual antes de
+# producción (más smoke test y rollback automático, ver stages DeployDev/Prod).
+#
 # Requiere configurar en Azure DevOps:
 #   - Service connection SonarQube: nombre exacto en SONARQUBE_SERVICE_CONNECTION
 #   - Service connection Docker Registry: nombre exacto en DOCKER_REGISTRY_SERVICE_CONNECTION
@@ -9,9 +19,11 @@
 #     SERVER_PROD_USER, SERVER_PROD_HOST, APP_PATH (ruta de docker-compose.yml en el servidor)
 #
 # Despliegue vía Docker: la etapa BuildImage construye la imagen, la escanea
-# con Trivy y la publica en el registry; DeployDev/DeployProd solo hacen
-# `docker compose pull && up -d` sobre el docker-compose.yml ya presente en
-# cada servidor (ver README.md § Despliegue en producción).
+# con Trivy y la publica en el registry; DeployDev/DeployProd hacen
+# `docker compose pull && up -d`, seguido de un smoke test contra /api/health
+# (hasta 60s) y, si falla, rollback automático al último tag que sí pasó el
+# smoke test (registrado en .last_successful_tag en el propio servidor) — ver
+# README.md § Despliegue en producción.
 
 trigger:
   branches:
@@ -202,15 +214,43 @@ stages:
           steps:
 
           - task: SSH@0
-            displayName: 'docker compose pull + up en Dev'
+            displayName: 'Deploy + smoke test + rollback automático en Dev'
             inputs:
               sshServiceConnection: $(SSH_DEV_SERVICE_CONNECTION)
               runOptions: commands
               commands: |
-                cd $(APP_PATH) &&
-                export IMAGE_TAG=$(Build.BuildId) &&
-                docker compose pull &&
+                cd $(APP_PATH)
+                NEW_TAG=$(Build.BuildId)
+                PREV_TAG=$(cat .last_successful_tag 2>/dev/null || echo "")
+                export IMAGE_TAG=$NEW_TAG
+                docker compose pull
                 docker compose up -d
+
+                echo "Smoke test — esperando /api/health (hasta 60s)..."
+                HEALTHY=0
+                for i in $(seq 1 15); do
+                  if curl -sf http://localhost:3000/api/health -o /dev/null; then
+                    HEALTHY=1
+                    break
+                  fi
+                  sleep 4
+                done
+
+                if [ "$HEALTHY" -eq 1 ]; then
+                  echo "$NEW_TAG" > .last_successful_tag
+                  echo "Deploy saludable en Dev — tag $NEW_TAG"
+                else
+                  echo "Smoke test falló en Dev para el tag $NEW_TAG"
+                  if [ -n "$PREV_TAG" ]; then
+                    echo "Rollback automático al tag anterior: $PREV_TAG"
+                    export IMAGE_TAG=$PREV_TAG
+                    docker compose pull
+                    docker compose up -d
+                  else
+                    echo "No hay tag anterior registrado en .last_successful_tag — no es posible hacer rollback automático"
+                  fi
+                  exit 1
+                fi
               failOnStdErr: false
 
 # ─────────────────────────────────────────────
@@ -234,13 +274,41 @@ stages:
           steps:
 
           - task: SSH@0
-            displayName: 'docker compose pull + up en Producción'
+            displayName: 'Deploy + smoke test + rollback automático en Producción'
             inputs:
               sshServiceConnection: $(SSH_PROD_SERVICE_CONNECTION)
               runOptions: commands
               commands: |
-                cd $(APP_PATH) &&
-                export IMAGE_TAG=$(Build.BuildId) &&
-                docker compose pull &&
+                cd $(APP_PATH)
+                NEW_TAG=$(Build.BuildId)
+                PREV_TAG=$(cat .last_successful_tag 2>/dev/null || echo "")
+                export IMAGE_TAG=$NEW_TAG
+                docker compose pull
                 docker compose up -d
+
+                echo "Smoke test — esperando /api/health (hasta 60s)..."
+                HEALTHY=0
+                for i in $(seq 1 15); do
+                  if curl -sf http://localhost:3000/api/health -o /dev/null; then
+                    HEALTHY=1
+                    break
+                  fi
+                  sleep 4
+                done
+
+                if [ "$HEALTHY" -eq 1 ]; then
+                  echo "$NEW_TAG" > .last_successful_tag
+                  echo "Deploy saludable en Producción — tag $NEW_TAG"
+                else
+                  echo "Smoke test falló en Producción para el tag $NEW_TAG"
+                  if [ -n "$PREV_TAG" ]; then
+                    echo "Rollback automático al tag anterior: $PREV_TAG"
+                    export IMAGE_TAG=$PREV_TAG
+                    docker compose pull
+                    docker compose up -d
+                  else
+                    echo "No hay tag anterior registrado en .last_successful_tag — no es posible hacer rollback automático"
+                  fi
+                  exit 1
+                fi
               failOnStdErr: false

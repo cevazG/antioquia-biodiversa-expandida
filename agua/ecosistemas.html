@@ -6,11 +6,11 @@
   <meta name="theme-color" content="#3561ab">
   <meta name="page-title" content="ecosystems_title">
   <title>Ecosistemas Estratégicos · Antioquia</title>
-  <link rel="stylesheet" href="../biodiversidad/css/main.css?v=5">
+  <link rel="stylesheet" href="../biodiversidad/css/main.css?v=6">
   <link rel="stylesheet" href="../biodiversidad/css/components.css?v=21">
   <link rel="stylesheet" href="../biodiversidad/css/animations.css?v=4">
   <link rel="preload" as="image" href="img/fondos/fondo-agua.webp">
-  <link rel="stylesheet" href="ecosistemas.css?v=5">
+  <link rel="stylesheet" href="ecosistemas.css?v=9">
   <link rel="prefetch" href="data/ecosistemas.json" as="fetch">
   <link rel="prefetch" href="../data/translations.json" as="fetch">
 </head>
@@ -41,13 +41,13 @@
 
       <p class="section-label" data-i18n="ecosystems_infographic_label">Corte transversal por altitud</p>
       <p class="eco-infografia__hint" data-i18n="ecosystems_infographic_hint">Toca una franja para conocer ese ecosistema</p>
-      <p class="eco-infografia__disclaimer" data-i18n="ecosystems_infographic_disclaimer">Esquema ilustrativo, no a escala — las cuevas no siguen el eje de altitud, por eso aparecen aparte, abajo</p>
+      <p class="eco-infografia__disclaimer" data-i18n="ecosystems_infographic_disclaimer">Esquema ilustrativo, no a escala — cavernas y cuevas aparece aparte porque no sigue el eje de altitud</p>
 
       <div class="eco-infografia">
         <img
           class="eco-infografia__img"
           src="img/ecosistemas/infografia-transversal.webp"
-          alt="Corte transversal de los ecosistemas de Antioquia por altitud: páramo, bosque húmedo tropical, humedales, bosque seco tropical, manglares y playas y mar"
+          alt="Corte transversal de los ecosistemas de Antioquia por altitud: páramo, bosque húmedo tropical, humedales, bosque seco tropical, manglares y playas y mar, con cavernas y cuevas aparte"
           loading="lazy"
         >
         <div class="eco-infografia__hotspots" aria-hidden="false">
@@ -57,17 +57,9 @@
           <a href="ecosistema.html?id=bosque_seco_tropical" class="eco-hotspot eco-hotspot--bosque_seco_tropical" data-i18n-aria="eco_bosque_seco_tropical_nombre" aria-label="Bosque Seco Tropical"></a>
           <a href="ecosistema.html?id=manglares" class="eco-hotspot eco-hotspot--manglares" data-i18n-aria="eco_manglares_nombre" aria-label="Manglares"></a>
           <a href="ecosistema.html?id=playas_mar" class="eco-hotspot eco-hotspot--playas_mar" data-i18n-aria="eco_playas_mar_nombre" aria-label="Playas y Mar"></a>
+          <a href="ecosistema.html?id=cavernas_cuevas" class="eco-hotspot eco-hotspot--cavernas_cuevas" data-i18n-aria="eco_cavernas_cuevas_nombre" aria-label="Cavernas y Cuevas"></a>
         </div>
       </div>
-
-      <a href="ecosistema.html?id=cavernas_cuevas" class="eco-cave-card ripple-container">
-        <span class="eco-cave-card__icon" aria-hidden="true">🦇</span>
-        <div class="eco-cave-card__text">
-          <h2 data-i18n="eco_cavernas_cuevas_nombre">Cavernas y Cuevas</h2>
-          <p data-i18n="ecosystems_cave_note">No sigue un patrón de altura: depende de la geología local</p>
-        </div>
-        <svg class="mode-card__arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg>
-      </a>
 
       <p class="section-label" style="margin-top: var(--space-lg)" data-i18n="ecosystems_grid_label">Los 7 ecosistemas</p>
 
@@ -76,7 +68,7 @@
       </div>
 
       <a href="ecosistemas_mapa.html" class="mode-card ripple-container anim-fade-in-up" style="margin-top: var(--space-md)" aria-label="Ver ecosistemas en el mapa">
-        <div class="mode-card__icon" aria-hidden="true">🗺️</div>
+        <div class="mode-card__icon" aria-hidden="true"><img src="img/icons/ver-en-el-mapa.svg" alt="" width="38" height="38"></div>
         <div class="mode-card__text">
           <h2 data-i18n="ecosystems_map_cta">Ver en el mapa</h2>
           <p data-i18n="ecosystems_map_cta_desc">Sitios representativos de cada ecosistema</p>

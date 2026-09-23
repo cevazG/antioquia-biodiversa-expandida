@@ -8,9 +8,29 @@
    comunidad/jovenes_pa_lante/galeria.css, que no está en components.css).
    ============================================================ */
 
+/* Cross-document view transition con splash.html — ver splash.css para
+   el porqué. Debe declararse en ambos documentos. */
+@view-transition {
+  navigation: auto;
+}
+
 :root {
   --feed-sources-h: 47px;   /* alto real de .feed-sources (incluye su borde) */
   --color-jpl-dark: #6b5216; /* texto blanco AA sobre este tono, no sobre #B0942B */
+}
+
+/* Fade-in al llegar desde splash.html (ver el <script> inline en feed.html
+   que agrega estas clases según document.referrer) — de respaldo garantizado
+   para el cross-fade, ya que @view-transition arriba no es confiable con
+   <video> en todos los navegadores. No afecta la navegación normal al feed
+   (bottom bar, etc.), que sigue apareciendo de inmediato. */
+html.from-splash .app-shell--feed {
+  opacity: 0;
+}
+
+html.from-splash.splash-fade-in .app-shell--feed {
+  opacity: 1;
+  transition: opacity 0.5s ease;
 }
 
 /* Fondo de pantalla completa (mismo patrón que biodiversidad.html) — solo

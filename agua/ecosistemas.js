@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     card.className = `bio-card bio-card--${eco.id} ripple-container`;
     card.style.textDecoration = 'none';
     card.innerHTML = `
-      <span class="bio-card__icon" aria-hidden="true">${eco.icono}</span>
+      <img class="bio-card__icon" src="${eco.iconoUrl}" alt="" aria-hidden="true">
       <span class="bio-card__name">${name}</span>
       <span class="bio-card__desc">${desc}</span>
     `;

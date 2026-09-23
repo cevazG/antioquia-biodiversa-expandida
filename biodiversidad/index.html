@@ -7,18 +7,18 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <title>Antioquia Natural</title>
-  <link rel="stylesheet" href="css/main.css?v=5">
+  <link rel="stylesheet" href="css/main.css?v=6">
   <link rel="stylesheet" href="css/components.css?v=21">
   <link rel="stylesheet" href="css/animations.css?v=4">
   <link rel="preload" as="image" href="img/fondos/fondo-biodiversidad.webp">
-  <link rel="stylesheet" href="css/index.css?v=6">
+  <link rel="stylesheet" href="css/index.css?v=7">
 </head>
 <body>
   <main class="lang-page">
     <div class="lang-page__bg"></div>
     <div class="lang-page__leaves" aria-hidden="true"></div>
-    <div class="corner-leaf corner-leaf--tl" aria-hidden="true">🌿</div>
-    <div class="corner-leaf corner-leaf--br" aria-hidden="true">🌿</div>
+    <img class="corner-leaf corner-leaf--tl" src="img/icons/biodiversidad-general.svg" alt="" aria-hidden="true">
+    <img class="corner-leaf corner-leaf--br" src="img/icons/biodiversidad-general.svg" alt="" aria-hidden="true">
 
     <div class="lang-page__content">
       <!-- Logo oficial Gobernación de Antioquia (fondo blanco sostenido, manual de marca p.8) -->
@@ -74,7 +74,7 @@
   <!-- Modal Ley 1581 de 2012 — se muestra una sola vez; bloquea la UI hasta aceptar -->
   <div id="privacy-modal" class="privacy-overlay" role="dialog" aria-modal="true" aria-labelledby="privacy-title" aria-describedby="privacy-desc">
     <div class="privacy-card">
-      <div class="privacy-icon" aria-hidden="true">🔒</div>
+      <img class="privacy-icon" src="img/icons/privacidad.svg" alt="" aria-hidden="true">
 
       <h2 id="privacy-title" class="privacy-title">
         Tratamiento de datos personales
@@ -112,6 +112,6 @@
     </div>
   </div>
 
-  <script src="js/index.js?v=4"></script>
+  <script src="js/index.js?v=6"></script>
 </body>
 </html>

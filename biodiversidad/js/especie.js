@@ -43,8 +43,20 @@ function isUnidentified(sp) {
       cracidae:       '🐓', ramphastidae:   '🦜',
     };
 
+    // Ícono SVG a color por familia (septiembre 2026, entrega del diseñador) —
+    // mismas 18 familias que FAMILY_EMOJI, que se mantiene como alt/fallback.
+    const FAMILY_ICON = {};
+    Object.keys(FAMILY_EMOJI).forEach(fam => { FAMILY_ICON[fam] = `img/icons/familias/${fam}.svg`; });
+
     function getSpeciesEmoji(sp) {
       return FAMILY_EMOJI[sp.familyId] || GROUP_META[sp.group]?.deco || '🌿';
+    }
+
+    // Ícono a color para el placeholder de foto: primero el de familia, si no
+    // existe el del grupo (los 10 ya están todos disponibles), si tampoco hay
+    // grupo válido cae a null y el llamador usa el emoji de getSpeciesEmoji.
+    function getSpeciesIconUrl(sp) {
+      return FAMILY_ICON[sp.familyId] || (GROUP_META[sp.group] ? `img/icons/${sp.group}.svg` : null);
     }
 
     // Badge "Jóvenes pa' Lante" sobre las fotos de la comunidad anexadas a la galería
@@ -73,8 +85,14 @@ function isUnidentified(sp) {
       // Título de página
       document.title = (lang === 'en' ? sp.nameEn : sp.nameEs) + ' · Antioquia Natural';
 
-      // Foto placeholder (emoji de grupo)
-      document.getElementById('photo-emoji').textContent = getSpeciesEmoji(sp);
+      // Foto placeholder (ícono de familia/grupo, o emoji si no hay ícono)
+      const photoEmojiEl = document.getElementById('photo-emoji');
+      const placeholderIconUrl = getSpeciesIconUrl(sp);
+      if (placeholderIconUrl) {
+        photoEmojiEl.innerHTML = `<img src="${placeholderIconUrl}" alt="" class="photo-placeholder__icon-img">`;
+      } else {
+        photoEmojiEl.textContent = getSpeciesEmoji(sp);
+      }
 
       // Fotos reales — sp.photos puede ser string[] u object[] {url, captionEs, captionEn}
       const rawPhotos = sp.photos || [];
@@ -288,9 +306,13 @@ function isUnidentified(sp) {
       const familyEl = document.getElementById('sp-family');
       if (family) {
         const familyName = lang === 'en' ? family.nameEn : family.nameEs;
+        const familyIconUrl = getSpeciesIconUrl(sp);
+        const familyIconHtml = familyIconUrl
+          ? `<img src="${familyIconUrl}" alt="" class="family-pill__icon">`
+          : getSpeciesEmoji(sp);
         familyEl.innerHTML = `
           <div class="family-pill">
-            <span>${getSpeciesEmoji(sp)}</span>
+            <span>${familyIconHtml}</span>
             <em style="font-style:italic;font-size:0.8rem">${sp.familyId.charAt(0).toUpperCase() + sp.familyId.slice(1)}</em>
             · ${familyName}
           </div>

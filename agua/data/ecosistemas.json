@@ -63,7 +63,8 @@
           "municipio": "Bello",
           "subregion": "valle_aburra"
         }
-      ]
+      ],
+      "iconoUrl": "img/icons/ecosistemas/paramo.svg"
     },
     {
       "id": "bosque_tropical",
@@ -151,7 +152,8 @@
           "municipio": "Medellín",
           "subregion": "valle_aburra"
         }
-      ]
+      ],
+      "iconoUrl": "img/icons/ecosistemas/bosque_tropical.svg"
     },
     {
       "id": "bosque_seco_tropical",
@@ -177,7 +179,8 @@
           "subregion": "occidente",
           "id": "canon-rio-cauca"
         }
-      ]
+      ],
+      "iconoUrl": "img/icons/ecosistemas/bosque_seco_tropical.svg"
     },
     {
       "id": "humedales",
@@ -217,7 +220,8 @@
           "municipio": "Caucasia",
           "subregion": "bajo_cauca"
         }
-      ]
+      ],
+      "iconoUrl": "img/icons/ecosistemas/humedales.svg"
     },
     {
       "id": "manglares",
@@ -249,7 +253,8 @@
           "subregion": "uraba",
           "id": "manglares-uraba"
         }
-      ]
+      ],
+      "iconoUrl": "img/icons/ecosistemas/manglares.svg"
     },
     {
       "id": "playas_mar",
@@ -299,7 +304,8 @@
           "subregion": "uraba",
           "id": "playas-arboletes"
         }
-      ]
+      ],
+      "iconoUrl": "img/icons/ecosistemas/playas_mar.svg"
     },
     {
       "id": "cavernas_cuevas",
@@ -341,7 +347,8 @@
           "municipio": "San Luis",
           "subregion": "oriente"
         }
-      ]
+      ],
+      "iconoUrl": "img/icons/ecosistemas/cavernas_cuevas.svg"
     }
   ]
 }

@@ -31,6 +31,15 @@ const SUBREGION_NAMES = {
       return FAMILY_EMOJI[foto.familia] || GROUP_EMOJI[foto.grupo] || '🌿';
     }
 
+    // Ícono SVG a color por familia/grupo (septiembre 2026) — mismo criterio que biodiversidad/js/especie.js
+    const FAMILY_ICON = {};
+    Object.keys(FAMILY_EMOJI).forEach(fam => { FAMILY_ICON[fam] = `../../biodiversidad/img/icons/familias/${fam}.svg`; });
+    const GROUP_ICON = {};
+    Object.keys(GROUP_EMOJI).forEach(g => { GROUP_ICON[g] = `../../biodiversidad/img/icons/${g}.svg`; });
+    function getIconUrl(foto) {
+      return FAMILY_ICON[foto.familia] || GROUP_ICON[foto.grupo] || null;
+    }
+
     // Normaliza el campo foto/fotos para compatibilidad con datos estáticos (foto: string) y BD (fotos: [])
     function getImgs(foto) {
       if (foto.fotos && foto.fotos.length) return foto.fotos;
@@ -55,12 +64,13 @@ const SUBREGION_NAMES = {
       _index = data.meses;
 
       buildMonthChips();
+      initViewSwitcher();
 
       document.addEventListener('langchange', () => {
         buildMonthChips();
         buildGroupChips();
         buildSubregionChips();
-        renderGrid();
+        renderAll();
       });
 
       // Cargar el mes más reciente por defecto
@@ -120,7 +130,7 @@ const SUBREGION_NAMES = {
 
       buildGroupChips();
       buildSubregionChips();
-      renderGrid();
+      renderAll();
     }
 
     function buildSubregionChips() {
@@ -150,7 +160,7 @@ const SUBREGION_NAMES = {
       document.querySelectorAll('#subregion-filters .filter-chip--sub').forEach(b =>
         b.classList.toggle('active', b.dataset.sub === value)
       );
-      renderGrid();
+      renderAll();
     }
 
     function buildGroupChips() {
@@ -180,7 +190,7 @@ const SUBREGION_NAMES = {
       document.querySelectorAll('#group-filters .filter-chip').forEach(b =>
         b.classList.toggle('active', b.dataset.group === group)
       );
-      renderGrid();
+      renderAll();
     }
 
     function getFiltered() {
@@ -217,6 +227,10 @@ const SUBREGION_NAMES = {
         const nombre   = lang === 'en' && foto.especieEn ? foto.especieEn : foto.especieEs;
         const subNombre = SUBREGION_NAMES[foto.subregion] || foto.subregion;
         const emoji    = getEmoji(foto) || '🌿';
+        const iconUrl  = getIconUrl(foto);
+        const placeholderHtml = iconUrl
+          ? `<img src="${iconUrl}" alt="" class="photo-card__placeholder-icon">`
+          : emoji;
 
         const card = document.createElement('div');
         card.className = 'photo-card';
@@ -226,7 +240,7 @@ const SUBREGION_NAMES = {
         card.innerHTML = `
           <div class="photo-card__img-wrap">
             <img src="${getImgs(foto)[0] || ''}" alt="${nombre}" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
-            <div class="photo-card__placeholder">${emoji}</div>
+            <div class="photo-card__placeholder">${placeholderHtml}</div>
             <span class="photo-card__iucn-overlay badge-iucn badge-iucn--${foto.iucn}">${foto.iucn}</span>
             ${foto.endemica ? `<span class="photo-card__endemic-overlay">🫓 Endémica</span>` : ''}
           </div>
@@ -243,6 +257,104 @@ const SUBREGION_NAMES = {
       });
     }
 
+    function emptyStateHtml() {
+      return `<p class="no-results visible">${I18n.t('no_results') || 'Sin resultados'}</p>`;
+    }
+
+    function renderReel() {
+      const lang = I18n.getLang();
+      const reel = document.getElementById('jpl-reel');
+      if (!reel) return;
+      reel.innerHTML = '';
+      const list = getFiltered();
+      if (list.length === 0) { reel.innerHTML = emptyStateHtml(); return; }
+
+      list.forEach((foto, i) => {
+        const nombre = lang === 'en' && foto.especieEn ? foto.especieEn : foto.especieEs;
+        const card = document.createElement('div');
+        card.className = 'photo-reel__card ripple-container';
+        card.setAttribute('role', 'button');
+        card.setAttribute('tabindex', '0');
+        card.setAttribute('aria-label', nombre);
+        card.innerHTML = `
+          <img src="${getImgs(foto)[0] || ''}" alt="${nombre}" loading="${i < 3 ? 'eager' : 'lazy'}">
+          <div class="photo-reel__scrim" aria-hidden="true"></div>
+          <span class="photo-reel__name">${nombre}</span>`;
+        card.addEventListener('click', () => openModal(foto));
+        card.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') openModal(foto); });
+        reel.appendChild(card);
+      });
+    }
+
+    function renderMasonry() {
+      const lang = I18n.getLang();
+      const masonry = document.getElementById('jpl-masonry');
+      if (!masonry) return;
+      masonry.innerHTML = '';
+      const list = getFiltered();
+      if (list.length === 0) { masonry.innerHTML = emptyStateHtml(); return; }
+
+      const cols = [document.createElement('div'), document.createElement('div')];
+      cols.forEach(c => c.className = 'photo-masonry__col');
+      const colHeights = [0, 0];
+      list.forEach((foto, i) => {
+        const nombre = lang === 'en' && foto.especieEn ? foto.especieEn : foto.especieEs;
+        const cell = document.createElement('div');
+        cell.className = 'photo-masonry__item';
+        cell.setAttribute('role', 'button');
+        cell.setAttribute('tabindex', '0');
+        cell.setAttribute('aria-label', nombre);
+        cell.innerHTML = `
+          <img src="${getImgs(foto)[0] || ''}" alt="${nombre}" loading="${i < 6 ? 'eager' : 'lazy'}">
+          <div class="photo-masonry__scrim" aria-hidden="true"></div>
+          <span class="photo-masonry__name">${nombre}</span>`;
+        cell.addEventListener('click', () => openModal(foto));
+        cell.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') openModal(foto); });
+        const target = colHeights[0] <= colHeights[1] ? 0 : 1;
+        cols[target].appendChild(cell);
+        colHeights[target] += 1;
+      });
+      masonry.appendChild(cols[0]);
+      masonry.appendChild(cols[1]);
+    }
+
+    function renderAll() {
+      renderGrid();
+      renderReel();
+      renderMasonry();
+    }
+
+    // ── Selector de modalidad de vista (mismo patrón que feed.js/biodiversidad.js) ──
+    const VIEW_KEY = 'jpl_gallery_view';
+    function initViewSwitcher() {
+      const buttons = document.querySelectorAll('.view-switcher__btn');
+      const views = {
+        reel: document.getElementById('view-reel'),
+        grid: document.getElementById('view-grid'),
+        masonry: document.getElementById('view-masonry'),
+      };
+      const context = document.getElementById('gallery-context');
+      const toolbar = document.getElementById('gallery-toolbar');
+      const resultsCount = document.getElementById('results-count');
+
+      function setView(view) {
+        Object.keys(views).forEach(key => { views[key].hidden = key !== view; });
+        buttons.forEach(btn => {
+          const active = btn.dataset.view === view;
+          btn.classList.toggle('active', active);
+          btn.setAttribute('aria-selected', active ? 'true' : 'false');
+        });
+        if (context) context.hidden = view === 'reel';
+        if (toolbar) toolbar.hidden = view === 'reel';
+        if (resultsCount) resultsCount.hidden = view === 'reel';
+        localStorage.setItem(VIEW_KEY, view);
+      }
+
+      buttons.forEach(btn => btn.addEventListener('click', () => setView(btn.dataset.view)));
+      const saved = localStorage.getItem(VIEW_KEY);
+      setView(saved && views[saved] ? saved : 'grid');
+    }
+
     function openModal(foto) {
       _modalFoto    = foto;
       _modalImgIdx  = 0;
@@ -252,8 +364,13 @@ const SUBREGION_NAMES = {
       const desc      = lang === 'en' && foto.descripcionEn ? foto.descripcionEn : foto.descripcionEs;
       const subNombre = SUBREGION_NAMES[foto.subregion] || foto.subregion;
       const emoji     = getEmoji(foto) || '🌿';
-
-      document.getElementById('modal-placeholder').textContent = emoji;
+      const modalIconUrl = getIconUrl(foto);
+      const modalPlaceholderEl = document.getElementById('modal-placeholder');
+      if (modalIconUrl) {
+        modalPlaceholderEl.innerHTML = `<img src="${modalIconUrl}" alt="" class="modal-photo__placeholder-icon">`;
+      } else {
+        modalPlaceholderEl.textContent = emoji;
+      }
       showModalImg(0);
 
       document.getElementById('modal-name').textContent = nombre;

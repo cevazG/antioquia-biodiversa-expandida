@@ -36,14 +36,19 @@
     .agua-hero__content { position: relative; z-index: 1; }
 
     .agua-hero__emoji {
-      font-size: 3.5rem;
-      margin-bottom: var(--space-sm);
+      width: 72px;
+      height: 72px;
+      margin: 0 auto var(--space-sm);
       display: block;
       animation: pulse 3s ease-in-out infinite;
     }
 
-    .agua-hero h1 { color: var(--color-agua); font-size: 1.625rem; margin-bottom: var(--space-sm); }
-    .agua-hero p  { color: var(--color-agua); font-size: 0.9375rem; }
+    /* var(--color-agua) (#3561ab) se confundía con el patrón decorativo
+       azul-grisáceo del fondo (fondo-agua.webp es casi blanco, pero con
+       líneas y curvas en un azul cercano al del texto); --color-agua-dark
+       da mucho más contraste sin perder la identidad azul del módulo. */
+    .agua-hero h1 { color: var(--color-agua-dark); font-size: 1.625rem; margin-bottom: var(--space-sm); }
+    .agua-hero p  { color: var(--color-agua-dark); font-size: 0.9375rem; }
 
     .agua-content {
       padding: var(--space-lg) var(--space-md);

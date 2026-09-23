@@ -52,14 +52,17 @@
   filter: drop-shadow(0 4px 12px rgba(0,0,0,.25));
 }
 
+/* #3561ab se confundía con el patrón decorativo azul-grisáceo del fondo
+   (mismo problema que en agua/index.html) — #1a3a6b da mucho más contraste
+   sin perder la identidad azul del módulo. */
 .eco-hero h1 {
-  color: #3561ab;
+  color: #1a3a6b;
   font-size: 1.5rem;
   margin-bottom: var(--space-sm);
 }
 
 .eco-hero p {
-  color: #3561ab;
+  color: #1a3a6b;
   font-size: 0.9rem;
   max-width: 320px;
   margin: 0 auto;
@@ -120,38 +123,11 @@
 .eco-hotspot--manglares            { top: 74.7%;   height: 8.3%;  }
 .eco-hotspot--playas_mar           { top: 83.0%;   height: 17%;   }
 
-/* Tarjeta especial de cavernas (no sigue el eje de altitud) */
-.eco-cave-card {
-  display: flex;
-  align-items: center;
-  gap: var(--space-md);
-  padding: var(--space-md);
-  border-radius: var(--radius-md);
-  border: 1.5px dashed var(--color-border);
-  background: var(--color-bg);
-  text-decoration: none;
-  color: inherit;
-  transition: all var(--transition);
-}
-
-.eco-cave-card:active { background: var(--color-green-pale); transform: scale(0.98); }
-
-.eco-cave-card__icon {
-  font-size: 1.75rem;
-  flex-shrink: 0;
-}
-
-.eco-cave-card__text h2 {
-  font-size: 0.9375rem;
-  font-weight: 700;
-  color: var(--color-text-dark);
-  margin-bottom: 2px;
-}
-
-.eco-cave-card__text p {
-  font-size: 0.8125rem;
-  color: var(--color-text-light);
-}
+/* Cavernas y Cuevas: no sigue el eje de altitud, es una tarjeta aparte
+   dentro de la misma ilustración (a la derecha) — por eso, a diferencia
+   de las otras 6, no es una franja de ancho completo sino un recuadro con
+   left/width propios. Porcentajes medidos sobre la imagen fuente. */
+.eco-hotspot--cavernas_cuevas { left: 67%; right: auto; top: 36.5%; width: 31%; height: 15%; }
 
 /* Grid de ecosistemas — reusa .bio-grid / .bio-card, con relleno de color
    (a diferencia de la cuadrícula de grupos de biodiversidad, que ahora usa
@@ -159,12 +135,16 @@
    que la base de .bio-card cambió a texto oscuro. */
 #eco-grid .bio-card { border: none; color: var(--color-white); }
 #eco-grid .bio-card__name, #eco-grid .bio-card__count { color: var(--color-white); }
-/* Aquí el ícono sigue siendo un emoji en texto (no <img> como en biodiversidad) */
+/* Halo blanco translúcido detrás de todos los íconos (visible en el margen
+   transparente del propio SVG): da contraste parejo card por card sin
+   tocar la paleta de cada ícono ni la de su tarjeta — antes solo estaba en
+   Bosque Húmedo Tropical y Manglares, que eran los únicos con problema de
+   contraste real, pero se ve mejor aplicado a las 7 tarjetas por igual. */
 #eco-grid .bio-card__icon {
-  width: auto;
-  height: auto;
-  font-size: 2.5rem;
-  line-height: 1;
+  width: 64px;
+  height: 64px;
+  background: rgba(255,255,255,0.3);
+  border-radius: 50%;
   filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
 }
 

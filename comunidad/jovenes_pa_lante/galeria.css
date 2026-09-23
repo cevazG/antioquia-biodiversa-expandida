@@ -39,6 +39,11 @@
       z-index: 50;
     }
 
+    /* .gallery-toolbar fuerza display:flex, que le gana en cascada al
+       display:none del atributo [hidden] del navegador — mismo bug que en
+       listado.html, ver CLAUDE.md "CSS — el atributo hidden". */
+    .gallery-toolbar[hidden] { display: none; }
+
     .filter-row {
       display: flex;
       gap: 6px;
@@ -175,6 +180,8 @@
       pointer-events: none;
     }
 
+    .photo-card__img-wrap img.photo-card__placeholder-icon { width: 32px; height: 32px; }
+
     /* Overlays on image — el color de texto lo define .badge-iucn--XX (components.css)
        según cada color de fondo; aquí no se fuerza blanco, algunas categorías (LC/VU/EN/DD)
        necesitan texto oscuro para cumplir WCAG AA, ver components.css */
@@ -309,6 +316,8 @@
       object-fit: contain;
       display: block;
     }
+
+    .modal-photo img.modal-photo__placeholder-icon { width: 100px; height: 100px; }
 
     .modal-photo__placeholder {
       position: absolute;

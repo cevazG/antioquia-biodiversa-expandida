@@ -759,6 +759,123 @@ Estructura: `biodiversidad/img/species/<grupo>/<familia>/<spXXX_slug>/<slug>_001
 
 ---
 
+## Infográfico de ecosistemas — versión con Cavernas y Cuevas integrado (septiembre 2026)
+
+Sebastián reemplazó `Diseño/Exportados APP/Infografico/Infografico.jpg` por una versión nueva que ya incluye "Cavernas y Cuevas" como un recuadro dentro de la misma ilustración (antes era una tarjeta HTML aparte, debajo del gráfico). Pidió quitarle la regla/escala del lado izquierdo y reubicar los enlaces táctiles.
+
+- **Regla eliminada** con clonado de fondo (mismo criterio que la limpieza de imagen ya documentada en "Ecosistemas Estratégicos" más abajo): se detectó la caja exacta de la regla por análisis de color (x 70-165, y 120-2180 sobre 2562×2258) y se rellenó con una franja limpia de fondo tomada de una zona sin contenido (x 168-200, confirmada libre de la tarjeta "0 msnm" y de la pirámide en toda la altura) — un primer intento clonando una franja más ancha arrastró por error un fragmento de la tarjeta "0 msnm" al área de la regla; se corrigió acotando la fuente del clonado.
+- **Los 6 hotspots de siempre** (`agua/ecosistemas.css`, `.eco-hotspot--*`) **se dejaron con los mismos porcentajes** que ya tenía el gráfico anterior — se verificó por análisis de color (mediana de color por fila dentro del contorno de la pirámide) que las proporciones de la nueva ilustración coinciden con las de la vieja, dentro de 1-3% de margen.
+- **7° hotspot nuevo**: `.eco-hotspot--cavernas_cuevas` — a diferencia de los otros 6 (franjas de ancho completo), es un recuadro propio (`left:67%; top:36.5%; width:31%; height:15%`), medido sobre la imagen fuente por el color del borde de la tarjeta.
+- **`eco-cave-card` (la tarjeta HTML separada) se eliminó** de `agua/ecosistemas.html` — quedaría duplicada con el nuevo hotspot. El CSS huérfano (`.eco-cave-card*`) también se quitó de `agua/ecosistemas.css`.
+- Texto del disclaimer actualizado (ES/EN, `ecosystems_infographic_disclaimer` en `data/translations.json`): ya no dice "aparecen aparte, abajo" sino que refleja que ahora está integrado en la misma imagen.
+
+## Fondo de Biodiversidad — reemplazo (septiembre 2026)
+
+`biodiversidad/img/fondos/fondo-biodiversidad.webp` (un solo archivo, referenciado desde 5 páginas: `home.html`, `listado.html`, `feed.html`, `biodiversidad.html`, `index.html`) se regeneró desde `Diseño/Exportados APP/fondos/Fondo-Biodiversidad-2.jpg` (mismas dimensiones que el anterior, reemplazo directo) — no hizo falta tocar ningún HTML/CSS, solo sobrescribir el WebP.
+
+## Galerías de Guarda Cuencas y JPL — 3 vistas + píldoras de subregión (septiembre 2026)
+
+Sebastián pidió que ambas galerías tuvieran las mismas 3 modalidades de vista (carrete / cuadrícula / mosaico) que ya usan `biodiversidad/feed.html` y `biodiversidad.html`, conservando la vista que cada una ya tenía como una de las tres. También pidió que la selección de subregión en Guarda Cuencas usara píldoras en vez de un `<select>` — Jóvenes pa' Lante ya las tenía (se verificó explícitamente, no hizo falta tocarla en ese punto).
+
+### Guarda Cuencas (`comunidad/guarda_cuencas/galeria.html`/`.js`/`.css`)
+- La vista de lista detallada que ya existía (`#photo-list`, con foto + subregión + crédito) se conservó tal cual, ahora dentro de `<div class="photo-view" id="view-grid">` y accesible desde el botón "grid" del switcher.
+- Se agregaron `#view-reel` (`.photo-reel.photo-reel--vertical`) y `#view-masonry` (`.photo-masonry`), reutilizando las clases ya compartidas en `biodiversidad/css/components.css` (no hizo falta CSS nuevo para estas dos vistas).
+- El `<select id="subregion-filter">` se reemplazó por `<div class="filter-row" id="subregion-filters">`, poblado con el mismo patrón de `buildSubregionChips()`/`setSubregion()` que ya usaba `jovenes_pa_lante/galeria.js` (chip "Todas las subregiones" + una por subregión presente en el mes activo, con 📍 y nombre).
+- `renderList()` (grid) se mantuvo; se agregaron `renderReel()`/`renderMasonry()` y un `renderAll()` que llama a las tres, más `initViewSwitcher()` (mismo patrón que `feed.js`: guarda la vista elegida en `localStorage`, oculta la barra de contexto y el toolbar en modo carrete).
+
+### Jóvenes pa' Lante (`comunidad/jovenes_pa_lante/galeria.html`/`.js`/`.css`)
+- Mismo tratamiento: la cuadrícula existente (`#photo-grid`) pasó a `#view-grid`; se agregaron `#view-reel`/`#view-masonry` y `renderReel()`/`renderMasonry()`/`renderAll()`/`initViewSwitcher()` análogos.
+- Los filtros de grupo y subregión (`#group-filters`/`#subregion-filters`) ya eran píldoras — no se tocaron.
+
+### Bug encontrado y corregido en ambas: `[hidden]` no ocultaba el toolbar
+Al implementar `initViewSwitcher()` (que usa el atributo `hidden` para esconder `.gallery-toolbar` en modo carrete), el toolbar **no se ocultaba** — mismo bug ya documentado en "CSS — el atributo `hidden` necesita un guard explícito" más abajo: `.gallery-toolbar { display: flex; ... }` le gana en cascada al `display:none` que el navegador aplica por `[hidden]`. Se agregó `.gallery-toolbar[hidden] { display: none; }` en los `galeria.css` de ambos módulos.
+
+---
+
+## Íconos SVG a color (septiembre 2026) — reemplazo de emojis, entrega del diseñador
+
+El diseñador entregó 49 íconos SVG duotono (`#104837` verde oscuro / `#4fd698` verde claro, semáforo de colores propio en los 6 de IUCN) en `Diseño/Exportados APP/Iconografía/Iconos SVG-2/`, para reemplazar los emojis documentados en `Diseño/Referencias para diseñador/Antioquia_Natural_Inventario_Emojis.xlsx` (el inventario que se le entregó en agosto). Implementados en esta sesión:
+
+### Ya estaban sincronizados (nada que hacer)
+9 de los 10 íconos de grupo taxonómico (`biodiversidad/img/icons/*.svg`) ya eran idénticos byte a byte a esta entrega — se habían integrado en una sesión anterior. Solo **Hongos** seguía con el placeholder viejo (1.3 KB) — reemplazado por el nuevo (4.5 KB).
+
+### Placeholders de foto por familia (18 familias → 13 íconos, algunos compartidos)
+`biodiversidad/img/icons/familias/<familyId>.svg` — nuevo. Reemplaza el emoji que se mostraba en vez de la foto cuando una especie de esa familia no tenía foto todavía, en 3 archivos que mantienen el mismo patrón (`FAMILY_EMOJI` se conserva como *alt*/fallback, `FAMILY_ICON`/`getSpeciesIconUrl()` es la ruta nueva):
+- `biodiversidad/js/especie.js` — placeholder grande de la ficha (`#photo-emoji`) y el ícono de la píldora de familia (`.family-pill`)
+- `biodiversidad/js/listado.js` — ícono del encabezado de familia en el acordeón, tarjeta de especie (grid) y tarjeta de resultado de búsqueda
+- `comunidad/jovenes_pa_lante/galeria.js` — placeholder de la tarjeta de foto y del visor modal
+
+Si una familia no tiene ícono propio (la mayoría de las 65 familias del catálogo), cae al ícono del **grupo** (`img/icons/<grupo>.svg`, ya sincronizado) — no al emoji, salvo que ni familia ni grupo resuelvan (caso extremo, no debería pasar con los 10 grupos ya completos).
+
+**Cuidado con la especificidad CSS**: en `comunidad/jovenes_pa_lante/galeria.css` y `comunidad/guarda_cuencas/galeria.css` hay reglas tipo `.photo-card__img-wrap img { width:100%; height:100% }` que le ganan en especificidad a una clase sola (`.photo-card__placeholder-icon`) — hubo que escribir el selector como `.photo-card__img-wrap img.photo-card__placeholder-icon` para que el tamaño chico (32px) no quedara pisado por el 100%/100% pensado para la foto real. Mismo cuidado si se agrega un ícono nuevo dentro de un contenedor de foto existente.
+
+### Íconos de héroe / módulo
+- **Agua / Guarda Cuencas** (💧) → `agua/img/icons/guarda-cuencas.svg` y `comunidad/guarda_cuencas/img/icons/guarda-cuencas.svg` (copia local en cada módulo, siguiendo el patrón ya establecido de no compartir assets entre módulos) — hero de `agua/index.html`, hero circular de `comunidad/guarda_cuencas/index.html`, y placeholder de foto (tarjeta + modal) en `comunidad/guarda_cuencas/galeria.js`/`.html`.
+- **Ecosistemas** (🏞️) → `agua/img/icons/ecosistemas.svg` — mode-card "Ecosistemas Estratégicos" en `agua/index.html`. *Antes* este mode-card compartía el mismo emoji 🏞️ con "Cuencas Hídricas" (ambigüedad preexistente); ahora cada uno tiene su propio ícono/emoji distinto.
+- **Biodiversidad general** (🌿) → `biodiversidad/img/icons/biodiversidad-general.svg` — las 2 hojas decorativas (`.corner-leaf`) de la pantalla de idioma.
+- **Privacidad** (🔒) → `biodiversidad/img/icons/privacidad.svg` — ícono del modal de tratamiento de datos (Ley 1581).
+
+### Los 7 ecosistemas (`agua/data/ecosistemas.json`)
+Se agregó el campo `iconoUrl` a cada uno de los 7 ecosistemas (`icono` con el emoji se conserva, usado todavía en el tag pequeño "🏔️ Ecosistema Estratégico" de `agua/ecosistema.html` y en el popup/marcador de `agua/ecosistemas_mapa.js`, que se dejaron en emoji por ser contextos chicos de texto+ícono). `iconoUrl` reemplaza el emoji en:
+- `agua/ecosistemas.js` — las 7 tarjetas grandes de "Los 7 ecosistemas" (antes NO se veían al tamaño correcto: `.bio-card__icon` ya estaba pensado para `<img>` de 48×48, un `<span>` con emoji dentro no respeta ese tamaño — se corrigió de paso)
+- `agua/ecosistema.js` — placeholder grande cuando el ecosistema no tiene fotos
+
+### Botones "Ver en el mapa" / "Subir foto" / cámara
+- `agua/img/icons/ver-en-el-mapa.svg` — card "Ver en el mapa" de `agua/ecosistemas.html`
+- `comunidad/jovenes_pa_lante/img/icons/ver-en-el-mapa.svg` (copia local) — card "Mapa de Municipios" de `comunidad/jovenes_pa_lante/index.html`
+- `comunidad/jovenes_pa_lante/img/icons/subir-foto.svg` — card "Fotos de Biodiversidad" (mismo módulo)
+- `comunidad/img/icons/subir-foto.svg` y `comunidad/img/icons/especie-del-mes.svg` quedaron copiados pero **sin usar todavía** — ver pendientes abajo
+
+### Pendiente / no resuelto en esta sesión
+
+- **🚧 "Próximamente"** (banner de `comunidad/guarda_cuencas/index.html`) no tiene ícono en esta entrega — sigue en emoji, a la espera de una futura entrega del diseñador.
+- **`reptiles.svg`** (un lagarto) vino de más — la app solo tiene el grupo combinado "Anfibios y Reptiles" (`anfibios-reptiles.svg`, una rana), no uno separado para reptiles. No se usó. Si en el futuro se separa el grupo en dos, este ícono ya está listo en la carpeta de origen.
+- **`Especie del Mes.svg`** (trofeo con hoja) y **`Especie del Mes_1.svg`** eran casi idénticos — se trataron como exportación duplicada (mismo caso que `Ver en el mapa copia.svg`, un duplicado exacto). El trofeo se copió a `comunidad/img/icons/especie-del-mes.svg` pero **no se usó**: los dos lugares candidatos (`em-badge-mes` en `especie_del_mes.html`, `prog-card__deco` en `comunidad/index.html`) son textos-con-emoji chicos en línea, no un ícono grande independiente — convertir solo uno de los 3 `prog-card__deco` de `comunidad/index.html` (🌱 JPL, 💧 GC, 🏆 EDM) se habría visto inconsistente al lado de los otros dos que se quedan en emoji por no tener ícono de programa general todavía.
+- **Badges chicos con emoji + texto** (📍 ubicación/subregión — "el más repetido de toda la app", 🏘️ municipio, 🌊 cuenca/río) — **no se tocaron**, decisión de alcance: son docenas de instancias en toda la app (feed, galerías, fichas), y en los casos donde sí se reemplazó un emoji-en-línea-con-texto (badges de grupo, tags IUCN chicos, "eco-tag") se dejaron igual por ser del mismo patrón. Si se quiere que estos badges también usen ícono en vez de emoji, es una tarea aparte — hay que decidir si vale la pena para un ícono tan chico (normalmente 14-16px al lado del texto).
+- **6 íconos de IUCN** (`LC-Preocupación menor.svg`, etc.) — **no se tocaron, pendiente de decisión de diseño**. El emoji actual (🟢🟡🟠🔴🟣⚪) es un puntito chico de color al lado del texto "LC"/"NT"/etc. en `biodiversidad/js/app.js` (`iucnStatusBadge()`). Los SVG nuevos ya traen el código de 2 letras dibujado adentro del círculo (ej. el círculo verde ya dice "LC") — usarlos junto a un texto separado que también dice "LC" mostraría el código duplicado. Hace falta decidir con Sebastián si el ícono nuevo **reemplaza** el badge de texto entero (`badge-iucn`, usado en decenas de tarjetas de especie en toda la app) o si se necesita una versión sin el texto dibujado adentro.
+
+---
+
+## Íconos SVG — segunda tanda (septiembre 2026): resuelve varios pendientes de arriba
+
+Sebastián pidió reemplazar los emojis de 3 pantallas más. Resultado:
+
+- **`biodiversidad/biodiversidad.html`** (modal "¿Cómo quieres explorar?"): 📍 Por Subregión → `img/icons/ubicacion-subregion.svg` (nuevo, copiado de `Diseño/.../Ubicación - Subregión.svg`); 🌿 Flora → reutiliza `arboles_nativos.svg`; 🦜 Fauna → reutiliza `aves.svg`; 🍄 Hongos → reutiliza `hongos.svg`. Ninguno de los 4 tenía ícono genérico propio en la entrega — para Flora/Fauna, decisión explícita de Sebastián: reutilizar árbol/ave aunque se repitan visualmente con las tarjetas de esos grupos más abajo en la misma pantalla.
+- **`agua/index.html`**: 🏞️ Cuencas Hídricas → `img/icons/cuenca-rio.svg` (nuevo). 🚰 Cuencas Abastecedoras → reutiliza `guarda-cuencas.svg` (mismo ícono que ya usa el hero de esta página) — no había ícono de "acueducto"/grifo en la entrega, decisión explícita de Sebastián de usar el más cercano temáticamente.
+- **`comunidad/index.html`** (Programas Comunitarios) — esto resuelve el pendiente de arriba ("los dos lugares candidatos... no se usó"): 🌱 Jóvenes pa' Lante → `comunidad/img/icons/jovenes-pa-lante.svg` (copia de `arboles-nativos.svg`, tampoco había ícono de "semilla/germinar"); 💧 Guarda Cuencas → copia local de `guarda-cuencas.svg`; 🏆 Especie del Mes → **por fin se usa** `comunidad/img/icons/especie-del-mes.svg` (el trofeo con hoja que había quedado copiado sin usar).
+
+Con esto, de los 4 pendientes de la tanda anterior solo siguen sin resolver: el 🚧 "Próximamente", los badges chicos texto+emoji (📍🏘️🌊), y los 6 íconos de estado IUCN (sigue pendiente decidir si reemplazan el badge de texto completo o no).
+
+## Ecosistemas — fix de tamaño de ícono y halo de contraste (septiembre 2026)
+
+Dos bugs encontrados por Sebastián en las 7 tarjetas de `agua/ecosistemas.js` (`#eco-grid .bio-card`) después de la tanda de íconos:
+
+1. **Hueco vacío enorme en la tarjeta**: el ícono es un `<img>` de un SVG con solo `viewBox="0 0 500 500"` (sin `width`/`height` propios). La regla `#eco-grid .bio-card__icon { width:auto; height:auto; font-size:2.5rem; }` era un resabio de cuando el ícono era un emoji de texto — con `auto/auto` el navegador usa el tamaño intrínseco por defecto del SVG (mucho más grande de lo pensado), estirando toda la tarjeta. Fix: `width:64px; height:64px;` explícitos.
+2. **Bosque Húmedo Tropical y Manglares ilegibles**: sus íconos usan verdes oscuros (`#005641`, `#135748`...) casi idénticos al degradado de fondo de su propia tarjeta. Primero se agregó un halo blanco translúcido (`background: rgba(255,255,255,0.3); border-radius:50%`) solo en esas 2 tarjetas — verificado con capturas antes/después (composición en PIL) que sí mejora el contraste. Sebastián después pidió extenderlo a **las 7 tarjetas por parejo** (se ve mejor así, no solo en las 2 con problema real de contraste) — `#eco-grid .bio-card__icon` quedó con el halo aplicado a todas.
+
+## Animación de bienvenida / splash (septiembre 2026)
+
+Video fuente: `Diseño/Exportados APP/Animación/Animación Inicio 1.mp4` (720×1280, 6s, con audio, 4 MB, 5.3 Mbps).
+
+- **Comprimido** a `biodiversidad/video/intro.mp4` vía ffmpeg: audio eliminado (los navegadores bloquean el autoplay con audio de todas formas), H.264 CRF 32 + `preset slower`, mismo 720×1280 → **557 KB** (-88% del original). Se probaron variantes más agresivas (540×960, hasta 432 KB) pero se descartaron por ahora: la de 557 KB no pierde nitidez visible (verificado extrayendo frames) y no había necesidad de bajar más.
+- **Pantalla nueva** `biodiversidad/splash.html` + `css/splash.css` + `js/splash.js`: video a pantalla completa, `autoplay muted playsinline` (obligatorio en iOS/Android), botón "Saltar", y una salvaguarda de 9s por si `ended`/`error` no disparan (nunca deja a nadie atascado).
+- **Se muestra siempre** al pasar de la pantalla de idioma (`biodiversidad/index.html`, `selectLang()`) al feed — no solo la primera vez (se probó con flag en `localStorage` pero Sebastián pidió quitarlo). También accesible bajo demanda desde un botón "▶" nuevo en el header de `feed.html` (`.app-header__replay-btn`, junto al título).
+- **Precarga durante la reproducción**: en el evento `canplaythrough` del video (no antes, para no competir por ancho de banda con la descarga del propio video) se hace `fetch(..., {cache:'force-cache'})` de todo el CSS/JS/JSON que necesita `feed.html`, precalentando el caché HTTP para que la transición sea instantánea.
+- **El fade-out arranca 1s antes de que termine el video** (`timeupdate`, `currentTime >= duration - 1`), no en el evento `ended` — así la transición ya está en curso cuando llega el último frame, en vez de sumarse después.
+- **Cross-fade video → feed**: no es posible un crossfade real entre dos documentos HTML distintos sin ayuda del navegador. Se implementó en dos capas:
+  1. **Respaldo manual garantizado** (funciona en cualquier navegador): al salir de `splash.html`, el video y el botón "Saltar" se desvanecen (0.5s) hacia el verde institucional de fondo; `feed.html` detecta que viene de `splash.html` vía `document.referrer` (clase `from-splash` agregada por un `<script>` inline muy temprano en el `<head>`, antes de que cargue el CSS, para evitar flash de contenido) y arranca en opacidad 0, con fade-in (0.5s) tras un `requestAnimationFrame`. No afecta la navegación normal al feed (bottom bar, etc.), que sigue apareciendo de inmediato.
+  2. **Mejora nativa donde el navegador la soporte**: `@view-transition { navigation: auto; }` declarado en `splash.css` y `feed.css` (debe estar en ambos documentos). Se intentó usar esto como mecanismo *principal* pero Sebastián reportó corte abrupto — la API es poco confiable capturando el snapshot de un `<video>` reproduciéndose en algunos navegadores. Se dejó como mejora silenciosa adicional, no como el mecanismo del que depende el efecto.
+
+## Contraste de texto — 3 pantallas (septiembre 2026)
+
+Mismo patrón de bug encontrado 3 veces: texto en un color pensado para fondo oscuro/saturado, reutilizado sobre un fondo que en algún momento se volvió claro (los `fondo-*.webp` de este período son casi blancos, ~`rgb(242,241,242)` de promedio, con líneas decorativas sutiles).
+
+- **`comunidad/especie_del_mes.html`**: `.em-badge-mes` ("Junio 2026") y `.em-chip` base (ej. "Mamíferos") tenían `color:white` sobre `rgba(255,255,255,0.16)` — invisibles sobre el fondo casi blanco de `fondo-especie-del-mes.webp`. Cambiados a fondo `--color-em-pale` sólido + texto `--color-em-dark`. Los chips de estado IUCN (`.em-chip--iucn-*`) sí tienen color de fondo propio saturado y mantienen texto blanco, pero se subió su opacidad de 0.35 a 0.75 para más contraste. De paso, el 🏆 del badge de mes se reemplazó por `img/icons/especie-del-mes.svg`.
+- **`agua/index.html`** ("Red Hídrica de Antioquia..."): `.agua-hero h1`/`p` en `var(--color-agua)` (#3561ab, azul medio) se confundían con el patrón decorativo azul-grisáceo de `fondo-agua.webp` (mismo tono, aunque el contraste plano contra blanco puro daba ~5.4:1 — el problema es de matiz/textura, no solo luminancia). Cambiado a `var(--color-agua-dark)` (#1a3a6b, ~10:1 de contraste).
+- **`agua/ecosistemas.css`**: mismo bug, mismo fondo compartido (`fondo-agua.webp`) — `.eco-hero h1`/`p` de `#3561ab` a `#1a3a6b`.
+
+---
+
 ## Módulo Agua — Cuencas Hídricas
 
 `agua/mapa.html` muestra las cuencas hidrográficas principales de Antioquia (19 ríos) en un solo mapa Leaflet, con su área de drenaje y el trazado del río, coloreadas por zona hidrográfica. `agua/acueductos.html` es un módulo aparte (cuencas que abastecen acueductos municipales, no confundir con el de cuencas hidrográficas).
@@ -1220,6 +1337,13 @@ Detalle completo, hallazgo por hallazgo, en el propio documento de respuesta.
 - [x] **Foto principal de Especie del Mes** (`foto_oficial`) reemplaza el emoji del hero, con visor de pantalla completa unificado (hero + galería en un solo carrete) y crédito visible — ver sección dedicada arriba
 - [x] **Consejos para mejores fotos** (`comunidad/consejos_fotos.html`) — portado de Ampliación JPL, bilingüe, enlazado desde Especie del Mes en su propia tarjeta, ver sección dedicada arriba
 - [x] **Headers transparentes** en `agua/index.html`, `biodiversidad/listado.html`, `biodiversidad/biodiversidad.html`, `biodiversidad/feed.html` y `comunidad/jovenes_pa_lante/index.html` — mismo fondo fotográfico que el resto de la pantalla, en vez de la barra blanca sólida que traían
+- [x] **Infográfico de ecosistemas actualizado** con Cavernas y Cuevas integrado a la ilustración (antes tarjeta aparte), regla/escala eliminada por clonado de imagen, 7 hotspots — ver sección dedicada arriba
+- [x] **Fondo de Biodiversidad reemplazado** (`Fondo-Biodiversidad-2.jpg`)
+- [x] **Guarda Cuencas y JPL: 3 modalidades de vista** (carrete/cuadrícula/mosaico) + selector de subregión por píldoras en Guarda Cuencas — ver sección dedicada arriba
+- [x] **Segunda tanda de íconos SVG**: Por Subregión/Flora/Fauna/Hongos en `biodiversidad.html`, Cuencas Hídricas/Abastecedoras en `agua/index.html`, JPL/Guarda Cuencas/Especie del Mes en `comunidad/index.html` — ver sección dedicada arriba
+- [x] **Fix de ícono sobredimensionado y halo de contraste** en las 7 tarjetas de `agua/ecosistemas.html` — ver sección dedicada arriba
+- [x] **Animación de bienvenida** (`biodiversidad/splash.html`) entre la pantalla de idioma y el feed, con fade in/out, botón de repetir en el feed y precarga de assets durante la reproducción — ver sección dedicada arriba
+- [x] **Fix de contraste de texto** en Especie del Mes (badge de mes, chip de grupo, chips IUCN) y en los hero de `agua/index.html`/`agua/ecosistemas.html` — ver sección dedicada arriba
 - [ ] Ampliar a 150+ especies con fotos y descripciones bilingües *(154 alcanzadas — evaluar seguir creciendo el catálogo o cerrar esta línea)*
 - [ ] Consultar Libro Rojo de Colombia para estados IUCN reales en Lepidoptera
 - [ ] **Proceso de build para el frontend** — script que hashea el contenido de cada `.css`/`.js` y reescribe las referencias en los HTML, para eliminar el `?v=N` manual (ver incidente 2026-07-31 arriba). Netlify pasaría a servir una carpeta `dist/` en vez de la raíz del repo. No requiere bundler/framework — mantiene la arquitectura vanilla actual.
@@ -1250,4 +1374,4 @@ Commits en estándar **Conventional Commits** (`feat:`, `fix:`, `docs:`, `refact
 ---
 
 *Proyecto desarrollado con Claude Code — Anthropic*
-*Última actualización: 2026-09-22*
+*Última actualización: 2026-09-23*

@@ -19,16 +19,42 @@ const SUBREGION_NAMES = {
       _index = data.meses;
 
       buildMonthChips();
+      initViewSwitcher();
 
-      document.getElementById('subregion-filter').addEventListener('change', e => {
-        _activeSubregion = e.target.value;
-        renderList();
-      });
-
-      document.addEventListener('langchange', () => { buildMonthChips(); renderList(); });
+      document.addEventListener('langchange', () => { buildMonthChips(); buildSubregionChips(); renderAll(); });
 
       await setMonth(_index[0].id);
     });
+
+    function buildSubregionChips() {
+      const row = document.getElementById('subregion-filters');
+      row.innerHTML = '';
+
+      const allBtn = document.createElement('button');
+      allBtn.className = 'filter-chip filter-chip--sub' + (_activeSubregion === 'all' ? ' active' : '');
+      allBtn.dataset.sub = 'all';
+      allBtn.textContent = I18n.t('all_subregions') || 'Todas las subregiones';
+      allBtn.addEventListener('click', () => setSubregion('all'));
+      row.appendChild(allBtn);
+
+      const subregions = [...new Set(_photos.map(f => f.subregion).filter(Boolean))].sort();
+      subregions.forEach(s => {
+        const btn = document.createElement('button');
+        btn.className = 'filter-chip filter-chip--sub' + (_activeSubregion === s ? ' active' : '');
+        btn.dataset.sub = s;
+        btn.textContent = '📍 ' + (SUBREGION_NAMES[s] || s);
+        btn.addEventListener('click', () => setSubregion(s));
+        row.appendChild(btn);
+      });
+    }
+
+    function setSubregion(value) {
+      _activeSubregion = value;
+      document.querySelectorAll('#subregion-filters .filter-chip--sub').forEach(b =>
+        b.classList.toggle('active', b.dataset.sub === value)
+      );
+      renderAll();
+    }
 
     function buildMonthChips() {
       const lang = I18n.getLang();
@@ -48,7 +74,6 @@ const SUBREGION_NAMES = {
     async function setMonth(id) {
       _activeMonth = id;
       _activeSubregion = 'all';
-      document.getElementById('subregion-filter').value = 'all';
 
       document.querySelectorAll('.month-chip').forEach(b =>
         b.classList.toggle('active', b.dataset.monthId === id)
@@ -68,7 +93,22 @@ const SUBREGION_NAMES = {
       document.getElementById('gallery-sub').textContent =
         `${_photos.length} ${I18n.t('gc_fotos_count') || 'fotografías'} · ${mesLabel} ${monthData.año}`;
 
+      buildSubregionChips();
+      renderAll();
+    }
+
+    function getVisible() {
+      return _photos.filter(f => _activeSubregion === 'all' || f.subregion === _activeSubregion);
+    }
+
+    function emptyStateHtml() {
+      return `<p style="text-align:center;padding:var(--space-xxl);color:var(--color-text-light)">${I18n.t('no_results') || 'Sin resultados'}</p>`;
+    }
+
+    function renderAll() {
       renderList();
+      renderReel();
+      renderMasonry();
     }
 
     function renderList() {
@@ -76,9 +116,7 @@ const SUBREGION_NAMES = {
       const list = document.getElementById('photo-list');
       list.innerHTML = '';
 
-      const visible = _photos.filter(f =>
-        _activeSubregion === 'all' || f.subregion === _activeSubregion
-      );
+      const visible = getVisible();
 
       if (visible.length === 0) {
         const msg = document.createElement('p');
@@ -101,7 +139,7 @@ const SUBREGION_NAMES = {
         card.innerHTML = `
           <div class="photo-card__img-wrap">
             <img src="${foto.foto}" alt="${titulo}" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'">
-            <div class="photo-card__placeholder">💧</div>
+            <div class="photo-card__placeholder"><img src="img/icons/guarda-cuencas.svg" alt="" class="photo-card__placeholder-icon"></div>
           </div>
           <div class="photo-card__info">
             <div class="photo-card__title">${titulo}</div>
@@ -118,6 +156,92 @@ const SUBREGION_NAMES = {
         card.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') openModal(foto); });
         list.appendChild(card);
       });
+    }
+
+    function renderReel() {
+      const lang = I18n.getLang();
+      const reel = document.getElementById('gc-reel');
+      if (!reel) return;
+      reel.innerHTML = '';
+      const visible = getVisible();
+      if (visible.length === 0) { reel.innerHTML = emptyStateHtml(); return; }
+
+      visible.forEach((foto, i) => {
+        const titulo = lang === 'en' && foto.tituloEn ? foto.tituloEn : foto.tituloEs;
+        const card = document.createElement('div');
+        card.className = 'photo-reel__card ripple-container';
+        card.setAttribute('role', 'button');
+        card.setAttribute('tabindex', '0');
+        card.setAttribute('aria-label', titulo);
+        card.innerHTML = `
+          <img src="${foto.foto}" alt="${titulo}" loading="${i < 3 ? 'eager' : 'lazy'}">
+          <div class="photo-reel__scrim" aria-hidden="true"></div>
+          <span class="photo-reel__name">${titulo}</span>`;
+        card.addEventListener('click', () => openModal(foto));
+        card.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') openModal(foto); });
+        reel.appendChild(card);
+      });
+    }
+
+    function renderMasonry() {
+      const lang = I18n.getLang();
+      const masonry = document.getElementById('gc-masonry');
+      if (!masonry) return;
+      masonry.innerHTML = '';
+      const visible = getVisible();
+      if (visible.length === 0) { masonry.innerHTML = emptyStateHtml(); return; }
+
+      const cols = [document.createElement('div'), document.createElement('div')];
+      cols.forEach(c => c.className = 'photo-masonry__col');
+      const colHeights = [0, 0];
+      visible.forEach((foto, i) => {
+        const titulo = lang === 'en' && foto.tituloEn ? foto.tituloEn : foto.tituloEs;
+        const cell = document.createElement('div');
+        cell.className = 'photo-masonry__item';
+        cell.setAttribute('role', 'button');
+        cell.setAttribute('tabindex', '0');
+        cell.setAttribute('aria-label', titulo);
+        cell.innerHTML = `
+          <img src="${foto.foto}" alt="${titulo}" loading="${i < 6 ? 'eager' : 'lazy'}">
+          <div class="photo-masonry__scrim" aria-hidden="true"></div>
+          <span class="photo-masonry__name">${titulo}</span>`;
+        cell.addEventListener('click', () => openModal(foto));
+        cell.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') openModal(foto); });
+        const target = colHeights[0] <= colHeights[1] ? 0 : 1;
+        cols[target].appendChild(cell);
+        colHeights[target] += 1;
+      });
+      masonry.appendChild(cols[0]);
+      masonry.appendChild(cols[1]);
+    }
+
+    // ── Selector de modalidad de vista (mismo patrón que feed.js/biodiversidad.js) ──
+    const VIEW_KEY = 'gc_gallery_view';
+    function initViewSwitcher() {
+      const buttons = document.querySelectorAll('.view-switcher__btn');
+      const views = {
+        reel: document.getElementById('view-reel'),
+        grid: document.getElementById('view-grid'),
+        masonry: document.getElementById('view-masonry'),
+      };
+      const context = document.getElementById('gallery-context');
+      const toolbar = document.getElementById('gallery-toolbar');
+
+      function setView(view) {
+        Object.keys(views).forEach(key => { views[key].hidden = key !== view; });
+        buttons.forEach(btn => {
+          const active = btn.dataset.view === view;
+          btn.classList.toggle('active', active);
+          btn.setAttribute('aria-selected', active ? 'true' : 'false');
+        });
+        if (context) context.hidden = view === 'reel';
+        if (toolbar) toolbar.hidden = view === 'reel';
+        localStorage.setItem(VIEW_KEY, view);
+      }
+
+      buttons.forEach(btn => btn.addEventListener('click', () => setView(btn.dataset.view)));
+      const saved = localStorage.getItem(VIEW_KEY);
+      setView(saved && views[saved] ? saved : 'grid');
     }
 
     function openModal(foto) {

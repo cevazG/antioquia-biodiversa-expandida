@@ -122,6 +122,11 @@ document.addEventListener('DOMContentLoaded', async () => {
       });
     }
   } else {
-    document.getElementById('photo-emoji').textContent = eco.icono;
+    const photoEmojiEl = document.getElementById('photo-emoji');
+    if (eco.iconoUrl) {
+      photoEmojiEl.innerHTML = `<img src="${eco.iconoUrl}" alt="" class="photo-placeholder__icon-img">`;
+    } else {
+      photoEmojiEl.textContent = eco.icono;
+    }
   }
 });

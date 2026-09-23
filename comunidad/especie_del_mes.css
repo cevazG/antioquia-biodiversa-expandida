@@ -69,16 +69,17 @@
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      background: rgba(255,255,255,0.16);
-      border: 1.5px solid rgba(255,255,255,0.28);
-      color: white;
+      background: var(--color-em-pale);
+      border: 1.5px solid var(--color-em-light);
+      color: var(--color-em-dark);
       padding: 5px 14px;
       border-radius: var(--radius-sm);
       font-size: 0.78rem;
       font-weight: 700;
       margin-bottom: var(--space-md);
-      backdrop-filter: blur(4px);
     }
+
+    .em-badge-mes img { display: block; }
 
     .em-hero__emoji {
       font-size: 5rem;
@@ -141,20 +142,25 @@
     }
 
     .em-chip {
-      background: rgba(255,255,255,0.16);
-      border: 1px solid rgba(255,255,255,0.28);
-      color: white;
+      background: var(--color-em-pale);
+      border: 1px solid var(--color-em-light);
+      color: var(--color-em-dark);
       padding: 4px 12px;
       border-radius: var(--radius-sm);
       font-size: 0.78rem;
       font-weight: 600;
     }
 
-    .em-chip--iucn-LC { background: rgba(76,175,80,0.35);  border-color: #4CAF50; }
-    .em-chip--iucn-NT { background: rgba(255,193,7,0.35);  border-color: #FFC107; }
-    .em-chip--iucn-VU { background: rgba(255,152,0,0.35);  border-color: #FF9800; }
-    .em-chip--iucn-EN { background: rgba(244,67,54,0.35);  border-color: #F44336; }
-    .em-chip--iucn-CR { background: rgba(156,39,176,0.35); border-color: #9C27B0; }
+    /* Los chips de estado IUCN sí llevan su propio color de fondo saturado
+       (no el lila pálido genérico), por eso mantienen texto blanco. */
+    .em-chip--iucn-LC, .em-chip--iucn-NT, .em-chip--iucn-VU,
+    .em-chip--iucn-EN, .em-chip--iucn-CR { color: white; }
+
+    .em-chip--iucn-LC { background: rgba(76,175,80,0.75);  border-color: #4CAF50; }
+    .em-chip--iucn-NT { background: rgba(255,193,7,0.75);  border-color: #FFC107; }
+    .em-chip--iucn-VU { background: rgba(255,152,0,0.75);  border-color: #FF9800; }
+    .em-chip--iucn-EN { background: rgba(244,67,54,0.75);  border-color: #F44336; }
+    .em-chip--iucn-CR { background: rgba(156,39,176,0.75); border-color: #9C27B0; }
 
     /* ── Página contenido ── */
     .em-page {

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#0b5640">
+  <title>Antioquia Natural</title>
+  <link rel="stylesheet" href="css/main.css?v=6">
+  <link rel="stylesheet" href="css/splash.css?v=4">
+</head>
+<body>
+  <div class="splash-shell">
+    <video
+      id="splash-video"
+      class="splash-video"
+      src="video/intro.mp4"
+      autoplay
+      muted
+      playsinline
+      webkit-playsinline
+      preload="auto"
+    ></video>
+
+    <button id="splash-skip" class="splash-skip" aria-label="Saltar animación">
+      <span data-i18n="splash_skip">Saltar</span>
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg>
+    </button>
+  </div>
+
+  <script src="js/i18n.js?v=3"></script>
+  <script src="js/splash.js?v=5"></script>
+</body>
+</html>

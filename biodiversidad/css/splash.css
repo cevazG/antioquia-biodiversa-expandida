@@ -1,0 +1,72 @@
+/* ============================================================
+   Antioquia Natural — splash.css
+   Pantalla de animación de bienvenida (video a pantalla completa)
+   ============================================================ */
+
+/* Cross-document view transition: al navegar a feed.html (que declara la
+   misma regla), el navegador hace un cross-fade nativo entre el último
+   frame del video y el feed apareciendo debajo — sin esto es un corte
+   directo. Solo funciona si AMBOS documentos la declaran. Progressive
+   enhancement: en navegadores sin soporte simplemente no hay fade. */
+@view-transition {
+  navigation: auto;
+}
+
+html, body {
+  height: 100%;
+  background: var(--color-green-dark);
+  overflow: hidden;
+}
+
+.splash-shell {
+  max-width: var(--app-max-width);
+  margin: 0 auto;
+  height: 100dvh;
+  position: relative;
+  background: var(--color-green-dark);
+  overflow: hidden;
+}
+
+.splash-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.splash-video.is-visible {
+  opacity: 1;
+}
+
+.splash-skip {
+  position: absolute;
+  top: env(safe-area-inset-top, 0);
+  right: 0;
+  margin: var(--space-md);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 8px 14px;
+  border: none;
+  border-radius: var(--radius-full);
+  background: rgba(0,0,0,0.4);
+  backdrop-filter: blur(4px);
+  color: var(--color-white);
+  font-family: var(--font-primary);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  cursor: pointer;
+  z-index: 5;
+  opacity: 1;
+  transition: opacity 0.5s ease;
+}
+
+.splash-skip.is-hidden {
+  opacity: 0;
+}
+
+.splash-skip:active {
+  background: rgba(0,0,0,0.6);
+}

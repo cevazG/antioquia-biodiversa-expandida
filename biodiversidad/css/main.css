@@ -311,6 +311,25 @@ em, .scientific-name {
   background: var(--color-green-pale);
 }
 
+.app-header__replay-btn {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background: none;
+  cursor: pointer;
+  border-radius: var(--radius-sm);
+  color: var(--color-green-primary);
+  transition: background var(--transition);
+  flex-shrink: 0;
+}
+
+.app-header__replay-btn:active {
+  background: var(--color-green-pale);
+}
+
 .app-header__lang {
   font-size: 0.8125rem;
   font-weight: 600;

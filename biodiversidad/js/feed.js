@@ -379,6 +379,44 @@ function initModal() {
   });
 }
 
+// ── Precarga de Bio/Agua/Comunidad (bottom bar) ────────────
+// El feed es la puerta de entrada — casi todo el mundo va a tocar Bio,
+// Agua o Comunidad desde acá. Se precalienta el CSS/JS/fondo/íconos de
+// esas 3 pantallas en segundo plano (idle, después de que el feed ya
+// renderizó lo suyo) para que la PRIMERA visita a cada una no se sienta
+// más lenta que volver a una ya visitada — ver CLAUDE.md "Precarga de
+// módulos desde el feed".
+function prefetchModules() {
+  const files = [
+    'css/biodiversidad.css?v=8',
+    'js/biodiversidad.js?v=13',
+    '../agua/index.css?v=12',
+    '../agua/index.js',
+    '../comunidad/index.css?v=8',
+    '../comunidad/index.js',
+  ];
+  files.forEach(url => fetch(url, { cache: 'force-cache' }).catch(() => {}));
+
+  [
+    '../agua/img/fondos/fondo-agua.webp',
+    '../comunidad/img/fondos/fondo-comunidad.webp',
+    '../agua/img/icons/cuenca-rio.svg',
+    '../agua/img/icons/guarda-cuencas.svg',
+    '../agua/img/icons/ecosistemas.svg',
+    '../comunidad/img/icons/jovenes-pa-lante.svg',
+    '../comunidad/img/icons/guarda-cuencas.svg',
+    '../comunidad/img/icons/especie-del-mes.svg',
+  ].forEach(src => { const img = new Image(); img.src = src; });
+}
+
+function scheduleModulePrefetch() {
+  if ('requestIdleCallback' in window) {
+    requestIdleCallback(prefetchModules, { timeout: 3000 });
+  } else {
+    setTimeout(prefetchModules, 2000);
+  }
+}
+
 // ── Arranque ──────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', async () => {
   await Promise.all([I18n.init(), FeedStore.init()]);
@@ -387,6 +425,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   initSourceTabs();  // hace el primer renderAll()
   initModal();
   App.initSearch('feed-search-input', (q) => { _filters.query = q || null; renderAll(); });
+  scheduleModulePrefetch();
 
   // Los textos de tarjeta se generan en JS (sin data-i18n) → repintar al cambiar idioma
   document.addEventListener('langchange', renderAll);

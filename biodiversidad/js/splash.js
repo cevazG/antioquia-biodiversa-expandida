@@ -62,7 +62,7 @@
       'css/feed.css?v=7',
       'js/nav.js?v=3',
       'js/app.js?v=7',
-      'js/feed.js?v=3',
+      'js/feed.js?v=4',
       'data/species.json',
       '../comunidad/jovenes_pa_lante/data/fotos_biodiversidad.json',
       '../comunidad/guarda_cuencas/data/fotos_cuencas.json',

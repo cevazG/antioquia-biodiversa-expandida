@@ -1176,6 +1176,16 @@ Título, subtítulo, "Elige tu idioma", pie de página y las tarjetas de Españo
 
 De paso: se quitó el subtítulo de país bajo cada idioma (`.lang-option__native`: "Colombia · Colombia" / "United States · EE.UU", clase ahora eliminada del CSS por quedar sin uso) y la bandera de English pasó de 🇺🇸 a 🇬🇧 — no se usa la bandera específica de Inglaterra (tag sequence `🏴󠁧󠁢󠁥󠁮󠁧󠁿`) porque se renderiza mal o no aparece en varios celulares; 🇬🇧 es la opción confiable multiplataforma.
 
+### Marco de inicio — reemplaza el logo/título (septiembre 2026)
+
+El logo de la Gobernación + `<h1>Antioquia Natural</h1>` se reemplazaron por el "marco de inicio" (entrega del diseñador: oso de anteojos, mariposa monarca, colibrí y laguna de páramo enmarcados en un borde redondeado). Dos archivos entregados: uno con el texto ya dibujado (`Marco-inicio-app.png`, usado como referencia) y uno sin texto (`Marco-Inicio-app-sin-texto.png`, el que se usa en la app) — se prefirió la versión sin texto para mantener el título como HTML real (nítido a cualquier escala, no depende del diseñador para cambios de copy), igual que el resto de la app. Un tercer archivo (`Marco inicio app.svg`) resultó ser un export de Illustrator con rutas rotas a imágenes en el disco del diseñador (`I:\...`), no sirve.
+
+- **Imagen**: `biodiversidad/img/fondos/marco-inicio.webp`, reescalada de 2185×1455 a 900×599 y comprimida (2.9 MB → 95 KB).
+- **Texto posicionado por análisis de color, no a ojo**: se detectó el bounding box exacto de la píldora "Antioquia", "Natural" y el subtítulo en `Marco-inicio-app.png` (la versión CON texto) y se tradujo a porcentajes. Los tamaños de fuente van en **`cqw`** (no `rem`), con `.brand-frame { container-type: inline-size }` — como son % del ancho del propio marco, el texto escala exactamente igual que la imagen a cualquier ancho de pantalla (probado en 320/375/430px sin encimarse con el oso ni el colibrí). Primer intento con tamaños en `rem` fijos + porcentajes estimados a ojo quedó "apeñuzcado" y no escalaba igual que la imagen — corregido con esta medición exacta.
+- **Subtítulo**: se usa el tagline "Explora el patrimonio natural y social del departamento" (igual que en la referencia con texto), no "Gobernación de Antioquia" que tenía antes.
+- **Fondo de la pantalla reemplazado, pero como archivo aparte**: `fondo-idioma.webp` (nuevo, desde `Fondo-Biodiversidad-3.1.jpg`) en vez de reutilizar el `fondo-biodiversidad.webp` compartido con home/feed/listado — ese traía un colibrí de fondo que chocaba visualmente con el colibrí del marco. Al ser un archivo propio de esta pantalla, no afecta las otras 4 que sí usan el compartido.
+- **Animación**: un brillo diagonal (`::after` con gradiente + `translateX`) que atraviesa el marco **2 veces, en direcciones alternadas** (`animation-direction: alternate`), no en loop infinito — es la pantalla de selección de idioma, se ve unos segundos nada más, un efecto persistente de fondo distraería más de lo que suma. Se descartó animar el oso/mariposa/colibrí por separado porque la entrega es una sola imagen aplanada, no capas independientes.
+
 ---
 
 ## Ambientes — Dev / QA / Producción

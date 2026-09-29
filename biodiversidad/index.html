@@ -10,13 +10,14 @@
   <link rel="stylesheet" href="css/main.css?v=6">
   <link rel="stylesheet" href="css/components.css?v=21">
   <link rel="stylesheet" href="css/animations.css?v=4">
-  <link rel="preload" as="image" href="img/fondos/fondo-biodiversidad.webp">
+  <link rel="preload" as="image" href="img/fondos/fondo-idioma.webp">
+  <link rel="preload" as="image" href="img/fondos/marco-inicio.webp">
   <!-- El video de bienvenida se reproduce en la siguiente pantalla
        (splash.html) — prefetch (no preload) para que empiece a bajar en
        segundo plano sin competir con lo que esta pantalla necesita ya
        mismo, dándole más tiempo mientras el usuario lee/elige idioma. -->
   <link rel="prefetch" href="video/intro.mp4">
-  <link rel="stylesheet" href="css/index.css?v=7">
+  <link rel="stylesheet" href="css/index.css?v=14">
 </head>
 <body>
   <main class="lang-page">
@@ -26,15 +27,16 @@
     <img class="corner-leaf corner-leaf--br" src="img/icons/biodiversidad-general.svg" alt="" aria-hidden="true">
 
     <div class="lang-page__content">
-      <!-- Logo oficial Gobernación de Antioquia (fondo blanco sostenido, manual de marca p.8) -->
-      <div class="brand-logo-plate">
-        <img src="img/logo/logo_gobernacion.png" class="brand-logo" alt="Escudo Gobernación de Antioquia">
-      </div>
-
-      <!-- Nombre del proyecto -->
-      <div class="brand-title">
-        <h1>Antioquia<br>Natural</h1>
-        <p>Gobernación de Antioquia</p>
+      <!-- Marco de inicio (entrega del diseñador, sin texto) con el título
+           en HTML real encima — no la versión con el texto ya dibujado, para
+           que siga siendo texto de verdad (nítido a cualquier escala, y
+           editable sin depender del diseñador). -->
+      <div class="brand-frame">
+        <img src="img/fondos/marco-inicio.webp" alt="" class="brand-frame__img">
+        <div class="brand-frame__text">
+          <h1><span class="brand-frame__pill">Antioquia</span><br>Natural</h1>
+          <p>Explora el patrimonio natural y social del departamento</p>
+        </div>
       </div>
 
       <!-- Selector de idioma -->

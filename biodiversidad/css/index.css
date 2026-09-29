@@ -12,7 +12,9 @@
       overflow: hidden;
     }
 
-    /* Fondo: foto de biodiversidad (mismo asset del selector de módulos) */
+    /* Fondo propio de esta pantalla (no el compartido fondo-biodiversidad.webp
+       de home/feed/listado) — ese traía un colibrí de fondo que chocaba con
+       el colibrí del marco de inicio; este es un patrón abstracto sin fauna. */
     .lang-page__bg {
       position: fixed;
       top: 0;
@@ -21,7 +23,7 @@
       width: 100%;
       max-width: var(--app-max-width);
       height: 100dvh;
-      background: url("../img/fondos/fondo-biodiversidad.webp") center / cover no-repeat, var(--color-green-dark);
+      background: url("../img/fondos/fondo-idioma.webp") center / cover no-repeat, var(--color-bg);
     }
 
     .lang-page__leaves { display: none; }
@@ -38,35 +40,75 @@
       animation: fadeInUp 0.6s ease both;
     }
 
-    /* Logo / escudo oficial — siempre sobre blanco sostenido (manual de marca p.8) */
-    .brand-logo-plate {
-      display: inline-flex;
-      background: var(--color-white);
-      border-radius: 20px;
-      padding: 16px 20px;
-      box-shadow: 0 8px 24px rgba(0,0,0,0.35);
+    /* Marco de inicio (entrega del diseñador) con el título en HTML real
+       encima. Posición y tamaños medidos por análisis de color (no a ojo)
+       sobre Marco-inicio-app.png (la versión CON el texto ya dibujado, que
+       el diseñador entregó como referencia): se ubicó el bounding box exacto
+       de la píldora "Antioquia", de "Natural" y del subtítulo en esa imagen
+       (2185×1455) y se tradujo a % / cqw. cqw (no rem) porque estos
+       porcentajes son relativos al ANCHO del propio marco — con
+       container-type:inline-size, el texto escala exactamente igual que la
+       imagen a cualquier ancho de pantalla, igual que en la referencia. */
+    .brand-frame {
+      position: relative;
+      width: 100%;
+      container-type: inline-size;
+      overflow: hidden;
+      border-radius: 16px;
     }
 
-    .brand-logo {
-      width: 120px;
+    .brand-frame__img {
+      width: 100%;
       height: auto;
+      display: block;
     }
 
-    .brand-title {
+    .brand-frame__text {
+      position: absolute;
+      top: 15.5%;
+      left: 24%;
+      width: 58%;
       text-align: center;
     }
 
-    .brand-title h1 {
+    .brand-frame__text h1 {
       color: var(--color-green-dark);
-      font-size: 2rem;
+      font-size: 5.6cqw;
       font-weight: 800;
-      line-height: 1.15;
+      line-height: 1.25;
     }
 
-    .brand-title p {
+    .brand-frame__pill {
+      display: inline-block;
+      background: #66e69d;
+      border-radius: 999px;
+      padding: 0.1em 0.5em;
+    }
+
+    .brand-frame__text p {
       color: var(--color-green-dark);
-      font-size: 0.9375rem;
-      margin-top: 6px;
+      font-size: 3.4cqw;
+      font-weight: 600;
+      line-height: 1.25;
+      margin-top: 4.4cqw;
+    }
+
+    /* Brillo sutil: un solo barrido diagonal de luz al aparecer el marco,
+       no un loop — es la pantalla de selección de idioma, el usuario la ve
+       unos segundos y sigue, un brillo repitiéndose de fondo distraería
+       más de lo que suma. */
+    .brand-frame::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(115deg, transparent 40%, rgba(255,255,255,0.55) 50%, transparent 60%);
+      transform: translateX(-120%);
+      animation: brand-frame-shine 2.2s ease 0.9s 2 alternate;
+      pointer-events: none;
+    }
+
+    @keyframes brand-frame-shine {
+      to { transform: translateX(120%); }
     }
 
     /* Divisor decorativo dorado */

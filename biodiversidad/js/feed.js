@@ -417,6 +417,31 @@ function scheduleModulePrefetch() {
   }
 }
 
+// ── Header + filtros + búsqueda: se esconden al bajar, vuelven al subir ──
+// Sin esto quedaban pegados arriba y las fotos pasaban por detrás del header
+// transparente, lo que parecía un error.
+function initChromeAutoHide() {
+  const root = document.documentElement;
+  const search = document.getElementById('feed-search');
+  let lastY = window.scrollY;
+  let ticking = false;
+
+  function update() {
+    ticking = false;
+    const y = window.scrollY;
+    const dy = y - lastY;
+    const reel = search && search.hidden;  // en carrete los controles no se mueven
+    if (reel || y < 80) root.classList.remove('feed-chrome-hidden');
+    else if (dy > 6) root.classList.add('feed-chrome-hidden');
+    else if (dy < -6) root.classList.remove('feed-chrome-hidden');
+    if (Math.abs(dy) > 6 || y < 80) lastY = y;
+  }
+
+  window.addEventListener('scroll', () => {
+    if (!ticking) { ticking = true; requestAnimationFrame(update); }
+  }, { passive: true });
+}
+
 // ── Arranque ──────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', async () => {
   await Promise.all([I18n.init(), FeedStore.init()]);
@@ -424,6 +449,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   initViewSwitcher();
   initSourceTabs();  // hace el primer renderAll()
   initModal();
+  initChromeAutoHide();
   App.initSearch('feed-search-input', (q) => { _filters.query = q || null; renderAll(); });
   scheduleModulePrefetch();
 

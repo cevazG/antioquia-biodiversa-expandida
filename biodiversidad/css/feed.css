@@ -97,6 +97,26 @@ html.from-splash.splash-fade-in .app-shell--feed {
 
 .feed-sources::-webkit-scrollbar { display: none; }
 
+/* Auto-ocultar al bajar (ver initChromeAutoHide en feed.js). Cada capa sube
+   lo suyo más lo que tiene encima para que salgan las tres juntas. */
+.app-header,
+.feed-sources,
+.feed-search {
+  transition: transform 0.25s ease;
+}
+
+.feed-chrome-hidden .app-header { transform: translateY(-100%); }
+.feed-chrome-hidden .feed-sources { transform: translateY(calc(-100% - var(--header-height))); }
+.feed-chrome-hidden .feed-search {
+  transform: translateY(calc(-100% - var(--header-height) - var(--feed-sources-h)));
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .app-header,
+  .feed-sources,
+  .feed-search { transition: none; }
+}
+
 /* Chip interactivo → píldora completa + borde (convención del proyecto) */
 .feed-sources__btn {
   flex-shrink: 0;
